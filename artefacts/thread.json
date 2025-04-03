@@ -1,0 +1,209 @@
+{
+  "thread": {
+    "promptTemplate": {
+      "project": {
+        "title": "Learn the Planet (scoring)",
+        "description": "Scoring system",
+        "definition": [
+          "Small scale public project",
+          "Maintain score during a test",
+          "Maintain scores across tests (test history)",
+          "Persists scores to a database",
+          "Handles different question types (see below)",
+          "Return standard response (see response-example below)"
+        ]
+      },
+      "question-types": [
+        {
+          "type": "Multiple Choice",
+          "description": "Given a set of options, the correct answer and the user's answer, matches the correct answer against the user's answer."
+        },
+        {
+          "type": "True/False",
+          "description": "Matches the correct answer against the user's answer"
+        },
+        {
+          "type": "Matching",
+          "description": "Matches the correct answer against the user's answer"
+        }
+      ],
+      "response-schema": {
+        "type": "Multiple Choice, True/False or Matching",
+        "inputs": ["Set of options", "Correct answer", "User's answer"],
+        "response": ["score, current tests scores and scores history"]
+      },
+      "response-examples": [
+        {
+          "type": "Multiple Choice",
+          "inputs": [
+            {
+              "options": ["A", "B", "C"]
+            },
+            { "correct-answer": "B" },
+            { "users-answer": "A" }
+          ],
+          "response": {
+            "scores": {
+              "current-total-questions": 1,
+              "current-total-correct": 0,
+              "current-scores": [
+                {
+                  "correct": false,
+                  "user-answer": "B",
+                  "correct-answer": "A"
+                },
+                {
+                  "correct": true,
+                  "user-answer": "Chicory",
+                  "correct-answer": "Chicory"
+                },
+                {
+                  "correct": false,
+                  "user-answer": "Dandelion",
+                  "correct-answer": "Buttercup"
+                }
+              ],
+              "history": {
+                "total-tests": 5,
+                "total-questions": 18,
+                "total-correct": 12
+              }
+            }
+          }
+        },
+        {
+          "type": "True/False",
+          "inputs": [
+            {
+              "options": [true, false]
+            },
+            { "correct-answer": true },
+            { "users-answer": false }
+          ],
+          "response": {
+            "scores": {
+              "current-total-questions": 2,
+              "current-total-correct": 1,
+              "current-scores": [
+                {
+                  "correct": false,
+                  "user-answer": "B",
+                  "correct-answer": "A"
+                },
+                {
+                  "correct": true,
+                  "user-answer": true,
+                  "correct-answer": true
+                },
+                {
+                  "correct": false,
+                  "user-answer": "Dandelion",
+                  "correct-answer": "Buttercup"
+                }
+              ],
+              "history": {
+                "total-tests": 5,
+                "total-questions": 19,
+                "total-correct": 13
+              }
+            }
+          }
+        },
+        {
+          "type": "Matching",
+          "inputs": [
+            {
+              "options": ["Dandelion", "Buttercup"]
+            },
+            {
+              "correct-answer": "Dandelion"
+            },
+            {
+              "users-answer": "Buttercup"
+            }
+          ],
+          "response": {
+            "scores": {
+              "current-total-questions": 3,
+              "current-total-correct": 1,
+              "current-scores": [
+                {
+                  "correct": false,
+                  "user-answer": "B",
+                  "correct-answer": "A"
+                },
+                {
+                  "correct": true,
+                  "user-answer": true,
+                  "correct-answer": true
+                },
+                {
+                  "correct": false,
+                  "user-answer": "Dandelion",
+                  "correct-answer": "Buttercup"
+                }
+              ],
+              "history": {
+                "total-tests": 5,
+                "total-questions": 20,
+                "total-correct": 13
+              }
+            }
+          }
+        }
+      ],
+      "interactionGuidelines": {
+        "description": "The LLM should follow these guidelines throughout.",
+        "rules": {
+          "conciseByDefault": true,
+          "showCodeByDefault": false,
+          "askQuestionsWhenInDoubt": true,
+          "explainThinking": true,
+          "identifyCommonPatterns": true,
+          "identifySolutions": true,
+          "identifyRisks": true,
+          "identifyValue": true,
+          "highlightTradeoffs": true,
+          "considerSustainability": true,
+          "considerAccessibility": true,
+          "generateSnapshotOnRequest": true,
+          "proceedMethodically": true,
+          "confirmBeforeAdvancing": true,
+          "explainOneConceptAtATime": true,
+          "confirmDependenciesBeforeAdding": true
+        },
+        "terms": {
+          "promptTemplate": {
+            "definition": "Used to initialise a thread. Contains project-specific details, rules on how an LLM should interact and how it should format periodic summaries (snapshots). This document is a prompt template."
+          },
+          "thread": {
+            "definition": "The record of an interaction between a developer and an LLM. Contains the initial prompt template and a collection of snapshots.",
+            "purpose": "The thread serves as a breadcrumb trail through the development process, allowing both human developers and LLMs to retain context and coherence across multiple interactions. The developer is responsible for maintaining a record of the thread."
+          },
+          "snapshot": {
+            "definition": "A specific interaction state representative of progress to date. A snapshot should conform to the snapshot schema.",
+            "schema": {
+              "project": {
+                "title": "string",
+                "description": "string",
+                "definition": "string"
+              },
+              "prototype": { "type": "string", "definition": "string" },
+              "summary": "string"
+            }
+          }
+        }
+      }
+    },
+    "snapshots": [
+      {
+        "questions": [
+          "How do scores and layouts/screens align? Could they both share an index or counter? e.g.",
+          "collection[index]",
+          "layout[index]",
+          "score[index]"
+        ]
+      }
+    ]
+  }
+}
