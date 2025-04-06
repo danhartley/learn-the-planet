@@ -2,25 +2,23 @@ import {
   MultipleChoiceOption,
   MultipleChoiceQuestion,
   TextEntryQuestion,
-} from './_types'
+  Test,
+} from './types'
 
-const test1: {
-  question: MultipleChoiceQuestion
-  answer: string
-} = {
+const test1: Test = {
   question: {
     text: 'Which description matches the yew family',
     type: 'Multiple choice',
-    correctAnswer: 'Taxaceae',
+    key: 'Taxaceae',
     options: [
       {
-        display: 'Coniferous family of many-branched, small trees and shrubs.',
-        value: 'Taxaceae',
+        key: 'Taxaceae',
+        value: 'Coniferous family of many-branched, small trees and shrubs.',
       },
       {
-        display:
+        key: 'Cistaceae',
+        value:
           'Low-lying shrubs (some herbaceous) preferring sunny habitats on poor soils in mainly temperate areas of Europe and the Mediterranean.',
-        value: 'Cistaceae',
       },
     ],
   },
@@ -34,15 +32,15 @@ const test2: {
   question: {
     text: 'What is common name?',
     type: 'Multiple choice',
-    correctAnswer: 'Teixo',
+    key: 'Teixo',
     options: [
       {
-        display: 'Oliveira',
         value: 'Oliveira',
+        key: 'Oliveira',
       },
       {
-        display: 'Teixo',
         value: 'Teixo',
+        key: 'Teixo',
       },
     ],
   },
@@ -53,7 +51,7 @@ const test3: { question: TextEntryQuestion; answer: string } = {
   question: {
     text: 'Enter full Latin name',
     type: 'Text entry',
-    correctAnswer: 'Taxus baccata',
+    key: 'Taxus baccata',
   },
   answer: 'taxus  baccata',
 }
@@ -62,7 +60,7 @@ const test4: { question: TextEntryQuestion; answer: string } = {
   question: {
     text: 'Enter species name',
     type: 'Text entry',
-    correctAnswer: 'baccata',
+    key: 'baccata',
     hint: 'Taxus',
   },
   answer: 'baccata',
@@ -72,7 +70,7 @@ const test5: { question: TextEntryQuestion; answer: string } = {
   question: {
     text: 'Identify this species',
     type: 'Text entry',
-    correctAnswer: 'Taxus baccata',
+    key: 'Taxus baccata',
   },
   answer: 'Taxus',
 }

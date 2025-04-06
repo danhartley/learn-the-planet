@@ -17,22 +17,22 @@
   "devDependencies": {
     "@testing-library/dom": "latest",
     "@testing-library/react": "latest",
-    "@types/node": "latest",
+    "@types/node": "^22.14.0",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "cypress": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "jsdom": "latest",
-    "prettier": "latest",
-    "typescript": "latest",
     "launchdarkly-react-client-sdk": "latest",
     "next": "latest",
+    "prettier": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "vitest": "latest",
+    "typescript": "latest",
     "vite-tsconfig-paths": "latest",
-    "@vitejs/plugin-react": "latest",
-    "cypress": "latest"
+    "vitest": "latest"
   },
   "source": "./src/page.tsx"
 }

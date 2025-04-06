@@ -1,17 +1,16 @@
-import { Question, Score } from './_types'
+import { Question, Score } from './types'
 
 const formatAnswer = (answer: string) => {
   return answer.toLowerCase().replaceAll(' ', '')
 }
 
 export class Scorer {
-  private questionCount = 0
-  private correctCount = 0
-  private incorrectCount = 0
+  private questionCount: number = 0
+  private correctCount: number = 0
+  private incorrectCount: number = 0
 
   markAnswer(question: Question, answer: string): Score {
-    const isCorrect =
-      formatAnswer(question.correctAnswer) === formatAnswer(answer)
+    const isCorrect = formatAnswer(question.key) === formatAnswer(answer)
 
     this.questionCount++
     isCorrect ? this.correctCount++ : this.incorrectCount++

@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { Scorer } from './_scorer'
-import { mockTest } from './_mocks'
+import { Scorer } from './scorer'
+import { mockTest } from './mock-test'
 
 describe('Single question test score', () => {
   let scorer: Scorer
@@ -13,14 +13,14 @@ describe('Single question test score', () => {
       {
         text: '',
         type: 'Multiple choice',
-        correctAnswer: 'Taxaceae',
+        key: 'Taxaceae',
         options: [
           {
-            display: '',
+            value: '',
             value: '',
           },
           {
-            display: '',
+            value: '',
             value: '',
           },
         ],
@@ -35,14 +35,14 @@ describe('Single question test score', () => {
       {
         text: '',
         type: 'Multiple choice',
-        correctAnswer: 'Teixo',
+        key: 'Teixo',
         options: [
           {
-            display: '',
+            value: '',
             value: '',
           },
           {
-            display: '',
+            value: '',
             value: '',
           },
         ],
@@ -57,7 +57,7 @@ describe('Single question test score', () => {
       {
         text: '',
         type: 'Text entry',
-        correctAnswer: 'Taxus baccata',
+        key: 'Taxus baccata',
       },
       ' taxus  baCCATA '
     )
