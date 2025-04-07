@@ -1,5 +1,7 @@
 import './global.css'
 
+import { ScoreDisplay } from '@/components/ScoreDisplay'
+
 export const metadata = {
   title: 'Learn the Planet',
   description: 'Lessons to help you to learn more about the natural world',
@@ -14,6 +16,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         {/* Place children where you want to render a page or nested layout */}
         <main>{children}</main>
         <footer>I'm the footer in the root layout</footer>
+        <ScoreDisplay />
       </body>
     </html>
   )

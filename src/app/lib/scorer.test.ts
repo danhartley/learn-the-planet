@@ -16,11 +16,11 @@ describe('Single question test score', () => {
         key: 'Taxaceae',
         options: [
           {
-            value: '',
+            key: '',
             value: '',
           },
           {
-            value: '',
+            key: '',
             value: '',
           },
         ],
@@ -38,11 +38,11 @@ describe('Single question test score', () => {
         key: 'Teixo',
         options: [
           {
-            value: '',
+            key: '',
             value: '',
           },
           {
-            value: '',
+            key: '',
             value: '',
           },
         ],
