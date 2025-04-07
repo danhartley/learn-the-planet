@@ -37,12 +37,17 @@ export type Test = {
 
 // Collections and taxon items
 
+export type Image = {
+  url: string
+}
+
 export type Taxon = {
   id: number
   binomial: string
   common?: string
   family?: string
-  distractors?: string[]
+  distractors?: Taxon[]
+  images: Image[]
 }
 
 export type Collection = {

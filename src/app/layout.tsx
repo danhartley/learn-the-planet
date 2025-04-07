@@ -15,8 +15,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         {/* Layout UI */}
         {/* Place children where you want to render a page or nested layout */}
         <main>{children}</main>
-        <footer>I'm the footer in the root layout</footer>
-        <ScoreDisplay />
+        <footer>
+          <ScoreDisplay />
+        </footer>
       </body>
     </html>
   )
