@@ -1,8 +1,8 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useTestPlanner } from '@/lib/hooks/useTestPlanner'
-import { Collection } from '@/lib/types'
+import { useTestPlanner } from '@/hooks/useTestPlanner'
+import { Collection } from '@/types'
 
 type Props = {
   collection: Collection

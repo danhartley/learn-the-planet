@@ -1,7 +1,6 @@
-// lib/services/TestPlannerService.ts
 import { EventEmitter } from 'events'
 import { TestPlanner } from '../test-planner'
-import { Collection, Layout, Score } from '@/lib/types'
+import { Collection, Layout, Score, QuestionTemplate } from '@/types'
 import { TestPlannerEvent } from '@/utils/enums'
 
 class TestPlannerService {
@@ -19,8 +18,11 @@ class TestPlannerService {
     return TestPlannerService.instance
   }
 
-  startTest(collection: Collection): void {
-    this.testPlanner = new TestPlanner(collection)
+  startTest(
+    collection: Collection,
+    questionTemplates: QuestionTemplate[]
+  ): void {
+    this.testPlanner = new TestPlanner(collection, questionTemplates)
     this.emitter.emit(TestPlannerEvent.TEST_STARTED)
     this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
   }

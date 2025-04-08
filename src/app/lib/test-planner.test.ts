@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { TestPlanner } from './test-planner'
-import { Collection, Taxon } from './types'
+import { Collection, Taxon, QuestionTemplate } from './types'
+import { taxonomyTemplates } from './config/questionTemplates'
 
 describe('TestPlanner', () => {
   let collection!: Collection
@@ -20,7 +21,7 @@ describe('TestPlanner', () => {
     }
 
     expect(() => {
-      new TestPlanner(collection)
+      new TestPlanner(collection, [])
     }).toThrowError('Collection must contain at least one item')
   })
   it('Cannot create test planner with invalid taxon items (missing required properties)', () => {
@@ -36,7 +37,7 @@ describe('TestPlanner', () => {
     }
 
     expect(() => {
-      const testPlanner = new TestPlanner(collection)
+      const testPlanner = new TestPlanner(collection, [])
     }).toThrow('Invalid taxon item at index 0: missing required properties')
   })
   it('Cannot create test planner with invalid taxon binomial format', () => {
@@ -50,12 +51,13 @@ describe('TestPlanner', () => {
           id: 1,
           binomial: 'InvalidName', // No space between genus and species
           common: 'Test Plant',
+          images: [],
         },
       ],
     }
 
     expect(() => {
-      const testPlanner = new TestPlanner(collection)
+      const testPlanner = new TestPlanner(collection, [])
     }).toThrow(
       'Invalid taxon item at index 0: name must contain genus and species separated by space'
     )
@@ -76,7 +78,7 @@ describe('TestPlanner', () => {
     }
 
     expect(() => {
-      const testPlanner = new TestPlanner(collection)
+      const testPlanner = new TestPlanner(collection, [])
     }).toThrow('Invalid taxon item at index 0: name must be a non-empty string')
   })
 })
@@ -96,22 +98,24 @@ describe('Valid collection', () => {
           binomial: 'Genus SpeciesOne',
           common: 'Plant One',
           family: 'Family One',
+          images: [],
         },
         {
           id: 2,
           binomial: 'Altgenus SpeciesTwo',
           common: 'Plant Two',
           family: 'Family Two',
+          images: [],
         },
       ],
     }
 
-    testPlanner = new TestPlanner(collection)
+    testPlanner = new TestPlanner(collection, taxonomyTemplates)
   })
   it('Creates test plan with correct number of layouts', () => {
     const testPlan = testPlanner.getTestPlan()
-    // 2 items × 4 questions per item = 8 layouts
-    expect(testPlan.layouts.length).toBe(8)
+    // 2 items × 3 questions per item = 6 layouts
+    expect(testPlan.layouts.length).toBe(6)
   })
   it('Starts with default state', () => {
     const testPlan = testPlanner.getTestPlan()
@@ -141,7 +145,7 @@ describe('Valid collection', () => {
   })
   it('Returns false when no more questions are available', () => {
     // Move through all questions
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 5; i++) {
       expect(testPlanner.moveToNextQuestion()).toBe(true)
     }
 

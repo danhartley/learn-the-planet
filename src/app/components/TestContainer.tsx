@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useTestPlanner } from '@/lib/hooks/useTestPlanner'
+import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { QuestionDisplay } from '@/components/QuestionDisplay'
 import { QuestionAnswer } from '@/components/QuestionAnswer'
 

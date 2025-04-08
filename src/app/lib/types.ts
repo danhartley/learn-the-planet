@@ -97,3 +97,27 @@ export type AppState = {
   testPlanId: string
   lessonPlanId: string
 }
+
+// Define interfaces for the different question layout types
+interface BaseQuestionTemplate {
+  type: 'multipleChoice' | 'textEntry' /* other types */
+  level: string
+  questionTextTemplate: string // Uses ${property} syntax for interpolation
+}
+
+export interface MultipleChoiceTemplate extends BaseQuestionTemplate {
+  type: 'multipleChoice'
+  correctAnswerProperty: string // Property path on Taxon to get correct answer
+  distractorCount: number
+  distractorType: 'binomial' | 'genus' | 'species' | 'image' /* others */
+}
+
+export interface TextEntryTemplate extends BaseQuestionTemplate {
+  type: 'textEntry'
+  correctAnswerProperty: string
+  placeholder: string
+}
+
+export type QuestionTemplate =
+  | MultipleChoiceTemplate
+  | TextEntryTemplate /* other types */

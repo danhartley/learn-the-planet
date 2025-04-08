@@ -1,4 +1,4 @@
-import { Layout } from '@/lib/types'
+import { Layout } from '@/types'
 
 type Props = {
   layout: Layout

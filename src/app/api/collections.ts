@@ -1,4 +1,4 @@
-import { Collection } from '@/lib/types'
+import { Collection } from '@/types'
 
 export const getCollections = (): Promise<Collection[]> => {
   const collection = {

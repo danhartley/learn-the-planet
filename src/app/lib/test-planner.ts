@@ -5,11 +5,15 @@ import {
   Score,
   TestState,
   Taxon,
-  Question,
   MultipleChoiceQuestion,
   TextEntryQuestion,
+  QuestionTemplate,
+  MultipleChoiceTemplate,
+  TextEntryTemplate,
 } from './types'
 import { Scorer } from './scorer'
+
+import { generateDistractors } from '../lib/template-helpers'
 
 export class TestPlanner {
   private collection: Collection
@@ -27,8 +31,9 @@ export class TestPlanner {
   }
   private testPlanId: number = 0
   private static testPlanCounter: number = 0
+  private questionTemplates: QuestionTemplate[]
 
-  constructor(collection: Collection) {
+  constructor(collection: Collection, questionTemplates: QuestionTemplate[]) {
     if (!collection) {
       throw new Error('Collection cannot be null or undefined')
     }
@@ -61,60 +66,114 @@ export class TestPlanner {
     this.collection = collection
     this.scorer = new Scorer()
     this.testPlanId = ++TestPlanner.testPlanCounter
+    this.questionTemplates = questionTemplates
     this.generateLayouts()
   }
 
-  private generateLayouts(): void {
-    // For each item in the collection, create four standard question types
-    this.collection.items.forEach((item, index) => {
-      // Question 1: Select species from photos
-      this.layouts.push(
-        this.createMultipleChoiceLayout(
-          index * 4,
-          'level 1',
-          `Select the correct photo for ${item.common} (${item.binomial})`,
-          item.binomial,
-          this.getDistractors(item, 3)
-        )
-      )
+  private getPropertyByPath = (obj: any, path: string): any => {
+    // Return undefined for null/undefined objects
+    if (obj == null) {
+      return undefined
+    }
 
-      // Question 2: Select correct species name given genus
-      const genus = item.binomial.split(' ')[0]
-      this.layouts.push(
-        this.createMultipleChoiceLayout(
-          index * 4 + 1,
-          'level 1',
-          `Which species belongs to the genus ${genus}?`,
-          item.binomial,
-          this.getDistractors(item, 3)
-        )
-      )
+    // Handle simple property access
+    if (!path.includes('.') && !path.includes('[')) {
+      return obj[path]
+    }
 
-      // Question 3: Select correct genus name given species
-      const species = item.binomial.split(' ')[1]
-      this.layouts.push(
-        this.createMultipleChoiceLayout(
-          index * 4 + 2,
-          'level 2',
-          `Which genus does the species ${species} belong to?`,
-          genus,
-          this.getGenusDistractors(item, 3)
-        )
-      )
+    // Split by dots but preserve array notation
+    const pathArray = path.match(/[^\.\[\]]+|\[\d+\]/g)
 
-      // Question 4: Text entry for full name
-      this.layouts.push(
-        this.createTextEntryLayout(
-          index * 4 + 3,
-          'level 3',
-          `Enter the scientific name for ${item.common}`,
-          item.binomial,
-          'Enter genus and species'
-        )
-      )
+    // Start with the object
+    let current = obj
+
+    // Navigate through the path
+    for (let i = 0; i < pathArray!.length && current != null; i++) {
+      let key = pathArray![i]
+
+      // Handle array indexing
+      if (key.startsWith('[') && key.endsWith(']')) {
+        // Extract index number
+        const index = parseInt(key.slice(1, -1))
+
+        // Check if current is an array and index is valid
+        if (
+          Array.isArray(current) &&
+          !isNaN(index) &&
+          index >= 0 &&
+          index < current.length
+        ) {
+          current = current[index]
+        } else {
+          return undefined
+        }
+      } else {
+        // Regular property access
+        current = current[key]
+      }
+    }
+
+    return current
+  }
+
+  private processTemplate(template: string, item: Taxon): string {
+    return template.replace(/\${([^}]+)}/g, (match, propertyPath) => {
+      // Handle dot notation for nested properties (e.g., binomial, images[0].url)
+      const value = this.getPropertyByPath(item, propertyPath)
+      return value !== undefined ? String(value) : match
     })
   }
 
+  private createLayoutFromTemplate(
+    index: number,
+    item: Taxon,
+    template: QuestionTemplate
+  ): Layout {
+    // Process the question text template with actual item properties
+    const questionText = this.processTemplate(
+      template.questionTextTemplate,
+      item
+    )
+
+    switch (template.type) {
+      case 'multipleChoice':
+        return this.createMultipleChoiceFromTemplate(
+          index,
+          item,
+          template,
+          questionText
+        )
+      case 'textEntry':
+        return this.createTextEntryFromTemplate(
+          index,
+          item,
+          template,
+          questionText
+        )
+      // Add cases for other question types
+      default:
+        throw new Error(`Unknown question type: ${(template as any).type}`)
+    }
+  }
+
+  private generateLayouts(): void {
+    // For each item in the collection, create layouts based on templates
+    this.collection.items.forEach((item, itemIndex) => {
+      this.questionTemplates.forEach((template, templateIndex) => {
+        // Create a unique index for each question
+        const questionIndex =
+          itemIndex * this.questionTemplates.length + templateIndex
+
+        // Generate the layout based on the template type
+        const layout = this.createLayoutFromTemplate(
+          questionIndex,
+          item,
+          template
+        )
+        this.layouts.push(layout)
+      })
+    })
+  }
   private createMultipleChoiceLayout(
     index: number,
     level: string,
@@ -148,6 +207,34 @@ export class TestPlanner {
     }
   }
 
+  private createMultipleChoiceFromTemplate(
+    index: number,
+    item: Taxon,
+    template: MultipleChoiceTemplate,
+    questionText: string
+  ): Layout {
+    // Get the correct answer based on the specified property
+    const correctAnswer = this.getPropertyByPath(
+      item,
+      template.correctAnswerProperty
+    )
+
+    // Generate distractors based on template configuration
+    const distractors = generateDistractors(
+      item,
+      template.distractorCount,
+      template.distractorType
+    )
+
+    return this.createMultipleChoiceLayout(
+      index,
+      template.level,
+      questionText,
+      correctAnswer,
+      distractors
+    )
+  }
+
   private createTextEntryLayout(
     index: number,
     level: string,
@@ -170,6 +257,26 @@ export class TestPlanner {
     }
   }
 
+  private createTextEntryFromTemplate(
+    index: number,
+    item: Taxon,
+    template: TextEntryTemplate,
+    questionText: string
+  ): Layout {
+    const correctAnswer = this.getPropertyByPath(
+      item,
+      template.correctAnswerProperty
+    )
+
+    return this.createTextEntryLayout(
+      index,
+      template.level,
+      questionText,
+      correctAnswer,
+      template.placeholder
+    )
+  }
+
   private getDistractors(item: Taxon, count: number): string[] {
     // If the item has distractors defined, use those
     if (
@@ -185,7 +292,7 @@ export class TestPlanner {
 
     while (distractors.length < count && availableItems.length > 0) {
       const randomIndex = Math.floor(Math.random() * availableItems.length)
-      const distractor = availableItems[randomIndex].name
+      const distractor = availableItems[randomIndex].binomial
 
       if (!distractors.includes(distractor) && distractor !== item.binomial) {
         distractors.push(distractor)

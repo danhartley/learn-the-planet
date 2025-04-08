@@ -1,4 +1,4 @@
-import { Collection } from '@/lib/types'
+import { Collection } from '@/types'
 import { CollectionItem } from '@/components/CollectionItem'
 
 type Props = {

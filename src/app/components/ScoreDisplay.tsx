@@ -1,6 +1,6 @@
 'use client'
 
-import { useTestPlanner } from '@/lib/hooks/useTestPlanner'
+import { useTestPlanner } from '@/hooks/useTestPlanner'
 
 export function ScoreDisplay() {
   const { lastScore } = useTestPlanner()
