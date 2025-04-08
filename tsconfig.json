@@ -19,14 +19,15 @@
         "name": "next"
       }
     ],
-    "baseUrl": "src/app/",
+    "baseUrl": "src/",
     "paths": {
-      "@/hooks/*": ["lib/hooks/*"],
-      "@/types": ["lib/types"],
       "@/styles/*": ["styles/*"],
       "@/components/*": ["components/*"],
+      "@/hooks/*": ["lib/hooks/*"],
+      "@/types": ["lib/types"],
       "@/services/*": ["lib/services/*"],
-      "@/utils/*": ["lib/utils/*"]
+      "@/utils/*": ["lib/utils/*"],
+      "@/api/*": ["lib/api/*"]
     }
   },
   "include": [

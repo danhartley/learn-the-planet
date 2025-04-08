@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import TestPlannerService from '../../lib/services/TestPlannerService'
+import TestPlannerService from '@/services/TestPlannerService'
 
 describe('TestPlannerService', () => {
   it('getInstance should always return the same instance (singleton pattern)', () => {

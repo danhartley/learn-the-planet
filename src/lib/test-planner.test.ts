@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { TestPlanner } from './test-planner'
-import { Collection, Taxon, QuestionTemplate } from './types'
+import { Collection } from './types'
 import { taxonomyTemplates } from './config/questionTemplates'
 
 describe('TestPlanner', () => {

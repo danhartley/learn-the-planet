@@ -1,13 +1,6 @@
 import { useState, useEffect } from 'react'
 import TestPlannerService from '@/services/TestPlannerService'
-import {
-  Collection,
-  Layout,
-  Score,
-  QuestionTemplate,
-  MultipleChoiceTemplate,
-  TextEntryTemplate,
-} from '@/types'
+import { Collection, Layout, Score, QuestionTemplate } from '@/types'
 import { TestPlannerEvent } from '@/utils/enums'
 import { taxonomyTemplates } from '../config/questionTemplates'
 
@@ -38,7 +31,8 @@ export function useTestPlanner() {
 
     // Cleanup subscription
     return () => {
-      unsubscribe, unsubscribeFromAnswerMarked
+      unsubscribe()
+      unsubscribeFromAnswerMarked()
     }
   }, [])
 

@@ -55,7 +55,7 @@ class TestPlannerService {
     return () => this.emitter.off(TestPlannerEvent.STATE_CHANGED, callback)
   }
 
-  // Enhanced subscribe method to listen to specific events
+  // Subscribe method to listen to specific events
   subscribeToEvent(
     eventName: string,
     callback: (data?: any) => void
