@@ -5,5 +5,6 @@ type Props = {
 }
 
 export function QuestionDisplay({ layout }: Props) {
+  console.log(layout)
   return <div>{layout.question?.text}</div>
 }

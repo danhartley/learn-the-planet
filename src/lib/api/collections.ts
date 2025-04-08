@@ -17,6 +17,18 @@ export const getCollections = (): Promise<Collection[]> => {
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
           },
         ],
+        distractors: [
+          {
+            id: 1,
+            binomial: 'binomial name',
+            common: 'common name',
+            images: [
+              {
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+              },
+            ],
+          },
+        ],
       },
       {
         id: 484542,
@@ -26,6 +38,18 @@ export const getCollections = (): Promise<Collection[]> => {
         images: [
           {
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
+          },
+        ],
+        distractors: [
+          {
+            id: 1,
+            binomial: 'binomial name',
+            common: 'common name',
+            images: [
+              {
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+              },
+            ],
           },
         ],
       },
@@ -39,6 +63,18 @@ export const getCollections = (): Promise<Collection[]> => {
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
           },
         ],
+        distractors: [
+          {
+            id: 1,
+            binomial: 'binomial name',
+            common: 'common name',
+            images: [
+              {
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+              },
+            ],
+          },
+        ],
       },
       {
         id: 578478,
@@ -48,6 +84,18 @@ export const getCollections = (): Promise<Collection[]> => {
         images: [
           {
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
+          },
+        ],
+        distractors: [
+          {
+            id: 1,
+            binomial: 'binomial name',
+            common: 'common name',
+            images: [
+              {
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+              },
+            ],
           },
         ],
       },
@@ -61,6 +109,18 @@ export const getCollections = (): Promise<Collection[]> => {
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
           },
         ],
+        distractors: [
+          {
+            id: 1,
+            binomial: 'binomial name',
+            common: 'common name',
+            images: [
+              {
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+              },
+            ],
+          },
+        ],
       },
       {
         id: 581687,
@@ -70,6 +130,18 @@ export const getCollections = (): Promise<Collection[]> => {
         images: [
           {
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
+          },
+        ],
+        distractors: [
+          {
+            id: 1,
+            binomial: 'binomial name',
+            common: 'common name',
+            images: [
+              {
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+              },
+            ],
           },
         ],
       },
@@ -83,6 +155,18 @@ export const getCollections = (): Promise<Collection[]> => {
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
           },
         ],
+        distractors: [
+          {
+            id: 1,
+            binomial: 'binomial name',
+            common: 'common name',
+            images: [
+              {
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+              },
+            ],
+          },
+        ],
       },
       {
         id: 579364,
@@ -92,6 +176,18 @@ export const getCollections = (): Promise<Collection[]> => {
         images: [
           {
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
+          },
+        ],
+        distractors: [
+          {
+            id: 1,
+            binomial: 'binomial name',
+            common: 'common name',
+            images: [
+              {
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+              },
+            ],
           },
         ],
       },
@@ -105,6 +201,18 @@ export const getCollections = (): Promise<Collection[]> => {
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
           },
         ],
+        distractors: [
+          {
+            id: 1,
+            binomial: 'binomial name',
+            common: 'common name',
+            images: [
+              {
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+              },
+            ],
+          },
+        ],
       },
       {
         id: 579379,
@@ -114,6 +222,18 @@ export const getCollections = (): Promise<Collection[]> => {
         images: [
           {
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
+          },
+        ],
+        distractors: [
+          {
+            id: 1,
+            binomial: 'binomial name',
+            common: 'common name',
+            images: [
+              {
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+              },
+            ],
           },
         ],
       },

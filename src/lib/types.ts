@@ -2,7 +2,7 @@
 
 export type MultipleChoiceOption = {
   key: string
-  value: string
+  value: string | Image | undefined
 }
 
 export type QuestionType = 'Multiple choice' | 'Text entry'
@@ -44,10 +44,13 @@ export type Image = {
 export type Taxon = {
   id: number
   binomial: string
+  genus?: string
+  species?: string
   common?: string
   family?: string
   distractors?: Taxon[]
   images: Image[]
+  image?: Image
 }
 
 export type Collection = {
@@ -63,6 +66,7 @@ export type Layout = {
   level: string
   index: number
   question: Question
+  distractorType?: DistractorType
 }
 
 export type TestState = {
@@ -105,11 +109,17 @@ interface BaseQuestionTemplate {
   questionTextTemplate: string // Uses ${property} syntax for interpolation
 }
 
+export type DistractorType =
+  | 'binomial'
+  | 'genus'
+  | 'species'
+  | 'image' /* others */
+
 export interface MultipleChoiceTemplate extends BaseQuestionTemplate {
   type: 'multipleChoice'
   correctAnswerProperty: string // Property path on Taxon to get correct answer
   distractorCount: number
-  distractorType: 'binomial' | 'genus' | 'species' | 'image' /* others */
+  distractorType: DistractorType
 }
 
 export interface TextEntryTemplate extends BaseQuestionTemplate {

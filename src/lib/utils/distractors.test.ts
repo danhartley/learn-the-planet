@@ -1,9 +1,11 @@
 import { describe, it, expect, beforeEach } from 'vitest'
+import { Collection, Taxon } from '@/types'
 import { generateDistractors } from '@/utils/distractors'
 
 describe('distractors', () => {
   let values: string[]
   const count = 2
+  const distractorType = 'binomial'
   const collection = {
     id: '',
     name: '',
@@ -51,17 +53,18 @@ describe('distractors', () => {
     collection,
     collection.items[0],
     count,
-    'binomial'
-  )
-  it('should return only distractor values', () => {
+    distractorType
+  ).map((v: Taxon) => v[distractorType])
+  it('should return only distractor binomial values', () => {
     const allExpectedValues = ['Distractor 1', 'Distractor 2'].every(v =>
       values.includes(v)
     )
 
     expect(allExpectedValues).toBe(true)
   })
-  it('should return distractor values and one non-distractor value', () => {
+  it('should return all distractor binomial values and one non-distractor binomial value', () => {
     const count = 3
+    const distractorType = 'binomial'
     const collection = {
       id: '',
       name: '',
@@ -120,8 +123,8 @@ describe('distractors', () => {
       collection,
       collection.items[0],
       count,
-      'binomial'
-    )
+      distractorType
+    ).map((v: Taxon) => v[distractorType])
 
     const expectedValues = [
       'Distractor 1',

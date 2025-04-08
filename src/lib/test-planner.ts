@@ -175,22 +175,20 @@ export class TestPlanner {
     })
   }
   private createMultipleChoiceLayout(
+    item: Taxon,
     index: number,
-    level: string,
+    template: MultipleChoiceTemplate,
     text: string,
     key: string,
-    distractors: string[]
+    distractors: Taxon[]
   ): Layout {
     const options = [
-      { key: key, value: `Photo of ${key}` },
-      ...distractors.map(d => ({ key: d, value: `Photo of ${d}` })),
+      { key: key, value: item[template.distractorType] },
+      ...distractors.map((d: Taxon) => ({
+        key: d.binomial,
+        value: d[template.distractorType] || '',
+      })),
     ]
-
-    // Shuffle options
-    for (let i = options.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[options[i], options[j]] = [options[j], options[i]]
-    }
 
     const question: MultipleChoiceQuestion = {
       type: 'Multiple choice',
@@ -201,9 +199,10 @@ export class TestPlanner {
 
     return {
       id: `layout-${this.testPlanId}-${index}`,
-      level,
+      level: template.level,
       index,
       question,
+      distractorType: template.distractorType,
     }
   }
 
@@ -228,8 +227,9 @@ export class TestPlanner {
     )
 
     return this.createMultipleChoiceLayout(
+      item,
       index,
-      template.level,
+      template,
       questionText,
       correctAnswer,
       distractors
