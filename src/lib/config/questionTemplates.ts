@@ -6,7 +6,7 @@ export const taxonomyTemplates: QuestionTemplate[] = [
   {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the correct photo for ${binomial}',
+    questionTextTemplate: 'Select the correct binomial for ${name}',
     correctAnswerProperty: 'binomial',
     distractorCount: 3,
     distractorType: 'binomial',

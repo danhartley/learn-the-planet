@@ -13,7 +13,7 @@ import {
 } from './types'
 import { Scorer } from './scorer'
 
-import { generateDistractors } from '../lib/template-helpers'
+import { generateDistractors } from '@/utils/distractors'
 
 export class TestPlanner {
   private collection: Collection
@@ -221,6 +221,7 @@ export class TestPlanner {
 
     // Generate distractors based on template configuration
     const distractors = generateDistractors(
+      this.collection,
       item,
       template.distractorCount,
       template.distractorType
