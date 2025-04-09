@@ -11,11 +11,14 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body>
-        <header>I'm the header in the root layout</header>
+        <header>
+          <h1>Learn the Planet</h1>
+        </header>
         {/* Layout UI */}
         {/* Place children where you want to render a page or nested layout */}
         <main>{children}</main>
         <footer>
+          <h2>Footer</h2>
           <ScoreDisplay />
         </footer>
       </body>

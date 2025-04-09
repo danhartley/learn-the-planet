@@ -34,7 +34,9 @@ export function CollectionItem({ collection }: Props) {
     <div>
       <h3>{collection.name}</h3>
       <p>{collection.count} items</p>
-      <button onClick={handleStartTest}>Start Test</button>
+      <button id="start-test" onClick={handleStartTest}>
+        Start Test
+      </button>
     </div>
   )
 }

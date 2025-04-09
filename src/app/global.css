@@ -7,3 +7,16 @@ body {
 a {
   text-underline-offset: 0.4rem;
 }
+
+input,
+button {
+  padding: 1vh;
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  row-gap: 1vw;
+  column-gap: 2vw;
+  padding: 1vw 0;
+}

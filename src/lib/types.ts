@@ -110,10 +110,11 @@ interface BaseQuestionTemplate {
 }
 
 export type DistractorType =
+  | 'common'
   | 'binomial'
   | 'genus'
   | 'species'
-  | 'image' /* others */
+  | 'image'
 
 export interface MultipleChoiceTemplate extends BaseQuestionTemplate {
   type: 'multipleChoice'

@@ -114,8 +114,8 @@ describe('Valid collection', () => {
   })
   it('Creates test plan with correct number of layouts', () => {
     const testPlan = testPlanner.getTestPlan()
-    // 2 items × 4 questions per item = 8 layouts
-    expect(testPlan.layouts.length).toBe(8)
+    // 2 items × 5 questions per item = 8 layouts
+    expect(testPlan.layouts.length).toBe(10)
   })
   it('Starts with default state', () => {
     const testPlan = testPlanner.getTestPlan()
@@ -145,7 +145,7 @@ describe('Valid collection', () => {
   })
   it('Returns false when no more questions are available', () => {
     // Move through all questions
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 9; i++) {
       expect(testPlanner.moveToNextQuestion()).toBe(true)
     }
 

@@ -24,7 +24,7 @@ export const getCollections = (): Promise<Collection[]> => {
             common: 'common name',
             images: [
               {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/small.jpeg',
               },
             ],
           },
@@ -47,7 +47,7 @@ export const getCollections = (): Promise<Collection[]> => {
             common: 'common name',
             images: [
               {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/small.jpeg',
               },
             ],
           },
@@ -70,7 +70,7 @@ export const getCollections = (): Promise<Collection[]> => {
             common: 'common name',
             images: [
               {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/small.jpeg',
               },
             ],
           },
@@ -93,7 +93,7 @@ export const getCollections = (): Promise<Collection[]> => {
             common: 'common name',
             images: [
               {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/small.jpeg',
               },
             ],
           },
@@ -116,7 +116,7 @@ export const getCollections = (): Promise<Collection[]> => {
             common: 'common name',
             images: [
               {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/small.jpeg',
               },
             ],
           },
@@ -139,7 +139,7 @@ export const getCollections = (): Promise<Collection[]> => {
             common: 'common name',
             images: [
               {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/small.jpeg',
               },
             ],
           },
@@ -162,7 +162,7 @@ export const getCollections = (): Promise<Collection[]> => {
             common: 'common name',
             images: [
               {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/small.jpeg',
               },
             ],
           },
@@ -185,7 +185,7 @@ export const getCollections = (): Promise<Collection[]> => {
             common: 'common name',
             images: [
               {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/small.jpeg',
               },
             ],
           },
@@ -208,7 +208,7 @@ export const getCollections = (): Promise<Collection[]> => {
             common: 'common name',
             images: [
               {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/small.jpeg',
               },
             ],
           },
@@ -231,7 +231,7 @@ export const getCollections = (): Promise<Collection[]> => {
             common: 'common name',
             images: [
               {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/medium.jpeg',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/66662426/small.jpeg',
               },
             ],
           },
