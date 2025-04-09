@@ -23,7 +23,7 @@ const questionTypeMap: Record<DisplayKey, React.ComponentType<any>> = {
   'species+Text entry': TextEntryComponent,
 }
 
-export function QuestionDisplay({ layout, onSubmit }: Props) {
+export function TestDisplay({ layout, onSubmit }: Props) {
   const type = layout.distractorType ?? 'binomial'
   const Component = questionTypeMap[`${type}+${layout.question.type}`]
   return <Component question={layout.question} onSubmit={onSubmit} />

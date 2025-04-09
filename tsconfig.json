@@ -27,7 +27,8 @@
       "@/types": ["lib/types"],
       "@/services/*": ["lib/services/*"],
       "@/utils/*": ["lib/utils/*"],
-      "@/api/*": ["lib/api/*"]
+      "@/api/*": ["lib/api/*"],
+      "@/mocks/*": ["lib/mocks/*"]
     }
   },
   "include": [

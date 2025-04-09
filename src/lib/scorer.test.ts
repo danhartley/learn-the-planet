@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { Scorer } from './scorer'
-import { mockTest } from './mock-test'
+import { mockTest } from '@/mocks/mock-test'
 
 describe('Single question test score', () => {
   let scorer: Scorer

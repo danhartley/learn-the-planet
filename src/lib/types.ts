@@ -38,19 +38,64 @@ export type Test = {
 // Collections and taxon items
 
 export type Image = {
-  url: string
+  url?: string
+}
+
+export type Family = {
+  genera?: number
+  members?: string[]
+  names: string[]
+  summary?: string
+  species?: number
+  identification?: string
+  taxon?: string
+  traits?: {
+    pollination?: { value: string[] }
+    'leaf arrangement'?: { value: string[] }
+    inflorescence?: { value: string[] }
+    'petal count'?: { value: string[] }
+    'fruit type'?: { value: string[] }
+  }
+  wiki?: string
+  eol?: string
+  name?: string
+  iconicTaxon?: string
+  taxonomy?: {
+    phylum: string
+    class: string
+    kingdom: string
+    order: string
+  }
+  vernacularName?: string
 }
 
 export type Taxon = {
   id: number
+  iconicTaxon: string
+  names: {
+    vernacularName?: string
+    language?: string
+    wikiSearchTerm?: boolean
+  }[]
   binomial: string
+  order?: string
   genus?: string
   species?: string
-  common?: string
-  family?: string
+  vernacularName: string
+  family?: string | Family | undefined
   distractors?: Taxon[]
-  images: Image[]
+  images?: Image[]
   image?: Image
+  taxonomy?: {
+    phylum?: string
+    family?: string | Family // Allow `family` to be either a string or an object
+    class?: string
+    kingdom?: string
+    order?: string
+    genus?: string
+    species?: string
+  }
+  traits?: Record<string, any>
 }
 
 export type Collection = {

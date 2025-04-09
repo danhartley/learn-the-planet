@@ -3,7 +3,7 @@ import {
   MultipleChoiceQuestion,
   TextEntryQuestion,
   Test,
-} from './types'
+} from '@/types'
 
 const test1: Test = {
   question: {

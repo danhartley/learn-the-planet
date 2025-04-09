@@ -1,4 +1,4 @@
-import { TestPlan } from './types'
+import { TestPlan } from '@/types'
 
 export const testPlan: TestPlan = {
   id: 'Test plan 1',

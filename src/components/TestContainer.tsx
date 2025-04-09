@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
-import { QuestionDisplay } from '@/components/test/QuestionDisplay'
+import { TestDisplay } from '@/components/test/TestDisplay'
 
 export function TestContainer() {
   const router = useRouter()
@@ -34,7 +34,7 @@ export function TestContainer() {
     <>
       <h2>Tests</h2>
       <div>
-        <QuestionDisplay layout={currentLayout} onSubmit={handleSubmitAnswer} />
+        <TestDisplay layout={currentLayout} onSubmit={handleSubmitAnswer} />
       </div>
     </>
   )
