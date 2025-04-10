@@ -112,6 +112,7 @@ export type Layout = {
   index: number
   question: Question
   distractorType?: DistractorType
+  item?: Taxon
 }
 
 export type TestState = {

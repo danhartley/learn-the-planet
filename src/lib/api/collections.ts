@@ -220,13 +220,13 @@ export const getCollections = (): Promise<Collection[]> => {
             'Umbellifers',
             'Celery family',
             'Carrot family',
-            'Parsely family',
+            'Parsley family',
           ],
           summary:
-            'A family of mostly aromatic flowering plants that includes species such as carrot, celery, cumin, parsley and coriander, and the posionouse hemlocks.',
+            'A family of mostly aromatic flowering plants that includes species such as carrot, celery, cumin, parsley and coriander, and the poisonous hemlocks.',
           species: 3700,
           identification:
-            'Compound, termial umbels radiating from a single point. Hollow flower stalks.',
+            'Compound, terminal umbels radiating from a single point. Hollow flower stalks.',
           taxon: 'family',
           traits: {
             pollination: {

@@ -206,6 +206,7 @@ export class TestPlanner {
       index,
       question,
       distractorType: template.distractorType,
+      item,
     }
   }
 
@@ -244,7 +245,8 @@ export class TestPlanner {
     level: string,
     text: string,
     key: string,
-    hint: string
+    hint: string,
+    item: Taxon
   ): Layout {
     const question: TextEntryQuestion = {
       type: 'Text entry',
@@ -258,6 +260,7 @@ export class TestPlanner {
       level,
       index,
       question,
+      item,
     }
   }
 
@@ -277,7 +280,8 @@ export class TestPlanner {
       template.level,
       questionText,
       correctAnswer,
-      template.placeholder
+      template.placeholder,
+      item
     )
   }
 

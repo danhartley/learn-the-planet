@@ -6,7 +6,7 @@ type Props = {
   onSubmit: (answer: string) => void
 }
 
-export default function ImageChoiceComponent({ question, onSubmit }: Props) {
+const ImageChoiceComponent = ({ question, onSubmit }: Props) => {
   const setAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
     const answer = (e.currentTarget.dataset.key || '').trim()
     onSubmit(answer)
@@ -33,3 +33,5 @@ export default function ImageChoiceComponent({ question, onSubmit }: Props) {
     </>
   )
 }
+
+export default ImageChoiceComponent

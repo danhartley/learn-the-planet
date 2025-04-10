@@ -12,6 +12,9 @@ const Home = () => {
       <p>
         See LaunchDarkly <Link href="/flags">flags</Link>
       </p>
+      <p>
+        <Link href="/collections">Collections</Link>
+      </p>
     </>
   )
 }
