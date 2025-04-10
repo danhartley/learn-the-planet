@@ -129,7 +129,6 @@ export const getCollections = (): Promise<Collection[]> => {
               'https://commons.wikimedia.org/wiki/File:Anethum_graveolens_Inflorescencia_2009-6-20_CampoCalatrava.jpg',
             license: 'http://creativecommons.org/licenses/publicdomain/',
             url: '55/a9/7a/509.12137574.jpg',
-            part: '55/a9/7a/509.12137574',
             small:
               'https://content.eol.org/data/media/55/a9/7a/509.12137574.98x68.jpg',
             medium:
@@ -469,7 +468,6 @@ export const getCollections = (): Promise<Collection[]> => {
             source: 'https://commons.wikimedia.org/wiki/File:Thymian.jpg',
             url: '63/e8/d3/509.512777.jpg',
             license: 'http://creativecommons.org/licenses/publicdomain/',
-            part: '63/e8/d3/509.512777',
             small:
               'https://content.eol.org/data/media/63/e8/d3/509.512777.98x68.jpg',
             medium:
@@ -831,7 +829,6 @@ export const getCollections = (): Promise<Collection[]> => {
             source:
               'https://commons.wikimedia.org/wiki/File:Origanum_vulgare_Prague_2011_3.jpg',
             photographer: '',
-            part: '5c/51/0b/509.20063126',
             small:
               'https://content.eol.org/data/media/5c/51/0b/509.20063126.98x68.jpg',
             medium:
@@ -1077,7 +1074,6 @@ export const getCollections = (): Promise<Collection[]> => {
             rightsHolder:
               'licensed media from Wikimedia Commons in DwCA without owner',
             photographer: '',
-            part: '56/91/94/509.16708476',
             small:
               'https://content.eol.org/data/media/56/91/94/509.16708476.98x68.jpg',
             medium:
@@ -1353,7 +1349,7 @@ export const getCollections = (): Promise<Collection[]> => {
             source:
               'https://commons.wikimedia.org/wiki/File:Petroselinum_crispum_003.JPG',
             url: '55/5b/92/509.10776444.jpg',
-            part: '55/5b/92/509.10776444',
+
             small:
               'https://content.eol.org/data/media/55/5b/92/509.10776444.98x68.jpg',
             medium:
@@ -1656,7 +1652,7 @@ export const getCollections = (): Promise<Collection[]> => {
               'licensed media from Wikimedia Commons in DwCA without owner',
             url: '59/02/5e/509.27916713.jpg',
             photographer: '',
-            part: '59/02/5e/509.27916713',
+
             small:
               'https://content.eol.org/data/media/59/02/5e/509.27916713.98x68.jpg',
             medium:
@@ -1930,7 +1926,7 @@ export const getCollections = (): Promise<Collection[]> => {
               'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus3.jpg',
             license: 'http://creativecommons.org/licenses/by/3.0/',
             url: '58/74/e3/509.2528916.jpg',
-            part: '58/74/e3/509.2528916',
+
             small:
               'https://content.eol.org/data/media/58/74/e3/509.2528916.98x68.jpg',
             medium:
@@ -2195,7 +2191,7 @@ export const getCollections = (): Promise<Collection[]> => {
               'licensed media from Wikimedia Commons in DwCA without owner',
             photographer: '',
             starred: true,
-            part: '57/13/dd/509.19013504',
+
             small:
               'https://content.eol.org/data/media/57/13/dd/509.19013504.98x68.jpg',
             medium:
@@ -2570,7 +2566,7 @@ export const getCollections = (): Promise<Collection[]> => {
               'https://commons.wikimedia.org/wiki/File:20141101Mentha_spicata2.jpg',
             rightsHolder:
               'licensed media from Wikimedia Commons in DwCA without owner',
-            part: '5f/7f/d6/509.36618670',
+
             small:
               'https://content.eol.org/data/media/5f/7f/d6/509.36618670.98x68.jpg',
             medium:
@@ -2798,7 +2794,7 @@ export const getCollections = (): Promise<Collection[]> => {
             source: 'https://www.flickr.com/photos/33590535@N06/3455879598/',
             title: 'Rosemary Gorizia',
             url: '7f/86/96/542.3455879598.jpg',
-            part: '7f/86/96/542.3455879598',
+
             small:
               'https://content.eol.org/data/media/7f/86/96/542.3455879598.98x68.jpg',
             medium:

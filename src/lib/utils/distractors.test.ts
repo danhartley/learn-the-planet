@@ -15,7 +15,7 @@ describe('distractors', () => {
       {
         id: 584995,
         binomial: 'Anethum graveolens',
-        common: 'Dill',
+        vernacularName: 'Dill',
         family: 'Apiaceae',
         images: [
           {
@@ -26,7 +26,7 @@ describe('distractors', () => {
           {
             id: 484542,
             binomial: 'Distractor 1',
-            common: 'Thyme',
+            vernacularName: 'Thyme',
             family: 'Lamiaceae',
             images: [
               {
@@ -37,7 +37,7 @@ describe('distractors', () => {
           {
             id: 579367,
             binomial: 'Distractor 2',
-            common: 'Oregano',
+            vernacularName: 'Oregano',
             family: 'Lamiaceae',
             images: [
               {
@@ -74,7 +74,7 @@ describe('distractors', () => {
         {
           id: 584995,
           binomial: 'Anethum graveolens',
-          common: 'Dill',
+          vernacularName: 'Dill',
           family: 'Apiaceae',
           images: [
             {
@@ -85,7 +85,7 @@ describe('distractors', () => {
             {
               id: 484542,
               binomial: 'Distractor 1',
-              common: 'Thyme',
+              vernacularName: 'Thyme',
               family: 'Lamiaceae',
               images: [
                 {
@@ -96,7 +96,7 @@ describe('distractors', () => {
             {
               id: 579367,
               binomial: 'Distractor 2',
-              common: 'Oregano',
+              vernacularName: 'Oregano',
               family: 'Lamiaceae',
               images: [
                 {
@@ -109,7 +109,7 @@ describe('distractors', () => {
         {
           id: 581421,
           binomial: 'Petroselinum crispum',
-          common: 'Parsley',
+          vernacularName: 'Parsley',
           family: 'Apiaceae',
           images: [
             {

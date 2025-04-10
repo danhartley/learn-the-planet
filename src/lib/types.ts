@@ -71,8 +71,8 @@ export type Family = {
 
 export type Taxon = {
   id: number
-  iconicTaxon: string
-  names: {
+  iconicTaxon?: string
+  names?: {
     vernacularName?: string
     language?: string
     wikiSearchTerm?: boolean
@@ -155,7 +155,7 @@ interface BaseQuestionTemplate {
 }
 
 export type DistractorType =
-  | 'common'
+  | 'vernacularName'
   | 'binomial'
   | 'genus'
   | 'species'

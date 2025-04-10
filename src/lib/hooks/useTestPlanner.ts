@@ -22,9 +22,6 @@ export function useTestPlanner() {
     const unsubscribeFromAnswerMarked = service.subscribeToEvent(
       TestPlannerEvent.ANSWER_MARKED,
       ({ answer, score }) => {
-        console.log(
-          `User answered: ${answer}, scored: ${score.correct ? 'correct' : 'incorrect'}`
-        )
         setLastScore(score)
       }
     )
@@ -35,13 +32,11 @@ export function useTestPlanner() {
       unsubscribeFromAnswerMarked()
     }
   }, [])
-
   return {
     startTest: (
       collection: Collection,
       questionTemplates: QuestionTemplate[] = taxonomyTemplates
     ) => service.startTest(collection, questionTemplates),
-
     currentLayout: layout,
     markAnswer: (answer: string) => service.markAnswer(answer),
     moveToNextQuestion: () => service.moveToNextQuestion(),

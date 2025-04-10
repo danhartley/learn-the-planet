@@ -21,7 +21,6 @@ export function TestContainer() {
 
   const handleSubmitAnswer = (answer: string) => {
     const score = markAnswer(answer)
-    console.log(score)
     const hasNext = moveToNextQuestion()
 
     if (!hasNext) {

@@ -15,6 +15,8 @@ import { Scorer } from './scorer'
 
 import { generateDistractors } from '@/utils/distractors'
 
+import { isCamelCase, splitCamelCaseSmart } from '@/utils/strings'
+
 export class TestPlanner {
   private collection: Collection
   private scorer: Scorer
@@ -174,6 +176,7 @@ export class TestPlanner {
       })
     })
   }
+
   private createMultipleChoiceLayout(
     item: Taxon,
     index: number,
@@ -276,58 +279,6 @@ export class TestPlanner {
       correctAnswer,
       template.placeholder
     )
-  }
-
-  private getDistractors(item: Taxon, count: number): string[] {
-    // If the item has distractors defined, use those
-    if (
-      (item as any).distractors &&
-      (item as any).distractors.length >= count
-    ) {
-      return (item as any).distractors.slice(0, count)
-    }
-
-    // Otherwise, get random items from the collection
-    const distractors: string[] = []
-    const availableItems = this.collection.items.filter(i => i.id !== item.id)
-
-    while (distractors.length < count && availableItems.length > 0) {
-      const randomIndex = Math.floor(Math.random() * availableItems.length)
-      const distractor = availableItems[randomIndex].binomial
-
-      if (!distractors.includes(distractor) && distractor !== item.binomial) {
-        distractors.push(distractor)
-      }
-
-      availableItems.splice(randomIndex, 1)
-    }
-
-    return distractors
-  }
-
-  private getGenusDistractors(item: Taxon, count: number): string[] {
-    const genus = item.binomial.split(' ')[0]
-    const distractors: string[] = []
-    const availableItems = this.collection.items.filter(i => {
-      const itemGenus = i.binomial.split(' ')[0]
-      return itemGenus !== genus
-    })
-
-    const usedGenera = new Set<string>()
-
-    while (distractors.length < count && availableItems.length > 0) {
-      const randomIndex = Math.floor(Math.random() * availableItems.length)
-      const distractor = availableItems[randomIndex].binomial.split(' ')[0]
-
-      if (!usedGenera.has(distractor)) {
-        distractors.push(distractor)
-        usedGenera.add(distractor)
-      }
-
-      availableItems.splice(randomIndex, 1)
-    }
-
-    return distractors
   }
 
   public getCurrentLayout(): Layout {

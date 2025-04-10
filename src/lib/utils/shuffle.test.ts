@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { shuffle } from '@/utils/shuffle'
 
 describe('shuffle', () => {

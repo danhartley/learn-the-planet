@@ -50,7 +50,7 @@ describe('TestPlanner', () => {
         {
           id: 1,
           binomial: 'InvalidName', // No space between genus and species
-          common: 'Test Plant',
+          vernacularName: 'Test Plant',
           images: [],
         },
       ],
@@ -72,7 +72,7 @@ describe('TestPlanner', () => {
         {
           id: 1,
           binomial: '',
-          common: 'Test Plant',
+          vernacularName: 'Test Plant',
         },
       ],
     }
@@ -96,14 +96,14 @@ describe('Valid collection', () => {
         {
           id: 1,
           binomial: 'Genus SpeciesOne',
-          common: 'Plant One',
+          vernacularName: 'Plant One',
           family: 'Family One',
           images: [],
         },
         {
           id: 2,
           binomial: 'Altgenus SpeciesTwo',
-          common: 'Plant Two',
+          vernacularName: 'Plant Two',
           family: 'Family Two',
           images: [],
         },
@@ -181,5 +181,39 @@ describe('Valid collection', () => {
       correctCount: 0,
       incorrectCount: 0,
     })
+  })
+})
+
+describe('Private methods', () => {
+  let collection!: Collection
+  let testPlanner: TestPlanner
+  beforeEach(() => {
+    collection = {
+      id: '1',
+      name: 'Valid collection',
+      count: 2,
+      index: 0,
+      items: [
+        {
+          id: 1,
+          binomial: 'Genus SpeciesOne',
+          vernacularName: 'Plant One',
+          family: 'Family One',
+          images: [],
+        },
+        {
+          id: 2,
+          binomial: 'Altgenus SpeciesTwo',
+          vernacularName: 'Plant Two',
+          family: 'Family Two',
+          images: [],
+        },
+      ],
+    }
+
+    testPlanner = new TestPlanner(collection, taxonomyTemplates)
+  })
+  it('gets nested properties correctly via public method', () => {
+    expect(testPlanner.getCurrentLayout().id).toBe('layout-8-0')
   })
 })

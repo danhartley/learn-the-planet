@@ -30,7 +30,7 @@ const test2: {
   answer: string
 } = {
   question: {
-    text: 'What is common name?',
+    text: 'What is vernacularName name?',
     type: 'Multiple choice',
     key: 'Teixo',
     options: [

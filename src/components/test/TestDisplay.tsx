@@ -12,12 +12,12 @@ type DisplayKey = `${DistractorType}+${QuestionType}`
 
 const questionTypeMap: Record<DisplayKey, React.ComponentType<any>> = {
   'image+Multiple choice': ImageChoiceComponent,
-  'common+Multiple choice': MultipleTextChoiceComponent,
+  'vernacularName+Multiple choice': MultipleTextChoiceComponent,
   'binomial+Multiple choice': MultipleTextChoiceComponent,
   'genus+Multiple choice': MultipleTextChoiceComponent,
   'species+Multiple choice': MultipleTextChoiceComponent,
   'image+Text entry': TextEntryComponent,
-  'common+Text entry': TextEntryComponent,
+  'vernacularName+Text entry': TextEntryComponent,
   'binomial+Text entry': TextEntryComponent,
   'genus+Text entry': TextEntryComponent,
   'species+Text entry': TextEntryComponent,

@@ -1,4 +1,5 @@
 import { MultipleChoiceQuestion, MultipleChoiceOption } from '@/types'
+import { createEOLUrl } from '@/utils/image'
 
 type Props = {
   question: MultipleChoiceQuestion
@@ -17,7 +18,11 @@ export default function ImageChoiceComponent({ question, onSubmit }: Props) {
         data-key={o.key as string}
         onClick={e => setAnswer(e)}
       >
-        <img key={o.key} src={o.value.url} alt={o.key} />
+        <img
+          key={o.key}
+          src={createEOLUrl(o.value.url as string)}
+          alt={o.key}
+        />
       </button>
     ) : null
   })

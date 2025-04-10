@@ -1,4 +1,4 @@
-import './global.css'
+import '@/css/global.css'
 
 import { ScoreDisplay } from '@/components/ScoreDisplay'
 

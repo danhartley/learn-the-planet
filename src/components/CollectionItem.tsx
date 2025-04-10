@@ -17,12 +17,12 @@ export function CollectionItem({ collection }: Props) {
       const [genus, species] = i.binomial.split(' ')
       i.genus = genus
       i.species = species
-      i.image = i.images[0]
+      i.image = i.images?.[0]
       i?.distractors?.forEach(d => {
         const [genus, species] = d.binomial.split(' ')
         d.genus = genus
         d.species = species
-        d.image = d.images[0]
+        d.image = d.images?.[0]
       })
     })
 

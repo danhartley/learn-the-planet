@@ -6,15 +6,15 @@ export const taxonomyTemplates: QuestionTemplate[] = [
   {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the correct common for ${binomial}',
-    correctAnswerProperty: 'common',
+    questionTextTemplate: 'Select the correct vernacular name for ${binomial}',
+    correctAnswerProperty: 'vernacularName',
     distractorCount: 3,
-    distractorType: 'common',
+    distractorType: 'vernacularName',
   },
   {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the correct image for ${common}',
+    questionTextTemplate: 'Select the correct image for ${vernacularName}',
     correctAnswerProperty: 'binomial',
     distractorCount: 3,
     distractorType: 'image',
@@ -22,7 +22,7 @@ export const taxonomyTemplates: QuestionTemplate[] = [
   {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the correct binomial for ${common}',
+    questionTextTemplate: 'Select the correct binomial for ${vernacularName}',
     correctAnswerProperty: 'binomial',
     distractorCount: 3,
     distractorType: 'binomial',
@@ -37,9 +37,9 @@ export const taxonomyTemplates: QuestionTemplate[] = [
   {
     type: 'textEntry',
     level: 'level 1',
-    questionTextTemplate: 'Enter the common name for ${binomial}',
-    correctAnswerProperty: 'common',
-    placeholder: 'Common name',
+    questionTextTemplate: 'Enter the vernacular name name for ${binomial}',
+    correctAnswerProperty: 'vernacularName',
+    placeholder: 'vernacularName name',
   },
 ]
 
