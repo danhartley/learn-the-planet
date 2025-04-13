@@ -15,8 +15,6 @@ import { Scorer } from './scorer'
 
 import { generateDistractors } from '@/utils/distractors'
 
-import { isCamelCase, splitCamelCaseSmart } from '@/utils/strings'
-
 export class TestPlanner {
   private collection: Collection
   private scorer: Scorer

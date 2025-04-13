@@ -21,12 +21,14 @@ export function TestContainer() {
 
   const handleSubmitAnswer = (answer: string) => {
     const score = markAnswer(answer)
-    const hasNext = moveToNextQuestion()
+    setTimeout(() => {
+      const hasNext = moveToNextQuestion()
 
-    if (!hasNext) {
-      // Test completed
-      router.push('/results')
-    }
+      if (!hasNext) {
+        // Test completed
+        router.push('/results')
+      }
+    }, 2000)
   }
 
   return (

@@ -26,7 +26,7 @@ const ImageChoiceComponent = ({ question, onSubmit }: Props) => {
           alt={o.key}
           width={230}
           height={230}
-          style={{ objectFit: 'contain' }}
+          style={{ objectFit: 'cover' }}
         ></Image>
       </button>
     ) : null

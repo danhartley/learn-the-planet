@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, FormEvent } from 'react'
+import React, { useState, FormEvent, useEffect } from 'react'
 import { TextEntryQuestion } from '@/types'
 
 interface QuestionAnswerProps {
@@ -12,30 +12,26 @@ export default function TextEntryComponent({
   onSubmit,
 }: QuestionAnswerProps) {
   const [answer, setAnswer] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isAnswerHidden, setIsAnswerHidden] = useState(true)
+  const [isAnswerVisible, showAnswer] = useState(false)
+
+  useEffect(() => {
+    // Hide answer when we move to next question
+    showAnswer(false)
+
+    // Reset form
+    setAnswer('')
+  }, [question.key])
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
     if (!answer.trim()) return
 
-    setTimeout(() => {
-      // Hide answer
-      setIsAnswerHidden(true)
-
-      setIsSubmitting(true)
-
-      // Submit the answer
-      onSubmit(answer.trim())
-
-      // Reset form
-      setAnswer('')
-      setIsSubmitting(false)
-    }, 1500)
+    // Submit the answer
+    onSubmit(answer.trim())
 
     // Show answer
-    setIsAnswerHidden(false)
+    showAnswer(true)
   }
 
   return (
@@ -43,7 +39,7 @@ export default function TextEntryComponent({
       <h3 id="text-entry">Text entry</h3>
       <div className="question-text">{question.text}</div>
       <form onSubmit={handleSubmit}>
-        <div className="block">
+        <div className="form-row">
           <label htmlFor="answer">Your Answer:</label>
           <input
             id="answer"
@@ -52,15 +48,12 @@ export default function TextEntryComponent({
             onChange={e => setAnswer(e.target.value)}
             required
           />
-          <div className={isAnswerHidden ? 'hidden' : ''}>{question.key}</div>
+          <div className={isAnswerVisible ? '' : 'hidden'}>{question.key}</div>
         </div>
-        <div>
-          <button
-            id="submit-answer"
-            type="submit"
-            disabled={isSubmitting || !answer.trim()}
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit Answer'}
+        <div className="form-row">
+          <span></span>
+          <button id="submit-answer" type="submit" disabled={!answer.trim()}>
+            Submit Answer
           </button>
         </div>
       </form>
