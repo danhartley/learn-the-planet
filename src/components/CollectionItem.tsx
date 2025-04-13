@@ -31,7 +31,7 @@ export function CollectionItem({ collection }: Props) {
   }
 
   return (
-    <div>
+    <div className="">
       <h3>{collection.name}</h3>
       <p>{collection.count} items</p>
       <button id="start-test" onClick={handleStartTest}>

@@ -4,6 +4,7 @@ export const getCollections = (): Promise<Collection[]> => {
   const collection = {
     id: '1',
     name: 'Herbs',
+    description: 'Common herbs',
     count: 10,
     index: 0,
     items: [

@@ -42,13 +42,11 @@ class TestPlannerService {
   moveToNextQuestion(): boolean {
     if (!this.testPlanner) return false
     const hasNext = this.testPlanner.moveToNextQuestion()
-    setTimeout(() => {
-      this.emitter.emit(
-        TestPlannerEvent.QUESTION_CHANGED,
-        this.getCurrentLayout()
-      )
-      this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
-    }, 1000)
+    this.emitter.emit(
+      TestPlannerEvent.QUESTION_CHANGED,
+      this.getCurrentLayout()
+    )
+    this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
     return hasNext
   }
 

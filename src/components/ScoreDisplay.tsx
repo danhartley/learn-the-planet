@@ -6,22 +6,30 @@ export function ScoreDisplay() {
   const { lastScore } = useTestPlanner()
 
   return (
-    <>
-      <h3>Score display</h3>
+    <section aria-labelledby="score">
+      <h3 id="score">Score</h3>
       {lastScore ? (
         <dl>
-          <dt>Question count</dt>
-          <dd>{lastScore?.questionCount}</dd>
-          <dt>Correct count</dt>
-          <dd>{lastScore?.correctCount}</dd>
-          <dt>Incorrect count</dt>
-          <dd>{lastScore?.incorrectCount}</dd>
-          <dt>Last answered</dt>
-          <dd>{lastScore?.isCorrect}</dd>
+          <div>
+            <dt>Correct count</dt>
+            <dd>{lastScore?.correctCount}</dd>
+          </div>
+          <div>
+            <dt>Incorrect count</dt>
+            <dd>{lastScore?.incorrectCount}</dd>
+          </div>
+          <div>
+            <dt>Question count</dt>
+            <dd>{lastScore?.questionCount}</dd>
+          </div>
+          <div>
+            <dt>Last answered</dt>
+            <dd>{lastScore?.isCorrect}</dd>
+          </div>
         </dl>
       ) : (
-        <div>No score</div>
+        <div>No score </div>
       )}
-    </>
+    </section>
   )
 }

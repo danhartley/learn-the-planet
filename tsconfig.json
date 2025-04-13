@@ -29,7 +29,8 @@
       "@/utils/*": ["lib/utils/*"],
       "@/api/*": ["lib/api/*"],
       "@/mocks/*": ["lib/mocks/*"]
-    }
+    },
+    "types": ["cypress", "@testing-library/cypress"]
   },
   "include": [
     "next-env.d.ts",

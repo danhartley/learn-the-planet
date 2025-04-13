@@ -4,6 +4,13 @@ import { QuestionTemplate } from '@/types'
 export const taxonomyTemplates: QuestionTemplate[] = [
   // Stub: Basic templates for taxonomy tests
   {
+    type: 'textEntry',
+    level: 'level 1',
+    questionTextTemplate: 'Enter the genus for ${species}',
+    correctAnswerProperty: 'genus',
+    placeholder: 'Genus name',
+  },
+  {
     type: 'multipleChoice',
     level: 'level 1',
     questionTextTemplate: 'Select the correct vernacular name for ${binomial}',
@@ -26,13 +33,6 @@ export const taxonomyTemplates: QuestionTemplate[] = [
     correctAnswerProperty: 'binomial',
     distractorCount: 3,
     distractorType: 'binomial',
-  },
-  {
-    type: 'textEntry',
-    level: 'level 1',
-    questionTextTemplate: 'Enter the genus for ${species}',
-    correctAnswerProperty: 'genus',
-    placeholder: 'Genus name',
   },
   {
     type: 'textEntry',

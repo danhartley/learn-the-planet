@@ -3,7 +3,10 @@ import { ScoreDisplay } from './ScoreDisplay'
 
 describe('<ScoreDisplay />', () => {
   it('renders', () => {
-    // see: https://on.cypress.io/mounting-react
     cy.mount(<ScoreDisplay />)
+  })
+  it('renders with No Score message', () => {
+    cy.mount(<ScoreDisplay />)
+    cy.contains('No score')
   })
 })

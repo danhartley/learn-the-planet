@@ -286,7 +286,15 @@ export class TestPlanner {
   }
 
   public getCurrentLayout(): Layout {
-    return this.layouts[this.state.layoutIndex]
+    const layout: Layout = this.layouts[this.state.layoutIndex]
+    return {
+      ...layout,
+      collection: {
+        name: this.collection.name,
+        description: this.collection.description,
+        count: this.collection.count,
+      },
+    }
   }
 
   public markAnswer(answer: string): Score {

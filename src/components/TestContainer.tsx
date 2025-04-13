@@ -30,11 +30,10 @@ export function TestContainer() {
   }
 
   return (
-    <>
-      <h2>Tests</h2>
-      <div>
-        <TestDisplay layout={currentLayout} onSubmit={handleSubmitAnswer} />
-      </div>
-    </>
+    <section className="group" aria-labelledby="collection">
+      <h2 id="collection">{`Test your knowledge of ${currentLayout.collection.name}`}</h2>
+      <div>{currentLayout.collection?.description}</div>
+      <TestDisplay layout={currentLayout} onSubmit={handleSubmitAnswer} />
+    </section>
   )
 }

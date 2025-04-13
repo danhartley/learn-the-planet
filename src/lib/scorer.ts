@@ -1,7 +1,7 @@
 import { Question, Score } from './types'
 
 const formatAnswer = (answer: string) => {
-  return answer.toLowerCase().replaceAll(' ', '')
+  return answer?.toLowerCase().replaceAll(' ', '')
 }
 
 export class Scorer {

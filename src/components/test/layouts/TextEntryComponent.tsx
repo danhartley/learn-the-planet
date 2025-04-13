@@ -13,27 +13,36 @@ export default function TextEntryComponent({
 }: QuestionAnswerProps) {
   const [answer, setAnswer] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isAnswerHidden, setIsAnswerHidden] = useState(true)
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
     if (!answer.trim()) return
 
-    setIsSubmitting(true)
+    setTimeout(() => {
+      // Hide answer
+      setIsAnswerHidden(true)
 
-    // Submit the answer
-    onSubmit(answer.trim())
+      setIsSubmitting(true)
 
-    // Reset form
-    setAnswer('')
-    setIsSubmitting(false)
+      // Submit the answer
+      onSubmit(answer.trim())
+
+      // Reset form
+      setAnswer('')
+      setIsSubmitting(false)
+    }, 1500)
+
+    // Show answer
+    setIsAnswerHidden(false)
   }
 
   return (
-    <div>
-      <h3>Text entry</h3>
+    <section className="group" aria-labelledby="text-entry">
+      <h3 id="text-entry">Text entry</h3>
+      <div className="question-text">{question.text}</div>
       <form onSubmit={handleSubmit}>
-        <div>{question.text}</div>
         <div className="block">
           <label htmlFor="answer">Your Answer:</label>
           <input
@@ -43,13 +52,18 @@ export default function TextEntryComponent({
             onChange={e => setAnswer(e.target.value)}
             required
           />
+          <div className={isAnswerHidden ? 'hidden' : ''}>{question.key}</div>
         </div>
         <div>
-          <button type="submit" disabled={isSubmitting || !answer.trim()}>
+          <button
+            id="submit-answer"
+            type="submit"
+            disabled={isSubmitting || !answer.trim()}
+          >
             {isSubmitting ? 'Submitting...' : 'Submit Answer'}
           </button>
         </div>
       </form>
-    </div>
+    </section>
   )
 }

@@ -7,8 +7,8 @@ type Props = {
 
 export function CollectionList({ collections }: Props) {
   return (
-    <div>
-      <h2>Available Collections</h2>
+    <section aria-labelledby="collections">
+      <h2 id="collections">Available Collections</h2>
       {collections.length === 0 ? (
         <p>No collections available</p>
       ) : (
@@ -20,6 +20,6 @@ export function CollectionList({ collections }: Props) {
           ))}
         </ul>
       )}
-    </div>
+    </section>
   )
 }

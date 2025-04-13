@@ -101,9 +101,16 @@ export type Taxon = {
 export type Collection = {
   id: string
   name: string
+  description?: string
   count: number
   index: number
   items: Taxon[]
+}
+
+export type CollectionSummary = {
+  name: string
+  description?: string
+  count: number
 }
 
 export type Layout = {
@@ -112,7 +119,8 @@ export type Layout = {
   index: number
   question: Question
   distractorType?: DistractorType
-  item?: Taxon
+  item: Taxon
+  collection: CollectionSummary
 }
 
 export type TestState = {

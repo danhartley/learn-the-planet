@@ -17,19 +17,20 @@ export default function MultipleTextChoiceComponent({
   const buttons = question.options.map((o: MultipleChoiceOption) => {
     return (
       <button
+        id={o.key}
         key={o.key}
         value={o.value as string}
         onClick={e => setAnswer((e.target as HTMLButtonElement).value)}
       >
-        {o.value as string}
+        <span>{o.value as string}</span>
       </button>
     )
   })
   return (
-    <>
-      <h3>Multiple choice</h3>
-      <div>{question.text}</div>
+    <section className="group" aria-labelledby="multiple-choice">
+      <h3 id="multiple-choice">Multiple choice</h3>
+      <div className="question-text">{question.text}</div>
       <div className="block">{buttons}</div>
-    </>
+    </section>
   )
 }
