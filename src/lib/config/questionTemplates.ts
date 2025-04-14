@@ -8,12 +8,12 @@ export const taxonomyTemplates: QuestionTemplate[] = [
     level: 'level 1',
     questionTextTemplate: 'Enter the genus for ${species}',
     correctAnswerProperty: 'genus',
-    placeholder: 'Genus name',
+    placeholder: 'Genus',
   },
   {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the correct vernacular name for ${binomial}',
+    questionTextTemplate: 'Select the common name for ${binomial}',
     correctAnswerProperty: 'vernacularName',
     distractorCount: 3,
     distractorType: 'vernacularName',
@@ -21,7 +21,7 @@ export const taxonomyTemplates: QuestionTemplate[] = [
   {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the correct image for ${vernacularName}',
+    questionTextTemplate: 'Select the image that matches ${vernacularName}',
     correctAnswerProperty: 'binomial',
     distractorCount: 3,
     distractorType: 'image',
@@ -29,7 +29,7 @@ export const taxonomyTemplates: QuestionTemplate[] = [
   {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the correct binomial for ${vernacularName}',
+    questionTextTemplate: 'Select the binomial for ${vernacularName}',
     correctAnswerProperty: 'binomial',
     distractorCount: 3,
     distractorType: 'binomial',
@@ -37,9 +37,9 @@ export const taxonomyTemplates: QuestionTemplate[] = [
   {
     type: 'textEntry',
     level: 'level 1',
-    questionTextTemplate: 'Enter the vernacular name name for ${binomial}',
+    questionTextTemplate: 'Enter the common name for ${binomial}',
     correctAnswerProperty: 'vernacularName',
-    placeholder: 'vernacularName name',
+    placeholder: 'Common name',
   },
 ]
 

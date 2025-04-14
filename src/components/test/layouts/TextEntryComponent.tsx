@@ -35,12 +35,12 @@ export default function TextEntryComponent({
   }
 
   return (
-    <section className="group" aria-labelledby="text-entry">
+    <section className="group-block" aria-labelledby="text-entry">
       <h3 id="text-entry">Text entry</h3>
       <div className="question-text">{question.text}</div>
-      <form className="group-block" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="form-row">
-          <label htmlFor="answer">Your Answer:</label>
+          <label htmlFor="answer">{question.hint}</label>
           <input
             id="answer"
             type="text"
@@ -48,13 +48,14 @@ export default function TextEntryComponent({
             onChange={e => setAnswer(e.target.value)}
             required
           />
-          <div className={isAnswerVisible ? '' : 'hidden'}>{question.key}</div>
         </div>
         <div className="form-row">
-          <span></span>
           <button id="submit-answer" type="submit" disabled={!answer.trim()}>
             Submit Answer
           </button>
+        </div>
+        <div className="form-row">
+          <div className={isAnswerVisible ? '' : 'hidden'}>{question.key}</div>
         </div>
       </form>
     </section>

@@ -1,6 +1,7 @@
 import '@/css/global.css'
 
 import { ScoreDisplay } from '@/components/ScoreDisplay'
+import { Menu } from '@/components/Menu'
 
 export const metadata = {
   title: 'Learn the Planet',
@@ -32,6 +33,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <main>{children}</main>
         <footer>
           <ScoreDisplay />
+          <Menu />
         </footer>
       </body>
     </html>

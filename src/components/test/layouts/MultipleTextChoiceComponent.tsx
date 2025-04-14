@@ -27,7 +27,7 @@ export default function MultipleTextChoiceComponent({
     )
   })
   return (
-    <section className="group group-block" aria-labelledby="multiple-choice">
+    <section className="group-block" aria-labelledby="multiple-choice">
       <h3 id="multiple-choice">Multiple choice</h3>
       <div className="question-text">{question.text}</div>
       <div className="block">{buttons}</div>

@@ -33,7 +33,7 @@ export function TestContainer() {
 
   return (
     <section className="group" aria-labelledby="collection">
-      <h2 id="collection">{`Test your knowledge of ${currentLayout.collection.name}`}</h2>
+      <h2 id="collection">{currentLayout.collection.name}</h2>
       <div>{currentLayout.collection?.description}</div>
       <TestDisplay layout={currentLayout} onSubmit={handleSubmitAnswer} />
     </section>
