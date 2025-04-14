@@ -38,7 +38,7 @@ export default function TextEntryComponent({
     <section className="group" aria-labelledby="text-entry">
       <h3 id="text-entry">Text entry</h3>
       <div className="question-text">{question.text}</div>
-      <form onSubmit={handleSubmit}>
+      <form className="group-block" onSubmit={handleSubmit}>
         <div className="form-row">
           <label htmlFor="answer">Your Answer:</label>
           <input

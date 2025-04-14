@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScoreDisplay } from './ScoreDisplay'
+import { ScoreDisplay } from '@/components/ScoreDisplay'
 
 describe('<ScoreDisplay />', () => {
   it('renders', () => {

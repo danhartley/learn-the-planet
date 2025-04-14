@@ -6,10 +6,33 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+header {
+  position: relative;
+  height: 4vh;
+}
+
 h1 {
   text-transform: uppercase;
   font-weight: normal;
-  font-size: x-large;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+
+  position: initial;
+
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    right: 0%;
+  }
+}
+
+h2 {
+  font-weight: 300;
+}
+
+h3 {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: small;
 }
 
 a {
@@ -98,6 +121,8 @@ form {
 }
 
 .question-text {
+  font-size: 1.4rem;
+  font-weight: 500;
   &::before {
     content: '[ ';
   }
@@ -114,4 +139,11 @@ form {
   * {
     margin-bottom: 0;
   }
+}
+
+.group-block {
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  margin: 1rem 0;
+  padding: 1rem 0;
 }

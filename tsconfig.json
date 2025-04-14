@@ -30,14 +30,22 @@
       "@/api/*": ["lib/api/*"],
       "@/mocks/*": ["lib/mocks/*"]
     },
-    "types": ["cypress", "@testing-library/cypress"]
+    "types": [
+      "cypress",
+      "@testing-library/cypress",
+      "vitest/jsdom",
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ]
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "prettier.config.js"
+    "**/*.test.tsx",
+    "prettier.config.js",
+    "@testing-library/jest-dom/vitest"
   ],
   "exclude": ["node_modules"],
   "ts-node": {
