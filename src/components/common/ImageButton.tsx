@@ -1,5 +1,5 @@
 import { MultipleChoiceOption, Image } from '@/types'
-import ResponsiveImage from '@/components/common/ResponsiveImage'
+import { ResponsiveImage } from '@/components/common/ResponsiveImage'
 
 const ImageButton = ({
   option,
@@ -16,7 +16,11 @@ const ImageButton = ({
       onClick={e => setAnswer(e)}
       title={`Option: ${option.key}`}
     >
-      <ResponsiveImage id={option.key} img={option.value as Image} />
+      <ResponsiveImage
+        id={option.key}
+        img={option.value as Image}
+        alt={option.key}
+      />
     </button>
   )
 }

@@ -1,6 +1,8 @@
 :root {
   --line: lightgray;
   --bg-colour: white;
+  --bg-accent-colour-plantae: rgb(216, 223, 210);
+  --bg-accent-colour-insecta: rgb(226, 220, 226);
 }
 
 body {
@@ -198,4 +200,25 @@ form {
     right: 1rem;
     width: -webkit-fill-available;
   }
+}
+
+.taxon {
+  text-align: center;
+}
+
+figcaption {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.25rem;
+  div {
+    min-height: 1.2rem;
+  }
+}
+
+.bg-plantae {
+  background-color: var(--bg-accent-colour-plantae);
+}
+
+.bg-insecta {
+  background-color: var(--bg-accent-colour-insecta);
 }

@@ -2,7 +2,7 @@ import { getCollections } from '@/api/collections'
 
 import { Collection } from '@/types'
 
-import ResponsiveImage from '@/components/common/ResponsiveImage'
+import { TaxonCard } from '@/components/common/TaxonCard'
 
 export default async function Page({
   params,
@@ -19,11 +19,8 @@ export default async function Page({
   const images = collection?.items.map(item => {
     const image = item?.images ? item.images[0] : null
     if (!image) return
-    return (
-      <div key={item.id + crypto.randomUUID()}>
-        <ResponsiveImage id={item.id.toString()} img={image} />
-      </div>
-    )
+    console.log(item)
+    return <TaxonCard key={item.id + crypto.randomUUID()} taxon={item} />
   })
 
   return (
