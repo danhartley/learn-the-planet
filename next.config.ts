@@ -6,7 +6,10 @@
 const nextConfig = {
   basePath: '',
   images: {
-    remotePatterns: [new URL('https://content.eol.org/data/media/**')],
+    remotePatterns: [
+      new URL('https://content.eol.org/data/media/**'),
+      new URL('https://inaturalist-open-data.s3.amazonaws.com/**'),
+    ],
   },
 }
 

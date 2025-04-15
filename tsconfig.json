@@ -45,7 +45,8 @@
     "**/*.tsx",
     "**/*.test.tsx",
     "prettier.config.js",
-    "@testing-library/jest-dom/vitest"
+    "@testing-library/jest-dom/vitest",
+    "artefacts/inat.js"
   ],
   "exclude": ["node_modules"],
   "ts-node": {

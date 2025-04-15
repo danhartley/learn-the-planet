@@ -23,7 +23,7 @@ export const getCollections = (): Promise<Collection[]> => {
           {
             vernacularName: 'dill',
             language: 'en',
-            wikiSearchTerm: true,
+            wikiSearchTerm: '',
           },
           {
             language: 'en',
@@ -577,7 +577,7 @@ export const getCollections = (): Promise<Collection[]> => {
           {
             language: 'de',
             vernacularName: 'oregano',
-            wikiSearchTerm: true,
+            wikiSearchTerm: '',
           },
           {
             vernacularName: 'Dost',
@@ -1287,7 +1287,7 @@ export const getCollections = (): Promise<Collection[]> => {
           {
             language: 'en',
             vernacularName: 'parsley',
-            wikiSearchTerm: true,
+            wikiSearchTerm: '',
           },
           {
             vernacularName: 'Common garden parsley',
@@ -1557,7 +1557,7 @@ export const getCollections = (): Promise<Collection[]> => {
           },
           {
             language: 'en',
-            wikiSearchTerm: true,
+            wikiSearchTerm: '',
             vernacularName: 'coriander',
           },
           {
@@ -2064,7 +2064,7 @@ export const getCollections = (): Promise<Collection[]> => {
           },
           {
             language: 'en',
-            wikiSearchTerm: true,
+            wikiSearchTerm: '',
             vernacularName: 'basil',
           },
           {
@@ -2386,7 +2386,7 @@ export const getCollections = (): Promise<Collection[]> => {
         iconicTaxon: 'plantae',
         names: [
           {
-            wikiSearchTerm: true,
+            wikiSearchTerm: '',
             language: 'en',
             vernacularName: 'spearmint',
           },
@@ -2695,7 +2695,7 @@ export const getCollections = (): Promise<Collection[]> => {
           },
           {
             vernacularName: 'rosemary',
-            wikiSearchTerm: true,
+            wikiSearchTerm: '',
             language: 'en',
           },
           {
@@ -2998,7 +2998,452 @@ export const getCollections = (): Promise<Collection[]> => {
     ],
   }
 
+  const collection2 = {
+    id: '2',
+    name: 'Hike',
+    description: 'Plants seen along the way',
+    count: 11,
+    index: 1,
+    items: [
+      {
+        id: 52592,
+        iconicTaxon: 'Insecta',
+        names: [
+          {
+            vernacularName: 'Speckled Wood',
+            language: 'en',
+            wikiSearchTerm:
+              'http://en.wikipedia.org/wiki/Speckled_wood_(butterfly)',
+          },
+        ],
+        binomial: 'Pararge aegeria',
+        rank: 'species',
+        vernacularName: 'Speckled Wood',
+        images: [
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/398125894/square.jpeg',
+          },
+        ],
+        image: {
+          id: 102255693,
+          license_code: 'cc-by-nc',
+          attribution:
+            '(c) Felipe Hidalgo, some rights reserved (CC BY-NC), uploaded by Felipe Hidalgo',
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/102255693/square.jpg',
+          original_dimensions: {
+            height: 1200,
+            width: 951,
+          },
+          flags: [],
+          square_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/102255693/square.jpg',
+          medium_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/102255693/medium.jpg',
+        },
+      },
+      {
+        id: 58127,
+        iconicTaxon: 'Plantae',
+        names: [
+          {
+            vernacularName: 'Fat-hen',
+            language: 'en',
+            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Chenopodium_album',
+          },
+        ],
+        binomial: 'Chenopodium album',
+        rank: 'species',
+        vernacularName: 'Fat-hen',
+        images: [
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/394844909/square.jpeg',
+          },
+        ],
+        image: {
+          id: 45792371,
+          license_code: null,
+          attribution:
+            '(c) Mandy Rude, all rights reserved, uploaded by Mandy Rude',
+          url: 'https://static.inaturalist.org/photos/45792371/square.jpg',
+          original_dimensions: {
+            height: 2048,
+            width: 1536,
+          },
+          flags: [],
+          square_url:
+            'https://static.inaturalist.org/photos/45792371/square.jpg',
+          medium_url:
+            'https://static.inaturalist.org/photos/45792371/medium.jpg',
+        },
+      },
+      {
+        id: 55801,
+        iconicTaxon: 'Plantae',
+        names: [
+          {
+            vernacularName: 'European Hornbeam',
+            language: 'en',
+            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Carpinus_betulus',
+          },
+        ],
+        binomial: 'Carpinus betulus',
+        rank: 'species',
+        vernacularName: 'European Hornbeam',
+        images: [
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391066130/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391066230/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391066236/square.jpeg',
+          },
+        ],
+        image: {
+          id: 46763976,
+          license_code: null,
+          attribution:
+            '(c) Joao Tiago Tavares, all rights reserved, uploaded by Joao Tiago Tavares',
+          url: 'https://static.inaturalist.org/photos/46763976/square.jpeg',
+          original_dimensions: {
+            height: 1365,
+            width: 2048,
+          },
+          flags: [],
+          square_url:
+            'https://static.inaturalist.org/photos/46763976/square.jpeg',
+          medium_url:
+            'https://static.inaturalist.org/photos/46763976/medium.jpeg',
+        },
+      },
+      {
+        id: 43151,
+        iconicTaxon: 'Mammalia',
+        names: [
+          {
+            vernacularName: 'European Rabbit',
+            language: 'en',
+            wikiSearchTerm: 'http://en.wikipedia.org/wiki/European_rabbit',
+          },
+        ],
+        binomial: 'Oryctolagus cuniculus',
+        rank: 'species',
+        vernacularName: 'European Rabbit',
+        images: [
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391063785/square.jpeg',
+          },
+        ],
+        image: {
+          id: 479605587,
+          license_code: 'cc-by-nc-nd',
+          attribution: '(c) fra298, some rights reserved (CC BY-NC-ND)',
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/479605587/square.jpg',
+          original_dimensions: {
+            height: 1365,
+            width: 2048,
+          },
+          flags: [],
+          square_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/479605587/square.jpg',
+          medium_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/479605587/medium.jpg',
+        },
+      },
+      {
+        id: 121763,
+        iconicTaxon: 'Plantae',
+        names: [
+          {
+            vernacularName: 'Sweet Chestnut',
+            language: 'en',
+            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Castanea_sativa',
+          },
+        ],
+        binomial: 'Castanea sativa',
+        rank: 'species',
+        vernacularName: 'Sweet Chestnut',
+        images: [
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388502816/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388504750/square.jpeg',
+          },
+        ],
+        image: {
+          id: 12739074,
+          license_code: null,
+          attribution:
+            '(c) catherwoods, all rights reserved, uploaded by catherwoods',
+          url: 'https://static.inaturalist.org/photos/12739074/square.jpg',
+          original_dimensions: {
+            height: 1536,
+            width: 2048,
+          },
+          flags: [],
+          square_url:
+            'https://static.inaturalist.org/photos/12739074/square.jpg',
+          medium_url:
+            'https://static.inaturalist.org/photos/12739074/medium.jpg',
+        },
+      },
+      {
+        id: 55801,
+        iconicTaxon: 'Plantae',
+        names: [
+          {
+            vernacularName: 'European Hornbeam',
+            language: 'en',
+            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Carpinus_betulus',
+          },
+        ],
+        binomial: 'Carpinus betulus',
+        rank: 'species',
+        vernacularName: 'European Hornbeam',
+        images: [
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388502806/square.jpeg',
+          },
+        ],
+        image: {
+          id: 46763976,
+          license_code: null,
+          attribution:
+            '(c) Joao Tiago Tavares, all rights reserved, uploaded by Joao Tiago Tavares',
+          url: 'https://static.inaturalist.org/photos/46763976/square.jpeg',
+          original_dimensions: {
+            height: 1365,
+            width: 2048,
+          },
+          flags: [],
+          square_url:
+            'https://static.inaturalist.org/photos/46763976/square.jpeg',
+          medium_url:
+            'https://static.inaturalist.org/photos/46763976/medium.jpeg',
+        },
+      },
+      {
+        id: 56152,
+        iconicTaxon: 'Plantae',
+        names: [
+          {
+            vernacularName: 'Ramsons',
+            language: 'en',
+            wikiSearchTerm: 'https://en.wikipedia.org/wiki/Allium_ursinum',
+          },
+        ],
+        binomial: 'Allium ursinum',
+        rank: 'species',
+        vernacularName: 'Ramsons',
+        images: [
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388502802/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388503894/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388503897/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388503898/square.jpeg',
+          },
+        ],
+        image: {
+          id: 10674,
+          license_code: 'cc-by',
+          attribution: '(c) Ulrika, some rights reserved (CC BY)',
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
+          original_dimensions: {
+            height: 2048,
+            width: 1533,
+          },
+          flags: [],
+          square_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
+          medium_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/medium.jpg',
+        },
+      },
+      {
+        id: 56152,
+        iconicTaxon: 'Plantae',
+        names: [
+          {
+            vernacularName: 'Ramsons',
+            language: 'en',
+            wikiSearchTerm: 'https://en.wikipedia.org/wiki/Allium_ursinum',
+          },
+        ],
+        binomial: 'Allium ursinum',
+        rank: 'species',
+        vernacularName: 'Ramsons',
+        images: [
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386375257/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388504439/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388504498/square.jpeg',
+          },
+        ],
+        image: {
+          id: 10674,
+          license_code: 'cc-by',
+          attribution: '(c) Ulrika, some rights reserved (CC BY)',
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
+          original_dimensions: {
+            height: 2048,
+            width: 1533,
+          },
+          flags: [],
+          square_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
+          medium_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/medium.jpg',
+        },
+      },
+      {
+        id: 61906,
+        iconicTaxon: 'Plantae',
+        names: [
+          {
+            vernacularName: 'bristly oxtongue',
+            language: 'en',
+            wikiSearchTerm:
+              'http://en.wikipedia.org/wiki/Helminthotheca_echioides',
+          },
+        ],
+        binomial: 'Helminthotheca echioides',
+        rank: 'species',
+        vernacularName: 'bristly oxtongue',
+        images: [
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386375225/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377195/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377196/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377199/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377203/square.jpeg',
+          },
+        ],
+        image: {
+          id: 231490858,
+          license_code: 'cc-by-nc',
+          attribution:
+            '(c) Σάββας Ζαφειρίου (Savvas Zafeiriou), some rights reserved (CC BY-NC), uploaded by Σάββας Ζαφειρίου (Savvas Zafeiriou)',
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/231490858/square.jpg',
+          original_dimensions: {
+            height: 1353,
+            width: 2048,
+          },
+          flags: [],
+          square_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/231490858/square.jpg',
+          medium_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/231490858/medium.jpg',
+        },
+      },
+      {
+        id: 51610,
+        iconicTaxon: 'Plantae',
+        names: [
+          {
+            vernacularName: 'Germander Speedwell',
+            language: 'en',
+            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Veronica_chamaedrys',
+          },
+        ],
+        binomial: 'Veronica chamaedrys',
+        rank: 'species',
+        vernacularName: 'Germander Speedwell',
+        images: [
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386372440/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386374107/square.jpeg',
+          },
+        ],
+        image: {
+          id: 92414767,
+          license_code: null,
+          attribution:
+            '(c) Mireille Mourzelas, all rights reserved, uploaded by Mireille Mourzelas',
+          url: 'https://static.inaturalist.org/photos/92414767/square.jpeg',
+          original_dimensions: {
+            height: 2048,
+            width: 1536,
+          },
+          flags: [],
+          square_url:
+            'https://static.inaturalist.org/photos/92414767/square.jpeg',
+          medium_url:
+            'https://static.inaturalist.org/photos/92414767/medium.jpeg',
+        },
+      },
+      {
+        id: 204339,
+        iconicTaxon: 'Plantae',
+        names: [
+          {
+            vernacularName: 'yellow archangel',
+            language: 'en',
+            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Lamium_galeobdolon',
+          },
+        ],
+        binomial: 'Lamium galeobdolon',
+        rank: 'species',
+        vernacularName: 'yellow archangel',
+        images: [
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386372434/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373403/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373407/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373409/square.jpeg',
+          },
+          {
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373413/square.jpeg',
+          },
+        ],
+        image: {
+          id: 72097716,
+          license_code: 'cc-by-nc',
+          attribution:
+            '(c) Marian Talar, some rights reserved (CC BY-NC), uploaded by Marian Talar',
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/72097716/square.jpg',
+          original_dimensions: {
+            height: 2008,
+            width: 1775,
+          },
+          flags: [],
+          square_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/72097716/square.jpg',
+          medium_url:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/72097716/medium.jpg',
+        },
+      },
+    ],
+  }
+
   return new Promise((resolve, reject) => {
-    resolve([collection])
+    resolve([collection, collection2])
   })
 }

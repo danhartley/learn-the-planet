@@ -70,22 +70,24 @@ export type Family = {
 }
 
 export type Taxon = {
-  id: number
-  iconicTaxon?: string
+  id: number // taxon.id
+  iconicTaxon?: string // taxon.iconic_taxon_name (+ iconic_taxon_id)
   names?: {
-    vernacularName?: string
-    language?: string
-    wikiSearchTerm?: boolean
+    // taxon.preferred_common_names
+    vernacularName?: string // name
+    language?: string // locale
+    wikiSearchTerm?: string // wikipedia_url
   }[]
-  binomial: string
-  order?: string
-  genus?: string
-  species?: string
-  vernacularName: string
-  family?: string | Family | undefined
+  binomial: string // taxon.name
+  rank?: string // taxon.rank
+  order?: string // taxon.rank
+  genus?: string // taxon.rank
+  species?: string // taxon.rank
+  vernacularName: string // taxon.preferred_common_name
+  family?: string | Family | undefined // taxon.rank
   distractors?: Taxon[]
-  images?: Image[]
-  image?: Image
+  images?: Image[] //observation_photos
+  image?: Image // taxon.default_photo or observation_photos[0]
   taxonomy?: {
     phylum?: string
     family?: string | Family // Allow `family` to be either a string or an object
@@ -96,6 +98,9 @@ export type Taxon = {
     species?: string
   }
   traits?: Record<string, any>
+  // introduced boolean
+  // wikipedia_url string
+  // https://www.inaturalist.org/observations/227490000 (inat page)
 }
 
 export type Collection = {

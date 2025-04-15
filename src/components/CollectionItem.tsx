@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { Collection } from '@/types'
@@ -31,12 +33,14 @@ export function CollectionItem({ collection }: Props) {
   }
 
   return (
-    <div className="">
-      <h3>{collection.name}</h3>
-      <p>{collection.count} items</p>
+    <section className="group card" aria-labelledby="collection">
+      <h3 id="collection">{collection.name}</h3>
+      <Link href={`/collection/${encodeURIComponent(collection.id)}`}>
+        {collection.count} items
+      </Link>
       <button id="start-test" onClick={handleStartTest}>
         Start Test
       </button>
-    </div>
+    </section>
   )
 }

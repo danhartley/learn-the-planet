@@ -1,6 +1,5 @@
-import Image from 'next/image'
 import { MultipleChoiceQuestion, MultipleChoiceOption } from '@/types'
-import { createEOLUrl } from '@/utils/image'
+import ImageButton from '@/components/common/ImageButton'
 
 type Props = {
   question: MultipleChoiceQuestion
@@ -12,23 +11,9 @@ const ImageChoiceComponent = ({ question, onSubmit }: Props) => {
     const answer = (e.currentTarget.dataset.key || '').trim()
     onSubmit(answer)
   }
-  const images = question.options.map((o: MultipleChoiceOption) => {
-    return typeof o.value === 'object' && 'url' in o.value ? (
-      <button
-        id={o.key}
-        key={o.key}
-        data-key={o.key as string}
-        onClick={e => setAnswer(e)}
-        title={`Option: ${o.key}`}
-      >
-        <Image
-          src={createEOLUrl(o.value.url as string)}
-          alt={o.key}
-          width={230}
-          height={230}
-          style={{ objectFit: 'cover' }}
-        ></Image>
-      </button>
+  const images = question.options.map((option: MultipleChoiceOption) => {
+    return typeof option.value === 'object' && 'url' in option.value ? (
+      <ImageButton key={option.key} option={option} setAnswer={setAnswer} />
     ) : null
   })
   return (
