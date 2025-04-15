@@ -35,6 +35,7 @@ export function CollectionItem({ collection }: Props) {
   return (
     <section className="group card" aria-labelledby="collection">
       <h3 id="collection">{collection.name}</h3>
+      <div>{collection.description}</div>
       <Link href={`/collection/${encodeURIComponent(collection.id)}`}>
         {collection.count} items
       </Link>

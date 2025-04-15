@@ -101,6 +101,9 @@ dt {
 ul {
   margin-block: 0;
   padding-inline: 0;
+}
+
+.menu + ul {
   & > * + * {
     margin-top: 1rem;
   }
@@ -118,14 +121,16 @@ li::marker {
   padding-block: 2rem;
   flex-wrap: wrap;
 
-  button {
-    padding: 0;
-    width: clamp(200px, 20vw, 260px);
-    height: clamp(200px, 20vw, 260px);
+  :not(> .card) {
+    button {
+      padding: 0;
+      width: clamp(200px, 20vw, 260px);
+      height: clamp(200px, 20vw, 260px);
 
-    span {
-      padding: 0.5rem;
-      line-height: 1.4;
+      span {
+        padding: 0.5rem;
+        line-height: 1.4;
+      }
     }
   }
 
@@ -183,4 +188,14 @@ form {
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
+  width: clamp(100px, 10rem, 200px);
+  height: clamp(200px, 14rem, 300px);
+  position: relative;
+  > *:nth-last-child(1) {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    width: -webkit-fill-available;
+  }
 }

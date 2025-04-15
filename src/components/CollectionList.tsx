@@ -12,7 +12,7 @@ export function CollectionList({ collections }: Props) {
       {collections.length === 0 ? (
         <p>No collections available</p>
       ) : (
-        <ul>
+        <ul className="block">
           {collections.map(collection => (
             <li key={collection.id}>
               <CollectionItem collection={collection} />
