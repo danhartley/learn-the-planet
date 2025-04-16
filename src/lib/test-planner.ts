@@ -205,6 +205,7 @@ export class TestPlanner {
       question,
       distractorType: template.distractorType,
       item,
+      collection: this.collection,
     }
   }
 

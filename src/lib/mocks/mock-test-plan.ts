@@ -5,7 +5,8 @@ export const testPlan: TestPlan = {
   collection: {
     id: '1',
     name: 'Mediterranean wildflowers',
-    count: 10,
+    date: '',
+    location: '',
     index: 0,
     items: [
       {

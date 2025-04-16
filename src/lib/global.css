@@ -125,16 +125,14 @@ li::marker {
   padding-block: 2rem;
   flex-wrap: wrap;
 
-  :not(> .card) {
-    button {
-      padding: 0;
-      width: clamp(200px, 20vw, 260px);
-      height: clamp(200px, 20vw, 260px);
+  &:not(.card) > button {
+    padding: 0;
+    width: clamp(200px, 20vw, 260px);
+    height: clamp(200px, 20vw, 260px);
 
-      span {
-        padding: 0.5rem;
-        line-height: 1.4;
-      }
+    span {
+      padding: 0.5rem;
+      line-height: 1.4;
     }
   }
 

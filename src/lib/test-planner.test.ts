@@ -14,8 +14,9 @@ describe('TestPlanner', () => {
   it('Cannot create test planner when the collection has no items', () => {
     collection = {
       id: '1',
+      date: '',
+      location: '',
       name: 'Test collection',
-      count: 2,
       index: 0,
       items: [],
     }
@@ -28,7 +29,8 @@ describe('TestPlanner', () => {
     collection = {
       id: '1',
       name: 'Test collection',
-      count: 1,
+      date: '',
+      location: '',
       index: 0,
       items: [
         // @ts-expect-error - Intentionally missing properties for testing
@@ -44,7 +46,8 @@ describe('TestPlanner', () => {
     collection = {
       id: '1',
       name: 'Test collection',
-      count: 1,
+      date: '',
+      location: '',
       index: 0,
       items: [
         {
@@ -66,7 +69,8 @@ describe('TestPlanner', () => {
     collection = {
       id: '1',
       name: 'Test collection',
-      count: 1,
+      date: '',
+      location: '',
       index: 0,
       items: [
         {
@@ -90,7 +94,8 @@ describe('Valid collection', () => {
     collection = {
       id: '1',
       name: 'Valid collection',
-      count: 2,
+      date: '',
+      location: '',
       index: 0,
       items: [
         {
@@ -191,7 +196,8 @@ describe('Private methods', () => {
     collection = {
       id: '1',
       name: 'Valid collection',
-      count: 2,
+      date: '',
+      location: '',
       index: 0,
       items: [
         {
