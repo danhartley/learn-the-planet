@@ -25,9 +25,11 @@ export const TaxonCard = ({ taxon }: Props) => {
         />
         <figcaption>
           <div>
-            <em>{taxon.binomial}</em>
+            <div>
+              <em>{taxon.binomial}</em>
+            </div>
+            <div>{taxon.vernacularName}</div>
           </div>
-          <div>{taxon.vernacularName}</div>
         </figcaption>
       </figure>
     </div>

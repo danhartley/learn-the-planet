@@ -4,6 +4,7 @@
   --bg-accent-colour-plantae: rgb(216, 223, 210);
   --bg-accent-colour-insecta: rgb(226, 220, 226);
   --bg-accent-colour-mammalia: rgb(240, 199, 130);
+  --bg-accent-colour-reptilia: rgb(254, 226, 223);
 }
 
 body {
@@ -218,12 +219,22 @@ figure {
 }
 
 figcaption {
+  width: clamp(180px, 16vw, 240px);
+  height: 6rem;
   display: flex;
-  flex-direction: column;
-  padding: 0.5rem 0.5rem 1rem 0.5rem;
-  row-gap: 0.25rem;
-  div {
-    min-height: 1.2rem;
+  align-items: center;
+  justify-content: center;
+  > div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.2rem;
+    padding: 0.1rem 0.4rem;
+
+    > div {
+      &:nth-child(2) {
+        font-size: 0.9rem;
+      }
+    }
   }
 }
 
@@ -235,4 +246,7 @@ figcaption {
 }
 .bg-mammalia {
   background-color: var(--bg-accent-colour-mammalia);
+}
+.bg-reptilia {
+  background-color: var(--bg-accent-colour-reptilia);
 }
