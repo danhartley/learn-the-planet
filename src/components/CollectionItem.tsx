@@ -35,9 +35,10 @@ export function CollectionItem({ collection }: Props) {
   return (
     <section className="group card" aria-labelledby="collection">
       <h3 id="collection">{collection.name}</h3>
-      <div>{collection.description}</div>
+      <div>{collection.date}</div>
+      <div>{collection.location}</div>
       <Link href={`/collection/${encodeURIComponent(collection.id)}`}>
-        {collection.count} items
+        {collection.items.length} items
       </Link>
       <button id="start-test" onClick={handleStartTest}>
         Start Test

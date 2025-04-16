@@ -1,4 +1,5 @@
-export const createEOLUrl = (input: string) => {
+export const formatURL = (input: string) => {
+  console.log(input)
   if (input.indexOf('inaturalist') > -1) {
     return input.replace('square', 'medium')
   }

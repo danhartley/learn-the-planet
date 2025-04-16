@@ -3,6 +3,7 @@
   --bg-colour: white;
   --bg-accent-colour-plantae: rgb(216, 223, 210);
   --bg-accent-colour-insecta: rgb(226, 220, 226);
+  --bg-accent-colour-mammalia: rgb(240, 199, 130);
 }
 
 body {
@@ -139,6 +140,7 @@ li::marker {
   img {
     width: clamp(180px, 16vw, 240px);
     height: clamp(180px, 16vw, 240px);
+    border-radius: 0.25rem;
   }
 
   justify-content: center;
@@ -171,7 +173,7 @@ form {
 }
 
 .group {
-  * {
+  & > * {
     margin-bottom: 0;
   }
 }
@@ -206,9 +208,19 @@ form {
   text-align: center;
 }
 
+figure {
+  margin-block: 0;
+  margin-inline: 0;
+
+  img {
+    border-radius: 0.25rem 0.25rem 0 0;
+  }
+}
+
 figcaption {
   display: flex;
   flex-direction: column;
+  padding: 0.5rem 0.5rem 1rem 0.5rem;
   row-gap: 0.25rem;
   div {
     min-height: 1.2rem;
@@ -218,7 +230,9 @@ figcaption {
 .bg-plantae {
   background-color: var(--bg-accent-colour-plantae);
 }
-
 .bg-insecta {
   background-color: var(--bg-accent-colour-insecta);
+}
+.bg-mammalia {
+  background-color: var(--bg-accent-colour-mammalia);
 }

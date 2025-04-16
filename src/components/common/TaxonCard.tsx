@@ -8,16 +8,19 @@ type Props = {
   taxon: Taxon
 }
 
+type RImage = Img | null
+
 export const TaxonCard = ({ taxon }: Props) => {
   const bgClassName = `bg-${taxon.iconicTaxon?.toLowerCase()}`
   const classNames = `taxon ${bgClassName}`
+  const image: RImage = taxon.image ?? taxon.images?.[0] ?? null
 
-  return (
+  return !!image ? (
     <div className={classNames}>
       <figure>
         <ResponsiveImage
           id={taxon.id.toString()}
-          img={taxon.image as Img}
+          img={image}
           alt={taxon.binomial}
         />
         <figcaption>
@@ -28,5 +31,5 @@ export const TaxonCard = ({ taxon }: Props) => {
         </figcaption>
       </figure>
     </div>
-  )
+  ) : null
 }

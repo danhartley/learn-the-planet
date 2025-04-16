@@ -1,3453 +1,11 @@
 import { Collection } from '@/types'
 
 export const getCollections = (): Promise<Collection[]> => {
-  const collection = {
+  const collection1 = {
     id: '1',
-    name: 'Herbs',
-    description: 'Common herbs',
-    count: 10,
-    index: 0,
-    items: [
-      {
-        binomial: 'Anethum graveolens',
-        iconicTaxon: 'plantae',
-        names: [
-          {
-            vernacularName: 'dill',
-            language: 'de',
-          },
-          {
-            vernacularName: 'Gurkenkraut',
-            language: 'de',
-          },
-          {
-            vernacularName: 'dill',
-            language: 'en',
-            wikiSearchTerm: '',
-          },
-          {
-            language: 'en',
-            vernacularName: 'Indian Dill',
-          },
-          {
-            language: 'es',
-            vernacularName: 'Hinojo hediondo',
-          },
-          {
-            language: 'es',
-            vernacularName: 'Abesón',
-          },
-          {
-            vernacularName: 'Aneldo',
-            language: 'es',
-          },
-          {
-            vernacularName: 'Eneldo',
-            language: 'es',
-          },
-          {
-            vernacularName: 'anís alemán',
-            language: 'es',
-          },
-          {
-            vernacularName: 'anise',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Aneth odorant',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Fenouil bâtard',
-          },
-          {
-            language: 'it',
-            vernacularName: 'Aneto',
-          },
-          {
-            vernacularName: 'oneto',
-            language: 'it',
-          },
-          {
-            language: 'pt',
-            vernacularName: 'Endro',
-          },
-          {
-            vernacularName: 'Aneto',
-            language: 'pt',
-          },
-        ],
-        taxonomy: {
-          phylum: 'Tracheophyta',
-          family: 'Apiaceae',
-          class: 'Magnoliopsida',
-          kingdom: 'Plantae',
-          order: 'Apiales',
-          genus: 'Anethum',
-          species: 'graveolens',
-        },
-        images: [
-          {
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Dillflower-fleuraneth.jpg',
-            title: 'Dillflower-fleuraneth.jpg',
-            url: '55/44/d4/509.1046039.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:Fillflower2-fleuraneth2.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            url: '55/44/d6/509.1046066.jpg',
-            title: 'Fillflower2-fleuraneth2.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-          },
-          {
-            url: '55/a9/74/509.12137408.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Anethum_graveolens_EnfoqueFlores_2009-6-20_CampoCalatrava.jpg',
-            photographer: '',
-            title:
-              'Anethum graveolens EnfoqueFlores 2009-6-20 CampoCalatrava.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-          },
-          {
-            starred: true,
-            title:
-              'Anethum graveolens Inflorescencia 2009-6-20 CampoCalatrava.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Anethum_graveolens_Inflorescencia_2009-6-20_CampoCalatrava.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            url: '55/a9/7a/509.12137574.jpg',
-            small:
-              'https://content.eol.org/data/media/55/a9/7a/509.12137574.98x68.jpg',
-            medium:
-              'https://content.eol.org/data/media/55/a9/7a/509.12137574.260x190.jpg',
-            large:
-              'https://content.eol.org/data/media/55/a9/7a/509.12137574.jpg',
-          },
-          {
-            source: 'https://commons.wikimedia.org/wiki/File:Dill_Flower.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            url: '56/6f/cf/509.16033934.jpg',
-            title: 'Dill Flower.jpg',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            photographer: '',
-            url: '56/a9/01/509.1715550.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Anethumgraveolens.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Anethumgraveolens.jpg',
-          },
-          {
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Anethum_graveolens_(7490804904).jpg',
-            title: 'Anethum graveolens (7490804904).jpg',
-            url: '57/db/88/509.22751657.jpg',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:Anethum_graveolens_(7490802082).jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '57/db/8c/509.22751665.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-            title: 'Anethum graveolens (7490802082).jpg',
-          },
-          {
-            photographer: '',
-            title: 'File:Dill blÃ¼ht.jpg',
-            url: '58/a4/d5/509.26142003.jpg',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Dill_bl%C3%BCht.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            title: 'Anethum graveolens (7490802574).jpg',
-            url: '5c/dc/ce/509.22751669.jpg',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Anethum_graveolens_(7490802574).jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-        ],
-        terms: ['Umbel', 'Seed', 'Monocarpic', 'Annual', 'Perfect'],
-        genus: '',
-        family: {
-          genera: 400,
-          members: [
-            'Daucus carota subsp. sativus',
-            'Coriandrum sativum',
-            'Petroselinum crispum',
-            'Foeniculum vulgare',
-            'Anethum graveolens',
-            'Conium maculatum',
-            'Cuminum cyminum',
-            'Carum carvi',
-            'Anthriscus cerefolium',
-            'Myrrhis odorata',
-            'Pimpinella anisum',
-            'Levisticum officinale',
-            'Pastinaca sativa',
-          ],
-          names: [
-            'Carrot or Parsley family',
-            'Umbellifers',
-            'Celery family',
-            'Carrot family',
-            'Parsley family',
-          ],
-          summary:
-            'A family of mostly aromatic flowering plants that includes species such as carrot, celery, cumin, parsley and coriander, and the poisonous hemlocks.',
-          species: 3700,
-          identification:
-            'Compound, terminal umbels radiating from a single point. Hollow flower stalks.',
-          taxon: 'family',
-          traits: {
-            pollination: {
-              value: ['Leafcutter Bees'],
-            },
-            'leaf arrangement': {
-              value: ['Alternate'],
-            },
-            inflorescence: {
-              value: ['Umbel'],
-            },
-          },
-          wiki: 'https://en.wikipedia.org/wiki/Apiaceae',
-          eol: 'http://eol.org/pages/4200/overview',
-          name: 'Apiaceae',
-          iconicTaxon: 'plantae',
-          taxonomy: {
-            phylum: 'Tracheophyta',
-            class: 'Magnoliopsida',
-            kingdom: 'Plantae',
-            order: 'Apiales',
-          },
-          vernacularName: 'Carrot or Parsley family',
-        },
-        order: '',
-        id: 584995,
-        vernacularNames: ['Dill', 'Indian dill'],
-        vernacularName: 'Dill',
-        traits: {
-          exposure: {
-            value: ['Full sun'],
-          },
-          symbiont: {
-            type: 'companion planting',
-            value: ['solanum lycopersicum'],
-          },
-          usage: {
-            value: ['herb', ' food'],
-          },
-          'leaf shape': {
-            value: ['Filiform'],
-          },
-          'soil type': {
-            value: ['Well-drained'],
-          },
-          lookalikes: [
-            {
-              lookalike: {
-                name: 'Foeniculum vulgare',
-                description:
-                  'Highly aromatic and flavoursome herb similar in taste to anise. Hollow stems. Leaves are thinner than dill and up to 40cm long. An erect, glaucous green plant that can reach 2.5m. The seeds are dry and long with longitudinal grooves.',
-              },
-              description:
-                'Slender stems and long delicate, feathery leaves. Shorter growing than fennel (40-60cm). Flowers are either white or yellow.  Long, thick, slightly curved seeds with a longitudinally ridged surface.',
-            },
-          ],
-          name: 'Anethum graveolens',
-          description: {
-            value: [
-              'Dill grows up to 40–60cm, with slender hollow stems and alternate, finely divided, delicate leaves 10–20cm long.\n\nThe ultimate leaf divisions are 1–2mm broad, slightly broader than the similar leaves of fennel, which are threadlike, less than 1mm broad, but harder in texture. \n\nThe flowers are white to yellow, in small umbels 2–9cm diameter. \n\nThe seeds are 4–5mm long and 1mm thick, and straight to slightly curved with a longitudinally ridged surface.\n\nThe plants are somewhat monocarpic and quickly die after "bolting" (producing seeds).',
-            ],
-          },
-        },
-      },
-      {
-        binomial: 'Thymus vulgaris',
-        iconicTaxon: 'plantae',
-        names: [
-          {
-            vernacularName: 'Thymian',
-            language: 'de',
-          },
-          {
-            vernacularName: 'Echter Thymian',
-            language: 'de',
-          },
-          {
-            language: 'de',
-            vernacularName: 'Römischer Quendel',
-          },
-          {
-            vernacularName: 'thyme',
-            language: 'en',
-          },
-          {
-            vernacularName: 'garden thyme',
-            language: 'en',
-          },
-          {
-            language: 'en',
-            vernacularName: 'Common Thyme',
-          },
-          {
-            language: 'en',
-            vernacularName: 'Doretta Klaber Thyme',
-          },
-          {
-            vernacularName: 'English thyme',
-            language: 'en',
-          },
-          {
-            language: 'es',
-            vernacularName: 'Tomillo',
-          },
-          {
-            vernacularName: 'tomillo común',
-            language: 'es',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Thym',
-          },
-          {
-            vernacularName: 'Farigoule',
-            language: 'fr',
-          },
-          {
-            vernacularName: 'Frigoule',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Thym commun',
-          },
-          {
-            vernacularName: 'timo maggiore',
-            language: 'it',
-          },
-          {
-            vernacularName: 'Timo',
-            language: 'it',
-          },
-          {
-            language: 'pt',
-            vernacularName: 'Tomilho',
-          },
-          {
-            vernacularName: 'Tomilho-ordinário',
-            language: 'pt',
-          },
-        ],
-        taxonomy: {
-          phylum: 'Tracheophyta',
-          order: 'Lamiales',
-          family: 'Lamiaceae',
-          class: 'Magnoliopsida',
-          kingdom: 'Plantae',
-          genus: 'Thymus',
-          species: 'vulgaris',
-        },
-        images: [
-          {
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Thymus_vulgaris_Habitus_2010_5_09_DehesaBoyaldePuertollano.jpg',
-            photographer: '',
-            url: '55/5a/ca/509.10767003.jpg',
-            title:
-              'Thymus vulgaris Habitus 2010 5 09 DehesaBoyaldePuertollano.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-            url: '55/d0/49/509.12681689.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Thymus_vulgaris_1_(Espagne).jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Thymus vulgaris 1 (Espagne).jpg',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Thymus vulgaris 3 (Espagne).JPG',
-            url: '55/d0/50/509.12681755.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Thymus_vulgaris_3_(Espagne).JPG',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:Abella_en_farigola.JPG',
-            title: 'Abella en farigola.JPG',
-            url: '56/13/6d/509.14555862.jpg',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-          },
-          {
-            url: '57/70/8a/509.2066494.jpg',
-            title: 'Abeille-sur-thym2.jpg',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Abeille-sur-thym2.jpg',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '59/c9/28/509.32644578.jpg',
-            source: 'https://commons.wikimedia.org/wiki/File:Thymus_fasce.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-            title: 'Thymus fasce.jpg',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:Thymus_vulgaris_2_(Espagne).JPG',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            title: 'Thymus vulgaris 2 (Espagne).JPG',
-            url: '5a/d1/8f/509.12681754.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            photographer: '',
-            url: '5d/86/ae/509.255631.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Thymus_vulgaris_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-271.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title:
-              'File:Thymus vulgaris - KÃ¶hlerâs Medizinal-Pflanzen-271.jpg',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            title: 'Thymian.jpg',
-            starred: true,
-            source: 'https://commons.wikimedia.org/wiki/File:Thymian.jpg',
-            url: '63/e8/d3/509.512777.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            small:
-              'https://content.eol.org/data/media/63/e8/d3/509.512777.98x68.jpg',
-            medium:
-              'https://content.eol.org/data/media/63/e8/d3/509.512777.260x190.jpg',
-            large: 'https://content.eol.org/data/media/63/e8/d3/509.512777.jpg',
-          },
-          {
-            title: 'Thymus vulgaris L11.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Thymus_vulgaris_L11.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '65/0b/34/509.569188.jpg',
-          },
-        ],
-        terms: ['Evergreen', 'Revolute'],
-        genus: '',
-        family: {
-          names: ['Mint Family', 'Labiatae', 'Deadnettles'],
-          taxonomy: {
-            order: 'Lamiales',
-            phylum: 'Tracheophyta',
-            kingdom: 'Plantae',
-            class: 'Magnoliopsida',
-          },
-          taxon: 'family',
-          genera: 236,
-          summary:
-            'Many aromatic perennials including basil, mint, rosemary, sage, savory, marjoram, and oregano. Readily propagated from stem cuttings or seed (chia).',
-          wiki: 'https://en.wikipedia.org/wiki/Lamiaceae',
-          species: 7534,
-          name: 'Lamiaceae',
-          traits: {
-            'petal count': {
-              value: ['5'],
-            },
-            pollination: {
-              value: ['Insects', 'Bumblebees', 'Single Bees'],
-            },
-          },
-          identification:
-            'Square stems, simple and opposite leaves, often fragrant. 5 petals and sepals, fused in both cases.',
-          members: ['Ocimum basilicum', 'Rosmarinus officinalis'],
-          eol: 'http://eol.org/pages/4302/overview',
-          iconicTaxon: 'plantae',
-          vernacularName: 'Mint Family',
-        },
-        order: '',
-        id: 484542,
-        vernacularNames: [
-          'Thyme',
-          'Garden thyme',
-          'Common thyme',
-          'Doretta klaber thyme',
-          'English thyme',
-        ],
-        vernacularName: 'Thyme',
-        traits: {
-          physiology: {
-            value: ['evergreen'],
-          },
-          'leaf shape': {
-            value: ['Linear', 'Ovate'],
-          },
-          'soil type': {
-            value: ['nutrient poor', 'Loam', 'Sand', 'Chalk'],
-          },
-          characteristic: {
-            value: ['chamaephyte'],
-          },
-          ph: {
-            value: ['Alkaline', 'Neutral'],
-          },
-          name: 'Thymus vulgaris',
-          'flower colour': {
-            value: ['Purple', 'Pink', 'White'],
-          },
-          'leaf colour': {
-            value: ['Grey-green'],
-          },
-          description: {
-            value: [
-              'A species of flowering plant in the mint family Lamiaceae, native to southern Europe from the western Mediterranean to southern Italy. \n\nTo 15–30cm tall by 40cm wide. \n\nIt is a bushy, woody-based evergreen subshrub with small, highly aromatic, grey-green leaves and clusters of purple or pink flowers in early summer.',
-            ],
-          },
-          usage: {
-            value: ['herb', ' medicine', ' food'],
-          },
-          exposure: {
-            value: ['Full sun'],
-          },
-          inflorescence: {
-            value: ['Spike'],
-          },
-          'leaf folding': {
-            value: ['Revolute'],
-          },
-        },
-      },
-      {
-        binomial: 'Origanum vulgare',
-        iconicTaxon: 'plantae',
-        names: [
-          {
-            language: 'de',
-            vernacularName: 'oregano',
-            wikiSearchTerm: '',
-          },
-          {
-            vernacularName: 'Dost',
-            language: 'de',
-          },
-          {
-            language: 'de',
-            vernacularName: 'Gewöhnlicher Dost',
-          },
-          {
-            language: 'de',
-            vernacularName: 'Kostets',
-          },
-          {
-            vernacularName: 'Wilder Majoran',
-            language: 'de',
-          },
-          {
-            language: 'en',
-            vernacularName: 'oregano',
-          },
-          {
-            language: 'en',
-            vernacularName: 'Compact Oregano',
-          },
-          {
-            vernacularName: 'Greek Oregano',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Oregan',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Variegated Marjoram',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Wild Marjoram',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Orégano',
-            language: 'es',
-          },
-          {
-            vernacularName: 'Marjolaine bâtarde',
-            language: 'fr',
-          },
-          {
-            vernacularName: 'Doste',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Marazolette',
-          },
-          {
-            vernacularName: 'Marjolaine sauvage',
-            language: 'fr',
-          },
-          {
-            vernacularName: 'Origan',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Origan commun',
-          },
-          {
-            language: 'fr',
-            vernacularName: "Origan d'Héraclée",
-          },
-          {
-            vernacularName: 'Pelevoué',
-            language: 'fr',
-          },
-          {
-            vernacularName: 'Penevoué',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Thym de berger',
-          },
-          {
-            vernacularName: 'Thé rouge',
-            language: 'fr',
-          },
-          {
-            language: 'it',
-            vernacularName: 'origano commune',
-          },
-          {
-            vernacularName: 'Erba acciuga',
-            language: 'it',
-          },
-          {
-            vernacularName: 'Origano',
-            language: 'it',
-          },
-          {
-            vernacularName: 'Origano comune',
-            language: 'it',
-          },
-          {
-            language: 'it',
-            vernacularName: 'regano',
-          },
-          {
-            vernacularName: 'Orégão',
-            language: 'pt',
-          },
-          {
-            vernacularName: 'Oregâos',
-            language: 'pt',
-          },
-          {
-            vernacularName: 'Orégano',
-            language: 'pt',
-          },
-        ],
-        taxonomy: {
-          family: 'Lamiaceae',
-          kingdom: 'Plantae',
-          order: 'Lamiales',
-          phylum: 'Tracheophyta',
-          class: 'Magnoliopsida',
-          genus: 'Origanum',
-          species: 'vulgare',
-        },
-        images: [
-          {
-            photographer: '',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Origanum_vulgare_002.JPG',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            url: '55/5a/9a/509.10763869.jpg',
-            title: 'Origanum vulgare 002.JPG',
-          },
-          {
-            url: '56/21/7a/509.14736517.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Origanum vulgare-blanc coteau-charteves 02 12072007 1.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Origanum_vulgare-blanc_coteau-charteves_02_12072007_1.jpg',
-            photographer: '',
-          },
-          {
-            photographer: '',
-            url: '56/21/7b/509.14736521.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Origanum_vulgare_bray-sur-somme_80_25062007_2.jpg',
-            title: 'Origanum vulgare bray-sur-somme 80 25062007 2.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            url: '56/21/7c/509.14736523.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Origanum vulgare vallee-de-grace-amiens 80 21072007 1.jpg',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Origanum_vulgare_vallee-de-grace-amiens_80_21072007_1.jpg',
-          },
-          {
-            title: 'Origanum vulgare Aureum BotGardBln07122011C.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Origanum_vulgare_Aureum_BotGardBln07122011C.jpg',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '56/c8/38/509.17741737.jpg',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:20120715Schwetzinger_Hardt4.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '57/5d/67/509.20295391.jpg',
-            title: '20120715Schwetzinger Hardt4.jpg',
-            photographer: '',
-          },
-          {
-            title: 'Origanum vulgare 2012 Saratov.jpg',
-            url: '57/5e/07/509.20311318.jpg',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Origanum_vulgare_2012_Saratov.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            url: '57/62/6a/509.20412621.jpg',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            title: '20120723St Arnualer Wiesen05.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:20120723St_Arnualer_Wiesen05.jpg',
-          },
-          {
-            title: 'Origanum vulgare2 ies.jpg',
-            photographer: '',
-            url: '57/b1/6f/509.2210306.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Origanum_vulgare2_ies.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-          },
-          {
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            source:
-              'https://commons.wikimedia.org/wiki/File:20130525Oregano_Saarbruecken.jpg',
-            url: '58/ad/9f/509.26357730.jpg',
-            title: '20130525Oregano Saarbruecken.jpg',
-          },
-          {
-            title: 'Origanum vulgare Prague 2011 1.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Origanum_vulgare_Prague_2011_1.jpg',
-            photographer: '',
-            url: '5c/51/09/509.20063083.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            starred: true,
-            url: '5c/51/0b/509.20063126.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            title: 'Origanum vulgare Prague 2011 3.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Origanum_vulgare_Prague_2011_3.jpg',
-            photographer: '',
-            small:
-              'https://content.eol.org/data/media/5c/51/0b/509.20063126.98x68.jpg',
-            medium:
-              'https://content.eol.org/data/media/5c/51/0b/509.20063126.260x190.jpg',
-            large:
-              'https://content.eol.org/data/media/5c/51/0b/509.20063126.jpg',
-          },
-        ],
-        terms: ['Spike'],
-        genus: '',
-        family: {
-          names: ['Mint Family', 'Labiatae', 'Deadnettles'],
-          taxonomy: {
-            order: 'Lamiales',
-            phylum: 'Tracheophyta',
-            kingdom: 'Plantae',
-            class: 'Magnoliopsida',
-          },
-          taxon: 'family',
-          genera: 236,
-          summary:
-            'Many aromatic perennials including basil, mint, rosemary, sage, savory, marjoram, and oregano. Readily propagated from stem cuttings or seed (chia).',
-          wiki: 'https://en.wikipedia.org/wiki/Lamiaceae',
-          species: 7534,
-          name: 'Lamiaceae',
-          traits: {
-            'petal count': {
-              value: ['5'],
-            },
-            pollination: {
-              value: ['Insects', 'Bumblebees', 'Single Bees'],
-            },
-          },
-          identification:
-            'Square stems, simple and opposite leaves, often fragrant. 5 petals and sepals, fused in both cases.',
-          members: ['Ocimum basilicum', 'Rosmarinus officinalis'],
-          eol: 'http://eol.org/pages/4302/overview',
-          iconicTaxon: 'plantae',
-          vernacularName: 'Mint Family',
-        },
-        order: '',
-        id: 579367,
-        vernacularNames: [
-          'Oregano',
-          'Compact oregano',
-          'Greek oregano',
-          'Oregan',
-          'Variegated marjoram',
-          'Wild marjoram',
-        ],
-        vernacularName: 'Oregano',
-        traits: {
-          'leaf shape': {
-            value: ['Ovate', 'Oblong'],
-          },
-          description: {
-            value: [
-              'A flowering plant in the mint family (Lamiaceae). It is native to temperate Western and Southwestern Eurasia and the Mediterranean region.\n\nOregano is a perennial herb, 20–80cm tall, with opposite leaves 1–4cm long. \n\nThe flowers are purple, 3–4mm long, produced in erect spikes. \n\nIt is sometimes called wild marjoram, and its close relative, O. majorana, is known as sweet marjoram.',
-            ],
-          },
-          'ph value': {
-            value: ['6-8'],
-            unit: 'pH',
-          },
-          characteristic: {
-            value: ['Perennial'],
-          },
-          name: 'Origanum vulgare',
-          inflorescence: {
-            value: ['Spike'],
-          },
-        },
-      },
-      {
-        binomial: 'Salvia officinalis',
-        iconicTaxon: 'plantae',
-        names: [
-          {
-            language: 'de',
-            vernacularName: 'Salbei',
-          },
-          {
-            vernacularName: 'Echter Salbei',
-            language: 'de',
-          },
-          {
-            language: 'en',
-            vernacularName: 'Common Sage',
-          },
-          {
-            language: 'en',
-            vernacularName: 'Berggarten Sage',
-          },
-          {
-            vernacularName: 'Garden Sage',
-            language: 'en',
-          },
-          {
-            language: 'en',
-            vernacularName: 'Golden Sage',
-          },
-          {
-            vernacularName: "Holt's Mammoth Sage",
-            language: 'en',
-          },
-          {
-            language: 'en',
-            vernacularName: 'Purple Garden Sage',
-          },
-          {
-            language: 'en',
-            vernacularName: 'Tricolor Sage',
-          },
-          {
-            language: 'en',
-            vernacularName: 'West Indian sage',
-          },
-          {
-            language: 'en',
-            vernacularName: 'kitchen sage',
-          },
-          {
-            vernacularName: 'purple sage',
-            language: 'en',
-          },
-          {
-            vernacularName: 'sage',
-            language: 'en',
-          },
-          {
-            language: 'es',
-            vernacularName: 'salvia',
-          },
-          {
-            vernacularName: 'Mermasangre',
-            language: 'es',
-          },
-          {
-            language: 'es',
-            vernacularName: 'salvia fina',
-          },
-          {
-            vernacularName: 'salvia real',
-            language: 'es',
-          },
-          {
-            vernacularName: 'Sauge',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Sauge officinale',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Thé de la Grèce',
-          },
-          {
-            language: 'it',
-            vernacularName: 'salvia',
-          },
-          {
-            language: 'pt',
-            vernacularName: 'Salva',
-          },
-          {
-            vernacularName: 'Betónica',
-            language: 'pt',
-          },
-          {
-            language: 'pt',
-            vernacularName: 'Chá-da-Europa;',
-          },
-          {
-            language: 'pt',
-            vernacularName: 'Salva-mansa',
-          },
-          {
-            language: 'pt',
-            vernacularName: 'Salva-rubra',
-          },
-        ],
-        taxonomy: {
-          order: 'Lamiales',
-          class: 'Magnoliopsida',
-          kingdom: 'Plantae',
-          phylum: 'Tracheophyta',
-          family: 'Lamiaceae',
-          genus: 'Salvia',
-          species: 'officinalis',
-        },
-        images: [
-          {
-            license: 'http://creativecommons.org/licenses/by/2.0/',
-            source: 'https://www.flickr.com/photos/biodivlibrary/6972241336/',
-            url: '80/e3/91/542.6972241336.jpg',
-            title: 'n310_w1150',
-            rightsHolder: 'Biodiversity Heritage Library',
-            photographer: {
-              role: 'photographer',
-              full_name:
-                "<a href='http://www.flickr.com/photos/61021753@N02'>Biodiversity Heritage Library</a>",
-              homepage: 'http://www.flickr.com/photos/61021753@N02',
-            },
-          },
-          {
-            url: '55/6b/e3/509.11046044.jpg',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Salvia_officinalis_001.JPG',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Salvia officinalis 001.JPG',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:Salvia_officinalis_003.JPG',
-            url: '55/6b/e7/509.11046087.jpg',
-            title: 'Salvia officinalis 003.JPG',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:Salvia_officinalis_p1150381.jpg',
-            photographer: '',
-            url: '56/37/79/509.1513507.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            title: 'Salvia officinalis p1150381.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            starred: true,
-            title: 'Salvia officinalis serres du Luxembourg.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            url: '56/91/94/509.16708476.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Salvia_officinalis_serres_du_Luxembourg.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            small:
-              'https://content.eol.org/data/media/56/91/94/509.16708476.98x68.jpg',
-            medium:
-              'https://content.eol.org/data/media/56/91/94/509.16708476.260x190.jpg',
-            large:
-              'https://content.eol.org/data/media/56/91/94/509.16708476.jpg',
-          },
-          {
-            photographer: '',
-            source:
-              'https://commons.wikimedia.org/wiki/File:SalviaOfficinalis1.JPG',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '57/20/a1/509.1924724.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            title: 'SalviaOfficinalis1.JPG',
-          },
-          {
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Knobloch Aromagarten Bild 3.JPG',
-            url: '57/64/1a/509.20428948.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Knobloch_Aromagarten_Bild_3.JPG',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:Salvia_officinalis_faskomilo.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-            title: 'Salvia officinalis faskomilo.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '58/81/6d/509.25513192.jpg',
-          },
-          {
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source: 'https://commons.wikimedia.org/wiki/File:Salvia_3842.JPG',
-            url: '59/c3/5e/509.32509626.jpg',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Salvia 3842.JPG',
-          },
-          {
-            url: '59/c3/6f/509.32510663.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            title: 'Salvia in fiore3904.JPG',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Salvia_in_fiore3904.JPG',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-          },
-          {
-            url: '59/c6/0a/509.32574690.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-            source: 'https://commons.wikimedia.org/wiki/File:Faskomilo.jpg',
-            title: 'Faskomilo.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            photographer: '',
-            title: 'Salvia officinalis 6a.jpg',
-            url: '59/d8/1b/509.32950958.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Salvia_officinalis_6a.jpg',
-          },
-          {
-            url: '59/d8/1c/509.32950961.jpg',
-            photographer: '',
-            title: 'Salvia officinalis 6b.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Salvia_officinalis_6b.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            url: '59/dd/53/509.33060923.jpg',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Varennes-Changy_-_Sauge_officinale.jpg',
-            title: 'Varennes-Changy - Sauge officinale.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-          },
-          {
-            url: '5e/51/bf/509.2987812.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Salvia_officinalis_02_by_Line1.JPG',
-            title: 'Salvia officinalis 02 by Line1.JPG',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-        ],
-        genus: '',
-        family: {
-          names: ['Mint Family', 'Labiatae', 'Deadnettles'],
-          taxonomy: {
-            order: 'Lamiales',
-            phylum: 'Tracheophyta',
-            kingdom: 'Plantae',
-            class: 'Magnoliopsida',
-          },
-          taxon: 'family',
-          genera: 236,
-          summary:
-            'Many aromatic perennials including basil, mint, rosemary, sage, savory, marjoram, and oregano. Readily propagated from stem cuttings or seed (chia).',
-          wiki: 'https://en.wikipedia.org/wiki/Lamiaceae',
-          species: 7534,
-          name: 'Lamiaceae',
-          traits: {
-            'petal count': {
-              value: ['5'],
-            },
-            pollination: {
-              value: ['Insects', 'Bumblebees', 'Single Bees'],
-            },
-          },
-          identification:
-            'Square stems, simple and opposite leaves, often fragrant. 5 petals and sepals, fused in both cases.',
-          members: ['Ocimum basilicum', 'Rosmarinus officinalis'],
-          eol: 'http://eol.org/pages/4302/overview',
-          iconicTaxon: 'plantae',
-          vernacularName: 'Mint Family',
-        },
-        order: '',
-        id: 578478,
-        vernacularNames: [
-          'Common sage',
-          'Berggarten sage',
-          'Garden sage',
-          'Golden sage',
-          "Holt's mammoth sage",
-          'Purple garden sage',
-          'Tricolor sage',
-          'West indian sage',
-          'Kitchen sage',
-          'Purple sage',
-          'Sage',
-        ],
-        vernacularName: 'Common Sage',
-        traits: {
-          physiology: {
-            value: ['Evergreen'],
-          },
-          name: 'Salvia officinalis',
-          width: {
-            value: ['.6'],
-            unit: 'm',
-          },
-          height: {
-            unit: 'm',
-            value: ['.6'],
-          },
-          'leaf colour': {
-            value: ['Grey-white', 'Grey-green'],
-          },
-          exposure: {
-            value: ['Full sun'],
-          },
-          'leaf above surface': {
-            value: ['Rugose'],
-          },
-          characteristic: {
-            value: ['Perennial'],
-          },
-          description: {
-            value: [
-              'A perennial, evergreen subshrub, with woody stems, gray leaves, and blue to purple flowers.\n\nIt is a member of the mint family Lamiaceae and native to the Mediterranean region, though it has naturalised in many places throughout the world.\n\nThe leaves are oblong, ranging in size up to 6.4cm long by 2.5cm wide. Leaves are grey-green, rugose on the upper side, and nearly white underneath due to the many short soft hairs.\n\nFlowers in late spring or summer.',
-            ],
-          },
-          'flower colour': {
-            value: ['Blue', 'Purple', 'White'],
-          },
-          'leaf below surface': {
-            value: ['Pubescent'],
-          },
-          'leaf length': {
-            unit: 'cm',
-            value: ['<6.4'],
-          },
-          'leaf shape': {
-            value: ['Oblong'],
-          },
-          'leaf below colour': {
-            value: ['White'],
-          },
-          'leaf width': {
-            value: ['<2.5'],
-            unit: 'cm',
-          },
-        },
-      },
-      {
-        binomial: 'Petroselinum crispum',
-        iconicTaxon: 'plantae',
-        names: [
-          {
-            language: 'en',
-            vernacularName: 'parsley',
-            wikiSearchTerm: '',
-          },
-          {
-            vernacularName: 'Common garden parsley',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Curled Parsley',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Garden Parsley',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Hamburg Parsley',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Plainleaf Parsley',
-            language: 'en',
-          },
-          {
-            language: 'de',
-            vernacularName: 'Garten-Petersilie',
-          },
-          {
-            vernacularName: 'Perejil',
-            language: 'es',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Persil cultivé',
-          },
-          {
-            vernacularName: 'Prezzemolo',
-            language: 'it',
-          },
-          {
-            language: 'pt',
-            vernacularName: 'Salsa',
-          },
-        ],
-        taxonomy: {
-          family: 'Apiaceae',
-          order: 'Apiales',
-          phylum: 'Tracheophyta',
-          kingdom: 'Plantae',
-          class: 'Magnoliopsida',
-          genus: 'Petroselinum',
-          species: 'crispum',
-        },
-        images: [
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Petroselinum crispum 003.JPG',
-            starred: true,
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Petroselinum_crispum_003.JPG',
-            url: '55/5b/92/509.10776444.jpg',
-
-            small:
-              'https://content.eol.org/data/media/55/5b/92/509.10776444.98x68.jpg',
-            medium:
-              'https://content.eol.org/data/media/55/5b/92/509.10776444.260x190.jpg',
-            large:
-              'https://content.eol.org/data/media/55/5b/92/509.10776444.jpg',
-          },
-          {
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Petroselinum neapolitanum flower.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Petroselinum_neapolitanum_flower.jpg',
-            url: '55/84/96/509.1140179.jpg',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-          },
-          {
-            photographer: '',
-            url: '58/67/6c/509.25147862.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Syrphe_hoverfly_(3712346750).jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Syrphe hoverfly (3712346750).jpg',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Krause Petersilie.JPG',
-            photographer: '',
-            url: '5a/a0/73/509.11932210.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Krause_Petersilie.JPG',
-          },
-          {
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Chimichurri Sauce Recipe (13294643914).jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Chimichurri_Sauce_Recipe_(13294643914).jpg',
-            url: '5f/53/dc/509.35375333.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-          },
-          {
-            url: '5f/b4/51/509.37547764.jpg',
-            title: 'Petrocelium crispum-yercaud-salem-India.JPG',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Petrocelium_crispum-yercaud-salem-India.JPG',
-            photographer: '',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:PETROSELINUM_CRISPUM_-_AGUDA_-_IB-014_(Julivert).JPG',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            url: '5f/c1/24/509.37867879.jpg',
-            title: 'PETROSELINUM CRISPUM - AGUDA - IB-014 (Julivert).JPG',
-          },
-        ],
-        terms: ['Taproot', 'Chamaephyte'],
-        genus: '',
-        family: {
-          genera: 400,
-          members: [
-            'Daucus carota subsp. sativus',
-            'Coriandrum sativum',
-            'Petroselinum crispum',
-            'Foeniculum vulgare',
-            'Anethum graveolens',
-            'Conium maculatum',
-            'Cuminum cyminum',
-            'Carum carvi',
-            'Anthriscus cerefolium',
-            'Myrrhis odorata',
-            'Pimpinella anisum',
-            'Levisticum officinale',
-            'Pastinaca sativa',
-          ],
-          names: [
-            'Carrot or Parsley family',
-            'Umbellifers',
-            'Celery family',
-            'Carrot family',
-            'Parsely family',
-          ],
-          summary:
-            'A family of mostly aromatic flowering plants that includes species such as carrot, celery, cumin, parsley and coriander, and the posionouse hemlocks.',
-          species: 3700,
-          identification:
-            'Compound, termial umbels radiating from a single point. Hollow flower stalks.',
-          taxon: 'family',
-          traits: {
-            pollination: {
-              value: ['Leafcutter Bees'],
-            },
-            'leaf arrangement': {
-              value: ['Alternate'],
-            },
-            inflorescence: {
-              value: ['Umbel'],
-            },
-          },
-          wiki: 'https://en.wikipedia.org/wiki/Apiaceae',
-          eol: 'http://eol.org/pages/4200/overview',
-          name: 'Apiaceae',
-          iconicTaxon: 'plantae',
-          taxonomy: {
-            phylum: 'Tracheophyta',
-            class: 'Magnoliopsida',
-            kingdom: 'Plantae',
-            order: 'Apiales',
-          },
-          vernacularName: 'Carrot or Parsley family',
-        },
-        order: '',
-        id: 581421,
-        vernacularNames: [
-          'Parsley',
-          'Common garden parsley',
-          'Curled parsley',
-          'Garden parsley',
-          'Hamburg parsley',
-          'Plainleaf parsley',
-        ],
-        vernacularName: 'Parsley',
-        traits: {
-          usage: {
-            value: ['herb', ' food'],
-          },
-          symbiont: {
-            type: 'companion planting',
-            value: ['solanum lycopersicum'],
-          },
-          germination: {
-            unit: 'WW',
-            value: ['4-6'],
-          },
-          description: {
-            value: [
-              'A species of flowering plant in the family Apiaceae that is native to the central Mediterranean region, but has naturalised elsewhere in Europe.\n\nGarden parsley is a bright green, biennial plant in temperate climates, or an annual herb in subtropical and tropical areas.\n\nWhere it grows as a biennial, in the first year, it forms a rosette of tripinnate leaves 10–25cm long with numerous 1–3cm leaflets, and a taproot used as a food store over the winter. In the second year, it grows a flowering stem to 75cm tall with sparser leaves and flat-topped 3–10cm diameter umbels with numerous 2mm diameter yellow to yellow-green flowers.\n\nThe seeds are ovoid, 2–3mm long, with prominent style remnants at the apex. One of the compounds of the essential oil is apiol. The plant normally dies after seed maturation.',
-            ],
-          },
-          exposure: {
-            value: ['Full sun'],
-          },
-          'umbel diameter': {
-            unit: 'cm',
-            value: ['3-10'],
-          },
-          'leaf shape': {
-            value: ['Palmatifid', 'Cuneate'],
-          },
-          'leaf division': {
-            value: ['Tripinnate'],
-          },
-          inflorescence: {
-            value: ['Umbel'],
-          },
-          characteristic: {
-            value: ['Taproot system'],
-          },
-          'leaf length': {
-            value: ['10-25'],
-            unit: 'cm',
-          },
-          'flower diameter': {
-            unit: 'mm',
-            value: ['2'],
-          },
-          name: 'Petroselinum crispum',
-          'flower colour': {
-            value: ['Yellow', 'Yellow-green'],
-          },
-        },
-      },
-      {
-        binomial: 'Coriandrum sativum',
-        iconicTaxon: 'plantae',
-        names: [
-          {
-            vernacularName: 'Koriander',
-            language: 'de',
-          },
-          {
-            vernacularName: 'Chinesische Petersilie',
-            language: 'de',
-          },
-          {
-            vernacularName: 'Indische Petersilie',
-            language: 'de',
-          },
-          {
-            language: 'de',
-            vernacularName: 'Wanzenkümmel',
-          },
-          {
-            language: 'en',
-            wikiSearchTerm: '',
-            vernacularName: 'coriander',
-          },
-          {
-            vernacularName: 'Chinese parsley',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Cilantro',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Indian parsley',
-            language: 'en',
-          },
-          {
-            language: 'es',
-            vernacularName: 'Cilantro',
-          },
-          {
-            language: 'es',
-            vernacularName: 'Coriandro',
-          },
-          {
-            vernacularName: 'Coriandre',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Coriandre cultivée',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Persil arabe',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Punaise mâle',
-          },
-          {
-            vernacularName: 'Coriandolo',
-            language: 'it',
-          },
-          {
-            language: 'pt',
-            vernacularName: 'Coentro',
-          },
-        ],
-        taxonomy: {
-          kingdom: 'Plantae',
-          order: 'Apiales',
-          class: 'Magnoliopsida',
-          phylum: 'Tracheophyta',
-          family: 'Apiaceae',
-          genus: 'Coriandrum',
-          species: 'sativum',
-        },
-        images: [
-          {
-            title: 'A scene of Coriander leaves.JPG',
-            source:
-              'https://commons.wikimedia.org/wiki/File:A_scene_of_Coriander_leaves.JPG',
-            photographer: '',
-            url: '5b/d0/47/509.17870796.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            url: '55/75/14/509.11171049.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Bloeiende koriander.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Bloeiende_koriander.jpg',
-            photographer: '',
-          },
-          {
-            photographer: '',
-            title: 'Coriander NP.JPG',
-            url: '58/ac/43/509.26320860.jpg',
-            source: 'https://commons.wikimedia.org/wiki/File:Coriander_NP.JPG',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            starred: true,
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            title: 'Kottimiri.JPG',
-            source: 'https://commons.wikimedia.org/wiki/File:Kottimiri.JPG',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '59/02/5e/509.27916713.jpg',
-            photographer: '',
-
-            small:
-              'https://content.eol.org/data/media/59/02/5e/509.27916713.98x68.jpg',
-            medium:
-              'https://content.eol.org/data/media/59/02/5e/509.27916713.260x190.jpg',
-            large:
-              'https://content.eol.org/data/media/59/02/5e/509.27916713.jpg',
-          },
-          {
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            title: 'JfCamachilesMabalacatCoriandrumsativump495fvf.JPG',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            source:
-              'https://commons.wikimedia.org/wiki/File:JfCamachilesMabalacatCoriandrumsativump495fvf.JPG',
-            url: '5f/cc/3b/509.38177351.jpg',
-          },
-          {
-            url: '5f/cc/3e/509.38177355.jpg',
-            title: 'JfCamachilesMabalacatCoriandrumsativump498fvf.JPG',
-            source:
-              'https://commons.wikimedia.org/wiki/File:JfCamachilesMabalacatCoriandrumsativump498fvf.JPG',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            title: 'JfCamachilesMabalacatCoriandrumsativump499fvf.JPG',
-            url: '5f/cc/3f/509.38177356.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:JfCamachilesMabalacatCoriandrumsativump499fvf.JPG',
-          },
-          {
-            photographer: '',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Flor_de_Coentro.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            url: '5f/fc/dc/509.3884615.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Flor de Coentro.jpg',
-          },
-          {
-            photographer: '',
-            title: 'Coriandrum sativum sl1.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Coriandrum_sativum_sl1.jpg',
-            url: '60/99/1c/509.41170030.jpg',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source: 'https://commons.wikimedia.org/wiki/File:Koriander_A.jpg',
-            url: '60/9f/bb/509.41281320.jpg',
-            photographer: '',
-            title: 'Koriander A.jpg',
-          },
-        ],
-        terms: ['Schizocarp', 'Umbel'],
-        genus: '',
-        family: {
-          genera: 400,
-          members: [
-            'Daucus carota subsp. sativus',
-            'Coriandrum sativum',
-            'Petroselinum crispum',
-            'Foeniculum vulgare',
-            'Anethum graveolens',
-            'Conium maculatum',
-            'Cuminum cyminum',
-            'Carum carvi',
-            'Anthriscus cerefolium',
-            'Myrrhis odorata',
-            'Pimpinella anisum',
-            'Levisticum officinale',
-            'Pastinaca sativa',
-          ],
-          names: [
-            'Carrot or Parsley family',
-            'Umbellifers',
-            'Celery family',
-            'Carrot family',
-            'Parsely family',
-          ],
-          summary:
-            'A family of mostly aromatic flowering plants that includes species such as carrot, celery, cumin, parsley and coriander, and the posionouse hemlocks.',
-          species: 3700,
-          identification:
-            'Compound, termial umbels radiating from a single point. Hollow flower stalks.',
-          taxon: 'family',
-          traits: {
-            pollination: {
-              value: ['Leafcutter Bees'],
-            },
-            'leaf arrangement': {
-              value: ['Alternate'],
-            },
-            inflorescence: {
-              value: ['Umbel'],
-            },
-          },
-          wiki: 'https://en.wikipedia.org/wiki/Apiaceae',
-          eol: 'http://eol.org/pages/4200/overview',
-          name: 'Apiaceae',
-          iconicTaxon: 'plantae',
-          taxonomy: {
-            phylum: 'Tracheophyta',
-            class: 'Magnoliopsida',
-            kingdom: 'Plantae',
-            order: 'Apiales',
-          },
-          vernacularName: 'Carrot or Parsley family',
-        },
-        order: '',
-        id: 581687,
-        vernacularNames: [
-          'Coriander',
-          'Chinese parsley',
-          'Cilantro',
-          'Indian parsley',
-        ],
-        vernacularName: 'Coriander',
-        traits: {
-          name: 'Coriandrum sativum',
-          description: {
-            value: [
-              'An annual herb in the family Apiaceae. \n\nCoriander is native to regions spanning from Southern Europe and Northern Africa to Southwestern Asia. \n\nA soft plant to 50cm. \n\nThe leaves are variable in shape, broadly lobed at the base of the plant, and slender and feathery higher on the flowering stems. \n\nThe flowers are borne in small umbels, white or very pale pink, asymmetrical, with the petals pointing away from the centre of the umbel longer (5–6mm) than those pointing toward it 1–3mm long). \n\nThe fruit is a globular, dry schizocarp 3–5mm in diameter. Pollen size is approximately 33 microns.',
-            ],
-          },
-        },
-      },
-      {
-        binomial: 'Artemisia dracunculus',
-        iconicTaxon: 'plantae',
-        names: [
-          {
-            language: 'en',
-            vernacularName: 'wild tarragon',
-          },
-          {
-            vernacularName: 'wild tarragon',
-            language: 'en',
-          },
-          {
-            language: 'it',
-            vernacularName: 'Dragoncello o estragone',
-          },
-          {
-            vernacularName: 'Estragon',
-            language: 'de',
-          },
-          {
-            vernacularName: 'Estragon',
-            language: 'fr',
-          },
-          {
-            vernacularName: 'tarragon',
-            language: 'en',
-          },
-          {
-            language: 'en',
-            vernacularName: 'tarragon',
-          },
-        ],
-        taxonomy: {
-          kingdom: 'Plantae',
-          phylum: 'Tracheophyta',
-          family: 'Asteraceae',
-          order: 'Asterales',
-          class: 'Magnoliopsida',
-          genus: 'Artemisia',
-          species: 'dracunculus',
-        },
-        images: [
-          {
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus_5.jpg',
-            photographer: '',
-            url: '55/44/9c/509.10457950.jpg',
-            title: 'Artemisia dracunculus 5.jpg',
-          },
-          {
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Artemisia dracunculus 6.jpg',
-            url: '55/44/9d/509.10457952.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus_6.jpg',
-          },
-          {
-            title: 'Artemisia dracunculus 8.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '55/44/9f/509.10457958.jpg',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus_8.jpg',
-          },
-          {
-            title: 'Artemisia dracunculus1.jpg',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus1.jpg',
-            url: '57/ac/1f/509.2200786.jpg',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus2.jpg',
-            url: '57/ac/20/509.2200787.jpg',
-            title: 'Artemisia dracunculus2.jpg',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            photographer: '',
-          },
-          {
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            url: '57/da/1e/509.22748651.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus_(8186674150).jpg',
-            photographer: '',
-            title: 'Artemisia dracunculus (8186674150).jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            title: 'Artemisia dracunculus (5021066066).jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus_(5021066066).jpg',
-            url: '57/e2/ae/509.22759942.jpg',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            url: '57/e2/b4/509.22759973.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus_(5021063648).jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            title: 'Artemisia dracunculus (5021063648).jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            starred: true,
-            photographer: '',
-            title: 'Artemisia dracunculus3.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus3.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            url: '58/74/e3/509.2528916.jpg',
-
-            small:
-              'https://content.eol.org/data/media/58/74/e3/509.2528916.98x68.jpg',
-            medium:
-              'https://content.eol.org/data/media/58/74/e3/509.2528916.260x190.jpg',
-            large:
-              'https://content.eol.org/data/media/58/74/e3/509.2528916.jpg',
-          },
-          {
-            title: 'Artemisia dracunculus 5.jpg',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '5a/45/dc/509.10457950.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus_5.jpg',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-          },
-          {
-            title: 'Asterales - Artemisia dracunculus - 1.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Asterales_-_Artemisia_dracunculus_-_1.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            url: '63/18/1d/509.48202144.jpg',
-            photographer: '',
-          },
-          {
-            title: 'Artemisia dracunculus HRM.jpg',
-            photographer: '',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Artemisia_dracunculus_HRM.jpg',
-            url: '67/76/f6/509.6774964.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-          },
-        ],
-        terms: ['Polymorphism', 'Pseudanthium', 'Rhizome'],
-        genus: '',
-        family: {
-          names: [
-            'Daisies',
-            'Compositae',
-            'Aster',
-            'Composite',
-            'Sunflower family',
-          ],
-          wiki: 'https://en.wikipedia.org/wiki/Asteraceae',
-          traits: {
-            'fruit type': {
-              value: ['Achene'],
-            },
-            pollination: {
-              value: ['Insects', 'Wind', 'Asexual'],
-            },
-          },
-          taxon: 'family',
-          iconicTaxon: 'plantae',
-          eol: 'http://eol.org/pages/4206/overview',
-          identification:
-            'Composite flowers with either disk or ray flowers, or both.',
-          species: 32913,
-          members: ['Cynara cardunculus', 'Helianthus annuus'],
-          genera: 1911,
-          name: 'Asteraceae',
-          taxonomy: {
-            class: 'Magnoliopsida',
-            phylum: 'Tracheophyta',
-            kingdom: 'Plantae',
-            order: 'Asterales',
-          },
-          summary:
-            'Worldwide distribution, second only to the orchids in size. Economically important, products include cooking oils, lettuce, sunflower seeds, and artichokes. The head may track the sun which maximizes reflectivity thereby attracting more pollinators.',
-          vernacularName: 'Daisies',
-        },
-        order: '',
-        id: 577604,
-        vernacularNames: [
-          'Wild tarragon',
-          'Wild tarragon',
-          'Tarragon',
-          'Tarragon',
-        ],
-        vernacularName: 'Wild Tarragon',
-        traits: {
-          'leaf width': {
-            value: ['2-10'],
-            unit: 'mm',
-          },
-          'leaf shape': {
-            value: ['Lanceolate'],
-          },
-          height: {
-            value: ['120-150'],
-            unit: 'cm',
-          },
-          propagation: {
-            value: ['Rhizomes'],
-          },
-          'leaf margin': {
-            value: ['Entire'],
-          },
-          characteristic: {
-            value: ['Polymorphic'],
-          },
-          description: {
-            value: [
-              'A polymorphic species of perennial herb in the sunflower family. It is widespread in the wild across much of Eurasia and North America.\n\nThe subspecies, Artemisia dracunculus var. sativa, is cultivated for use of the leaves as an aromatic culinary herb.\n\nTarragon grows to 120–150cm, with slender branches. \n\nThe leaves are lanceolate, 2–8cm by 2–10mm, broad, glossy green, with an entire margin.\n\nThe flowers are produced in small capitula 2–4mm in diameter, each capitulum containing up to 40 yellow or green-yellow florets.\n\nTarragon has rhizomatous roots that it uses to spread and readily reproduce.\n\nThe species is polymorphic. Informal names for distinguishing the variations include "French tarragon", "Russian tarragon", and "wild tarragon".',
-            ],
-          },
-          name: 'Artemisia dracunculus',
-          'leaf length': {
-            value: ['2-8'],
-            unit: 'cm',
-          },
-        },
-      },
-      {
-        binomial: 'Ocimum basilicum',
-        iconicTaxon: 'plantae',
-        names: [
-          {
-            language: 'de',
-            vernacularName: 'Basilikum',
-          },
-          {
-            vernacularName: 'Basilienkraut',
-            language: 'de',
-          },
-          {
-            vernacularName: 'Königskraut',
-            language: 'de',
-          },
-          {
-            language: 'en',
-            wikiSearchTerm: '',
-            vernacularName: 'basil',
-          },
-          {
-            vernacularName: "Saint-Joseph's-wort",
-            language: 'en',
-          },
-          {
-            language: 'en',
-            vernacularName: 'common basil',
-          },
-          {
-            vernacularName: 'sweet basil',
-            language: 'en',
-          },
-          {
-            vernacularName: 'albahaca',
-            language: 'es',
-          },
-          {
-            language: 'es',
-            vernacularName: 'Albacar',
-          },
-          {
-            language: 'es',
-            vernacularName: 'Alfábega',
-          },
-          {
-            vernacularName: 'albahaca de puerco',
-            language: 'es',
-          },
-          {
-            vernacularName: 'Basilic',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Basilic commun',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Basilic à épis nombreux',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Herbe royale',
-          },
-          {
-            vernacularName: 'petit framboisin',
-            language: 'fr',
-          },
-          {
-            language: 'it',
-            vernacularName: 'Basilico',
-          },
-          {
-            vernacularName: 'Manjericão',
-            language: 'pt',
-          },
-          {
-            vernacularName: 'Alfavaca',
-            language: 'pt',
-          },
-        ],
-        taxonomy: {
-          family: 'Lamiaceae',
-          kingdom: 'Plantae',
-          order: 'Lamiales',
-          class: 'Magnoliopsida',
-          phylum: 'Tracheophyta',
-          genus: 'Ocimum',
-          species: 'basilicum',
-        },
-        images: [
-          {
-            photographer: {
-              full_name:
-                "<a href='http://www.flickr.com/photos/12303842@N00'>John Rusk</a>",
-              role: 'photographer',
-              homepage: 'http://www.flickr.com/photos/12303842@N00',
-            },
-            source: 'https://www.flickr.com/photos/john_d_rusk/27605914044/',
-            url: '7f/15/b4/542.27605914044.jpg',
-            rightsHolder: 'John Rusk',
-            title: '2016-07-09-11.07.58 ZS PMax Ocimum basilicum-1-1',
-            license: 'http://creativecommons.org/licenses/by/2.0/',
-          },
-          {
-            title: 'J20160709-0013Ocimum basilicum',
-            source: 'https://www.flickr.com/photos/john_d_rusk/28118020912/',
-            photographer: {
-              homepage: 'http://www.flickr.com/photos/12303842@N00',
-              full_name:
-                "<a href='http://www.flickr.com/photos/12303842@N00'>John Rusk</a>",
-              role: 'photographer',
-            },
-            rightsHolder: 'John Rusk',
-            license: 'http://creativecommons.org/licenses/by/2.0/',
-            url: '7f/1c/e7/542.28118020912.jpg',
-          },
-          {
-            title: 'Basil leaves.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            source: 'https://commons.wikimedia.org/wiki/File:Basil_leaves.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-            url: '55/2f/43/509.1008187.jpg',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:2006-10-16-Ocimum02.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            title: '2006-10-16-Ocimum02.jpg',
-            url: '56/05/ae/509.1406078.jpg',
-            photographer: '',
-          },
-          {
-            title: 'Basilico.JPG',
-            source: 'https://commons.wikimedia.org/wiki/File:Basilico.JPG',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            url: '57/13/dd/509.19013504.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            starred: true,
-
-            small:
-              'https://content.eol.org/data/media/57/13/dd/509.19013504.98x68.jpg',
-            medium:
-              'https://content.eol.org/data/media/57/13/dd/509.19013504.260x190.jpg',
-            large:
-              'https://content.eol.org/data/media/57/13/dd/509.19013504.jpg',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            url: '57/63/15/509.20419458.jpg',
-            title:
-              'File:Basilic Ã  feuille de laitue Vilmorin-Andrieux 1904.png',
-            photographer: '',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Basilic_%C3%A0_feuille_de_laitue_Vilmorin-Andrieux_1904.png',
-          },
-          {
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Basilic anis.JPG',
-            source: 'https://commons.wikimedia.org/wiki/File:Basilic_anis.JPG',
-            url: '57/92/16/509.21313601.jpg',
-            photographer: '',
-          },
-          {
-            photographer: '',
-            title:
-              'Ocimum basilicum - Agri-Horticultural Society of India - Alipore - Kolkata 2013-01-05 2276.JPG',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Ocimum_basilicum_-_Agri-Horticultural_Society_of_India_-_Alipore_-_Kolkata_2013-01-05_2276.JPG',
-            url: '58/15/b9/509.23839616.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            photographer: '',
-            title: 'File:BasilikumGenovesergroÃblÃ¤ttriger.jpg',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            url: '59/7d/f0/509.3107062.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            source:
-              'https://commons.wikimedia.org/wiki/File:BasilikumGenovesergro%C3%9Fbl%C3%A4ttriger.jpg',
-          },
-          {
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-            title: 'Ocimum Basilicum - Basilica (2842866456).jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Ocimum_Basilicum_-_Basilica_(2842866456).jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '59/ba/e1/509.32319643.jpg',
-          },
-          {
-            url: '59/e4/29/509.33232479.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Ocimum_basilicum_111.JPG',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            title: 'Ocimum basilicum 111.JPG',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-          },
-          {
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            title: 'Ocimum basilicum 002.JPG',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Ocimum_basilicum_002.JPG',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '5a/5a/7e/509.10740982.jpg',
-          },
-          {
-            url: '5a/bb/9b/509.12387887.jpg',
-            title: 'Gardenology-IMG 8038 hunt10aug.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Gardenology-IMG_8038_hunt10aug.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-          },
-          {
-            title: '2006-10-16-Ocimum02.jpg',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '5b/06/ee/509.1406078.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:2006-10-16-Ocimum02.jpg',
-          },
-        ],
-        terms: [
-          'Spike',
-          'Entomophily',
-          'Achene',
-          'Bilabiate',
-          'Calyx',
-          'Zygomorphic',
-        ],
-        genus: '',
-        family: {
-          names: ['Mint Family', 'Labiatae', 'Deadnettles'],
-          taxonomy: {
-            order: 'Lamiales',
-            phylum: 'Tracheophyta',
-            kingdom: 'Plantae',
-            class: 'Magnoliopsida',
-          },
-          taxon: 'family',
-          genera: 236,
-          summary:
-            'Many aromatic perennials including basil, mint, rosemary, sage, savory, marjoram, and oregano. Readily propagated from stem cuttings or seed (chia).',
-          wiki: 'https://en.wikipedia.org/wiki/Lamiaceae',
-          species: 7534,
-          name: 'Lamiaceae',
-          traits: {
-            'petal count': {
-              value: ['5'],
-            },
-            pollination: {
-              value: ['Insects', 'Bumblebees', 'Single Bees'],
-            },
-          },
-          identification:
-            'Square stems, simple and opposite leaves, often fragrant. 5 petals and sepals, fused in both cases.',
-          members: ['Ocimum basilicum', 'Rosmarinus officinalis'],
-          eol: 'http://eol.org/pages/4302/overview',
-          iconicTaxon: 'plantae',
-          vernacularName: 'Mint Family',
-        },
-        order: '',
-        id: 579364,
-        vernacularNames: [
-          'Basil',
-          "Saint-joseph's-wort",
-          'Common basil',
-          'Sweet basil',
-        ],
-        vernacularName: 'Basil',
-        traits: {
-          'leaf shape': {
-            value: ['Ovate', 'Lanceolate'],
-          },
-          'flower colour': {
-            value: ['White'],
-          },
-          description: {
-            value: [
-              'A culinary herb in the family Lamiaceae.\n\nBasil is native to tropical regions from central Africa to Southeast Asia.\n\nIt is a tender plant. Depending on the species and cultivar, the leaves may taste like anise, with a strong, pungent, often sweet smell.\n\nBasil is an annual, or sometimes perennial, herb.\n\nDepending on the variety, plants can reach between 30cm and 150cm. \n\nIts leaves are richly green and ovate, but otherwise come in a wide variety of sizes and shapes depending on the cultivar.\n\nLeaf sizes range from 3cm to 11cm long, and 1cm to 6cm wide.\n\nBasil grows a thick, central taproot.\n\nIts flowers are small and white, and grow from a central inflorescence that emerges from the central stem atop the plant.',
-            ],
-          },
-          inflorescence: {
-            value: ['Spike'],
-          },
-          name: 'Ocimum basilicum',
-          'flower shape': {
-            value: ['Bilabiate', 'Zygomorphic'],
-          },
-          characteristic: {
-            value: ['annual', ' perennial', 'Polymorphic'],
-          },
-          pollination: {
-            value: ['Entomophily'],
-          },
-          usage: {
-            value: ['herb', ' food'],
-          },
-          role: {
-            type: 'parasitism',
-            value: ['peronospora belbahrii'],
-          },
-          climate: {
-            value: ['hot', ' dry'],
-          },
-          symbiont: {
-            value: ['solanum lycopersicum'],
-            type: 'companion planting',
-          },
-        },
-      },
-      {
-        binomial: 'Mentha spicata',
-        iconicTaxon: 'plantae',
-        names: [
-          {
-            wikiSearchTerm: '',
-            language: 'en',
-            vernacularName: 'spearmint',
-          },
-          {
-            language: 'en',
-            vernacularName: 'Curled Mint',
-          },
-          {
-            vernacularName: 'Garden mint',
-            language: 'en',
-          },
-          {
-            language: 'en',
-            vernacularName: 'bush mint',
-          },
-          {
-            vernacularName: 'bush mint (spearmint)',
-            language: 'en',
-          },
-          {
-            vernacularName: 'horse mint',
-            language: 'en',
-          },
-          {
-            vernacularName: 'wild mint',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Menthe à longues feuilles',
-            language: 'fr',
-          },
-          {
-            vernacularName: 'Baume',
-            language: 'fr',
-          },
-          {
-            vernacularName: 'Menthe',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Menthe en grappe',
-          },
-          {
-            vernacularName: 'Menthe en épi, Menthe verte',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Menthe glabre',
-          },
-          {
-            vernacularName: 'Menthe velue',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Menthe verte',
-          },
-          {
-            vernacularName: 'baume vert',
-            language: 'fr',
-          },
-          {
-            vernacularName: 'menthe romaine',
-            language: 'fr',
-          },
-          {
-            vernacularName: 'menthe à épis',
-            language: 'fr',
-          },
-          {
-            language: 'it',
-            vernacularName: 'Mentastro verde',
-          },
-          {
-            language: 'pt',
-            vernacularName: 'Hortelã-verde',
-          },
-        ],
-        taxonomy: {
-          phylum: 'Tracheophyta',
-          family: 'Lamiaceae',
-          order: 'Lamiales',
-          class: 'Magnoliopsida',
-          kingdom: 'Plantae',
-          genus: 'Mentha',
-          species: 'spicata',
-        },
-        images: [
-          {
-            source: 'https://commons.wikimedia.org/wiki/File:FreshMint.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            title: 'FreshMint.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            url: '55/51/39/509.10631792.jpg',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            url: '55/e6/ac/509.13062318.jpg',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            title:
-              'Flowering Spear Mint (Mentha spicata) - geograph.org.uk - 539690.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Flowering_Spear_Mint_(Mentha_spicata)_-_geograph.org.uk_-_539690.jpg',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:Mentha_viridis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-096.jpg',
-            url: '58/83/67/509.255375.jpg',
-            photographer: '',
-            title: 'File:Mentha viridis - KÃ¶hlerâs Medizinal-Pflanzen-096.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:Ants_on_spearmint_flowers_001.jpg',
-            title: 'Ants on spearmint flowers 001.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '58/c6/37/509.26889605.jpg',
-          },
-          {
-            photographer: '',
-            url: '59/bb/9c/509.32331202.jpg',
-            title: 'Mentha spicata Jammu India.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Mentha_spicata_Jammu_India.jpg',
-          },
-          {
-            url: '5a/20/d8/509.34240722.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            source:
-              'https://commons.wikimedia.org/wiki/File:20140727Mentha_spicata2.jpg',
-            title: '20140727Mentha spicata2.jpg',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-          },
-          {
-            url: '5a/20/dd/509.34240738.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:20140727Mentha_spicata5.jpg',
-            title: '20140727Mentha spicata5.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-          },
-          {
-            url: '5f/36/13/509.34674320.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            source:
-              'https://commons.wikimedia.org/wiki/File:20140809Mentha_spicata1.jpg',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            title: '20140809Mentha spicata1.jpg',
-          },
-          {
-            license: 'http://creativecommons.org/licenses/publicdomain/',
-            title: '20141101Mentha spicata2.jpg',
-            photographer: '',
-            starred: true,
-            url: '5f/7f/d6/509.36618670.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:20141101Mentha_spicata2.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-
-            small:
-              'https://content.eol.org/data/media/5f/7f/d6/509.36618670.98x68.jpg',
-            medium:
-              'https://content.eol.org/data/media/5f/7f/d6/509.36618670.260x190.jpg',
-            large:
-              'https://content.eol.org/data/media/5f/7f/d6/509.36618670.jpg',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:Mentha_spicata1.jpg',
-            photographer: '',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            title: 'Mentha spicata1.jpg',
-            url: '61/42/8c/509.4343707.jpg',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            url: '64/8f/db/509.54569001.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Spearmint_in_Bangladesh_09.jpg',
-            title: 'Spearmint in Bangladesh 09.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            photographer: '',
-          },
-        ],
-        genus: '',
-        family: {
-          names: ['Mint Family', 'Labiatae', 'Deadnettles'],
-          taxonomy: {
-            order: 'Lamiales',
-            phylum: 'Tracheophyta',
-            kingdom: 'Plantae',
-            class: 'Magnoliopsida',
-          },
-          taxon: 'family',
-          genera: 236,
-          summary:
-            'Many aromatic perennials including basil, mint, rosemary, sage, savory, marjoram, and oregano. Readily propagated from stem cuttings or seed (chia).',
-          wiki: 'https://en.wikipedia.org/wiki/Lamiaceae',
-          species: 7534,
-          name: 'Lamiaceae',
-          traits: {
-            'petal count': {
-              value: ['5'],
-            },
-            pollination: {
-              value: ['Insects', 'Bumblebees', 'Single Bees'],
-            },
-          },
-          identification:
-            'Square stems, simple and opposite leaves, often fragrant. 5 petals and sepals, fused in both cases.',
-          members: ['Ocimum basilicum', 'Rosmarinus officinalis'],
-          eol: 'http://eol.org/pages/4302/overview',
-          iconicTaxon: 'plantae',
-          vernacularName: 'Mint Family',
-        },
-        order: '',
-        id: 579697,
-        vernacularNames: [
-          'Spearmint',
-          'Curled mint',
-          'Garden mint',
-          'Bush mint',
-          'Bush mint (spearmint)',
-          'Horse mint',
-          'Wild mint',
-        ],
-        vernacularName: 'Spearmint',
-        traits: {
-          'leaf width': {
-            unit: 'cm',
-            value: ['1.5-3'],
-          },
-          exposure: {
-            value: ['Partial shade', 'Full sun'],
-          },
-          name: 'Mentha spicata',
-          description: {
-            value: [
-              'Native to Europe and southern temperate Asia, extending from Ireland in the west to southern China in the east. It is naturalised in many other temperate parts of the world.\n\nSpearmint is a perennial herbaceous plant 30–100cm tall, with variably hairless to hairy stems and foliage, and a wide-spreading fleshy underground rhizome from which it grows.\n\nThe leaves are 5–9cm by 1.5–3cm, with a serrated margin.\n\nThe stem is square-shaped, a trademark of the mint family of herbs.\n\nSpearmint produces flowers in slender spikes, each flower pink or white in colour, 2.5–3mm long, and broad.\n\nSpearmint flowers in the summer and has relatively large seeds.\n\nMentha spicata varies considerably in leaf blade dimensions, the prominence of leaf veins, and pubescence.',
-            ],
-          },
-          'flower colour': {
-            value: ['White', 'Pink'],
-          },
-          height: {
-            unit: 'cm',
-            value: ['30-100'],
-          },
-          inflorescence: {
-            value: ['Spike'],
-          },
-          characteristic: {
-            value: ['Perennial', 'Herbaceous'],
-          },
-          'ph value': {
-            value: ['6-7.5'],
-            unit: 'pH',
-          },
-          'soil type': {
-            value: ['Well-drained'],
-          },
-          'leaf length': {
-            unit: 'cm',
-            value: ['5-9'],
-          },
-          'leaf shape': {
-            value: ['Oblong', 'Lanceolate'],
-          },
-          propagation: {
-            value: ['Rhizomes'],
-          },
-        },
-      },
-      {
-        binomial: 'Rosmarinus officinalis',
-        iconicTaxon: 'plantae',
-        names: [
-          {
-            vernacularName: 'Rosmarin',
-            language: 'de',
-          },
-          {
-            vernacularName: 'rosemary',
-            wikiSearchTerm: '',
-            language: 'en',
-          },
-          {
-            vernacularName: 'Old Man',
-            language: 'en',
-          },
-          {
-            language: 'en',
-            vernacularName: 'Prostrate Rosemary',
-          },
-          {
-            vernacularName: 'Romero',
-            language: 'en',
-          },
-          {
-            language: 'es',
-            vernacularName: 'yerba de la niña',
-          },
-          {
-            vernacularName: 'Romarin',
-            language: 'fr',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Ecensier',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Romarin officinal',
-          },
-          {
-            language: 'fr',
-            vernacularName: 'Rosmarin encens',
-          },
-          {
-            vernacularName: 'Ramerino',
-            language: 'it',
-          },
-          {
-            vernacularName: 'Rosmarino',
-            language: 'it',
-          },
-          {
-            vernacularName: 'Alecrim',
-            language: 'pt',
-          },
-          {
-            vernacularName: 'alecrim-do-jardim',
-            language: 'pt',
-          },
-          {
-            vernacularName: 'erva-coroada',
-            language: 'pt',
-          },
-          {
-            language: 'pt',
-            vernacularName: 'rosa-marinha',
-          },
-          {
-            vernacularName: 'rosmarinho',
-            language: 'pt',
-          },
-        ],
-        taxonomy: {
-          family: 'Lamiaceae',
-          phylum: 'Tracheophyta',
-          order: 'Lamiales',
-          kingdom: 'Plantae',
-          class: 'Magnoliopsida',
-          genus: 'Rosmarinus',
-          species: 'officinalis',
-        },
-        images: [
-          {
-            title: '2015-01-03-15.34.28 ZS PMax-Rosmarinus officinalis-1',
-            photographer: {
-              homepage: 'http://www.flickr.com/photos/12303842@N00',
-              full_name:
-                "<a href='http://www.flickr.com/photos/12303842@N00'>John Rusk</a>",
-              role: 'photographer',
-            },
-            license: 'http://creativecommons.org/licenses/by/2.0/',
-            source: 'https://www.flickr.com/photos/john_d_rusk/16003508409/',
-            url: '7e/ab/db/542.16003508409.jpg',
-            rightsHolder: 'John Rusk',
-          },
-          {
-            starred: true,
-            photographer: {
-              role: 'photographer',
-              full_name:
-                "<a href='http://www.flickr.com/photos/33590535@N06'>Drew Avery</a>",
-              homepage: 'http://www.flickr.com/photos/33590535@N06',
-            },
-            rightsHolder: 'Drew Avery',
-            license: 'http://creativecommons.org/licenses/by/2.0/',
-            source: 'https://www.flickr.com/photos/33590535@N06/3455879598/',
-            title: 'Rosemary Gorizia',
-            url: '7f/86/96/542.3455879598.jpg',
-
-            small:
-              'https://content.eol.org/data/media/7f/86/96/542.3455879598.98x68.jpg',
-            medium:
-              'https://content.eol.org/data/media/7f/86/96/542.3455879598.260x190.jpg',
-            large:
-              'https://content.eol.org/data/media/7f/86/96/542.3455879598.jpg',
-          },
-          {
-            title: 'Rosmarinus officinalis 0001.JPG',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Rosmarinus_officinalis_0001.JPG',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            url: '55/6a/83/509.11026897.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-          },
-          {
-            title: 'Rosmarinus officinalis 0003.JPG',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Rosmarinus_officinalis_0003.JPG',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            url: '55/6a/85/509.11026931.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            license: 'http://creativecommons.org/licenses/by-sa/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Rosmarinus_officinalis2.jpg',
-            url: '55/74/c6/509.111643.jpg',
-            photographer: '',
-            title: 'Rosmarinus officinalis2.jpg',
-          },
-          {
-            url: '55/d6/3d/509.12735177.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Rosmarinus officinalis 1 (Corse).JPG',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Rosmarinus_officinalis_1_(Corse).JPG',
-          },
-          {
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            title: 'Rosmarinus officinalis 2 (Corse).JPG',
-            url: '55/d6/3e/509.12735178.jpg',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Rosmarinus_officinalis_2_(Corse).JPG',
-          },
-          {
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            photographer: '',
-            url: '56/1c/aa/509.14669120.jpg',
-            source:
-              'https://commons.wikimedia.org/wiki/File:Romarin_Rosmarinus_officinalis_2.jpg',
-            title: 'Romarin Rosmarinus officinalis 2.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:ChristianBauer_flowering_rosemary.jpg',
-            url: '57/71/e9/509.20696.jpg',
-            photographer: '',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'ChristianBauer flowering rosemary.jpg',
-          },
-          {
-            source:
-              'https://commons.wikimedia.org/wiki/File:Rosemary_(Rosmarinus_officinalis)_3.jpg',
-            url: '5a/15/32/509.33944832.jpg',
-            license: 'http://creativecommons.org/licenses/by/3.0/',
-            rightsHolder:
-              'licensed media from Wikimedia Commons in DwCA without owner',
-            title: 'Rosemary (Rosmarinus officinalis) 3.jpg',
-            photographer: '',
-          },
-        ],
-        genus: '',
-        family: {
-          names: ['Mint Family', 'Labiatae', 'Deadnettles'],
-          taxonomy: {
-            order: 'Lamiales',
-            phylum: 'Tracheophyta',
-            kingdom: 'Plantae',
-            class: 'Magnoliopsida',
-          },
-          taxon: 'family',
-          genera: 236,
-          summary:
-            'Many aromatic perennials including basil, mint, rosemary, sage, savory, marjoram, and oregano. Readily propagated from stem cuttings or seed (chia).',
-          wiki: 'https://en.wikipedia.org/wiki/Lamiaceae',
-          species: 7534,
-          name: 'Lamiaceae',
-          traits: {
-            'petal count': {
-              value: ['5'],
-            },
-            pollination: {
-              value: ['Insects', 'Bumblebees', 'Single Bees'],
-            },
-          },
-          identification:
-            'Square stems, simple and opposite leaves, often fragrant. 5 petals and sepals, fused in both cases.',
-          members: ['Ocimum basilicum', 'Rosmarinus officinalis'],
-          eol: 'http://eol.org/pages/4302/overview',
-          iconicTaxon: 'plantae',
-          vernacularName: 'Mint Family',
-        },
-        order: '',
-        id: 579379,
-        vernacularNames: [
-          'Rosemary',
-          'Old man',
-          'Prostrate rosemary',
-          'Romero',
-        ],
-        vernacularName: 'Rosemary',
-        traits: {
-          height: {
-            value: ['1.5'],
-            unit: 'm',
-          },
-          name: 'Rosmarinus officinalis',
-          'leaf width': {
-            value: ['2-5'],
-            unit: 'mm',
-          },
-          description: {
-            value: [
-              'Rosemary, is a woody, perennial herb with fragrant, evergreen, needle-like leaves and white, pink, purple, or blue flowers, native to the Mediterranean region.\n\nRosemary is an aromatic evergreen shrub with leaves similar to hemlock needles.\n\nIt is reasonably hardy in cool climates. It can withstand droughts, surviving a severe lack of water for lengthy periods. \n\nThe seeds are often difficult to start, with a low germination rate and relatively slow growth, but the plant can live as long as 30 years.\n\nForms range from upright to trailing; the upright forms can reach 1.5m tall, rarely 2m.\n\nThe leaves are evergreen, 2–4cm long and 2–5mm broad, green above, and white below, with dense, short, woolly hair.\n\nThe plant flowers in spring and summer in temperate climates, but the plants can be in constant bloom in warm climates; flowers are white, pink, purple or deep blue. Rosemary also has a tendency to flower outside its normal flowering season.',
-            ],
-          },
-          usage: {
-            value: ['herb', ' pest control', ' tea'],
-          },
-          'leaf colour below': {
-            value: ['White'],
-          },
-          'leaf colour above': {
-            value: ['Green'],
-          },
-          'leaf margin': {
-            value: ['Entire'],
-          },
-          'flower colour': {
-            value: ['White', 'Pink', 'Purple', 'Blue'],
-          },
-          'leaf length': {
-            value: ['2-4'],
-            unit: 'cm',
-          },
-          'life span': {
-            unit: 'YY',
-            value: ['30'],
-          },
-          'leaf folding': {
-            value: ['Revolute'],
-          },
-          characteristic: {
-            value: ['chamaephyte', ' perennial', 'Fibrous root system'],
-          },
-          'leaf shape': {
-            value: ['Acicular'],
-          },
-          ph: {
-            value: ['Neutral', 'Alkaline'],
-          },
-          climate: {
-            value: ['temperate', ' cool'],
-          },
-          'ph value': {
-            unit: 'pH',
-            value: ['7-7.8'],
-          },
-          'soil type': {
-            value: ['nutrient poor', 'Well-drained'],
-          },
-          'leaf texture': {
-            value: ['Wooly'],
-          },
-          exposure: {
-            value: ['Full sun'],
-          },
-          physiology: {
-            value: ['Evergreen'],
-          },
-        },
-      },
-    ],
-  }
-
-  const collection2 = {
-    id: '2',
-    name: 'Hike',
-    description: 'Plants seen along the way',
-    count: 11,
-    index: 1,
-    items: [
-      {
-        id: 52592,
-        iconicTaxon: 'Insecta',
-        names: [
-          {
-            vernacularName: 'Speckled Wood',
-            language: 'en',
-            wikiSearchTerm:
-              'http://en.wikipedia.org/wiki/Speckled_wood_(butterfly)',
-          },
-        ],
-        binomial: 'Pararge aegeria',
-        rank: 'species',
-        vernacularName: 'Speckled Wood',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/398125894/square.jpeg',
-          },
-        ],
-        image: {
-          id: 102255693,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) Felipe Hidalgo, some rights reserved (CC BY-NC), uploaded by Felipe Hidalgo',
-          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/102255693/square.jpg',
-          original_dimensions: {
-            height: 1200,
-            width: 951,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/102255693/square.jpg',
-          medium_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/102255693/medium.jpg',
-        },
-      },
-      {
-        id: 58127,
-        iconicTaxon: 'Plantae',
-        names: [
-          {
-            vernacularName: 'Fat-hen',
-            language: 'en',
-            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Chenopodium_album',
-          },
-        ],
-        binomial: 'Chenopodium album',
-        rank: 'species',
-        vernacularName: 'Fat-hen',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/394844909/square.jpeg',
-          },
-        ],
-        image: {
-          id: 45792371,
-          license_code: null,
-          attribution:
-            '(c) Mandy Rude, all rights reserved, uploaded by Mandy Rude',
-          url: 'https://static.inaturalist.org/photos/45792371/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 1536,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/45792371/square.jpg',
-          medium_url:
-            'https://static.inaturalist.org/photos/45792371/medium.jpg',
-        },
-      },
-      {
-        id: 55801,
-        iconicTaxon: 'Plantae',
-        names: [
-          {
-            vernacularName: 'European Hornbeam',
-            language: 'en',
-            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Carpinus_betulus',
-          },
-        ],
-        binomial: 'Carpinus betulus',
-        rank: 'species',
-        vernacularName: 'European Hornbeam',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391066130/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391066230/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391066236/square.jpeg',
-          },
-        ],
-        image: {
-          id: 46763976,
-          license_code: null,
-          attribution:
-            '(c) Joao Tiago Tavares, all rights reserved, uploaded by Joao Tiago Tavares',
-          url: 'https://static.inaturalist.org/photos/46763976/square.jpeg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/46763976/square.jpeg',
-          medium_url:
-            'https://static.inaturalist.org/photos/46763976/medium.jpeg',
-        },
-      },
-      {
-        id: 43151,
-        iconicTaxon: 'Mammalia',
-        names: [
-          {
-            vernacularName: 'European Rabbit',
-            language: 'en',
-            wikiSearchTerm: 'http://en.wikipedia.org/wiki/European_rabbit',
-          },
-        ],
-        binomial: 'Oryctolagus cuniculus',
-        rank: 'species',
-        vernacularName: 'European Rabbit',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391063785/square.jpeg',
-          },
-        ],
-        image: {
-          id: 479605587,
-          license_code: 'cc-by-nc-nd',
-          attribution: '(c) fra298, some rights reserved (CC BY-NC-ND)',
-          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/479605587/square.jpg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/479605587/square.jpg',
-          medium_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/479605587/medium.jpg',
-        },
-      },
-      {
-        id: 121763,
-        iconicTaxon: 'Plantae',
-        names: [
-          {
-            vernacularName: 'Sweet Chestnut',
-            language: 'en',
-            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Castanea_sativa',
-          },
-        ],
-        binomial: 'Castanea sativa',
-        rank: 'species',
-        vernacularName: 'Sweet Chestnut',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388502816/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388504750/square.jpeg',
-          },
-        ],
-        image: {
-          id: 12739074,
-          license_code: null,
-          attribution:
-            '(c) catherwoods, all rights reserved, uploaded by catherwoods',
-          url: 'https://static.inaturalist.org/photos/12739074/square.jpg',
-          original_dimensions: {
-            height: 1536,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/12739074/square.jpg',
-          medium_url:
-            'https://static.inaturalist.org/photos/12739074/medium.jpg',
-        },
-      },
-      {
-        id: 55801,
-        iconicTaxon: 'Plantae',
-        names: [
-          {
-            vernacularName: 'European Hornbeam',
-            language: 'en',
-            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Carpinus_betulus',
-          },
-        ],
-        binomial: 'Carpinus betulus',
-        rank: 'species',
-        vernacularName: 'European Hornbeam',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388502806/square.jpeg',
-          },
-        ],
-        image: {
-          id: 46763976,
-          license_code: null,
-          attribution:
-            '(c) Joao Tiago Tavares, all rights reserved, uploaded by Joao Tiago Tavares',
-          url: 'https://static.inaturalist.org/photos/46763976/square.jpeg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/46763976/square.jpeg',
-          medium_url:
-            'https://static.inaturalist.org/photos/46763976/medium.jpeg',
-        },
-      },
-      {
-        id: 56152,
-        iconicTaxon: 'Plantae',
-        names: [
-          {
-            vernacularName: 'Ramsons',
-            language: 'en',
-            wikiSearchTerm: 'https://en.wikipedia.org/wiki/Allium_ursinum',
-          },
-        ],
-        binomial: 'Allium ursinum',
-        rank: 'species',
-        vernacularName: 'Ramsons',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388502802/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388503894/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388503897/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388503898/square.jpeg',
-          },
-        ],
-        image: {
-          id: 10674,
-          license_code: 'cc-by',
-          attribution: '(c) Ulrika, some rights reserved (CC BY)',
-          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 1533,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
-          medium_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/medium.jpg',
-        },
-      },
-      {
-        id: 56152,
-        iconicTaxon: 'Plantae',
-        names: [
-          {
-            vernacularName: 'Ramsons',
-            language: 'en',
-            wikiSearchTerm: 'https://en.wikipedia.org/wiki/Allium_ursinum',
-          },
-        ],
-        binomial: 'Allium ursinum',
-        rank: 'species',
-        vernacularName: 'Ramsons',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386375257/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388504439/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388504498/square.jpeg',
-          },
-        ],
-        image: {
-          id: 10674,
-          license_code: 'cc-by',
-          attribution: '(c) Ulrika, some rights reserved (CC BY)',
-          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 1533,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
-          medium_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/medium.jpg',
-        },
-      },
-      {
-        id: 61906,
-        iconicTaxon: 'Plantae',
-        names: [
-          {
-            vernacularName: 'bristly oxtongue',
-            language: 'en',
-            wikiSearchTerm:
-              'http://en.wikipedia.org/wiki/Helminthotheca_echioides',
-          },
-        ],
-        binomial: 'Helminthotheca echioides',
-        rank: 'species',
-        vernacularName: 'bristly oxtongue',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386375225/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377195/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377196/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377199/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377203/square.jpeg',
-          },
-        ],
-        image: {
-          id: 231490858,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) Σάββας Ζαφειρίου (Savvas Zafeiriou), some rights reserved (CC BY-NC), uploaded by Σάββας Ζαφειρίου (Savvas Zafeiriou)',
-          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/231490858/square.jpg',
-          original_dimensions: {
-            height: 1353,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/231490858/square.jpg',
-          medium_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/231490858/medium.jpg',
-        },
-      },
-      {
-        id: 51610,
-        iconicTaxon: 'Plantae',
-        names: [
-          {
-            vernacularName: 'Germander Speedwell',
-            language: 'en',
-            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Veronica_chamaedrys',
-          },
-        ],
-        binomial: 'Veronica chamaedrys',
-        rank: 'species',
-        vernacularName: 'Germander Speedwell',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386372440/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386374107/square.jpeg',
-          },
-        ],
-        image: {
-          id: 92414767,
-          license_code: null,
-          attribution:
-            '(c) Mireille Mourzelas, all rights reserved, uploaded by Mireille Mourzelas',
-          url: 'https://static.inaturalist.org/photos/92414767/square.jpeg',
-          original_dimensions: {
-            height: 2048,
-            width: 1536,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/92414767/square.jpeg',
-          medium_url:
-            'https://static.inaturalist.org/photos/92414767/medium.jpeg',
-        },
-      },
-      {
-        id: 204339,
-        iconicTaxon: 'Plantae',
-        names: [
-          {
-            vernacularName: 'yellow archangel',
-            language: 'en',
-            wikiSearchTerm: 'http://en.wikipedia.org/wiki/Lamium_galeobdolon',
-          },
-        ],
-        binomial: 'Lamium galeobdolon',
-        rank: 'species',
-        vernacularName: 'yellow archangel',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386372434/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373403/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373407/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373409/square.jpeg',
-          },
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373413/square.jpeg',
-          },
-        ],
-        image: {
-          id: 72097716,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) Marian Talar, some rights reserved (CC BY-NC), uploaded by Marian Talar',
-          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/72097716/square.jpg',
-          original_dimensions: {
-            height: 2008,
-            width: 1775,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/72097716/square.jpg',
-          medium_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/72097716/medium.jpg',
-        },
-      },
-    ],
-  }
-
-  const collection3 = {
-    id: '3',
-    name: 'Hike in Arrábida',
-    description: 'May 2024',
-    count: 71,
+    name: 'Arrábida field notes',
+    date: 'Fri May 03 2024',
+    location: 'São Simão, Portugal',
     index: 0,
     items: [
       {
@@ -3455,1874 +13,2853 @@ export const getCollections = (): Promise<Collection[]> => {
         iconicTaxon: 'Plantae',
         binomial: 'Hyparrhenia hirta',
         rank: 'species',
-        vernacularName: 'Barboncino mediterraneo',
+        vernacularName: 'thatching grass',
         images: [
           {
+            id: 377244087,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377244087/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377244679,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377244679/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 256086487,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) Alba Rovira, some rights reserved (CC BY-NC), uploaded by Alba Rovira',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/256086487/square.jpeg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/256086487/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/256086487/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/256086487/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213460255',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Hyparrhenia_hirta',
       },
       {
         id: 77479,
         iconicTaxon: 'Plantae',
         binomial: 'Hyparrhenia hirta',
         rank: 'species',
-        vernacularName: 'Barboncino mediterraneo',
+        vernacularName: 'thatching grass',
         images: [
           {
+            id: 377244104,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377244104/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 256086487,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) Alba Rovira, some rights reserved (CC BY-NC), uploaded by Alba Rovira',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/256086487/square.jpeg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/256086487/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/256086487/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/256086487/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213460253',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Hyparrhenia_hirta',
       },
       {
         id: 636795,
         iconicTaxon: 'Plantae',
         binomial: 'Salvia rosmarinus',
         rank: 'species',
-        vernacularName: 'Rosmarino',
+        vernacularName: 'Rosemary',
         images: [
           {
+            id: 377234354,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377234354/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377234042,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377234042/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 87326219,
-          license_code: null,
-          attribution:
-            '(c) Frank Walther, all rights reserved, uploaded by Frank Walther',
           url: 'https://static.inaturalist.org/photos/87326219/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 1557,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/87326219/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/87326219/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/87326219/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213454717',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Rosemary',
       },
       {
         id: 60218,
         iconicTaxon: 'Plantae',
         binomial: 'Ficus carica',
         rank: 'species',
-        vernacularName: 'Fico',
+        vernacularName: 'common fig',
         images: [
           {
+            id: 377233239,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377233239/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 425438609,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) Claudia Fernández Bagan, some rights reserved (CC BY-NC), uploaded by Claudia Fernández Bagan',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/425438609/square.jpeg',
-          original_dimensions: {
-            height: 1536,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/425438609/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/425438609/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/425438609/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213454235',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Common_fig',
       },
       {
         id: 82864,
         iconicTaxon: 'Plantae',
         binomial: 'Plantago serraria',
         rank: 'species',
-        vernacularName: 'piantaggine seghettata',
+        vernacularName: 'Toothed Plantain',
         images: [
           {
+            id: 377230447,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377230447/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377232283,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377232283/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377232812,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377232812/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 35504905,
-          license_code: 'cc-by-nc-sa',
-          attribution:
-            '(c) Hans Henrik Bruun, some rights reserved (CC BY-NC-SA), uploaded by Hans Henrik Bruun',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/35504905/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 1536,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/35504905/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc-sa',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/35504905/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/35504905/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213452551',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Plantago_serraria',
       },
       {
         id: 82850,
         iconicTaxon: 'Plantae',
         binomial: 'Ruta montana',
         rank: 'species',
-        vernacularName: 'ruta montana',
+        vernacularName: 'Mountain Rue',
         images: [
           {
+            id: 377230418,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377230418/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377231893,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377231893/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 2075742,
-          license_code: 'cc-by-nc-sa',
-          attribution: '(c) Valter Jacinto, some rights reserved (CC BY-NC-SA)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/square.jpg',
-          original_dimensions: {
-            height: 326,
-            width: 500,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc-sa',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213452550',
+        wikipediaUrl: null,
       },
       {
         id: 57076,
         iconicTaxon: 'Plantae',
         binomial: 'Trifolium campestre',
         rank: 'species',
-        vernacularName: 'Trifoglio campestre',
+        vernacularName: 'hop trefoil',
         images: [
           {
+            id: 377230413,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377230413/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377230847,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377230847/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377230849,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377230849/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 73248929,
-          license_code: 'cc-by',
-          attribution: '(c) Kevin Thiele, some rights reserved (CC BY)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/73248929/square.jpg',
-          original_dimensions: {
-            height: 1610,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/73248929/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/73248929/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/73248929/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213452548',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Trifolium_campestre',
       },
       {
         id: 55653,
         iconicTaxon: 'Insecta',
         binomial: 'Maniola jurtina',
         rank: 'species',
-        vernacularName: 'Giurtina',
+        vernacularName: 'Meadow Brown',
         images: [
           {
+            id: 377220327,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377220327/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 455965,
-          license_code: 'cc-by-nc-nd',
-          attribution: '(c) Allan Hopkins, some rights reserved (CC BY-NC-ND)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/455965/square.jpg',
-          original_dimensions: {
-            height: 854,
-            width: 1280,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/455965/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc-nd',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/455965/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/455965/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213447029',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Meadow_brown',
       },
       {
         id: 333932,
         iconicTaxon: 'Insecta',
         binomial: 'Euchloe belemia',
         rank: 'species',
-        vernacularName: '',
+        vernacularName: 'Green-striped White',
         images: [
           {
+            id: 377215889,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377215889/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377217196,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377217196/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377217214,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377217214/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 175391070,
-          license_code: null,
-          attribution:
-            '(c) Karen Nichols, all rights reserved, uploaded by Karen Nichols',
           url: 'https://static.inaturalist.org/photos/175391070/square.jpg',
-          original_dimensions: {
-            height: 1804,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/175391070/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/175391070/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/175391070/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213444925',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Euchloe_belemia',
       },
       {
         id: 76363,
         iconicTaxon: 'Plantae',
         binomial: 'Cistus monspeliensis',
         rank: 'species',
-        vernacularName: 'Cisto di Montpellier',
+        vernacularName: 'Montpelier Cistus',
         images: [
           {
+            id: 377211260,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211260/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377212931,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377212931/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377212941,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377212941/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377213234,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377213234/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 345720885,
-          license_code: 'cc-by-sa',
-          attribution: '(c) Krzysztof Golik, some rights reserved (CC BY-SA)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/345720885/square.jpeg',
-          original_dimensions: {
-            height: 1677,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/345720885/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-sa',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/345720885/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/345720885/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213442948',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Cistus_monspeliensis',
       },
       {
         id: 118535,
         iconicTaxon: 'Plantae',
         binomial: 'Drimia maritima',
         rank: 'species',
-        vernacularName: 'Scilla marina',
+        vernacularName: 'sea squill',
         images: [
           {
+            id: 377211233,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211233/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 433502522,
-          license_code: null,
-          attribution:
-            '(c) Vicente Santos, all rights reserved, uploaded by Vicente Santos',
           url: 'https://static.inaturalist.org/photos/433502522/square.jpeg',
-          original_dimensions: {
-            height: 805,
-            width: 805,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/433502522/square.jpeg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/433502522/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/433502522/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213442947',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Drimia_maritima',
       },
       {
         id: 82672,
         iconicTaxon: 'Plantae',
         binomial: 'Cistus crispus',
         rank: 'species',
-        vernacularName: '',
+        vernacularName: 'curly rockrose',
         images: [
           {
+            id: 377211281,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377213960,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377213960/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377213983,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377213983/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377213985,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377213985/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377213989,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377213989/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377213986,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377213986/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 5552917,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) Antonio Xeira, some rights reserved (CC BY-NC), uploaded by Antonio Xeira',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/5552917/square.jpeg',
-          original_dimensions: {
-            height: 960,
-            width: 1280,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/5552917/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/5552917/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/5552917/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213442946',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Cistus_crispus',
       },
       {
         id: 82634,
         iconicTaxon: 'Plantae',
         binomial: 'Santolina rosmarinifolia',
         rank: 'species',
-        vernacularName: '',
+        vernacularName: 'Holy-flax',
         images: [
           {
+            id: 377211222,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211222/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377215015,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377215015/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 116668473,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) AnaCollados, some rights reserved (CC BY-NC), uploaded by AnaCollados',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/116668473/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 1536,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/116668473/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/116668473/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/116668473/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213442945',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Santolina_rosmarinifolia',
       },
       {
         id: 64103,
         iconicTaxon: 'Plantae',
         binomial: 'Agave americana',
         rank: 'species',
-        vernacularName: '',
+        vernacularName: 'American century plant',
         images: [
           {
+            id: 377211220,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211220/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 333174371,
-          license_code: null,
-          attribution:
-            '(c) Angela Jocabed Guzman Cantu, all rights reserved, uploaded by Angela Jocabed Guzman Cantu',
           url: 'https://static.inaturalist.org/photos/333174371/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 1536,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/333174371/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/333174371/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/333174371/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213442943',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Agave_americana',
       },
       {
         id: 82942,
         iconicTaxon: 'Plantae',
         binomial: 'Quercus coccifera',
         rank: 'species',
-        vernacularName: 'Quercia spinosa',
+        vernacularName: 'Kermes oak',
         images: [
           {
+            id: 377211197,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211197/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377233523,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377233523/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 113483275,
-          license_code: null,
-          attribution:
-            '(c) Konstantinos Kalaentzis, all rights reserved, uploaded by Konstantinos Kalaentzis',
           url: 'https://static.inaturalist.org/photos/113483275/square.jpg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/113483275/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/113483275/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/113483275/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213442941',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Quercus_coccifera',
       },
       {
         id: 208988,
         iconicTaxon: 'Insecta',
         binomial: 'Satyrium spini',
         rank: 'species',
-        vernacularName: 'Tecla del biancospino',
+        vernacularName: 'Blue-spot Hairstreak',
         images: [
           {
+            id: 377207330,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377207330/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377209450,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377209450/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377209464,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377209464/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377209466,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377209466/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 51689606,
-          license_code: 'cc-by',
-          attribution: '(c) Sandy Rae, some rights reserved (CC BY)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/51689606/square.jpg',
-          original_dimensions: {
-            height: 1678,
-            width: 1959,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/51689606/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/51689606/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/51689606/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213440456',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Satyrium_spini',
       },
       {
         id: 71173,
         iconicTaxon: 'Plantae',
         binomial: 'Gladiolus illyricus',
         rank: 'species',
-        vernacularName: 'Gladiolo illirico',
+        vernacularName: 'Wild Gladiolus',
         images: [
           {
+            id: 377207333,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377207333/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377208821,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377208821/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377208835,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377208835/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377208841,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377208841/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 31452,
-          license_code: 'cc-by-nc',
-          attribution: '(c) Ferran Pestaña, some rights reserved (CC BY-NC)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/31452/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 1468,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/31452/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/31452/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/31452/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213440455',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Gladiolus_illyricus',
       },
       {
         id: 734833,
         iconicTaxon: 'Plantae',
         binomial: 'Petrosedum sediforme',
         rank: 'species',
-        vernacularName: 'Borracina di Nizza',
+        vernacularName: 'Pale Stonecrop',
         images: [
           {
+            id: 377207332,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377207332/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377208424,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377208424/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 144898541,
-          license_code: null,
-          attribution:
-            '(c) Henk Feith, all rights reserved, uploaded by Henk Feith',
           url: 'https://static.inaturalist.org/photos/144898541/square.jpeg',
-          original_dimensions: {
-            height: 2048,
-            width: 1536,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/144898541/square.jpeg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/144898541/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/144898541/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213440450',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Petrosedum_sediforme',
       },
       {
         id: 707889,
         iconicTaxon: 'Plantae',
         binomial: 'Lysimachia monelli',
         rank: 'species',
-        vernacularName: 'centonchio di Monellus',
+        vernacularName: 'Flax-leaved Blue Pimpernel',
         images: [
           {
+            id: 377201511,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377201511/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377202959,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377202959/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 106501291,
-          license_code: 'cc-by',
-          attribution:
-            '(c) dhfischer, some rights reserved (CC BY), uploaded by dhfischer',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/106501291/square.jpg',
-          original_dimensions: {
-            height: 800,
-            width: 1200,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/106501291/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/106501291/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/106501291/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213436828',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Lysimachia_monelli',
       },
       {
         id: 123815,
         iconicTaxon: 'Insecta',
         binomial: 'Gonepteryx cleopatra',
         rank: 'species',
-        vernacularName: 'Cleopatra',
+        vernacularName: 'Cleopatra Butterfly',
         images: [
           {
+            id: 377203761,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377203761/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377201459,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377201459/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 31308671,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) Paolo Mazzei, some rights reserved (CC BY-NC), uploaded by Paolo Mazzei',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/31308671/square.jpg',
-          original_dimensions: {
-            height: 600,
-            width: 800,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/31308671/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/31308671/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/31308671/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213436824',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Gonepteryx_cleopatra',
       },
       {
         id: 82664,
         iconicTaxon: 'Plantae',
         binomial: 'Lonicera implexa',
         rank: 'species',
-        vernacularName: 'Caprifoglio mediterraneo',
+        vernacularName: 'Mediterranean Honeysuckle',
         images: [
           {
+            id: 377201423,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377201423/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 37591,
-          license_code: 'cc-by-nc-sa',
-          attribution:
-            '(c) José María Escolano, some rights reserved (CC BY-NC-SA)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/37591/square.jpg',
-          original_dimensions: {
-            height: 1360,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/37591/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc-sa',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/37591/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/37591/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213436823',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Lonicera_implexa',
       },
       {
         id: 56236,
         iconicTaxon: 'Plantae',
         binomial: 'Centaurium erythraea',
         rank: 'species',
-        vernacularName: 'Centauro maggiore',
+        vernacularName: 'Common centaury',
         images: [
           {
+            id: 377201420,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377201420/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377204927,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377204927/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 20424700,
-          license_code: 'cc-by',
-          attribution:
-            '(c) Harry Podschwit, some rights reserved (CC BY), uploaded by Harry Podschwit',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/20424700/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/20424700/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/20424700/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/20424700/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213436822',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Centaurium_erythraea',
       },
       {
         id: 164139,
         iconicTaxon: 'Plantae',
         binomial: 'Iris xiphium',
         rank: 'species',
-        vernacularName: '',
+        vernacularName: 'Spanish Iris',
         images: [
           {
+            id: 377201421,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377201421/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377214491,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377214491/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377214512,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377214512/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377214513,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377214513/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 3008054,
-          license_code: 'pd',
-          attribution:
-            'Javier martin, no known copyright restrictions (public domain)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/3008054/square.jpg',
-          original_dimensions: {
-            height: 1536,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/3008054/square.jpg',
-          medium_url:
+          licenceCode: 'pd',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/3008054/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/3008054/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213436819',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Iris_xiphium',
       },
       {
         id: 132892,
         iconicTaxon: 'Insecta',
         binomial: 'Anacridium aegyptium',
         rank: 'species',
-        vernacularName: 'Locusta egiziana',
+        vernacularName: 'Egyptian Bird Grasshopper',
         images: [
           {
+            id: 377196300,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377196300/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199066,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199066/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199068,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199068/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199072,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199072/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199075,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199075/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199074,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199074/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 70331970,
-          license_code: null,
-          attribution:
-            '(c) Konstantinos Kalaentzis, all rights reserved, uploaded by Konstantinos Kalaentzis',
           url: 'https://static.inaturalist.org/photos/70331970/square.jpg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/70331970/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/70331970/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/70331970/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213434768',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Anacridium_aegyptium',
       },
       {
         id: 82644,
         iconicTaxon: 'Plantae',
         binomial: 'Cynara humilis',
         rank: 'species',
-        vernacularName: '',
+        vernacularName: 'Dwarf Artichoke',
         images: [
           {
+            id: 377196315,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377196315/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 22221301,
-          license_code: null,
-          attribution:
-            '(c) Francisco Barros, all rights reserved, uploaded by Francisco Barros',
           url: 'https://static.inaturalist.org/photos/22221301/square.jpeg',
-          original_dimensions: {
-            height: 600,
-            width: 800,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/22221301/square.jpeg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/22221301/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/22221301/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213434765',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Cynara_humilis',
       },
       {
         id: 54404,
         iconicTaxon: 'Plantae',
         binomial: 'Papaver rhoeas',
         rank: 'species',
-        vernacularName: 'Papavero',
+        vernacularName: 'common poppy',
         images: [
           {
+            id: 377196271,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377196271/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 234132991,
-          license_code: null,
-          attribution:
-            '(c) David Neale, all rights reserved, uploaded by David Neale',
           url: 'https://static.inaturalist.org/photos/234132991/square.jpg',
-          original_dimensions: {
-            height: 1532,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/234132991/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/234132991/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/234132991/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213434763',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Papaver_rhoeas',
       },
       {
         id: 76434,
         iconicTaxon: 'Plantae',
         binomial: 'Convolvulus tricolor',
         rank: 'species',
-        vernacularName: 'Vilucchio tricolore',
+        vernacularName: 'Dwarf Morning-glory',
         images: [
           {
+            id: 377196274,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377196274/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377200200,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377200200/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377200215,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377200215/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 219623979,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) heiko_ernst, some rights reserved (CC BY-NC), uploaded by heiko_ernst',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/219623979/square.jpeg',
-          original_dimensions: {
-            height: 1837,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/219623979/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/219623979/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/219623979/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213434760',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Convolvulus_tricolor',
       },
       {
         id: 83085,
         iconicTaxon: 'Plantae',
         binomial: 'Anacamptis pyramidalis',
         rank: 'species',
-        vernacularName: 'Orchidea piramidale',
+        vernacularName: 'pyramidal orchid',
         images: [
           {
+            id: 377196268,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377196268/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377200036,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377200036/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 128723699,
-          license_code: 'cc-by-sa',
-          attribution: '(c) Zeynel Cebeci, some rights reserved (CC BY-SA)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/128723699/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 1373,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/128723699/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-sa',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/128723699/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/128723699/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213434759',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Anacamptis_pyramidalis',
       },
       {
         id: 540328,
         iconicTaxon: 'Reptilia',
         binomial: 'Zamenis scalaris',
         rank: 'species',
-        vernacularName: 'Serpente scala',
+        vernacularName: 'Ladder Snake',
         images: [
           {
+            id: 377196252,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377196252/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199677,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199677/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199687,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199687/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199690,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199690/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199689,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199689/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199691,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199691/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199713,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199713/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377199729,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377199729/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 477396359,
-          license_code: null,
-          attribution:
-            '(c) Luís Gaifém, all rights reserved, uploaded by Luís Gaifém',
           url: 'https://static.inaturalist.org/photos/477396359/square.jpeg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/477396359/square.jpeg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/477396359/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/477396359/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213434758',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Ladder_snake',
       },
       {
         id: 71192,
         iconicTaxon: 'Plantae',
         binomial: 'Linum strictum',
         rank: 'species',
-        vernacularName: 'Lino minore',
+        vernacularName: 'Upright Yellow-flax',
         images: [
           {
+            id: 377191530,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377191530/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377193953,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377193953/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377193958,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377193958/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 287038339,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) Sonja Bouwman-Gringhuis, some rights reserved (CC BY-NC), uploaded by Sonja Bouwman-Gringhuis',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/287038339/square.jpeg',
-          original_dimensions: {
-            height: 694,
-            width: 691,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/287038339/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/287038339/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/287038339/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213431852',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Linum_strictum',
       },
       {
         id: 64265,
         iconicTaxon: 'Plantae',
         binomial: 'Medicago orbicularis',
         rank: 'species',
-        vernacularName: 'Erba medica orbicolare',
+        vernacularName: 'button medick',
         images: [
           {
+            id: 377191529,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377191529/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 17680491,
-          license_code: null,
-          attribution:
-            '(c) Valter Jacinto, all rights reserved, uploaded by Valter Jacinto',
           url: 'https://static.inaturalist.org/photos/17680491/square.jpg',
-          original_dimensions: {
-            height: 900,
-            width: 1200,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/17680491/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/17680491/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/17680491/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213431851',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Medicago_orbicularis',
       },
       {
         id: 82895,
         iconicTaxon: 'Plantae',
         binomial: 'Allium roseum',
         rank: 'species',
-        vernacularName: 'Aglio rosa',
+        vernacularName: 'rosy garlic',
         images: [
           {
+            id: 377191526,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377191526/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 1783048,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) Stefano Doglio, some rights reserved (CC BY-NC), uploaded by Stefano Doglio',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/1783048/square.JPG',
-          original_dimensions: {
-            height: 706,
-            width: 900,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/1783048/square.JPG',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/1783048/medium.JPG',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/1783048/square.JPG',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213431850',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Allium_roseum',
       },
       {
         id: 791928,
         iconicTaxon: 'Plantae',
         binomial: 'Lysimachia arvensis',
         rank: 'species',
-        vernacularName: 'Centonchio',
+        vernacularName: 'scarlet pimpernel',
         images: [
           {
+            id: 377191500,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377191500/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 223278664,
-          license_code: 'cc-by-sa',
-          attribution:
-            '(c) Douglas Goldman, some rights reserved (CC BY-SA), uploaded by Douglas Goldman',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/square.jpg',
-          original_dimensions: {
-            height: 1371,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-sa',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213431846',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Anagallis_arvensis',
       },
       {
         id: 58300,
         iconicTaxon: 'Plantae',
         binomial: 'Punica granatum',
         rank: 'species',
-        vernacularName: 'melograno',
+        vernacularName: 'pomegranate',
         images: [
           {
+            id: 377191499,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377191499/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377195664,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377195664/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377195675,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377195675/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 4956594,
-          license_code: 'cc-by-sa',
-          attribution: '(c) H. Zell, some rights reserved (CC BY-SA)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/4956594/square.jpeg',
-          original_dimensions: {
-            height: 1292,
-            width: 1722,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/4956594/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-sa',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/4956594/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/4956594/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213431845',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Pomegranate',
       },
       {
         id: 133250,
         iconicTaxon: 'Insecta',
         binomial: 'Tettigonia viridissima',
         rank: 'species',
-        vernacularName: 'Cavalletta verde',
+        vernacularName: 'Great Green Bush-cricket',
         images: [
           {
+            id: 377191496,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377191496/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 98388966,
-          license_code: null,
-          attribution:
-            '(c) Konstantinos Kalaentzis, all rights reserved, uploaded by Konstantinos Kalaentzis',
           url: 'https://static.inaturalist.org/photos/98388966/square.jpg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/98388966/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/98388966/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/98388966/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213431840',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Tettigonia_viridissima',
       },
       {
         id: 82867,
         iconicTaxon: 'Plantae',
         binomial: 'Plantago lagopus',
         rank: 'species',
-        vernacularName: 'Piantaggine piede di lepre',
+        vernacularName: "Hare's-foot Plantain",
         images: [
           {
+            id: 377123346,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377123346/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377125341,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377125341/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377125348,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377125348/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 22157444,
-          license_code: null,
-          attribution:
-            '(c) Francisco Barros, all rights reserved, uploaded by Francisco Barros',
           url: 'https://static.inaturalist.org/photos/22157444/square.jpeg',
-          original_dimensions: {
-            height: 601,
-            width: 800,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/22157444/square.jpeg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/22157444/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/22157444/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213392196',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Plantago_lagopus',
       },
       {
         id: 55401,
         iconicTaxon: 'Insecta',
         binomial: 'Pieris brassicae',
         rank: 'species',
-        vernacularName: 'Cavolaia maggiore',
+        vernacularName: 'Large White',
         images: [
           {
+            id: 377123350,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377123350/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377125588,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377125588/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 51458201,
-          license_code: null,
-          attribution:
-            '(c) Freyja Brown, all rights reserved, uploaded by Freyja Brown',
           url: 'https://static.inaturalist.org/photos/51458201/square.jpeg',
-          original_dimensions: {
-            height: 1996,
-            width: 1996,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/51458201/square.jpeg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/51458201/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/51458201/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213392194',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Pieris_brassicae',
       },
       {
         id: 59904,
         iconicTaxon: 'Plantae',
         binomial: 'Glebionis coronaria',
         rank: 'species',
-        vernacularName: 'Crisantemo giallo',
+        vernacularName: 'Garland Daisy',
         images: [
           {
+            id: 377123353,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377123353/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377125738,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377125738/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 14080027,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) James Bailey, some rights reserved (CC BY-NC), uploaded by James Bailey',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/14080027/square.jpeg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/14080027/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/14080027/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/14080027/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213392193',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Glebionis_coronaria',
       },
       {
         id: 55653,
         iconicTaxon: 'Insecta',
         binomial: 'Maniola jurtina',
         rank: 'species',
-        vernacularName: 'Giurtina',
+        vernacularName: 'Meadow Brown',
         images: [
           {
+            id: 377122777,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377122777/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377123015,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377123015/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 455965,
-          license_code: 'cc-by-nc-nd',
-          attribution: '(c) Allan Hopkins, some rights reserved (CC BY-NC-ND)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/455965/square.jpg',
-          original_dimensions: {
-            height: 854,
-            width: 1280,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/455965/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc-nd',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/455965/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/455965/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213391260',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Meadow_brown',
       },
       {
         id: 1467819,
         iconicTaxon: 'Plantae',
         binomial: 'Lysimachia loeflingii',
         rank: 'species',
-        vernacularName: 'Centonchio a foglie larghe',
+        vernacularName: 'Blue Scarlet Pimpernel',
         images: [
           {
+            id: 377119953,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377119953/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377120865,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377120865/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 281291207,
-          license_code: null,
-          attribution:
-            '(c) Joao Tiago Tavares, all rights reserved, uploaded by Joao Tiago Tavares',
           url: 'https://static.inaturalist.org/photos/281291207/square.jpeg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/281291207/square.jpeg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/281291207/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/281291207/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213389990',
+        wikipediaUrl: null,
       },
       {
         id: 82850,
         iconicTaxon: 'Plantae',
         binomial: 'Ruta montana',
         rank: 'species',
-        vernacularName: 'ruta montana',
+        vernacularName: 'Mountain Rue',
         images: [
           {
+            id: 377119956,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377119956/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 2075742,
-          license_code: 'cc-by-nc-sa',
-          attribution: '(c) Valter Jacinto, some rights reserved (CC BY-NC-SA)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/square.jpg',
-          original_dimensions: {
-            height: 326,
-            width: 500,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc-sa',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213389989',
+        wikipediaUrl: null,
       },
       {
         id: 82631,
         iconicTaxon: 'Plantae',
         binomial: 'Phagnalon saxatile',
         rank: 'species',
-        vernacularName: 'Scuderi delle pietraie',
+        vernacularName: 'Mediterranean Phagnalon',
         images: [
           {
+            id: 377119946,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377119946/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377121117,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377121117/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377121123,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377121123/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 1999988,
-          license_code: null,
-          attribution: '(c) Valter Jacinto, all rights reserved',
           url: 'https://static.inaturalist.org/photos/1999988/square.jpg',
-          original_dimensions: {
-            height: 675,
-            width: 900,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/1999988/square.jpg',
-          medium_url:
-            'https://static.inaturalist.org/photos/1999988/medium.jpg',
+          licenceCode: '',
+          mediumUrl: 'https://static.inaturalist.org/photos/1999988/medium.jpg',
+          squareUrl: 'https://static.inaturalist.org/photos/1999988/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213389988',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Phagnalon_saxatile',
       },
       {
         id: 61904,
         iconicTaxon: 'Plantae',
         binomial: 'Lavandula stoechas',
         rank: 'species',
-        vernacularName: 'Lavanda selvatica',
+        vernacularName: 'topped lavender',
         images: [
           {
+            id: 377119927,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377119927/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377121411,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377121411/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377121417,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377121417/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377121418,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377121418/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377121423,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377121423/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 181554951,
-          license_code: null,
-          attribution:
-            '(c) Konstantinos Barsakis, all rights reserved, uploaded by Konstantinos Barsakis',
           url: 'https://static.inaturalist.org/photos/181554951/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 1536,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/181554951/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/181554951/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/181554951/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213389984',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Lavandula_stoechas',
       },
       {
         id: 57140,
         iconicTaxon: 'Plantae',
         binomial: 'Olea europaea',
         rank: 'species',
-        vernacularName: 'Olivo',
+        vernacularName: 'Olive',
         images: [
           {
+            id: 377119924,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377119924/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377122421,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377122421/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 87194494,
-          license_code: 'cc-by-nc-nd',
-          attribution:
-            '(c) Pescalune Photo, some rights reserved (CC BY-NC-ND)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/square.jpg',
-          original_dimensions: {
-            height: 683,
-            width: 1024,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc-nd',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213389983',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Olive',
       },
       {
         id: 633980,
         iconicTaxon: 'Plantae',
         binomial: 'Pallenis spinosa',
         rank: 'species',
-        vernacularName: 'Asterisco spinoso',
+        vernacularName: 'Spiny Starwort',
         images: [
           {
+            id: 377119923,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377119923/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377231379,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377231379/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 123647584,
-          license_code: null,
-          attribution:
-            '(c) Konstantinos Kalaentzis, all rights reserved, uploaded by Konstantinos Kalaentzis',
           url: 'https://static.inaturalist.org/photos/123647584/square.jpg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/123647584/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/123647584/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/123647584/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213389979',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Pallenis_spinosa',
       },
       {
         id: 53052,
         iconicTaxon: 'Plantae',
         binomial: 'Foeniculum vulgare',
         rank: 'species',
-        vernacularName: 'finocchio',
+        vernacularName: 'fennel',
         images: [
           {
+            id: 377115979,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377115979/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377119179,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377119179/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 50868492,
-          license_code: null,
-          attribution:
-            '(c) Allie Schiltmeyer, all rights reserved, uploaded by Allie Schiltmeyer',
           url: 'https://static.inaturalist.org/photos/50868492/square.jpg',
-          original_dimensions: {
-            height: 2048,
-            width: 1536,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/50868492/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/50868492/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/50868492/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213388402',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Fennel',
       },
       {
         id: 467566,
         iconicTaxon: 'Plantae',
         binomial: 'Micromeria graeca',
         rank: 'species',
-        vernacularName: 'Issopo meridionale',
+        vernacularName: 'Greek Savory',
         images: [
           {
+            id: 377115978,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377115978/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 369599952,
-          license_code: 'cc-by-nc',
-          attribution:
-            '(c) faluke, some rights reserved (CC BY-NC), uploaded by faluke',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/369599952/square.jpeg',
-          original_dimensions: {
-            height: 1402,
-            width: 1414,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/369599952/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/369599952/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/369599952/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213388401',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Micromeria_graeca',
       },
       {
         id: 633980,
         iconicTaxon: 'Plantae',
         binomial: 'Pallenis spinosa',
         rank: 'species',
-        vernacularName: 'Asterisco spinoso',
+        vernacularName: 'Spiny Starwort',
         images: [
           {
+            id: 377115956,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377115956/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377118896,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377118896/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377118902,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377118902/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 123647584,
-          license_code: null,
-          attribution:
-            '(c) Konstantinos Kalaentzis, all rights reserved, uploaded by Konstantinos Kalaentzis',
           url: 'https://static.inaturalist.org/photos/123647584/square.jpg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/123647584/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/123647584/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/123647584/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213388397',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Pallenis_spinosa',
       },
       {
         id: 76610,
         iconicTaxon: 'Plantae',
         binomial: 'Daucus carota',
         rank: 'species',
-        vernacularName: 'carota',
+        vernacularName: 'wild carrot',
         images: [
           {
+            id: 377115955,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377115955/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377118267,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377118267/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 84336733,
-          license_code: null,
-          attribution:
-            '(c) Michelle Layton, all rights reserved, uploaded by Michelle Layton',
           url: 'https://static.inaturalist.org/photos/84336733/square.jpeg',
-          original_dimensions: {
-            height: 2048,
-            width: 1536,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/84336733/square.jpeg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/84336733/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/84336733/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213388395',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Daucus_carota',
       },
       {
         id: 76610,
         iconicTaxon: 'Plantae',
         binomial: 'Daucus carota',
         rank: 'species',
-        vernacularName: 'carota',
+        vernacularName: 'wild carrot',
         images: [
           {
+            id: 377115959,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377115959/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 84336733,
-          license_code: null,
-          attribution:
-            '(c) Michelle Layton, all rights reserved, uploaded by Michelle Layton',
           url: 'https://static.inaturalist.org/photos/84336733/square.jpeg',
-          original_dimensions: {
-            height: 2048,
-            width: 1536,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/84336733/square.jpeg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/84336733/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/84336733/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213388393',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Daucus_carota',
       },
       {
         id: 82850,
         iconicTaxon: 'Plantae',
         binomial: 'Ruta montana',
         rank: 'species',
-        vernacularName: 'ruta montana',
+        vernacularName: 'Mountain Rue',
         images: [
           {
+            id: 377112567,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377112567/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377113952,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377113952/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377113960,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377113960/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 2075742,
-          license_code: 'cc-by-nc-sa',
-          attribution: '(c) Valter Jacinto, some rights reserved (CC BY-NC-SA)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/square.jpg',
-          original_dimensions: {
-            height: 326,
-            width: 500,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc-sa',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/2075742/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213386207',
+        wikipediaUrl: null,
       },
       {
         id: 75771,
         iconicTaxon: 'Plantae',
         binomial: 'Bituminaria bituminosa',
         rank: 'species',
-        vernacularName: 'Trifoglio bituminoso',
+        vernacularName: 'arabian pea',
         images: [
           {
+            id: 377112568,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377112568/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377114557,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377114557/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377114575,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377114575/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 385551323,
-          license_code: 'cc-by-nc',
-          attribution: '(c) eugenevs, some rights reserved (CC BY-NC)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385551323/square.jpeg',
-          original_dimensions: {
-            height: 2048,
-            width: 1694,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/385551323/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/385551323/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/385551323/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213386206',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Bituminaria_bituminosa',
       },
       {
         id: 1521906,
         iconicTaxon: 'Plantae',
         binomial: 'Convolvulus althaeoides',
         rank: 'species',
-        vernacularName: 'Vilucchio rosso',
+        vernacularName: 'Mallow Bindweed',
         images: [
           {
+            id: 377112563,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377112563/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377114823,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377114823/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 125738750,
-          license_code: 'cc-by-sa',
-          attribution:
-            '(c) Aissa Djamel Filali, some rights reserved (CC BY-SA), uploaded by Aissa Djamel Filali',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/125738750/square.jpeg',
-          original_dimensions: {
-            height: 1584,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/125738750/square.jpeg',
-          medium_url:
+          licenceCode: 'cc-by-sa',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/125738750/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/125738750/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213386201',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Convolvulus_althaeoides',
       },
       {
         id: 707889,
         iconicTaxon: 'Plantae',
         binomial: 'Lysimachia monelli',
         rank: 'species',
-        vernacularName: 'centonchio di Monellus',
+        vernacularName: 'Flax-leaved Blue Pimpernel',
         images: [
           {
+            id: 377112537,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377112537/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 106501291,
-          license_code: 'cc-by',
-          attribution:
-            '(c) dhfischer, some rights reserved (CC BY), uploaded by dhfischer',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/106501291/square.jpg',
-          original_dimensions: {
-            height: 800,
-            width: 1200,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/106501291/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/106501291/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/106501291/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213386197',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Lysimachia_monelli',
       },
       {
         id: 537967,
         iconicTaxon: 'Plantae',
         binomial: 'Bellardia viscosa',
         rank: 'species',
-        vernacularName: 'Perlina maggiore',
+        vernacularName: 'Yellow Glandweed',
         images: [
           {
+            id: 377112532,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377112532/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377115135,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377115135/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 31449,
-          license_code: null,
-          attribution: '(c) Tig, all rights reserved',
           url: 'https://static.inaturalist.org/photos/31449/square.jpg',
-          original_dimensions: {
-            height: 1237,
-            width: 800,
-          },
-          flags: [],
-          square_url: 'https://static.inaturalist.org/photos/31449/square.jpg',
-          medium_url: 'https://static.inaturalist.org/photos/31449/medium.jpg',
+          licenceCode: '',
+          mediumUrl: 'https://static.inaturalist.org/photos/31449/medium.jpg',
+          squareUrl: 'https://static.inaturalist.org/photos/31449/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213386196',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Parentucellia_viscosa',
       },
       {
         id: 545482,
         iconicTaxon: 'Plantae',
         binomial: 'Galactites tomentosus',
         rank: 'species',
-        vernacularName: 'Scarlina',
+        vernacularName: 'Boar Thistle',
         images: [
           {
+            id: 377112533,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377112533/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377115296,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377115296/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 364524152,
-          license_code: null,
-          attribution:
-            '(c) Fero Bednar, all rights reserved, uploaded by Fero Bednar',
           url: 'https://static.inaturalist.org/photos/364524152/square.jpg',
-          original_dimensions: {
-            height: 1365,
-            width: 2048,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/364524152/square.jpg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/364524152/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/364524152/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213386192',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Galactites_tomentosus',
       },
       {
         id: 59417,
         iconicTaxon: 'Plantae',
         binomial: 'Trifolium stellatum',
         rank: 'species',
-        vernacularName: 'Trifoglio stellato',
+        vernacularName: 'Star Clover',
         images: [
           {
+            id: 377111365,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377111365/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 70928027,
-          license_code: 'cc-by-nc-nd',
-          attribution: '(c) Juan Sevilla, some rights reserved (CC BY-NC-ND)',
           url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/70928027/square.jpg',
-          original_dimensions: {
-            height: 1024,
-            width: 683,
-          },
-          flags: [],
-          square_url:
-            'https://inaturalist-open-data.s3.amazonaws.com/photos/70928027/square.jpg',
-          medium_url:
+          licenceCode: 'cc-by-nc-nd',
+          mediumUrl:
             'https://inaturalist-open-data.s3.amazonaws.com/photos/70928027/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/70928027/square.jpg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213385321',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Trifolium_stellatum',
       },
       {
         id: 82644,
         iconicTaxon: 'Plantae',
         binomial: 'Cynara humilis',
         rank: 'species',
-        vernacularName: '',
+        vernacularName: 'Dwarf Artichoke',
         images: [
           {
+            id: 377111327,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377111327/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 22221301,
-          license_code: null,
-          attribution:
-            '(c) Francisco Barros, all rights reserved, uploaded by Francisco Barros',
           url: 'https://static.inaturalist.org/photos/22221301/square.jpeg',
-          original_dimensions: {
-            height: 600,
-            width: 800,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/22221301/square.jpeg',
-          medium_url:
+          licenceCode: '',
+          mediumUrl:
             'https://static.inaturalist.org/photos/22221301/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/22221301/square.jpeg',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213385308',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Cynara_humilis',
       },
       {
         id: 51286,
         iconicTaxon: 'Plantae',
         binomial: 'Bellardia trixago',
         rank: 'species',
-        vernacularName: 'Perlina minore',
+        vernacularName: 'Mediterranean lineseed',
         images: [
           {
+            id: 377111325,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377111325/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377235771,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377235771/square.jpeg',
+            licenceCode: 'cc0',
           },
           {
+            id: 377235779,
             url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377235779/square.jpeg',
+            licenceCode: 'cc0',
           },
         ],
         image: {
           id: 3253371,
-          license_code: null,
-          attribution:
-            '(c) Alessandra Boccabianca, all rights reserved, uploaded by Alessandra Boccabianca',
           url: 'https://static.inaturalist.org/photos/3253371/square.JPG',
-          original_dimensions: {
-            height: 912,
-            width: 684,
-          },
-          flags: [],
-          square_url:
-            'https://static.inaturalist.org/photos/3253371/square.JPG',
-          medium_url:
-            'https://static.inaturalist.org/photos/3253371/medium.JPG',
+          licenceCode: '',
+          mediumUrl: 'https://static.inaturalist.org/photos/3253371/medium.JPG',
+          squareUrl: 'https://static.inaturalist.org/photos/3253371/square.JPG',
         },
+        observationUrl: 'https://www.inaturalist.org/observations/213385304',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Bellardia_trixago',
       },
     ],
   }
 
+  const collection2 = {
+    id: '2',
+    name: 'Benenden fieldnotes',
+    date: 'Sunday 19 May 2024',
+    location: 'Benenden, UK',
+    fieldNotes: {
+      url: 'https://ifieldnotes.org/danielhartley-benenden-uk-sun-may-19-2024/',
+    },
+    index: 0,
+    items: [
+      {
+        id: 55801,
+        iconicTaxon: 'Plantae',
+        binomial: 'Carpinus betulus',
+        rank: 'species',
+        vernacularName: 'European Hornbeam',
+        images: [
+          {
+            id: 391066130,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391066130/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 391066230,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391066230/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 391066236,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391066236/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 46763976,
+          url: 'https://static.inaturalist.org/photos/46763976/square.jpeg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/46763976/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/46763976/square.jpeg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/220854906',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Carpinus_betulus',
+      },
+      {
+        id: 43151,
+        iconicTaxon: 'Mammalia',
+        binomial: 'Oryctolagus cuniculus',
+        rank: 'species',
+        vernacularName: 'European Rabbit',
+        images: [
+          {
+            id: 391063785,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/391063785/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 479605587,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/479605587/square.jpg',
+          licenceCode: 'cc-by-nc-nd',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/479605587/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/479605587/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/220853772',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/European_rabbit',
+      },
+      {
+        id: 121763,
+        iconicTaxon: 'Plantae',
+        binomial: 'Castanea sativa',
+        rank: 'species',
+        vernacularName: 'Sweet Chestnut',
+        images: [
+          {
+            id: 388502816,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388502816/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 388504750,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388504750/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 12739074,
+          url: 'https://static.inaturalist.org/photos/12739074/square.jpg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/12739074/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/12739074/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/219487351',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Castanea_sativa',
+      },
+      {
+        id: 55801,
+        iconicTaxon: 'Plantae',
+        binomial: 'Carpinus betulus',
+        rank: 'species',
+        vernacularName: 'European Hornbeam',
+        images: [
+          {
+            id: 388502806,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388502806/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 46763976,
+          url: 'https://static.inaturalist.org/photos/46763976/square.jpeg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/46763976/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/46763976/square.jpeg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/219487348',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Carpinus_betulus',
+      },
+      {
+        id: 56152,
+        iconicTaxon: 'Plantae',
+        binomial: 'Allium ursinum',
+        rank: 'species',
+        vernacularName: 'Ramsons',
+        images: [
+          {
+            id: 388502802,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388502802/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 388503894,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388503894/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 388503897,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388503897/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 388503898,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388503898/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 10674,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
+          licenceCode: 'cc-by',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/219487347',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Allium_ursinum',
+      },
+      {
+        id: 56152,
+        iconicTaxon: 'Plantae',
+        binomial: 'Allium ursinum',
+        rank: 'species',
+        vernacularName: 'Ramsons',
+        images: [
+          {
+            id: 386375257,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386375257/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 388504439,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388504439/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 388504498,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/388504498/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 10674,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
+          licenceCode: 'cc-by',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/10674/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/218351684',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Allium_ursinum',
+      },
+      {
+        id: 61906,
+        iconicTaxon: 'Plantae',
+        binomial: 'Helminthotheca echioides',
+        rank: 'species',
+        vernacularName: 'bristly oxtongue',
+        images: [
+          {
+            id: 386375225,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386375225/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386377195,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377195/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386377196,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377196/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386377199,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377199/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386377203,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386377203/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 231490858,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/231490858/square.jpg',
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/231490858/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/231490858/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/218351677',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Helminthotheca_echioides',
+      },
+      {
+        id: 51610,
+        iconicTaxon: 'Plantae',
+        binomial: 'Veronica chamaedrys',
+        rank: 'species',
+        vernacularName: 'Germander Speedwell',
+        images: [
+          {
+            id: 386372440,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386372440/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386374107,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386374107/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 92414767,
+          url: 'https://static.inaturalist.org/photos/92414767/square.jpeg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/92414767/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/92414767/square.jpeg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/218349688',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Veronica_chamaedrys',
+      },
+      {
+        id: 204339,
+        iconicTaxon: 'Plantae',
+        binomial: 'Lamium galeobdolon',
+        rank: 'species',
+        vernacularName: 'yellow archangel',
+        images: [
+          {
+            id: 386372434,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386372434/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386373403,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373403/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386373407,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373407/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386373409,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373409/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386373413,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373413/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 72097716,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/72097716/square.jpg',
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/72097716/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/72097716/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/218349687',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Lamium_galeobdolon',
+      },
+      {
+        id: 1024536,
+        iconicTaxon: 'Plantae',
+        binomial: 'Rabelera holostea',
+        rank: 'species',
+        vernacularName: 'greater stitchwort',
+        images: [
+          {
+            id: 386372408,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386372408/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386373223,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373223/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386373225,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373225/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 731375,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/731375/square.jpg',
+          licenceCode: 'cc-by-nc-sa',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/731375/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/731375/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/218349685',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Rabelera',
+      },
+      {
+        id: 52724,
+        iconicTaxon: 'Plantae',
+        binomial: 'Equisetum arvense',
+        rank: 'species',
+        vernacularName: 'field horsetail',
+        images: [
+          {
+            id: 386372413,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386372413/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386373076,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386373076/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 72881677,
+          url: 'https://static.inaturalist.org/photos/72881677/square.jpg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/72881677/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/72881677/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/218349683',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Equisetum_arvense',
+      },
+      {
+        id: 53178,
+        iconicTaxon: 'Plantae',
+        binomial: 'Plantago lanceolata',
+        rank: 'species',
+        vernacularName: 'ribwort plantain',
+        images: [
+          {
+            id: 386372404,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386372404/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 386372814,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/386372814/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 289213594,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/289213594/square.jpg',
+          licenceCode: 'cc-by',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/289213594/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/289213594/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/218349682',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Plantago_lanceolata',
+      },
+      {
+        id: 207977,
+        iconicTaxon: 'Insecta',
+        binomial: 'Aglais io',
+        rank: 'species',
+        vernacularName: 'European Peacock Butterfly',
+        images: [
+          {
+            id: 385100238,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385100238/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385100425,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385100425/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385100428,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385100428/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385100430,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385100430/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385100429,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385100429/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385100431,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385100431/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 4710619,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/4710619/square.jpg',
+          licenceCode: 'cc-by',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/4710619/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/4710619/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/217669408',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Aglais_io',
+      },
+      {
+        id: 855297,
+        iconicTaxon: 'Mammalia',
+        binomial: 'Meles meles',
+        rank: 'species',
+        vernacularName: 'European Badger',
+        images: [
+          {
+            id: 385098489,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098489/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098491,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098491/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098486,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098486/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098512,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098512/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098531,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098531/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098539,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098539/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385097517,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385097517/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098485,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098485/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098488,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098488/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098493,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098493/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098508,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098508/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098510,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098510/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098513,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098513/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098526,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098526/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098530,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098530/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 385098541,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/385098541/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 172054371,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/172054371/square.jpg',
+          licenceCode: 'cc-by',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/172054371/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/172054371/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/217668045',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/European_badger',
+      },
+    ],
+  }
+
+  const collection3 = {
+    id: '3',
+    name: 'Barreiro fieldnotes',
+    date: 'Thu Apr 18 2024',
+    location: 'Barreiro, Portugal',
+    index: 1,
+    items: [
+      {
+        id: 58379,
+        iconicTaxon: 'Plantae',
+        binomial: 'Lamarckia aurea',
+        rank: 'species',
+        vernacularName: 'goldentop grass',
+        images: [
+          {
+            id: 368933241,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368933241/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368933973,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368933973/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368933982,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368933982/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 426312020,
+          url: 'https://static.inaturalist.org/photos/426312020/square.jpg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/426312020/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/426312020/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/208514642',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Lamarckia',
+      },
+      {
+        id: 79141,
+        iconicTaxon: 'Plantae',
+        binomial: 'Solanum nigrum',
+        rank: 'species',
+        vernacularName: 'black nightshade',
+        images: [
+          {
+            id: 368933236,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368933236/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368933725,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368933725/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368933737,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368933737/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 250702428,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/250702428/square.jpeg',
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/250702428/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/250702428/square.jpeg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/208514639',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Solanum_nigrum',
+      },
+      {
+        id: 333717,
+        iconicTaxon: 'Plantae',
+        binomial: 'Andryala integrifolia',
+        rank: 'species',
+        vernacularName: 'Common Andryala',
+        images: [
+          {
+            id: 368917915,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368917915/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368921040,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368921040/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368921041,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368921041/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 2062923,
+          url: 'https://static.inaturalist.org/photos/2062923/square.jpg',
+          licenceCode: '',
+          mediumUrl: 'https://static.inaturalist.org/photos/2062923/medium.jpg',
+          squareUrl: 'https://static.inaturalist.org/photos/2062923/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/208506851',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Andryala_integrifolia',
+      },
+      {
+        id: 57643,
+        iconicTaxon: 'Plantae',
+        binomial: 'Geranium purpureum',
+        rank: 'species',
+        vernacularName: 'Little-Robin',
+        images: [
+          {
+            id: 368917893,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368917893/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368920283,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368920283/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368920284,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368920284/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368920287,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368920287/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368920289,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368920289/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368920295,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368920295/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 21874983,
+          url: 'https://static.inaturalist.org/photos/21874983/square.jpeg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/21874983/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/21874983/square.jpeg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/208506846',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Geranium_purpureum',
+      },
+      {
+        id: 792216,
+        iconicTaxon: 'Plantae',
+        binomial: 'Lysimachia foemina',
+        rank: 'species',
+        vernacularName: 'Foemina Blue Pimpernel',
+        images: [
+          {
+            id: 368917894,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368917894/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368921355,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368921355/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 265898979,
+          url: 'https://static.inaturalist.org/photos/265898979/square.jpeg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/265898979/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/265898979/square.jpeg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/208506840',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Lysimachia_foemina',
+      },
+      {
+        id: 52698,
+        iconicTaxon: 'Plantae',
+        binomial: 'Avena fatua',
+        rank: 'species',
+        vernacularName: 'wild oat',
+        images: [
+          {
+            id: 368917865,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368917865/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368932950,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368932950/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368932955,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368932955/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 68891941,
+          url: 'https://static.inaturalist.org/photos/68891941/square.jpg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/68891941/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/68891941/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/208506837',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Avena_fatua',
+      },
+      {
+        id: 55631,
+        iconicTaxon: 'Plantae',
+        binomial: 'Trifolium nigrescens',
+        rank: 'species',
+        vernacularName: 'small white clover',
+        images: [
+          {
+            id: 368914369,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368914369/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368916548,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368916548/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 71289830,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/71289830/square.jpeg',
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/71289830/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/71289830/square.jpeg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/208504386',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Trifolium_nigrescens',
+      },
+      {
+        id: 77479,
+        iconicTaxon: 'Plantae',
+        binomial: 'Hyparrhenia hirta',
+        rank: 'species',
+        vernacularName: 'thatching grass',
+        images: [
+          {
+            id: 368909622,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368909622/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368912657,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368912657/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368912658,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368912658/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368912659,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368912659/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368912661,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368912661/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 256086487,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/256086487/square.jpeg',
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/256086487/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/256086487/square.jpeg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/208501121',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Hyparrhenia_hirta',
+      },
+      {
+        id: 424860,
+        iconicTaxon: 'Reptilia',
+        binomial: 'Podarcis virescens',
+        rank: 'species',
+        vernacularName: 'Green Iberian Wall Lizard',
+        images: [
+          {
+            id: 368909592,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368909592/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368913863,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368913863/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 464363083,
+          url: 'https://static.inaturalist.org/photos/464363083/square.jpeg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/464363083/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/464363083/square.jpeg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/208501115',
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Podarcis_virescens',
+      },
+      {
+        id: 167773,
+        iconicTaxon: 'Plantae',
+        binomial: 'Reichardia picroides',
+        rank: 'species',
+        vernacularName: 'brighteyes',
+        images: [
+          {
+            id: 368909588,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368909588/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368910150,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368910150/square.jpeg',
+            licenceCode: 'cc0',
+          },
+          {
+            id: 368910149,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368910149/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 596847,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/596847/square.jpg',
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/596847/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/596847/square.jpg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/208501113',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Reichardia',
+      },
+      {
+        id: 60218,
+        iconicTaxon: 'Plantae',
+        binomial: 'Ficus carica',
+        rank: 'species',
+        vernacularName: 'common fig',
+        images: [
+          {
+            id: 368909591,
+            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/368909591/square.jpeg',
+            licenceCode: 'cc0',
+          },
+        ],
+        image: {
+          id: 425438609,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/425438609/square.jpeg',
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/425438609/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/425438609/square.jpeg',
+        },
+        observationUrl: 'https://www.inaturalist.org/observations/208501108',
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Common_fig',
+      },
+    ],
+  }
+
+  const dedupe = (items: any[]) => {
+    const deduped = Array.from(
+      new Map(items.map(item => [item.id, item])).values()
+    )
+
+    return deduped
+  }
+
   return new Promise((resolve, reject) => {
-    resolve([collection, collection2, collection3])
+    resolve([
+      {
+        ...collection1,
+        items: dedupe(collection1.items),
+      },
+      {
+        ...collection2,
+        items: dedupe(collection2.items),
+      },
+      {
+        ...collection3,
+        items: dedupe(collection3.items),
+      },
+    ])
   })
+}
+
+export const getCollectionById = async (
+  id: string
+): Promise<Collection | undefined> => {
+  const collections = await getCollections()
+  return collections.find(c => c.id === id)
 }

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { createEOLUrl } from '@/utils/image'
+import { formatURL } from '@/utils/image'
 import { Image as Img } from '@/types'
 
 type Props = {
@@ -12,7 +12,7 @@ export const ResponsiveImage = ({ id, img, alt }: Props) => {
   return (
     <Image
       id={id}
-      src={createEOLUrl(img?.url || '')}
+      src={formatURL(img?.url || '')}
       alt={alt}
       width={230}
       height={230}

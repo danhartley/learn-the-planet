@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
-import { createEOLUrl } from '@/utils/image'
+import { formatURL } from '@/utils/image'
 
-describe('createEOLUrl', () => {
+describe('formatURL', () => {
   it('should return complete URL', () => {
     const input = '55/6a/83/509.11026897.jpg'
-    const url = createEOLUrl(input)
+    const url = formatURL(input)
     expect(url).toEqual(
       'https://content.eol.org/data/media/55/6a/83/509.11026897.260x190.jpg'
     )

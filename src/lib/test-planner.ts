@@ -290,7 +290,6 @@ export class TestPlanner {
       collection: {
         name: this.collection.name,
         description: this.collection.description,
-        count: this.collection.count,
       },
     }
   }

@@ -38,7 +38,11 @@ export type Test = {
 // Collections and taxon items
 
 export type Image = {
-  url?: string
+  id: number
+  url: string
+  licenceCode?: string
+  mediumUrl?: string
+  squareUrl?: string
 }
 
 export type Family = {
@@ -98,16 +102,23 @@ export type Taxon = {
     species?: string
   }
   traits?: Record<string, any>
+  observationURL?: string
   // introduced boolean
-  // wikipedia_url string
-  // https://www.inaturalist.org/observations/227490000 (inat page)
+  // endemic boolean
+  // threatened boolean
+  // taxon.wikipedia_url string
+  // https://www.inaturalist.org/observations/227490000 (inat page) uri
 }
 
 export type Collection = {
   id: string
   name: string
+  date: string
+  location: string
   description?: string
-  count: number
+  fieldNotes?: {
+    url: string
+  }
   index: number
   items: Taxon[]
 }
@@ -115,7 +126,6 @@ export type Collection = {
 export type CollectionSummary = {
   name: string
   description?: string
-  count: number
 }
 
 export type Layout = {
@@ -150,15 +160,6 @@ export type Lesson = {
 
 export type LessonPlan = {
   id: string
-}
-
-// App state
-
-export type AppState = {
-  collections: Collection[]
-  testPlans: TestPlan[]
-  testPlanId: string
-  lessonPlanId: string
 }
 
 // Define interfaces for the different question layout types
