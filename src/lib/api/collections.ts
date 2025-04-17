@@ -6,7 +6,6 @@ export const getCollections = (): Promise<Collection[]> => {
     name: 'Arrábida field notes',
     date: 'Fri May 03 2024',
     location: 'São Simão, Portugal',
-    index: 0,
     items: [
       {
         id: 77479,
@@ -1878,7 +1877,6 @@ export const getCollections = (): Promise<Collection[]> => {
     fieldNotes: {
       url: 'https://ifieldnotes.org/danielhartley-benenden-uk-sun-may-19-2024/',
     },
-    index: 0,
     items: [
       {
         id: 55801,
@@ -2443,7 +2441,6 @@ export const getCollections = (): Promise<Collection[]> => {
     name: 'Barreiro fieldnotes',
     date: 'Thu Apr 18 2024',
     location: 'Barreiro, Portugal',
-    index: 1,
     items: [
       {
         id: 58379,
@@ -2829,6 +2826,14 @@ export const getCollections = (): Promise<Collection[]> => {
         wikipediaUrl: 'http://en.wikipedia.org/wiki/Common_fig',
       },
     ],
+  }
+
+  const collection4 = {
+    id: '4',
+    name: 'Test',
+    date: 'Today',
+    location: 'Here',
+    items: [],
   }
 
   const dedupe = (items: any[]) => {

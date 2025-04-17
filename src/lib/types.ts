@@ -119,7 +119,6 @@ export type Collection = {
   fieldNotes?: {
     url: string
   }
-  index: number
   items: Taxon[]
 }
 

@@ -16,3 +16,49 @@ export const splitCamelCaseSmart = (str: string): string => {
       .join(' ')
   )
 }
+
+export const getPropByPath = (obj: any, path: string): any => {
+  // Return undefined for null/undefined objects
+  if (obj == null) {
+    return undefined
+  }
+
+  // Handle simple property access
+  if (!path.includes('.') && !path.includes('[')) {
+    return obj[path]
+  }
+
+  // Split by dots but preserve array notation
+  const pathArray = path.match(/[^\.\[\]]+|\[\d+\]/g)
+
+  // Start with the object
+  let current = obj
+
+  // Navigate through the path
+  for (let i = 0; i < pathArray!.length && current != null; i++) {
+    let key = pathArray![i]
+
+    // Handle array indexing
+    if (key.startsWith('[') && key.endsWith(']')) {
+      // Extract index number
+      const index = parseInt(key.slice(1, -1))
+
+      // Check if current is an array and index is valid
+      if (
+        Array.isArray(current) &&
+        !isNaN(index) &&
+        index >= 0 &&
+        index < current.length
+      ) {
+        current = current[index]
+      } else {
+        return undefined
+      }
+    } else {
+      // Regular property access
+      current = current[key]
+    }
+  }
+
+  return current
+}
