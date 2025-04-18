@@ -4,9 +4,9 @@ import { Collection, Layout, Score, QuestionTemplate } from '@/types'
 import { TestPlannerEvent } from '@/utils/enums'
 import { taxonomyTemplates } from '../config/questionTemplates'
 
-export function useTestPlanner() {
+export function useTestPlanner<T>() {
   const service = TestPlannerService.getInstance()
-  const [layout, setLayout] = useState<Layout | null>(
+  const [layout, setLayout] = useState<Layout<T> | null>(
     service.getCurrentLayout()
   )
   const [isActive, setIsActive] = useState<boolean>(service.isTestActive())
@@ -34,7 +34,7 @@ export function useTestPlanner() {
   }, [])
   return {
     startTest: (
-      collection: Collection,
+      collection: Collection<T>,
       questionTemplates: QuestionTemplate[] = taxonomyTemplates
     ) => service.startTest(collection, questionTemplates),
     currentLayout: layout,

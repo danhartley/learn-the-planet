@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { TestDisplay } from '@/components/test/TestDisplay'
 
-export function TestContainer() {
+export function TestContainer<T>() {
   const router = useRouter()
   const { currentLayout, isActive, markAnswer, moveToNextQuestion } =
-    useTestPlanner()
+    useTestPlanner<T>()
 
   // Redirect if no test is active
   useEffect(() => {

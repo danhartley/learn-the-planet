@@ -3,15 +3,15 @@ import { TestPlanner } from '../test-planner'
 import { Collection, Layout, Score, QuestionTemplate } from '@/types'
 import { TestPlannerEvent } from '@/utils/enums'
 
-class TestPlannerService {
-  private static instance: TestPlannerService
-  private testPlanner: TestPlanner | null = null
+class TestPlannerService<T> {
+  private static instance: TestPlannerService<T>
+  private testPlanner: TestPlanner<T> | null = null
   private emitter = new EventEmitter()
 
   private constructor() {}
 
   // Singleton pattern: prevent more than one instance of the service from being created
-  static getInstance(): TestPlannerService {
+  static getInstance<T>(): TestPlannerService<T> {
     if (!TestPlannerService.instance) {
       TestPlannerService.instance = new TestPlannerService()
     }
@@ -19,7 +19,7 @@ class TestPlannerService {
   }
 
   startTest(
-    collection: Collection,
+    collection: Collection<T>,
     questionTemplates: QuestionTemplate[]
   ): void {
     this.testPlanner = new TestPlanner(collection, questionTemplates)
@@ -27,7 +27,7 @@ class TestPlannerService {
     this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
   }
 
-  getCurrentLayout(): Layout | null {
+  getCurrentLayout(): Layout<T> | null {
     return this.testPlanner?.getCurrentLayout() || null
   }
 

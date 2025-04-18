@@ -4,22 +4,17 @@ import {
   Layout,
   Score,
   TestState,
-  Taxon,
-  MultipleChoiceQuestion,
-  TextEntryQuestion,
   QuestionTemplate,
-  MultipleChoiceTemplate,
-  TextEntryTemplate,
+  ContentTypeHandler,
+  ContentHandlerType,
 } from './types'
-import { Scorer } from './scorer'
 
-import { generateDistractors } from '@/utils/distractors'
-import { getPropByPath } from '@/utils/strings'
+import { contentHandlers } from './registry'
 
-export class TestPlanner {
-  private collection: Collection
-  private scorer: Scorer
-  private layouts: Layout[] = []
+export class TestPlanner<T> {
+  private collection: Collection<T>
+  private contentHandler: ContentTypeHandler<T>
+  private layouts: Layout<T>[] = []
   private state: TestState = {
     layoutIndex: 0,
     collectionIndex: 0,
@@ -34,7 +29,15 @@ export class TestPlanner {
   private static testPlanCounter: number = 0
   private questionTemplates: QuestionTemplate[]
 
-  constructor(collection: Collection, questionTemplates: QuestionTemplate[]) {
+  constructor(
+    collection: Collection<T>,
+    questionTemplates: QuestionTemplate[]
+  ) {
+    this.collection = collection
+    this.contentHandler = contentHandlers[
+      collection.type as ContentHandlerType
+    ] as ContentTypeHandler<T>
+
     if (!collection) {
       throw new Error('Collection cannot be null or undefined')
     }
@@ -65,187 +68,58 @@ export class TestPlanner {
     })
 
     this.collection = collection
-    this.scorer = new Scorer()
     this.testPlanId = ++TestPlanner.testPlanCounter
     this.questionTemplates = questionTemplates
     this.generateLayouts()
   }
 
-  private getPropertyByPath = (obj: any, path: string): any => {
-    return getPropByPath(obj, path)
-  }
-
-  private processTemplate(template: string, item: Taxon): string {
-    return template.replace(/\${([^}]+)}/g, (match, propertyPath) => {
-      // Handle dot notation for nested properties (e.g., binomial, images[0].url)
-      const value = this.getPropertyByPath(item, propertyPath)
-      return value !== undefined ? String(value) : match
-    })
-  }
-
-  private createLayoutFromTemplate(
-    index: number,
-    item: Taxon,
-    template: QuestionTemplate
-  ): Layout {
-    // Process the question text template with actual item properties
-    const questionText = this.processTemplate(
-      template.questionTextTemplate,
-      item
-    )
-
-    switch (template.type) {
-      case 'multipleChoice':
-        return this.createMultipleChoiceFromTemplate(
-          index,
-          item,
-          template,
-          questionText
-        )
-      case 'textEntry':
-        return this.createTextEntryFromTemplate(
-          index,
-          item,
-          template,
-          questionText
-        )
-      // Add cases for other question types
-      default:
-        throw new Error(`Unknown question type: ${(template as any).type}`)
-    }
-  }
-
   private generateLayouts(): void {
     // For each item in the collection, create layouts based on templates
     this.collection.items.forEach((item, itemIndex) => {
-      this.questionTemplates.forEach((template, templateIndex) => {
-        // Create a unique index for each question
-        const questionIndex =
-          itemIndex * this.questionTemplates.length + templateIndex
+      const questions = this.contentHandler.createQuestions(
+        this.collection,
+        item,
+        this.questionTemplates
+      )
 
-        // Generate the layout based on the template type
-        const layout = this.createLayoutFromTemplate(
-          questionIndex,
+      // Create a layout for each question
+      questions.forEach((question, questionIndex) => {
+        const index = itemIndex * this.questionTemplates.length + questionIndex
+        const template = this.questionTemplates[questionIndex]
+
+        // Create layout with the generated question
+        const layout: Layout<T> = {
+          id: `layout-${this.testPlanId}-${index}`,
+          level: template.level,
+          index,
+          question,
           item,
-          template
-        )
+          collection: this.collection,
+          distractorType:
+            'distractorType' in template ? template.distractorType : undefined,
+        }
+
         this.layouts.push(layout)
       })
+
+      // this.questionTemplates.forEach((template, templateIndex) => {
+      //   // Create a unique index for each question
+      //   const questionIndex =
+      //     itemIndex * this.questionTemplates.length + templateIndex
+
+      //   // Generate the layout based on the template type
+      //   const layout = this.createLayoutFromTemplate(
+      //     questionIndex,
+      //     item,
+      //     template
+      //   )
+      //   this.layouts.push(layout)
+      // })
     })
   }
 
-  private createMultipleChoiceLayout(
-    item: Taxon,
-    index: number,
-    template: MultipleChoiceTemplate,
-    text: string,
-    key: string,
-    distractors: Taxon[]
-  ): Layout {
-    const options = [
-      { key: key, value: item[template.distractorType] },
-      ...distractors.map((d: Taxon) => ({
-        key: d.binomial,
-        value: d[template.distractorType] || '',
-      })),
-    ]
-
-    const question: MultipleChoiceQuestion = {
-      type: 'Multiple choice',
-      text,
-      key,
-      options,
-    }
-
-    return {
-      id: `layout-${this.testPlanId}-${index}`,
-      level: template.level,
-      index,
-      question,
-      distractorType: template.distractorType,
-      item,
-      collection: this.collection,
-    }
-  }
-
-  private createMultipleChoiceFromTemplate(
-    index: number,
-    item: Taxon,
-    template: MultipleChoiceTemplate,
-    questionText: string
-  ): Layout {
-    // Get the correct answer based on the specified property
-    const correctAnswer = this.getPropertyByPath(
-      item,
-      template.correctAnswerProperty
-    )
-
-    // Generate distractors based on template configuration
-    const distractors = generateDistractors(
-      this.collection,
-      item,
-      template.distractorCount,
-      template.distractorType
-    )
-
-    return this.createMultipleChoiceLayout(
-      item,
-      index,
-      template,
-      questionText,
-      correctAnswer,
-      distractors
-    )
-  }
-
-  private createTextEntryLayout(
-    index: number,
-    level: string,
-    text: string,
-    key: string,
-    hint: string,
-    item: Taxon
-  ): Layout {
-    const question: TextEntryQuestion = {
-      type: 'Text entry',
-      text,
-      key,
-      hint,
-    }
-
-    return {
-      id: `layout-${this.testPlanId}-${index}`,
-      level,
-      index,
-      question,
-      item,
-      collection: this.collection,
-    }
-  }
-
-  private createTextEntryFromTemplate(
-    index: number,
-    item: Taxon,
-    template: TextEntryTemplate,
-    questionText: string
-  ): Layout {
-    const correctAnswer = this.getPropertyByPath(
-      item,
-      template.correctAnswerProperty
-    )
-
-    return this.createTextEntryLayout(
-      index,
-      template.level,
-      questionText,
-      correctAnswer,
-      template.placeholder,
-      item
-    )
-  }
-
-  public getCurrentLayout(): Layout {
-    const layout: Layout = this.layouts[this.state.layoutIndex]
+  public getCurrentLayout(): Layout<T> {
+    const layout: Layout<T> = this.layouts[this.state.layoutIndex]
     return {
       ...layout,
       collection: {
@@ -257,8 +131,25 @@ export class TestPlanner {
 
   public markAnswer(answer: string): Score {
     const currentLayout = this.getCurrentLayout()
-    this.score = this.scorer.markAnswer(currentLayout.question, answer)
+    const isCorrect = this.contentHandler.validateAnswer(
+      currentLayout.question,
+      answer
+    )
+
+    // Update score
+    this.score.questionCount++
+    if (isCorrect) {
+      this.score.correctCount++
+      this.score.isCorrect = true
+    } else {
+      this.score.incorrectCount++
+      this.score.isCorrect = false
+    }
+
     return this.score
+    // const currentLayout = this.getCurrentLayout()
+    // this.score = this.scorer.markAnswer(currentLayout.question, answer)
+    // return this.score
   }
 
   public moveToNextQuestion(): boolean {
@@ -273,7 +164,7 @@ export class TestPlanner {
     return false
   }
 
-  public getTestPlan(): TestPlan {
+  public getTestPlan(): TestPlan<T> {
     return {
       id: `Test plan ${this.testPlanId}`,
       collection: this.collection,
@@ -294,6 +185,5 @@ export class TestPlanner {
       correctCount: 0,
       incorrectCount: 0,
     }
-    this.scorer = new Scorer()
   }
 }

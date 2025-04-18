@@ -1,8 +1,9 @@
-import { Collection } from '@/types'
+import { Collection, Taxon } from '@/types'
 
-export const getCollections = (): Promise<Collection[]> => {
+export const getCollections = (): Promise<Collection<Taxon>[]> => {
   const collection1 = {
     id: '1',
+    type: 'taxonomy',
     name: 'Arrábida field notes',
     date: 'Fri May 03 2024',
     location: 'São Simão, Portugal',
@@ -1871,6 +1872,7 @@ export const getCollections = (): Promise<Collection[]> => {
 
   const collection2 = {
     id: '2',
+    type: 'taxonomy',
     name: 'Benenden fieldnotes',
     date: 'Sunday 19 May 2024',
     location: 'Benenden, UK',
@@ -2438,6 +2440,7 @@ export const getCollections = (): Promise<Collection[]> => {
 
   const collection3 = {
     id: '3',
+    type: 'taxonomy',
     name: 'Barreiro fieldnotes',
     date: 'Thu Apr 18 2024',
     location: 'Barreiro, Portugal',
@@ -2864,7 +2867,7 @@ export const getCollections = (): Promise<Collection[]> => {
 
 export const getCollectionById = async (
   id: string
-): Promise<Collection | undefined> => {
+): Promise<Collection<Taxon> | undefined> => {
   const collections = await getCollections()
   return collections.find(c => c.id === id)
 }

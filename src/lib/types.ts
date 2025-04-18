@@ -73,8 +73,11 @@ export type Family = {
   vernacularName?: string
 }
 
-export type Taxon = {
-  id: number // taxon.id
+export interface LearningItem {
+  id: number
+}
+
+export interface Taxon extends LearningItem {
   iconicTaxon?: string // taxon.iconic_taxon_name (+ iconic_taxon_id)
   names?: {
     // taxon.preferred_common_names
@@ -89,7 +92,7 @@ export type Taxon = {
   species?: string // taxon.rank
   vernacularName: string // taxon.preferred_common_name
   family?: string | Family | undefined // taxon.rank
-  distractors?: Taxon[]
+  distractors?: any[]
   images?: Image[] //observation_photos
   image?: Image // taxon.default_photo or observation_photos[0]
   taxonomy?: {
@@ -110,8 +113,9 @@ export type Taxon = {
   // https://www.inaturalist.org/observations/227490000 (inat page) uri
 }
 
-export type Collection = {
+export type Collection<T> = {
   id: string
+  type: string
   name: string
   date: string
   location: string
@@ -119,7 +123,7 @@ export type Collection = {
   fieldNotes?: {
     url: string
   }
-  items: Taxon[]
+  items: T[]
 }
 
 export type CollectionSummary = {
@@ -127,14 +131,14 @@ export type CollectionSummary = {
   description?: string
 }
 
-export type Layout = {
+export type Layout<T> = {
   id: string
   level: string
   index: number
   question: Question
   distractorType?: DistractorType
-  item: Taxon
   collection: CollectionSummary
+  item: T
 }
 
 export type TestState = {
@@ -142,24 +146,24 @@ export type TestState = {
   collectionIndex: number
 }
 
-export type TestPlan = {
+export type TestPlan<T> = {
   id: string
-  collection: Collection
+  collection: Collection<T>
   state: TestState
   score: Score
-  layouts: Layout[]
+  layouts: Layout<T>[]
 }
 
 // Lesson
 
-export type Lesson = {
-  id: string
-  collection: Collection
-}
+// export type Lesson<T> = {
+//   id: string
+//   collection: Collection<T>
+// }
 
-export type LessonPlan = {
-  id: string
-}
+// export type LessonPlan = {
+//   id: string
+// }
 
 // Define interfaces for the different question layout types
 interface BaseQuestionTemplate {
@@ -191,3 +195,25 @@ export interface TextEntryTemplate extends BaseQuestionTemplate {
 export type QuestionTemplate =
   | MultipleChoiceTemplate
   | TextEntryTemplate /* other types */
+
+export interface ContentTypeHandler<T> {
+  // Transform items into questions based on templates
+  createQuestions(
+    collection: Collection<T>,
+    item: T,
+    templates: QuestionTemplate[]
+  ): Question[]
+
+  // Generate distractors for this content type
+  generateDistractors(
+    collection: Collection<T>,
+    item: T,
+    count: number,
+    distractorType: DistractorType
+  ): any[]
+
+  // Validate answers for this content type
+  validateAnswer(question: Question, answer: string): boolean
+}
+
+export type ContentHandlerType = 'taxonomy'

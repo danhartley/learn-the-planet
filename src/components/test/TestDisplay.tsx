@@ -3,8 +3,8 @@ import ImageChoiceComponent from '@/components/test/layouts/ImageChoiceComponent
 import MultipleTextChoiceComponent from '@/components/test/layouts/MultipleTextChoiceComponent'
 import TextEntryComponent from '@/components/test/layouts/TextEntryComponent'
 
-type Props = {
-  layout: Layout
+type Props<T> = {
+  layout: Layout<T>
   onSubmit: (answer: string) => void
 }
 
@@ -23,8 +23,10 @@ const questionTypeMap: Record<DisplayKey, React.ComponentType<any>> = {
   'species+Text entry': TextEntryComponent,
 }
 
-export function TestDisplay({ layout, onSubmit }: Props) {
+export function TestDisplay<T>({ layout, onSubmit }: Props<T>) {
   const type = layout.distractorType ?? 'binomial'
   const Component = questionTypeMap[`${type}+${layout.question.type}`]
+  console.log(type)
+  // console.log(Component)
   return <Component question={layout.question} onSubmit={onSubmit} />
 }

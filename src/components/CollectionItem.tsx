@@ -6,28 +6,15 @@ import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { Collection } from '@/types'
 
-type Props = {
-  collection: Collection
+type Props<T> = {
+  collection: Collection<T>
 }
 
-export function CollectionItem({ collection }: Props) {
+export function CollectionItem<T>({ collection }: Props<T>) {
   const router = useRouter()
-  const { startTest } = useTestPlanner()
+  const { startTest } = useTestPlanner<T>()
 
   const handleStartTest = () => {
-    collection.items.forEach(i => {
-      const [genus, species] = i.binomial.split(' ')
-      i.genus = genus
-      i.species = species
-      i.image = i.images?.[0]
-      i?.distractors?.forEach(d => {
-        const [genus, species] = d.binomial.split(' ')
-        d.genus = genus
-        d.species = species
-        d.image = d.images?.[0]
-      })
-    })
-
     startTest(collection)
     router.push('/test')
   }

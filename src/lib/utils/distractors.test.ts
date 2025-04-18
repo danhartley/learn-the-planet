@@ -1,140 +1,104 @@
-import { describe, it, expect, beforeEach } from 'vitest'
-import { Collection, Taxon } from '@/types'
-import { generateDistractors } from '@/utils/distractors'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { generateDistractors } from './distractors'
+import type { Taxon, Collection, DistractorType } from '@/types'
 
-describe('distractors', () => {
-  let values: string[]
-  const count = 2
-  const distractorType = 'binomial'
-  const collection = {
-    id: '',
-    name: '',
-    count: 1,
-    index: 0,
-    items: [
-      {
-        id: 584995,
-        binomial: 'Anethum graveolens',
-        vernacularName: 'Dill',
-        family: 'Apiaceae',
-        images: [
-          {
-            url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
-          },
-        ],
-        distractors: [
-          {
-            id: 484542,
-            binomial: 'Distractor 1',
-            vernacularName: 'Thyme',
-            family: 'Lamiaceae',
-            images: [
-              {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
-              },
-            ],
-          },
-          {
-            id: 579367,
-            binomial: 'Distractor 2',
-            vernacularName: 'Oregano',
-            family: 'Lamiaceae',
-            images: [
-              {
-                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
-              },
-            ],
-          },
-        ],
-      },
-    ],
+vi.mock('@/utils/shuffle', async () => {
+  return {
+    shuffle: <T>(arr: T[]) => arr, // identity shuffle for test predictability
   }
-  values = generateDistractors(
-    collection,
-    collection.items[0],
-    count,
-    distractorType
-  ).map((v: Taxon) => v[distractorType])
-  it('should return only distractor binomial values', () => {
-    const allExpectedValues = ['Distractor 1', 'Distractor 2'].every(v =>
-      values.includes(v)
-    )
+})
 
-    expect(allExpectedValues).toBe(true)
-  })
-  it('should return all distractor binomial values and one non-distractor binomial value', () => {
-    const count = 3
-    const distractorType = 'binomial'
-    const collection = {
-      id: '',
-      name: '',
-      count: 1,
+describe('generateDistractors', () => {
+  let collection: Collection<Taxon>
+  let item: Taxon
+
+  beforeEach(() => {
+    item = {
+      id: 1,
+      vernacularName: 'Species A',
+      binomial: 'Genus species A',
+      distractors: [
+        { binomial: 'Genus species B', name: 'Species B' },
+        { binomial: 'Genus species C', name: 'Species C' },
+      ],
+      traits: [],
+    }
+
+    collection = {
+      id: 'col1',
+      name: 'Test Collection',
+      date: '',
+      location: '',
       index: 0,
+      type: 'taxonomy',
       items: [
+        item,
         {
-          id: 584995,
-          binomial: 'Anethum graveolens',
-          vernacularName: 'Dill',
-          family: 'Apiaceae',
-          images: [
-            {
-              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
-            },
-          ],
-          distractors: [
-            {
-              id: 484542,
-              binomial: 'Distractor 1',
-              vernacularName: 'Thyme',
-              family: 'Lamiaceae',
-              images: [
-                {
-                  url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
-                },
-              ],
-            },
-            {
-              id: 579367,
-              binomial: 'Distractor 2',
-              vernacularName: 'Oregano',
-              family: 'Lamiaceae',
-              images: [
-                {
-                  url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
-                },
-              ],
-            },
-          ],
+          id: 2,
+          binomial: 'Genus species D',
+          vernacularName: 'Species D',
+          traits: [],
         },
         {
-          id: 581421,
-          binomial: 'Petroselinum crispum',
-          vernacularName: 'Parsley',
-          family: 'Apiaceae',
-          images: [
-            {
-              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377211281/small.jpeg',
-            },
-          ],
+          id: 3,
+          binomial: 'Genus species E',
+          vernacularName: 'Species E',
+          traits: [],
         },
       ],
     }
-    values = generateDistractors(
+  })
+
+  it('returns distractors from item.distractors only when count is less or equal', () => {
+    const result = generateDistractors(
       collection,
-      collection.items[0],
-      count,
-      distractorType
-    ).map((v: Taxon) => v[distractorType])
-
-    const expectedValues = [
-      'Distractor 1',
-      'Distractor 2',
-      'Petroselinum crispum',
-    ]
-    const allExpectedValues = expectedValues.every(
-      v => values.includes(v) && expectedValues.length === values.length
+      item,
+      2,
+      'name' as DistractorType
     )
+    expect(result).toEqual([
+      { key: 'Genus species B', value: 'Species B' },
+      { key: 'Genus species C', value: 'Species C' },
+    ])
+  })
 
-    expect(allExpectedValues).toBe(true)
+  it('adds fallback distractors from collection when item.distractors are insufficient', () => {
+    const result = generateDistractors(
+      collection,
+      item,
+      3,
+      'name' as DistractorType
+    )
+    expect(result).toContainEqual({
+      key: 'Genus species B',
+      value: 'Species B',
+    })
+    expect(result).toContainEqual({
+      key: 'Genus species C',
+      value: 'Species C',
+    })
+    expect(result.some(d => d.key === item.binomial)).toBe(false)
+  })
+
+  it('uses only collection distractors when item.distractors is empty', () => {
+    item.distractors = []
+    const result = generateDistractors(
+      collection,
+      item,
+      2,
+      'name' as DistractorType
+    )
+    expect(result.length).toBe(2)
+    expect(result.some(d => d.key === item.binomial)).toBe(false)
+  })
+
+  it('returns the correct value for given distractorType', () => {
+    const result = generateDistractors(
+      collection,
+      item,
+      2,
+      'name' as DistractorType
+    )
+    expect(result.every(opt => typeof opt.value === 'string')).toBe(true)
   })
 })

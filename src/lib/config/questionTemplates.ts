@@ -4,19 +4,19 @@ import { QuestionTemplate } from '@/types'
 export const taxonomyTemplates: QuestionTemplate[] = [
   // Stub: Basic templates for taxonomy tests
   {
+    type: 'textEntry',
+    level: 'level 1',
+    questionTextTemplate: 'Enter the genus for ${species}',
+    correctAnswerProperty: 'genus',
+    placeholder: 'Genus',
+  },
+  {
     type: 'multipleChoice',
     level: 'level 1',
     questionTextTemplate: 'Select the image that matches ${vernacularName}',
     correctAnswerProperty: 'binomial',
     distractorCount: 3,
     distractorType: 'image',
-  },
-  {
-    type: 'textEntry',
-    level: 'level 1',
-    questionTextTemplate: 'Enter the genus for ${species}',
-    correctAnswerProperty: 'genus',
-    placeholder: 'Genus',
   },
   {
     type: 'multipleChoice',

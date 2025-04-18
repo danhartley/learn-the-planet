@@ -2,8 +2,8 @@
 
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 
-export function ScoreDisplay() {
-  const { lastScore } = useTestPlanner()
+export function ScoreDisplay<T>() {
+  const { lastScore } = useTestPlanner<T>()
 
   return (
     <section aria-labelledby="score">

@@ -28,7 +28,8 @@
       "@/services/*": ["lib/services/*"],
       "@/utils/*": ["lib/utils/*"],
       "@/api/*": ["lib/api/*"],
-      "@/mocks/*": ["lib/mocks/*"]
+      "@/mocks/*": ["lib/mocks/*"],
+      "@/registry": ["lib/registry"]
     },
     "types": [
       "cypress",
