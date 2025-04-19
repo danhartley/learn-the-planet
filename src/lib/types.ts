@@ -119,7 +119,6 @@ export type Collection<T> = {
   name: string
   date: string
   location: string
-  description?: string
   fieldNotes?: {
     url: string
   }
@@ -128,7 +127,7 @@ export type Collection<T> = {
 
 export type CollectionSummary = {
   name: string
-  description?: string
+  type: string
 }
 
 export type Layout<T> = {

@@ -110,7 +110,7 @@ export class TestPlanner<T> {
       ...layout,
       collection: {
         name: this.collection.name,
-        description: this.collection.description,
+        type: this.collection.type,
       },
     }
   }

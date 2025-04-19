@@ -12,7 +12,7 @@ import {
 } from '@/types'
 
 import { generateDistractors as generateTaxonomyDistractors } from '@/utils/distractors'
-import { getPropByPath } from '@/utils/strings'
+import { getPropByPath, shuffleArray } from '@/utils/strings'
 
 export class TaxonomyContentHandler implements ContentTypeHandler<Taxon> {
   /**
@@ -167,22 +167,11 @@ export class TaxonomyContentHandler implements ContentTypeHandler<Taxon> {
     })
   }
 
-  /**
-   * Gets a property value from an object using a dotted path notation
-   */
   private getPropertyByPath(obj: any, path: string): any {
     return getPropByPath(obj, path)
   }
 
-  /**
-   * Shuffles an array using Fisher-Yates algorithm
-   */
   private shuffleArray<T>(array: T[]): T[] {
-    const result = [...array]
-    for (let i = result.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[result[i], result[j]] = [result[j], result[i]]
-    }
-    return result
+    return shuffleArray(array)
   }
 }

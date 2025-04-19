@@ -1,5 +1,5 @@
 import { ContentTypeHandler, ContentHandlerType } from '@/types'
-import { TaxonomyContentHandler } from './TaxonomyContentHandler'
+import { TaxonomyContentHandler } from './content-handlers/TaxonomyContentHandler'
 
 export const contentHandlers: Record<
   ContentHandlerType,

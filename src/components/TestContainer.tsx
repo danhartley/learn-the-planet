@@ -34,7 +34,6 @@ export function TestContainer<T>() {
   return (
     <section className="group" aria-labelledby="collection">
       <h2 id="collection">{currentLayout.collection.name}</h2>
-      <div>{currentLayout.collection?.description}</div>
       <TestDisplay layout={currentLayout} onSubmit={handleSubmitAnswer} />
     </section>
   )

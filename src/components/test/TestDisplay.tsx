@@ -1,4 +1,9 @@
-import { Layout, QuestionType, DistractorType } from '@/types'
+import {
+  Layout,
+  ContentHandlerType,
+  QuestionType,
+  DistractorType,
+} from '@/types'
 import ImageChoiceComponent from '@/components/test/layouts/ImageChoiceComponent'
 import MultipleTextChoiceComponent from '@/components/test/layouts/MultipleTextChoiceComponent'
 import TextEntryComponent from '@/components/test/layouts/TextEntryComponent'
@@ -8,25 +13,27 @@ type Props<T> = {
   onSubmit: (answer: string) => void
 }
 
-type DisplayKey = `${DistractorType}+${QuestionType}`
+type DisplayKey = `${ContentHandlerType}+${DistractorType}+${QuestionType}`
 
-const questionTypeMap: Record<DisplayKey, React.ComponentType<any>> = {
-  'image+Multiple choice': ImageChoiceComponent,
-  'vernacularName+Multiple choice': MultipleTextChoiceComponent,
-  'binomial+Multiple choice': MultipleTextChoiceComponent,
-  'genus+Multiple choice': MultipleTextChoiceComponent,
-  'species+Multiple choice': MultipleTextChoiceComponent,
-  'image+Text entry': TextEntryComponent,
-  'vernacularName+Text entry': TextEntryComponent,
-  'binomial+Text entry': TextEntryComponent,
-  'genus+Text entry': TextEntryComponent,
-  'species+Text entry': TextEntryComponent,
+const displayTypeMap: Record<DisplayKey, React.ComponentType<any>> = {
+  'taxonomy+image+Multiple choice': ImageChoiceComponent,
+  'taxonomy+vernacularName+Multiple choice': MultipleTextChoiceComponent,
+  'taxonomy+binomial+Multiple choice': MultipleTextChoiceComponent,
+  'taxonomy+genus+Multiple choice': MultipleTextChoiceComponent,
+  'taxonomy+species+Multiple choice': MultipleTextChoiceComponent,
+  'taxonomy+image+Text entry': TextEntryComponent,
+  'taxonomy+vernacularName+Text entry': TextEntryComponent,
+  'taxonomy+binomial+Text entry': TextEntryComponent,
+  'taxonomy+genus+Text entry': TextEntryComponent,
+  'taxonomy+species+Text entry': TextEntryComponent,
 }
 
 export function TestDisplay<T>({ layout, onSubmit }: Props<T>) {
-  const type = layout.distractorType ?? 'binomial'
-  const Component = questionTypeMap[`${type}+${layout.question.type}`]
-  console.log(type)
-  // console.log(Component)
+  const distractorType = layout.distractorType ?? 'binomial'
+  const contentType = layout.collection.type
+  const questionType = layout.question.type
+  const displayType =
+    `${contentType}+${distractorType}+${questionType}` as DisplayKey
+  const Component = displayTypeMap[displayType]
   return <Component question={layout.question} onSubmit={onSubmit} />
 }
