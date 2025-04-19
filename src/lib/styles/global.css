@@ -10,7 +10,7 @@
 body {
   max-width: 80vw;
   margin: 0 auto;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans';
   letter-spacing: 0.03rem;
   -webkit-font-smoothing: antialiased;
 }

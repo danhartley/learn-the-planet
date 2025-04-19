@@ -101,20 +101,6 @@ export class TestPlanner<T> {
 
         this.layouts.push(layout)
       })
-
-      // this.questionTemplates.forEach((template, templateIndex) => {
-      //   // Create a unique index for each question
-      //   const questionIndex =
-      //     itemIndex * this.questionTemplates.length + templateIndex
-
-      //   // Generate the layout based on the template type
-      //   const layout = this.createLayoutFromTemplate(
-      //     questionIndex,
-      //     item,
-      //     template
-      //   )
-      //   this.layouts.push(layout)
-      // })
     })
   }
 
