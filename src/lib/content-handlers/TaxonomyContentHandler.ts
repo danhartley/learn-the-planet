@@ -12,7 +12,7 @@ import {
 } from '@/types'
 
 import { generateDistractors as generateTaxonomyDistractors } from '@/utils/distractors'
-import { getPropByPath, shuffleArray } from '@/utils/strings'
+import { getPropByPath, shuffleArray, isEqual } from '@/utils/strings'
 
 export class TaxonomyContentHandler implements ContentTypeHandler<Taxon> {
   /**
@@ -82,11 +82,7 @@ export class TaxonomyContentHandler implements ContentTypeHandler<Taxon> {
    * Validates an answer against a question
    */
   validateAnswer(question: Question, answer: string): boolean {
-    // Normalise both strings for comparison (lowercase, trim whitespace)
-    const normalisedKey = question.key.toLowerCase().trim()
-    const normalisedAnswer = answer.toLowerCase().trim()
-
-    return normalisedKey === normalisedAnswer
+    return isEqual(question.key, answer)
   }
 
   /**

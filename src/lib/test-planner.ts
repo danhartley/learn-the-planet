@@ -46,27 +46,6 @@ export class TestPlanner<T> {
       throw new Error('Collection must contain at least one item')
     }
 
-    // Validate each taxon item
-    collection.items.forEach((item, index) => {
-      if (!item.id || (!item.binomial && item.binomial?.trim() !== '')) {
-        throw new Error(
-          `Invalid taxon item at index ${index}: missing required properties`
-        )
-      }
-
-      if (typeof item.binomial !== 'string' || item.binomial.trim() === '') {
-        throw new Error(
-          `Invalid taxon item at index ${index}: name must be a non-empty string`
-        )
-      }
-
-      if (!item.binomial.includes(' ')) {
-        throw new Error(
-          `Invalid taxon item at index ${index}: name must contain genus and species separated by space`
-        )
-      }
-    })
-
     this.collection = collection
     this.testPlanId = ++TestPlanner.testPlanCounter
     this.questionTemplates = questionTemplates
@@ -133,9 +112,6 @@ export class TestPlanner<T> {
     }
 
     return this.score
-    // const currentLayout = this.getCurrentLayout()
-    // this.score = this.scorer.markAnswer(currentLayout.question, answer)
-    // return this.score
   }
 
   public moveToNextQuestion(): boolean {

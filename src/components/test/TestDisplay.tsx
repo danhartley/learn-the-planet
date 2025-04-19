@@ -16,6 +16,7 @@ type Props<T> = {
 type DisplayKey = `${ContentHandlerType}+${DistractorType}+${QuestionType}`
 
 const displayTypeMap: Record<DisplayKey, React.ComponentType<any>> = {
+  // Taxonomy mappings
   'taxonomy+image+Multiple choice': ImageChoiceComponent,
   'taxonomy+vernacularName+Multiple choice': MultipleTextChoiceComponent,
   'taxonomy+binomial+Multiple choice': MultipleTextChoiceComponent,
@@ -26,6 +27,18 @@ const displayTypeMap: Record<DisplayKey, React.ComponentType<any>> = {
   'taxonomy+binomial+Text entry': TextEntryComponent,
   'taxonomy+genus+Text entry': TextEntryComponent,
   'taxonomy+species+Text entry': TextEntryComponent,
+
+  // Definition mappings
+  'definition+image+Multiple choice': ImageChoiceComponent,
+  'definition+vernacularName+Multiple choice': MultipleTextChoiceComponent,
+  'definition+binomial+Multiple choice': MultipleTextChoiceComponent,
+  'definition+genus+Multiple choice': MultipleTextChoiceComponent,
+  'definition+species+Multiple choice': MultipleTextChoiceComponent,
+  'definition+image+Text entry': TextEntryComponent,
+  'definition+vernacularName+Text entry': TextEntryComponent,
+  'definition+binomial+Text entry': TextEntryComponent,
+  'definition+genus+Text entry': TextEntryComponent,
+  'definition+species+Text entry': TextEntryComponent,
 }
 
 export function TestDisplay<T>({ layout, onSubmit }: Props<T>) {

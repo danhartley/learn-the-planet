@@ -1,40 +1,30 @@
-import Link from 'next/link'
-
-import { TaxonCard } from '@/components/common/TaxonCard'
-import { Collection } from '@/types'
+import { Collection, ContentHandlerType } from '@/types'
 import { getCollectionById } from '@/api/collections'
 
-export default async function Page({
+import { TaxonGallery } from '@/components/common/TaxonGallery'
+import { DefinitionGallery } from '@/components/common/DefinitionGallery'
+
+export default async function Page<T>({
   params,
 }: {
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
 
-  const collection: Collection | undefined = await getCollectionById(id)
+  const collection: Collection<T> | undefined = await getCollectionById(id)
 
-  if (!collection?.items?.[0]?.images?.[0]) return // Ensure items and images are properly accessed
+  const pageMap: Record<ContentHandlerType, React.ComponentType<any>> = {
+    taxonomy: TaxonGallery,
+    definition: DefinitionGallery,
+  }
 
-  const images = collection?.items.map(item => {
-    const image = item?.images ? item.images[0] : null
-    if (!image) return
-    console.log(item)
-    return <TaxonCard key={item.id + crypto.randomUUID()} taxon={item} />
-  })
+  if (!collection) {
+    return <div>Collection not found</div>
+  }
 
-  const fieldNotesUrl = collection?.fieldNotes?.url ? (
-    <Link href={collection.fieldNotes.url}>Field notes</Link>
-  ) : null
+  const Component =
+    pageMap[collection.type as ContentHandlerType] ||
+    (() => <div>Component not found</div>)
 
-  return (
-    <>
-      <section aria-labelledby="collection" className="group">
-        <h2 id="collection">Collection: {collection.name}</h2>
-        <div>{collection.date}</div>
-        <div>{collection.location}</div>
-        {fieldNotesUrl}
-        <div className="block">{images}</div>
-      </section>
-    </>
-  )
+  return <Component collection={collection} />
 }

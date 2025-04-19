@@ -113,12 +113,19 @@ export interface Taxon extends LearningItem {
   // https://www.inaturalist.org/observations/227490000 (inat page) uri
 }
 
+export interface Definition extends LearningItem {
+  term: string
+  definition: string
+  source?: string
+  example?: string
+}
+
 export type Collection<T> = {
   id: string
   type: string
   name: string
-  date: string
-  location: string
+  date?: string
+  location?: string
   fieldNotes?: {
     url: string
   }
@@ -215,4 +222,4 @@ export interface ContentTypeHandler<T> {
   validateAnswer(question: Question, answer: string): boolean
 }
 
-export type ContentHandlerType = 'taxonomy'
+export type ContentHandlerType = 'taxonomy' | 'definition'

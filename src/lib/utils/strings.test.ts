@@ -3,6 +3,8 @@ import {
   isCamelCase,
   splitCamelCaseSmart,
   getPropByPath,
+  sortBy,
+  sortAlphabeticallyBy,
 } from '@/utils/strings'
 
 describe('Check for camel case', () => {
@@ -157,5 +159,186 @@ describe('getPropByPath', () => {
 
     expect(getPropByPath(obj, 'user-name')).toBe('John')
     expect(getPropByPath(obj, 'contact.email-address')).toBe('john@example.com')
+  })
+})
+
+interface TestItem {
+  id: number
+  name: string
+  value: number
+  priority: string
+}
+
+describe('sortBy', () => {
+  it('should sort an array numerically by a given property in ascending order', () => {
+    const items: TestItem[] = [
+      { id: 3, name: 'item3', value: 30, priority: 'high' },
+      { id: 1, name: 'item1', value: 10, priority: 'low' },
+      { id: 2, name: 'item2', value: 20, priority: 'medium' },
+    ]
+
+    const sorted = sortBy(items, 'id')
+
+    expect(sorted).toEqual([
+      { id: 1, name: 'item1', value: 10, priority: 'low' },
+      { id: 2, name: 'item2', value: 20, priority: 'medium' },
+      { id: 3, name: 'item3', value: 30, priority: 'high' },
+    ])
+  })
+
+  it('should sort an array numerically by a given property in descending order', () => {
+    const items: TestItem[] = [
+      { id: 3, name: 'item3', value: 30, priority: 'high' },
+      { id: 1, name: 'item1', value: 10, priority: 'low' },
+      { id: 2, name: 'item2', value: 20, priority: 'medium' },
+    ]
+
+    const sorted = sortBy(items, 'value', 'desc')
+
+    expect(sorted).toEqual([
+      { id: 3, name: 'item3', value: 30, priority: 'high' },
+      { id: 2, name: 'item2', value: 20, priority: 'medium' },
+      { id: 1, name: 'item1', value: 10, priority: 'low' },
+    ])
+  })
+
+  it('should handle empty arrays', () => {
+    const emptyArray: TestItem[] = []
+
+    const sortedAsc = sortBy(emptyArray, 'id')
+    const sortedDesc = sortBy(emptyArray, 'id', 'desc')
+
+    expect(sortedAsc).toEqual([])
+    expect(sortedDesc).toEqual([])
+  })
+
+  it('should handle arrays with one item', () => {
+    const singleItem: TestItem[] = [
+      { id: 1, name: 'item1', value: 10, priority: 'low' },
+    ]
+
+    const sortedAsc = sortBy(singleItem, 'id')
+    const sortedDesc = sortBy(singleItem, 'id', 'desc')
+
+    expect(sortedAsc).toEqual(singleItem)
+    expect(sortedDesc).toEqual(singleItem)
+  })
+
+  it('should handle arrays with identical property values', () => {
+    const items: TestItem[] = [
+      { id: 1, name: 'item1', value: 10, priority: 'low' },
+      { id: 1, name: 'item2', value: 20, priority: 'medium' },
+      { id: 1, name: 'item3', value: 30, priority: 'high' },
+    ]
+
+    const sorted = sortBy(items, 'id')
+
+    // With identical values, order might be preserved or not, but the length should be the same
+    expect(sorted.length).toBe(items.length)
+    sorted.forEach(item => {
+      expect(item.id).toBe(1)
+    })
+  })
+})
+
+describe('sortAlphabeticallyBy', () => {
+  it('should sort an array alphabetically by a given string property', () => {
+    const items: TestItem[] = [
+      { id: 3, name: 'banana', value: 30, priority: 'high' },
+      { id: 1, name: 'apple', value: 10, priority: 'low' },
+      { id: 2, name: 'cherry', value: 20, priority: 'medium' },
+    ]
+
+    const sorted = sortAlphabeticallyBy(items, 'name')
+
+    expect(sorted).toEqual([
+      { id: 1, name: 'apple', value: 10, priority: 'low' },
+      { id: 3, name: 'banana', value: 30, priority: 'high' },
+      { id: 2, name: 'cherry', value: 20, priority: 'medium' },
+    ])
+  })
+
+  it('should handle case sensitivity correctly', () => {
+    const items: TestItem[] = [
+      { id: 3, name: 'Banana', value: 30, priority: 'high' },
+      { id: 1, name: 'apple', value: 10, priority: 'low' },
+      { id: 2, name: 'Cherry', value: 20, priority: 'medium' },
+    ]
+
+    const sorted = sortAlphabeticallyBy(items, 'name')
+
+    // In standard string comparison, uppercase comes before lowercase
+    expect(sorted).toEqual([
+      { id: 3, name: 'Banana', value: 30, priority: 'high' },
+      { id: 2, name: 'Cherry', value: 20, priority: 'medium' },
+      { id: 1, name: 'apple', value: 10, priority: 'low' },
+    ])
+  })
+
+  it('should sort an array alphabetically by a different string property', () => {
+    const items: TestItem[] = [
+      { id: 3, name: 'item3', value: 30, priority: 'high' },
+      { id: 1, name: 'item1', value: 10, priority: 'low' },
+      { id: 2, name: 'item2', value: 20, priority: 'medium' },
+    ]
+
+    const sorted = sortAlphabeticallyBy(items, 'priority')
+
+    expect(sorted).toEqual([
+      { id: 3, name: 'item3', value: 30, priority: 'high' },
+      { id: 1, name: 'item1', value: 10, priority: 'low' },
+      { id: 2, name: 'item2', value: 20, priority: 'medium' },
+    ])
+  })
+
+  it('should handle empty arrays', () => {
+    const emptyArray: TestItem[] = []
+
+    const sorted = sortAlphabeticallyBy(emptyArray, 'name')
+
+    expect(sorted).toEqual([])
+  })
+
+  it('should handle arrays with one item', () => {
+    const singleItem: TestItem[] = [
+      { id: 1, name: 'item1', value: 10, priority: 'low' },
+    ]
+
+    const sorted = sortAlphabeticallyBy(singleItem, 'name')
+
+    expect(sorted).toEqual(singleItem)
+  })
+
+  it('should handle arrays with identical property values', () => {
+    const items: TestItem[] = [
+      { id: 3, name: 'same', value: 30, priority: 'high' },
+      { id: 1, name: 'same', value: 10, priority: 'low' },
+      { id: 2, name: 'same', value: 20, priority: 'medium' },
+    ]
+
+    const sorted = sortAlphabeticallyBy(items, 'name')
+
+    // With identical values, order might be preserved or not, but the length should be the same
+    expect(sorted.length).toBe(items.length)
+    sorted.forEach(item => {
+      expect(item.name).toBe('same')
+    })
+  })
+
+  it('should handle special characters and numbers in strings', () => {
+    const items: TestItem[] = [
+      { id: 3, name: '123', value: 30, priority: 'high' },
+      { id: 1, name: 'abc', value: 10, priority: 'low' },
+      { id: 2, name: '!@#', value: 20, priority: 'medium' },
+    ]
+
+    const sorted = sortAlphabeticallyBy(items, 'name')
+
+    // Special characters typically come before numbers, which come before letters
+    expect(sorted).toEqual([
+      { id: 2, name: '!@#', value: 20, priority: 'medium' },
+      { id: 3, name: '123', value: 30, priority: 'high' },
+      { id: 1, name: 'abc', value: 10, priority: 'low' },
+    ])
   })
 })

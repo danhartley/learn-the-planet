@@ -77,3 +77,30 @@ export const shuffleArray = <T>(array: T[]): T[] => {
   }
   return result
 }
+
+export const isEqual = (a: string, b: string) => {
+  // Normalise both strings for comparison (lowercase, trim whitespace)
+  const normalisedKey = a.toLowerCase().trim()
+  const normalisedAnswer = b.toLowerCase().trim()
+
+  return normalisedKey === normalisedAnswer
+}
+
+export const sortBy = <T>(arr: T[], prop: keyof T, dir = 'asc') => {
+  return dir === 'asc'
+    ? arr.sort(
+        (a, b) => parseFloat(String(a[prop])) - parseFloat(String(b[prop]))
+      )
+    : arr.sort(
+        (a, b) => parseFloat(String(b[prop])) - parseFloat(String(a[prop]))
+      )
+}
+
+export const sortAlphabeticallyBy = <T>(arr: T[], prop: keyof T) => {
+  arr.sort(function (a, b) {
+    if (a[prop] < b[prop]) return -1
+    if (a[prop] > b[prop]) return 1
+    return 0
+  })
+  return arr
+}
