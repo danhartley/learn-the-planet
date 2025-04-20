@@ -160,17 +160,6 @@ export type TestPlan<T> = {
   layouts: Layout<T>[]
 }
 
-// Lesson
-
-// export type Lesson<T> = {
-//   id: string
-//   collection: Collection<T>
-// }
-
-// export type LessonPlan = {
-//   id: string
-// }
-
 // Define interfaces for the different question layout types
 interface BaseQuestionTemplate {
   type: 'multipleChoice' | 'textEntry' /* other types */

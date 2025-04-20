@@ -23,25 +23,11 @@ export class TaxonomyContentHandler implements ContentTypeHandler<Taxon> {
     item: Taxon,
     templates: QuestionTemplate[]
   ): Question[] {
-    collection.items.forEach(i => {
-      const [genus, species] = i.binomial.split(' ')
-      i.genus = genus
-      i.species = species
-      i.image = i.images?.[0]
-      i?.distractors?.forEach(d => {
-        const [genus, species] = d.binomial.split(' ')
-        d.genus = genus
-        d.species = species
-        d.image = d.images?.[0]
-      })
-    })
-
     return templates.map((template, index) => {
       const questionText = this.processTemplate(
         template.questionTextTemplate,
         item
       )
-      console.log(template.type)
       switch (template.type) {
         case 'multipleChoice':
           return this.createMultipleChoiceQuestion(

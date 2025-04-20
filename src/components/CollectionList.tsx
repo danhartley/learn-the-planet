@@ -1,11 +1,11 @@
 import { Collection } from '@/types'
 import { CollectionItem } from '@/components/CollectionItem'
 
-type Props = {
-  collections: Collection[]
+type Props<T> = {
+  collections: Collection<T>[]
 }
 
-export function CollectionList({ collections }: Props) {
+export function CollectionList<T>({ collections }: Props<T>) {
   return (
     <section className="group-block" aria-labelledby="collections">
       <h2 id="collections">Available Collections</h2>

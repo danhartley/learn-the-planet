@@ -1,4 +1,4 @@
-import { Collection } from '@/types'
+import { Collection, Taxon } from '@/types'
 import { sortAlphabeticallyBy } from '@/utils/strings'
 
 export const getCollections = (): Promise<Collection<any>[]> => {
@@ -2923,7 +2923,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
   }
 
   const collection5 = {
-    id: '5',
+    id: '6',
     type: 'definition',
     name: 'Plant Cells & Basic Structures',
     items: [
@@ -2931,7 +2931,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         id: 1,
         term: 'parenchyma (cells)',
         definition:
-          'Parenchyma cells are the most common and versatile plant cells, responsible for photosynthesis, storage, and healing. They have thin cell walls and can divide and differentiate.',
+          'The most common and versatile plant cells, responsible for photosynthesis, storage, and healing. They have thin cell walls and can divide and differentiate.',
         source: 'https://en.wikipedia.org/wiki/Parenchyma',
         example: 'Parenchyma cells in a leaf help make food using sunlight.',
       },
@@ -2939,426 +2939,421 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         id: 2,
         term: 'collenchyma (cells)',
         definition:
-          'Collenchyma cells are elongated plant cells with unevenly thickened walls that provide flexible support, especially in growing shoots and leaves.',
+          'Elongated support cells with unevenly thickened walls, providing flexible strength to growing parts of plants without restraining growth.',
         source: 'https://en.wikipedia.org/wiki/Collenchyma',
         example:
-          'Collenchyma cells help a young stem stay upright but still bend in the wind.',
+          'Collenchyma cells help support young stems and leaves while they are still expanding.',
       },
       {
         id: 3,
         term: 'sclerenchyma (cells)',
         definition:
-          'Sclerenchyma cells are plant cells with thick, lignin-rich walls that provide rigid structural support. These cells are typically dead at maturity.',
+          'Rigid support cells with thick, often lignified cell walls that are usually dead at maturity and provide structural strength.',
         source: 'https://en.wikipedia.org/wiki/Sclerenchyma',
-        example: 'Sclerenchyma cells make up the hard shell of a walnut.',
+        example:
+          'Sclerenchyma cells give hardness to nutshells and seed coats.',
       },
       {
         id: 4,
         term: 'meristematic (cells)',
         definition:
-          'Meristematic cells are undifferentiated plant cells that actively divide and are responsible for plant growth.',
+          'Undifferentiated cells capable of continuous division and growth, found in regions where new plant tissues form.',
         source: 'https://en.wikipedia.org/wiki/Meristem',
         example:
-          'Meristematic cells at the tips of roots help them grow longer.',
+          'Meristematic cells at the tip of a root keep dividing to make the root longer.',
       },
       {
         id: 5,
         term: 'apical meristem',
         definition:
-          'The apical meristem is a region of actively dividing cells located at the tips of roots and shoots, responsible for lengthwise growth in plants.',
+          'A region of actively dividing cells located at the tips of roots and shoots, responsible for primary growth and elongation.',
         source: 'https://en.wikipedia.org/wiki/Apical_meristem',
         example:
-          'The apical meristem lets a sunflower stem grow taller each day.',
+          'The apical meristem in a growing shoot allows the plant to get taller.',
       },
       {
         id: 6,
         term: 'cell',
         definition:
-          'A cell is the basic structural and functional unit of all living organisms. In plants, cells have a rigid wall, chloroplasts, and a large central vacuole.',
+          'The basic structural, functional, and biological unit of all living organisms, capable of carrying out life processes such as metabolism and reproduction.',
         source: 'https://en.wikipedia.org/wiki/Cell_(biology)',
         example:
-          'Each tiny box you see under a microscope in a leaf is a plant cell.',
+          'A plant is made of many cells, each with a wall and chloroplasts.',
       },
       {
         id: 7,
         term: 'tissue',
         definition:
-          'A tissue in plants is a group of similar cells working together to perform a specific function, like transport or support.',
-        source: 'https://en.wikipedia.org/wiki/Plant_tissue',
+          'A group of similar cells organized to perform a specific function within an organism.',
+        source: 'https://en.wikipedia.org/wiki/Tissue_(biology)',
         example:
-          'The green tissue in leaves that makes food is called mesophyll tissue.',
+          'The xylem is a tissue that transports water throughout the plant.',
       },
       {
         id: 8,
         term: 'organ',
         definition:
-          'In plants, an organ is a structural unit made up of multiple tissues that work together, such as roots, stems, and leaves.',
+          'A part of an organism composed of multiple tissues that performs a specialized function.',
         source: 'https://en.wikipedia.org/wiki/Organ_(biology)',
-        example: 'A leaf is a plant organ that helps capture sunlight.',
+        example: 'A leaf is an organ that helps in photosynthesis.',
       },
       {
         id: 9,
         term: 'ground tissue',
         definition:
-          'Ground tissue is a plant tissue system made up of parenchyma, collenchyma, and sclerenchyma cells, functioning in photosynthesis, storage, and support.',
+          'Plant tissue that is neither vascular nor dermal, often involved in storage, support, and photosynthesis.',
         source: 'https://en.wikipedia.org/wiki/Ground_tissue',
         example:
-          'The soft, green parts inside a stem are made mostly of ground tissue.',
+          'The soft part of a potato is made of ground tissue used for storage.',
       },
       {
         id: 10,
         term: 'mesophyll',
         definition:
-          'Mesophyll is the inner tissue of a leaf, made mainly of parenchyma cells, where most photosynthesis occurs.',
+          'Inner tissue of a leaf, consisting mainly of parenchyma cells where most photosynthesis occurs.',
         source: 'https://en.wikipedia.org/wiki/Mesophyll',
-        example: 'The mesophyll is where leaves turn sunlight into sugar.',
+        example:
+          'Light is absorbed by the mesophyll to make food for the plant.',
       },
       {
         id: 11,
         term: 'dermal tissue',
         definition:
-          'Dermal tissue is the outer protective covering of a plant, including the epidermis and sometimes the periderm.',
+          'The outer protective covering of a plant, including structures that prevent water loss and protect against injury and infection.',
         source: 'https://en.wikipedia.org/wiki/Dermal_tissue',
-        example:
-          'The outer layer of a cactus is dermal tissue that helps keep water in.',
+        example: 'The dermal tissue helps keep water inside the plant.',
       },
       {
         id: 12,
         term: 'epidermis',
         definition:
-          'The epidermis is the outermost layer of cells in the dermal tissue system, serving as a protective barrier and controlling gas exchange.',
+          'The outermost layer of cells in the dermal tissue system, forming a barrier to the external environment.',
         source: 'https://en.wikipedia.org/wiki/Epidermis_(botany)',
-        example:
-          'The epidermis on a leaf protects it like skin and has pores for air.',
+        example: 'The epidermis on a leaf helps prevent water loss.',
       },
       {
         id: 13,
         term: 'cuticle',
         definition:
-          'The cuticle is a waxy layer covering the epidermis of plants that helps prevent water loss.',
-        source: 'https://en.wikipedia.org/wiki/Cuticle_(plant)',
-        example:
-          'The shiny surface on a leaf is its cuticle keeping water from evaporating too fast.',
+          'A waxy or fatty layer covering the epidermis of aerial plant parts that helps reduce water loss.',
+        source: 'https://en.wikipedia.org/wiki/Cuticle_(biology)',
+        example: 'The shiny surface of some leaves comes from the cuticle.',
       },
       {
         id: 14,
         term: 'trichome',
         definition:
-          'Trichomes are small hair-like outgrowths on the epidermis of plants that can help with protection, temperature control, or reducing water loss.',
+          'Hair-like outgrowths of the epidermis that can protect plants from herbivores, reduce water loss, or trap insects.',
         source: 'https://en.wikipedia.org/wiki/Trichome',
-        example:
-          'The tiny hairs on a tomato plant are trichomes that keep bugs away.',
+        example: 'Some desert plants have trichomes to help trap moisture.',
       },
       {
         id: 15,
         term: 'stoma',
         definition:
-          'A stoma (plural: stomata) is a tiny opening in the epidermis of leaves and stems that allows gas exchange, especially oxygen and carbon dioxide.',
+          'A pore found in the epidermis of leaves, stems, and other organs that allows gas exchange between the plant and the atmosphere.',
         source: 'https://en.wikipedia.org/wiki/Stoma',
-        example:
-          'Stomata open during the day to let in carbon dioxide for photosynthesis.',
+        example: 'Carbon dioxide enters through the stoma for photosynthesis.',
       },
       {
         id: 16,
         term: 'pathogen',
         definition:
-          'A pathogen is any organism, such as a bacterium, virus, or fungus, that causes disease in a host plant or animal.',
+          'A biological agent that causes disease or illness to its host, including bacteria, viruses, and fungi.',
         source: 'https://en.wikipedia.org/wiki/Pathogen',
-        example: 'A fungus that makes leaves turn brown is a plant pathogen.',
+        example: 'A fungus that infects plant leaves is a type of pathogen.',
       },
       {
         id: 17,
         term: 'guard cell',
         definition:
-          'Guard cells are specialized cells that flank each stoma and control its opening and closing, helping to regulate gas exchange and water loss.',
+          'Specialized cell that surrounds each stoma and regulates its opening and closing by changing shape.',
         source: 'https://en.wikipedia.org/wiki/Guard_cell',
-        example: 'Guard cells swell to open the stoma and shrink to close it.',
+        example:
+          'When there is enough water, the guard cells open the stomata to let in carbon dioxide.',
       },
       {
         id: 18,
         term: 'periderm',
         definition:
-          'The periderm is the protective outer layer of a plant that replaces the epidermis in older stems and roots. It includes cork, cork cambium, and phelloderm.',
+          'Protective tissue that replaces the epidermis in mature plant stems and roots, consisting of cork, cork cambium, and phelloderm.',
         source: 'https://en.wikipedia.org/wiki/Periderm',
-        example: 'The rough outer bark of a tree is part of the periderm.',
+        example: 'The periderm forms the outer bark of woody plants.',
       },
       {
         id: 19,
         term: 'cork',
         definition:
-          'Cork is a protective tissue made of dead cells with thick walls that help prevent water loss and protect against damage and pathogens.',
-        source: 'https://en.wikipedia.org/wiki/Cork_(botany)',
-        example: 'Wine bottle corks come from the bark of cork oak trees.',
+          'A protective, water-resistant tissue made of dead cells with thick walls, produced by the cork cambium.',
+        source: 'https://en.wikipedia.org/wiki/Phellem',
+        example:
+          'Wine bottle stoppers are made from cork tissue of the cork oak.',
       },
       {
         id: 20,
         term: 'cork cambium',
         definition:
-          'Cork cambium is a type of lateral meristem that produces cork cells to the outside and phelloderm to the inside, forming part of the periderm.',
+          'A lateral meristem that produces cork cells to the outside and sometimes phelloderm to the inside, forming part of the periderm.',
         source: 'https://en.wikipedia.org/wiki/Cork_cambium',
-        example: 'Cork cambium helps the tree grow a thicker protective bark.',
+        example:
+          'As a tree trunk expands, the cork cambium generates new protective layers.',
       },
       {
         id: 21,
         term: 'phloem',
         definition:
-          'Phloem is a vascular tissue responsible for transporting sugars (mainly sucrose) from the leaves to other parts of the plant.',
+          'Vascular tissue responsible for transporting organic nutrients, especially sugars, from sources to sinks throughout the plant.',
         source: 'https://en.wikipedia.org/wiki/Phloem',
-        example: 'Phloem carries the sugar made in leaves to roots and fruits.',
+        example: 'The phloem carries sugars from the leaves to the roots.',
       },
       {
         id: 22,
         term: 'xylem',
         definition:
-          'Xylem is a vascular tissue in plants that transports water and minerals from the roots to the rest of the plant and provides structural support.',
+          'Vascular tissue that transports water and dissolved minerals from roots to the rest of the plant and provides structural support.',
         source: 'https://en.wikipedia.org/wiki/Xylem',
-        example: 'Xylem pulls water from the soil up into the leaves.',
+        example: 'Xylem tubes help move water from the soil to the leaves.',
       },
       {
         id: 23,
         term: 'phelloderm',
         definition:
-          'Phelloderm is a thin layer of living cells produced by the cork cambium toward the inside of the stem, part of the periderm.',
+          'A thin layer of living parenchyma cells formed by the cork cambium toward the interior of the stem or root.',
         source: 'https://en.wikipedia.org/wiki/Phelloderm',
         example:
-          'The phelloderm helps store nutrients and support new cork cells.',
+          'Phelloderm is part of the periderm and contributes to stem tissue.',
       },
       {
         id: 24,
         term: 'bark',
         definition:
-          'Bark is the outer covering of woody plants, including all tissues outside the vascular cambium, such as the periderm and phloem.',
+          'The outermost layers of stems and roots of woody plants, consisting of both living and dead tissue including periderm and phloem.',
         source: 'https://en.wikipedia.org/wiki/Bark_(botany)',
-        example:
-          'Tree bark protects the inner wood and helps keep moisture in.',
+        example: 'The bark of a tree protects it from insects and weather.',
       },
       {
         id: 25,
         term: 'rhytidome',
         definition:
-          'Rhytidome is the outermost layer of bark, consisting of dead tissue formed as the outer bark layers are replaced over time.',
+          'The outermost and usually dead layer of bark formed from layers of periderm and nonfunctional phloem.',
         source: 'https://en.wikipedia.org/wiki/Rhytidome',
-        example: 'The rough, flaky surface of a tree trunk is rhytidome.',
+        example:
+          'The rough, flaky surface of tree trunks is made of rhytidome.',
       },
       {
         id: 26,
         term: 'vascular tissue',
         definition:
-          'Vascular tissue in plants includes xylem and phloem, which transport water, minerals, and sugars throughout the plant.',
+          'Conductive plant tissue composed of xylem and phloem that transports water, minerals, and nutrients throughout the plant.',
         source: 'https://en.wikipedia.org/wiki/Vascular_tissue',
-        example: "Vascular tissue is like the plant's plumbing system.",
+        example:
+          'Vascular tissue allows tall plants to move water up from their roots.',
       },
       {
         id: 27,
         term: 'tracheids',
         definition:
-          'Tracheids are long, thin cells in the xylem that help transport water and provide structural support. They are dead at maturity and have thick lignified walls.',
+          'Elongated, tapering cells in the xylem that conduct water and provide structural support through their lignified walls.',
         source: 'https://en.wikipedia.org/wiki/Tracheid',
-        example:
-          'Water travels through tiny holes in tracheids to reach the leaves.',
+        example: 'Water flows through tracheids in conifer trees.',
       },
       {
         id: 28,
         term: 'sieve plates',
         definition:
-          'Sieve plates are porous end walls between sieve tube elements in the phloem that allow sugars and other materials to flow through the tubes.',
+          'Porous end walls between sieve tube elements in the phloem that allow the flow of sap between cells.',
         source: 'https://en.wikipedia.org/wiki/Sieve_tube_element',
         example:
-          'Sugars pass through sieve plates like cars through toll booths.',
+          'Sugars pass through sieve plates as they travel from leaves to roots.',
       },
       {
         id: 29,
         term: 'lignin',
         definition:
-          'Lignin is a complex organic polymer found in the cell walls of many plants, making them rigid and woody. It provides strength and water resistance.',
+          'A complex organic polymer deposited in cell walls that adds rigidity and resistance to decay, especially in vascular tissues.',
         source: 'https://en.wikipedia.org/wiki/Lignin',
-        example: 'Lignin makes tree trunks stiff so they can grow tall.',
+        example: 'The woody part of a stem is stiff because of lignin.',
       },
       {
         id: 30,
         term: 'photosynthesis',
         definition:
-          'Photosynthesis is the process by which green plants use sunlight, carbon dioxide, and water to make glucose (sugar) and release oxygen.',
+          'The process by which green plants convert light energy, water, and carbon dioxide into glucose and oxygen.',
         source: 'https://en.wikipedia.org/wiki/Photosynthesis',
-        example:
-          'Photosynthesis lets plants turn sunlight into the food they need to grow.',
+        example: 'Sunlight triggers photosynthesis in the leaves of a tree.',
       },
       {
         id: 31,
         term: 'evaporation',
         definition:
-          'Evaporation is the process by which water changes from a liquid to a gas, often occurring from surfaces like soil or leaves.',
+          'The process by which water changes from a liquid to a gas, often from plant surfaces into the air.',
         source: 'https://en.wikipedia.org/wiki/Evaporation',
-        example: 'Water on a leaf disappears into the air through evaporation.',
+        example: 'Water evaporates from leaf surfaces on a hot day.',
       },
       {
         id: 32,
         term: 'capillary action',
         definition:
-          'Capillary action is the movement of water through narrow spaces without the help of external forces, caused by adhesion and cohesion.',
+          'The ability of water to move upward through narrow tubes or pores due to adhesion and cohesion forces.',
         source: 'https://en.wikipedia.org/wiki/Capillary_action',
-        example:
-          'Capillary action helps water move up through a paper towel — and also up a plant stem.',
+        example: 'Water rises in the xylem by capillary action.',
       },
       {
         id: 33,
         term: 'cohesion-tension mechanism',
         definition:
-          "The cohesion-tension mechanism explains how water is pulled upward through a plant's xylem due to water molecules sticking together (cohesion) and to the walls of vessels (adhesion), creating tension.",
+          'A process that explains water movement in plants through the xylem as a result of water molecule cohesion and tension from transpiration.',
         source: 'https://en.wikipedia.org/wiki/Cohesion-tension_theory',
         example:
-          'Water is pulled up a tree like a chain, thanks to cohesion and evaporation at the leaves.',
+          'Water is pulled up from the roots when molecules stick together under tension.',
       },
       {
         id: 34,
         term: 'transpiration',
         definition:
-          'Transpiration is the loss of water vapor from plant leaves through the stomata, which helps pull water up from the roots.',
+          'The loss of water vapor from plant parts, especially through stomata, which helps pull water upward from the roots.',
         source: 'https://en.wikipedia.org/wiki/Transpiration',
         example:
-          'On hot days, plants lose more water through transpiration to cool down.',
+          'On sunny days, transpiration cools leaves and draws water from the soil.',
       },
       {
         id: 35,
         term: 'surface tension',
         definition:
-          'Surface tension is the elastic-like force on the surface of a liquid caused by cohesion between water molecules, helping water form droplets and resist external forces.',
+          'A property of the surface of a liquid caused by cohesive forces between molecules, allowing resistance to external force.',
         source: 'https://en.wikipedia.org/wiki/Surface_tension',
-        example:
-          'Surface tension lets small insects walk on water and helps water stay together in plant tubes.',
+        example: 'Surface tension helps water droplets cling to leaf surfaces.',
       },
       {
         id: 36,
         term: 'absorption',
         definition:
-          'Absorption in plants refers to the process of taking in water and minerals from the soil, mainly through the root hairs.',
+          'The process by which roots take in water and minerals from the soil, usually through root hairs.',
         source: 'https://en.wikipedia.org/wiki/Absorption_(biology)',
         example:
-          'Plant roots absorb water from the soil to keep the plant hydrated.',
+          'Roots increase their surface area to improve absorption of water.',
       },
       {
         id: 37,
         term: 'soil-plant-atmosphere continuum',
         definition:
-          'The soil-plant-atmosphere continuum is a concept describing the continuous movement of water from soil through plants and into the atmosphere via transpiration.',
-        source: 'https://en.wikipedia.org/wiki/Soil_plant_atmosphere_continuum',
+          'A conceptual framework describing the continuous movement of water from soil through plants to the atmosphere.',
+        source: 'https://en.wikipedia.org/wiki/Soil-plant-atmosphere_continuum',
         example:
-          'Water travels from soil into plant roots and then into the air, forming a water movement chain.',
+          'The soil-plant-atmosphere continuum explains how water reaches leaves and then evaporates.',
       },
       {
         id: 38,
         term: 'companion cell',
         definition:
-          'Companion cells are specialized cells in the phloem that help control the activity and loading of sugars into adjacent sieve tube elements.',
+          'A type of cell in the phloem that assists sieve tube elements in transporting sugars and managing cell functions.',
         source: 'https://en.wikipedia.org/wiki/Companion_cell',
         example:
-          'Companion cells act like helpers to get sugar into the plant’s transport tubes.',
+          'Companion cells help load sugars into the phloem for transport.',
       },
       {
         id: 39,
         term: 'sucrose',
         definition:
-          'Sucrose is a type of sugar made during photosynthesis that is transported through the phloem to different parts of the plant.',
+          'A disaccharide sugar composed of glucose and fructose that is commonly transported in the phloem of plants.',
         source: 'https://en.wikipedia.org/wiki/Sucrose',
         example:
-          'Plants make sucrose in leaves and send it to the roots to store energy.',
+          'Photosynthesis produces sucrose, which moves from leaves to storage organs.',
       },
       {
         id: 40,
-        term: 'positive hydrostatic pressure',
+        term: 'postive hydrostatic pressure',
         definition:
-          'Positive hydrostatic pressure is the outward force exerted by a fluid inside a container or cell, such as the pressure created inside phloem tubes during sugar transport.',
+          'A force generated by water pushing outward against the inside of a cell or tube, aiding in nutrient transport through the phloem.',
         source: 'https://en.wikipedia.org/wiki/Turgor_pressure',
         example:
-          'Sugar builds up pressure in the phloem, pushing it toward the roots.',
+          'Sugars move through the phloem under positive hydrostatic pressure.',
       },
       {
         id: 41,
         term: 'osmosis',
         definition:
-          'Osmosis is the movement of water across a semipermeable membrane from an area of low solute concentration to an area of high solute concentration.',
+          'The diffusion of water through a semipermeable membrane from an area of lower solute concentration to higher concentration.',
         source: 'https://en.wikipedia.org/wiki/Osmosis',
         example:
-          "Water enters root cells by osmosis because there's more salt inside the roots than outside.",
+          'Water enters root cells by osmosis when the soil has more water than the root interior.',
       },
       {
         id: 42,
         term: 'translocation (of sucrose)',
         definition:
-          'Translocation is the process of moving sucrose and other nutrients through the phloem from sources (like leaves) to sinks (like roots or fruits).',
+          'The movement of sugars through the phloem from sources, where they are made, to sinks, where they are used or stored.',
         source: 'https://en.wikipedia.org/wiki/Translocation_(botany)',
-        example: 'Sugar made in leaves is translocated to growing fruits.',
+        example:
+          'During the growing season, translocation moves sucrose to fruits and roots.',
       },
       {
         id: 43,
         term: 'concentration gradient',
         definition:
-          'A concentration gradient occurs when a substance exists in different concentrations in two areas, often driving diffusion or osmosis to balance the levels.',
+          'A difference in the concentration of a substance across a space, driving the movement of molecules like water or sugars.',
         source: 'https://en.wikipedia.org/wiki/Concentration_gradient',
         example:
-          'Water moves toward areas with more salt due to the concentration gradient.',
+          'Water follows a concentration gradient during osmosis into root cells.',
       },
       {
         id: 44,
         term: 'source',
         definition:
-          'In plants, a source is a tissue (usually a leaf) that produces sugars and supplies them to other parts of the plant through the phloem.',
-        source: 'https://en.wikipedia.org/wiki/Source–sink_dynamics',
-        example:
-          'A leaf that makes sugar is a source for other parts of the plant.',
+          'A part of a plant where sugars are produced or released, typically mature leaves, supplying energy to other parts.',
+        source: 'https://en.wikipedia.org/wiki/Translocation_(botany)',
+        example: 'A leaf is a source that sends sugars to roots and fruits.',
       },
       {
         id: 45,
         term: 'sink',
         definition:
-          'A sink is any part of the plant that uses or stores sugars transported from a source, such as roots, fruits, or growing shoots.',
-        source: 'https://en.wikipedia.org/wiki/Source–sink_dynamics',
-        example:
-          'Roots and fruits are sinks because they need sugar from the leaves.',
+          'A region in a plant where sugars are consumed or stored, such as roots, fruits, or growing tissues.',
+        source: 'https://en.wikipedia.org/wiki/Translocation_(botany)',
+        example: 'A potato acts as a sink by storing sugars underground.',
       },
       {
         id: 46,
         term: 'lateral meristem',
         definition:
-          'Lateral meristem is a type of plant tissue found in cylinders along stems and roots that causes them to grow in thickness (secondary growth). It includes the vascular cambium and cork cambium.',
-        source: 'https://en.wikipedia.org/wiki/Meristem#Lateral_meristems',
-        example: 'Trees grow wider each year because of the lateral meristem.',
+          'A meristem located along the sides of stems and roots that produces secondary growth, increasing plant thickness.',
+        source: 'https://en.wikipedia.org/wiki/Lateral_meristem',
+        example:
+          'The lateral meristem thickens the trunk of a tree as it ages.',
       },
       {
         id: 47,
         term: 'intercalary meristem',
         definition:
-          'Intercalary meristem is a growth region located between mature tissues, typically at the base of leaves or internodes in grasses, allowing regrowth after cutting.',
-        source: 'https://en.wikipedia.org/wiki/Intercalary_meristem',
+          'A meristem found at the base of leaves or internodes that allows regrowth in grasses and other monocots.',
+        source: 'https://en.wikipedia.org/wiki/Meristem#Intercalary_meristems',
         example:
-          'Grass can regrow after mowing because of its intercalary meristems.',
+          'Grass continues to grow after being cut due to intercalary meristems.',
       },
       {
         id: 48,
         term: 'cell wall',
         definition:
-          "The cell wall is a rigid outer layer that surrounds plant cells, providing structural support, protection, and helping to regulate growth. It's made mainly of cellulose.",
+          'A rigid layer surrounding plant cells made primarily of cellulose that provides structural support and protection.',
         source: 'https://en.wikipedia.org/wiki/Cell_wall',
         example:
-          'The cell wall keeps plant cells firm and helps the plant stand upright.',
+          'The firmness of a celery stalk comes from its strong cell walls.',
       },
       {
         id: 49,
         term: 'sclereids',
         definition:
-          'Sclereids are a type of sclerenchyma cell with thick, lignified walls that provide mechanical support and are often found in seed coats, nutshells, and gritty fruit flesh.',
+          'Short, thick-walled sclerenchyma cells that contribute to hardness in seed coats, nutshells, and gritty textures in fruits.',
         source: 'https://en.wikipedia.org/wiki/Sclereid',
-        example:
-          'The gritty bits in a pear are caused by clusters of sclereids.',
+        example: 'The gritty texture of a pear comes from sclereids.',
       },
       {
         id: 50,
         term: 'fibers',
         definition:
-          'Fibers are elongated, thick-walled sclerenchyma cells that provide support to plant tissues and are commonly found in stems and vascular bundles.',
+          'Elongated sclerenchyma cells with thick walls that provide mechanical support to various plant parts.',
         source: 'https://en.wikipedia.org/wiki/Fiber_(botany)',
-        example:
-          'Fibers make flax and hemp strong enough to be used in clothing and ropes.',
+        example: 'Fibers in flax stems are used to make linen fabric.',
       },
     ],
   }
@@ -3372,19 +3367,19 @@ export const getCollections = (): Promise<Collection<any>[]> => {
   }
 
   return new Promise((resolve, reject) => {
-    resolve([
-      {
+    const collections = [
+      generateGenusAndSpeciesFields({
         ...collection1,
         items: dedupe(collection1.items),
-      },
-      {
+      }),
+      generateGenusAndSpeciesFields({
         ...collection2,
         items: dedupe(collection2.items),
-      },
-      {
+      }),
+      generateGenusAndSpeciesFields({
         ...collection3,
         items: dedupe(collection3.items),
-      },
+      }),
       {
         ...collection4,
         items: sortAlphabeticallyBy(dedupe(collection4.items), 'term'),
@@ -3393,13 +3388,40 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         ...collection5,
         items: sortAlphabeticallyBy(dedupe(collection5.items), 'term'),
       },
-    ])
+    ]
+
+    resolve(collections)
   })
+}
+
+// Generated by Copilot
+const generateGenusAndSpeciesFields = (collection: Collection<Taxon>) => {
+  collection?.items.forEach(i => {
+    const [genus, species] = i.binomial.split(' ')
+    i.genus = genus
+    i.species = species
+    i.image = i.images?.[0]
+    i?.distractors?.forEach(d => {
+      const [genus, species] = d.binomial.split(' ')
+      d.genus = genus
+      d.species = species
+      d.image = d.images?.[0]
+    })
+  })
+
+  return collection
 }
 
 export const getCollectionById = async (
   id: string
 ): Promise<Collection<any> | undefined> => {
   const collections = await getCollections()
-  return collections.find(c => c.id === id)
+
+  let collection = collections.find(c => c.id === id)
+
+  if (collection?.type === 'taxonomy') {
+    generateGenusAndSpeciesFields(collection)
+  }
+
+  return collection
 }

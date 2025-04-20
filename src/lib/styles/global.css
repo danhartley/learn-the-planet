@@ -63,9 +63,19 @@ button {
   padding: 0.8rem;
   letter-spacing: 0.03rem;
   width: 100%;
+  border-radius: 4px;
 
   @media screen and (min-width: 768px) {
     width: initial;
+  }
+}
+
+input {
+  margin: 0.75rem 0;
+  font-size: 1rem;
+  border: 1px solid black;
+  &:focus-visible {
+    outline: 1px solid black;
   }
 }
 
@@ -73,7 +83,6 @@ button {
   border: none;
   border-radius: 0.25rem;
   border: 1px solid transparent;
-  border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   background-color: var(--bg-colour);
   cursor: pointer;
@@ -163,6 +172,7 @@ form {
 }
 
 .question-text {
+  max-width: 60ch;
   font-size: 1.4rem;
   font-weight: 500;
 }
