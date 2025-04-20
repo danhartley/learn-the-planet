@@ -75,29 +75,28 @@ export type Family = {
 
 export interface LearningItem {
   id: number
+  distractors?: any[]
 }
 
 export interface Taxon extends LearningItem {
-  iconicTaxon?: string // taxon.iconic_taxon_name (+ iconic_taxon_id)
+  iconicTaxon?: string
   names?: {
-    // taxon.preferred_common_names
-    vernacularName?: string // name
-    language?: string // locale
-    wikiSearchTerm?: string // wikipedia_url
+    vernacularName?: string
+    language?: string
+    wikiSearchTerm?: string
   }[]
-  binomial: string // taxon.name
-  rank?: string // taxon.rank
-  order?: string // taxon.rank
-  genus?: string // taxon.rank
-  species?: string // taxon.rank
-  vernacularName: string // taxon.preferred_common_name
-  family?: string | Family | undefined // taxon.rank
-  distractors?: any[]
-  images?: Image[] //observation_photos
-  image?: Image // taxon.default_photo or observation_photos[0]
+  binomial: string
+  rank?: string
+  order?: string
+  genus?: string
+  species?: string
+  vernacularName: string
+  family?: string | Family | undefined
+  images?: Image[]
+  image?: Image
   taxonomy?: {
     phylum?: string
-    family?: string | Family // Allow `family` to be either a string or an object
+    family?: string | Family
     class?: string
     kingdom?: string
     order?: string
@@ -106,11 +105,6 @@ export interface Taxon extends LearningItem {
   }
   traits?: Record<string, any>
   observationURL?: string
-  // introduced boolean
-  // endemic boolean
-  // threatened boolean
-  // taxon.wikipedia_url string
-  // https://www.inaturalist.org/observations/227490000 (inat page) uri
 }
 
 export interface Definition extends LearningItem {
@@ -173,6 +167,7 @@ export type DistractorType =
   | 'genus'
   | 'species'
   | 'image'
+  | 'term'
 
 export interface MultipleChoiceTemplate extends BaseQuestionTemplate {
   type: 'multipleChoice'

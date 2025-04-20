@@ -5,6 +5,13 @@ export const taxonomyTemplates: QuestionTemplate[] = [
   // Stub: Basic templates for taxonomy tests
   {
     type: 'textEntry',
+    level: 'level 0',
+    questionTextTemplate: '${definition}',
+    correctAnswerProperty: 'term',
+    placeholder: 'Match',
+  },
+  {
+    type: 'textEntry',
     level: 'level 1',
     questionTextTemplate: 'Enter the genus for ${species}',
     correctAnswerProperty: 'genus',

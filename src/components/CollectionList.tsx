@@ -15,7 +15,7 @@ export function CollectionList<T>({ collections }: Props<T>) {
         <ul className="block">
           {collections.map(collection => (
             <li key={collection.id}>
-              <CollectionItem collection={collection} />
+              <CollectionItem<T> collection={collection} />
             </li>
           ))}
         </ul>

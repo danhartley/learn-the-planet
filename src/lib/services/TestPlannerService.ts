@@ -11,11 +11,11 @@ class TestPlannerService<T> {
   private constructor() {}
 
   // Singleton pattern: prevent more than one instance of the service from being created
-  static getInstance<T>(): TestPlannerService<T> {
+  static getInstance<U>(): TestPlannerService<U> {
     if (!TestPlannerService.instance) {
-      TestPlannerService.instance = new TestPlannerService()
+      TestPlannerService.instance = new TestPlannerService<U>()
     }
-    return TestPlannerService.instance
+    return TestPlannerService.instance as TestPlannerService<U>
   }
 
   startTest(

@@ -47,6 +47,7 @@ export function TestDisplay<T>({ layout, onSubmit }: Props<T>) {
   const questionType = layout.question.type
   const displayType =
     `${contentType}+${distractorType}+${questionType}` as DisplayKey
+  console.log(displayType)
   const Component = displayTypeMap[displayType]
   return <Component question={layout.question} onSubmit={onSubmit} />
 }

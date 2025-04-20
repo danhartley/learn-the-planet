@@ -9,7 +9,7 @@ import {
   ContentHandlerType,
 } from './types'
 
-import { contentHandlers } from './registry'
+import { contentHandlers } from './content-handlers/registry'
 
 export class TestPlanner<T> {
   private collection: Collection<T>
