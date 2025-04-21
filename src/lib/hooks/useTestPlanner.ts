@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react'
 import TestPlannerService from '@/services/TestPlannerService'
-import { Collection, Layout, Score, QuestionTemplate } from '@/types'
+import {
+  Collection,
+  Layout,
+  Score,
+  QuestionTemplate,
+  ContentHandlerType,
+} from '@/types'
 import { TestPlannerEvent } from '@/utils/enums'
-import { taxonomyTemplates } from '../config/questionTemplates'
+import { getTemplatesByContentType } from '../api/questionTemplates'
 
 export function useTestPlanner<T>() {
   const service = TestPlannerService.getInstance()
@@ -35,7 +41,9 @@ export function useTestPlanner<T>() {
   return {
     startTest: (
       collection: Collection<T>,
-      questionTemplates: QuestionTemplate[] = taxonomyTemplates
+      questionTemplates: QuestionTemplate[] = getTemplatesByContentType(
+        collection.type as ContentHandlerType
+      )
     ) => service.startTest(collection, questionTemplates),
     currentLayout: layout,
     markAnswer: (answer: string) => service.markAnswer(answer),

@@ -1,8 +1,6 @@
-import { QuestionTemplate } from '@/types'
+import { QuestionTemplate, ContentHandlerType } from '@/types'
 
-// Default taxonomic question templates
-export const taxonomyTemplates: QuestionTemplate[] = [
-  // Stub: Basic templates for taxonomy tests
+export const definitionTemplates: QuestionTemplate[] = [
   {
     type: 'textEntry',
     level: 'level 0',
@@ -10,6 +8,9 @@ export const taxonomyTemplates: QuestionTemplate[] = [
     correctAnswerProperty: 'term',
     placeholder: 'Match',
   },
+]
+
+export const taxonomyTemplates: QuestionTemplate[] = [
   {
     type: 'textEntry',
     level: 'level 1',
@@ -50,7 +51,13 @@ export const taxonomyTemplates: QuestionTemplate[] = [
   },
 ]
 
-// Custom templates for other domains can be created
-export const customTemplateSet: QuestionTemplate[] = [
-  // Stub: Custom template set
-]
+export const getTemplatesByContentType = (
+  contentType: ContentHandlerType
+): QuestionTemplate[] => {
+  const templateMap = {
+    taxonomy: taxonomyTemplates,
+    definition: definitionTemplates,
+  }
+
+  return templateMap[contentType]
+}
