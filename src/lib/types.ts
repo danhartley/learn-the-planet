@@ -130,6 +130,7 @@ export type Collection<T> = {
 export type CollectionSummary = {
   name: string
   type: string
+  itemCount: number
 }
 
 export type Layout<T> = {

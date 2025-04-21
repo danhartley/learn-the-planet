@@ -11,6 +11,8 @@ import {
 
 import { contentHandlers } from './content-handlers/registry'
 
+import { shuffleArray } from '@/utils/strings'
+
 export class TestPlanner<T> {
   private collection: Collection<T>
   private contentHandler: ContentTypeHandler<T>
@@ -54,7 +56,7 @@ export class TestPlanner<T> {
 
   private generateLayouts(): void {
     // For each item in the collection, create layouts based on templates
-    this.collection.items.forEach((item, itemIndex) => {
+    shuffleArray(this.collection.items).forEach((item, itemIndex) => {
       const questions = this.contentHandler.createQuestions(
         this.collection,
         item,
@@ -73,7 +75,11 @@ export class TestPlanner<T> {
           index,
           question,
           item,
-          collection: this.collection,
+          collection: {
+            name: this.collection.name,
+            type: this.collection.type,
+            itemCount: this.collection.items.length,
+          },
           distractorType:
             'distractorType' in template ? template.distractorType : undefined,
         }
@@ -90,6 +96,7 @@ export class TestPlanner<T> {
       collection: {
         name: this.collection.name,
         type: this.collection.type,
+        itemCount: this.collection.items.length,
       },
     }
   }

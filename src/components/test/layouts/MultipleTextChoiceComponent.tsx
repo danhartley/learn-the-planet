@@ -1,17 +1,22 @@
 import React from 'react'
-import { MultipleChoiceQuestion, MultipleChoiceOption } from '@/types'
+import { MultipleChoiceQuestion, MultipleChoiceOption, Layout } from '@/types'
 
-type Props = {
-  question: MultipleChoiceQuestion
+type QuestionAnswerProps<T> = {
+  layout: Layout<T>
   onSubmit: (answer: string) => void
 }
 
 export default function MultipleTextChoiceComponent({
-  question,
+  layout,
   onSubmit,
-}: Props) {
+}: QuestionAnswerProps<MultipleChoiceQuestion>) {
   const setAnswer = (answer: string) => {
     onSubmit(answer.trim())
+  }
+
+  const question = layout.question as MultipleChoiceQuestion
+  if (!question.options) {
+    throw new Error('Invalid question type: options are missing.')
   }
 
   const buttons = question.options.map((o: MultipleChoiceOption) => {

@@ -1,5 +1,5 @@
-import { Collection, Definition } from '@/types'
 import React from 'react'
+import { Collection, Definition } from '@/types'
 
 type Props = {
   collection: Collection<Definition>
@@ -10,7 +10,15 @@ export const DefinitionGallery = ({ collection }: Props) => {
     return (
       <React.Fragment key={item.id}>
         <dt>{item.term}</dt>
-        <dd>{item.definition}</dd>
+        <dd>
+          <div>{item.definition}</div>
+          <div>
+            <em>{item.example}</em>
+          </div>
+          <div>
+            <a href={item.source}>{item.source}</a>
+          </div>
+        </dd>
       </React.Fragment>
     )
   })

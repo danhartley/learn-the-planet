@@ -1,19 +1,21 @@
 'use client'
 import React, { useState, FormEvent, useEffect, useRef } from 'react'
-import { TextEntryQuestion } from '@/types'
+import { Layout, TextEntryQuestion } from '@/types'
 
-interface QuestionAnswerProps {
-  question: TextEntryQuestion
+interface QuestionAnswerProps<T> {
+  layout: Layout<T>
   onSubmit: (answer: string) => void
 }
 
 export default function TextEntryComponent({
-  question,
+  layout,
   onSubmit,
-}: QuestionAnswerProps) {
+}: QuestionAnswerProps<TextEntryQuestion>) {
   const [answer, setAnswer] = useState('')
   const [isAnswerVisible, showAnswer] = useState(false)
   const answerInputRef = useRef(null)
+
+  const question: TextEntryQuestion = layout.question
 
   useEffect(() => {
     // Hide answer when we move to next question
@@ -64,6 +66,7 @@ export default function TextEntryComponent({
           </button>
         </div>
         <div className="form-row">
+          <div>{`Question ${layout.index + 1} of ${layout.collection.itemCount}`}</div>
           <div className={isAnswerVisible ? '' : 'hidden'}>{question.key}</div>
         </div>
       </form>

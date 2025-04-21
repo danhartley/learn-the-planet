@@ -42,5 +42,5 @@ export function TestDisplay<T>({ layout, onSubmit }: Props<T>) {
       ? questionMap.image
       : questionMap.default
 
-  return <Component question={layout.question} onSubmit={onSubmit} />
+  return <Component layout={layout} onSubmit={onSubmit} />
 }

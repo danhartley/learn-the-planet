@@ -2844,14 +2844,16 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         term: 'sclerophyll',
         definition:
           'Plants with hard, leathery leaves adapted to conserve water in dry conditions',
+        source: 'https://en.wikipedia.org/wiki/Sclerophyll',
         example:
-          'Olive trees (Olea europaea) have small, leathery leaves that minimize water loss during hot summers',
+          'Olive trees (Olea europaea) have small, leathery leaves that minimise water loss during hot summers',
       },
       {
         id: 2,
         term: 'chaparral',
         definition:
-          'A type of shrubland vegetation adapted to Mediterranean climate regions characterized by hot, dry summers and mild, wet winters',
+          'A type of shrubland vegetation adapted to Mediterranean climate regions characterised by hot, dry summers and mild, wet winters',
+        source: 'https://en.wikipedia.org/wiki/Chaparral',
         example:
           'The coastal regions of California are dominated by chaparral ecosystems with drought-resistant shrubs',
       },
@@ -2860,6 +2862,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         term: 'maquis',
         definition:
           'Dense, shrubby vegetation consisting of drought-resistant plants found in Mediterranean regions',
+        source: 'https://en.wikipedia.org/wiki/Maquis_shrubland',
         example:
           'The maquis of Corsica features aromatic plants like rosemary, lavender, and myrtle',
       },
@@ -2868,14 +2871,16 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         term: 'garrigue',
         definition:
           'Low, open scrubland with aromatic, drought-resistant plants growing on limestone soils in Mediterranean regions',
+        source: 'https://en.wikipedia.org/wiki/Garrigue',
         example:
-          'The garrigue landscape of southern France is characterized by thyme, sage, and juniper growing on rocky terrain',
+          'The garrigue landscape of southern France is characterised by thyme, sage, and juniper growing on rocky terrain',
       },
       {
         id: 5,
         term: 'dehesa',
         definition:
-          'A multifunctional agroforestry system found in Mediterranean regions, particularly Spain and Portugal, characterized by scattered oak trees with understory used for grazing',
+          'A multifunctional agroforestry system found in Mediterranean regions, particularly Spain and Portugal, characterised by scattered oak trees with understory used for grazing',
+        source: 'https://en.wikipedia.org/wiki/Dehesa',
         example:
           'The dehesa landscapes of Extremadura support cork oak trees while providing grazing for livestock',
       },
@@ -2884,6 +2889,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         term: 'pyrophyte',
         definition:
           'Plants adapted to survive and thrive in ecosystems where fire is common, often with fire-activated seeds or resprouting capabilities',
+        source: 'https://en.wikipedia.org/wiki/Pyrophyte',
         example:
           'Many Mediterranean pine species like Pinus halepensis are pyrophytes with serotinous cones that release seeds after fire',
       },
@@ -2892,6 +2898,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         term: 'phreatophyte',
         definition:
           'Deep-rooted plants that obtain water from the water table or the capillary fringe above it',
+        source: 'https://en.wikipedia.org/wiki/Phreatophyte',
         example:
           'Oleander (Nerium oleander) is a phreatophyte commonly found along watercourses in Mediterranean regions',
       },
@@ -2900,6 +2907,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         term: 'phrygana',
         definition:
           'A type of low shrubland found in the eastern Mediterranean region, consisting of aromatic, spiny shrubs adapted to grazing pressure and summer drought',
+        source: 'https://en.wikipedia.org/wiki/Phrygana',
         example:
           'The phrygana ecosystems of Greece and Turkey feature dwarf shrubs like thyme and sage growing on degraded soils',
       },
@@ -2908,6 +2916,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         term: 'seasonal dimorphism',
         definition:
           'The phenomenon where plants produce different types of leaves during different seasons as an adaptation to seasonal changes in rainfall and temperature',
+        source: 'https://en.wikipedia.org/wiki/Heterophylly',
         example:
           'Cistus species in Mediterranean regions often produce larger leaves during the wet winter and smaller leaves during the dry summer',
       },
@@ -2916,6 +2925,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         term: 'riparian woodland',
         definition:
           'Forest ecosystems that occur along rivers and streams in Mediterranean regions, providing important refuge for biodiversity during dry summers',
+        source: 'https://en.wikipedia.org/wiki/Riparian_zone',
         example:
           'Platanus orientalis forms riparian woodlands along streams in Greece, providing critical habitat during the hot, dry summer months',
       },
@@ -2984,7 +2994,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         id: 7,
         term: 'tissue',
         definition:
-          'A group of similar cells organized to perform a specific function within an organism.',
+          'A group of similar cells organised to perform a specific function within an organism.',
         source: 'https://en.wikipedia.org/wiki/Tissue_(biology)',
         example:
           'The xylem is a tissue that transports water throughout the plant.',
@@ -2993,7 +3003,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         id: 8,
         term: 'organ',
         definition:
-          'A part of an organism composed of multiple tissues that performs a specialized function.',
+          'A part of an organism composed of multiple tissues that performs a specialised function.',
         source: 'https://en.wikipedia.org/wiki/Organ_(biology)',
         example: 'A leaf is an organ that helps in photosynthesis.',
       },
@@ -3067,7 +3077,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         id: 17,
         term: 'guard cell',
         definition:
-          'Specialized cell that surrounds each stoma and regulates its opening and closing by changing shape.',
+          'Specialised cell that surrounds each stoma and regulates its opening and closing by changing shape.',
         source: 'https://en.wikipedia.org/wiki/Guard_cell',
         example:
           'When there is enough water, the guard cells open the stomata to let in carbon dioxide.',

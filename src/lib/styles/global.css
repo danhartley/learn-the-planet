@@ -257,3 +257,22 @@ figcaption {
 .bg-reptilia {
   background-color: var(--bg-accent-colour-reptilia);
 }
+
+[aria-labelledby='definitions'] {
+  dl {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    max-width: 60ch;
+
+    dt {
+      font-weight: 600;
+    }
+
+    dd {
+      display: flex;
+      flex-direction: column;
+      row-gap: 0.5rem;
+    }
+  }
+}
