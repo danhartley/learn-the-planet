@@ -162,6 +162,7 @@ export class ContentHandlerBase<T extends LearningItem>
       text: questionText,
       key: correctAnswer,
       hint: template.placeholder || 'Enter your answer',
+      contentType: template.contentType,
     }
   }
 

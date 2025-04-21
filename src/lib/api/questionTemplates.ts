@@ -12,19 +12,19 @@ export const definitionTemplates: QuestionTemplate[] = [
 
 export const taxonomyTemplates: QuestionTemplate[] = [
   {
-    type: 'textEntry',
-    level: 'level 1',
-    questionTextTemplate: 'Enter the genus for ${species}',
-    correctAnswerProperty: 'genus',
-    placeholder: 'Genus',
-  },
-  {
     type: 'multipleChoice',
     level: 'level 1',
     questionTextTemplate: 'Select the image that matches ${vernacularName}',
     correctAnswerProperty: 'binomial',
     distractorCount: 3,
     distractorType: 'image',
+  },
+  {
+    type: 'textEntry',
+    level: 'level 1',
+    questionTextTemplate: 'Enter the genus for ${species}',
+    correctAnswerProperty: 'genus',
+    placeholder: 'Genus',
   },
   {
     type: 'multipleChoice',
@@ -59,5 +59,10 @@ export const getTemplatesByContentType = (
     definition: definitionTemplates,
   }
 
-  return templateMap[contentType]
+  const templates = templateMap[contentType].map(template => {
+    template.contentType = contentType
+    return template
+  })
+
+  return templates
 }

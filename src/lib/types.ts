@@ -19,6 +19,7 @@ export type TextEntryQuestion = {
   key: string
   text: string
   hint?: string
+  contentType?: string
 }
 
 export type Question = MultipleChoiceQuestion | TextEntryQuestion
@@ -159,6 +160,7 @@ interface BaseQuestionTemplate {
   type: 'multipleChoice' | 'textEntry' /* other types */
   level: string
   questionTextTemplate: string // Uses ${property} syntax for interpolation
+  contentType?: string
 }
 
 export type DistractorType =

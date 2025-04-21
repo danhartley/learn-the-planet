@@ -26,7 +26,7 @@ export function generateTaxonomyDistractors(
   ).slice(0, extras)
 
   const distractors = [...distractorBinomials, ...collectionBinomials]
-  console.log(distractors)
+
   return distractors.map(d => {
     return {
       key: d.binomial,
