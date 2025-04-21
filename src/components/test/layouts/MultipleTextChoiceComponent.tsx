@@ -25,7 +25,7 @@ export default function MultipleTextChoiceComponent({
         id={o.key}
         key={o.key}
         value={o.value as string}
-        onClick={e => setAnswer((e.target as HTMLButtonElement).value)}
+        onClick={() => setAnswer(o.value as string)}
       >
         <span>{o.value as string}</span>
       </button>
