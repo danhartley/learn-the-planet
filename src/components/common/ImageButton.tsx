@@ -1,20 +1,45 @@
-import { MultipleChoiceOption, Image } from '@/types'
+import { MultipleChoiceOption, Image, MultipleChoiceQuestion } from '@/types'
 import { ResponsiveImage } from '@/components/common/ResponsiveImage'
+
+type Props<T> = {
+  option: MultipleChoiceOption
+  setAnswer: (answer: string) => void
+  selectedAnswer: string | null
+  correctAnswer: string | null
+}
 
 const ImageButton = ({
   option,
   setAnswer,
-}: {
-  option: MultipleChoiceOption
-  setAnswer: (e: React.MouseEvent<HTMLButtonElement>) => void
-}) => {
+  selectedAnswer,
+  correctAnswer,
+}: Props<MultipleChoiceQuestion>) => {
+  const handleClick = () => {
+    setAnswer(option.key as string)
+  }
+
+  // Determine button class based on state
+  const getButtonClass = () => {
+    if (!selectedAnswer) return ''
+
+    const isSelected = option.key === selectedAnswer
+    const isCorrect = option.key === correctAnswer
+
+    if (isSelected && isCorrect) return 'bg-correct'
+    if (isSelected && !isCorrect) return 'bg-incorrect'
+    if (!isSelected && isCorrect) return 'bg-correct'
+
+    return ''
+  }
+
   return (
     <button
       id={option.key}
       key={option.key}
       data-key={option.key as string}
-      onClick={e => setAnswer(e)}
+      onClick={handleClick}
       title={`Option: ${option.key}`}
+      className={getButtonClass()}
     >
       <ResponsiveImage
         id={option.key}

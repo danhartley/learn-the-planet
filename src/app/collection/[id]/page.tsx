@@ -1,8 +1,7 @@
 import { Collection, ContentHandlerType } from '@/types'
 import { getCollectionById } from '@/api/collections'
 
-import { TaxonGallery } from '@/components/common/TaxonGallery'
-import { DefinitionGallery } from '@/components/common/DefinitionGallery'
+import { Gallery } from '@/components/common/Gallery'
 
 export default async function Page<T>({
   params,
@@ -13,18 +12,5 @@ export default async function Page<T>({
 
   const collection: Collection<T> | undefined = await getCollectionById(id)
 
-  const pageMap: Record<ContentHandlerType, React.ComponentType<any>> = {
-    taxonomy: TaxonGallery,
-    definition: DefinitionGallery,
-  }
-
-  if (!collection) {
-    return <div>Collection not found</div>
-  }
-
-  const Component =
-    pageMap[collection.type as ContentHandlerType] ||
-    (() => <div>Component not found</div>)
-
-  return <Component collection={collection} />
+  return <Gallery collection={collection} />
 }

@@ -1,6 +1,5 @@
 import '@/css/global.css'
 
-import { ScoreDisplay } from '@/components/ScoreDisplay'
 import { Menu } from '@/components/Menu'
 import '../lib/styles/fonts.css'
 
@@ -21,7 +20,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         {/* Place children where you want to render a page or nested layout */}
         <main>{children}</main>
         <footer>
-          <ScoreDisplay />
+          <div></div>
           <Menu />
         </footer>
       </body>

@@ -31,7 +31,7 @@ describe('ScoreDisplay', () => {
 
     render(<ScoreDisplay />)
 
-    expect(screen.getByText('No score')).toBeInTheDocument()
+    expect(screen.getByText('Start test')).toBeInTheDocument()
   })
 
   it('displays correct score data when lastScore exists', () => {
@@ -53,16 +53,11 @@ describe('ScoreDisplay', () => {
 
     // Check that all score data is displayed correctly
     expect(
-      screen.getByRole('heading', { name: 'Collection score' })
+      screen.getByRole('heading', { name: 'Test score' })
     ).toBeInTheDocument()
-    expect(screen.getByText('Correct count')).toBeInTheDocument()
-    expect(screen.getByText('7')).toBeInTheDocument()
-    expect(screen.getByText('Incorrect count')).toBeInTheDocument()
-    expect(screen.getByText('3')).toBeInTheDocument()
-    expect(screen.getByText('Question count')).toBeInTheDocument()
-    expect(screen.getByText('10')).toBeInTheDocument()
-    expect(screen.getByText('Last answered')).toBeInTheDocument()
-    expect(screen.getByText('true')).toBeInTheDocument()
+    expect(
+      screen.getByText("You've answered 7 out of 10 correctly.")
+    ).toBeInTheDocument()
   })
 
   it('displays correct data with different score values', () => {
@@ -81,13 +76,8 @@ describe('ScoreDisplay', () => {
 
     render(<ScoreDisplay />)
 
-    expect(screen.getByText('Correct count')).toBeInTheDocument()
-    expect(screen.getByText('2')).toBeInTheDocument()
-    expect(screen.getByText('Incorrect count')).toBeInTheDocument()
-    expect(screen.getByText('3')).toBeInTheDocument()
-    expect(screen.getByText('Question count')).toBeInTheDocument()
-    expect(screen.getByText('5')).toBeInTheDocument()
-    expect(screen.getByText('Last answered')).toBeInTheDocument()
-    expect(screen.getByText('false')).toBeInTheDocument()
+    expect(
+      screen.getByText("You've answered 2 out of 5 correctly.")
+    ).toBeInTheDocument()
   })
 })

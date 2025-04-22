@@ -1,11 +1,13 @@
-import { Layout, QuestionType } from '@/types'
+import { Layout, QuestionType, Score } from '@/types'
 import ImageChoiceComponent from '@/components/test/layouts/ImageChoiceComponent'
 import MultipleTextChoiceComponent from '@/components/test/layouts/MultipleTextChoiceComponent'
 import TextEntryComponent from '@/components/test/layouts/TextEntryComponent'
+import { ScoreDisplay } from '@/components/ScoreDisplay'
+import { Gallery } from '@/components/common/Gallery'
 
 type Props<T> = {
   layout: Layout<T>
-  onSubmit: (answer: string) => void
+  onSubmit: (answer: string) => Score | null
 }
 
 // Create a more robust mapping system with proper TypeScript support
@@ -42,5 +44,11 @@ export function TestDisplay<T>({ layout, onSubmit }: Props<T>) {
       ? questionMap.image
       : questionMap.default
 
-  return <Component layout={layout} onSubmit={onSubmit} />
+  return (
+    <>
+      <Component layout={layout} onSubmit={onSubmit} />
+      <ScoreDisplay />
+      {/* <Gallery collection={layout.collection} /> */}
+    </>
+  )
 }

@@ -127,19 +127,13 @@ export type Collection<T> = {
   items: T[]
 }
 
-export type CollectionSummary = {
-  name: string
-  type: string
-  itemCount: number
-}
-
 export type Layout<T> = {
   id: string
   level: string
   index: number
   question: Question
   distractorType?: DistractorType
-  collection: CollectionSummary
+  collection: Collection<T>
   item: T
 }
 

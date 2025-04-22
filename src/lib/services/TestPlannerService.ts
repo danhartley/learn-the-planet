@@ -72,6 +72,10 @@ class TestPlannerService<T> {
     this.testPlanner = null
     this.emitter.emit(TestPlannerEvent.TEST_RESET)
   }
+
+  getLayouts(): Layout<T>[] | undefined {
+    return this.testPlanner?.getLayouts()
+  }
 }
 
 export default TestPlannerService

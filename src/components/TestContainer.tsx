@@ -29,6 +29,7 @@ export function TestContainer<T>() {
         router.push('/results')
       }
     }, 2000)
+    return score
   }
 
   return (

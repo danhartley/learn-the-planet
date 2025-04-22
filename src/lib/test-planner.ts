@@ -75,11 +75,7 @@ export class TestPlanner<T> {
           index,
           question,
           item,
-          collection: {
-            name: this.collection.name,
-            type: this.collection.type,
-            itemCount: this.collection.items.length,
-          },
+          collection: this.collection,
           distractorType:
             'distractorType' in template ? template.distractorType : undefined,
         }
@@ -93,11 +89,6 @@ export class TestPlanner<T> {
     const layout: Layout<T> = this.layouts[this.state.layoutIndex]
     return {
       ...layout,
-      collection: {
-        name: this.collection.name,
-        type: this.collection.type,
-        itemCount: this.collection.items.length,
-      },
     }
   }
 
@@ -154,5 +145,9 @@ export class TestPlanner<T> {
       correctCount: 0,
       incorrectCount: 0,
     }
+  }
+
+  public getLayouts(): Layout<T>[] {
+    return this.layouts
   }
 }

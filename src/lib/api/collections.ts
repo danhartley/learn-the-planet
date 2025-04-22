@@ -1,6 +1,31 @@
 import { Collection, Taxon } from '@/types'
 import { sortAlphabeticallyBy } from '@/utils/strings'
 
+const dedupe = (items: any[]) => {
+  const deduped = Array.from(
+    new Map(items.map(item => [item.id, item])).values()
+  )
+
+  return deduped
+}
+
+const generateGenusAndSpeciesFields = (collection: Collection<Taxon>) => {
+  collection?.items.forEach(i => {
+    const [genus, species] = i.binomial.split(' ')
+    i.genus = genus
+    i.species = species
+    i.image = i.images?.[0]
+    i?.distractors?.forEach(d => {
+      const [genus, species] = d.binomial.split(' ')
+      d.genus = genus
+      d.species = species
+      d.image = d.images?.[0]
+    })
+  })
+
+  return collection
+}
+
 export const getCollections = (): Promise<Collection<any>[]> => {
   const collection1 = {
     id: '1',
@@ -3366,31 +3391,6 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         example: 'Fibers in flax stems are used to make linen fabric.',
       },
     ],
-  }
-
-  const dedupe = (items: any[]) => {
-    const deduped = Array.from(
-      new Map(items.map(item => [item.id, item])).values()
-    )
-
-    return deduped
-  }
-
-  const generateGenusAndSpeciesFields = (collection: Collection<Taxon>) => {
-    collection?.items.forEach(i => {
-      const [genus, species] = i.binomial.split(' ')
-      i.genus = genus
-      i.species = species
-      i.image = i.images?.[0]
-      i?.distractors?.forEach(d => {
-        const [genus, species] = d.binomial.split(' ')
-        d.genus = genus
-        d.species = species
-        d.image = d.images?.[0]
-      })
-    })
-
-    return collection
   }
 
   return new Promise((resolve, reject) => {

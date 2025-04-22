@@ -1,7 +1,8 @@
+import { useState, useEffect } from 'react'
 import { MultipleChoiceQuestion, MultipleChoiceOption, Layout } from '@/types'
 import ImageButton from '@/components/common/ImageButton'
 
-type QuestionAnswerProps<T> = {
+type Props<T> = {
   layout: Layout<T>
   onSubmit: (answer: string) => void
 }
@@ -9,11 +10,18 @@ type QuestionAnswerProps<T> = {
 const ImageChoiceComponent = ({
   layout,
   onSubmit,
-}: QuestionAnswerProps<MultipleChoiceQuestion>) => {
-  const setAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const answer = (e.currentTarget.dataset.key || '').trim()
-    onSubmit(answer)
+}: Props<MultipleChoiceQuestion>) => {
+  const [userAnswer, setUserAnswer] = useState<string | null>(null)
+
+  const setAnswer = (answer: string) => {
+    setUserAnswer(answer)
+    onSubmit((answer || '').trim())
   }
+
+  useEffect(() => {
+    // Reset display
+    setUserAnswer('')
+  }, [])
 
   const question = layout.question as MultipleChoiceQuestion
   if (!question.options) {
@@ -22,7 +30,13 @@ const ImageChoiceComponent = ({
 
   const images = question.options.map((option: MultipleChoiceOption) => {
     return typeof option.value === 'object' && 'url' in option.value ? (
-      <ImageButton key={option.key} option={option} setAnswer={setAnswer} />
+      <ImageButton
+        key={option.key}
+        option={option}
+        setAnswer={setAnswer}
+        correctAnswer={question.key}
+        selectedAnswer={userAnswer}
+      />
     ) : null
   })
   return (
