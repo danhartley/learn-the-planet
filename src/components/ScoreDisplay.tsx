@@ -19,7 +19,7 @@ export function ScoreDisplay<T>() {
 
   // Progress display logic
   const progress = !!currentLayout ? (
-    <div className="form-row">
+    <div>
       <label htmlFor="test-progress">Test progress </label>
       <div>
         <progress

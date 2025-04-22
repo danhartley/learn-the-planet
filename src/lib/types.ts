@@ -165,6 +165,7 @@ export type DistractorType =
   | 'species'
   | 'image'
   | 'term'
+  | 'definition'
 
 export interface MultipleChoiceTemplate extends BaseQuestionTemplate {
   type: 'multipleChoice'

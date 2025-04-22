@@ -8,6 +8,14 @@ export const definitionTemplates: QuestionTemplate[] = [
     correctAnswerProperty: 'term',
     placeholder: 'Match',
   },
+  {
+    type: 'multipleChoice',
+    level: 'level 1',
+    questionTextTemplate: 'Select the definition for ${term}',
+    correctAnswerProperty: 'definition',
+    distractorCount: 3,
+    distractorType: 'definition',
+  },
 ]
 
 export const taxonomyTemplates: QuestionTemplate[] = [

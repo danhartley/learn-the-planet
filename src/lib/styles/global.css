@@ -7,8 +7,8 @@
   --bg-accent-colour-reptilia: rgb(254, 226, 223);
   --bg-taxonomy: rgb(43 73 34); /* rgb(245 248 252) */
   --bg-definition: rgb(
-    64 34 73
-  ); /* rgb(73 64 34) or rgb(73 34 43) or even! rgb(253 248 244) */
+    73 64 34
+  ); /* rgb(64 34 73) or rgb(73 34 43) or even! rgb(253 248 244) */
   --fg-form-label: rgb(64 64 65);
   --correct: rgb(106 176 84); /* rgb(210 252 195) */
   --incorrect: rgb(176 84 106); /* rgb(252 195 210) lipstick */
@@ -144,6 +144,7 @@ li::marker {
     height: clamp(200px, 20vw, 260px);
 
     span {
+      display: block;
       padding: 0.5rem;
       line-height: 1.4;
     }
@@ -174,7 +175,6 @@ form {
   gap: 1rem;
   margin: 1.5rem 0 0 0;
   padding: 1.5rem;
-  width: 100%;
   padding: 1.5rem;
   @media screen and (min-width: 1025px) {
     width: clamp(30rem, 600px, 40rem);
@@ -188,7 +188,7 @@ form {
   }
   input,
   button {
-    width: inherit;
+    width: 100%;
   }
 
   &.taxonomy {
@@ -228,6 +228,14 @@ form {
   max-width: 60ch;
   font-size: 1.4rem;
   font-weight: 500;
+}
+
+[aria-labelledby='text-entry'] {
+  .question-text {
+    display: flex;
+    align-items: center;
+    min-height: 100px;
+  }
 }
 
 .hidden {
