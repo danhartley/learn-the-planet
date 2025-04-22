@@ -63,7 +63,9 @@ export function ScoreDisplay<T>() {
   const historyItems = history.map(historyItem => (
     <li key={historyItem.id}>
       <div className={historyItem.isCorrect ? 'correct' : 'incorrect'}>
-        {historyItem.question} ({historyItem.answer})
+        <div>
+          {historyItem.question} ({historyItem.answer})
+        </div>
       </div>
     </li>
   ))

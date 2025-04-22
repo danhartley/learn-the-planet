@@ -39,7 +39,7 @@ export const taxonomyTemplates: QuestionTemplate[] = [
     level: 'level 1',
     questionTextTemplate: 'Enter the common name for ${binomial}',
     correctAnswerProperty: 'vernacularName',
-    placeholder: 'Common name',
+    placeholder: 'Common',
   },
   {
     type: 'multipleChoice',

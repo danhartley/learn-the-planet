@@ -5,11 +5,13 @@
   --bg-accent-colour-insecta: rgb(226, 220, 226);
   --bg-accent-colour-mammalia: rgb(240, 199, 130);
   --bg-accent-colour-reptilia: rgb(254, 226, 223);
-  --bg-taxonomy: rgb(245 248 252);
-  --bg-definition: rgb(253 248 244);
+  --bg-taxonomy: rgb(43 73 34); /* rgb(245 248 252) */
+  --bg-definition: rgb(
+    64 34 73
+  ); /* rgb(73 64 34) or rgb(73 34 43) or even! rgb(253 248 244) */
   --fg-form-label: rgb(64 64 65);
-  --correct: rgb(210 252 195);
-  --incorrect: rgb(252 195 210);
+  --correct: rgb(106 176 84); /* rgb(210 252 195) */
+  --incorrect: rgb(176 84 106); /* rgb(252 195 210) lipstick */
 }
 
 body {
@@ -67,8 +69,9 @@ input,
 button {
   letter-spacing: 0.03rem;
   width: 100%;
+  border-radius: 4px;
   &:focus-visible {
-    outline: 1px solid black;
+    outline: none;
   }
 
   @media screen and (min-width: 768px) {
@@ -78,15 +81,14 @@ button {
 
 input {
   padding: 1rem;
-  border: 1px solid lightgray;
-  margin: 0.75rem 0;
+  border: none;
   font-size: 1.6rem;
 }
 
 button {
-  padding: 0.8rem;
+  padding: 1rem;
   border: 1px solid black;
-  border-radius: 4px;
+
   border-radius: 0.25rem;
   background-color: var(--bg-colour);
   cursor: pointer;
@@ -169,34 +171,56 @@ form {
 .form-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
+  margin: 1.5rem 0 0 0;
+  padding: 1.5rem;
+  width: 100%;
+  padding: 1.5rem;
+  @media screen and (min-width: 1025px) {
+    width: clamp(30rem, 600px, 40rem);
+    input,
+    button {
+      width: inherit;
+    }
+  }
+  button {
+    font-size: 1.4rem;
+  }
+  input,
+  button {
+    width: inherit;
+  }
 
   &.taxonomy {
     background-color: var(--bg-taxonomy);
-    padding: 0.5rem 1rem;
-    margin: 1rem 0;
-    border-radius: 4px;
   }
 
   &.definition {
     background-color: var(--bg-definition);
-    padding: 0.5rem 1rem;
-    margin: 1rem 0;
-    border-radius: 4px;
+  }
+
+  &.taxonomy,
+  &.definition {
+    label {
+      color: white !important;
+    }
   }
 
   &.bg-correct {
     background-color: var(--bg-correct);
-    padding: 0.5rem 1rem;
-    margin: 1rem 0;
-    border-radius: 4px;
   }
 
   &.bg-incorrect {
     background-color: var(--bg-incorrect);
-    padding: 0.5rem 1rem;
-    margin: 1rem 0;
+  }
+
+  &.bg-correct,
+  &.bg-incorrect {
     border-radius: 4px;
+
+    label {
+      color: white !important;
+    }
   }
 }
 
@@ -238,7 +262,7 @@ form {
     bottom: 1rem;
     left: 1rem;
     right: 1rem;
-    width: -webkit-fill-available;
+    width: auto;
   }
 }
 
@@ -323,6 +347,13 @@ label {
   color: var(--fg-form-label);
 }
 
+.correct,
+.incorrect {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .correct::before {
   content: '\2713';
   margin-right: 0.25rem;
@@ -339,4 +370,11 @@ label {
 
 .bg-incorrect {
   background-color: var(--incorrect) !important;
+}
+
+[aria-labelledby='score'] {
+  li {
+    margin: 0.75rem 0;
+    max-width: 80ch;
+  }
 }
