@@ -5,13 +5,11 @@
   --bg-accent-colour-insecta: rgb(226, 220, 226);
   --bg-accent-colour-mammalia: rgb(240, 199, 130);
   --bg-accent-colour-reptilia: rgb(254, 226, 223);
-  --bg-taxonomy: rgb(43 73 34); /* rgb(245 248 252) */
-  --bg-definition: rgb(
-    73 64 34
-  ); /* rgb(64 34 73) or rgb(73 34 43) or even! rgb(253 248 244) */
+  --bg-taxonomy: rgb(43 73 34);
+  --bg-definition: rgb(73 64 34);
   --fg-form-label: rgb(64 64 65);
-  --correct: rgb(106 176 84); /* rgb(210 252 195) */
-  --incorrect: rgb(176 84 106); /* rgb(252 195 210) lipstick */
+  --correct: rgb(106 176 84);
+  --incorrect: rgb(176 84 106);
 }
 
 body {
@@ -146,7 +144,7 @@ li::marker {
     span {
       display: block;
       padding: 0.5rem;
-      line-height: 1.4;
+      line-height: 1.2;
     }
   }
 

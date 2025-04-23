@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from 'react'
+import React, { useRef, useCallback } from 'react'
 import {
   MultipleChoiceQuestion,
   MultipleChoiceOption,
@@ -9,11 +9,13 @@ import {
 type Props<T> = {
   layout: Layout<T>
   onSubmit: (answer: string) => Score
+  layouts: Layout<T>[]
 }
 
 export default function MultipleTextChoiceComponent({
   layout,
   onSubmit,
+  layouts,
 }: Props<MultipleChoiceQuestion>) {
   const buttonRefs = useRef<Record<string, HTMLButtonElement | null>>({})
 
@@ -70,6 +72,9 @@ export default function MultipleTextChoiceComponent({
       <h3 id="multiple-choice">Multiple choice</h3>
       <div className="question-text">{question.text}</div>
       <div className="block">{buttons}</div>
+      <div>
+        <div>{`Question ${layout.index + 1} of ${layouts.length}`}</div>
+      </div>
     </section>
   )
 }

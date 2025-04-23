@@ -1,25 +1,15 @@
-import { Question, Score } from './types'
-
 const formatAnswer = (answer: string) => {
   return answer?.toLowerCase().replaceAll(' ', '')
 }
 
-export class Scorer {
-  private questionCount: number = 0
-  private correctCount: number = 0
-  private incorrectCount: number = 0
+const removeBrackets = (text: string): string => {
+  return text.replace(/\s*\([^)]*\)/g, '').trim()
+}
 
-  markAnswer(question: Question, answer: string): Score {
-    const isCorrect = formatAnswer(question.key) === formatAnswer(answer)
+export const markAnswer = (question: string, answer: string): boolean => {
+  const isCorrect =
+    formatAnswer(removeBrackets(question)) ===
+    formatAnswer(removeBrackets(answer))
 
-    this.questionCount++
-    isCorrect ? this.correctCount++ : this.incorrectCount++
-
-    return {
-      isCorrect,
-      questionCount: this.questionCount,
-      correctCount: this.correctCount,
-      incorrectCount: this.incorrectCount,
-    }
-  }
+  return isCorrect
 }

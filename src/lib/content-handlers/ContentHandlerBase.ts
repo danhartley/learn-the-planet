@@ -11,7 +11,9 @@ import {
   DistractorType,
 } from '@/types'
 
-import { getPropByPath, shuffleArray, isEqual } from '@/utils/strings'
+import { getPropByPath, shuffleArray } from '@/utils/strings'
+
+import { markAnswer } from '@/utils/scorer'
 
 export class ContentHandlerBase<T extends LearningItem>
   implements ContentTypeHandler<T>
@@ -93,7 +95,7 @@ export class ContentHandlerBase<T extends LearningItem>
    * Validates an answer against a question
    */
   validateAnswer(question: Question, answer: string): boolean {
-    return isEqual(question.key, answer)
+    return markAnswer(question.key, answer)
   }
 
   /**

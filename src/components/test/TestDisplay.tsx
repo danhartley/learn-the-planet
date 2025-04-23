@@ -8,6 +8,7 @@ import { Gallery } from '@/components/common/Gallery'
 type Props<T> = {
   layout: Layout<T>
   onSubmit: (answer: string) => Score | null
+  layouts: Layout<T>[]
 }
 
 // Create a more robust mapping system with proper TypeScript support
@@ -30,7 +31,7 @@ const displayComponentMap: ComponentMap = {
   },
 }
 
-export function TestDisplay<T>({ layout, onSubmit }: Props<T>) {
+export function TestDisplay<T>({ layout, onSubmit, layouts }: Props<T>) {
   const distractorType = layout.distractorType ?? 'binomial'
   const questionType = layout.question.type
 
@@ -46,7 +47,7 @@ export function TestDisplay<T>({ layout, onSubmit }: Props<T>) {
 
   return (
     <>
-      <Component layout={layout} onSubmit={onSubmit} />
+      <Component layout={layout} onSubmit={onSubmit} layouts={layouts} />
       <ScoreDisplay />
       {/* <Gallery collection={layout.collection} /> */}
     </>

@@ -7,7 +7,7 @@ import { TestDisplay } from '@/components/test/TestDisplay'
 
 export function TestContainer<T>() {
   const router = useRouter()
-  const { currentLayout, isActive, markAnswer, moveToNextQuestion } =
+  const { currentLayout, isActive, markAnswer, moveToNextQuestion, layouts } =
     useTestPlanner<T>()
 
   // Redirect if no test is active
@@ -35,7 +35,11 @@ export function TestContainer<T>() {
   return (
     <section className="group" aria-labelledby="collection">
       <h2 id="collection">{currentLayout.collection.name}</h2>
-      <TestDisplay layout={currentLayout} onSubmit={handleSubmitAnswer} />
+      <TestDisplay
+        layout={currentLayout}
+        onSubmit={handleSubmitAnswer}
+        layouts={layouts || []}
+      />
     </section>
   )
 }
