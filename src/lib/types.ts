@@ -115,6 +115,12 @@ export interface Definition extends LearningItem {
   example?: string
 }
 
+export type SubCollectionSummary<T> = {
+  id: string
+  name: string
+  type: string
+}
+
 export type Collection<T> = {
   id: string
   type: string
@@ -125,6 +131,7 @@ export type Collection<T> = {
     url: string
   }
   items: T[]
+  collections?: SubCollectionSummary<T>[]
 }
 
 export type Layout<T> = {

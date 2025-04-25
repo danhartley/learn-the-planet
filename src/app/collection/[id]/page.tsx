@@ -1,4 +1,4 @@
-import { Collection, ContentHandlerType } from '@/types'
+import { Collection } from '@/types'
 import { getCollectionById } from '@/api/collections'
 
 import { Gallery } from '@/components/common/Gallery'

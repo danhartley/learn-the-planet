@@ -15,7 +15,7 @@ export const TaxonCard = ({ taxon }: Props) => {
   const classNames = `taxon ${bgClassName}`
   const image: RImage = taxon.image ?? taxon.images?.[0] ?? null
 
-  return !!image ? (
+  const taxa = !!image ? (
     <div className={classNames}>
       <figure>
         <ResponsiveImage
@@ -34,4 +34,6 @@ export const TaxonCard = ({ taxon }: Props) => {
       </figure>
     </div>
   ) : null
+
+  return <>{taxa}</>
 }

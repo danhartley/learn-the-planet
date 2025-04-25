@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import { Collection, Taxon } from '@/types'
+import { Collection, Taxon, SubCollectionSummary } from '@/types'
 import { TaxonCard } from '@/components/common/TaxonCard'
 
 type Props = {
@@ -10,10 +10,11 @@ type Props = {
 }
 
 export const TaxonGallery = ({ collection }: Props) => {
-  if (!collection?.items?.[0]?.images?.[0]) return // Ensure items and images are properly accessed
+  if (!collection?.items?.[0]) return
 
   const images = collection?.items.map(item => {
-    const image = item?.images ? item.images[0] : null
+    const firstImage = item?.images ? item.images[0] : null
+    const image = item?.image || firstImage
     if (!image) return
     return <TaxonCard key={item.id + crypto.randomUUID()} taxon={item} />
   })
@@ -22,13 +23,40 @@ export const TaxonGallery = ({ collection }: Props) => {
     <Link href={collection.fieldNotes.url}>Field notes</Link>
   ) : null
 
+  const subCollections = collection?.collections?.map(
+    (subCollection: SubCollectionSummary<Taxon>) => {
+      return subCollection ? (
+        <li key={subCollection.id}>
+          <Link href={`/collection/${encodeURIComponent(subCollection.id)}`}>
+            {subCollection.name}
+          </Link>
+        </li>
+      ) : null
+    }
+  )
+
+  const definitions = subCollections?.filter(
+    sc => sc?.type === 'definition'
+  ) ? (
+    <>
+      <section aria-labelledby="definitions">
+        <h3 id="definitions">Definitions</h3>
+        <ul>{subCollections}</ul>
+      </section>
+    </>
+  ) : null
+
   return (
     <section aria-labelledby="collection" className="group">
       <h2 id="collection">Collection: {collection.name}</h2>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
+      <div>{definitions}</div>
       {fieldNotesUrl}
-      <div className="block">{images}</div>
+      <section aria-labelledby="taxa">
+        <h3 id="taxa">Taxa</h3>
+        <div className="block">{images}</div>
+      </section>
     </section>
   )
 }

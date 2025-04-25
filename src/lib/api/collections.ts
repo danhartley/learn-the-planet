@@ -14,7 +14,7 @@ const generateGenusAndSpeciesFields = (collection: Collection<Taxon>) => {
     const [genus, species] = i.binomial.split(' ')
     i.genus = genus
     i.species = species
-    i.image = i.images?.[0]
+    i.image = i.image || i.images?.[0]
     i?.distractors?.forEach(d => {
       const [genus, species] = d.binomial.split(' ')
       d.genus = genus
@@ -2861,8 +2861,6 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     id: '4',
     type: 'definition',
     name: 'Features of Mediterranean Plants',
-    date: 'Today',
-    location: 'Here',
     items: [
       {
         id: 1,
@@ -2958,7 +2956,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
   }
 
   const collection5 = {
-    id: '6',
+    id: '5',
     type: 'definition',
     name: 'Plant Cells & Basic Structures',
     items: [
@@ -3393,6 +3391,272 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     ],
   }
 
+  const collection6 = {
+    id: '6',
+    type: 'definition',
+    name: 'Traits of Mediterranean wildflower annuals',
+    items: [
+      {
+        id: 'term-1',
+        term: 'annual',
+        definition:
+          'Plants that complete their entire life cycle (germination, reproduction, and death) within a single growing season or year',
+        example:
+          'Sunflowers (Helianthus annuus) sprout in spring, flower in summer, produce seeds, and die by autumn',
+        source: 'https://en.wikipedia.org/wiki/Annual_plant',
+      },
+      {
+        id: 'term-2',
+        term: 'perennial',
+        definition:
+          'Plants that live for more than two years, continuing to grow and bloom over multiple growing seasons',
+        example:
+          'Lavender (Lavandula angustifolia) can live for many years, flowering repeatedly each summer',
+        source: 'https://en.wikipedia.org/wiki/Perennial_plant',
+      },
+      {
+        id: 'term-3',
+        term: 'therophyte',
+        definition:
+          'Plants that survive unfavorable seasons as seeds, completing their life cycle during favorable periods',
+        example: 'Borage (Borago officinalis)',
+        source: 'https://en.wikipedia.org/wiki/Therophyte',
+      },
+      {
+        id: 'term-4',
+        term: 'aestivation',
+        definition:
+          'The arrangement of petals and sepals in a flower bud before it opens',
+        example:
+          'Morning glory (Ipomoea purpurea) flowers have a twisted or contorted aestivation pattern in the bud',
+        source: 'https://en.wikipedia.org/wiki/Aestivation_(botany)',
+      },
+      {
+        id: 'term-5',
+        term: 'herbaceous',
+        definition:
+          'Plants with little or no woody tissue above ground, typically dying back at the end of the growing season',
+        example:
+          'Garden phlox (Phlox paniculata) has soft, non-woody stems that die back to the ground in winter',
+        source: 'https://en.wikipedia.org/wiki/Herbaceous_plant',
+      },
+      {
+        id: 'term-6',
+        term: 'reproductive opportunism',
+        definition:
+          'Strategy where plants respond to favorable environmental conditions by rapidly initiating reproduction',
+        example:
+          'Saguaro cactus (Carnegiea gigantea) produces flowers quickly after substantial rainfall events',
+        source:
+          'https://www.sciencedirect.com/topics/agricultural-and-biological-sciences/plant-reproduction',
+      },
+      {
+        id: 'term-7',
+        term: 'obligate opportunism',
+        definition:
+          'Life history strategy where reproduction occurs only when specific environmental triggers are present',
+        example:
+          'Desert ephemerals like desert gold (Geraea canescens) germinate and flower only after sufficient rainfall',
+        source: 'https://www.jstor.org/stable/2996724',
+      },
+      {
+        id: 'term-8',
+        term: 'semelparity',
+        definition:
+          'Reproductive strategy where an organism reproduces only once in its lifetime before dying',
+        example:
+          'Century plant (Agave americana) grows for many years, flowers once, then dies after seed production',
+        source: 'https://en.wikipedia.org/wiki/Semelparity_and_iteroparity',
+      },
+      {
+        id: 'term-9',
+        term: 'iteroparity',
+        definition:
+          'Reproductive strategy where an organism reproduces multiple times throughout its lifetime',
+        example:
+          'Apple trees (Malus domestica) flower and produce fruit year after year for decades',
+        source: 'https://en.wikipedia.org/wiki/Semelparity_and_iteroparity',
+      },
+      {
+        id: 'term-10',
+        term: 'rosette (botany)',
+        definition:
+          'A circular arrangement of leaves radiating from a central point at or close to ground level',
+        example:
+          'Dandelions (Taraxacum officinale) form a distinctive flat circular pattern of leaves close to the soil',
+        source: 'https://en.wikipedia.org/wiki/Rosette_(botany)',
+      },
+      {
+        id: 'term-11',
+        term: 'convergent evolution',
+        definition:
+          'Process where organisms not closely related independently evolve similar traits due to similar environmental pressures',
+        example:
+          'Cacti (family Cactaceae) from the Americas and euphorbias (family Euphorbiaceae) from Africa have independently evolved similar succulent forms with spines',
+        source: 'https://en.wikipedia.org/wiki/Convergent_evolution',
+      },
+      {
+        id: 'term-12',
+        term: 'episodic resource availability',
+        definition:
+          'Ecological pattern where critical resources like water or nutrients become available unpredictably or intermittently',
+        example:
+          'Desert wildflowers like sand verbena (Abronia villosa) respond to episodic rainfall with rapid germination and flowering',
+        source:
+          'https://www.sciencedirect.com/science/article/abs/pii/S1439179104701435',
+      },
+      {
+        id: 'term-13',
+        term: 'seasonal climatic stress',
+        definition:
+          'Regular, predictable adverse environmental conditions that occur annually and impact plant growth and survival',
+        example:
+          'Deciduous trees like sugar maple (Acer saccharum) shed leaves in response to winter cold stress',
+        source: 'https://en.wikipedia.org/wiki/Acer_saccharum',
+      },
+      {
+        id: 'term-14',
+        term: 'ephemeral (plant)',
+        definition:
+          'Short-lived plants that grow quickly, reproduce, and die within a brief period when conditions are favorable',
+        example:
+          'Desert paintbrush (Castilleja chromosa) emerges after rain, completes its life cycle in weeks, then dies as conditions dry',
+        source: 'https://en.wikipedia.org/wiki/Ephemeral_plant',
+      },
+      {
+        id: 'term-15',
+        term: 'perennation',
+        definition:
+          'The ability of plants to survive from one growing season to the next using specialised structures or tissues',
+        example:
+          'Potato plants (Solanum tuberosum) perennate through underground tubers that sprout new growth in spring',
+        source: 'https://www.britannica.com/science/perennation',
+      },
+      {
+        id: 'term-16',
+        term: 'ruderal',
+        definition:
+          'Plants adapted to colonise disturbed lands, typically exhibiting rapid growth, early reproduction, and high seed production',
+        example:
+          'Common groundsel (Senecio vulgaris) quickly establishes in newly disturbed soil and completes multiple generations per year',
+        source: 'https://en.wikipedia.org/wiki/Ruderal_species',
+      },
+      {
+        id: 'term-17',
+        term: 'autogamy',
+        definition:
+          "Self-fertilisation process where pollen from a flower's anthers fertilises the same flower's stigma",
+        example:
+          'Peanut plants (Arachis hypogaea) have flowers that self-pollinate before they even open',
+        source: 'https://en.wikipedia.org/wiki/Autogamy',
+      },
+      {
+        id: 'term-18',
+        term: 'ecotype',
+        definition:
+          'Organisms which belong to the same species but possess different phenotypical features as a result of environmental factors such as elevation, climate and predation',
+        example:
+          'The Scots pine (Pinus sylvestris) has 20 different ecotypes in an area from Scotland to Siberia, all capable of interbreeding',
+        source: 'https://en.wikipedia.org/wiki/ecotype',
+      },
+      {
+        id: 'term-19',
+        term: 'senescence',
+        definition:
+          'The gradual deterioration of functional characteristics in living organisms',
+        example: 'Ginkgo trees show little effect of age even at 667 years',
+        source: 'https://en.wikipedia.org/wiki/senescence',
+      },
+    ],
+  }
+
+  const collection7 = {
+    id: '7',
+    type: 'taxonomy',
+    name: 'Mediterranean wildflower annuals',
+    items: [
+      {
+        id: 47687,
+        iconicTaxon: 'Plantae',
+        binomial: 'Erodium cicutarium',
+        rank: 'species',
+        vernacularName: "Redstem Stork's-bill",
+        image: {
+          id: 186814588,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/186814588/square.jpg',
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/186814588/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/186814588/square.jpg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Erodium_cicutarium',
+      },
+      {
+        id: 791928,
+        iconicTaxon: 'Plantae',
+        binomial: 'Lysimachia arvensis',
+        rank: 'species',
+        vernacularName: 'scarlet pimpernel',
+        image: {
+          id: 223278664,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/square.jpg',
+          licenceCode: 'cc-by-sa',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/square.jpg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Anagallis_arvensis',
+      },
+      {
+        id: 53212,
+        iconicTaxon: 'Plantae',
+        binomial: 'Silene gallica',
+        rank: 'species',
+        vernacularName: 'Small-flowered Catchfly',
+        image: {
+          id: 333751144,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/333751144/square.jpeg',
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/333751144/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/333751144/square.jpeg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Silene_gallica',
+      },
+      {
+        id: 62313,
+        iconicTaxon: 'Plantae',
+        binomial: 'Nigella damascena',
+        rank: 'species',
+        vernacularName: 'love-in-a-mist',
+        image: {
+          id: 207557206,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/207557206/square.jpg',
+          licenceCode: 'cc-by',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/207557206/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/207557206/square.jpg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Nigella_damascena',
+      },
+    ],
+    collections: [
+      {
+        id: '6',
+        name: 'Traits of Mediterranean wildflower annuals',
+        type: 'definition',
+      },
+    ],
+  }
+
   return new Promise((resolve, reject) => {
     const collections = [
       generateGenusAndSpeciesFields({
@@ -3415,6 +3679,14 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         ...collection5,
         items: sortAlphabeticallyBy(dedupe(collection5.items), 'term'),
       },
+      {
+        ...collection6,
+        items: sortAlphabeticallyBy(dedupe(collection6.items), 'term'),
+      },
+      generateGenusAndSpeciesFields({
+        ...collection7,
+        items: dedupe(collection7.items),
+      }),
     ]
 
     resolve(collections)
