@@ -1,17 +1,18 @@
 :root {
   /* Colors */
-  --color-line: lightgray;
-  --color-fg-main: rgb(0, 0, 0);
-  --color-bg-main: white;
-  --color-bg-plantae: rgb(216, 223, 210);
-  --color-bg-insecta: rgb(226, 220, 226);
-  --color-bg-mammalia: rgb(240, 199, 130);
-  --color-bg-reptilia: rgb(254, 226, 223);
-  --color-bg-taxon: rgb(43 73 34);
-  --color-bg-definition: rgb(73 64 34);
-  --color-form-label: rgb(64 64 65);
-  --color-correct: rgb(106 176 84);
-  --color-incorrect: rgb(176 84 106);
+  --colour-line: lightgray;
+  --colour-fg-main: rgb(0, 0, 0);
+  --colour-fg-alt-main: rgb(255, 255, 255);
+  --colour-bg-main: rgb(255, 255, 255);
+  --colour-bg-plantae: rgb(216, 223, 210);
+  --colour-bg-insecta: rgb(226, 220, 226);
+  --colour-bg-mammalia: rgb(240, 199, 130);
+  --colour-bg-reptilia: rgb(254, 226, 223);
+  --colour-bg-taxon: rgb(43 73 34);
+  --colour-bg-definition: rgb(73 64 34);
+  --colour-form-label: rgb(64 64 65);
+  --colour-correct: rgb(106 176 84);
+  --colour-incorrect: rgb(176 84 106);
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -68,13 +69,13 @@ h3 {
 
 a {
   text-underline-offset: 0.4rem;
-  color: var(--color-fg-main);
+  color: var(--colour-fg-main);
   overflow-wrap: anywhere;
   line-height: 1.8;
 }
 
 a:visited {
-  color: var(--color-fg-main);
+  color: var(--colour-fg-main);
 }
 
 /* Layout elements */
@@ -106,7 +107,7 @@ button {
 }
 
 button:focus-visible {
-  outline: 2px solid var(--color-fg-main);
+  outline: 2px solid var(--colour-fg-main);
   outline-offset: 2px;
 }
 
@@ -122,8 +123,8 @@ input {
 
 button {
   padding: var(--spacing-md);
-  border: 1px solid var(--color-fg-main);
-  background-color: var(--color-bg-main);
+  border: 1px solid var(--colour-fg-main);
+  background-color: var(--colour-bg-main);
   cursor: pointer;
 }
 
@@ -132,7 +133,7 @@ button:hover {
 }
 
 button:disabled {
-  border-color: var(--color-line);
+  border-color: var(--colour-line);
   cursor: not-allowed;
 }
 
@@ -207,8 +208,8 @@ li::marker {
 }
 
 .group-block {
-  border-top: 1px solid var(--color-line);
-  border-bottom: 1px solid var(--color-line);
+  border-top: 1px solid var(--colour-line);
+  border-bottom: 1px solid var(--colour-line);
   margin: var(--spacing-md) 0 3rem;
   padding: var(--spacing-md) 0;
 }
@@ -239,16 +240,16 @@ form {
 
 /* Form row variants */
 .form-row.taxon {
-  background-color: var(--color-bg-taxon);
+  background-color: var(--colour-bg-taxon);
 }
 
 .form-row.definition {
-  background-color: var(--color-bg-definition);
+  background-color: var(--colour-bg-definition);
 }
 
 .form-row.taxon label,
 .form-row.definition label {
-  color: white !important;
+  color: var(--colour-fg-alt-main) !important;
 }
 
 .form-row.bg-correct,
@@ -258,7 +259,7 @@ form {
 
 .form-row.bg-correct label,
 .form-row.bg-incorrect label {
-  color: white !important;
+  color: var(--colour-fg-alt-main) !important;
 }
 
 /* Question elements */
@@ -276,7 +277,7 @@ form {
 
 /* Card components */
 .card {
-  border: 1px solid var(--color-line);
+  border: 1px solid var(--colour-line);
   padding: 0 var(--spacing-md) var(--spacing-md);
   display: flex;
   flex-direction: column;
@@ -329,27 +330,27 @@ figcaption > div > div:nth-child(2) {
 
 /* Background colors */
 .bg-plantae {
-  background-color: var(--color-bg-plantae);
+  background-color: var(--colour-bg-plantae);
 }
 
 .bg-insecta {
-  background-color: var(--color-bg-insecta);
+  background-color: var(--colour-bg-insecta);
 }
 
 .bg-mammalia {
-  background-color: var(--color-bg-mammalia);
+  background-color: var(--colour-bg-mammalia);
 }
 
 .bg-reptilia {
-  background-color: var(--color-bg-reptilia);
+  background-color: var(--colour-bg-reptilia);
 }
 
 .bg-correct {
-  background-color: var(--color-correct) !important;
+  background-color: var(--colour-correct) !important;
 }
 
 .bg-incorrect {
-  background-color: var(--color-incorrect) !important;
+  background-color: var(--colour-incorrect) !important;
 }
 
 /* Status indicators */
@@ -362,12 +363,10 @@ figcaption > div > div:nth-child(2) {
 
 .correct::before {
   content: '\2713';
-  margin-right: var(--spacing-xs);
 }
 
 .incorrect::before {
   content: '\2717';
-  margin-right: var(--spacing-xs);
 }
 
 /* Taxon sections */
@@ -404,7 +403,7 @@ figcaption > div > div:nth-child(2) {
 
 .sub-section {
   margin-block-start: var(--spacing-xl);
-  border-top: 1px solid var(--color-line);
+  border-top: 1px solid var(--colour-line);
 }
 
 /* Score section */
@@ -414,7 +413,7 @@ figcaption > div > div:nth-child(2) {
 
 /* Progress indicators */
 progress {
-  accent-color: var(--color-fg-main);
+  accent-color: var(--colour-fg-main);
 }
 
 /* Media queries */
@@ -450,5 +449,38 @@ progress {
   .form-row input,
   .form-row button {
     width: inherit;
+  }
+}
+
+/* Score notification */
+.notification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.visible {
+    opacity: 1;
+  }
+
+  &.hidden {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  & > div {
+    position: fixed;
+    padding: var(--spacing-lg);
+    border: 1px solid var(--colour-line);
+    border-radius: var(--border-radius-sm);
+    bottom: var(--spacing-lg);
+    color: var(--colour-fg-alt-main);
+
+    &.correct {
+      background-color: var(--colour-correct);
+    }
+
+    &.incorrect {
+      background-color: var(--colour-incorrect);
+    }
   }
 }

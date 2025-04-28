@@ -1,14 +1,22 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { TestDisplay } from '@/components/test/TestDisplay'
+import { ScoreDisplayNotification } from '@/components/ScoreDisplayNotification'
 
 export function TestContainer<T>() {
   const router = useRouter()
-  const { currentLayout, isActive, markAnswer, moveToNextQuestion, layouts } =
-    useTestPlanner<T>()
+  const {
+    currentLayout,
+    isActive,
+    markAnswer,
+    moveToNextQuestion,
+    layouts,
+    lastScore,
+  } = useTestPlanner<T>()
+  const [isVisibleClassName, setIsVisibleClassName] = useState('hidden')
 
   // Redirect if no test is active
   useEffect(() => {
@@ -21,25 +29,33 @@ export function TestContainer<T>() {
 
   const handleSubmitAnswer = (answer: string) => {
     const score = markAnswer(answer)
+    setIsVisibleClassName('visible')
     setTimeout(() => {
       const hasNext = moveToNextQuestion()
-
       if (!hasNext) {
         // Test completed
         router.push('/results')
       }
+      setIsVisibleClassName('hidden')
     }, 2000)
     return score
   }
 
   return (
-    <section className="group" aria-labelledby="collection">
-      <h1 id="collection">{currentLayout.collection.name}</h1>
-      <TestDisplay
-        layout={currentLayout}
-        onSubmit={handleSubmitAnswer}
-        layouts={layouts || []}
+    <>
+      <section className="group" aria-labelledby="collection">
+        <h1 id="collection">{currentLayout.collection.name}</h1>
+        <TestDisplay
+          layout={currentLayout}
+          onSubmit={handleSubmitAnswer}
+          layouts={layouts || []}
+        />
+      </section>
+      <ScoreDisplayNotification
+        isCorrect={lastScore?.isCorrect || false}
+        history={history}
+        isVisibleClassName={isVisibleClassName}
       />
-    </section>
+    </>
   )
 }

@@ -4,5 +4,5 @@ import Home from './page'
 
 test('Home', () => {
   render(<Home />)
-  expect(screen.getByRole('heading', { level: 2, name: 'Home' })).toBeDefined()
+  expect(screen.getByRole('heading', { level: 1, name: 'Home' })).toBeDefined()
 })

@@ -3,7 +3,6 @@ import ImageChoiceComponent from '@/components/test/layouts/ImageChoiceComponent
 import MultipleTextChoiceComponent from '@/components/test/layouts/MultipleTextChoiceComponent'
 import TextEntryComponent from '@/components/test/layouts/TextEntryComponent'
 import { ScoreDisplay } from '@/components/ScoreDisplay'
-import { Gallery } from '@/components/common/Gallery'
 
 type Props<T> = {
   layout: Layout<T>
@@ -49,7 +48,6 @@ export function TestDisplay<T>({ layout, onSubmit, layouts }: Props<T>) {
     <>
       <Component layout={layout} onSubmit={onSubmit} layouts={layouts} />
       <ScoreDisplay />
-      {/* <Gallery collection={layout.collection} /> */}
     </>
   )
 }
