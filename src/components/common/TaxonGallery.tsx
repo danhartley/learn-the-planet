@@ -2,6 +2,9 @@
 
 import Link from 'next/link'
 
+import { useRouter } from 'next/navigation'
+import { useTestPlanner } from '@/hooks/useTestPlanner'
+
 import { Collection, Taxon, SubCollectionSummary } from '@/types'
 import { TaxonCard } from '@/components/common/TaxonCard'
 
@@ -12,7 +15,15 @@ type Props = {
 export const TaxonGallery = ({ collection }: Props) => {
   if (!collection?.items?.[0]) return
 
-  const images = collection?.items.map(item => {
+  const router = useRouter()
+  const { startTest } = useTestPlanner<T>()
+
+  const handleStartTest = () => {
+    startTest(collection)
+    router.push('/test')
+  }
+
+  const taxa = collection?.items.map(item => {
     const firstImage = item?.images ? item.images[0] : null
     const image = item?.image || firstImage
     if (!image) return
@@ -53,7 +64,10 @@ export const TaxonGallery = ({ collection }: Props) => {
       {fieldNotesUrl}
       <section aria-labelledby="taxa" className="sub-section">
         <h3 id="taxa">Taxa</h3>
-        <div className="block">{images}</div>
+        <div className="block">{taxa}</div>
+        <button id="start-test" onClick={handleStartTest}>
+          Test your knowledge of these taxa
+        </button>
       </section>
     </section>
   )

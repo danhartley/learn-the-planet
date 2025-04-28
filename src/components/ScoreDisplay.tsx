@@ -40,9 +40,7 @@ export function ScoreDisplay<T>() {
   // Score display logic
   const score = lastScore ? (
     <p>{`You've answered ${lastScore.correctCount} out of ${lastScore.questionCount} correctly.`}</p>
-  ) : (
-    <p>Start test</p>
-  )
+  ) : null
 
   // Update history when lastScore changes
   useEffect(() => {

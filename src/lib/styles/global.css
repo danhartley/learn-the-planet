@@ -1,6 +1,7 @@
 :root {
   /* Colors */
   --color-line: lightgray;
+  --color-fg-main: rgb(0, 0, 0);
   --color-bg-main: white;
   --color-bg-plantae: rgb(216, 223, 210);
   --color-bg-insecta: rgb(226, 220, 226);
@@ -31,7 +32,7 @@
   --font-size-xl: 1.6rem;
 
   /* Element sizes */
-  --card-width: clamp(100px, 10rem, 200px);
+  --card-width: clamp(100px, 12rem, 240px);
   --card-height: clamp(200px, 14rem, 300px);
   --img-size: clamp(180px, 16vw, 240px);
   --button-size: clamp(200px, 20vw, 260px);
@@ -67,17 +68,27 @@ h3 {
 
 a {
   text-underline-offset: 0.4rem;
-  color: black;
+  color: var(--color-fg-main);
+  overflow-wrap: anywhere;
+  line-height: 1.8;
 }
 
 a:visited {
-  color: black;
+  color: var(--color-fg-main);
 }
 
 /* Layout elements */
 header {
   position: relative;
-  height: 4vh;
+  height: 0;
+  top: var(--spacing-md);
+  font-size: var(--font-size-md);
+  text-transform: uppercase;
+
+  & > div {
+    position: absolute;
+    display: none;
+  }
 }
 
 footer {
@@ -95,7 +106,7 @@ button {
 }
 
 button:focus-visible {
-  outline: 2px solid black;
+  outline: 2px solid var(--color-fg-main);
   outline-offset: 2px;
 }
 
@@ -111,7 +122,7 @@ input {
 
 button {
   padding: var(--spacing-md);
-  border: 1px solid black;
+  border: 1px solid var(--color-fg-main);
   background-color: var(--color-bg-main);
   cursor: pointer;
 }
@@ -175,6 +186,7 @@ li::marker {
 .block.options > button {
   width: var(--button-size);
   height: var(--button-size);
+  padding: 0;
 }
 
 .block.options > button span {
@@ -363,6 +375,10 @@ figcaption > div > div:nth-child(2) {
   min-height: initial;
 }
 
+[aria-labelledby='taxa'] .block {
+  margin-bottom: 2rem;
+}
+
 /* Definition sections */
 [aria-labelledby='definitions'] dl {
   display: flex;
@@ -376,6 +392,10 @@ figcaption > div > div:nth-child(2) {
   flex-direction: column;
   row-gap: var(--spacing-sm);
   margin-left: 0;
+
+  &:last-child {
+    margin-bottom: 2rem;
+  }
 }
 
 [data-type='definition'] .block.options > button span {
@@ -394,17 +414,18 @@ figcaption > div > div:nth-child(2) {
 
 /* Progress indicators */
 progress {
-  accent-color: black;
+  accent-color: var(--color-fg-main);
 }
 
 /* Media queries */
 @media screen and (min-width: 768px) {
+  header {
+    height: 4vh;
+  }
+
   header > div {
-    position: absolute;
+    display: block;
     right: 0%;
-    top: var(--spacing-md);
-    font-size: var(--font-size-md);
-    text-transform: uppercase;
   }
 
   footer {
