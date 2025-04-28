@@ -38,12 +38,10 @@ export const TaxonGallery = ({ collection }: Props) => {
   const definitions = subCollections?.filter(
     sc => sc?.type === 'definition'
   ) ? (
-    <>
-      <section aria-labelledby="definitions">
-        <h3 id="definitions">Definitions</h3>
-        <ul>{subCollections}</ul>
-      </section>
-    </>
+    <section aria-labelledby="definitions" className="sub-section">
+      <h3 id="definitions">Definitions</h3>
+      <ul>{subCollections}</ul>
+    </section>
   ) : null
 
   return (
@@ -51,9 +49,9 @@ export const TaxonGallery = ({ collection }: Props) => {
       <h2 id="collection">Collection: {collection.name}</h2>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
-      <div>{definitions}</div>
+      {definitions}
       {fieldNotesUrl}
-      <section aria-labelledby="taxa">
+      <section aria-labelledby="taxa" className="sub-section">
         <h3 id="taxa">Taxa</h3>
         <div className="block">{images}</div>
       </section>

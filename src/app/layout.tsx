@@ -11,7 +11,9 @@ export const metadata = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <script src="http://localhost:8097" />
+      </head>
       <body>
         <header>
           <h1>Learn the Planet</h1>

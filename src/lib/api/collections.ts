@@ -3400,7 +3400,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         id: 'term-1',
         term: 'annual',
         definition:
-          'Plants that complete their entire life cycle (germination, reproduction, and death) within a single growing season or year',
+          'Plant that completes its entire life cycle (germination, reproduction, and death) within a single growing season or year',
         example:
           'Sunflowers (Helianthus annuus) sprout in spring, flower in summer, produce seeds, and die by autumn',
         source: 'https://en.wikipedia.org/wiki/Annual_plant',
@@ -3409,7 +3409,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         id: 'term-2',
         term: 'perennial',
         definition:
-          'Plants that live for more than two years, continuing to grow and bloom over multiple growing seasons',
+          'Plant that lives for more than two years, continuing to grow and bloom over multiple growing seasons',
         example:
           'Lavender (Lavandula angustifolia) can live for many years, flowering repeatedly each summer',
         source: 'https://en.wikipedia.org/wiki/Perennial_plant',
@@ -3567,6 +3567,199 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         example: 'Ginkgo trees show little effect of age even at 667 years',
         source: 'https://en.wikipedia.org/wiki/senescence',
       },
+      {
+        id: 'term-20',
+        term: 'Floral competency',
+        definition:
+          'A developmental state in which a plant is capable of responding to floral inductive signals and initiating flower formation.',
+        source: '',
+        example:
+          'In Arabidopsis thaliana, juvenile plants are not floral competent and do not respond to photoperiodic signals promoting flowering until they reach a certain developmental stage.',
+      },
+
+      {
+        id: 'term-21',
+        term: 'Photoperiod',
+        definition:
+          'The relative length of day and night in a 24-hour cycle, which acts as an environmental signal influencing plant developmental processes, especially the timing of flowering.',
+        source: 'https://en.wikipedia.org/wiki/Photoperiodism',
+        example:
+          'Long-day plants like spinach flower when the photoperiod exceeds a certain critical length, usually in late spring or early summer.',
+      },
+      {
+        id: 'term-22',
+        term: 'Vernalization',
+        definition:
+          "The induction of a plant's flowering process by exposure to prolonged cold temperatures, enabling the plant to become competent to flower when favorable conditions return.",
+        source: 'https://en.wikipedia.org/wiki/Vernalization',
+        example:
+          'Winter wheat requires vernalization to flower; it will not flower in spring unless it has been exposed to cold winter temperatures.',
+      },
+      {
+        id: 'term-23',
+        term: 'Gibberellins',
+        definition:
+          'A group of plant hormones that regulate growth and influence various developmental processes, including stem elongation, germination, and flowering.',
+        source: 'https://en.wikipedia.org/wiki/Gibberellin',
+        example:
+          'Application of gibberellins to rosette plants like cabbage can induce bolting and flowering even under non-inductive photoperiods.',
+      },
+
+      {
+        id: 'term-24',
+        term: 'Ecotype',
+        definition:
+          'A genetically distinct population within a species that is adapted to specific environmental conditions.',
+        source: 'https://en.wikipedia.org/wiki/Ecotype',
+        example:
+          'The coastal and inland ecotypes of Cistus ladanifer in the Western Mediterranean exhibit differences in drought tolerance.',
+      },
+      {
+        id: 'term-25',
+        term: 'Allele',
+        definition:
+          'One of two or more alternative forms of a gene that arise by mutation and are found at the same place on a chromosome.',
+        source: 'https://en.wikipedia.org/wiki/Allele',
+        example:
+          'Different alleles in wild populations of Olea europaea (olive) affect traits such as fruit size and oil composition.',
+      },
+      {
+        id: 'term-26',
+        term: 'Pleiotropic (gene)',
+        definition:
+          'A gene that influences multiple, seemingly unrelated phenotypic traits.',
+        source: 'https://en.wikipedia.org/wiki/Pleiotropy',
+        example:
+          'A pleiotropic gene in Lavandula stoechas (Spanish lavender) affects both flower colour and scent production.',
+      },
+      {
+        id: 'term-27',
+        term: 'Endodormancy',
+        definition:
+          'A physiological state characterised by growth inhibition that occurs in response to cold temperatures in woody species.',
+        source: 'https://en.wikipedia.org/wiki/Dormancy#Plants',
+        example:
+          'Quercus suber (cork oak) exhibits endodormancy during the cool winters of the Western Mediterranean.',
+      },
+      {
+        id: 'term-28',
+        term: 'Reproductive assurance',
+        definition:
+          'An increase in seed set caused by self-fertilisation when pollinators and/or potential mates are scarce.',
+        source: 'https://en.wikipedia.org/wiki/Reproductive_assurance',
+        example:
+          'In the Western Mediterranean, Linaria vulgaris may rely on self-fertilisation for reproductive assurance during seasons of low pollinator activity.',
+      },
+
+      {
+        id: 'term-29',
+        term: 'Outcrossing',
+        definition:
+          'The transfer of pollen between different individuals, leading to cross-fertilisation and increased genetic diversity.',
+        source: 'https://en.wikipedia.org/wiki/Outcrossing',
+        example:
+          'In the Western Mediterranean, outcrossing is common in Rosmarinus officinalis (rosemary), promoting genetic variation in wild populations.',
+      },
+      {
+        id: 'term-30',
+        term: 'Allopatric',
+        definition:
+          'Describing populations or species that occur in separate, non-overlapping geographic areas.',
+        source: 'https://en.wikipedia.org/wiki/Allopatry',
+        example:
+          'Allopatric populations of the Iberian endemic Narcissus species have evolved separately due to mountain barriers.',
+      },
+      {
+        id: 'term-31',
+        term: 'Sympatric',
+        definition:
+          'Describing populations or species that occupy the same or overlapping geographic areas and may encounter one another.',
+        source: 'https://en.wikipedia.org/wiki/Sympatry',
+        example:
+          'Sympatric species of the genus Cistus often coexist in Mediterranean scrublands, maintaining reproductive isolation through different flowering times.',
+      },
+      {
+        id: 'term-32',
+        term: 'Pollen limitation',
+        definition:
+          'Reduced reproductive success caused by an inadequate quantity or quality of pollen such that some ovules remain unfertilised and developing embryos do not compete for resources.',
+        source: 'https://en.wikipedia.org/wiki/Pollen_limitation',
+        example:
+          'In Mediterranean populations of Anthyllis vulneraria, pollen limitation can occur during dry seasons with low pollinator activity.',
+      },
+      {
+        id: 'term-33',
+        term: 'Inbreeding depression',
+        definition:
+          'Reduction in viability and fertility of offspring from self-fertilisation or other forms of inbreeding compared with cross-fertilised offspring.',
+        source: 'https://en.wikipedia.org/wiki/Inbreeding_depression',
+        example:
+          'Inbreeding depression has been observed in isolated populations of Silene vulgaris growing on Mediterranean islands.',
+      },
+
+      {
+        id: 'term-34',
+        term: 'Self-incompatibility (SI)',
+        definition:
+          'A physiological mechanism that prevents fertile hermaphrodite plants from setting abundant seed following self-pollination.',
+        source: 'https://en.wikipedia.org/wiki/Self-incompatibility_in_plants',
+        example:
+          'Self-incompatibility is common in wild populations of Olea europaea (olive) in the Mediterranean Basin.',
+      },
+      {
+        id: 'term-35',
+        term: 'Herkogamy',
+        definition:
+          'A floral trait characterised by spatial separation of anthers and stigmas within a flower, reducing the likelihood of self-pollination.',
+        source: 'https://en.wikipedia.org/wiki/Herkogamy',
+        example:
+          'Herkogamy is observed in Mediterranean species like Salvia officinalis, where the floral structure promotes cross-pollination by bees.',
+      },
+      {
+        id: 'term-36',
+        term: 'Dichogamy',
+        definition:
+          'A temporal separation of male and female reproductive phases within the same flower or plant to reduce self-pollination.',
+        source: 'https://en.wikipedia.org/wiki/Dichogamy',
+        example:
+          'In Mediterranean populations of Arbutus unedo (strawberry tree), flowers often display protandry, a form of dichogamy where pollen is released before stigmas become receptive.',
+      },
+      {
+        id: 'term-37',
+        term: 'Dioecy',
+        definition:
+          'A sexual polymorphism in which populations are composed of female and male individuals.',
+        source: 'https://en.wikipedia.org/wiki/Dioecy',
+        example:
+          'Dioecy occurs in Pistacia lentiscus, a widespread shrub in Mediterranean ecosystems.',
+      },
+      {
+        id: 'term-38',
+        term: 'Geitonogamy',
+        definition:
+          'Self-pollination resulting from pollen transfer between flowers on the same individual.',
+        source: 'https://en.wikipedia.org/wiki/Geitonogamy',
+        example:
+          'In Lavandula latifolia, a Mediterranean shrub, geitonogamy can occur when pollinators move pollen between flowers of the same plant.',
+      },
+      {
+        id: 'term-39',
+        term: 'Polyploidy',
+        definition:
+          'The condition of having more than two complete sets of chromosomes, often resulting in increased size, vigour, or adaptability.',
+        source: 'https://en.wikipedia.org/wiki/Polyploidy',
+        example:
+          'Polyploidy is common in the Mediterranean genus Centaurea, contributing to the diversity and ecological success of its species.',
+      },
+      {
+        id: 'term-40',
+        term: 'Seed set',
+        definition:
+          'The process during which the fertilised ovule develops into a seed.',
+        source: 'https://en.wikipedia.org/wiki/Seed#Size_and_seed_set',
+        example:
+          'In Ceratonia siliqua (carob tree) native to the Mediterranean, fertilised ovules develop into large, hard seeds adapted for dispersal by animals.',
+      },
     ],
   }
 
@@ -3650,9 +3843,139 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     ],
     collections: [
       {
+        id: '5',
+        name: 'Plant cells and basic structures',
+        type: 'definition',
+      },
+      {
         id: '6',
         name: 'Traits of Mediterranean wildflower annuals',
         type: 'definition',
+      },
+    ],
+  }
+
+  const collection8 = {
+    id: '8',
+    type: 'definition',
+    name: 'Mechanisms of Plant Growth',
+    items: [
+      {
+        id: 'term-41',
+        term: 'Primary growth',
+        definition:
+          'Growth that occurs as a result of cell division at the tips of roots and shoots, leading to an increase in length.',
+        source: 'https://en.wikipedia.org/wiki/Primary_growth',
+        example:
+          'Primary growth in Olea europaea (olive) enables the extension of shoots during the spring growing season.',
+      },
+      {
+        id: 'term-42',
+        term: 'Secondary growth',
+        definition:
+          'Growth that results from the activity of lateral meristems and leads to an increase in the thickness or girth of roots and stems.',
+        source: 'https://en.wikipedia.org/wiki/Secondary_growth',
+        example:
+          'Quercus suber (cork oak) shows prominent secondary growth, forming thick, corky bark layers.',
+      },
+      {
+        id: 'term-43',
+        term: 'Auxin',
+        definition:
+          'A class of plant hormones that regulate various aspects of growth and development, including cell elongation, apical dominance, and root formation.',
+        source: 'https://en.wikipedia.org/wiki/Auxin',
+        example:
+          'Auxin distribution in Mediterranean species like Lavandula stoechas influences the curvature of stems towards light.',
+      },
+      {
+        id: 'term-44',
+        term: 'Geotropism',
+        definition:
+          'The growth response of a plant or part of a plant to gravity.',
+        source: 'https://en.wikipedia.org/wiki/Gravitropism',
+        example:
+          'The roots of Cistus albidus exhibit positive geotropism, growing downward into the rocky Mediterranean soils.',
+      },
+      {
+        id: 'term-45',
+        term: 'Gravitropism',
+        definition:
+          'A directional growth response in which a plant organ grows in response to gravitational forces; often used interchangeably with geotropism.',
+        source: 'https://en.wikipedia.org/wiki/Gravitropism',
+        example:
+          'The stems of Rosmarinus officinalis (rosemary) exhibit negative gravitropism, growing upwards against the force of gravity.',
+      },
+      {
+        id: 'term-46',
+        term: 'Phototropism',
+        definition:
+          'The growth of a plant in response to light direction, typically resulting in stems bending towards a light source.',
+        source: 'https://en.wikipedia.org/wiki/Phototropism',
+        example:
+          'Seedlings of Lavatera maritima in the Western Mediterranean display positive phototropism, bending toward the sunlight.',
+      },
+      {
+        id: 'term-47',
+        term: 'Cytokinin',
+        definition:
+          'A class of plant hormones that promote cell division in plant roots and shoots and delay senescence.',
+        source: 'https://en.wikipedia.org/wiki/Cytokinin',
+        example:
+          'Cytokinin activity helps sustain shoot growth in drought-tolerant plants like Nerium oleander native to Mediterranean regions.',
+      },
+      {
+        id: 'term-48',
+        term: 'Cytokinesis',
+        definition:
+          'The division of the cytoplasm of a parental cell into two daughter cells following mitosis or meiosis.',
+        source: 'https://en.wikipedia.org/wiki/Cytokinesis',
+        example:
+          'During leaf development in Mediterranean shrubs like Pistacia lentiscus, cytokinesis ensures proper cell division and tissue formation.',
+      },
+      {
+        id: 'term-49',
+        term: 'Meristem',
+        definition:
+          'Regions in plants consisting of undifferentiated cells capable of division and growth, responsible for the formation of new tissues.',
+        source: 'https://en.wikipedia.org/wiki/Meristem',
+        example:
+          'The apical meristems of Ficus carica (fig tree) in the Mediterranean allow continuous growth of branches during the growing season.',
+      },
+      {
+        id: 'term-50',
+        term: 'Apical meristem',
+        definition:
+          'A meristem located at the tip of a plant shoot or root that enables primary growth by producing new cells.',
+        source: 'https://en.wikipedia.org/wiki/Apical_meristem',
+        example:
+          'In Ceratonia siliqua (carob tree), apical meristems drive the elongation of young roots and shoots each spring.',
+      },
+      {
+        id: 'term-51',
+        term: 'Abscisic acid',
+        definition:
+          'A plant hormone that regulates processes such as seed dormancy, stomatal closure, and responses to environmental stress.',
+        source: 'https://en.wikipedia.org/wiki/Abscisic_acid',
+        example:
+          'Abscisic acid accumulation in Olea europaea (olive) helps the plant conserve water by closing stomata during Mediterranean summer droughts.',
+      },
+      {
+        id: 'term-52',
+        term: 'Ethylene',
+        definition:
+          'A gaseous plant hormone involved in regulating processes such as fruit ripening, flower wilting, and leaf fall.',
+        source: 'https://en.wikipedia.org/wiki/Ethylene',
+        example:
+          'Ethylene production in Ficus carica (fig) accelerates fruit ripening under the hot, dry Mediterranean climate.',
+      },
+      {
+        id: 'term-53',
+        term: 'Mitosis',
+        definition:
+          'A process of nuclear division in eukaryotic cells that results in two genetically identical daughter nuclei, essential for growth and tissue repair.',
+        source: 'https://en.wikipedia.org/wiki/Mitosis',
+        example:
+          'In young shoots of Lavandula stoechas, mitosis drives rapid cell proliferation during spring growth.',
       },
     ],
   }
@@ -3687,6 +4010,10 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         ...collection7,
         items: dedupe(collection7.items),
       }),
+      {
+        ...collection8,
+        items: sortAlphabeticallyBy(dedupe(collection8.items), 'term'),
+      },
     ]
 
     resolve(collections)
