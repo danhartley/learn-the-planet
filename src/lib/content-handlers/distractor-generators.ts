@@ -10,7 +10,7 @@ import { shuffle } from '@/utils/shuffle'
 /**
  * Generate distractors for Taxon items
  */
-export function generateTaxonomyDistractors(
+export function generateTaxonDistractors(
   collection: Collection<Taxon>,
   item: Taxon,
   count: number,

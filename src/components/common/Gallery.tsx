@@ -8,7 +8,7 @@ interface GalleryProps<T> {
 
 export function Gallery<T>({ collection }: GalleryProps<T>) {
   const pageMap: Record<ContentHandlerType, React.ComponentType<any>> = {
-    taxonomy: TaxonGallery,
+    taxon: TaxonGallery,
     definition: DefinitionGallery,
   }
 

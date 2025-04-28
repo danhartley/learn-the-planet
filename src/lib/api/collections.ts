@@ -29,7 +29,7 @@ const generateGenusAndSpeciesFields = (collection: Collection<Taxon>) => {
 export const getCollections = (): Promise<Collection<any>[]> => {
   const collection1 = {
     id: '1',
-    type: 'taxonomy',
+    type: 'taxon',
     name: 'Arrábida field notes',
     date: 'Fri May 03 2024',
     location: 'São Simão, Portugal',
@@ -1898,7 +1898,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
   const collection2 = {
     id: '2',
-    type: 'taxonomy',
+    type: 'taxon',
     name: 'Benenden fieldnotes',
     date: 'Sunday 19 May 2024',
     location: 'Benenden, UK',
@@ -2466,7 +2466,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
   const collection3 = {
     id: '3',
-    type: 'taxonomy',
+    type: 'taxon',
     name: 'Barreiro fieldnotes',
     date: 'Thu Apr 18 2024',
     location: 'Barreiro, Portugal',
@@ -3765,7 +3765,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
   const collection7 = {
     id: '7',
-    type: 'taxonomy',
+    type: 'taxon',
     name: 'Mediterranean wildflower annuals',
     items: [
       {
@@ -4027,7 +4027,7 @@ export const getCollectionById = async (
 
   let collection = collections.find(c => c.id === id)
 
-  if (collection?.type === 'taxonomy') {
+  if (collection?.type === 'taxon') {
     generateGenusAndSpeciesFields(collection)
   }
 

@@ -18,7 +18,7 @@ export const definitionTemplates: QuestionTemplate[] = [
   },
 ]
 
-export const taxonomyTemplates: QuestionTemplate[] = [
+export const taxonTemplates: QuestionTemplate[] = [
   {
     type: 'multipleChoice',
     level: 'level 1',
@@ -63,7 +63,7 @@ export const getTemplatesByContentType = (
   contentType: ContentHandlerType
 ): QuestionTemplate[] => {
   const templateMap = {
-    taxonomy: taxonomyTemplates,
+    taxon: taxonTemplates,
     definition: definitionTemplates,
   }
 

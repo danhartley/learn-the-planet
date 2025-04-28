@@ -211,4 +211,4 @@ export interface ContentTypeHandler<T> {
   validateAnswer(question: Question, answer: string): boolean
 }
 
-export type ContentHandlerType = 'taxonomy' | 'definition'
+export type ContentHandlerType = 'taxon' | 'definition'
