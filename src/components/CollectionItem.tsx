@@ -28,7 +28,7 @@ export function CollectionItem<T>({ collection }: Props<T>) {
         {collection.items.length} items
       </Link>
       <button id="start-test" onClick={handleStartTest}>
-        Start Test
+        Start test
       </button>
     </section>
   )

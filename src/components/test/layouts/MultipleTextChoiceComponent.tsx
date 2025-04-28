@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from 'react'
+import React, { useRef, useCallback } from 'react'
 import {
   MultipleChoiceQuestion,
   MultipleChoiceOption,
@@ -25,15 +25,6 @@ export default function MultipleTextChoiceComponent({
     throw new Error('Invalid question type: options are missing.')
   }
 
-  useEffect(() => {
-    if (buttonRefs) {
-      Object.keys(buttonRefs.current).map(btn => {
-        buttonRefs?.current[btn]?.classList.remove('bg-correct')
-        buttonRefs?.current[btn]?.classList.remove('bg-incorrect')
-      })
-    }
-  }, [buttonRefs])
-
   const setAnswer = useCallback(
     (answer: string, key: string) => {
       if (buttonRefs.current[key]) {
@@ -56,6 +47,16 @@ export default function MultipleTextChoiceComponent({
       }
 
       onSubmit(answer.trim())
+
+      /* Remove all styling before next multiple text choice question */
+      setTimeout(() => {
+        if (buttonRefs) {
+          Object.keys(buttonRefs.current).map(btn => {
+            buttonRefs?.current[btn]?.classList.remove('bg-correct')
+            buttonRefs?.current[btn]?.classList.remove('bg-incorrect')
+          })
+        }
+      }, 2000)
     },
     [onSubmit]
   )

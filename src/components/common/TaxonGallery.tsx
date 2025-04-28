@@ -50,7 +50,7 @@ export const TaxonGallery = ({ collection }: Props) => {
     sc => sc?.type === 'definition'
   ) ? (
     <section aria-labelledby="definitions" className="sub-section">
-      <h3 id="definitions">Definitions</h3>
+      <h3 id="definitions">Terms</h3>
       <ul>{subCollections}</ul>
     </section>
   ) : null

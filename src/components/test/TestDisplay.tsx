@@ -10,12 +10,10 @@ type Props<T> = {
   layouts: Layout<T>[]
 }
 
-// Create a more robust mapping system with proper TypeScript support
 type ComponentMap = {
   [key in QuestionType]: {
     default: React.ComponentType<any>
     image?: React.ComponentType<any>
-    // Add other specific overrides as needed
   }
 }
 

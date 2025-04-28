@@ -32,6 +32,13 @@
   --font-size-lg: 1.4rem;
   --font-size-xl: 1.6rem;
 
+  /* Font weights */
+  --font-weight-300: 300;
+  --font-weight-400: 400;
+  --font-weight-500: 500;
+  --font-weight-600: 600;
+  --font-weight-800: 800;
+
   /* Element sizes */
   --card-width: clamp(100px, 12rem, 240px);
   --card-height: clamp(200px, 14rem, 300px);
@@ -226,11 +233,7 @@ form {
   align-items: center;
   gap: var(--spacing-md);
   margin: var(--spacing-lg) 0 0 0;
-  padding: var(--spacing-lg);
-}
-
-.form-row button {
-  font-size: var(--font-size-lg);
+  border-radius: var(--border-radius-sm);
 }
 
 .form-row input,
@@ -238,13 +241,23 @@ form {
   width: 100%;
 }
 
+.form-row button {
+  text-transform: uppercase;
+  padding: var(--spacing-md) 0;
+  font-size: large;
+  font-weight: var(--font-weight-300);
+  letter-spacing: 0.05rem;
+}
+
 /* Form row variants */
 .form-row.taxon {
   background-color: var(--colour-bg-taxon);
+  padding: var(--spacing-lg);
 }
 
 .form-row.definition {
   background-color: var(--colour-bg-definition);
+  padding: var(--spacing-lg);
 }
 
 .form-row.taxon label,
@@ -255,6 +268,7 @@ form {
 .form-row.bg-correct,
 .form-row.bg-incorrect {
   border-radius: var(--border-radius-sm);
+  padding: var(--spacing-lg);
 }
 
 .form-row.bg-correct label,
@@ -434,21 +448,13 @@ progress {
   input,
   button {
     width: initial;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-size-md);
   }
 
   .block {
     justify-content: flex-start;
-  }
-}
-
-@media screen and (min-width: 1025px) {
-  .form-row {
-    width: clamp(30rem, 600px, 40rem);
-  }
-
-  .form-row input,
-  .form-row button {
-    width: inherit;
   }
 }
 
