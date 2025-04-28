@@ -25,7 +25,7 @@ export const DefinitionGallery = ({ collection }: Props) => {
 
   return (
     <section aria-labelledby="definitions">
-      <h2 id="definitions">Definitions</h2>
+      <h1 id="definitions">Definitions</h1>
       <dl>{definitions}</dl>
     </section>
   )

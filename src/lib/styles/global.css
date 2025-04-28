@@ -399,9 +399,12 @@ progress {
 
 /* Media queries */
 @media screen and (min-width: 768px) {
-  h1 {
+  header > div {
     position: absolute;
     right: 0%;
+    top: var(--spacing-md);
+    font-size: var(--font-size-md);
+    text-transform: uppercase;
   }
 
   footer {

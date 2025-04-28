@@ -16,7 +16,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </head>
       <body>
         <header>
-          <h1>Learn the Planet</h1>
+          <div>Learn the Planet</div>
         </header>
         {/* Layout UI */}
         {/* Place children where you want to render a page or nested layout */}

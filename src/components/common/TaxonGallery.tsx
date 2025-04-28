@@ -46,7 +46,7 @@ export const TaxonGallery = ({ collection }: Props) => {
 
   return (
     <section aria-labelledby="collection" className="group">
-      <h2 id="collection">Collection: {collection.name}</h2>
+      <h1 id="collection">Collection: {collection.name}</h1>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
       {definitions}
