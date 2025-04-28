@@ -173,7 +173,11 @@ export class ContentHandlerBase<T extends LearningItem>
    */
   private processTemplate(template: string, item: T): string {
     return template.replace(/\${([^}]+)}/g, (match, propertyPath) => {
-      const value = this.getPropertyByPath(item, propertyPath)
+      let value = this.getPropertyByPath(item, propertyPath)
+
+      /* Force terms to lower case */
+      if (match === '${term}') value = value.toLowerCase()
+
       return value !== undefined ? String(value) : match
     })
   }
@@ -185,7 +189,7 @@ export class ContentHandlerBase<T extends LearningItem>
     if ('binomial' in item) {
       return (item as any).binomial
     } else if ('term' in item) {
-      return (item as any).term
+      return ((item as any).term as string).toLowerCase()
     }
 
     // Default fallback
