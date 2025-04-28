@@ -125,10 +125,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* button span {
-  font-size: var(--font-size-sm);
-} */
-
 /* Lists and definition lists */
 dl > div {
   display: flex;
@@ -168,13 +164,15 @@ li::marker {
   align-items: center;
   row-gap: var(--spacing-xl);
   column-gap: var(--spacing-xl);
-  padding-block: var(--spacing-xl);
   flex-wrap: wrap;
   justify-content: center;
 }
 
+.block.options {
+  padding-block: var(--spacing-xl);
+}
+
 .block.options > button {
-  /* padding: 0; */
   width: var(--button-size);
   height: var(--button-size);
 }
@@ -358,6 +356,11 @@ figcaption > div > div:nth-child(2) {
 .incorrect::before {
   content: '\2717';
   margin-right: var(--spacing-xs);
+}
+
+/* Taxonomy sections */
+[data-type='taxonomy'] .question-text {
+  min-height: initial;
 }
 
 /* Definition sections */

@@ -42,10 +42,14 @@ const ImageChoiceComponent = ({
     ) : null
   })
   return (
-    <section className="group-block" aria-labelledby="multiple-choice">
+    <section
+      className="group-block"
+      aria-labelledby="multiple-choice"
+      data-type={layout.collection.type}
+    >
       <h3 id="multiple-choice">Multiple choice</h3>
       <div className="question-text">{question.text}</div>
-      <div className="block">{images}</div>
+      <div className="block options">{images}</div>
       <div>
         <div>{`Question ${layout.index + 1} of ${layouts.length}`}</div>
       </div>

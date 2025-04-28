@@ -49,7 +49,11 @@ export default function TextEntryComponent({
   }
 
   return (
-    <section className="group-block" aria-labelledby="text-entry">
+    <section
+      className="group-block"
+      aria-labelledby="text-entry"
+      data-type={layout.collection.type}
+    >
       <h3 id="text-entry">{question.contentType || question.type}</h3>
       <div className="question-text">{question.text}</div>
       <form onSubmit={handleSubmit}>

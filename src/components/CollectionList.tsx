@@ -7,19 +7,14 @@ type Props<T> = {
 
 export function CollectionList<T>({ collections }: Props<T>) {
   return (
-    <section className="group-block" aria-labelledby="collections">
-      <h2 id="collections">Available Collections</h2>
-      {collections.length === 0 ? (
-        <p>No collections available</p>
-      ) : (
-        <ul className="block">
-          {collections.map(collection => (
-            <li key={collection.id}>
-              <CollectionItem<T> collection={collection} />
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
+    // <section className="group-block" aria-labelledby="collections">
+    <ul className="block">
+      {collections.map(collection => (
+        <li key={collection.id}>
+          <CollectionItem<T> collection={collection} />
+        </li>
+      ))}
+    </ul>
+    // </section>
   )
 }
