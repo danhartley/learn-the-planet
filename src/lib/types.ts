@@ -132,6 +132,19 @@ export type Collection<T> = {
   }
   items: T[]
   collections?: SubCollectionSummary<T>[]
+  article?: {
+    tags: string[]
+    items: [
+      {
+        text: string[]
+        credit: {
+          title: string
+          source: string
+          authors: string[]
+        }
+      },
+    ]
+  }
 }
 
 export type Layout<T> = {
@@ -211,4 +224,4 @@ export interface ContentTypeHandler<T> {
   validateAnswer(question: Question, answer: string): boolean
 }
 
-export type ContentHandlerType = 'taxon' | 'definition'
+export type ContentHandlerType = 'taxon' | 'definition' | 'trait'

@@ -490,3 +490,8 @@ progress {
     }
   }
 }
+
+article {
+  max-width: 60ch;
+  overflow-wrap: anywhere;
+}

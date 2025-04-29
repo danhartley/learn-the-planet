@@ -46,6 +46,28 @@ export const TaxonGallery = ({ collection }: Props) => {
     }
   )
 
+  const articles = collection.article?.items.map((item, itemIndex) => {
+    return (
+      <div key={itemIndex} className="article-item">
+        {/* Render all paragraphs */}
+        {item.text.map((para, paraIndex) => (
+          <p key={`${itemIndex}-${paraIndex}`}>{para}</p>
+        ))}
+
+        {/* Render credit information once per article item */}
+        <div className="article-credit">
+          <p>
+            <em>{item.credit.title}</em>
+          </p>
+          <p>Authors: {item.credit.authors.join(', ')}</p>
+          <p>
+            <a href={item.credit.source}>Source</a>
+          </p>
+        </div>
+      </div>
+    )
+  })
+
   const definitions = subCollections?.filter(
     sc => sc?.type === 'definition'
   ) ? (
@@ -60,6 +82,7 @@ export const TaxonGallery = ({ collection }: Props) => {
       <h1 id="collection">Collection: {collection.name}</h1>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
+      <article>{articles}</article>
       {definitions}
       {fieldNotesUrl}
       <section aria-labelledby="taxa" className="sub-section">

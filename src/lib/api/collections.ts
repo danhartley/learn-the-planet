@@ -3767,6 +3767,55 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     id: '7',
     type: 'taxon',
     name: 'Mediterranean wildflower annuals',
+    article: {
+      tags: ['annuals', 'life-history strategy'],
+      items: [
+        {
+          text: [
+            'Flowering plants exhibit two principal life-history strategies: annuality (living and reproducing in one year) and perenniality (living more than one year).',
+            'The advantages of either strategy depend on the relative benefits of immediate reproduction balanced against survivorship and future reproduction.',
+            'This trade-off means that life-history strategies are associated with particular environments, with annuals being found more often in unpredictable habitats.',
+          ],
+          credit: {
+            title:
+              'The Evolution of Annual and Perennial Plant Life Histories: Ecological Correlates and Genetic Mechanisms',
+            source:
+              'https://www.researchgate.net/publication/343950868_The_Evolution_of_Annual_and_Perennial_Plant_Life_Histories_Ecological_Correlates_and_Genetic_Mechanisms',
+            authors: ["Jannice Friedman, Queen's University"],
+          },
+        },
+        {
+          text: [
+            'An annual plant completes its life cycle in one growing season.',
+            'It germinates, flowers, sets seed, and dies within the same year.',
+            'Annuals are common in environments with unpredictable conditions.',
+            'They contrast with biennials and perennials, which live longer.',
+            'Some annuals can behave as perennials in mild climates.',
+          ],
+          credit: {
+            title: 'Annual plant',
+            source: 'https://en.wikipedia.org/wiki/Annual_plant',
+            authors: ['Wikipedia contributors'],
+          },
+        },
+        {
+          text: [
+            'The annual life cycle is favoured in disturbed or dry environments.',
+            'Annuals can rapidly exploit favourable conditions.',
+            'They avoid harsh seasons by completing life cycles quickly.',
+            'Natural selection supports fast growth and early reproduction.',
+            'Annuals produce many seeds, enhancing survival in uncertain habitats.',
+            'Their evolution is influenced by climate, soil, and disturbance patterns.',
+          ],
+          credit: {
+            title:
+              'Annual plant – The evolutionary and ecological drivers of the annual life cycle',
+            source: 'https://en.wikipedia.org/wiki/Annual_plant',
+            authors: ['Wikipedia contributors'],
+          },
+        },
+      ],
+    },
     items: [
       {
         id: 47687,
