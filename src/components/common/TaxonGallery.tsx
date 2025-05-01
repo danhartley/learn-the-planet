@@ -46,22 +46,22 @@ export const TaxonGallery = ({ collection }: Props) => {
     }
   )
 
-  const articles = collection.article?.items.map((item, itemIndex) => {
+  const articles = collection.article?.sections.map((section, sectionIndex) => {
     return (
-      <div key={itemIndex} className="article-item">
+      <div key={sectionIndex} className="article-item">
         {/* Render all paragraphs */}
-        {item.text.map((para, paraIndex) => (
-          <p key={`${itemIndex}-${paraIndex}`}>{para}</p>
+        {section.text.map((para, paraIndex) => (
+          <p key={`${sectionIndex}-${paraIndex}`}>{para}</p>
         ))}
 
         {/* Render credit information once per article item */}
         <div className="article-credit">
           <p>
-            <em>{item.credit.title}</em>
+            <em>{section.credit.title}</em>
           </p>
-          <p>Authors: {item.credit.authors.join(', ')}</p>
+          <p>Authors: {section.credit.authors.join(', ')}</p>
           <p>
-            <a href={item.credit.source}>Source</a>
+            <a href={section.credit.source}>Source</a>
           </p>
         </div>
       </div>

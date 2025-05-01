@@ -3769,7 +3769,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     name: 'Mediterranean wildflower annuals',
     article: {
       tags: ['annuals', 'life-history strategy'],
-      items: [
+      sections: [
         {
           text: [
             'Flowering plants exhibit two principal life-history strategies: annuality (living and reproducing in one year) and perenniality (living more than one year).',
@@ -4029,6 +4029,86 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     ],
   }
 
+  const collection9 = {
+    id: '9',
+    type: 'definition',
+    name: 'Plant Pigments',
+    items: [
+      {
+        id: 'pigment',
+        term: 'pigment',
+        definition:
+          'A molecule that absorbs specific wavelengths of light and reflects others, giving color to tissues; in plants, pigments play key roles in light absorption for photosynthesis and protection from UV damage.',
+        source: 'Wikipedia',
+        example:
+          'Chlorophyll is a green pigment that absorbs light most efficiently in the blue and red parts of the electromagnetic spectrum.',
+      },
+      {
+        id: 'chlorophyll',
+        term: 'chlorophyll',
+        definition:
+          'A class of green pigments essential for photosynthesis, responsible for capturing light energy and converting it into chemical energy in chloroplasts.',
+        source: 'Wikipedia',
+        example:
+          'Chlorophyll a is the primary pigment involved in the light reactions of photosynthesis in plants and algae.',
+      },
+      {
+        id: 'carotenoids',
+        term: 'carotenoids',
+        definition:
+          'A group of yellow, orange, or red accessory pigments that absorb light in the blue-green spectrum and protect chlorophyll from photodamage by quenching excess energy.',
+        source: 'Wikipedia',
+        example:
+          'Beta-carotene is a carotenoid that contributes to the orange color of carrots and also acts as an antioxidant in plant tissues.',
+      },
+      {
+        id: 'accessory-pigments',
+        term: 'accessory pigments',
+        definition:
+          'Pigments that assist chlorophyll in photosynthesis by broadening the range of absorbed light and transferring captured energy to chlorophyll a.',
+        source: 'Wikipedia',
+        example:
+          'Carotenoids and phycobilins are accessory pigments that enhance the efficiency of photosynthesis in various plant and algal species.',
+      },
+      {
+        id: 'flavanoids',
+        term: 'flavanoids',
+        definition:
+          'A diverse group of plant secondary metabolites with antioxidant properties, involved in UV filtration, pigmentation, and defense against pathogens.',
+        source: 'Wikipedia',
+        example:
+          'Flavonols, a type of flavanoid, accumulate in leaf epidermal cells to protect underlying tissues from ultraviolet radiation.',
+      },
+      {
+        id: 'anthocyanins',
+        term: 'anthocyanins',
+        definition:
+          'Water-soluble flavanoid pigments responsible for red, purple, and blue colors in many flowers, fruits, and leaves, often playing roles in attracting pollinators and providing photoprotection.',
+        source: 'Wikipedia',
+        example:
+          'The red coloration of autumn leaves in maples is due to the accumulation of anthocyanins.',
+      },
+      {
+        id: 'phytochrome',
+        term: 'phytochrome',
+        definition:
+          'A photoreceptor protein in plants that detects red and far-red light, regulating developmental processes such as seed germination, stem elongation, and flowering in response to light conditions.',
+        source: 'Wikipedia',
+        example:
+          'Phytochrome-mediated signaling helps plants detect shading by neighboring plants and adjust their growth accordingly.',
+      },
+      {
+        id: 'photoreceptor',
+        term: 'photoreceptor',
+        definition:
+          'A protein or molecule in organisms that detects light and initiates a physiological response; in plants, photoreceptors regulate growth, circadian rhythms, and responses to light quality and duration.',
+        source: 'Wikipedia',
+        example:
+          'Cryptochromes and phytochromes are plant photoreceptors involved in light-dependent development and behavior.',
+      },
+    ],
+  }
+
   return new Promise((resolve, reject) => {
     const collections = [
       generateGenusAndSpeciesFields({
@@ -4062,6 +4142,10 @@ export const getCollections = (): Promise<Collection<any>[]> => {
       {
         ...collection8,
         items: sortAlphabeticallyBy(dedupe(collection8.items), 'term'),
+      },
+      {
+        ...collection9,
+        items: sortAlphabeticallyBy(dedupe(collection9.items), 'term'),
       },
     ]
 

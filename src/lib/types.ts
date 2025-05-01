@@ -121,6 +121,20 @@ export type SubCollectionSummary<T> = {
   type: string
 }
 
+export type Section = {
+  text: string[]
+  credit: {
+    title: string
+    source: string
+    authors: string[]
+  }
+}
+
+export type Article = {
+  tags: string[]
+  sections: Section[]
+}
+
 export type Collection<T> = {
   id: string
   type: string
@@ -132,19 +146,7 @@ export type Collection<T> = {
   }
   items: T[]
   collections?: SubCollectionSummary<T>[]
-  article?: {
-    tags: string[]
-    items: [
-      {
-        text: string[]
-        credit: {
-          title: string
-          source: string
-          authors: string[]
-        }
-      },
-    ]
-  }
+  article?: Article | null
 }
 
 export type Layout<T> = {
