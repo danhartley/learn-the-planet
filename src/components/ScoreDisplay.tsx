@@ -2,20 +2,22 @@
 
 import React, { useState, useEffect } from 'react'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
-import { QuestionType } from '@/types'
-
-type HistoryItem<T> = {
-  id: string
-  isCorrect: boolean
-  item: T | undefined
-  question: string | undefined
-  type: QuestionType | undefined
-  answer: string | undefined
-}
+import { HistoryItem } from '@/types'
 
 export function ScoreDisplay<T>() {
-  const { lastScore, currentLayout, layouts } = useTestPlanner<T>()
+  const {
+    lastScore,
+    currentLayout,
+    layouts,
+    updateTestHistory,
+    testHistory,
+    testState,
+  } = useTestPlanner<T>()
   const [history, setHistory] = useState<HistoryItem<T>[]>([])
+
+  const progressValue = testState?.isEndOfTest
+    ? testState.layoutCount
+    : currentLayout?.index
 
   // Progress display logic
   const progress = !!currentLayout ? (
@@ -24,9 +26,9 @@ export function ScoreDisplay<T>() {
       <div>
         <progress
           id="test-progress"
-          max={currentLayout.collection.items.length}
-          value={currentLayout.index}
-        >{`${currentLayout.index + 1}%`}</progress>
+          max={testState?.layoutCount}
+          value={progressValue}
+        >{`${progressValue}%`}</progress>
       </div>
     </div>
   ) : (
@@ -52,13 +54,18 @@ export function ScoreDisplay<T>() {
         question: currentLayout?.question.text,
         type: currentLayout?.question.type,
         answer: currentLayout?.question.key,
+        layoutId: currentLayout?.id || '',
       }
 
-      setHistory(prevHistory => [answer, ...prevHistory])
+      const newHistory = [answer, ...history]
+      setHistory(newHistory)
+      updateTestHistory(newHistory)
     }
   }, [lastScore?.questionCount])
 
-  const historyItems = history.map(historyItem => (
+  const currentHistory = history.length > 0 ? history : testHistory
+
+  const historyItems = currentHistory.map(historyItem => (
     <li key={historyItem.id}>
       <div className={historyItem.isCorrect ? 'correct' : 'incorrect'}>
         <div>
@@ -67,8 +74,6 @@ export function ScoreDisplay<T>() {
       </div>
     </li>
   ))
-
-  const _layouts = layouts
 
   return (
     <section aria-labelledby="score">

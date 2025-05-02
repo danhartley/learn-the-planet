@@ -162,6 +162,8 @@ export type Layout<T> = {
 export type TestState = {
   layoutIndex: number
   collectionIndex: number
+  layoutCount: number
+  isEndOfTest: boolean
 }
 
 export type TestPlan<T> = {
@@ -227,3 +229,18 @@ export interface ContentTypeHandler<T> {
 }
 
 export type ContentHandlerType = 'taxon' | 'definition' | 'trait'
+
+export type HistoryItem<T> = {
+  id: string
+  isCorrect: boolean
+  item: T | undefined
+  question: string | undefined
+  type: QuestionType | undefined
+  answer: string | undefined
+  layoutId: string
+}
+
+export type TestStrategy = 'incorrect-only'
+
+export const isDefined = <T>(value: T | undefined): value is T =>
+  value !== undefined

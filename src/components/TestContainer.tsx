@@ -34,7 +34,7 @@ export function TestContainer<T>() {
       const hasNext = moveToNextQuestion()
       if (!hasNext) {
         // Test completed
-        router.push('/results')
+        router.push('/test/review')
       }
       setIsVisibleClassName('hidden')
     }, 2000)

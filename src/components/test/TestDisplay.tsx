@@ -2,7 +2,6 @@ import { Layout, QuestionType, Score } from '@/types'
 import ImageChoiceComponent from '@/components/test/layouts/ImageChoiceComponent'
 import MultipleTextChoiceComponent from '@/components/test/layouts/MultipleTextChoiceComponent'
 import TextEntryComponent from '@/components/test/layouts/TextEntryComponent'
-import { ScoreDisplay } from '@/components/ScoreDisplay'
 
 type Props<T> = {
   layout: Layout<T>
@@ -42,10 +41,5 @@ export function TestDisplay<T>({ layout, onSubmit, layouts }: Props<T>) {
       ? questionMap.image
       : questionMap.default
 
-  return (
-    <>
-      <Component layout={layout} onSubmit={onSubmit} layouts={layouts} />
-      <ScoreDisplay />
-    </>
-  )
+  return <Component layout={layout} onSubmit={onSubmit} layouts={layouts} />
 }

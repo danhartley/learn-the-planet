@@ -15,5 +15,8 @@
     "plaintext": false,
     "markdown": false,
     "scminput": false
+  },
+  "workbench.colorCustomizations": {
+    "tab.activeBorder": "#6ab054"
   }
 }

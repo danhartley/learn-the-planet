@@ -7,6 +7,7 @@ import {
   QuestionTemplate,
   ContentTypeHandler,
   ContentHandlerType,
+  HistoryItem,
 } from './types'
 
 import { contentHandlers } from './content-handlers/registry'
@@ -17,9 +18,11 @@ export class TestPlanner<T> {
   private collection: Collection<T>
   private contentHandler: ContentTypeHandler<T>
   private layouts: Layout<T>[] = []
-  private state: TestState = {
+  private testState: TestState = {
     layoutIndex: 0,
     collectionIndex: 0,
+    layoutCount: 0,
+    isEndOfTest: false,
   }
   private score: Score = {
     isCorrect: false,
@@ -30,6 +33,7 @@ export class TestPlanner<T> {
   private testPlanId: number = 0
   private static testPlanCounter: number = 0
   private questionTemplates: QuestionTemplate[]
+  private testHistory: HistoryItem<T>[]
 
   constructor(
     collection: Collection<T>,
@@ -52,6 +56,7 @@ export class TestPlanner<T> {
     this.testPlanId = ++TestPlanner.testPlanCounter
     this.questionTemplates = questionTemplates
     this.generateLayouts()
+    this.testHistory = []
   }
 
   private generateLayouts(): void {
@@ -83,13 +88,13 @@ export class TestPlanner<T> {
         this.layouts.push(layout)
       })
     })
+
+    this.testState.layoutCount = this.layouts.length
   }
 
   public getCurrentLayout(): Layout<T> {
-    const layout: Layout<T> = this.layouts[this.state.layoutIndex]
-    return {
-      ...layout,
-    }
+    const layout: Layout<T> = this.layouts[this.testState.layoutIndex]
+    return layout
   }
 
   public markAnswer(answer: string): Score {
@@ -112,15 +117,25 @@ export class TestPlanner<T> {
     return this.score
   }
 
+  public updateTestHistory = (history: HistoryItem<T>[]) => {
+    if (history) {
+      this.testHistory = history
+      return true
+    } else false
+  }
+
   public moveToNextQuestion(): boolean {
-    if (this.state.layoutIndex < this.layouts.length - 1) {
-      this.state.layoutIndex++
+    if (this.testState.layoutIndex < this.layouts.length - 1) {
+      this.testState.layoutIndex++
 
       // Update collection index if we've moved to a new item
-      this.state.collectionIndex = Math.floor(this.state.layoutIndex / 4)
+      this.testState.collectionIndex = Math.floor(
+        this.testState.layoutIndex / 4
+      )
 
       return true
     }
+
     return false
   }
 
@@ -128,16 +143,18 @@ export class TestPlanner<T> {
     return {
       id: `Test plan ${this.testPlanId}`,
       collection: this.collection,
-      state: this.state,
+      state: this.testState,
       score: this.score,
       layouts: this.layouts,
     }
   }
 
   public reset(): void {
-    this.state = {
+    this.testState = {
       layoutIndex: 0,
       collectionIndex: 0,
+      layoutCount: 0,
+      isEndOfTest: false,
     }
     this.score = {
       isCorrect: false,
@@ -149,5 +166,21 @@ export class TestPlanner<T> {
 
   public getLayouts(): Layout<T>[] {
     return this.layouts
+  }
+
+  public setLayouts(layouts: Layout<T>[]) {
+    this.layouts = layouts
+  }
+
+  public getTestHistory(): HistoryItem<T>[] {
+    return this.testHistory
+  }
+
+  public getState(): TestState {
+    return this.testState
+  }
+
+  public setState(state: TestState): void {
+    this.testState = state
   }
 }

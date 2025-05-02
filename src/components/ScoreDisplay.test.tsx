@@ -12,27 +12,30 @@ vi.mock('@/hooks/useTestPlanner', () => ({
 describe('ScoreDisplay', () => {
   // Create a default mock implementation
   const defaultMockHook = {
-    lastScore: null,
     startTest: vi.fn(),
-    currentLayout: null,
+    startRetest: vi.fn(),
     markAnswer: vi.fn(),
     moveToNextQuestion: vi.fn(),
-    isActive: false,
     resetTest: vi.fn(),
+    setLayouts: vi.fn(),
+    updateTestHistory: vi.fn(),
+    currentLayout: null,
+    isActive: false,
+    lastScore: null,
     layouts: [],
+    testHistory: [],
+    testState: null,
   }
 
   beforeEach(() => {
     vi.resetAllMocks()
   })
 
-  it('renders with No Score message when lastScore is null', () => {
+  it('renders with no message when lastScore is null', () => {
     // Set up the mock to return no score
     vi.mocked(useTestPlanner).mockReturnValue(defaultMockHook)
 
     render(<ScoreDisplay />)
-
-    // expect(screen.getByText('Start test')).toBeInTheDocument()
   })
 
   it('displays correct score data when lastScore exists', () => {

@@ -6,6 +6,8 @@ import {
   Score,
   QuestionTemplate,
   ContentHandlerType,
+  HistoryItem,
+  TestSate,
 } from '@/types'
 import { TestPlannerEvent } from '@/utils/enums'
 import { getTemplatesByContentType } from '../api/questionTemplates'
@@ -17,13 +19,25 @@ export function useTestPlanner<T>() {
   )
   const [isActive, setIsActive] = useState<boolean>(service.isTestActive())
   const [lastScore, setLastScore] = useState<Score | null>(null)
+  const [testState, setTestState] = useState<TestSate | null>(
+    service.getState()
+  )
 
   useEffect(() => {
     // Update state when service emits changes
     const unsubscribe = service.subscribe(() => {
-      setLayout(service.getCurrentLayout() as Layout<T> | null)
       setIsActive(service.isTestActive())
     })
+
+    const unsubscribeFromQuestionChanged = service.subscribeToEvent(
+      TestPlannerEvent.QUESTION_CHANGED,
+      () => setLayout(service.getCurrentLayout() as Layout<T> | null)
+    )
+
+    const unsubscribeFromTestEnded = service.subscribeToEvent(
+      TestPlannerEvent.TEST_ENDED,
+      () => setTestState(service.getState() as TestSate)
+    )
 
     const unsubscribeFromAnswerMarked = service.subscribeToEvent(
       TestPlannerEvent.ANSWER_MARKED,
@@ -36,6 +50,8 @@ export function useTestPlanner<T>() {
     return () => {
       unsubscribe()
       unsubscribeFromAnswerMarked()
+      unsubscribeFromQuestionChanged()
+      unsubscribeFromTestEnded()
     }
   }, [])
   return {
@@ -45,12 +61,20 @@ export function useTestPlanner<T>() {
         collection.type as ContentHandlerType
       )
     ) => service.startTest(collection, questionTemplates),
-    currentLayout: layout,
+    startRetest: (layouts: Layout<T>[]) => {
+      service.startRetest(layouts)
+    },
     markAnswer: (answer: string) => service.markAnswer(answer),
     moveToNextQuestion: () => service.moveToNextQuestion(),
-    isActive,
     resetTest: () => service.resetTest(),
+    setLayouts: (layouts: Layout<T>[]) => service.setLayouts(layouts),
+    updateTestHistory: (history: HistoryItem<T>[]) =>
+      service.updateTestHistory(history),
+    currentLayout: layout,
+    isActive,
     lastScore,
     layouts: service.getLayouts(),
+    testHistory: service.getTestHistory(),
+    testState,
   }
 }

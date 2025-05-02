@@ -74,6 +74,8 @@ export const testPlan: TestPlan = {
   state: {
     layoutIndex: 0,
     collectionIndex: 0,
+    layoutCount: 0,
+    isEndOfTest: false,
   },
   score: {
     isCorrect: false,
