@@ -117,11 +117,12 @@ export class TestPlanner<T> {
     return this.score
   }
 
-  public updateTestHistory = (history: HistoryItem<T>[]) => {
+  public updateTestHistory = (history: HistoryItem<T>): HistoryItem<T>[] => {
     if (history) {
-      this.testHistory = history
-      return true
-    } else false
+      this.testHistory = [history, ...this.testHistory]
+    }
+
+    return this.testHistory
   }
 
   public moveToNextQuestion(): boolean {
@@ -162,6 +163,7 @@ export class TestPlanner<T> {
       correctCount: 0,
       incorrectCount: 0,
     }
+    this.testHistory = []
   }
 
   public getLayouts(): Layout<T>[] {
@@ -176,7 +178,7 @@ export class TestPlanner<T> {
     return this.testHistory
   }
 
-  public getState(): TestState {
+  public getState(): TestState | undefined {
     return this.testState
   }
 

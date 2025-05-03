@@ -3,11 +3,9 @@ import TestPlannerService from '@/services/TestPlannerService'
 import {
   Collection,
   Layout,
-  Score,
   QuestionTemplate,
   ContentHandlerType,
-  HistoryItem,
-  TestSate,
+  TestState,
 } from '@/types'
 import { TestPlannerEvent } from '@/utils/enums'
 import { getTemplatesByContentType } from '../api/questionTemplates'
@@ -18,10 +16,10 @@ export function useTestPlanner<T>() {
     service.getCurrentLayout()
   )
   const [isActive, setIsActive] = useState<boolean>(service.isTestActive())
-  const [lastScore, setLastScore] = useState<Score | null>(null)
-  const [testState, setTestState] = useState<TestSate | null>(
+  const [testState, setTestState] = useState<TestState | undefined>(
     service.getState()
   )
+  const [testHistory, setTestHistory] = useState(service.getTestHistory())
 
   useEffect(() => {
     // Update state when service emits changes
@@ -34,15 +32,24 @@ export function useTestPlanner<T>() {
       () => setLayout(service.getCurrentLayout() as Layout<T> | null)
     )
 
-    const unsubscribeFromTestEnded = service.subscribeToEvent(
-      TestPlannerEvent.TEST_ENDED,
-      () => setTestState(service.getState() as TestSate)
-    )
-
     const unsubscribeFromAnswerMarked = service.subscribeToEvent(
       TestPlannerEvent.ANSWER_MARKED,
-      ({ answer, score }) => {
-        setLastScore(score)
+      ({ testHistory }) => {
+        setTestHistory(testHistory)
+      }
+    )
+
+    const unsubscribeFromTestEnded = service.subscribeToEvent(
+      TestPlannerEvent.TEST_ENDED,
+      ({ state }) => {
+        setTestState(state)
+      }
+    )
+
+    const unsubscribeFromTestRestarted = service.subscribeToEvent(
+      TestPlannerEvent.TEST_RESTARTED,
+      ({ testHistory }) => {
+        setTestHistory(testHistory)
       }
     )
 
@@ -52,6 +59,7 @@ export function useTestPlanner<T>() {
       unsubscribeFromAnswerMarked()
       unsubscribeFromQuestionChanged()
       unsubscribeFromTestEnded()
+      unsubscribeFromTestRestarted()
     }
   }, [])
   return {
@@ -68,13 +76,10 @@ export function useTestPlanner<T>() {
     moveToNextQuestion: () => service.moveToNextQuestion(),
     resetTest: () => service.resetTest(),
     setLayouts: (layouts: Layout<T>[]) => service.setLayouts(layouts),
-    updateTestHistory: (history: HistoryItem<T>[]) =>
-      service.updateTestHistory(history),
     currentLayout: layout,
     isActive,
-    lastScore,
     layouts: service.getLayouts(),
-    testHistory: service.getTestHistory(),
+    testHistory,
     testState,
   }
 }

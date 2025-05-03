@@ -9,7 +9,6 @@ import {
   TestState,
 } from '@/types'
 import { TestPlannerEvent } from '@/utils/enums'
-import { H } from 'vitest/dist/chunks/reporters.d.CfRkRKN2'
 
 class TestPlannerService<T> {
   private static instance: TestPlannerService<T>
@@ -36,9 +35,6 @@ class TestPlannerService<T> {
   }
 
   startRetest(layouts: Layout<T>[]): void {
-    // Reset layout and collections indices (to 0)
-    this.testPlanner?.reset()
-
     // Reset indices
     layouts.forEach((layout, index) => {
       layout.index = index
@@ -46,7 +42,10 @@ class TestPlannerService<T> {
 
     this.testPlanner?.setLayouts(layouts)
 
-    this.emitter.emit(TestPlannerEvent.TEST_RESTARTED)
+    this.testPlanner?.reset()
+    const testHistory = this.testPlanner?.getTestHistory()
+
+    this.emitter.emit(TestPlannerEvent.TEST_RESTARTED, { testHistory })
     this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
   }
 
@@ -57,15 +56,32 @@ class TestPlannerService<T> {
   markAnswer(answer: string): Score | null {
     if (!this.testPlanner) return null
     const score = this.testPlanner.markAnswer(answer)
-    this.emitter.emit(TestPlannerEvent.ANSWER_MARKED, { answer, score })
-    this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
-    return score
-  }
+    const currentLayout = this.getCurrentLayout()
 
-  updateTestHistory(history: HistoryItem<T>[]) {
-    if (!this.testPlanner) return false
-    this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
-    return this.testPlanner?.updateTestHistory(history)
+    let testHistory
+
+    if (score) {
+      const historyItem: HistoryItem<T> = {
+        id: crypto.randomUUID(),
+        isCorrect: score.isCorrect,
+        item: currentLayout?.item,
+        question: currentLayout?.question.text,
+        type: currentLayout?.question.type,
+        answer: currentLayout?.question.key,
+        layoutId: currentLayout?.id || '',
+      }
+
+      testHistory = this.testPlanner?.updateTestHistory(historyItem)
+
+      this.emitter.emit(TestPlannerEvent.ANSWER_MARKED, {
+        answer,
+        score,
+        testHistory,
+      })
+      this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
+    }
+
+    return score
   }
 
   getTestHistory(): HistoryItem<T>[] {
@@ -82,11 +98,18 @@ class TestPlannerService<T> {
     )
     this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
     if (!hasNext) {
-      this.testPlanner.setState({
-        ...this.testPlanner.getState(),
-        isEndOfTest: true,
-      })
-      this.emitter.emit(TestPlannerEvent.TEST_ENDED)
+      const state = this.testPlanner.getState()
+      if (state !== undefined) {
+        this.testPlanner.setState({
+          ...state,
+          isEndOfTest: true,
+        })
+        console.log('reset')
+        // this.testPlanner.reset()
+        // const testHistory = this.testPlanner.getTestHistory()
+        // this.emitter.emit(TestPlannerEvent.TEST_ENDED, { state, testHistory })
+        this.emitter.emit(TestPlannerEvent.TEST_ENDED, { state })
+      }
     }
 
     return hasNext

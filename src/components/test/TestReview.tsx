@@ -12,7 +12,7 @@ function TestReview<T>() {
 
   const router = useRouter()
 
-  const newLayouts = layouts
+  const failedLayouts = layouts
     ?.map(layout => {
       const score = (testHistory as HistoryItem<T>[]).find(
         (history: HistoryItem<T>) => history.layoutId === layout.id
@@ -23,42 +23,50 @@ function TestReview<T>() {
     })
     .filter(isDefined) as Layout<T>[]
 
-  const handleChange = (option: string) => {
-    setSelectedOption(option)
-    console.log(option)
+  function handleRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setSelectedOption(event.target.value)
   }
 
   const startNewTest = () => {
-    startRetest(newLayouts)
+    const layoutsToTest = (
+      selectedOption === 'all' ? layouts : failedLayouts
+    ) as Layout<T>[]
+    startRetest(layoutsToTest)
     router.push('/test')
   }
 
   return (
-    <>
-      <div>
+    <div className="p-4">
+      <h2 className="text-xl mb-4">Select test mode:</h2>
+
+      <div className="mb-2">
         <input
           type="radio"
-          id="all"
-          name="test"
+          id="all-radio"
+          name="test-mode"
           value="all"
           checked={selectedOption === 'all'}
-          onChange={e => handleChange(e.target.value)}
+          onChange={handleRadioChange}
+          className="mr-2"
         />
-        <label htmlFor="all">All</label>
+        <label htmlFor="all-radio">All questions</label>
       </div>
-      <div>
+
+      <div className="mb-4">
         <input
           type="radio"
-          id="failed"
-          name="test"
+          id="failed-radio"
+          name="test-mode"
           value="failed"
           checked={selectedOption === 'failed'}
-          onChange={e => handleChange(e.target.value)}
+          onChange={handleRadioChange}
+          className="mr-2"
         />
-        <label htmlFor="failed">Failed only</label>
+        <label htmlFor="failed-radio">Failed questions only</label>
       </div>
+
       <button onClick={startNewTest}>Start new test</button>
-    </>
+    </div>
   )
 }
 

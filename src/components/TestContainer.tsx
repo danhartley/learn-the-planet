@@ -14,9 +14,11 @@ export function TestContainer<T>() {
     markAnswer,
     moveToNextQuestion,
     layouts,
-    lastScore,
+    testHistory,
   } = useTestPlanner<T>()
   const [isVisibleClassName, setIsVisibleClassName] = useState('hidden')
+
+  const score = testHistory.at(0)
 
   // Redirect if no test is active
   useEffect(() => {
@@ -52,7 +54,7 @@ export function TestContainer<T>() {
         />
       </section>
       <ScoreDisplayNotification
-        isCorrect={lastScore?.isCorrect || false}
+        isCorrect={score?.isCorrect || false}
         history={history}
         isVisibleClassName={isVisibleClassName}
       />
