@@ -6,6 +6,7 @@ import {
   QuestionTemplate,
   ContentHandlerType,
   TestState,
+  TestStrategy,
 } from '@/types'
 import { TestPlannerEvent } from '@/utils/enums'
 import { getTemplatesByContentType } from '../api/questionTemplates'
@@ -20,6 +21,7 @@ export function useTestPlanner<T>() {
     service.getState()
   )
   const [testHistory, setTestHistory] = useState(service.getTestHistory())
+  const [layouts, setLayouts] = useState(service.getLayouts())
 
   useEffect(() => {
     // Update state when service emits changes
@@ -48,8 +50,10 @@ export function useTestPlanner<T>() {
 
     const unsubscribeFromTestRestarted = service.subscribeToEvent(
       TestPlannerEvent.TEST_RESTARTED,
-      ({ testHistory }) => {
+      ({ testHistory, layouts }) => {
         setTestHistory(testHistory)
+        console.log('hook: ', layouts)
+        setLayouts(layouts)
       }
     )
 
@@ -69,16 +73,15 @@ export function useTestPlanner<T>() {
         collection.type as ContentHandlerType
       )
     ) => service.startTest(collection, questionTemplates),
-    startRetest: (layouts: Layout<T>[]) => {
-      service.startRetest(layouts)
+    startRetest: (strategy: TestStrategy) => {
+      service.startRetest(strategy)
     },
     markAnswer: (answer: string) => service.markAnswer(answer),
     moveToNextQuestion: () => service.moveToNextQuestion(),
-    resetTest: () => service.resetTest(),
     setLayouts: (layouts: Layout<T>[]) => service.setLayouts(layouts),
     currentLayout: layout,
     isActive,
-    layouts: service.getLayouts(),
+    layouts,
     testHistory,
     testState,
   }

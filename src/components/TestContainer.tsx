@@ -17,7 +17,6 @@ export function TestContainer<T>() {
     testHistory,
   } = useTestPlanner<T>()
   const [isVisibleClassName, setIsVisibleClassName] = useState('hidden')
-
   const score = testHistory.at(0)
 
   // Redirect if no test is active

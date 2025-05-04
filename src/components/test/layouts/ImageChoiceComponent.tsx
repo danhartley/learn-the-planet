@@ -5,13 +5,13 @@ import ImageButton from '@/components/common/ImageButton'
 type Props<T> = {
   layout: Layout<T>
   onSubmit: (answer: string) => void
-  layouts: Layout<T>[]
+  questionProgressText: string
 }
 
 const ImageChoiceComponent = ({
   layout,
   onSubmit,
-  layouts,
+  questionProgressText,
 }: Props<MultipleChoiceQuestion>) => {
   const [userAnswer, setUserAnswer] = useState<string | null>(null)
 
@@ -41,6 +41,7 @@ const ImageChoiceComponent = ({
       />
     ) : null
   })
+
   return (
     <section
       className="group-block"
@@ -51,7 +52,7 @@ const ImageChoiceComponent = ({
       <div className="question-text">{question.text}</div>
       <div className="block options">{images}</div>
       <div>
-        <div>{`Question ${layout.index + 1} of ${layouts.length}`}</div>
+        <div>{questionProgressText}</div>
       </div>
     </section>
   )

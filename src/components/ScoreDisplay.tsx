@@ -4,7 +4,6 @@ import { useTestPlanner } from '@/hooks/useTestPlanner'
 
 export function ScoreDisplay<T>() {
   const { currentLayout, testHistory, testState } = useTestPlanner<T>()
-  console.log('testHistory', testHistory)
 
   const progressValue = testState?.isEndOfTest
     ? testState.layoutCount

@@ -34,6 +34,17 @@ export function TestDisplay<T>({ layout, onSubmit, layouts }: Props<T>) {
   // Get the map for this question type
   const questionMap = displayComponentMap[questionType]
 
+  let activeLayouts = layouts.filter(l => l.isActive)
+  let activeIndex
+
+  activeLayouts.forEach((activeLayout, i) => {
+    if (activeLayout.index === layout.index) {
+      activeIndex = i + 1
+    }
+  })
+
+  const questionProgressText = `Question ${activeIndex} of ${activeLayouts.length}`
+
   // Check if there's a specific component for this distractor type
   // If not, fall back to the default
   const Component =
@@ -41,5 +52,11 @@ export function TestDisplay<T>({ layout, onSubmit, layouts }: Props<T>) {
       ? questionMap.image
       : questionMap.default
 
-  return <Component layout={layout} onSubmit={onSubmit} layouts={layouts} />
+  return (
+    <Component
+      layout={layout}
+      onSubmit={onSubmit}
+      questionProgressText={questionProgressText}
+    />
+  )
 }

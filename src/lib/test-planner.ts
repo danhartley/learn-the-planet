@@ -83,6 +83,7 @@ export class TestPlanner<T> {
           collection: this.collection,
           distractorType:
             'distractorType' in template ? template.distractorType : undefined,
+          isActive: true,
         }
 
         this.layouts.push(layout)
@@ -126,18 +127,39 @@ export class TestPlanner<T> {
   }
 
   public moveToNextQuestion(): boolean {
-    if (this.testState.layoutIndex < this.layouts.length - 1) {
-      this.testState.layoutIndex++
+    let foundActive = false
+    const startingIndex = this.testState.layoutIndex
 
-      // Update collection index if we've moved to a new item
-      this.testState.collectionIndex = Math.floor(
-        this.testState.layoutIndex / 4
-      )
+    while (!foundActive) {
+      // Check if we've reached the end of layouts
+      if (this.testState.layoutIndex >= this.layouts.length - 1) {
+        // If we're already at the last layout, return false
+        if (this.testState.layoutIndex === this.layouts.length - 1) {
+          return false
+        }
 
-      return true
+        // Move to the next layout
+        this.testState.layoutIndex++
+      } else {
+        // Move to the next layout
+        this.testState.layoutIndex++
+
+        // Check if the current layout is active
+        if (this.layouts[this.testState.layoutIndex].isActive !== false) {
+          foundActive = true
+        }
+      }
+
+      // If we've checked all layouts and none are active, return false
+      if (!foundActive && this.testState.layoutIndex === startingIndex) {
+        return false
+      }
     }
 
-    return false
+    // Update collection index if we've moved to a new item
+    this.testState.collectionIndex = Math.floor(this.testState.layoutIndex / 4)
+
+    return true
   }
 
   public getTestPlan(): TestPlan<T> {
@@ -164,6 +186,7 @@ export class TestPlanner<T> {
       incorrectCount: 0,
     }
     this.testHistory = []
+    this.layouts = []
   }
 
   public getLayouts(): Layout<T>[] {
@@ -178,7 +201,7 @@ export class TestPlanner<T> {
     return this.testHistory
   }
 
-  public getState(): TestState | undefined {
+  public getState(): TestState {
     return this.testState
   }
 

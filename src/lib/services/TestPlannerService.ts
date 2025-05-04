@@ -7,6 +7,7 @@ import {
   QuestionTemplate,
   HistoryItem,
   TestState,
+  TestStrategy,
 } from '@/types'
 import { TestPlannerEvent } from '@/utils/enums'
 
@@ -34,19 +35,40 @@ class TestPlannerService<T> {
     this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
   }
 
-  startRetest(layouts: Layout<T>[]): void {
-    // Reset indices
-    layouts.forEach((layout, index) => {
-      layout.index = index
-    })
-
-    this.testPlanner?.setLayouts(layouts)
+  startRetest(strategy: TestStrategy): void {
+    const oldTestHistory = this.testPlanner?.getTestHistory()
+    const oldLayouts = this.getLayouts()
 
     this.testPlanner?.reset()
-    const testHistory = this.testPlanner?.getTestHistory()
 
-    this.emitter.emit(TestPlannerEvent.TEST_RESTARTED, { testHistory })
-    this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
+    let layouts: Layout<T>[] = oldLayouts,
+      index: number = 0
+
+    switch (strategy) {
+      case 'incorrect-only':
+        layouts = oldLayouts?.map(layout => {
+          const score = (oldTestHistory as HistoryItem<T>[]).find(
+            (history: HistoryItem<T>) => history?.layoutId === layout.id
+          )
+          // Where there is a layout score, check for correct answer
+          // Where not, e.g. where the question had previously been answered correctly, set active to false
+          const isActive = score?.isCorrect === false
+          return { ...layout, isActive }
+        }) as Layout<T>[]
+        // Find first active layout index
+        index = layouts?.find(layout => layout.isActive)?.index || 0
+        break
+    }
+
+    const state = this.testPlanner?.getState() as TestState
+
+    this.testPlanner?.setState({ ...state, layoutIndex: index })
+    this.testPlanner?.setLayouts(layouts || [])
+
+    this.emitter.emit(TestPlannerEvent.TEST_RESTARTED, {
+      testHistory: [],
+      layouts,
+    })
   }
 
   getCurrentLayout(): Layout<T> | null {
@@ -104,10 +126,6 @@ class TestPlannerService<T> {
           ...state,
           isEndOfTest: true,
         })
-        console.log('reset')
-        // this.testPlanner.reset()
-        // const testHistory = this.testPlanner.getTestHistory()
-        // this.emitter.emit(TestPlannerEvent.TEST_ENDED, { state, testHistory })
         this.emitter.emit(TestPlannerEvent.TEST_ENDED, { state })
       }
     }
@@ -133,14 +151,8 @@ class TestPlannerService<T> {
     return !!this.testPlanner
   }
 
-  resetTest(): void {
-    this.testPlanner = null
-    this.emitter.emit(TestPlannerEvent.TEST_RESET)
-    this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
-  }
-
-  getLayouts(): Layout<T>[] | undefined {
-    return this.testPlanner?.getLayouts()
+  getLayouts(): Layout<T>[] {
+    return this.testPlanner?.getLayouts() || []
   }
 
   setLayouts(layouts: Layout<T>[]): void {

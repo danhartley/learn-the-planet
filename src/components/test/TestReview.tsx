@@ -4,35 +4,21 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 
-import { HistoryItem, Layout, isDefined } from '@/types'
+import { TestStrategy } from '@/types'
 
 function TestReview<T>() {
   const { testHistory, layouts, startRetest } = useTestPlanner<T>()
-  const [selectedOption, setSelectedOption] = useState('failed')
+  const [selectedOption, setSelectedOption] =
+    useState<TestStrategy>('incorrect-only')
 
   const router = useRouter()
 
-  const failedLayouts = layouts
-    ?.map(layout => {
-      const score = (testHistory as HistoryItem<T>[]).find(
-        (history: HistoryItem<T>) => history.layoutId === layout.id
-      )
-      if (!score?.isCorrect) {
-        return layout
-      }
-    })
-    .filter(isDefined) as Layout<T>[]
-
-  function handleRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setSelectedOption(event.target.value)
-  }
-
   const startNewTest = () => {
-    const layoutsToTest = (
-      selectedOption === 'all' ? layouts : failedLayouts
-    ) as Layout<T>[]
-    startRetest(layoutsToTest)
+    startRetest(selectedOption)
     router.push('/test')
+  }
+  function handleRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setSelectedOption(event.target.value as TestStrategy)
   }
 
   return (
@@ -55,14 +41,14 @@ function TestReview<T>() {
       <div className="mb-4">
         <input
           type="radio"
-          id="failed-radio"
+          id="incorrect-only-radio"
           name="test-mode"
-          value="failed"
-          checked={selectedOption === 'failed'}
+          value="incorrect-only"
+          checked={selectedOption === 'incorrect-only'}
           onChange={handleRadioChange}
           className="mr-2"
         />
-        <label htmlFor="failed-radio">Failed questions only</label>
+        <label htmlFor="incorrect-only-radio">Failed questions only</label>
       </div>
 
       <button onClick={startNewTest}>Start new test</button>

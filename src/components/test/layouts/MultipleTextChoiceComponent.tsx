@@ -9,13 +9,13 @@ import {
 type Props<T> = {
   layout: Layout<T>
   onSubmit: (answer: string) => Score
-  layouts: Layout<T>[]
+  questionProgressText: string
 }
 
 export default function MultipleTextChoiceComponent({
   layout,
   onSubmit,
-  layouts,
+  questionProgressText,
 }: Props<MultipleChoiceQuestion>) {
   const buttonRefs = useRef<Record<string, HTMLButtonElement | null>>({})
 
@@ -87,7 +87,7 @@ export default function MultipleTextChoiceComponent({
       <div className="question-text">{question.text}</div>
       <div className="block options">{buttons}</div>
       <div>
-        <div>{`Question ${layout.index + 1} of ${layouts.length}`}</div>
+        <div>{questionProgressText}</div>
       </div>
     </section>
   )

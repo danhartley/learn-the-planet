@@ -157,6 +157,7 @@ export type Layout<T> = {
   distractorType?: DistractorType
   collection: Collection<T>
   item: T
+  isActive: boolean
 }
 
 export type TestState = {
@@ -240,7 +241,7 @@ export type HistoryItem<T> = {
   layoutId: string
 }
 
-export type TestStrategy = 'incorrect-only'
+export type TestStrategy = 'all' | 'incorrect-only'
 
 export const isDefined = <T>(value: T | undefined): value is T =>
   value !== undefined

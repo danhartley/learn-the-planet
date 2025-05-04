@@ -5,13 +5,13 @@ import { Layout, TextEntryQuestion, Score } from '@/types'
 interface Props<T> {
   layout: Layout<T>
   onSubmit: (answer: string) => Score
-  layouts: Layout<T>[]
+  questionProgressText: string
 }
 
 export default function TextEntryComponent({
   layout,
   onSubmit,
-  layouts,
+  questionProgressText,
 }: Props<TextEntryQuestion>) {
   const [answer, setAnswer] = useState('')
   const answerInputRef = useRef(null)
@@ -75,7 +75,7 @@ export default function TextEntryComponent({
         </div>
       </form>
       <div>
-        <div>{`Question ${layout.index + 1} of ${layouts.length}`}</div>
+        <div>{questionProgressText}</div>
       </div>
     </section>
   )
