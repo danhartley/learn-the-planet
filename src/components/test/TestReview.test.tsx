@@ -36,17 +36,17 @@ describe('TestReview Component', () => {
     render(<TestReview />)
 
     // Verify component renders correctly
-    expect(screen.getByText('Select test mode:')).toBeInTheDocument()
-    expect(screen.getByText('All questions')).toBeInTheDocument()
-    expect(screen.getByText('Failed questions only')).toBeInTheDocument()
+    expect(screen.getByText('Test review')).toBeInTheDocument()
+    expect(screen.getByText('Repeat the test in full')).toBeInTheDocument()
+    expect(screen.getByText('Repeat failed questions only')).toBeInTheDocument()
     expect(screen.getByText('Start new test')).toBeInTheDocument()
 
     // Verify default selection
     const incorrectOnlyRadio = screen.getByLabelText(
-      'Failed questions only'
+      'Repeat failed questions only'
     ) as HTMLInputElement
     const allQuestionsRadio = screen.getByLabelText(
-      'All questions'
+      'Repeat the test in full'
     ) as HTMLInputElement
 
     expect(incorrectOnlyRadio.checked).toBe(true)
@@ -56,16 +56,19 @@ describe('TestReview Component', () => {
   it('changes selection when a different radio option is clicked', () => {
     render(<TestReview />)
 
-    const allQuestionsRadio = screen.getByLabelText('All questions')
+    const allQuestionsRadio = screen.getByLabelText('Repeat the test in full')
 
-    // Click on the "All questions" option
+    // Click on the "Repeat the test in full" option
     fireEvent.click(allQuestionsRadio)
 
     // Verify the selection changed
     expect((allQuestionsRadio as HTMLInputElement).checked).toBe(true)
     expect(
-      (screen.getByLabelText('Failed questions only') as HTMLInputElement)
-        .checked
+      (
+        screen.getByLabelText(
+          'Repeat failed questions only'
+        ) as HTMLInputElement
+      ).checked
     ).toBe(false)
   })
 
@@ -85,7 +88,7 @@ describe('TestReview Component', () => {
     render(<TestReview />)
 
     // Change to "all" option
-    const allQuestionsRadio = screen.getByLabelText('All questions')
+    const allQuestionsRadio = screen.getByLabelText('Repeat the test in full')
     fireEvent.click(allQuestionsRadio)
 
     // Click the start button
@@ -101,7 +104,7 @@ describe('TestReview Component', () => {
     const { rerender } = render(<TestReview />)
 
     // Change to "all" option
-    const allQuestionsRadio = screen.getByLabelText('All questions')
+    const allQuestionsRadio = screen.getByLabelText('Repeat the test in full')
     fireEvent.click(allQuestionsRadio)
 
     // Re-render the component
@@ -109,11 +112,15 @@ describe('TestReview Component', () => {
 
     // Verify the selection is maintained
     expect(
-      (screen.getByLabelText('All questions') as HTMLInputElement).checked
+      (screen.getByLabelText('Repeat the test in full') as HTMLInputElement)
+        .checked
     ).toBe(true)
     expect(
-      (screen.getByLabelText('Failed questions only') as HTMLInputElement)
-        .checked
+      (
+        screen.getByLabelText(
+          'Repeat failed questions only'
+        ) as HTMLInputElement
+      ).checked
     ).toBe(false)
   })
 })

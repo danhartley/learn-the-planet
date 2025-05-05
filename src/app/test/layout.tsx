@@ -6,9 +6,9 @@ export default function TestLayout({
   children: React.ReactNode
 }) {
   return (
-    <section>
+    <>
       {children}
       <ScoreDisplay />
-    </section>
+    </>
   )
 }

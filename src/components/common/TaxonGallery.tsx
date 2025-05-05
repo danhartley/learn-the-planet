@@ -79,7 +79,8 @@ export const TaxonGallery = ({ collection }: Props) => {
 
   return (
     <section aria-labelledby="collection" className="group">
-      <h1 id="collection">Collection: {collection.name}</h1>
+      <h1 id="collection">Collection notes</h1>
+      <h2>{collection.name}</h2>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
       <article>{articles}</article>
@@ -88,9 +89,11 @@ export const TaxonGallery = ({ collection }: Props) => {
       <section aria-labelledby="taxa" className="sub-section">
         <h3 id="taxa">Taxa</h3>
         <div className="block">{taxa}</div>
-        <button id="start-test" onClick={handleStartTest}>
-          Test your knowledge of these taxa
-        </button>
+        <p>
+          <button id="start-test" onClick={handleStartTest}>
+            Start test
+          </button>
+        </p>
       </section>
     </section>
   )

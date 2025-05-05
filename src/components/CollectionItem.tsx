@@ -21,7 +21,12 @@ export function CollectionItem<T>({ collection }: Props<T>) {
 
   return (
     <section className="group card" aria-labelledby="collection">
-      <h3 id="collection">{collection.name}</h3>
+      <div className="group">
+        <h3 id="collection">{collection.name}</h3>
+        <Link className="breadcrumb" href={`/collection/${collection.id}`}>
+          Collection notes
+        </Link>
+      </div>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
       <Link href={`/collection/${encodeURIComponent(collection.id)}`}>

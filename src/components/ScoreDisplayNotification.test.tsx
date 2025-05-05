@@ -25,7 +25,7 @@ describe('ScoreDisplayNotification', () => {
       />
     )
 
-    expect(screen.getByText('You nailed it!')).toBeInTheDocument()
+    expect(screen.getByText('That is the correct answer')).toBeInTheDocument()
   })
 
   it('should display failure message when answer is incorrect', () => {
@@ -37,7 +37,7 @@ describe('ScoreDisplayNotification', () => {
       />
     )
 
-    expect(screen.getByText('You suck!')).toBeInTheDocument()
+    expect(screen.getByText("That's not the right answer")).toBeInTheDocument()
   })
 
   it('should have correct CSS class when answer is correct', () => {
@@ -49,7 +49,7 @@ describe('ScoreDisplayNotification', () => {
       />
     )
 
-    const messageElement = screen.getByText('You nailed it!')
+    const messageElement = screen.getByText('That is the correct answer')
     expect(messageElement).toHaveClass('correct')
     expect(messageElement).not.toHaveClass('incorrect')
   })
@@ -63,7 +63,7 @@ describe('ScoreDisplayNotification', () => {
       />
     )
 
-    const messageElement = screen.getByText('You suck!')
+    const messageElement = screen.getByText("That's not the right answer")
     expect(messageElement).toHaveClass('incorrect')
     expect(messageElement).not.toHaveClass('correct')
   })

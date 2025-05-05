@@ -30,6 +30,9 @@ describe('ScoreDisplay Component', () => {
     expect(progressBar).toBeInTheDocument()
     expect(progressBar.max).toBe(10)
     expect(progressBar.value).toBe(0)
+    expect(
+      screen.getByText('Your answers and score will appear here.')
+    ).toBeInTheDocument()
   })
 
   it('renders progress based on currentLayout and testState', () => {

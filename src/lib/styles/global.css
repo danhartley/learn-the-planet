@@ -44,6 +44,9 @@
   --card-height: clamp(200px, 14rem, 300px);
   --img-size: clamp(180px, 16vw, 240px);
   --button-size: clamp(200px, 20vw, 260px);
+
+  /* Letter spacing */
+  --letter-spacing: 0.03rem;
 }
 
 /* Base styles */
@@ -51,8 +54,16 @@ body {
   max-width: 80vw;
   margin: 0 auto;
   font-family: 'Open Sans', sans-serif;
-  letter-spacing: 0.03rem;
+  letter-spacing: var(--letter-spacing);
   -webkit-font-smoothing: antialiased;
+}
+
+body,
+main,
+main > section + section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
 }
 
 /* Typography */
@@ -85,6 +96,10 @@ a:visited {
   color: var(--colour-fg-main);
 }
 
+.breadcrumb {
+  font-size: var(--font-size-xs);
+}
+
 /* Layout elements */
 header {
   position: relative;
@@ -101,14 +116,14 @@ header {
 
 footer {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   flex-direction: column;
 }
 
 /* Form elements */
 input,
 button {
-  letter-spacing: 0.03rem;
+  letter-spacing: var(--letter-spacing);
   width: 100%;
   border-radius: var(--border-radius-sm);
 }
@@ -126,6 +141,12 @@ input {
   padding: var(--spacing-md);
   border: none;
   font-size: var(--font-size-xl);
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  margin: var(--spacing-sm);
+  accent-color: var(--colour-fg-main);
 }
 
 button {
@@ -215,9 +236,9 @@ li::marker {
 }
 
 .group-block {
-  border-top: 1px solid var(--colour-line);
+  /* border-top: 1px solid var(--colour-line); */
   border-bottom: 1px solid var(--colour-line);
-  margin: var(--spacing-md) 0 3rem;
+  margin: var(--spacing-md) 0 0 0;
   padding: var(--spacing-md) 0;
 }
 
@@ -242,10 +263,9 @@ form {
 }
 
 .form-row button {
-  text-transform: uppercase;
   padding: var(--spacing-md) 0;
   font-size: large;
-  font-weight: var(--font-weight-300);
+  font-weight: var(--font-weight-400);
   letter-spacing: 0.05rem;
 }
 
@@ -388,9 +408,9 @@ figcaption > div > div:nth-child(2) {
   min-height: initial;
 }
 
-[aria-labelledby='taxa'] .block {
+/* [aria-labelledby='taxa'] .block {
   margin-bottom: 2rem;
-}
+} */
 
 /* Definition sections */
 [aria-labelledby='definitions'] dl {

@@ -10,7 +10,7 @@ export default async function CollectionsPage<T>() {
 
   return (
     <>
-      <h2 id="collections">Available Collections</h2>
+      <h1 id="collections">Collections</h1>
       <section aria-labelledby="taxa">
         <h3 id="taxa">Taxa</h3>
         <CollectionList collections={taxa} />

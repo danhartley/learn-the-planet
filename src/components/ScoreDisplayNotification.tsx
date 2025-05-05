@@ -9,7 +9,9 @@ export const ScoreDisplayNotification = ({
   isVisibleClassName: string
 }) => {
   const notificationDisplay = useRef(null)
-  const response = isCorrect ? 'You nailed it!' : 'You suck!'
+  const response = isCorrect
+    ? 'That is the correct answer'
+    : "That's not the right answer"
   const className = isCorrect ? 'correct' : 'incorrect'
 
   /* The visibility of the notification is determined by the test container */

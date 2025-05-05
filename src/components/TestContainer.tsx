@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
+
+import Link from 'next/link'
+
 import { TestDisplay } from '@/components/test/TestDisplay'
 import { ScoreDisplayNotification } from '@/components/ScoreDisplayNotification'
 
@@ -45,7 +48,15 @@ export function TestContainer<T>() {
   return (
     <>
       <section className="group" aria-labelledby="collection">
-        <h1 id="collection">{currentLayout.collection.name}</h1>
+        <div className="group">
+          <h1 id="collection">{currentLayout.collection.name}</h1>
+          <Link
+            className="breadcrumb"
+            href={`/collection/${currentLayout.collection.id}`}
+          >
+            Collection notes
+          </Link>
+        </div>
         <TestDisplay
           layout={currentLayout}
           onSubmit={handleSubmitAnswer}
