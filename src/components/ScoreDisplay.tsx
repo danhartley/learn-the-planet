@@ -28,9 +28,8 @@ export function ScoreDisplay<T>() {
     </div>
   )
 
-  const scores = testHistory
-  const feedback = scores ? (
-    <p>{`You've answered ${scores.filter(s => s.isCorrect).length} out of ${scores.length} correctly.`}</p>
+  const feedback = testHistory ? (
+    <p>{`You've answered ${testHistory.filter(s => s.isCorrect).length} out of ${testHistory.length} correctly.`}</p>
   ) : null
 
   const historyItems = testHistory.map(historyItem => (

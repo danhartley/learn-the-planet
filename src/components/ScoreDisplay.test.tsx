@@ -1,87 +1,130 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { expect } from 'vitest'
-import { ScoreDisplay } from '@/components/ScoreDisplay'
+import { ScoreDisplay } from './ScoreDisplay'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
-import type { Score } from '@/types'
 
 // Mock the hook
 vi.mock('@/hooks/useTestPlanner', () => ({
   useTestPlanner: vi.fn(),
 }))
 
-describe('ScoreDisplay', () => {
-  // Create a default mock implementation
-  const defaultMockHook = {
-    startTest: vi.fn(),
-    startRetest: vi.fn(),
-    markAnswer: vi.fn(),
-    moveToNextQuestion: vi.fn(),
-    resetTest: vi.fn(),
-    setLayouts: vi.fn(),
-    updateTestHistory: vi.fn(),
-    currentLayout: null,
-    isActive: false,
-    lastScore: null,
-    layouts: [],
-    testHistory: [],
-    testState: null,
-  }
-
+describe('ScoreDisplay Component', () => {
   beforeEach(() => {
-    vi.resetAllMocks()
+    vi.clearAllMocks()
   })
 
-  it('renders with no message when lastScore is null', () => {
-    // Set up the mock to return no score
-    vi.mocked(useTestPlanner).mockReturnValue(defaultMockHook)
-
-    render(<ScoreDisplay />)
-  })
-
-  it('displays correct score data when lastScore exists', () => {
-    // Create a mock score
-    const mockScore: Score = {
-      isCorrect: true,
-      questionCount: 10,
-      correctCount: 7,
-      incorrectCount: 3,
-    }
-
-    // Set up the mock to return our score
+  it('renders the default progress bar when no currentLayout is available', () => {
+    // Mock the return value of useTestPlanner
     vi.mocked(useTestPlanner).mockReturnValue({
-      ...defaultMockHook,
-      lastScore: mockScore,
-    })
+      currentLayout: null,
+      testHistory: [],
+      testState: null,
+    } as any)
 
     render(<ScoreDisplay />)
 
-    // Check that all score data is displayed correctly
+    // Check that the component renders with default progress
+    expect(screen.getByText('Test score')).toBeInTheDocument()
+
+    const progressBar = screen.getByRole('progressbar') as HTMLProgressElement
+    expect(progressBar).toBeInTheDocument()
+    expect(progressBar.max).toBe(10)
+    expect(progressBar.value).toBe(0)
+  })
+
+  it('renders progress based on currentLayout and testState', () => {
+    // Mock the return value of useTestPlanner with test data
+    vi.mocked(useTestPlanner).mockReturnValue({
+      currentLayout: { index: 3 },
+      testHistory: [],
+      testState: { layoutCount: 5, isEndOfTest: false },
+    } as any)
+
+    render(<ScoreDisplay />)
+
+    // Check that the component renders with correct progress
+    expect(screen.getByText('Test progress')).toBeInTheDocument()
+
+    const progressBar = screen.getByRole('progressbar') as HTMLProgressElement
+    expect(progressBar).toBeInTheDocument()
+    expect(progressBar.max).toBe(5)
+    expect(progressBar.value).toBe(3)
+  })
+
+  it('uses layoutCount as progress value when at end of test', () => {
+    // Mock the return value of useTestPlanner for end of test
+    vi.mocked(useTestPlanner).mockReturnValue({
+      currentLayout: { index: 3 },
+      testHistory: [],
+      testState: { layoutCount: 5, isEndOfTest: true },
+    } as any)
+
+    render(<ScoreDisplay />)
+
+    const progressBar = screen.getByRole('progressbar') as HTMLProgressElement
+    expect(progressBar.max).toBe(5)
+    expect(progressBar.value).toBe(5) // Should be layoutCount at end of test
+  })
+
+  it('displays correct feedback based on test history', () => {
+    // Mock the return value of useTestPlanner with test history
+    vi.mocked(useTestPlanner).mockReturnValue({
+      currentLayout: { index: 3 },
+      testHistory: [
+        { id: '1', isCorrect: true, question: 'Q1', answer: 'A1' },
+        { id: '2', isCorrect: false, question: 'Q2', answer: 'A2' },
+        { id: '3', isCorrect: true, question: 'Q3', answer: 'A3' },
+      ],
+      testState: { layoutCount: 5, isEndOfTest: false },
+    } as any)
+
+    render(<ScoreDisplay />)
+
+    // Check the feedback text
     expect(
-      screen.getByRole('heading', { name: 'Test score' })
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText("You've answered 7 out of 10 correctly.")
+      screen.getByText("You've answered 2 out of 3 correctly.")
     ).toBeInTheDocument()
   })
 
-  it('displays correct data with different score values', () => {
-    // Test with different values
-    const mockScore: Score = {
-      isCorrect: false,
-      questionCount: 5,
-      correctCount: 2,
-      incorrectCount: 3,
-    }
+  it('renders history items with correct styling', () => {
+    const testHistory = [
+      { id: '1', isCorrect: true, question: 'Question 1', answer: 'Answer 1' },
+      { id: '2', isCorrect: false, question: 'Question 2', answer: 'Answer 2' },
+    ]
 
+    // Mock the return value of useTestPlanner with test history
     vi.mocked(useTestPlanner).mockReturnValue({
-      ...defaultMockHook,
-      lastScore: mockScore,
-    })
+      currentLayout: { index: 3 },
+      testHistory,
+      testState: { layoutCount: 5, isEndOfTest: false },
+    } as any)
 
     render(<ScoreDisplay />)
 
-    expect(
-      screen.getByText("You've answered 2 out of 5 correctly.")
-    ).toBeInTheDocument()
+    // Check for history items
+    expect(screen.getByText('Question 1 (Answer 1)')).toBeInTheDocument()
+    expect(screen.getByText('Question 2 (Answer 2)')).toBeInTheDocument()
+
+    // Check that the correct CSS classes are applied
+    const listItems = screen.getAllByRole('listitem')
+    expect(listItems).toHaveLength(2)
+
+    // First item should have 'correct' class
+    expect(listItems[0].querySelector('.correct')).toBeInTheDocument()
+
+    // Second item should have 'incorrect' class
+    expect(listItems[1].querySelector('.incorrect')).toBeInTheDocument()
+  })
+
+  it('renders properly with undefined testState', () => {
+    // Mock the return value of useTestPlanner with undefined testState
+    vi.mocked(useTestPlanner).mockReturnValue({
+      currentLayout: { index: 1 },
+      testHistory: [],
+      testState: undefined,
+    } as any)
+
+    // This should not throw an error
+    expect(() => render(<ScoreDisplay />)).not.toThrow()
   })
 })

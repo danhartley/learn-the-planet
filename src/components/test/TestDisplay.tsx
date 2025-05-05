@@ -35,7 +35,7 @@ export function TestDisplay<T>({ layout, onSubmit, layouts }: Props<T>) {
   const questionMap = displayComponentMap[questionType]
 
   let activeLayouts = layouts.filter(l => l.isActive)
-  let activeIndex
+  let activeIndex = 1
 
   activeLayouts.forEach((activeLayout, i) => {
     if (activeLayout.index === layout.index) {

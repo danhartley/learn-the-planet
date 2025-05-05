@@ -7,7 +7,7 @@ import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { TestStrategy } from '@/types'
 
 function TestReview<T>() {
-  const { testHistory, layouts, startRetest } = useTestPlanner<T>()
+  const { startRetest } = useTestPlanner<T>()
   const [selectedOption, setSelectedOption] =
     useState<TestStrategy>('incorrect-only')
 
