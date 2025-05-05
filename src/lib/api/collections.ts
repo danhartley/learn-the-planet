@@ -3835,60 +3835,60 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         observationUrl: undefined,
         wikipediaUrl: 'http://en.wikipedia.org/wiki/Erodium_cicutarium',
       },
-      // {
-      //   id: 791928,
-      //   iconicTaxon: 'Plantae',
-      //   binomial: 'Lysimachia arvensis',
-      //   rank: 'species',
-      //   vernacularName: 'scarlet pimpernel',
-      //   image: {
-      //     id: 223278664,
-      //     url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/square.jpg',
-      //     licenceCode: 'cc-by-sa',
-      //     mediumUrl:
-      //       'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/medium.jpg',
-      //     squareUrl:
-      //       'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/square.jpg',
-      //   },
-      //   observationUrl: undefined,
-      //   wikipediaUrl: 'http://en.wikipedia.org/wiki/Anagallis_arvensis',
-      // },
-      // {
-      //   id: 53212,
-      //   iconicTaxon: 'Plantae',
-      //   binomial: 'Silene gallica',
-      //   rank: 'species',
-      //   vernacularName: 'Small-flowered Catchfly',
-      //   image: {
-      //     id: 333751144,
-      //     url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/333751144/square.jpeg',
-      //     licenceCode: 'cc-by-nc',
-      //     mediumUrl:
-      //       'https://inaturalist-open-data.s3.amazonaws.com/photos/333751144/medium.jpeg',
-      //     squareUrl:
-      //       'https://inaturalist-open-data.s3.amazonaws.com/photos/333751144/square.jpeg',
-      //   },
-      //   observationUrl: undefined,
-      //   wikipediaUrl: 'https://en.wikipedia.org/wiki/Silene_gallica',
-      // },
-      // {
-      //   id: 62313,
-      //   iconicTaxon: 'Plantae',
-      //   binomial: 'Nigella damascena',
-      //   rank: 'species',
-      //   vernacularName: 'love-in-a-mist',
-      //   image: {
-      //     id: 207557206,
-      //     url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/207557206/square.jpg',
-      //     licenceCode: 'cc-by',
-      //     mediumUrl:
-      //       'https://inaturalist-open-data.s3.amazonaws.com/photos/207557206/medium.jpg',
-      //     squareUrl:
-      //       'https://inaturalist-open-data.s3.amazonaws.com/photos/207557206/square.jpg',
-      //   },
-      //   observationUrl: undefined,
-      //   wikipediaUrl: 'http://en.wikipedia.org/wiki/Nigella_damascena',
-      // },
+      {
+        id: 791928,
+        iconicTaxon: 'Plantae',
+        binomial: 'Lysimachia arvensis',
+        rank: 'species',
+        vernacularName: 'scarlet pimpernel',
+        image: {
+          id: 223278664,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/square.jpg',
+          licenceCode: 'cc-by-sa',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/223278664/square.jpg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Anagallis_arvensis',
+      },
+      {
+        id: 53212,
+        iconicTaxon: 'Plantae',
+        binomial: 'Silene gallica',
+        rank: 'species',
+        vernacularName: 'Small-flowered Catchfly',
+        image: {
+          id: 333751144,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/333751144/square.jpeg',
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/333751144/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/333751144/square.jpeg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'https://en.wikipedia.org/wiki/Silene_gallica',
+      },
+      {
+        id: 62313,
+        iconicTaxon: 'Plantae',
+        binomial: 'Nigella damascena',
+        rank: 'species',
+        vernacularName: 'love-in-a-mist',
+        image: {
+          id: 207557206,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/207557206/square.jpg',
+          licenceCode: 'cc-by',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/207557206/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/207557206/square.jpg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Nigella_damascena',
+      },
     ],
     collections: [
       {
@@ -4109,6 +4109,185 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     ],
   }
 
+  const collection10 = {
+    id: '10',
+    type: 'definition',
+    name: 'Sexual reproduction in flowering plants',
+    items: [
+      {
+        id: 'br001',
+        term: 'Stamen',
+        definition:
+          'The male reproductive organ of a flower, typically consisting of an anther and a filament.',
+        source: 'https://en.wikipedia.org/wiki/Stamen',
+        example:
+          'The stamen of a lily is prominent and easily visible in the center of the flower.',
+      },
+      {
+        id: 'br002',
+        term: 'Anther',
+        definition: 'The part of the stamen that produces and contains pollen.',
+        source: 'https://en.wikipedia.org/wiki/Anther',
+        example:
+          'The anthers burst open to release pollen onto visiting insects.',
+      },
+      {
+        id: 'br003',
+        term: 'Filament',
+        definition: 'The stalk that supports the anther in the stamen.',
+        source: 'https://en.wikipedia.org/wiki/Filament_(botany)',
+        example:
+          'The filament elevates the anther to enhance pollen dispersal.',
+      },
+      {
+        id: 'br004',
+        term: 'Pistil',
+        definition:
+          'The female reproductive part of a flower, composed of the stigma, style, and ovary.',
+        source: 'https://en.wikipedia.org/wiki/Pistil',
+        example:
+          'The pistil receives pollen and facilitates fertilisation of the ovule.',
+      },
+      {
+        id: 'br005',
+        term: 'Stigma',
+        definition:
+          'The sticky surface at the top of the pistil that captures pollen.',
+        source: 'https://en.wikipedia.org/wiki/Stigma_(botany)',
+        example: 'Pollen grains adhere to the stigma before germinating.',
+      },
+      {
+        id: 'br006',
+        term: 'Style',
+        definition:
+          'The slender stalk that connects the stigma and ovary in the pistil.',
+        source: 'https://en.wikipedia.org/wiki/Style_(botany)',
+        example: 'The style guides the pollen tube toward the ovule.',
+      },
+      {
+        id: 'br007',
+        term: 'Ovary',
+        definition:
+          'The part of the pistil that contains ovules and develops into fruit after fertilisation.',
+        source: 'https://en.wikipedia.org/wiki/Ovary_(botany)',
+        example:
+          'After fertilisation, the ovary matures into a seed-containing fruit.',
+      },
+      {
+        id: 'br008',
+        term: 'Ovule',
+        definition:
+          'The structure within the ovary that, after fertilisation, develops into a seed.',
+        source: 'https://en.wikipedia.org/wiki/Ovule',
+        example:
+          'The pollen tube delivers sperm cells to the ovule for fertilisation.',
+      },
+      {
+        id: 'br009',
+        term: 'Pollen',
+        definition:
+          'The microscopic grains produced in the anther that contain male gametes.',
+        source: 'https://en.wikipedia.org/wiki/Pollen',
+        example:
+          'Bees carry pollen from flower to flower, aiding cross-pollination.',
+      },
+      {
+        id: 'br010',
+        term: 'Pollination',
+        definition:
+          'The transfer of pollen from the anther to the stigma of a flower.',
+        source: 'https://en.wikipedia.org/wiki/Pollination',
+        example: 'Pollination can occur via wind, insects, birds, or water.',
+      },
+      {
+        id: 'br011',
+        term: 'Fertilisation',
+        definition:
+          'The fusion of male and female gametes in the ovule of a flowering plant.',
+        source: 'https://en.wikipedia.org/wiki/Fertilisation',
+        example:
+          'Fertilisation leads to the formation of a zygote, which becomes the seed.',
+      },
+      {
+        id: 'br012',
+        term: 'Pollen tube',
+        definition:
+          'A tubular structure formed by a germinating pollen grain that allows sperm to reach the ovule.',
+        source: 'https://en.wikipedia.org/wiki/Pollen_tube',
+        example:
+          'The pollen tube grows through the style to deliver sperm to the ovule.',
+      },
+      {
+        id: 'br013',
+        term: 'Sepal',
+        definition:
+          'A leaf-like structure that encloses and protects the flower bud before it opens.',
+        source: 'https://en.wikipedia.org/wiki/Sepal',
+        example:
+          'The sepals fall away when the flower blooms, revealing the petals.',
+      },
+      {
+        id: 'br014',
+        term: 'Petal',
+        definition: 'A colorful part of the flower that attracts pollinators.',
+        source: 'https://en.wikipedia.org/wiki/Petal',
+        example:
+          'Brightly colored petals help guide insects toward the nectar.',
+      },
+      {
+        id: 'br015',
+        term: 'Monoecious',
+        definition:
+          'Describes a plant species that has both male and female reproductive organs on the same individual.',
+        source: 'https://en.wikipedia.org/wiki/Monoecy',
+        example:
+          'Corn is monoecious, with separate male and female flowers on the same plant.',
+      },
+      {
+        id: 'br016',
+        term: 'Dioecious',
+        definition:
+          'Describes a plant species with separate male and female individuals.',
+        source: 'https://en.wikipedia.org/wiki/Dioecy',
+        example: 'Holly plants are dioecious; only female plants bear berries.',
+      },
+      {
+        id: 'br017',
+        term: 'Gamete',
+        definition:
+          'A reproductive cell (sperm or egg) that unites with another during fertilisation.',
+        source: 'https://en.wikipedia.org/wiki/Gamete',
+        example:
+          'In flowering plants, male gametes are found in pollen grains.',
+      },
+      {
+        id: 'br018',
+        term: 'Zygote',
+        definition: 'The cell formed by the fusion of male and female gametes.',
+        source: 'https://en.wikipedia.org/wiki/Zygote',
+        example: 'The zygote divides to form the embryo inside the seed.',
+      },
+      {
+        id: 'br019',
+        term: 'Embryo sac',
+        definition:
+          'The female gametophyte within the ovule, containing the egg cell.',
+        source: 'https://en.wikipedia.org/wiki/Embryo_sac',
+        example:
+          'The embryo sac develops inside the ovule and participates in fertilisation.',
+      },
+      {
+        id: 'br020',
+        term: 'Double fertilisation',
+        definition:
+          'A unique process in flowering plants where one sperm fertilizes the egg and another fuses with polar nuclei to form endosperm.',
+        source: 'https://en.wikipedia.org/wiki/Double_fertilisation',
+        example:
+          'Double fertilisation ensures both the embryo and food storage tissue form simultaneously.',
+      },
+    ],
+  }
+
   return new Promise((resolve, reject) => {
     const collections = [
       generateGenusAndSpeciesFields({
@@ -4146,6 +4325,10 @@ export const getCollections = (): Promise<Collection<any>[]> => {
       {
         ...collection9,
         items: sortAlphabeticallyBy(dedupe(collection9.items), 'term'),
+      },
+      {
+        ...collection10,
+        items: sortAlphabeticallyBy(dedupe(collection10.items), 'term'),
       },
     ]
 
