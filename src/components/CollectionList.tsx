@@ -7,7 +7,6 @@ type Props<T> = {
 
 export function CollectionList<T>({ collections }: Props<T>) {
   return (
-    // <section className="group-block" aria-labelledby="collections">
     <ul className="block">
       {collections.map(collection => (
         <li key={collection.id}>
@@ -15,6 +14,5 @@ export function CollectionList<T>({ collections }: Props<T>) {
         </li>
       ))}
     </ul>
-    // </section>
   )
 }

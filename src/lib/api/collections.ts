@@ -3901,6 +3901,11 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         name: 'Traits of Mediterranean wildflower annuals',
         type: 'definition',
       },
+      {
+        id: '10',
+        name: 'Sexual reproduction in flowering plants',
+        type: 'definition',
+      },
     ],
   }
 
@@ -4288,6 +4293,23 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     ],
   }
 
+  const collection11 = {
+    id: '11',
+    type: 'definition',
+    name: 'Test',
+    items: [
+      {
+        id: 'br001',
+        term: 'Stamen',
+        definition:
+          'The male reproductive organ of a flower, typically consisting of an anther and a filament.',
+        source: 'https://en.wikipedia.org/wiki/Stamen',
+        example:
+          'The stamen of a lily is prominent and easily visible in the center of the flower.',
+      },
+    ],
+  }
+
   return new Promise((resolve, reject) => {
     const collections = [
       generateGenusAndSpeciesFields({
@@ -4329,6 +4351,10 @@ export const getCollections = (): Promise<Collection<any>[]> => {
       {
         ...collection10,
         items: sortAlphabeticallyBy(dedupe(collection10.items), 'term'),
+      },
+      {
+        ...collection11,
+        items: sortAlphabeticallyBy(dedupe(collection11.items), 'term'),
       },
     ]
 

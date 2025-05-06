@@ -1,3 +1,5 @@
+import { text } from 'stream/consumers'
+
 export const isCamelCase = (str: string): boolean => {
   return /^[a-z]+(?:[A-Z][a-z0-9]*)*$/.test(str)
 }
@@ -95,4 +97,17 @@ export const sortAlphabeticallyBy = <T>(arr: T[], prop: keyof T) => {
     return 0
   })
   return arr
+}
+
+/**
+ * Converts a hyphenated string to title case format
+ * @param hyphenatedString - The hyphenated string to convert
+ * @returns The string with spaces instead of hyphens and first letter capitalized
+ */
+export const formatHyphenatedString = (hyphenatedString: string): string => {
+  // Replace hyphens with spaces
+  const spacedString = hyphenatedString.replace(/-/g, ' ')
+
+  // Capitalize the first letter
+  return spacedString.charAt(0).toUpperCase() + spacedString.slice(1)
 }

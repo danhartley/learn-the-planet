@@ -5,6 +5,7 @@ import {
   getPropByPath,
   sortBy,
   sortAlphabeticallyBy,
+  formatHyphenatedString,
 } from '@/utils/strings'
 
 describe('Check for camel case', () => {
@@ -340,5 +341,48 @@ describe('sortAlphabeticallyBy', () => {
       { id: 3, name: '123', value: 30, priority: 'high' },
       { id: 1, name: 'abc', value: 10, priority: 'low' },
     ])
+  })
+})
+
+// Tests using Vitest
+describe('formatHyphenatedString', () => {
+  test('converts hyphenated string to title case format', () => {
+    expect(formatHyphenatedString('repeat-failed-questions-only')).toBe(
+      'Repeat failed questions only'
+    )
+  })
+
+  test('handles single word', () => {
+    expect(formatHyphenatedString('test')).toBe('Test')
+  })
+
+  test('handles empty string', () => {
+    expect(formatHyphenatedString('')).toBe('')
+  })
+
+  test('handles multiple hyphens', () => {
+    expect(formatHyphenatedString('this-is-a-test-string')).toBe(
+      'This is a test string'
+    )
+  })
+
+  test('preserves existing capitalization', () => {
+    expect(formatHyphenatedString('camelCase-testString-example')).toBe(
+      'CamelCase testString example'
+    )
+  })
+
+  test('handles string with leading hyphen', () => {
+    expect(formatHyphenatedString('-leading-hyphen')).toBe(' leading hyphen')
+  })
+
+  test('handles string with trailing hyphen', () => {
+    expect(formatHyphenatedString('trailing-hyphen-')).toBe('Trailing hyphen ')
+  })
+
+  test('handles string with consecutive hyphens', () => {
+    expect(formatHyphenatedString('multiple--consecutive---hyphens')).toBe(
+      'Multiple  consecutive   hyphens'
+    )
   })
 })

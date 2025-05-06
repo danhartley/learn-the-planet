@@ -86,7 +86,7 @@ export const TaxonGallery = ({ collection }: Props) => {
       <article>{articles}</article>
       {definitions}
       {fieldNotesUrl}
-      <section aria-labelledby="taxa" className="sub-section">
+      <section aria-labelledby="taxa" className="group-block">
         <h3 id="taxa">Taxa</h3>
         <div className="block">{taxa}</div>
         <p>

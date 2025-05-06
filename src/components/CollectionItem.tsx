@@ -29,9 +29,7 @@ export function CollectionItem<T>({ collection }: Props<T>) {
       </div>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
-      <Link href={`/collection/${encodeURIComponent(collection.id)}`}>
-        {collection.items.length} items
-      </Link>
+      <div>{collection.items.length} items</div>
       <button id="start-test" onClick={handleStartTest}>
         Start test
       </button>

@@ -38,12 +38,18 @@ export function DefinitionGallery<T>({ collection }: Props<T>) {
   })
 
   return (
-    <section aria-labelledby="definitions">
-      <h1 id="definitions">Terms</h1>
-      <dl>{definitions}</dl>
-      <button id="start-test" onClick={handleStartTest}>
-        Test your knowledge of these terms
-      </button>
+    <section aria-labelledby="definitions" className="group">
+      <h1 id="definitions">Definitions</h1>
+      <h2>{collection.name}</h2>
+      <section aria-labelledby="terms" className="group-block">
+        <h3 id="terms">Terms</h3>
+        <dl>{definitions}</dl>
+        <p>
+          <button id="start-test" onClick={handleStartTest}>
+            Start test
+          </button>
+        </p>
+      </section>
     </section>
   )
 }

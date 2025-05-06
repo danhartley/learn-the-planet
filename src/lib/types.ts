@@ -229,7 +229,7 @@ export interface ContentTypeHandler<T> {
   validateAnswer(question: Question, answer: string): boolean
 }
 
-export type ContentHandlerType = 'taxon' | 'definition' | 'trait'
+export type ContentHandlerType = 'taxon' | 'definition'
 
 export type HistoryItem<T> = {
   id: string
@@ -241,7 +241,9 @@ export type HistoryItem<T> = {
   layoutId: string
 }
 
-export type TestStrategy = 'all' | 'incorrect-only'
+export type TestStrategy =
+  | 'repeat-failed-questions-only'
+  | 'repeat-the-test-in-full'
 
 export const isDefined = <T>(value: T | undefined): value is T =>
   value !== undefined

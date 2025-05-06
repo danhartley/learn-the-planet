@@ -1,7 +1,9 @@
 :root {
   /* Colors */
-  --colour-line: lightgray;
+  --colour-line: rgb(211, 211, 211);
+  --colour-bg-accent: rgb(236, 239, 247);
   --colour-fg-main: rgb(0, 0, 0);
+  --colour-fg-text: rgb(68, 68, 68);
   --colour-fg-alt-main: rgb(255, 255, 255);
   --colour-bg-main: rgb(255, 255, 255);
   --colour-bg-plantae: rgb(216, 223, 210);
@@ -54,16 +56,22 @@ body {
   max-width: 80vw;
   margin: 0 auto;
   font-family: 'Open Sans', sans-serif;
+  color: var(--colour-fg-text);
   letter-spacing: var(--letter-spacing);
   -webkit-font-smoothing: antialiased;
 }
 
 body,
 main,
-main > section + section {
+main > section {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
+}
+
+article {
+  max-width: 60ch;
+  overflow-wrap: anywhere;
 }
 
 /* Typography */
@@ -145,6 +153,7 @@ input {
 
 input[type='checkbox'],
 input[type='radio'] {
+  width: initial;
   margin: var(--spacing-sm);
   accent-color: var(--colour-fg-main);
 }
@@ -216,6 +225,7 @@ li::marker {
   width: var(--button-size);
   height: var(--button-size);
   padding: 0;
+  border: none;
 }
 
 .block.options > button span {
@@ -236,10 +246,10 @@ li::marker {
 }
 
 .group-block {
-  /* border-top: 1px solid var(--colour-line); */
-  border-bottom: 1px solid var(--colour-line);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--colour-bg-accent);
   margin: var(--spacing-md) 0 0 0;
-  padding: var(--spacing-md) 0;
+  padding: var(--spacing-md);
 }
 
 /* Forms */
@@ -478,7 +488,7 @@ progress {
   }
 }
 
-/* Score notification */
+/* Notifications and feedback */
 .notification {
   display: flex;
   align-items: center;
@@ -511,7 +521,6 @@ progress {
   }
 }
 
-article {
-  max-width: 60ch;
-  overflow-wrap: anywhere;
+.feedback {
+  font-weight: var(--font-weight-600);
 }

@@ -49,8 +49,8 @@ describe('TestReview Component', () => {
       'Repeat the test in full'
     ) as HTMLInputElement
 
-    expect(incorrectOnlyRadio.checked).toBe(true)
-    expect(allQuestionsRadio.checked).toBe(false)
+    expect(allQuestionsRadio.checked).toBe(true)
+    expect(incorrectOnlyRadio.checked).toBe(false)
   })
 
   it('changes selection when a different radio option is clicked', () => {
@@ -80,7 +80,7 @@ describe('TestReview Component', () => {
     fireEvent.click(startButton)
 
     // Verify the startRetest was called with the default option
-    expect(mockStartRetest).toHaveBeenCalledWith('incorrect-only')
+    expect(mockStartRetest).toHaveBeenCalledWith('repeat-the-test-in-full')
     expect(mockPush).toHaveBeenCalledWith('/test')
   })
 
@@ -96,7 +96,7 @@ describe('TestReview Component', () => {
     fireEvent.click(startButton)
 
     // Verify the startRetest was called with "all"
-    expect(mockStartRetest).toHaveBeenCalledWith('all')
+    expect(mockStartRetest).toHaveBeenCalledWith('repeat-the-test-in-full')
     expect(mockPush).toHaveBeenCalledWith('/test')
   })
 
@@ -122,5 +122,64 @@ describe('TestReview Component', () => {
         ) as HTMLInputElement
       ).checked
     ).toBe(false)
+  })
+})
+
+describe('TestReview Component when all answers are correct', () => {
+  const mockStartRetest = vi.fn()
+  const mockPush = vi.fn()
+  const mockCollection = { id: '123', name: 'Test Collection' }
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+
+    // Setup mock return values with isEveryAnswerCorrect = true scenario
+    vi.mocked(useTestPlanner).mockReturnValue({
+      startRetest: mockStartRetest,
+      testHistory: [{ isCorrect: true }, { isCorrect: true }], // All answers correct
+      currentLayout: { collection: mockCollection },
+    } as any)
+
+    vi.mocked(useRouter).mockReturnValue({
+      push: mockPush,
+    } as any)
+  })
+
+  it('renders only the "repeat the test in full" option when all answers are correct', () => {
+    render(<TestReview />)
+
+    // Verify component renders with collection name
+    expect(screen.getByText('Test Collection')).toBeInTheDocument()
+
+    // Verify only one radio option is available
+    expect(screen.getByLabelText('Repeat the test in full')).toBeInTheDocument()
+    expect(
+      screen.queryByLabelText('Repeat failed questions only')
+    ).not.toBeInTheDocument()
+
+    // Verify the available option is selected by default
+    const fullTestRadio = screen.getByLabelText(
+      'Repeat the test in full'
+    ) as HTMLInputElement
+    expect(fullTestRadio.checked).toBe(true)
+  })
+
+  it('starts a new test with the correct option when button is clicked', () => {
+    render(<TestReview />)
+
+    // Click the start button
+    const startButton = screen.getByText('Start new test')
+    fireEvent.click(startButton)
+
+    // Verify the startRetest was called with the only available option
+    expect(mockStartRetest).toHaveBeenCalledWith('repeat-the-test-in-full')
+    expect(mockPush).toHaveBeenCalledWith('/test')
+  })
+
+  it('renders the collection link correctly', () => {
+    render(<TestReview />)
+
+    const collectionLink = screen.getByText('Collection notes')
+    expect(collectionLink).toHaveAttribute('href', '/collection/123')
   })
 })

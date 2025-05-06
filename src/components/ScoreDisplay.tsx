@@ -30,9 +30,9 @@ export function ScoreDisplay<T>() {
 
   const feedback =
     testHistory?.length > 0 ? (
-      <p>{`You've answered ${testHistory.filter(s => s.isCorrect).length} out of ${testHistory.length} correctly.`}</p>
+      <div className="feedback">{`You've answered ${testHistory.filter(s => s.isCorrect).length} out of ${testHistory.length} correctly.`}</div>
     ) : (
-      <p>Your answers and score will appear here.</p>
+      <div>Your answers and score will appear here.</div>
     )
 
   const historyItems = testHistory.map(historyItem => (
