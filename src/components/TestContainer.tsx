@@ -49,7 +49,8 @@ export function TestContainer<T>() {
     <>
       <section className="group" aria-labelledby="collection">
         <div className="group">
-          <h1 id="collection">{currentLayout.collection.name}</h1>
+          <h1 id="collection">Test</h1>
+          <h2 id="collection">{currentLayout.collection.name}</h2>
           <Link
             className="breadcrumb"
             href={`/collection/${currentLayout.collection.id}`}

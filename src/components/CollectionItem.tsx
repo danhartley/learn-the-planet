@@ -19,12 +19,15 @@ export function CollectionItem<T>({ collection }: Props<T>) {
     router.push('/test')
   }
 
+  const linkText =
+    collection.type === 'taxon' ? 'Collection notes' : 'Collection terms'
+
   return (
     <section className="group card" aria-labelledby="collection">
       <div className="group">
         <h3 id="collection">{collection.name}</h3>
         <Link className="breadcrumb" href={`/collection/${collection.id}`}>
-          Collection notes
+          {linkText}
         </Link>
       </div>
       <div>{collection.date}</div>

@@ -9,8 +9,11 @@ export default async function CollectionsPage<T>() {
   const definitions = collections.filter(c => c.type === 'definition')
 
   return (
-    <>
-      <h1 id="collections">Collections</h1>
+    <section aria-labelledby="collections">
+      <div className="group">
+        <h1 id="collections">Collections</h1>
+        <h2>All collections</h2>
+      </div>
       <section aria-labelledby="taxa">
         <h3 id="taxa">Taxa</h3>
         <CollectionList collections={taxa} />
@@ -19,6 +22,6 @@ export default async function CollectionsPage<T>() {
         <h3 id="definitions">Terms</h3>
         <CollectionList collections={definitions} />
       </section>
-    </>
+    </section>
   )
 }

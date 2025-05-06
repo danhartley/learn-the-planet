@@ -85,7 +85,9 @@ export default function MultipleTextChoiceComponent({
     >
       <h3 id="multiple-choice">Multiple choice</h3>
       <div className="question-text">{question.text}</div>
-      <div className="block options">{buttons}</div>
+      <div className="block-container">
+        <div className="grid-container-4-2-1 options">{buttons}</div>
+      </div>
       <div>
         <div>{questionProgressText}</div>
       </div>

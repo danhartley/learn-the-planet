@@ -137,7 +137,7 @@ export type Article = {
 
 export type Collection<T> = {
   id: string
-  type: string
+  type: ContentHandlerType
   name: string
   date?: string
   location?: string
