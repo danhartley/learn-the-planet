@@ -25,7 +25,6 @@ function TestReview<T>() {
   }
 
   const options = testStrategies.map(strategy => {
-    console.log(`Processing strategy: ${strategy}`)
     return (
       <div>
         <input

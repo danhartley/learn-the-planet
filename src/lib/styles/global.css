@@ -67,6 +67,11 @@ main > section {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
+
+  p:empty,
+  div:empty {
+    display: none;
+  }
 }
 
 article {
@@ -309,7 +314,7 @@ form {
 }
 
 .form-row button {
-  padding: var(--spacing-md) 0;
+  padding: var(--spacing-md);
   font-size: large;
   font-weight: var(--font-weight-400);
   letter-spacing: 0.05rem;
@@ -365,6 +370,7 @@ form {
   width: var(--card-width);
   height: var(--card-height);
   position: relative;
+  background-color: var(--colour-bg-main);
 }
 
 .card > *:nth-last-child(1) {
@@ -488,6 +494,15 @@ figcaption > div > div:nth-child(2) {
   font-size: var(--font-size-sm);
 }
 
+[aria-labelledby='taxa'],
+[aria-labelledby='terms'] {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 3px 3px;
+  padding: 1rem;
+}
+
 .sub-section {
   margin-block-start: var(--spacing-xl);
   border-top: 1px solid var(--colour-line);
@@ -524,6 +539,10 @@ progress {
     font-family: 'Open Sans', sans-serif;
     font-weight: var(--font-weight-400);
     font-size: var(--font-size-md);
+  }
+
+  .form-row button {
+    width: fit-content;
   }
 }
 

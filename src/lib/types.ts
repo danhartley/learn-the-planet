@@ -137,7 +137,7 @@ export type Article = {
 
 export type Collection<T> = {
   id: string
-  type: ContentHandlerType
+  type: string
   name: string
   date?: string
   location?: string
@@ -229,7 +229,7 @@ export interface ContentTypeHandler<T> {
   validateAnswer(question: Question, answer: string): boolean
 }
 
-export type ContentHandlerType = 'taxon' | 'definition'
+export type ContentHandlerType = 'taxon' | 'definition' | 'locale'
 
 export type HistoryItem<T> = {
   id: string

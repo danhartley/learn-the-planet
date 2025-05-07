@@ -18,7 +18,7 @@ export default async function CollectionsPage<T>() {
         <h3 id="taxa">Taxa</h3>
         <CollectionList collections={taxa} />
       </section>
-      <section aria-labelledby="definitions">
+      <section aria-labelledby="terms">
         <h3 id="definitions">Terms</h3>
         <CollectionList collections={definitions} />
       </section>
