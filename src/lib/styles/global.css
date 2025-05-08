@@ -220,7 +220,7 @@ li::marker {
 .block-container {
   display: flex;
   justify-content: center;
-  padding: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
 }
 
 .block {
@@ -243,7 +243,7 @@ li::marker {
 .grid-md {
   display: grid;
   grid-template-columns: 1fr;
-  row-gap: var(--spacing-xl);
+  row-gap: var(--spacing-sm);
   column-gap: var(--spacing-xl);
   justify-content: center;
 }
@@ -409,7 +409,7 @@ form {
   }
 }
 
-[aria-labelledby='locales'] {
+[aria-labelledby='topics'] {
   button {
     display: none;
   }

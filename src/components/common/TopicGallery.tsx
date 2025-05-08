@@ -11,7 +11,7 @@ type Props = {
   collection: Collection<Taxon>
 }
 
-export const LocaleGallery = ({ collection }: Props) => {
+export const TopicGallery = ({ collection }: Props) => {
   const router = useRouter()
   const { startTest } = useTestPlanner<T>()
 
@@ -61,8 +61,8 @@ export const LocaleGallery = ({ collection }: Props) => {
   const definitions = subCollections?.filter(
     sc => sc?.type === 'definition'
   ) ? (
-    <section aria-labelledby="locale-gallery" className="sub-section">
-      <h3 id="locale-gallery">Terms</h3>
+    <section aria-labelledby="topic-gallery" className="sub-section">
+      <h3 id="topic-gallery">Terms</h3>
       <ul>{subCollections}</ul>
     </section>
   ) : null

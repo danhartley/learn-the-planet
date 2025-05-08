@@ -59,7 +59,7 @@ export const taxonTemplates: QuestionTemplate[] = [
   },
 ]
 
-export const localeTemplates: QuestionTemplate[] = []
+export const topicTemplates: QuestionTemplate[] = []
 
 export const getTemplatesByContentType = (
   contentType: ContentHandlerType
@@ -67,7 +67,7 @@ export const getTemplatesByContentType = (
   const templateMap = {
     taxon: taxonTemplates,
     definition: definitionTemplates,
-    locale: localeTemplates,
+    topic: topicTemplates,
   }
 
   const templates = templateMap[contentType].map(template => {

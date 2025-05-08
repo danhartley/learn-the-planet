@@ -28,7 +28,7 @@ export function CollectionItem<T>({ collection }: Props<T>) {
     case 'definition':
       linkText = 'Review terms'
       break
-    case 'locale':
+    case 'topic':
       linkText = 'Background'
       break
   }

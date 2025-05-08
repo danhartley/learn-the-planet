@@ -4247,7 +4247,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
   const collection12 = {
     id: '12',
-    type: 'locale',
+    type: 'topic',
     name: 'Pollination Strategies',
     items: [],
     article: {
