@@ -229,7 +229,7 @@ export interface ContentTypeHandler<T> {
   validateAnswer(question: Question, answer: string): boolean
 }
 
-export type ContentHandlerType = 'taxon' | 'definition' | 'topic'
+export type ContentHandlerType = 'taxon' | 'definition' | 'topic' | 'trait'
 
 export type HistoryItem<T> = {
   id: string

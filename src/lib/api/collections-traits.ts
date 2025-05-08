@@ -21,6 +21,8 @@ export const traits = [
         perennial_examples: [
           { commonName: 'Rosemary', scientificName: 'Salvia rosmarinus' },
           { commonName: 'Asphodel', scientificName: 'Asphodelus aestivus' },
+          { commonName: 'Common chicory', scientificName: 'Cichorium intybus' },
+          { commonName: 'Century plant', scientificName: 'Agave americana' },
         ],
         seasonalIndicators:
           'After summer drought, annuals will be completely dead while perennials may maintain living root structures even if aboveground parts die back',

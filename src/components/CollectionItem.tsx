@@ -23,13 +23,16 @@ export function CollectionItem<T>({ collection }: Props<T>) {
 
   switch (collection.type as ContentHandlerType) {
     case 'taxon':
-      linkText = 'Collection items'
+      linkText = 'View taxa'
       break
     case 'definition':
       linkText = 'Review terms'
       break
     case 'topic':
       linkText = 'Background'
+      break
+    case 'trait':
+      linkText = 'View traits'
       break
   }
 

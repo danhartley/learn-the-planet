@@ -8,15 +8,15 @@ import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { Collection, Taxon, SubCollectionSummary } from '@/types'
 import { TaxonCard } from '@/components/common/TaxonCard'
 
-type Props = {
+type Props<Taxon> = {
   collection: Collection<Taxon>
 }
 
-export const TaxonGallery = ({ collection }: Props) => {
+export const TaxonGallery = ({ collection }: Props<Taxon>) => {
   if (!collection?.items?.[0]) return
 
   const router = useRouter()
-  const { startTest } = useTestPlanner<T>()
+  const { startTest } = useTestPlanner<Taxon>()
 
   const handleStartTest = () => {
     startTest(collection)

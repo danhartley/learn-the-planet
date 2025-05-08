@@ -2,24 +2,13 @@
 
 import Link from 'next/link'
 
-import { useRouter } from 'next/navigation'
-import { useTestPlanner } from '@/hooks/useTestPlanner'
-
 import { Collection, Taxon, SubCollectionSummary } from '@/types'
 
-type Props = {
-  collection: Collection<Taxon>
+type Props<T> = {
+  collection: Collection<T>
 }
 
-export const TopicGallery = ({ collection }: Props) => {
-  const router = useRouter()
-  const { startTest } = useTestPlanner<T>()
-
-  const handleStartTest = () => {
-    startTest(collection)
-    router.push('/test')
-  }
-
+export const TopicGallery = ({ collection }: Props<T>) => {
   const fieldNotesUrl = collection?.fieldNotes?.url ? (
     <Link href={collection.fieldNotes.url}>Field notes</Link>
   ) : null
