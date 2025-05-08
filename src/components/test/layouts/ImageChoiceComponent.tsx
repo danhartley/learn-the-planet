@@ -51,7 +51,7 @@ const ImageChoiceComponent = ({
       <h3 id="multiple-choice">Multiple choice</h3>
       <div className="question-text">{question.text}</div>
       <div className="block-container">
-        <div className="grid-container-4-2-1 options">{images}</div>
+        <div className="grid-lg options">{images}</div>
       </div>
       <div>
         <div>{questionProgressText}</div>

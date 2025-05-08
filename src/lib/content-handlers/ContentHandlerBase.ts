@@ -32,14 +32,14 @@ export class ContentHandlerBase<T extends LearningItem>
    * Constructor that takes a distractor generator function
    */
   constructor(
-    distractorGenerator: (
+    distractorGenerator?: (
       collection: Collection<T>,
       item: T,
       count: number,
       distractorType: DistractorType
     ) => any[]
   ) {
-    this.generateItemDistractors = distractorGenerator
+    this.generateItemDistractors = distractorGenerator || <any>[]
   }
 
   /**

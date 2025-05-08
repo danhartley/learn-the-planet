@@ -6,12 +6,16 @@
   --colour-fg-text: rgb(68, 68, 68);
   --colour-fg-alt-main: rgb(255, 255, 255);
   --colour-bg-main: rgb(255, 255, 255);
+  --colour-bg-card: rgb(246, 247, 249);
   --colour-bg-plantae: rgb(216, 223, 210);
   --colour-bg-insecta: rgb(226, 220, 226);
   --colour-bg-mammalia: rgb(240, 199, 130);
   --colour-bg-reptilia: rgb(254, 226, 223);
   --colour-bg-taxon: rgb(43 73 34);
-  --colour-bg-definition: rgb(73 64 34);
+  --colour-bg-taxon-card: rgb(226 239 220);
+  --colour-bg-terms: rgb(73 64 34);
+  --colour-bg-terms-card: rgb(245, 243, 234);
+  --colour-bg-card-button: rgba(255, 255, 255, 0.5);
   --colour-form-label: rgb(64 64 65);
   --colour-correct: rgb(106, 176, 84);
   --colour-incorrect: rgb(176 84 106);
@@ -96,6 +100,7 @@ h3 {
   text-transform: uppercase;
   font-weight: 400;
   font-size: var(--font-size-xs);
+  line-height: 1.6;
 }
 
 a {
@@ -227,7 +232,7 @@ li::marker {
   justify-content: center;
 }
 
-.grid-container-4-2-1 {
+.grid-lg {
   display: grid;
   grid-template-columns: 1fr;
   row-gap: var(--spacing-xl);
@@ -235,7 +240,7 @@ li::marker {
   justify-content: center;
 }
 
-.grid-small-container-4-2-1 {
+.grid-md {
   display: grid;
   grid-template-columns: 1fr;
   row-gap: var(--spacing-xl);
@@ -244,12 +249,12 @@ li::marker {
 }
 
 .block.options,
-.grid-container-4-2-1.options {
+.grid-lg.options {
   padding-block: var(--spacing-xl);
 }
 
 .block.options > button,
-.grid-container-4-2-1.options > button {
+.grid-lg.options > button {
   width: var(--button-size);
   height: var(--button-size);
   padding: 0;
@@ -257,7 +262,7 @@ li::marker {
 }
 
 .block.options > button span,
-.grid-container-4-2-1.options > button span {
+.grid-lg.options > button span {
   display: block;
   padding: var(--spacing-sm);
   line-height: 1.2;
@@ -267,12 +272,12 @@ li::marker {
 }
 
 [data-type='taxon'] .block.options > button span,
-[data-type='taxon'] .grid-container-4-2-1.options > button span {
+[data-type='taxon'] .grid-lg.options > button span {
   font-size: var(--font-size-lg);
 }
 
 .block img,
-.grid-container-4-2-1 img {
+.grid-lg img {
   width: var(--img-size);
   height: var(--img-size);
   border-radius: var(--border-radius-sm);
@@ -284,13 +289,20 @@ li::marker {
 
 .group-block {
   border-radius: var(--border-radius-sm);
-  background-color: var(--colour-bg-accent);
+  /* background-color: var(--colour-bg-accent); */
   margin: var(--spacing-md) 0 0 0;
   padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
   background-image:
     linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
   background-size: 3px 3px;
+}
+
+[aria-labelledby='taxon-gallery'] .group-block,
+[aria-labelledby='definition-gallery'] .group-block {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-xl);
 }
 
 /* Forms */
@@ -327,7 +339,7 @@ form {
 }
 
 .form-row.definition {
-  background-color: var(--colour-bg-definition);
+  background-color: var(--colour-bg-terms);
   padding: var(--spacing-lg);
 }
 
@@ -363,14 +375,15 @@ form {
 /* Card components */
 .card {
   border: 1px solid var(--colour-line);
-  padding: 0 var(--spacing-md) var(--spacing-md);
+  padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-sm);
   width: var(--card-width);
   height: var(--card-height);
   position: relative;
-  background-color: var(--colour-bg-main);
+  background-color: var(--colour-bg-card);
+  border-radius: var(--border-radius-sm);
 }
 
 .card > *:nth-last-child(1) {
@@ -379,6 +392,27 @@ form {
   left: var(--spacing-md);
   right: var(--spacing-md);
   width: auto;
+}
+
+[aria-labelledby='taxa'] .card {
+  background-color: var(--colour-bg-taxon-card);
+}
+
+[aria-labelledby='terms'] .card {
+  background-color: var(--colour-bg-terms-card);
+}
+
+.card button {
+  background-color: var(--colour-bg-card-button);
+  &:hover {
+    background-color: var(--colour-bg-main);
+  }
+}
+
+[aria-labelledby='locales'] {
+  button {
+    display: none;
+  }
 }
 
 .taxon {
@@ -461,19 +495,20 @@ figcaption > div > div:nth-child(2) {
 }
 
 /* Definition sections */
-[aria-labelledby='definitions'] {
+[aria-labelledby='definition-gallery'] {
   width: fit-content;
   margin: auto;
 }
 
-[aria-labelledby='definitions'] dl {
+[aria-labelledby='definition-gallery'] dl {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-sm);
   max-width: 60ch;
+  margin: 0;
 }
 
-[aria-labelledby='definitions'] dd {
+[aria-labelledby='definition-gallery'] dd {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-sm);
@@ -492,15 +527,6 @@ figcaption > div > div:nth-child(2) {
 
 [data-type='definition'] .block.options > button span {
   font-size: var(--font-size-sm);
-}
-
-[aria-labelledby='taxa'],
-[aria-labelledby='terms'] {
-  background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  background-size: 3px 3px;
-  padding: 1rem;
 }
 
 .sub-section {
@@ -535,7 +561,7 @@ progress {
 
   input,
   button {
-    width: initial;
+    width: fit-content;
     font-family: 'Open Sans', sans-serif;
     font-weight: var(--font-weight-400);
     font-size: var(--font-size-md);
@@ -546,26 +572,42 @@ progress {
   }
 }
 
-@media (min-width: 577px) and (max-width: 1440px) {
-  .grid-container-4-2-1 {
+/* Large grid */
+
+@media (min-width: 767px) and (max-width: 1286px) {
+  .grid-lg {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1287px) and (max-width: 1440px) {
+  .grid-lg {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 @media (min-width: 1441px) {
-  .grid-container-4-2-1 {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+  .grid-lg {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 }
 
-@media (min-width: 577px) and (max-width: 1365px) {
-  .grid-small-container-4-2-1 {
+/* Small grid */
+
+@media (min-width: 767px) and (max-width: 1186px) {
+  .grid-md {
     grid-template-columns: 1fr 1fr;
   }
 }
 
+@media (min-width: 1187px) and (max-width: 1365px) {
+  .grid-md {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
 @media (min-width: 1366px) {
-  .grid-small-container-4-2-1 {
+  .grid-md {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }

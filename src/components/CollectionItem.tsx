@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
-import { Collection } from '@/types'
+import { Collection, ContentHandlerType } from '@/types'
 
 type Props<T> = {
   collection: Collection<T>
@@ -19,8 +19,22 @@ export function CollectionItem<T>({ collection }: Props<T>) {
     router.push('/test')
   }
 
-  const linkText =
-    collection.type === 'taxon' ? 'Collection notes' : 'Collection terms'
+  let linkText
+
+  switch (collection.type as ContentHandlerType) {
+    case 'taxon':
+      linkText = 'Collection items'
+      break
+    case 'definition':
+      linkText = 'Review terms'
+      break
+    case 'locale':
+      linkText = 'Background'
+      break
+  }
+
+  const items =
+    collection.items?.length > 0 ? `${collection.items?.length} items` : ''
 
   return (
     <section className="group card" aria-labelledby="collection">
@@ -32,7 +46,7 @@ export function CollectionItem<T>({ collection }: Props<T>) {
       </div>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
-      <div>{collection.items.length} items</div>
+      <div>{items}</div>
       <button id="start-test" onClick={handleStartTest}>
         Start test
       </button>

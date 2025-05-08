@@ -38,8 +38,8 @@ export function DefinitionGallery<T>({ collection }: Props<T>) {
   })
 
   return (
-    <section aria-labelledby="definitions" className="group">
-      <h1 id="definitions">Definitions</h1>
+    <section aria-labelledby="definition-gallery" className="group">
+      <h1 id="definition-gallery">Definitions</h1>
       <h2>{collection.name}</h2>
       <section aria-labelledby="terms" className="group-block">
         <h3 id="terms">Terms</h3>

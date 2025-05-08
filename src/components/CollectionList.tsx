@@ -8,7 +8,7 @@ type Props<T> = {
 export function CollectionList<T>({ collections }: Props<T>) {
   return (
     <div className="block-container">
-      <ul className="grid-small-container-4-2-1">
+      <ul className="grid-md">
         {collections.map(collection => (
           <li key={collection.id}>
             <CollectionItem<T> collection={collection} />

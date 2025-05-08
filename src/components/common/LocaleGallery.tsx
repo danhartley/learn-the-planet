@@ -6,15 +6,12 @@ import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 
 import { Collection, Taxon, SubCollectionSummary } from '@/types'
-import { TaxonCard } from '@/components/common/TaxonCard'
 
 type Props = {
   collection: Collection<Taxon>
 }
 
-export const TaxonGallery = ({ collection }: Props) => {
-  if (!collection?.items?.[0]) return
-
+export const LocaleGallery = ({ collection }: Props) => {
   const router = useRouter()
   const { startTest } = useTestPlanner<T>()
 
@@ -22,13 +19,6 @@ export const TaxonGallery = ({ collection }: Props) => {
     startTest(collection)
     router.push('/test')
   }
-
-  const taxa = collection?.items.map(item => {
-    const firstImage = item?.images ? item.images[0] : null
-    const image = item?.image || firstImage
-    if (!image) return
-    return <TaxonCard key={item.id + crypto.randomUUID()} taxon={item} />
-  })
 
   const fieldNotesUrl = collection?.fieldNotes?.url ? (
     <Link href={collection.fieldNotes.url}>Field notes</Link>
@@ -68,21 +58,24 @@ export const TaxonGallery = ({ collection }: Props) => {
     )
   })
 
+  const definitions = subCollections?.filter(
+    sc => sc?.type === 'definition'
+  ) ? (
+    <section aria-labelledby="locale-gallery" className="sub-section">
+      <h3 id="locale-gallery">Terms</h3>
+      <ul>{subCollections}</ul>
+    </section>
+  ) : null
+
   return (
-    <section aria-labelledby="taxon-gallery" className="group">
-      <h1 id="taxon-gallery">Collection notes</h1>
+    <section aria-labelledby="collection" className="group">
+      <h1 id="collection">Collection notes</h1>
       <h2>{collection.name}</h2>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
       <article>{articles}</article>
+      {definitions}
       {fieldNotesUrl}
-      <section aria-labelledby="taxa" className="group-block">
-        <h3 id="taxa">Taxa</h3>
-        <div className="block">{taxa}</div>
-        <button id="start-test" onClick={handleStartTest}>
-          Start test
-        </button>
-      </section>
     </section>
   )
 }
