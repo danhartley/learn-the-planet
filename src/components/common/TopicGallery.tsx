@@ -47,9 +47,8 @@ export const TopicGallery = ({ collection }: Props<T>) => {
     )
   })
 
-  const definitions = subCollections?.filter(
-    sc => sc?.type === 'definition'
-  ) ? (
+  // change to switch
+  const definitions = subCollections?.filter(sc => sc?.type === 'term') ? (
     <section aria-labelledby="topic-gallery" className="sub-section">
       <h3 id="topic-gallery">Terms</h3>
       <ul>{subCollections}</ul>

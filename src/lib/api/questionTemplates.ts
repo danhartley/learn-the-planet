@@ -4,7 +4,7 @@ export const definitionTemplates: QuestionTemplate[] = [
   {
     type: 'textEntry',
     level: 'level 0',
-    questionTextTemplate: '${definition}',
+    questionTextTemplate: '${term}',
     correctAnswerProperty: 'term',
     placeholder: 'Match',
   },
@@ -14,7 +14,7 @@ export const definitionTemplates: QuestionTemplate[] = [
     questionTextTemplate: 'Select the definition for ${term}',
     correctAnswerProperty: 'definition',
     distractorCount: 3,
-    distractorType: 'definition',
+    distractorType: 'term',
   },
 ]
 
@@ -66,7 +66,7 @@ export const getTemplatesByContentType = (
 ): QuestionTemplate[] => {
   const templateMap = {
     taxon: taxonTemplates,
-    definition: definitionTemplates,
+    term: definitionTemplates,
     topic: topicTemplates,
   }
 

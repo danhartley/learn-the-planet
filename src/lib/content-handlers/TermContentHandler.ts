@@ -2,16 +2,16 @@ import { Definition, Collection, DistractorType } from '@/types'
 import { ContentHandlerBase } from './ContentHandlerBase'
 import { shuffleArray } from '@/utils/strings'
 
-export class DefinitionContentHandler extends ContentHandlerBase<Definition> {
+export class TermContentHandler extends ContentHandlerBase<Definition> {
   constructor() {
-    super(generateDefinitionDistractors)
+    super(generateTermDistractors)
   }
 }
 
 /**
  * Generate distractors for Definition items
  */
-function generateDefinitionDistractors(
+function generateTermDistractors(
   collection: Collection<Definition>,
   item: Definition,
   count: number,

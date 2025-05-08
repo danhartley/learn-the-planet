@@ -1,6 +1,6 @@
 import { ContentTypeHandler, ContentHandlerType } from '@/types'
 import { TaxonContentHandler } from './TaxonContentHandler'
-import { DefinitionContentHandler } from './DefinitionContentHandler'
+import { TermContentHandler } from './TermContentHandler'
 import { TopicContentHandler } from './TopicContentHandler'
 import { TraitContentHandler } from './TraitContentHandler'
 
@@ -9,7 +9,7 @@ export const contentHandlers: Record<
   ContentTypeHandler<any>
 > = {
   taxon: new TaxonContentHandler(),
-  definition: new DefinitionContentHandler(),
+  term: new TermContentHandler(),
   topic: new TopicContentHandler(),
   trait: new TraitContentHandler(),
 }

@@ -190,7 +190,7 @@ export type DistractorType =
   | 'species'
   | 'image'
   | 'term'
-  | 'definition'
+  | 'term'
 
 export interface MultipleChoiceTemplate extends BaseQuestionTemplate {
   type: 'multipleChoice'
@@ -229,7 +229,7 @@ export interface ContentTypeHandler<T> {
   validateAnswer(question: Question, answer: string): boolean
 }
 
-export type ContentHandlerType = 'taxon' | 'definition' | 'topic' | 'trait'
+export type ContentHandlerType = 'taxon' | 'term' | 'topic' | 'trait'
 
 export type HistoryItem<T> = {
   id: string

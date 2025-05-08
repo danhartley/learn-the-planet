@@ -6,7 +6,7 @@ export default async function CollectionsPage<T>() {
   const collections: Collection<T>[] = await getCollections()
 
   const taxa = collections.filter(c => c.type === 'taxon')
-  const definitions = collections.filter(c => c.type === 'definition')
+  const definitions = collections.filter(c => c.type === 'term')
   const topics = collections.filter(c => c.type === 'topic')
 
   return (

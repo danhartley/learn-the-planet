@@ -2859,7 +2859,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
   const collection4 = {
     id: '4',
-    type: 'definition',
+    type: 'term',
     name: 'Features of Mediterranean Plants',
     items: [
       {
@@ -2957,7 +2957,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
   const collection5 = {
     id: '5',
-    type: 'definition',
+    type: 'term',
     name: 'Plant Cells & Basic Structures',
     items: [
       {
@@ -3393,7 +3393,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
   const collection6 = {
     id: '6',
-    type: 'definition',
+    type: 'term',
     name: 'Traits of Mediterranean wildflower annuals',
     items: [
       {
@@ -3846,7 +3846,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
   const collection8 = {
     id: '8',
-    type: 'definition',
+    type: 'term',
     name: 'Mechanisms of Plant Growth',
     items: [
       {
@@ -3971,7 +3971,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
   const collection9 = {
     id: '9',
-    type: 'definition',
+    type: 'term',
     name: 'Plant Pigments',
     items: [
       {
@@ -4051,7 +4051,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
   const collection10 = {
     id: '10',
-    type: 'definition',
+    type: 'term',
     name: 'Sexual reproduction in flowering plants',
     items: [
       {
@@ -4230,7 +4230,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
   const collection11 = {
     id: '11',
-    type: 'definition',
+    type: 'term',
     name: 'Test',
     items: [
       {
@@ -4303,17 +4303,17 @@ export const getCollections = (): Promise<Collection<any>[]> => {
       {
         id: '5',
         name: 'Plant cells and basic structures',
-        type: 'definition',
+        type: 'term',
       },
       {
         id: '6',
         name: 'Traits of Mediterranean wildflower annuals',
-        type: 'definition',
+        type: 'term',
       },
       {
         id: '10',
         name: 'Sexual reproduction in flowering plants',
-        type: 'definition',
+        type: 'term',
       },
     ],
   }

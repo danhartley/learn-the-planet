@@ -299,7 +299,7 @@ li::marker {
 }
 
 [aria-labelledby='taxon-gallery'] .group-block,
-[aria-labelledby='definition-gallery'] .group-block {
+[aria-labelledby='term-gallery'] .group-block {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-xl);
@@ -338,13 +338,13 @@ form {
   padding: var(--spacing-lg);
 }
 
-.form-row.definition {
+.form-row.term {
   background-color: var(--colour-bg-terms);
   padding: var(--spacing-lg);
 }
 
 .form-row.taxon label,
-.form-row.definition label {
+.form-row.term label {
   color: var(--colour-fg-alt-main) !important;
 }
 
@@ -494,13 +494,17 @@ figcaption > div > div:nth-child(2) {
   min-height: initial;
 }
 
-/* Definition sections */
-[aria-labelledby='definition-gallery'] {
+/* Term sections */
+[data-type='term'] .question-text {
+  min-height: initial;
+}
+
+[aria-labelledby='term-gallery'] {
   width: fit-content;
   margin: auto;
 }
 
-[aria-labelledby='definition-gallery'] dl {
+[aria-labelledby='term-gallery'] dl {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-sm);
@@ -508,7 +512,7 @@ figcaption > div > div:nth-child(2) {
   margin: 0;
 }
 
-[aria-labelledby='definition-gallery'] dd {
+[aria-labelledby='term-gallery'] dd {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-sm);
@@ -525,7 +529,7 @@ figcaption > div > div:nth-child(2) {
   }
 }
 
-[data-type='definition'] .block.options > button span {
+[data-type='term'] .block.options > button span {
   font-size: var(--font-size-sm);
 }
 

@@ -1,6 +1,6 @@
 import { Collection, ContentHandlerType } from '@/types'
 import { TaxonGallery } from '@/components/common/TaxonGallery'
-import { DefinitionGallery } from '@/components/common/DefinitionGallery'
+import { TermGallery } from '@/components/common/TermGallery'
 import { TopicGallery } from '@/components/common/TopicGallery'
 import { TraitGallery } from '@/components/common/TraitGallery'
 
@@ -11,7 +11,7 @@ interface GalleryProps<T> {
 export function Gallery<T>({ collection }: GalleryProps<T>) {
   const pageMap: Record<ContentHandlerType, React.ComponentType<any>> = {
     taxon: TaxonGallery,
-    definition: DefinitionGallery,
+    term: TermGallery,
     trait: TraitGallery,
     topic: TopicGallery,
   }
