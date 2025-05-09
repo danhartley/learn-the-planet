@@ -4248,7 +4248,7 @@ export const getCollections = (): Promise<Collection<any>[]> => {
   const collection12 = {
     id: '12',
     type: 'topic',
-    name: 'Pollination Strategies',
+    name: 'Life history strategies',
     items: [],
     article: {
       tags: ['annuals', 'life-history strategy'],
@@ -4318,6 +4318,142 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     ],
   }
 
+  const collection13 = {
+    id: '13',
+    type: 'trait',
+    name: 'Mediterranean Adaptations',
+    items: [
+      {
+        id: 't1',
+        trait: 'sclerophyllous',
+        name: 'Sclerophyllous Leaves',
+        source: 'https://en.wikipedia.org/wiki/Sclerophyll',
+        description:
+          'Hard, tough leaves with thick cuticles and reduced surface area',
+        morphology: [
+          'Thick, leathery leaves',
+          'Often small or narrow leaf shape',
+          'Waxy, glossy or reflective surface',
+          'Grey-green colouration',
+          'Leaves may be rolled, needle-like or scale-like',
+        ],
+        phenology: {
+          spring: 'New growth may appear softer but quickly hardens',
+          summer:
+            'Full hardening of leaves, sometimes with reduced angle to sun',
+          autumn: "Persistent, doesn't shed during typical autumn leaf drop",
+          winter:
+            'Maintained year-round, allowing photosynthesis during mild winter days',
+        },
+        examples: [
+          {
+            commonName: 'Holm Oak',
+            scientificName: 'Quercus ilex',
+            wikipedia: 'https://en.wikipedia.org/wiki/Quercus_ilex',
+            inaturalist: 'https://www.inaturalist.org/taxa/78805-Quercus-ilex',
+          },
+          {
+            commonName: 'Olive Tree',
+            scientificName: 'Olea europaea',
+            wikipedia: 'https://en.wikipedia.org/wiki/Olive',
+            inaturalist: 'https://www.inaturalist.org/taxa/57140-Olea-europaea',
+          },
+          {
+            commonName: 'Strawberry Tree',
+            scientificName: 'Arbutus unedo',
+            wikipedia: 'https://en.wikipedia.org/wiki/Arbutus_unedo',
+            inaturalist: 'https://www.inaturalist.org/taxa/82689-Arbutus-unedo',
+          },
+        ],
+      },
+      {
+        id: 't2',
+        trait: 'serotiny',
+        name: 'Serotinous Cones/Fruits',
+        source: 'https://en.wikipedia.org/wiki/Serotiny',
+        description:
+          'Seeds held in closed cones or fruits that open in response to environmental triggers, especially heat from fires',
+        morphology: [
+          'Woody cones/fruits that remain closed on plant for years',
+          'Cones often have thick, resinous seals',
+          'Seeds released en masse after fire',
+          'Plant may have mixture of different aged cones/fruits',
+        ],
+        phenology: {
+          spring: 'New cones/fruits begin forming after flowering',
+          summer: 'Cones mature but remain closed',
+          autumn: 'No seasonal release of seeds',
+          winter: 'Cones remain tightly closed despite moisture',
+        },
+        examples: [
+          {
+            commonName: 'Maritime Pine',
+            scientificName: 'Pinus pinaster',
+            wikipedia: 'https://en.wikipedia.org/wiki/Pinus_pinaster',
+            inaturalist:
+              'https://www.inaturalist.org/taxa/82723-Pinus-pinaster',
+          },
+          {
+            commonName: 'Aleppo Pine',
+            scientificName: 'Pinus halepensis',
+            wikipedia: 'https://en.wikipedia.org/wiki/Pinus_halepensis',
+            inaturalist:
+              'https://www.inaturalist.org/taxa/82722-Pinus-halepensis',
+          },
+          {
+            commonName: 'Rockrose',
+            scientificName: 'Cistus ladanifer',
+            wikipedia: 'https://en.wikipedia.org/wiki/Cistus_ladanifer',
+            inaturalist:
+              'https://www.inaturalist.org/taxa/76362-Cistus-ladanifer',
+          },
+        ],
+      },
+      {
+        id: 't3',
+        trait: 'root architecture',
+        name: 'Deep Root Systems',
+        description:
+          'Extensive root systems that reach well below surface soil levels',
+        morphology: [
+          'Plants resist uprooting even in loose soil',
+          'May have visible woody root crown',
+          'Often wider spacing between individual plants',
+          'Can thrive in seemingly dry sites',
+        ],
+        phenology: {
+          spring: 'Early access to soil moisture allows head start on growth',
+          summer:
+            'Plant remains green when shallow-rooted species have dried out',
+          autumn: 'Continued activity later into dry season',
+          winter: 'Protected from frost damage underground',
+        },
+        examples: [
+          {
+            commonName: 'Cork Oak',
+            scientificName: 'Quercus suber',
+            wikipedia: 'https://en.wikipedia.org/wiki/Quercus_suber',
+            inaturalist: 'https://www.inaturalist.org/taxa/50868-Quercus-suber',
+          },
+          {
+            commonName: 'Wild Olive',
+            scientificName: 'Olea europaea var. sylvestris',
+            wikipedia: 'https://en.wikipedia.org/wiki/Olea_oleaster',
+            inaturalist:
+              'https://www.inaturalist.org/taxa/237528-Olea-europaea-europaea',
+          },
+          {
+            commonName: 'Mastic Tree',
+            scientificName: 'Pistacia lentiscus',
+            wikipedia: 'https://en.wikipedia.org/wiki/Pistacia_lentiscus',
+            inaturalist:
+              'https://www.inaturalist.org/taxa/128188-Pistacia-lentiscus',
+          },
+        ],
+      },
+    ],
+  }
+
   return new Promise((resolve, reject) => {
     const collections = [
       generateGenusAndSpeciesFields({
@@ -4365,6 +4501,10 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         items: sortAlphabeticallyBy(dedupe(collection11.items), 'term'),
       },
       collection12,
+      {
+        ...collection13,
+        items: sortAlphabeticallyBy(dedupe(collection13.items), 'trait'),
+      },
     ]
 
     resolve(collections)

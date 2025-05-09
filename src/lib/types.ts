@@ -75,7 +75,7 @@ export type Family = {
 }
 
 export interface LearningItem {
-  id: number
+  id: string
   distractors?: any[]
 }
 
@@ -113,6 +113,23 @@ export interface Definition extends LearningItem {
   definition: string
   source?: string
   example?: string
+}
+
+export interface Trait extends LearningItem {
+  trait: string
+  name: string
+  source?: string
+  description: string
+  morphology?: string
+  phenology?: string
+  examples?: [
+    {
+      vernacularName: string
+      binomial: string
+      wikipedia: string
+      inaturalist: string
+    },
+  ]
 }
 
 export type SubCollectionSummary<T> = {
@@ -190,7 +207,9 @@ export type DistractorType =
   | 'species'
   | 'image'
   | 'term'
-  | 'term'
+  | 'trait'
+  | 'name'
+  | 'description'
 
 export interface MultipleChoiceTemplate extends BaseQuestionTemplate {
   type: 'multipleChoice'

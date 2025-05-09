@@ -5,7 +5,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 
-import { Collection, Definition } from '@/types'
+import { Collection, Trait } from '@/types'
 
 type Props<T> = {
   collection: Collection<T>
@@ -20,14 +20,14 @@ export function TraitGallery<T>({ collection }: Props<T>) {
     router.push('/test')
   }
 
-  const definitions = (collection.items as Definition[]).map(item => {
+  const traits = (collection.items as Trait[]).map(item => {
     return (
       <React.Fragment key={item.id}>
-        <dt>{item.term}</dt>
+        <dt>{item.trait}</dt>
         <dd>
-          <div>{item.definition}</div>
+          <div>{item.name}</div>
           <div>
-            <em>{item.example}</em>
+            <em>{item.description}</em>
           </div>
           <div>
             <a href={item.source}>{item.source}</a>
@@ -38,12 +38,12 @@ export function TraitGallery<T>({ collection }: Props<T>) {
   })
 
   return (
-    <section aria-labelledby="term-gallery" className="group">
-      <h1 id="term-gallery">Definitions</h1>
+    <section aria-labelledby="trait-gallery" className="group">
+      <h1 id="trait-gallery">Traits</h1>
       <h2>{collection.name}</h2>
       <section aria-labelledby="terms" className="group-block">
-        <h3 id="terms">Terms</h3>
-        <dl>{definitions}</dl>
+        <h3 id="traits">Traits</h3>
+        <dl>{traits}</dl>
         <p>
           <button id="start-test" onClick={handleStartTest}>
             Start test

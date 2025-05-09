@@ -6,6 +6,7 @@ import {
   sortBy,
   sortAlphabeticallyBy,
   formatHyphenatedString,
+  shuffle,
 } from '@/utils/strings'
 
 describe('Check for camel case', () => {
@@ -384,5 +385,11 @@ describe('formatHyphenatedString', () => {
     expect(formatHyphenatedString('multiple--consecutive---hyphens')).toBe(
       'Multiple  consecutive   hyphens'
     )
+  })
+})
+
+describe('shuffle', () => {
+  it('should return [] for empty array', () => {
+    expect(shuffle([])).toEqual([])
   })
 })

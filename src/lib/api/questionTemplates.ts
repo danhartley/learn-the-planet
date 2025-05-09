@@ -1,6 +1,6 @@
 import { QuestionTemplate, ContentHandlerType } from '@/types'
 
-export const definitionTemplates: QuestionTemplate[] = [
+export const termTemplates: QuestionTemplate[] = [
   {
     type: 'textEntry',
     level: 'level 0',
@@ -59,6 +59,16 @@ export const taxonTemplates: QuestionTemplate[] = [
   },
 ]
 
+export const traitTemplates: QuestionTemplate[] = [
+  {
+    type: 'multipleChoice',
+    level: 'level 1',
+    questionTextTemplate: 'Select the description for ${name}',
+    correctAnswerProperty: 'description',
+    distractorCount: 3,
+    distractorType: 'description',
+  },
+]
 export const topicTemplates: QuestionTemplate[] = []
 
 export const getTemplatesByContentType = (
@@ -66,7 +76,8 @@ export const getTemplatesByContentType = (
 ): QuestionTemplate[] => {
   const templateMap = {
     taxon: taxonTemplates,
-    term: definitionTemplates,
+    term: termTemplates,
+    trait: traitTemplates,
     topic: topicTemplates,
   }
 
