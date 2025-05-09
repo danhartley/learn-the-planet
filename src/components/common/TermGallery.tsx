@@ -5,7 +5,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 
-import { Collection, Definition } from '@/types'
+import { Collection, Term } from '@/types'
 
 type Props<T> = {
   collection: Collection<T>
@@ -20,7 +20,7 @@ export function TermGallery<T>({ collection }: Props<T>) {
     router.push('/test')
   }
 
-  const definitions = (collection.items as Definition[]).map(item => {
+  const definitions = (collection.items as Term[]).map(item => {
     return (
       <React.Fragment key={item.id}>
         <dt>{item.term}</dt>

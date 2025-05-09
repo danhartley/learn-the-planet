@@ -108,7 +108,7 @@ export interface Taxon extends LearningItem {
   observationURL?: string
 }
 
-export interface Definition extends LearningItem {
+export interface Term extends LearningItem {
   term: string
   definition: string
   source?: string
@@ -210,6 +210,7 @@ export type DistractorType =
   | 'trait'
   | 'name'
   | 'description'
+  | 'definition'
 
 export interface MultipleChoiceTemplate extends BaseQuestionTemplate {
   type: 'multipleChoice'

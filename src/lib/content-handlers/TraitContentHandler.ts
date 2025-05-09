@@ -14,7 +14,7 @@ export class TraitContentHandler extends ContentHandlerBase<Trait> {
 }
 
 /**
- * Generate distractors for Definition items
+ * Generate distractors for Term items
  */
 function generateTraitDistractors(
   collection: Collection<Trait>,

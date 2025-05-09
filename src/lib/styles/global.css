@@ -183,7 +183,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Lists and definition lists */
+/* Lists and term lists */
 dl > div {
   display: flex;
   justify-content: space-between;

@@ -4,7 +4,7 @@ export const termTemplates: QuestionTemplate[] = [
   {
     type: 'textEntry',
     level: 'level 0',
-    questionTextTemplate: '${term}',
+    questionTextTemplate: '${definition}',
     correctAnswerProperty: 'term',
     placeholder: 'Match',
   },
@@ -14,7 +14,7 @@ export const termTemplates: QuestionTemplate[] = [
     questionTextTemplate: 'Select the definition for ${term}',
     correctAnswerProperty: 'definition',
     distractorCount: 3,
-    distractorType: 'term',
+    distractorType: 'definition',
   },
 ]
 

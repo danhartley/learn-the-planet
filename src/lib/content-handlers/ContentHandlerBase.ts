@@ -122,7 +122,7 @@ export class ContentHandlerBase<T extends LearningItem>
       template.distractorType
     )
 
-    // Get the identifier property (binomial for Taxon, term for Definition)
+    // Get the identifier property (binomial for Taxon, term for Term)
     const identifierProp = this.getIdentifierProperty(item)
 
     // Combine correct answer with distractors
