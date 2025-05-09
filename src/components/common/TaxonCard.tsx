@@ -8,12 +8,12 @@ type Props = {
   taxon: Taxon
 }
 
-type RImage = Img | null
+type responsiveImage = Img | null
 
 export const TaxonCard = ({ taxon }: Props) => {
   const bgClassName = `bg-${taxon.iconicTaxon?.toLowerCase()}`
   const classNames = `taxon ${bgClassName}`
-  const image: RImage = taxon.image ?? taxon.images?.[0] ?? null
+  const image: responsiveImage = taxon.image ?? taxon.images?.[0] ?? null
 
   const taxa = !!image ? (
     <div className={classNames}>
