@@ -49,8 +49,10 @@ export function ScoreDisplay<T>() {
 
   return (
     <section aria-labelledby="score">
-      <h3 id="score">Test score</h3>
-      {progress}
+      <div className="group">
+        <h3 id="score">Test score</h3>
+        {progress}
+      </div>
       {feedback}
       <ul>{historyItems}</ul>
     </section>

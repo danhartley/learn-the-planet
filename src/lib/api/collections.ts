@@ -2952,6 +2952,15 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         example:
           'Platanus orientalis forms riparian woodlands along streams in Greece, providing critical habitat during the hot, dry summer months',
       },
+      {
+        id: '11',
+        term: 'serotiny',
+        definition:
+          'An ecological adaptation in which seed release occurs in response to an environmental trigger, such as fire or drought, rather than at seed maturation.',
+        source: 'https://en.wikipedia.org/wiki/Serotiny',
+        example:
+          'The Aleppo pine (*Pinus halepensis*) exhibits fire-induced serotiny, with cones that remain closed until exposed to the heat of a wildfire, ensuring seed dispersal in conditions favorable for germination.',
+      },
     ],
   }
 
@@ -4322,14 +4331,25 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     id: '13',
     type: 'trait',
     name: 'Mediterranean Adaptations',
+    collections: [
+      {
+        id: '4',
+        name: 'Features of Mediterranean Plants',
+        type: 'term',
+      },
+      {
+        id: '14',
+        type: 'taxon',
+        name: 'Mediterranean Adaptations',
+      },
+    ],
     items: [
       {
         id: 't1',
-        trait: 'sclerophyllous',
-        name: 'Sclerophyllous Leaves',
+        trait: 'sclerophyll',
+        definition:
+          'Plants with hard, leathery leaves adapted to conserve water in dry conditions',
         source: 'https://en.wikipedia.org/wiki/Sclerophyll',
-        description:
-          'Hard, tough leaves with thick cuticles and reduced surface area',
         morphology: [
           'Thick, leathery leaves',
           'Often small or narrow leaf shape',
@@ -4347,32 +4367,73 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         },
         examples: [
           {
-            commonName: 'Holm Oak',
-            scientificName: 'Quercus ilex',
-            wikipedia: 'https://en.wikipedia.org/wiki/Quercus_ilex',
-            inaturalist: 'https://www.inaturalist.org/taxa/78805-Quercus-ilex',
+            id: 78805,
+            iconicTaxon: 'Plantae',
+            binomial: 'Quercus ilex',
+            rank: 'species',
+            vernacularName: 'Holm oak',
+            image: {
+              id: 156456597,
+              url: 'https://static.inaturalist.org/photos/156456597/square.jpg',
+              licenceCode: '',
+              mediumUrl:
+                'https://static.inaturalist.org/photos/156456597/medium.jpg',
+              squareUrl:
+                'https://static.inaturalist.org/photos/156456597/square.jpg',
+            },
+            observationUrl: undefined,
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Quercus_ilex',
+            inaturalistUrl:
+              'https://www.inaturalist.org/taxa/78805-Quercus-ilex',
           },
           {
-            commonName: 'Olive Tree',
-            scientificName: 'Olea europaea',
-            wikipedia: 'https://en.wikipedia.org/wiki/Olive',
-            inaturalist: 'https://www.inaturalist.org/taxa/57140-Olea-europaea',
+            id: 57140,
+            iconicTaxon: 'Plantae',
+            binomial: 'Olea europaea',
+            rank: 'species',
+            vernacularName: 'Olive',
+            image: {
+              id: 87194494,
+              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/square.jpg',
+              licenceCode: 'cc-by-nc-nd',
+              mediumUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/medium.jpg',
+              squareUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/square.jpg',
+            },
+            observationUrl: undefined,
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Olive',
+            inaturalistUrl:
+              'https://www.inaturalist.org/taxa/57140-Olea-europaea',
           },
           {
-            commonName: 'Strawberry Tree',
-            scientificName: 'Arbutus unedo',
-            wikipedia: 'https://en.wikipedia.org/wiki/Arbutus_unedo',
-            inaturalist: 'https://www.inaturalist.org/taxa/82689-Arbutus-unedo',
+            id: 82689,
+            iconicTaxon: 'Plantae',
+            binomial: 'Arbutus unedo',
+            rank: 'species',
+            vernacularName: 'strawberry tree',
+            image: {
+              id: 170457242,
+              url: 'https://static.inaturalist.org/photos/170457242/square.jpeg',
+              licenceCode: '',
+              mediumUrl:
+                'https://static.inaturalist.org/photos/170457242/medium.jpeg',
+              squareUrl:
+                'https://static.inaturalist.org/photos/170457242/square.jpeg',
+            },
+            observationUrl: undefined,
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Arbutus_unedo',
+            inaturalistUrl:
+              'https://www.inaturalist.org/taxa/82689-Arbutus-unedo',
           },
         ],
       },
       {
         id: 't2',
         trait: 'serotiny',
-        name: 'Serotinous Cones/Fruits',
         source: 'https://en.wikipedia.org/wiki/Serotiny',
-        description:
-          'Seeds held in closed cones or fruits that open in response to environmental triggers, especially heat from fires',
+        definition:
+          'An ecological adaptation in which seed release occurs in response to an environmental trigger, such as fire or drought, rather than at seed maturation.',
         morphology: [
           'Woody cones/fruits that remain closed on plant for years',
           'Cones often have thick, resinous seals',
@@ -4387,33 +4448,71 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         },
         examples: [
           {
-            commonName: 'Maritime Pine',
-            scientificName: 'Pinus pinaster',
-            wikipedia: 'https://en.wikipedia.org/wiki/Pinus_pinaster',
-            inaturalist:
+            id: 82723,
+            iconicTaxon: 'Plantae',
+            binomial: 'Pinus pinaster',
+            rank: 'species',
+            vernacularName: 'maritime pine',
+            image: {
+              id: 37028,
+              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/37028/square.jpg',
+              licenceCode: 'cc-by-nc-sa',
+              mediumUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/37028/medium.jpg',
+              squareUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/37028/square.jpg',
+            },
+            observationUrl: undefined,
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Pinus_pinaster',
+            inaturalistUrl:
               'https://www.inaturalist.org/taxa/82723-Pinus-pinaster',
           },
           {
-            commonName: 'Aleppo Pine',
-            scientificName: 'Pinus halepensis',
-            wikipedia: 'https://en.wikipedia.org/wiki/Pinus_halepensis',
-            inaturalist:
+            id: 82722,
+            iconicTaxon: 'Plantae',
+            binomial: 'Pinus halepensis',
+            rank: 'species',
+            vernacularName: 'Aleppo pine',
+            image: {
+              id: 116399911,
+              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/116399911/square.jpeg',
+              licenceCode: 'cc-by-sa',
+              mediumUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/116399911/medium.jpeg',
+              squareUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/116399911/square.jpeg',
+            },
+            observationUrl: undefined,
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Pinus_halepensis',
+            inaturalistUrl:
               'https://www.inaturalist.org/taxa/82722-Pinus-halepensis',
           },
           {
-            commonName: 'Rockrose',
-            scientificName: 'Cistus ladanifer',
-            wikipedia: 'https://en.wikipedia.org/wiki/Cistus_ladanifer',
-            inaturalist:
+            id: 76362,
+            iconicTaxon: 'Plantae',
+            binomial: 'Cistus ladanifer',
+            rank: 'species',
+            vernacularName: 'Gum Rock-rose',
+            image: {
+              id: 476982651,
+              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/476982651/square.jpg',
+              licenceCode: 'cc-by',
+              mediumUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/476982651/medium.jpg',
+              squareUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/476982651/square.jpg',
+            },
+            observationUrl: undefined,
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Cistus_ladanifer',
+            inaturalistUrl:
               'https://www.inaturalist.org/taxa/76362-Cistus-ladanifer',
           },
         ],
       },
       {
         id: 't3',
-        trait: 'root architecture',
-        name: 'Deep Root Systems',
-        description:
+        trait: 'deep rooting',
+        definition:
           'Extensive root systems that reach well below surface soil levels',
         morphology: [
           'Plants resist uprooting even in loose soil',
@@ -4430,10 +4529,24 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         },
         examples: [
           {
-            commonName: 'Cork Oak',
-            scientificName: 'Quercus suber',
-            wikipedia: 'https://en.wikipedia.org/wiki/Quercus_suber',
-            inaturalist: 'https://www.inaturalist.org/taxa/50868-Quercus-suber',
+            id: 50868,
+            iconicTaxon: 'Plantae',
+            binomial: 'Quercus suber',
+            rank: 'species',
+            vernacularName: 'cork oak',
+            image: {
+              id: 159050222,
+              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/159050222/square.jpeg',
+              licenceCode: 'cc-by',
+              mediumUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/159050222/medium.jpeg',
+              squareUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/159050222/square.jpeg',
+            },
+            observationUrl: undefined,
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Quercus_suber',
+            inaturalistUrl:
+              'https://www.inaturalist.org/taxa/50868-Quercus-suber',
           },
           {
             commonName: 'Wild Olive',
@@ -4443,13 +4556,178 @@ export const getCollections = (): Promise<Collection<any>[]> => {
               'https://www.inaturalist.org/taxa/237528-Olea-europaea-europaea',
           },
           {
-            commonName: 'Mastic Tree',
-            scientificName: 'Pistacia lentiscus',
-            wikipedia: 'https://en.wikipedia.org/wiki/Pistacia_lentiscus',
-            inaturalist:
-              'https://www.inaturalist.org/taxa/128188-Pistacia-lentiscus',
+            id: 82600,
+            iconicTaxon: 'Plantae',
+            binomial: 'Pistacia lentiscus',
+            rank: 'species',
+            vernacularName: 'mastic',
+            image: {
+              id: 106821640,
+              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/106821640/square.jpeg',
+              licenceCode: 'cc-by-nc',
+              mediumUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/106821640/medium.jpeg',
+              squareUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/106821640/square.jpeg',
+            },
+            observationUrl: undefined,
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Pistacia_lentiscus',
+            inaturalistUrl:
+              'https://www.inaturalist.org/taxa/82600-Pistacia-lentiscus',
           },
         ],
+      },
+    ],
+  }
+
+  const collection14 = {
+    id: '14',
+    type: 'taxon',
+    name: 'Mediterranean Adaptations',
+    items: [
+      {
+        id: 57140,
+        iconicTaxon: 'Plantae',
+        binomial: 'Olea europaea',
+        rank: 'species',
+        vernacularName: 'Olive',
+        image: {
+          id: 87194494,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/square.jpg',
+          licenceCode: 'cc-by-nc-nd',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/square.jpg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Olive',
+      },
+      {
+        id: 82689,
+        iconicTaxon: 'Plantae',
+        binomial: 'Arbutus unedo',
+        rank: 'species',
+        vernacularName: 'strawberry tree',
+        image: {
+          id: 170457242,
+          url: 'https://static.inaturalist.org/photos/170457242/square.jpeg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/170457242/medium.jpeg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/170457242/square.jpeg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Arbutus_unedo',
+      },
+      {
+        id: 78805,
+        iconicTaxon: 'Plantae',
+        binomial: 'Quercus ilex',
+        rank: 'species',
+        vernacularName: 'Holm oak',
+        image: {
+          id: 156456597,
+          url: 'https://static.inaturalist.org/photos/156456597/square.jpg',
+          licenceCode: '',
+          mediumUrl:
+            'https://static.inaturalist.org/photos/156456597/medium.jpg',
+          squareUrl:
+            'https://static.inaturalist.org/photos/156456597/square.jpg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Quercus_ilex',
+      },
+      {
+        id: 82722,
+        iconicTaxon: 'Plantae',
+        binomial: 'Pinus halepensis',
+        rank: 'species',
+        vernacularName: 'Aleppo pine',
+        image: {
+          id: 116399911,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/116399911/square.jpeg',
+          licenceCode: 'cc-by-sa',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/116399911/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/116399911/square.jpeg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Pinus_halepensis',
+      },
+      {
+        id: 50868,
+        iconicTaxon: 'Plantae',
+        binomial: 'Quercus suber',
+        rank: 'species',
+        vernacularName: 'cork oak',
+        image: {
+          id: 159050222,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/159050222/square.jpeg',
+          licenceCode: 'cc-by',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/159050222/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/159050222/square.jpeg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Quercus_suber',
+      },
+      {
+        id: 76362,
+        iconicTaxon: 'Plantae',
+        binomial: 'Cistus ladanifer',
+        rank: 'species',
+        vernacularName: 'Gum Rock-rose',
+        image: {
+          id: 476982651,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/476982651/square.jpg',
+          licenceCode: 'cc-by',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/476982651/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/476982651/square.jpg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Cistus_ladanifer',
+      },
+      {
+        id: 82723,
+        iconicTaxon: 'Plantae',
+        binomial: 'Pinus pinaster',
+        rank: 'species',
+        vernacularName: 'maritime pine',
+        image: {
+          id: 37028,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/37028/square.jpg',
+          licenceCode: 'cc-by-nc-sa',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/37028/medium.jpg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/37028/square.jpg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Pinus_pinaster',
+      },
+      {
+        id: 82600,
+        iconicTaxon: 'Plantae',
+        binomial: 'Pistacia lentiscus',
+        rank: 'species',
+        vernacularName: 'mastic',
+        image: {
+          id: 106821640,
+          url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/106821640/square.jpeg',
+          licenceCode: 'cc-by-nc',
+          mediumUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/106821640/medium.jpeg',
+          squareUrl:
+            'https://inaturalist-open-data.s3.amazonaws.com/photos/106821640/square.jpeg',
+        },
+        observationUrl: undefined,
+        wikipediaUrl: 'http://en.wikipedia.org/wiki/Pistacia_lentiscus',
       },
     ],
   }
@@ -4505,6 +4783,10 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         ...collection13,
         items: sortAlphabeticallyBy(dedupe(collection13.items), 'trait'),
       },
+      generateGenusAndSpeciesFields({
+        ...collection14,
+        items: dedupe(collection14.items),
+      }),
     ]
 
     resolve(collections)

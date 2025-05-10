@@ -44,11 +44,9 @@ export function TermGallery<T>({ collection }: Props<T>) {
       <section aria-labelledby="terms" className="group-block">
         <h3 id="terms">Terms</h3>
         <dl>{definitions}</dl>
-        <p>
-          <button id="start-test" onClick={handleStartTest}>
-            Start test
-          </button>
-        </p>
+        <button id="start-test" onClick={handleStartTest}>
+          Start test
+        </button>
       </section>
     </section>
   )

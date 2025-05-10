@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import { Collection, Taxon, SubCollectionSummary } from '@/types'
+import { Collection, Taxon, CollectionSummary } from '@/types'
 
 type Props<T> = {
   collection: Collection<T>
@@ -13,8 +13,8 @@ export const TopicGallery = ({ collection }: Props<T>) => {
     <Link href={collection.fieldNotes.url}>Field notes</Link>
   ) : null
 
-  const subCollections = collection?.collections?.map(
-    (subCollection: SubCollectionSummary<Taxon>) => {
+  const collections = collection?.collections?.map(
+    (subCollection: CollectionSummary<Taxon>) => {
       return subCollection ? (
         <li key={subCollection.id}>
           <Link href={`/collection/${encodeURIComponent(subCollection.id)}`}>
@@ -47,11 +47,10 @@ export const TopicGallery = ({ collection }: Props<T>) => {
     )
   })
 
-  // change to switch
-  const definitions = subCollections?.filter(sc => sc?.type === 'term') ? (
+  const terms = collections?.filter(sc => sc?.type === 'term') ? (
     <section aria-labelledby="topic-gallery" className="sub-section">
       <h3 id="topic-gallery">Terms</h3>
-      <ul>{subCollections}</ul>
+      <ul>{collections}</ul>
     </section>
   ) : null
 
@@ -62,7 +61,7 @@ export const TopicGallery = ({ collection }: Props<T>) => {
       <div>{collection.date}</div>
       <div>{collection.location}</div>
       <article>{articles}</article>
-      {definitions}
+      {terms}
       {fieldNotesUrl}
     </section>
   )

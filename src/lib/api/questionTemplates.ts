@@ -63,10 +63,10 @@ export const traitTemplates: QuestionTemplate[] = [
   {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the description for ${name}',
-    correctAnswerProperty: 'description',
+    questionTextTemplate: 'Select the description for ${trait}',
+    correctAnswerProperty: 'definition',
     distractorCount: 3,
-    distractorType: 'description',
+    distractorType: 'definition',
   },
 ]
 export const topicTemplates: QuestionTemplate[] = []

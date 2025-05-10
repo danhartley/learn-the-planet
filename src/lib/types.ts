@@ -115,24 +115,28 @@ export interface Term extends LearningItem {
   example?: string
 }
 
-export interface Trait extends LearningItem {
-  trait: string
-  name: string
-  source?: string
-  description: string
-  morphology?: string
-  phenology?: string
-  examples?: [
-    {
-      vernacularName: string
-      binomial: string
-      wikipedia: string
-      inaturalist: string
-    },
-  ]
+export interface TraitExample extends Taxon {
+  inaturalistUrl?: string
 }
 
-export type SubCollectionSummary<T> = {
+export interface Trait extends LearningItem {
+  trait: string
+  source?: string
+  definition: string
+  morphology?: string[]
+  phenology?: {
+    'rainy season'?: string
+    'fire season'?: string
+    'dormant period'?: string
+    spring?: string
+    summer?: string
+    autumn?: string
+    winter?: string
+  }
+  examples?: TraitExample[]
+}
+
+export type CollectionSummary<T> = {
   id: string
   name: string
   type: string
@@ -162,7 +166,7 @@ export type Collection<T> = {
     url: string
   }
   items: T[]
-  collections?: SubCollectionSummary<T>[]
+  collections?: CollectionSummary<T>[]
   article?: Article | null
 }
 

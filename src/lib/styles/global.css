@@ -98,9 +98,8 @@ h2 {
 
 h3 {
   text-transform: uppercase;
-  font-weight: 400;
-  font-size: var(--font-size-xs);
-  line-height: 1.6;
+  font-weight: 500;
+  font-size: var(--font-size-sm);
 }
 
 a {
@@ -192,7 +191,8 @@ dl > div {
 
 dt {
   width: initial;
-  font-weight: 600;
+  font-weight: 800;
+  text-transform: capitalize;
 
   &:not(:first-child) {
     margin-top: var(--spacing-lg);
@@ -206,6 +206,10 @@ ul {
 
 li {
   margin: 0.75rem 0;
+
+  span {
+    text-transform: capitalize;
+  }
 }
 
 .menu + ul > * + * {
@@ -230,6 +234,12 @@ li::marker {
   column-gap: var(--spacing-xl);
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.column-group {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-xl);
 }
 
 .grid-lg {
@@ -419,6 +429,13 @@ form {
   text-align: center;
 }
 
+.trait {
+  border: 1px solid var(--colour-line);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+}
+
 /* Figure and images */
 figure {
   margin-block: 0;
@@ -504,7 +521,8 @@ figcaption > div > div:nth-child(2) {
   margin: auto;
 }
 
-[aria-labelledby='term-gallery'] dl {
+[aria-labelledby='term-gallery'] dl,
+[aria-labelledby='trait-gallery'] dl {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-sm);
@@ -512,21 +530,19 @@ figcaption > div > div:nth-child(2) {
   margin: 0;
 }
 
-[aria-labelledby='term-gallery'] dd {
+[aria-labelledby='term-gallery'] dd,
+[aria-labelledby='trait-gallery'] dd {
   display: flex;
   flex-direction: column;
-  row-gap: var(--spacing-sm);
   margin-left: 0;
-  border-bottom: 1px solid var(--colour-line);
-  padding-bottom: var(--spacing-xl);
 
   div + div {
     margin-top: var(--spacing-md);
   }
+}
 
-  &:last-child {
-    margin-bottom: 2rem;
-  }
+[aria-labelledby='term-gallery'] dd {
+  padding-bottom: var(--spacing-xl);
 }
 
 [data-type='term'] .block.options > button span {
