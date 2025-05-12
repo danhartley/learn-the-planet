@@ -14,8 +14,10 @@ const ImageChoiceComponent = ({
   questionProgressText,
 }: Props<MultipleChoiceQuestion>) => {
   const [userAnswer, setUserAnswer] = useState<string | null>(null)
+  const [isAnswered, setAnswered] = useState(false)
 
   const setAnswer = (answer: string) => {
+    setAnswered(true)
     setUserAnswer(answer)
     onSubmit((answer || '').trim())
   }
@@ -38,6 +40,7 @@ const ImageChoiceComponent = ({
         setAnswer={setAnswer}
         correctAnswer={question.key}
         selectedAnswer={userAnswer}
+        isAnswered={isAnswered}
       />
     ) : null
   })

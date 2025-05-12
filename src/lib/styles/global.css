@@ -6,6 +6,7 @@
   --colour-fg-text: rgb(68, 68, 68);
   --colour-fg-alt-main: rgb(255, 255, 255);
   --colour-bg-main: rgb(255, 255, 255);
+  --colour-bg-hover: rgb(243 243 243);
   --colour-bg-card: rgb(246, 247, 249);
   --colour-bg-plantae: rgb(216, 223, 210);
   --colour-bg-insecta: rgb(226, 220, 226);
@@ -15,10 +16,15 @@
   --colour-bg-taxon-card: rgb(226 239 220);
   --colour-bg-terms: rgb(73 64 34);
   --colour-bg-terms-card: rgb(245, 243, 234);
+  --colour-bg-traits: rgb(64 34 73);
+  --colour-bg-traits-card: rgb(243 235 245);
+  --colour-bg-button: rgb(233 228 208);
   --colour-bg-card-button: rgba(255, 255, 255, 0.5);
   --colour-form-label: rgb(64 64 65);
   --colour-correct: rgb(106, 176, 84);
+  --colour-correct-light: rgb(189 219 178);
   --colour-incorrect: rgb(176 84 106);
+  --colour-incorrect-light: rgb(232 205 211);
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -224,7 +230,8 @@ li::marker {
 .block-container {
   display: flex;
   justify-content: center;
-  padding-bottom: var(--spacing-lg);
+  padding: var(--spacing-lg) 0;
+  /* padding-bottom: var(--spacing-lg); */
 }
 
 .block {
@@ -240,6 +247,14 @@ li::marker {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-xl);
+}
+
+.row-group {
+  display: flex;
+  align-items: center;
+  min-height: calc(var(--spacing-lg) * 2);
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-sm);
 }
 
 .grid-lg {
@@ -258,10 +273,10 @@ li::marker {
   justify-content: center;
 }
 
-.block.options,
+/* .block.options,
 .grid-lg.options {
   padding-block: var(--spacing-xl);
-}
+} */
 
 .block.options > button,
 .grid-lg.options > button {
@@ -305,7 +320,6 @@ li::marker {
 
 .group-block {
   border-radius: var(--border-radius-sm);
-  /* background-color: var(--colour-bg-accent); */
   margin: var(--spacing-md) 0 0 0;
   padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
   background-image:
@@ -325,14 +339,16 @@ li::marker {
 form {
   display: flex;
   flex-direction: column;
-  margin: 0 0 var(--spacing-xl) 0;
+  /* margin: 0 0 var(--spacing-xl) 0; */
 }
 
 .form-row {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  margin: var(--spacing-lg) 0 0 0;
+  /* margin: 0 0 var(--spacing-lg) 0; */
+  margin: var(--spacing-lg) 0;
+  /* margin: var(--spacing-lg) 0 0 0; */
   border-radius: var(--border-radius-sm);
 }
 
@@ -357,6 +373,27 @@ form {
 .form-row.term {
   background-color: var(--colour-bg-terms);
   padding: var(--spacing-lg);
+}
+
+[data-type='taxon'] button {
+  background-color: var(--colour-bg-taxon-card);
+  &:hover {
+    background-color: var(--colour-bg-hover);
+  }
+}
+
+[data-type='term'] button {
+  background-color: var(--colour-bg-terms-card);
+  &:hover {
+    background-color: var(--colour-bg-hover);
+  }
+}
+
+[data-type='trait'] button {
+  background-color: var(--colour-bg-traits-card);
+  &:hover {
+    background-color: var(--colour-bg-hover);
+  }
 }
 
 .form-row.taxon label,
@@ -490,9 +527,16 @@ figcaption > div > div:nth-child(2) {
 .bg-correct {
   background-color: var(--colour-correct) !important;
 }
+.bg-correct-light {
+  background-color: var(--colour-correct-light) !important;
+}
 
 .bg-incorrect {
   background-color: var(--colour-incorrect) !important;
+}
+
+.bg-incorrect-light {
+  background-color: var(--colour-incorrect-light) !important;
 }
 
 /* Status indicators */
@@ -509,6 +553,14 @@ figcaption > div > div:nth-child(2) {
 
 .incorrect::before {
   content: '\2717';
+}
+
+.cb-correct {
+  accent-color: var(--colour-correct) !important;
+}
+
+.cb-incorrect {
+  accent-color: var(--colour-incorrect) !important;
 }
 
 /* Taxon sections */

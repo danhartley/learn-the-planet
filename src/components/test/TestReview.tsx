@@ -65,7 +65,9 @@ function TestReview<T>() {
       <section aria-labelledby="test-options" className="group-block">
         <h3 id="test-options">Test options</h3>
         <form>{options}</form>
-        <button onClick={startNewTest}>Start new test</button>
+        <div className="form-row">
+          <button onClick={startNewTest}>Start new test</button>
+        </div>
       </section>
     </section>
   )

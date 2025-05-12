@@ -18,8 +18,9 @@ export default function TextEntryComponent({
   const [correctClassName, setCorrectClassName] = useState(
     `form-row ${(layout.question as TextEntryQuestion).contentType}`
   )
+  const [isAnswered, setIsAnswered] = useState(false)
 
-  const question: TextEntryQuestion = layout.question
+  const question: TextEntryQuestion = layout.question as TextEntryQuestion
 
   useEffect(() => {
     // Reset display
@@ -40,6 +41,8 @@ export default function TextEntryComponent({
     e.preventDefault()
 
     if (!answer.trim()) return
+
+    setIsAnswered(true)
 
     // Submit the answer
     const score = onSubmit(answer.trim())
@@ -69,14 +72,18 @@ export default function TextEntryComponent({
           />
         </div>
         <div className="form-row">
-          <button id="submit-answer" type="submit" disabled={!answer.trim()}>
+          <button
+            id="submit-answer"
+            type="submit"
+            disabled={!answer.trim() || isAnswered}
+          >
             Submit answer
           </button>
         </div>
+        <div>
+          <div>{questionProgressText}</div>
+        </div>
       </form>
-      <div>
-        <div>{questionProgressText}</div>
-      </div>
     </section>
   )
 }

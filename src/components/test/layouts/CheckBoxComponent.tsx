@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, FormEvent, useEffect, useRef } from 'react'
+import React, { useState, FormEvent, useRef } from 'react'
 import { MultipleSelectQuestion, Layout, Score, LearningItem } from '@/types'
 
 type Props<T> = {
@@ -14,6 +14,8 @@ export default function CheckBoxComponent({
   questionProgressText,
 }: Props<LearningItem>) {
   const [answers, setAnswers] = useState<string[]>([])
+  const [isAnswered, setIsAnswered] = useState(false)
+  const checkboxRefs = useRef<Record<string, HTMLInputElement | null>>({})
 
   const addAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
     const answer = (e.target as HTMLInputElement).value
@@ -22,27 +24,49 @@ export default function CheckBoxComponent({
     )
   }
 
+  const question = layout.question as MultipleSelectQuestion
+
+  if (!question.options) {
+    throw new Error('Invalid question type: options are missing.')
+  }
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
 
-    const score = onSubmit(answers)
+    setIsAnswered(true)
+
+    /* Mark correct or incorrect answers */
+    Object.values(checkboxRefs.current).forEach(cb => {
+      const answer = cb?.value as string
+      const isChecked = cb?.checked
+      const isCorrect = question.key.includes(answer)
+      if (isCorrect) {
+        cb?.classList.add('cb-correct')
+        cb?.parentElement?.classList.add('bg-correct-light')
+      }
+      if (!isCorrect && isChecked) {
+        cb?.classList.add('cb-incorrect')
+        cb?.parentElement?.classList.add('bg-incorrect-light')
+      }
+    })
+
+    onSubmit(answers)
   }
 
-  const question = layout.question as MultipleSelectQuestion
-
-  const options = question.options.map(option => {
+  const options = question.options.map((option: string) => {
     return (
-      <div key={option}>
-        <label htmlFor={option}>
-          <input
-            id={option}
-            type="checkbox"
-            onChange={addAnswer}
-            value={option}
-            checked={answers.includes(option)}
-          />
-          {option}
-        </label>
+      <div key={option} className="row-group">
+        <input
+          id={option}
+          type="checkbox"
+          onChange={addAnswer}
+          value={option}
+          checked={answers.includes(option)}
+          ref={el => {
+            checkboxRefs.current[option] = el
+          }}
+        />
+        <label htmlFor={option}>{option}</label>
       </div>
     )
   })
@@ -62,7 +86,7 @@ export default function CheckBoxComponent({
         <button
           id="submit-answer"
           type="submit"
-          disabled={answers.length !== 2}
+          disabled={answers.length !== 2 || isAnswered}
           onClick={handleSubmit}
         >
           Submit answer

@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react'
+import React, { useRef, useCallback, useState } from 'react'
 import {
   MultipleChoiceQuestion,
   MultipleChoiceOption,
@@ -18,6 +18,7 @@ export default function MultipleTextChoiceComponent({
   onSubmit,
   questionProgressText,
 }: Props<LearningItem>) {
+  const [isAnswered, setIsAnswered] = useState(false)
   const buttonRefs = useRef<Record<string, HTMLButtonElement | null>>({})
 
   const question = layout.question as MultipleChoiceQuestion
@@ -28,6 +29,7 @@ export default function MultipleTextChoiceComponent({
 
   const setAnswer = useCallback(
     (answer: string, key: string) => {
+      setIsAnswered(true)
       if (buttonRefs.current[key]) {
         const isCorrect = answer === question.key
 
@@ -72,6 +74,7 @@ export default function MultipleTextChoiceComponent({
         ref={el => {
           buttonRefs.current[option.key] = el
         }}
+        disabled={isAnswered}
       >
         <span>{option.value as string}</span>
       </button>

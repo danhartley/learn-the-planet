@@ -6,6 +6,7 @@ type Props<T> = {
   setAnswer: (answer: string) => void
   selectedAnswer: string | null
   correctAnswer: string | null
+  isAnswered: boolean
 }
 
 const ImageButton = ({
@@ -13,6 +14,7 @@ const ImageButton = ({
   setAnswer,
   selectedAnswer,
   correctAnswer,
+  isAnswered = false,
 }: Props<MultipleChoiceQuestion>) => {
   const handleClick = () => {
     setAnswer(option.key as string)
@@ -40,6 +42,7 @@ const ImageButton = ({
       onClick={handleClick}
       title={`Option: ${option.key}`}
       className={getButtonClass()}
+      disabled={isAnswered}
     >
       <ResponsiveImage
         id={option.key}
