@@ -461,4 +461,17 @@ describe('containsSourceInTargetArray', () => {
   it('should return false when source array is empty', () => {
     expect(containsSourceInTargetArray([], [])).toBe(false)
   })
+  it('should return false when source array is greater than target array', () => {
+    expect(containsSourceInTargetArray(['one', 'two'], ['one'])).toBe(false)
+  })
+  it('should return true when source members are all in target array', () => {
+    expect(containsSourceInTargetArray(['one', 'two'], ['one', 'two'])).toBe(
+      true
+    )
+  })
+  it('should return false when not all source members are in target array', () => {
+    expect(containsSourceInTargetArray(['one', 'three'], ['one', 'two'])).toBe(
+      false
+    )
+  })
 })
