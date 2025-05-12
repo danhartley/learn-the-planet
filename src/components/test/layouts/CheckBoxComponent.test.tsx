@@ -15,16 +15,10 @@ describe('CheckBoxComponent', () => {
       key: 'q1',
       text: 'Select two morphological descriptions that match serotiny',
       options: [
-        {
-          key: 'opt1',
-          value: 'Woody cones/fruits that remain closed on plant for years',
-        },
-        { key: 'opt2', value: 'Plants resist uprooting even in loose soil' },
-        { key: 'opt3', value: 'Seeds released en masse after fire' },
-        {
-          key: 'opt4',
-          value: 'May have visible woody root crown',
-        },
+        'Woody cones/fruits that remain closed on plant for years',
+        'Plants resist uprooting even in loose soil',
+        'Seeds released en masse after fire',
+        'May have visible woody root crown',
       ],
     },
     collection: {
@@ -53,7 +47,7 @@ describe('CheckBoxComponent', () => {
     isActive: true,
   }
 
-  const mockOnSubmit = vi.fn((answer: string): Score => {
+  const mockOnSubmit = vi.fn((answer: string | string[]): Score => {
     return {
       isCorrect: true,
       questionCount: 10,

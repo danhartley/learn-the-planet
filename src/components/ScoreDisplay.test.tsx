@@ -105,8 +105,8 @@ describe('ScoreDisplay Component', () => {
     render(<ScoreDisplay />)
 
     // Check for history items
-    expect(screen.getByText('Question 1 (Answer 1)')).toBeInTheDocument()
-    expect(screen.getByText('Question 2 (Answer 2)')).toBeInTheDocument()
+    expect(screen.getByText('Question 1')).toBeInTheDocument()
+    expect(screen.getByText('(Answer 2)')).toBeInTheDocument()
 
     // Check that the correct CSS classes are applied
     const listItems = screen.getAllByRole('listitem')

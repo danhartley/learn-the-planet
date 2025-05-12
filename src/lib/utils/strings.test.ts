@@ -8,6 +8,7 @@ import {
   formatHyphenatedString,
   shuffle,
   getRandomItems,
+  containsSourceInTargetArray,
 } from '@/utils/strings'
 
 describe('Check for camel case', () => {
@@ -453,5 +454,11 @@ describe('getRandomItems', () => {
       }
     }
     expect(atLeastOneShuffled).toBe(true)
+  })
+})
+
+describe('containsSourceInTargetArray', () => {
+  it('should return false when source array is empty', () => {
+    expect(containsSourceInTargetArray([], [])).toBe(false)
   })
 })
