@@ -236,3 +236,11 @@ return {
 6. **Memory Management**: Proper subscription cleanup prevents memory leaks
 
 This pattern is particularly valuable for the app's quiz system where multiple components need to react to the same state changes (current question, score updates, test completion) without tightly coupling them together.
+
+## License
+
+This code is released for **non-commercial use only** under a custom license.  
+You may view and use it for personal or educational purposes.  
+Commercial use or redistribution is prohibited without permission.
+
+If you wish to license this software commercially, please contact [danhartleybcn@gmail.com](mailto:danhartleybcn@gmail.com).
