@@ -170,6 +170,7 @@ input[type='radio'] {
   width: initial;
   margin: var(--spacing-sm);
   accent-color: var(--colour-fg-main);
+  cursor: pointer;
 }
 
 button {
@@ -184,6 +185,7 @@ button:hover {
 }
 
 button:disabled {
+  color: var(--colour-fg-main);
   border-color: var(--colour-line);
   cursor: not-allowed;
 }

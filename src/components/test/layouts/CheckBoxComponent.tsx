@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, FormEvent, useRef } from 'react'
+import React, { useState, FormEvent, useRef, useEffect } from 'react'
 import { MultipleSelectQuestion, Layout, Score, LearningItem } from '@/types'
 
 type Props<T> = {
@@ -70,6 +70,20 @@ export default function CheckBoxComponent({
       </div>
     )
   })
+
+  useEffect(() => {
+    setAnswers([])
+    setIsAnswered(false)
+
+    // Clean up any styling from previous question
+    Object.values(checkboxRefs.current).forEach(cb => {
+      cb?.classList.remove('cb-correct', 'cb-incorrect')
+      cb?.parentElement?.classList.remove(
+        'bg-correct-light',
+        'bg-incorrect-light'
+      )
+    })
+  }, [layout.question])
 
   return (
     <section

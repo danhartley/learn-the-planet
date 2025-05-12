@@ -64,6 +64,15 @@ export const traitTemplates: QuestionTemplate[] = [
     type: 'multiSelect',
     level: 'level 1',
     questionTextTemplate:
+      'Select the phenology descriptions that match ${trait}',
+    correctAnswerProperty: 'phenology',
+    distractorCount: 3,
+    distractorType: 'phenology',
+  },
+  {
+    type: 'multiSelect',
+    level: 'level 1',
+    questionTextTemplate:
       'Select the morphological descriptions that match ${trait}',
     correctAnswerProperty: 'morphology',
     distractorCount: 3,

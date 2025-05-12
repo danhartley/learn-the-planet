@@ -4357,14 +4357,12 @@ export const getCollections = (): Promise<Collection<any>[]> => {
           'Grey-green colouration',
           'Leaves may be rolled, needle-like or scale-like',
         ],
-        phenology: {
-          spring: 'New growth may appear softer but quickly hardens',
-          summer:
-            'Full hardening of leaves, sometimes with reduced angle to sun',
-          autumn: "Persistent, doesn't shed during typical autumn leaf drop",
-          winter:
-            'Maintained year-round, allowing photosynthesis during mild winter days',
-        },
+        phenology: [
+          'Spring: new growth may appear softer but quickly hardens',
+          'Summer: full hardening of leaves, sometimes with reduced angle to sun',
+          "Autumn: persistent, doesn't shed during typical autumn leaf drop",
+          'Winter: maintained year-round, allowing photosynthesis during mild winter days',
+        ],
         examples: [
           {
             id: 78805,
@@ -4440,12 +4438,12 @@ export const getCollections = (): Promise<Collection<any>[]> => {
           'Seeds released en masse after fire',
           'Plant may have mixture of different aged cones/fruits',
         ],
-        phenology: {
-          spring: 'New cones/fruits begin forming after flowering',
-          summer: 'Cones mature but remain closed',
-          autumn: 'No seasonal release of seeds',
-          winter: 'Cones remain tightly closed despite moisture',
-        },
+        phenology: [
+          'Spring: new cones/fruits begin forming after flowering',
+          'Summer: cones mature but remain closed',
+          'Autumn: no seasonal release of seeds',
+          'Winter: cones remain tightly closed despite moisture',
+        ],
         examples: [
           {
             id: 82723,
@@ -4520,13 +4518,12 @@ export const getCollections = (): Promise<Collection<any>[]> => {
           'Often wider spacing between individual plants',
           'Can thrive in seemingly dry sites',
         ],
-        phenology: {
-          spring: 'Early access to soil moisture allows head start on growth',
-          summer:
-            'Plant remains green when shallow-rooted species have dried out',
-          autumn: 'Continued activity later into dry season',
-          winter: 'Protected from frost damage underground',
-        },
+        phenology: [
+          'Spring: early access to soil moisture allows head start on growth',
+          'Summer: plant remains green when shallow-rooted species have dried out',
+          'Autumn: continued activity later into dry season',
+          'Winter: protected from frost damage underground',
+        ],
         examples: [
           {
             id: 50868,

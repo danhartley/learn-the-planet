@@ -3,7 +3,6 @@
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 
 import { HistoryItem } from '@/types'
-import { divide } from 'cypress/types/lodash'
 
 export function ScoreDisplay<T>() {
   const { currentLayout, testHistory, testState } = useTestPlanner<T>()
@@ -44,11 +43,11 @@ export function ScoreDisplay<T>() {
   ): React.ReactNode => {
     return Array.isArray(answer) ? (
       <div>
-        <strong>{question}</strong> ({answer.join(' - ')})
+        <em>{question}</em> ({answer.join(' - ')})
       </div>
     ) : (
       <div>
-        <strong>{question}</strong> ({answer})
+        <em>{question}</em> ({answer})
       </div>
     )
   }

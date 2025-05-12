@@ -139,15 +139,7 @@ export interface Trait extends LearningItem {
   source?: string
   definition: string
   morphology?: string[]
-  phenology?: {
-    'rainy season'?: string
-    'fire season'?: string
-    'dormant period'?: string
-    spring?: string
-    summer?: string
-    autumn?: string
-    winter?: string
-  }
+  phenology?: string[]
   examples?: TraitExample[]
 }
 
@@ -231,6 +223,7 @@ export type DistractorType =
   | 'description'
   | 'definition'
   | 'morphology'
+  | 'phenology'
 
 export interface MultipleChoiceTemplate extends BaseQuestionTemplate {
   type: 'multipleChoice'
