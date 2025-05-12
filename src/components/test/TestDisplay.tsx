@@ -2,10 +2,11 @@ import { Layout, QuestionType, Score } from '@/types'
 import ImageChoiceComponent from '@/components/test/layouts/ImageChoiceComponent'
 import MultipleTextChoiceComponent from '@/components/test/layouts/MultipleTextChoiceComponent'
 import TextEntryComponent from '@/components/test/layouts/TextEntryComponent'
+import CheckBoxComponent from '@/components/test/layouts/CheckBoxComponent'
 
 type Props<T> = {
   layout: Layout<T>
-  onSubmit: (answer: string) => Score | null
+  onSubmit: (answer: string | string[]) => Score | null
   layouts: Layout<T>[]
 }
 
@@ -23,7 +24,9 @@ const displayComponentMap: ComponentMap = {
   },
   'Text entry': {
     default: TextEntryComponent,
-    // Text entry uses the same component regardless of distractor type
+  },
+  'Multiple select': {
+    default: CheckBoxComponent,
   },
 }
 

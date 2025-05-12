@@ -76,7 +76,7 @@ export function useTestPlanner<T>() {
     startRetest: (strategy: TestStrategy) => {
       service.startRetest(strategy)
     },
-    markAnswer: (answer: string) => service.markAnswer(answer),
+    markAnswer: (answer: string | string[]) => service.markAnswer(answer),
     moveToNextQuestion: () => service.moveToNextQuestion(),
     setLayouts: (layouts: Layout<T>[]) => service.setLayouts(layouts),
     currentLayout: layout,

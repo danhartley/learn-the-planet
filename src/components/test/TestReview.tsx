@@ -26,7 +26,7 @@ function TestReview<T>() {
 
   const options = testStrategies.map(strategy => {
     return (
-      <div>
+      <div key={strategy}>
         <input
           type="radio"
           id={strategy}

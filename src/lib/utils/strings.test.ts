@@ -7,6 +7,7 @@ import {
   sortAlphabeticallyBy,
   formatHyphenatedString,
   shuffle,
+  getRandomItems,
 } from '@/utils/strings'
 
 describe('Check for camel case', () => {
@@ -391,5 +392,66 @@ describe('formatHyphenatedString', () => {
 describe('shuffle', () => {
   it('should return [] for empty array', () => {
     expect(shuffle([])).toEqual([])
+  })
+})
+
+describe('getRandomItems', () => {
+  it('should return [] for empty array', () => {
+    expect(getRandomItems([])).toEqual([])
+  })
+  it('should return array with one item for single item array', () => {
+    expect(getRandomItems(['single item'])).toEqual(['single item'])
+    expect(getRandomItems(['item one'], 3)).toEqual(['item one'])
+  })
+  it('should return number of requested items where available', () => {
+    expect(getRandomItems(['item one', 'item two'], 2, false)).toEqual([
+      'item one',
+      'item two',
+    ])
+    expect(getRandomItems(['item one', 'item two'], 3, false)).toEqual([
+      'item one',
+      'item two',
+    ])
+    expect(getRandomItems(['item one', 'item two'], 4, false)).toEqual([
+      'item one',
+      'item two',
+    ])
+  })
+  // Test length of returned array
+  it('should return the correct number of items', () => {
+    const array = ['a', 'b', 'c', 'd', 'e']
+    expect(getRandomItems(array, 3).length).toBe(3)
+  })
+
+  // Test that returned items are from the original array
+  it('should return items from the original array', () => {
+    const array = ['a', 'b', 'c', 'd', 'e']
+    const result = getRandomItems(array, 3)
+    result.forEach(item => {
+      expect(array).toContain(item)
+    })
+  })
+
+  // Test that all items are unique
+  it('should return unique items', () => {
+    const array = ['a', 'b', 'c', 'd', 'e']
+    const result = getRandomItems(array, 3)
+    const uniqueItems = new Set(result)
+    expect(uniqueItems.size).toBe(result.length)
+  })
+
+  // Test forcing randomization
+  it('should shuffle items when forceRandom is true', () => {
+    // This is inherently flaky since randomness could theoretically return the original order
+    // Run multiple times to reduce likelihood of false passes
+    let atLeastOneShuffled = false
+    for (let i = 0; i < 10; i++) {
+      const result = getRandomItems(['a', 'b', 'c', 'd'], 4, true)
+      if (result.join('') !== 'abcd') {
+        atLeastOneShuffled = true
+        break
+      }
+    }
+    expect(atLeastOneShuffled).toBe(true)
   })
 })

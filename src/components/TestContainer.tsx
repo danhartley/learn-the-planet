@@ -31,7 +31,7 @@ export function TestContainer<T>() {
 
   if (!currentLayout) return null
 
-  const handleSubmitAnswer = (answer: string) => {
+  const handleSubmitAnswer = (answer: string | string[]) => {
     const score = markAnswer(answer)
     setIsVisibleClassName('visible')
     setTimeout(() => {

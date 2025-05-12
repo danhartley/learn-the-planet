@@ -4,6 +4,7 @@ import {
   MultipleChoiceOption,
   Layout,
   Score,
+  LearningItem,
 } from '@/types'
 
 type Props<T> = {
@@ -16,7 +17,7 @@ export default function MultipleTextChoiceComponent({
   layout,
   onSubmit,
   questionProgressText,
-}: Props<MultipleChoiceQuestion>) {
+}: Props<LearningItem>) {
   const buttonRefs = useRef<Record<string, HTMLButtonElement | null>>({})
 
   const question = layout.question as MultipleChoiceQuestion

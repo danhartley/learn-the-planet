@@ -286,6 +286,12 @@ li::marker {
   font-size: var(--font-size-lg);
 }
 
+[aria-labelledby='multiple-select'] {
+  .grid-lg {
+    row-gap: var(--spacing-sm);
+  }
+}
+
 .block img,
 .grid-lg img {
   width: var(--img-size);
@@ -430,7 +436,6 @@ form {
 }
 
 .trait {
-  border: 1px solid var(--colour-line);
   padding: var(--spacing-md);
   display: flex;
   flex-direction: column;
@@ -554,6 +559,10 @@ figcaption > div > div:nth-child(2) {
   border-top: 1px solid var(--colour-line);
 }
 
+.trait dt {
+  font-size: var(--font-size-lg);
+}
+
 /* Score section */
 [aria-labelledby='score'] li {
   max-width: 80ch;
@@ -562,6 +571,10 @@ figcaption > div > div:nth-child(2) {
 /* Progress indicators */
 progress {
   accent-color: var(--colour-fg-main);
+}
+
+[aria-labelledby='score'] label {
+  font-size: var(--font-size-sm);
 }
 
 /* Media queries */

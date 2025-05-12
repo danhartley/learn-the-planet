@@ -5,13 +5,16 @@ import {
   Question,
   MultipleChoiceQuestion,
   TextEntryQuestion,
+  MultipleSelectQuestion,
   MultipleChoiceTemplate,
   TextEntryTemplate,
+  MultiSelectTemplate,
   Collection,
   DistractorType,
+  MultipleSelectOption,
 } from '@/types'
 
-import { getPropByPath, shuffleArray } from '@/utils/strings'
+import { getPropByPath, shuffleArray, getRandomItems } from '@/utils/strings'
 
 import { markAnswer } from '@/utils/scorer'
 
@@ -71,6 +74,14 @@ export class ContentHandlerBase<T extends LearningItem>
             questionText,
             index
           )
+        case 'multiSelect':
+          return this.createMultiSelectQuestion(
+            collection,
+            item,
+            template as MultiSelectTemplate,
+            questionText,
+            index
+          )
         default:
           throw new Error(
             `Unsupported question type: ${(template as any).type}`
@@ -94,8 +105,8 @@ export class ContentHandlerBase<T extends LearningItem>
   /**
    * Validates an answer against a question
    */
-  validateAnswer(question: Question, answer: string): boolean {
-    return markAnswer(question.key, answer)
+  validateAnswer(question: Question, answer: string | string[]): boolean {
+    return markAnswer(question, answer)
   }
 
   /**
@@ -140,6 +151,47 @@ export class ContentHandlerBase<T extends LearningItem>
       type: 'Multiple choice',
       text: questionText,
       key: correctAnswer,
+      options: shuffledOptions,
+    }
+  }
+
+  /**
+   * Creates a multiple choice question from a template
+   */
+  private createMultiSelectQuestion(
+    collection: Collection<T>,
+    item: T,
+    template: MultiSelectTemplate,
+    questionText: string,
+    index: number
+  ): MultipleSelectQuestion {
+    // Get the correct answer property
+
+    const correctAnswerArray = this.getPropertyByPath(
+      item,
+      template.correctAnswerProperty
+    )
+
+    const correctAnswers = this.getRandomPropertyItems(correctAnswerArray, 2)
+
+    // Generate distractors
+    const distractorItems: MultipleSelectOption[] = this.generateDistractors(
+      collection,
+      item,
+      template.distractorCount,
+      template.distractorType
+    ) as MultipleSelectOption[]
+    const distractors = getRandomItems(distractorItems[0].value, 2)
+
+    const options = [...correctAnswers, ...distractors]
+
+    // Shuffle options
+    const shuffledOptions = this.shuffleArray(options)
+
+    return {
+      type: 'Multiple select',
+      text: questionText,
+      key: correctAnswerArray,
       options: shuffledOptions,
     }
   }
@@ -202,5 +254,9 @@ export class ContentHandlerBase<T extends LearningItem>
 
   private shuffleArray<A>(array: A[]): A[] {
     return shuffleArray(array)
+  }
+
+  private getRandomPropertyItems(arr: any, count: number): any {
+    return getRandomItems(arr, count)
   }
 }

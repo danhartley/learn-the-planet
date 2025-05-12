@@ -75,7 +75,7 @@ class TestPlannerService<T> {
     return this.testPlanner?.getCurrentLayout() || null
   }
 
-  markAnswer(answer: string): Score | null {
+  markAnswer(answer: string | string[]): Score | null {
     if (!this.testPlanner) return null
     const score = this.testPlanner.markAnswer(answer)
     const currentLayout = this.getCurrentLayout()

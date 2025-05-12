@@ -6,7 +6,7 @@ export const termTemplates: QuestionTemplate[] = [
     level: 'level 0',
     questionTextTemplate: '${definition}',
     correctAnswerProperty: 'term',
-    placeholder: 'Match',
+    placeholder: 'match',
   },
   {
     type: 'multipleChoice',
@@ -61,9 +61,18 @@ export const taxonTemplates: QuestionTemplate[] = [
 
 export const traitTemplates: QuestionTemplate[] = [
   {
+    type: 'multiSelect',
+    level: 'level 1',
+    questionTextTemplate:
+      'Select the morphological descriptions that match ${trait}',
+    correctAnswerProperty: 'morphology',
+    distractorCount: 3,
+    distractorType: 'morphology',
+  },
+  {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the description for ${trait}',
+    questionTextTemplate: 'Select the definition for ${trait}',
     correctAnswerProperty: 'definition',
     distractorCount: 3,
     distractorType: 'definition',

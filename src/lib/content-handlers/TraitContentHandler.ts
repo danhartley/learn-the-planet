@@ -2,7 +2,7 @@ import {
   Trait,
   Collection,
   DistractorType,
-  MultipleChoiceOption,
+  MultipleSelectOption,
 } from '@/types'
 import { ContentHandlerBase } from './ContentHandlerBase'
 import { shuffle, shuffleArray } from '@/utils/strings'
@@ -14,29 +14,43 @@ export class TraitContentHandler extends ContentHandlerBase<Trait> {
 }
 
 /**
- * Generate distractors for Term items
+ * Generate distractors for Trait items
  */
 function generateTraitDistractors(
   collection: Collection<Trait>,
   item: Trait,
   count: number,
   distractorType: DistractorType
-): MultipleChoiceOption[] {
-  const distractorNames =
-    (item.distractors && item.distractors?.length > 0) || 0
+): MultipleSelectOption[] {
+  let collectionDistractorNames = [] as any[]
+  const itemDistractorNames =
+    item.distractors && item.distractors?.length > 0
       ? shuffle(item.distractors)
       : []
-  const extras = count - distractorNames.length
-  const collectionNames = shuffleArray(
-    collection.items.filter(d => d.trait !== item.trait)
-  ).slice(0, extras)
+  const extras = count - itemDistractorNames.length
 
-  const distractors = [...distractorNames, ...collectionNames]
+  switch (distractorType) {
+    case 'morphology':
+      return shuffleArray(collection.items.filter(d => d.trait !== item.trait))
+        .slice(0, extras)
+        .map(d => {
+          return {
+            key: d.trait,
+            value: d['morphology' as keyof Trait],
+          }
+        }) as MultipleSelectOption[]
+    default:
+      collectionDistractorNames = shuffleArray(
+        collection.items.filter(d => d.trait !== item.trait)
+      ).slice(0, extras) as Trait[]
+      const distractorItems = [
+        ...itemDistractorNames,
+        ...collectionDistractorNames,
+      ]
 
-  return distractors.map(d => {
-    return {
-      key: d.trait,
-      value: d[distractorType],
-    }
-  })
+      return distractorItems.map(item => ({
+        key: item.trait,
+        value: item[distractorType as keyof Trait],
+      })) as MultipleSelectOption[]
+  }
 }

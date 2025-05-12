@@ -5,7 +5,12 @@ export type MultipleChoiceOption = {
   value: string | Image | undefined
 }
 
-export type QuestionType = 'Multiple choice' | 'Text entry'
+export type MultipleSelectOption = {
+  key: string
+  value: string[]
+}
+
+export type QuestionType = 'Multiple choice' | 'Text entry' | 'Multiple select'
 
 export type MultipleChoiceQuestion = {
   type: QuestionType
@@ -22,7 +27,17 @@ export type TextEntryQuestion = {
   contentType?: string
 }
 
-export type Question = MultipleChoiceQuestion | TextEntryQuestion
+export type MultipleSelectQuestion = {
+  type: QuestionType
+  key: string | string[]
+  text: string
+  options: string[]
+}
+
+export type Question =
+  | MultipleChoiceQuestion
+  | TextEntryQuestion
+  | MultipleSelectQuestion
 
 export type Score = {
   isCorrect: boolean
@@ -198,7 +213,7 @@ export type TestPlan<T> = {
 
 // Define interfaces for the different question layout types
 interface BaseQuestionTemplate {
-  type: 'multipleChoice' | 'textEntry' /* other types */
+  type: 'multipleChoice' | 'textEntry' | 'multiSelect'
   level: string
   questionTextTemplate: string // Uses ${property} syntax for interpolation
   contentType?: string
@@ -215,6 +230,7 @@ export type DistractorType =
   | 'name'
   | 'description'
   | 'definition'
+  | 'morphology'
 
 export interface MultipleChoiceTemplate extends BaseQuestionTemplate {
   type: 'multipleChoice'
@@ -229,9 +245,17 @@ export interface TextEntryTemplate extends BaseQuestionTemplate {
   placeholder: string
 }
 
+export interface MultiSelectTemplate extends BaseQuestionTemplate {
+  type: 'multiSelect'
+  correctAnswerProperty: string
+  distractorCount: number
+  distractorType: DistractorType
+}
+
 export type QuestionTemplate =
   | MultipleChoiceTemplate
-  | TextEntryTemplate /* other types */
+  | TextEntryTemplate
+  | MultiSelectTemplate /* other types */
 
 export interface ContentTypeHandler<T> {
   // Transform items into questions based on templates
@@ -250,7 +274,7 @@ export interface ContentTypeHandler<T> {
   ): any[]
 
   // Validate answers for this content type
-  validateAnswer(question: Question, answer: string): boolean
+  validateAnswer(question: Question, answer: string | string[]): boolean
 }
 
 export type ContentHandlerType = 'taxon' | 'term' | 'topic' | 'trait'

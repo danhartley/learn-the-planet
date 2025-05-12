@@ -1,5 +1,3 @@
-import { text } from 'stream/consumers'
-
 export const isCamelCase = (str: string): boolean => {
   return /^[a-z]+(?:[A-Z][a-z0-9]*)*$/.test(str)
 }
@@ -129,4 +127,63 @@ export const shuffle = (array: any) => {
   }
 
   return array
+}
+
+/**
+ * Selects a specified number of random items from an array
+ * @param array - The source array to pick items from
+ * @param count - Number of items to pick (defaults to 2)
+ * @param forceRandom - Whether to force randomization even for edge cases (defaults to false)
+ * @returns Array of randomly selected items
+ */
+export const getRandomItems = <T>(
+  array: T[],
+  count: number = 2,
+  forceRandom: boolean = true
+): T[] => {
+  // Handle edge cases
+  if (!array || array.length === 0) {
+    return []
+  }
+
+  // If there's only one item, return it in an array
+  if (array.length === 1) {
+    return array
+  }
+
+  // For testing purposes: if the array length exactly matches count and forceRandom is false,
+  // return a copy of the original array to ensure test stability
+  if (array.length === count && !forceRandom) {
+    return array
+  }
+
+  // Ensure count doesn't exceed array length
+  const itemsToSelect = Math.min(count, array.length)
+
+  // Create a copy of the array to avoid modifying the original
+  const arrayCopy = [...array]
+
+  // If we don't want random items, take the first n values
+  if (!forceRandom) return array.slice(0, itemsToSelect)
+
+  // Use the Fisher-Yates algorithm for shuffling (similar to the shuffleArray function)
+  for (let i = arrayCopy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[arrayCopy[i], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i]]
+  }
+
+  // Return the first 'itemsToSelect' elements
+  return arrayCopy.slice(0, itemsToSelect)
+}
+
+export const containsSourceInTargetArray = <T>(
+  sourceArray: T[],
+  targetArray: T[]
+): boolean => {
+  if (sourceArray.length === 0 || sourceArray.length > targetArray.length)
+    return false
+  const matchCount = sourceArray.filter(item =>
+    targetArray.includes(item)
+  ).length
+  return sourceArray.length === matchCount
 }

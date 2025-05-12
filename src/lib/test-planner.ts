@@ -98,7 +98,7 @@ export class TestPlanner<T> {
     return layout
   }
 
-  public markAnswer(answer: string): Score {
+  public markAnswer(answer: string | string[]): Score {
     const currentLayout = this.getCurrentLayout()
     const isCorrect = this.contentHandler.validateAnswer(
       currentLayout.question,
