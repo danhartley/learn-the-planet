@@ -55,7 +55,7 @@ export function TestContainer<T>() {
             className="breadcrumb"
             href={`/collection/${currentLayout.collection.id}`}
           >
-            Collection notes
+            Collection overview
           </Link>
         </div>
         <TestDisplay

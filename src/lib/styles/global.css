@@ -148,6 +148,7 @@ header {
 footer {
   display: flex;
   flex-direction: column;
+  border-top: 1px dashed var(--colour-line);
 }
 
 /* Form elements */
@@ -241,7 +242,6 @@ li::marker {
   display: flex;
   justify-content: center;
   padding: var(--spacing-lg) 0;
-  /* padding-bottom: var(--spacing-lg); */
 }
 
 .block {
@@ -282,11 +282,6 @@ li::marker {
   column-gap: var(--spacing-xl);
   justify-content: center;
 }
-
-/* .block.options,
-.grid-lg.options {
-  padding-block: var(--spacing-xl);
-} */
 
 .block.options > button,
 .grid-lg.options > button {
@@ -349,16 +344,13 @@ li::marker {
 form {
   display: flex;
   flex-direction: column;
-  /* margin: 0 0 var(--spacing-xl) 0; */
 }
 
 .form-row {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  /* margin: 0 0 var(--spacing-lg) 0; */
   margin: var(--spacing-lg) 0;
-  /* margin: var(--spacing-lg) 0 0 0; */
   border-radius: var(--border-radius-sm);
 }
 
@@ -491,7 +483,6 @@ form {
 .trait {
   padding: var(--spacing-md);
   display: flex;
-  /* flex-direction: column; */
 }
 
 /* Figure and images */

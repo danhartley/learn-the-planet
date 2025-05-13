@@ -179,7 +179,7 @@ describe('TestReview Component when all answers are correct', () => {
   it('renders the collection link correctly', () => {
     render(<TestReview />)
 
-    const collectionLink = screen.getByText('Collection notes')
+    const collectionLink = screen.getByText('Collection overview')
     expect(collectionLink).toHaveAttribute('href', '/collection/123')
   })
 })

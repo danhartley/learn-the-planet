@@ -56,7 +56,7 @@ export const TopicGallery = ({ collection }: Props<T>) => {
 
   return (
     <section aria-labelledby="collection" className="group">
-      <h1 id="collection">Collection notes</h1>
+      <h1 id="collection">Collection overview</h1>
       <h2>{collection.name}</h2>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
