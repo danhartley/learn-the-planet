@@ -21,8 +21,7 @@ export const TraitCard = ({ trait }: Props) => {
       ) {
         return (
           <li key={key}>
-            <span>{key}</span>:{' '}
-            {trait.phenology[key as keyof typeof trait.phenology]}
+            {String(trait.phenology[key as keyof typeof trait.phenology])}
           </li>
         )
       }
@@ -36,7 +35,7 @@ export const TraitCard = ({ trait }: Props) => {
   })
 
   return (
-    <div className="trait">
+    <div id={trait.trait} className="trait">
       <dl>
         <dt>{trait.trait}</dt>
         <dd>

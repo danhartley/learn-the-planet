@@ -30,6 +30,16 @@ export function TraitGallery<T>({ collection }: Props<T>) {
     )
   })
 
+  const traitIndex = (collection.items as Trait[]).map(item => {
+    return (
+      <li key={item.id}>
+        <Link href={`#${item.trait}`} scroll={true}>
+          {item.trait}
+        </Link>
+      </li>
+    )
+  })
+
   const collections = collection?.collections?.map(
     (subCollection: CollectionSummary<T>) => {
       return subCollection ? (
@@ -55,6 +65,7 @@ export function TraitGallery<T>({ collection }: Props<T>) {
       <h2>{collection.name}</h2>
       <section aria-labelledby="terms" className="group-block">
         <h3 id="traits">Traits</h3>
+        <ul className="trait">{traitIndex}</ul>
         <div className="column-group">{traits}</div>
         <p>
           <button id="start-test" onClick={handleStartTest}>

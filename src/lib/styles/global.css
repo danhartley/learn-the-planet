@@ -221,8 +221,14 @@ ul {
   padding-inline: 0;
 }
 
+[aria-labelledby='trait-gallery'] .trait > li {
+  text-transform: capitalize;
+  margin: 0;
+  font-size: var(--font-size-sm);
+}
+
 li {
-  margin: 0.75rem 0;
+  margin: var(--spacing-sm) 0;
 
   span {
     text-transform: capitalize;
