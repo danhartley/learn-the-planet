@@ -377,6 +377,11 @@ form {
   padding: var(--spacing-lg);
 }
 
+.form-row.trait {
+  background-color: var(--colour-bg-traits);
+  padding: var(--spacing-lg);
+}
+
 [data-type='taxon'] button {
   background-color: var(--colour-bg-taxon-card);
   &:hover {
@@ -399,7 +404,8 @@ form {
 }
 
 .form-row.taxon label,
-.form-row.term label {
+.form-row.term label,
+.form-row.trait label {
   color: var(--colour-fg-alt-main) !important;
 }
 
@@ -477,7 +483,7 @@ form {
 .trait {
   padding: var(--spacing-md);
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 /* Figure and images */
