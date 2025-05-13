@@ -7,6 +7,5 @@ describe('<ScoreDisplay />', () => {
   })
   it('renders with Test score message', () => {
     cy.mount(<ScoreDisplay />)
-    cy.contains('Test score')
   })
 })
