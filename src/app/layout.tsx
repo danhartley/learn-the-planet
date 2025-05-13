@@ -1,7 +1,9 @@
+import Link from 'next/link'
+
 import '@/css/global.css'
+import '@/css/fonts.css'
 
 import { Menu } from '@/components/Menu'
-import '../lib/styles/fonts.css'
 
 export const metadata = {
   title: 'Learn the Planet',
@@ -14,10 +16,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <head>{/* <script src="http://localhost:8097" /> */}</head>
       <body>
         <header>
-          <div>Learn the Planet</div>
+          <div>
+            <Link href="/">Learn the Planet</Link>
+          </div>
         </header>
-        {/* Layout UI */}
-        {/* Place children where you want to render a page or nested layout */}
         <main>{children}</main>
         <footer>
           <div></div>
