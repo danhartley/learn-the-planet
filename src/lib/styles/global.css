@@ -485,6 +485,10 @@ form {
   display: flex;
 }
 
+.group-block .trait {
+  flex-direction: column;
+}
+
 /* Figure and images */
 figure {
   margin-block: 0;
