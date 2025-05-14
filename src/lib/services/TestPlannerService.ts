@@ -18,7 +18,10 @@ class TestPlannerService<T> {
   private testPlanner: TestPlanner<T> | null = null
   private emitter = new EventEmitter()
 
-  private constructor() {}
+  private constructor() {
+    // Set a higher maximum number of listeners to avoid warnings
+    this.emitter.setMaxListeners(30)
+  }
 
   // Singleton pattern: prevent more than one instance of the service from being created
   static getInstance<U>(): TestPlannerService<U> {

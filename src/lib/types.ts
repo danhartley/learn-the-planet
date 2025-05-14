@@ -291,7 +291,7 @@ export type HistoryItem<T> = {
   item: T | undefined
   question: string | undefined
   type: QuestionType | undefined
-  answer: string | undefined
+  answer: string | string[] | undefined
   layoutId: string
 }
 
