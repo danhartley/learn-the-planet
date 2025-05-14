@@ -9,6 +9,7 @@ import {
   shuffle,
   getRandomItems,
   containsSourceInTargetArray,
+  formatCamelCase,
 } from '@/utils/strings'
 
 describe('Check for camel case', () => {
@@ -473,5 +474,14 @@ describe('containsSourceInTargetArray', () => {
     expect(containsSourceInTargetArray(['one', 'three'], ['one', 'two'])).toBe(
       false
     )
+  })
+})
+
+describe('formatCamelCase', () => {
+  it('should return no change for standard text, capitalised', () => {
+    expect(formatCamelCase('standard text')).toBe('Standard text')
+  })
+  it('should return standard text, capitalised for camel cased text', () => {
+    expect(formatCamelCase('camelCaseText')).toBe('Camel case text')
   })
 })

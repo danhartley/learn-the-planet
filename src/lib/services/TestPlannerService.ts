@@ -4,10 +4,12 @@ import {
   Collection,
   Layout,
   Score,
-  QuestionTemplate,
   HistoryItem,
   TestState,
   TestStrategy,
+  TestConfig,
+  QuestionTemplateSelection,
+  QuestionTemplate,
 } from '@/types'
 import { TestPlannerEvent } from '@/utils/enums'
 
@@ -28,8 +30,27 @@ class TestPlannerService<T> {
 
   startTest(
     collection: Collection<T>,
-    questionTemplates: QuestionTemplate[]
+    questionTemplates: QuestionTemplate[],
+    config: TestConfig | undefined
   ): void {
+    if (!config) {
+      // By default, all template types are available for testing
+      config = {
+        questionTemplateSelections: [
+          { type: 'multipleChoice', isSelected: true },
+          { type: 'textEntry', isSelected: true },
+          { type: 'multiSelect', isSelected: true },
+        ] as QuestionTemplateSelection[],
+      }
+    }
+
+    questionTemplates = questionTemplates.filter(qt =>
+      config.questionTemplateSelections
+        .filter(qts => qts.isSelected)
+        .map(qts => qts.type)
+        .includes(qt.type)
+    )
+
     this.testPlanner = new TestPlanner(collection, questionTemplates)
     this.emitter.emit(TestPlannerEvent.TEST_STARTED)
     this.emitter.emit(TestPlannerEvent.STATE_CHANGED)
@@ -45,7 +66,7 @@ class TestPlannerService<T> {
       index: number = 0
 
     switch (strategy) {
-      case 'incorrect-only':
+      case 'repeat-failed-questions-only':
         layouts = oldLayouts?.map(layout => {
           const score = (oldTestHistory as HistoryItem<T>[]).find(
             (history: HistoryItem<T>) => history?.layoutId === layout.id

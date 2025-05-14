@@ -30,6 +30,7 @@ export default function TextEntryComponent({
 
     // Reset form
     setAnswer('')
+    setIsAnswered(false)
 
     // Focus on answer
     if (answerInputRef.current) {

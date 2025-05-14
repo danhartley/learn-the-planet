@@ -273,6 +273,11 @@ li::marker {
   padding: var(--spacing-sm);
 }
 
+.horizontal-group {
+  display: flex;
+  align-items: center;
+}
+
 .grid-lg {
   display: grid;
   grid-template-columns: 1fr;
@@ -491,7 +496,7 @@ form {
   display: flex;
 }
 
-.group-block .trait {
+[aria-labelledby='trait-gallery'] .group-block .trait {
   flex-direction: column;
 }
 

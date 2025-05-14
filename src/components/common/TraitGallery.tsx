@@ -1,13 +1,19 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 
 import Link from 'next/link'
 
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { TraitCard } from '@/components/common/TraitCard'
-import { Collection, Trait, CollectionSummary } from '@/types'
+import {
+  Collection,
+  Trait,
+  CollectionSummary,
+  QuestionTemplateSelection,
+} from '@/types'
+import { TestConfigSettings } from '@/components/common/TestConfigSettings'
 
 type Props<T> = {
   collection: Collection<T>
@@ -16,9 +22,16 @@ type Props<T> = {
 export function TraitGallery<T>({ collection }: Props<T>) {
   const router = useRouter()
   const { startTest } = useTestPlanner<T>()
+  const [config, setConfig] = useState({
+    questionTemplateSelections: [
+      { type: 'multipleChoice', isSelected: true },
+      { type: 'textEntry', isSelected: true },
+      { type: 'multiSelect', isSelected: true },
+    ] as QuestionTemplateSelection[],
+  })
 
   const handleStartTest = () => {
-    startTest(collection)
+    startTest({ collection, config })
     router.push('/test')
   }
 
@@ -74,6 +87,7 @@ export function TraitGallery<T>({ collection }: Props<T>) {
         </p>
         {terms}
       </section>
+      <TestConfigSettings config={config} setConfig={setConfig} />
     </section>
   )
 }

@@ -203,12 +203,25 @@ export type TestPlan<T> = {
   layouts: Layout<T>[]
 }
 
-// Define interfaces for the different question layout types
+export type QuestionTemplateType =
+  | 'multipleChoice'
+  | 'textEntry'
+  | 'multiSelect'
+
+export type QuestionTemplateSelection = {
+  type: QuestionTemplateType
+  isSelected: boolean
+}
+
 interface BaseQuestionTemplate {
-  type: 'multipleChoice' | 'textEntry' | 'multiSelect'
+  type: QuestionTemplateType
   level: string
   questionTextTemplate: string // Uses ${property} syntax for interpolation
   contentType?: string
+}
+
+export type TestConfig = {
+  questionTemplateSelections: QuestionTemplateSelection[]
 }
 
 export type DistractorType =

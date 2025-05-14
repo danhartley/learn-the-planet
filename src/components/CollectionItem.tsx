@@ -15,7 +15,7 @@ export function CollectionItem<T>({ collection }: Props<T>) {
   const { startTest } = useTestPlanner<T>()
 
   const handleStartTest = () => {
-    startTest(collection)
+    startTest({ collection })
     router.push('/test')
   }
 

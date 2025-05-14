@@ -17,7 +17,7 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
   const { startTest } = useTestPlanner<Taxon>()
 
   const handleStartTest = () => {
-    startTest(collection)
+    startTest({ collection })
     router.push('/test')
   }
 

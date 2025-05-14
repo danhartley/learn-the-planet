@@ -1,3 +1,5 @@
+import { camelCase } from 'cypress/types/lodash'
+
 export const isCamelCase = (str: string): boolean => {
   return /^[a-z]+(?:[A-Z][a-z0-9]*)*$/.test(str)
 }
@@ -186,4 +188,19 @@ export const containsSourceInTargetArray = <T>(
     targetArray.includes(item)
   ).length
   return sourceArray.length === matchCount
+}
+
+/**
+ * Converts a camelCase string to ordinary text with spaces.
+ * Example: "multipleChoice" becomes "multiple choice"
+ *
+ * @param camelCase - The camelCase string to convert
+ * @returns A string with spaces between words and first letter capitalized
+ */
+export const formatCamelCase = (camelCase: string): string => {
+  // Insert a space before all uppercase letters, then convert to lowercase
+  const withSpaces = camelCase.replace(/([A-Z])/g, ' $1').toLowerCase()
+
+  // Trim in case the string started with an uppercase letter
+  return withSpaces.trim().charAt(0).toUpperCase() + withSpaces.slice(1)
 }
