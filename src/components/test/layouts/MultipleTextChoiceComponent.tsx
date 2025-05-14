@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from 'react'
+import React, { useRef, useCallback, useState, useEffect } from 'react'
 import {
   MultipleChoiceQuestion,
   MultipleChoiceOption,
@@ -26,6 +26,10 @@ export default function MultipleTextChoiceComponent({
   if (!question.options) {
     throw new Error('Invalid question type: options are missing.')
   }
+
+  useEffect(() => {
+    setIsAnswered(false)
+  }, [question.key])
 
   const setAnswer = useCallback(
     (answer: string, key: string) => {

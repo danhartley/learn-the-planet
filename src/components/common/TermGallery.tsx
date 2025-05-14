@@ -1,11 +1,11 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
-
-import { Collection, Term } from '@/types'
+import { TestConfigSettings } from '@/components/common/TestConfigSettings'
+import { Collection, Term, QuestionTemplateSelection } from '@/types'
 
 type Props<T> = {
   collection: Collection<T>
@@ -14,9 +14,15 @@ type Props<T> = {
 export function TermGallery<T>({ collection }: Props<T>) {
   const router = useRouter()
   const { startTest } = useTestPlanner<T>()
+  const [config, setConfig] = useState({
+    questionTemplateSelections: [
+      { type: 'multipleChoice', isSelected: true },
+      { type: 'textEntry', isSelected: true },
+    ] as QuestionTemplateSelection[],
+  })
 
   const handleStartTest = () => {
-    startTest({ collection })
+    startTest({ collection, config })
     router.push('/test')
   }
 
@@ -44,10 +50,11 @@ export function TermGallery<T>({ collection }: Props<T>) {
       <section aria-labelledby="terms" className="group-block">
         <h3 id="terms">Terms</h3>
         <dl>{definitions}</dl>
-        <button id="start-test" onClick={handleStartTest}>
-          Start test
-        </button>
       </section>
+      <button id="start-test" onClick={handleStartTest}>
+        Start test
+      </button>
+      <TestConfigSettings config={config} setConfig={setConfig} />
     </section>
   )
 }

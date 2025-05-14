@@ -80,13 +80,11 @@ export function TraitGallery<T>({ collection }: Props<T>) {
         <h3 id="traits">Traits</h3>
         <ul className="trait">{traitIndex}</ul>
         <div className="column-group">{traits}</div>
-        <p>
-          <button id="start-test" onClick={handleStartTest}>
-            Start test
-          </button>
-        </p>
         {terms}
       </section>
+      <button id="start-test" onClick={handleStartTest}>
+        Start test
+      </button>
       <TestConfigSettings config={config} setConfig={setConfig} />
     </section>
   )

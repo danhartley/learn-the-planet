@@ -1,9 +1,9 @@
 'use client'
-
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
-
-import { Collection, Taxon } from '@/types'
+import { TestConfigSettings } from '@/components/common/TestConfigSettings'
+import { Collection, Taxon, QuestionTemplateSelection } from '@/types'
 import { TaxonCard } from '@/components/common/TaxonCard'
 
 type Props<Taxon> = {
@@ -15,9 +15,15 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
 
   const router = useRouter()
   const { startTest } = useTestPlanner<Taxon>()
+  const [config, setConfig] = useState({
+    questionTemplateSelections: [
+      { type: 'multipleChoice', isSelected: true },
+      { type: 'textEntry', isSelected: true },
+    ] as QuestionTemplateSelection[],
+  })
 
   const handleStartTest = () => {
-    startTest({ collection })
+    startTest({ collection, config })
     router.push('/test')
   }
 
@@ -37,10 +43,11 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
       <section aria-labelledby="taxa" className="group-block">
         <h3 id="taxa">Taxa</h3>
         <div className="block">{taxa}</div>
-        <button id="start-test" onClick={handleStartTest}>
-          Start test
-        </button>
       </section>
+      <button id="start-test" onClick={handleStartTest}>
+        Start test
+      </button>
+      <TestConfigSettings config={config} setConfig={setConfig} />
     </section>
   )
 }
