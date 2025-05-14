@@ -44,7 +44,7 @@ export function TestConfigSettings({ config, setConfig }: Props) {
 
   return (
     <section aria-labelledby="template-options">
-      <h3 id="template-options">Template options</h3>
+      <h3 id="template-options">Test type options</h3>
       <ul>{templateTypes}</ul>
     </section>
   )
