@@ -182,6 +182,11 @@ input[type='radio'] {
   cursor: pointer;
 }
 
+input[type='checkbox'] + label,
+input[type='radio'] + label {
+  cursor: pointer;
+}
+
 button {
   padding: var(--spacing-md);
   border: 1px solid var(--colour-fg-main);

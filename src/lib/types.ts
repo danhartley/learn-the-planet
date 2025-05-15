@@ -301,3 +301,10 @@ export type TestStrategy =
 
 export const isDefined = <T>(value: T | undefined): value is T =>
   value !== undefined
+
+export type Operation = 'create' | 'read' | 'update' | 'delete'
+
+export type ContentType = {
+  key: string
+  value: ContentHandlerType
+}
