@@ -14,10 +14,11 @@
   --colour-bg-reptilia: rgb(254, 226, 223);
   --colour-bg-taxon: rgb(43 73 34);
   --colour-bg-taxon-card: rgb(226 239 220);
-  --colour-bg-terms: rgb(73 64 34);
-  --colour-bg-terms-card: rgb(245, 243, 234);
-  --colour-bg-traits: rgb(64 34 73);
-  --colour-bg-traits-card: rgb(243 235 245);
+  --colour-bg-term: rgb(73 64 34);
+  --colour-bg-term-card: rgb(245, 243, 234);
+  --colour-bg-trait: rgb(64 34 73);
+  --colour-bg-trait-card: rgb(243 235 245);
+  --colour-bg-topic: rgb(128 128 128);
   --colour-bg-button: rgb(233 228 208);
   --colour-bg-card-button: rgba(255, 255, 255, 0.5);
   --colour-form-label: rgb(64 64 65);
@@ -395,12 +396,17 @@ form {
 }
 
 .form-row.term {
-  background-color: var(--colour-bg-terms);
+  background-color: var(--colour-bg-term);
   padding: var(--spacing-lg);
 }
 
 .form-row.trait {
-  background-color: var(--colour-bg-traits);
+  background-color: var(--colour-bg-trait);
+  padding: var(--spacing-lg);
+}
+
+.form-row.topic {
+  background-color: var(--colour-bg-topic);
   padding: var(--spacing-lg);
 }
 
@@ -412,14 +418,14 @@ form {
 }
 
 [data-type='term'] button {
-  background-color: var(--colour-bg-terms-card);
+  background-color: var(--colour-bg-term-card);
   &:hover {
     background-color: var(--colour-bg-hover);
   }
 }
 
 [data-type='trait'] button {
-  background-color: var(--colour-bg-traits-card);
+  background-color: var(--colour-bg-trait-card);
   &:hover {
     background-color: var(--colour-bg-hover);
   }
@@ -427,7 +433,8 @@ form {
 
 .form-row.taxon label,
 .form-row.term label,
-.form-row.trait label {
+.form-row.trait label,
+.form-row.topic label {
   color: var(--colour-fg-alt-main) !important;
 }
 
@@ -482,7 +489,7 @@ form {
 }
 
 [aria-labelledby='terms'] .card {
-  background-color: var(--colour-bg-terms-card);
+  background-color: var(--colour-bg-term-card);
 }
 
 .card button {
