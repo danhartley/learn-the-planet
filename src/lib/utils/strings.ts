@@ -1,5 +1,3 @@
-import { camelCase } from 'cypress/types/lodash'
-
 export const isCamelCase = (str: string): boolean => {
   return /^[a-z]+(?:[A-Z][a-z0-9]*)*$/.test(str)
 }

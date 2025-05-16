@@ -204,6 +204,12 @@ button:disabled {
   cursor: not-allowed;
 }
 
+textarea {
+  padding: var(--spacing-md);
+  resize: none;
+  white-space: pre-wrap;
+}
+
 /* Lists and term lists */
 dl > div {
   display: flex;

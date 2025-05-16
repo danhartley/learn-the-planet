@@ -1,7 +1,6 @@
 import { ContentHandlerType } from '@/types'
 import { CollectionItemTermPicker } from './CollectionItemTermPicker'
 import { CollectionItemTaxonPicker } from './CollectionItemTaxonPicker'
-import { Component } from 'react'
 
 type Props = {
   type: ContentHandlerType
@@ -12,18 +11,14 @@ export function CollectionItemPicker({ type }: Props) {
     [key in ContentHandlerType]: React.ComponentType<any>
   }
 
-  const itenComponent: ComponentMap = {
+  const itemComponent: ComponentMap = {
     term: CollectionItemTermPicker,
     taxon: CollectionItemTaxonPicker,
     topic: CollectionItemTaxonPicker,
     trait: CollectionItemTaxonPicker,
   }
 
-  const Component = itenComponent[type]
+  const Component = itemComponent[type]
 
-  return (
-    <div>
-      <Component />
-    </div>
-  )
+  return <Component />
 }

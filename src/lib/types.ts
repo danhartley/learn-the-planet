@@ -308,3 +308,9 @@ export type ContentType = {
   key: string
   value: ContentHandlerType
 }
+
+export interface ValidationResult {
+  isValid: boolean
+  parsedData?: Term
+  errors: string[]
+}
