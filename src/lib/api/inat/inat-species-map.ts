@@ -1,3 +1,5 @@
+// whttps://api.inaturalist.org/v1/docs/#!/Taxa/get_taxa
+
 type Photo = {
   inatId: number
   licenceCode: string

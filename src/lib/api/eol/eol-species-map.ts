@@ -1,3 +1,5 @@
+// https://eol.org/docs/what-is-eol/classic-apis/
+
 type EOLSpecies = {
   eolId: number
   binomial: string
