@@ -121,6 +121,8 @@ export interface Taxon extends LearningItem {
   }
   traits?: Record<string, any>
   observationURL?: string
+  wikipediaUrl?: string
+  inaturalistUrl?: string
 }
 
 export interface Term extends LearningItem {

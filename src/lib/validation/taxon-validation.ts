@@ -1,12 +1,12 @@
 import { ValidationResult } from '@/types'
-import { Term } from '@/types'
+import { Taxon } from '@/types'
 
 /**
- * Type guard to check if an object is a valid Term
+ * Type guard to check if an object is a valid Taxon
  * @param obj - The object to check
- * @returns Boolean indicating whether the object conforms to the Term interface
+ * @returns Boolean indicating whether the object conforms to the Taxon interface
  */
-export const isTermObject = (obj: any): obj is Term => {
+export const isTaxonObject = (obj: any): obj is Taxon => {
   // Check if obj is an object and not null
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
     return false
@@ -17,11 +17,14 @@ export const isTermObject = (obj: any): obj is Term => {
     return false
   }
 
-  if (typeof obj.term !== 'string' || obj.term.trim() === '') {
+  if (
+    typeof obj.vernacularName !== 'string' ||
+    obj.vernacularName.trim() === ''
+  ) {
     return false
   }
 
-  if (typeof obj.definition !== 'string' || obj.definition.trim() === '') {
+  if (typeof obj.binomial !== 'string' || obj.binomial.trim() === '') {
     return false
   }
 
@@ -43,11 +46,11 @@ export const isTermObject = (obj: any): obj is Term => {
 }
 
 /**
- * Validates if a JSON string represents a valid Term object
+ * Validates if a JSON string represents a valid Taxon object
  * @param jsonString - The JSON string to validate
  * @returns A ValidationResult object
  */
-export function validateTermJson(jsonString: string): ValidationResult<Term> {
+export function validateTaxonJson(jsonString: string): ValidationResult<Taxon> {
   // Skip empty input
   if (!jsonString.trim()) {
     return {
@@ -67,15 +70,15 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
 
     // Step 3: Validate each item
     itemsToValidate.forEach((item: any, index: number) => {
-      // Use isTermObject directly - if valid, no need to check anything else
-      if (isTermObject(item)) {
+      // Use isTaxonObject directly - if valid, no need to check anything else
+      if (isTaxonObject(item)) {
         return // This item is valid, continue to next item
       }
 
       // Item is invalid, collect specific errors
       let hasSpecificErrors = false
 
-      // Check required fields
+      // Check if it's even an object
       if (!item || typeof item !== 'object' || Array.isArray(item)) {
         errors.push(`Item ${index}: Not a valid object`)
         return // Skip further checks if not even an object
@@ -93,36 +96,41 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
         hasSpecificErrors = true
       }
 
-      if (!item.term) {
-        errors.push(`Item ${index}: Missing required field: term`)
+      if (!item.vernacularName) {
+        errors.push(`Item ${index}: Missing required field: vernacularName`)
         hasSpecificErrors = true
-      } else if (typeof item.term !== 'string') {
-        errors.push(`Item ${index}: Field "term" must be a string`)
+      } else if (typeof item.vernacularName !== 'string') {
+        errors.push(`Item ${index}: Field "vernacularName" must be a string`)
         hasSpecificErrors = true
-      } else if (item.term.trim() === '') {
-        errors.push(`Item ${index}: Field "term" cannot be empty`)
-        hasSpecificErrors = true
-      }
-
-      if (!item.definition) {
-        errors.push(`Item ${index}: Missing required field: definition`)
-        hasSpecificErrors = true
-      } else if (typeof item.definition !== 'string') {
-        errors.push(`Item ${index}: Field "definition" must be a string`)
-        hasSpecificErrors = true
-      } else if (item.definition.trim() === '') {
-        errors.push(`Item ${index}: Field "definition" cannot be empty`)
+      } else if (item.vernacularName.trim() === '') {
+        errors.push(`Item ${index}: Field "vernacularName" cannot be empty`)
         hasSpecificErrors = true
       }
 
-      // Check optional fields
-      if (item.source !== undefined && typeof item.source !== 'string') {
-        errors.push(`Item ${index}: Field "source" must be a string`)
+      if (!item.binomial) {
+        errors.push(`Item ${index}: Missing required field: binomial`)
+        hasSpecificErrors = true
+      } else if (typeof item.binomial !== 'string') {
+        errors.push(`Item ${index}: Field "binomial" must be a string`)
+        hasSpecificErrors = true
+      } else if (item.binomial.trim() === '') {
+        errors.push(`Item ${index}: Field "binomial" cannot be empty`)
         hasSpecificErrors = true
       }
 
-      if (item.example !== undefined && typeof item.example !== 'string') {
-        errors.push(`Item ${index}: Field "example" must be a string`)
+      if (
+        item.wikipediaUrl !== undefined &&
+        typeof item.wikipediaUrl !== 'string'
+      ) {
+        errors.push(`Item ${index}: Field "wikipediaUrl" must be a string`)
+        hasSpecificErrors = true
+      }
+
+      if (
+        item.inaturalistUrl !== undefined &&
+        typeof item.inaturalistUrl !== 'string'
+      ) {
+        errors.push(`Item ${index}: Field "inaturalistUrl" must be a string`)
         hasSpecificErrors = true
       }
 
@@ -131,10 +139,10 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
         hasSpecificErrors = true
       }
 
-      // If no specific errors were found but isTermObject still failed, add generic error
+      // If no specific errors were found but isTaxonObject still failed, add generic error
       if (!hasSpecificErrors) {
         errors.push(
-          `Item ${index}: Object does not match Term interface structure`
+          `Item ${index}: Object does not match Taxon interface structure`
         )
       }
     })

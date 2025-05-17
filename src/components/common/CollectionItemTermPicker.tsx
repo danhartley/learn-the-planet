@@ -20,6 +20,7 @@ export function CollectionItemTermPicker({ setItems }: Props) {
 
     if (result.isValid && result.parsedData)
       setItems(result.parsedData as Term[])
+    else console.log(result.errors)
   }
 
   return (
