@@ -1,12 +1,14 @@
-import { ContentHandlerType } from '@/types'
+import React, { Dispatch, SetStateAction } from 'react'
+import { ContentHandlerType, LearningItem } from '@/types'
 import { CollectionItemTermPicker } from './CollectionItemTermPicker'
 import { CollectionItemTaxonPicker } from './CollectionItemTaxonPicker'
 
 type Props = {
   type: ContentHandlerType
+  setItems: Dispatch<SetStateAction<LearningItem[] | undefined>>
 }
 
-export function CollectionItemPicker({ type }: Props) {
+export function CollectionItemPicker({ type, setItems }: Props) {
   type ComponentMap = {
     [key in ContentHandlerType]: React.ComponentType<any>
   }
@@ -20,5 +22,5 @@ export function CollectionItemPicker({ type }: Props) {
 
   const Component = itemComponent[type]
 
-  return <Component />
+  return <Component setItems={setItems} />
 }

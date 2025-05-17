@@ -47,7 +47,7 @@ export const isTermObject = (obj: any): obj is Term => {
  * @param jsonString - The JSON string to validate
  * @returns A ValidationResult object
  */
-export function validateTermJson(jsonString: string): ValidationResult {
+export function validateTermJson(jsonString: string): ValidationResult<Term> {
   const errors: string[] = []
 
   // Skip empty input
@@ -64,7 +64,7 @@ export function validateTermJson(jsonString: string): ValidationResult {
 
     // Step 2: Check if JSON is an array
     const isArray = Array.isArray(parsedJSON)
-    if (isArray) parsedJSON = [...parsedJSON]
+    if (!isArray) parsedJSON = [...parsedJSON]
 
     parsedJSON.forEach((item: any) => {
       if (!isTermObject(item)) {

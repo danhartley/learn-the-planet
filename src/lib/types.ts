@@ -309,8 +309,8 @@ export type ContentType = {
   value: ContentHandlerType
 }
 
-export interface ValidationResult {
+export interface ValidationResult<LearningItem> {
   isValid: boolean
-  parsedData?: Term
+  parsedData?: LearningItem[]
   errors: string[]
 }
