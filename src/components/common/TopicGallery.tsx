@@ -25,7 +25,7 @@ export const TopicGallery = ({ collection }: Props<T>) => {
     }
   )
 
-  const articles = collection.article?.sections.map((section, sectionIndex) => {
+  const articles = collection.items.map((section, sectionIndex) => {
     return (
       <div key={sectionIndex} className="article-item">
         {/* Render all paragraphs */}

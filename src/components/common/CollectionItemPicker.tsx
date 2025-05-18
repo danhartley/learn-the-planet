@@ -3,6 +3,7 @@ import { ContentHandlerType, LearningItem } from '@/types'
 import { CollectionItemTermPicker } from './CollectionItemTermPicker'
 import { CollectionItemTaxonPicker } from './CollectionItemTaxonPicker'
 import { CollectionItemTraitPicker } from './CollectionItemTraitPicker'
+import { CollectionItemTopicPicker } from './CollectionItemTopicPicker'
 
 type Props = {
   type: ContentHandlerType
@@ -17,7 +18,7 @@ export function CollectionItemPicker({ type, setItems }: Props) {
   const itemComponent: ComponentMap = {
     term: CollectionItemTermPicker,
     taxon: CollectionItemTaxonPicker,
-    topic: CollectionItemTaxonPicker,
+    topic: CollectionItemTopicPicker,
     trait: CollectionItemTraitPicker,
   }
 

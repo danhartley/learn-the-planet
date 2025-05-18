@@ -151,18 +151,16 @@ export type CollectionSummary<T> = {
   type: string
 }
 
-export type Section = {
-  text: string[]
-  credit: {
-    title: string
-    source: string
-    authors: string[]
-  }
+export type Credit = {
+  title: string
+  source: string
+  authors: string[]
 }
 
-export type Article = {
-  tags: string[]
-  sections: Section[]
+export interface Topic extends LearningItem {
+  text: string[]
+  topic: string
+  credit?: Credit
 }
 
 export type Collection<T> = {
@@ -176,7 +174,6 @@ export type Collection<T> = {
   }
   items: T[]
   collections?: CollectionSummary<T>[]
-  article?: Article | null
 }
 
 export type Layout<T> = {

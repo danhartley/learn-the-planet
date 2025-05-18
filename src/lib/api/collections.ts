@@ -4258,26 +4258,24 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     id: '12',
     type: 'topic',
     name: 'Life history strategies',
-    items: [],
-    article: {
-      tags: ['annuals', 'life-history strategy'],
-      sections: [
-        {
-          text: [
-            'Flowering plants exhibit two principal life-history strategies: annuality (living and reproducing in one year) and perenniality (living more than one year).',
-            'The advantages of either strategy depend on the relative benefits of immediate reproduction balanced against survivorship and future reproduction.',
-            'This trade-off means that life-history strategies are associated with particular environments, with annuals being found more often in unpredictable habitats.',
-          ],
-          credit: {
-            title:
-              'The Evolution of Annual and Perennial Plant Life Histories: Ecological Correlates and Genetic Mechanisms',
-            source:
-              'https://www.researchgate.net/publication/343950868_The_Evolution_of_Annual_and_Perennial_Plant_Life_Histories_Ecological_Correlates_and_Genetic_Mechanisms',
-            authors: ["Jannice Friedman, Queen's University"],
-          },
+    items: [
+      {
+        id: 'topic 1',
+        topic: 'life-history strategy',
+        text: [
+          'Flowering plants exhibit two principal life-history strategies: annuality (living and reproducing in one year) and perenniality (living more than one year).',
+          'The advantages of either strategy depend on the relative benefits of immediate reproduction balanced against survivorship and future reproduction.',
+          'This trade-off means that life-history strategies are associated with particular environments, with annuals being found more often in unpredictable habitats.',
+        ],
+        credit: {
+          title:
+            'The Evolution of Annual and Perennial Plant Life Histories: Ecological Correlates and Genetic Mechanisms',
+          source:
+            'https://www.researchgate.net/publication/343950868_The_Evolution_of_Annual_and_Perennial_Plant_Life_Histories_Ecological_Correlates_and_Genetic_Mechanisms',
+          authors: ["Jannice Friedman, Queen's University"],
         },
-      ],
-    },
+      },
+    ],
     collections: [
       {
         id: '5',
