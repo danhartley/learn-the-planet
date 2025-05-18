@@ -1,12 +1,12 @@
 import { ValidationResult } from '@/types'
-import { Taxon } from '@/types'
+import { Trait } from '@/types'
 
 /**
- * Type guard to check if an object is a valid Taxon
+ * Type guard to check if an object is a valid Trait
  * @param obj - The object to check
- * @returns Boolean indicating whether the object conforms to the Taxon interface
+ * @returns Boolean indicating whether the object conforms to the Trait interface
  */
-export const isTaxonObject = (obj: any): obj is Taxon => {
+export const isTraitObject = (obj: any): obj is Trait => {
   // Check if obj is an object and not null
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
     return false
@@ -17,14 +17,11 @@ export const isTaxonObject = (obj: any): obj is Taxon => {
     return false
   }
 
-  if (
-    typeof obj.vernacularName !== 'string' ||
-    obj.vernacularName.trim() === ''
-  ) {
+  if (typeof obj.trait !== 'string' || obj.trait.trim() === '') {
     return false
   }
 
-  if (typeof obj.binomial !== 'string' || obj.binomial.trim() === '') {
+  if (typeof obj.definition !== 'string' || obj.definition.trim() === '') {
     return false
   }
 
@@ -33,22 +30,19 @@ export const isTaxonObject = (obj: any): obj is Taxon => {
     return false
   }
 
-  if (obj.example !== undefined && typeof obj.example !== 'string') {
-    return false
-  }
-
   if (obj.distractors !== undefined && !Array.isArray(obj.distractors)) {
     return false
   }
 
-  if (obj.wikipediaUrl !== undefined && typeof obj.wikipediaUrl !== 'string') {
+  if (obj.morphology !== undefined && !Array.isArray(obj.morphology)) {
     return false
   }
 
-  if (
-    obj.inaturalistUrl !== undefined &&
-    typeof obj.inaturalistUrl !== 'string'
-  ) {
+  if (obj.phenology !== undefined && !Array.isArray(obj.phenology)) {
+    return false
+  }
+
+  if (obj.examples !== undefined && !Array.isArray(obj.examples)) {
     return false
   }
 
@@ -57,11 +51,11 @@ export const isTaxonObject = (obj: any): obj is Taxon => {
 }
 
 /**
- * Validates if a JSON string represents a valid Taxon object
+ * Validates if a JSON string represents a valid Trait object
  * @param jsonString - The JSON string to validate
  * @returns A ValidationResult object
  */
-export function validateTaxonJson(jsonString: string): ValidationResult<Taxon> {
+export function validateTraitJson(jsonString: string): ValidationResult<Trait> {
   // Skip empty input
   if (!jsonString.trim()) {
     return {
@@ -81,15 +75,15 @@ export function validateTaxonJson(jsonString: string): ValidationResult<Taxon> {
 
     // Step 3: Validate each item
     itemsToValidate.forEach((item: any, index: number) => {
-      // Use isTaxonObject directly - if valid, no need to check anything else
-      if (isTaxonObject(item)) {
+      // Use isTraitObject directly - if valid, no need to check anything else
+      if (isTraitObject(item)) {
         return // This item is valid, continue to next item
       }
 
       // Item is invalid, collect specific errors
       let hasSpecificErrors = false
 
-      // Check if it's even an object
+      // Check required fields
       if (!item || typeof item !== 'object' || Array.isArray(item)) {
         errors.push(`Item ${index}: Not a valid object`)
         return // Skip further checks if not even an object
@@ -107,41 +101,31 @@ export function validateTaxonJson(jsonString: string): ValidationResult<Taxon> {
         hasSpecificErrors = true
       }
 
-      if (!item.vernacularName && item.vernacularName !== '') {
-        errors.push(`Item ${index}: Missing required field: vernacularName`)
+      if (!item.trait && item.trait !== '') {
+        errors.push(`Item ${index}: Missing required field: trait`)
         hasSpecificErrors = true
-      } else if (typeof item.vernacularName !== 'string') {
-        errors.push(`Item ${index}: Field "vernacularName" must be a string`)
+      } else if (typeof item.trait !== 'string') {
+        errors.push(`Item ${index}: Field "trait" must be a string`)
         hasSpecificErrors = true
-      } else if (item.vernacularName.trim() === '') {
-        errors.push(`Item ${index}: Field "vernacularName" cannot be empty`)
-        hasSpecificErrors = true
-      }
-
-      if (!item.binomial && item.binomial !== '') {
-        errors.push(`Item ${index}: Missing required field: binomial`)
-        hasSpecificErrors = true
-      } else if (typeof item.binomial !== 'string') {
-        errors.push(`Item ${index}: Field "binomial" must be a string`)
-        hasSpecificErrors = true
-      } else if (item.binomial.trim() === '') {
-        errors.push(`Item ${index}: Field "binomial" cannot be empty`)
+      } else if (item.trait.trim() === '') {
+        errors.push(`Item ${index}: Field "trait" cannot be empty`)
         hasSpecificErrors = true
       }
 
-      if (
-        item.wikipediaUrl !== undefined &&
-        typeof item.wikipediaUrl !== 'string'
-      ) {
-        errors.push(`Item ${index}: Field "wikipediaUrl" must be a string`)
+      if (!item.definition && item.definition !== '') {
+        errors.push(`Item ${index}: Missing required field: definition`)
+        hasSpecificErrors = true
+      } else if (typeof item.definition !== 'string') {
+        errors.push(`Item ${index}: Field "definition" must be a string`)
+        hasSpecificErrors = true
+      } else if (item.definition.trim() === '') {
+        errors.push(`Item ${index}: Field "definition" cannot be empty`)
         hasSpecificErrors = true
       }
 
-      if (
-        item.inaturalistUrl !== undefined &&
-        typeof item.inaturalistUrl !== 'string'
-      ) {
-        errors.push(`Item ${index}: Field "inaturalistUrl" must be a string`)
+      // Check optional fields
+      if (item.source !== undefined && typeof item.source !== 'string') {
+        errors.push(`Item ${index}: Field "source" must be a string`)
         hasSpecificErrors = true
       }
 
@@ -150,10 +134,25 @@ export function validateTaxonJson(jsonString: string): ValidationResult<Taxon> {
         hasSpecificErrors = true
       }
 
-      // If no specific errors were found but isTaxonObject still failed, add generic error
+      if (item.morphology !== undefined && !Array.isArray(item.morphology)) {
+        errors.push(`Item ${index}: Field "morphology" must be an array`)
+        hasSpecificErrors = true
+      }
+
+      if (item.phenology !== undefined && !Array.isArray(item.phenology)) {
+        errors.push(`Item ${index}: Field "phenology" must be an array`)
+        hasSpecificErrors = true
+      }
+
+      if (item.examples !== undefined && !Array.isArray(item.examples)) {
+        errors.push(`Item ${index}: Field "examples" must be an array`)
+        hasSpecificErrors = true
+      }
+
+      // If no specific errors were found but isTraitObject still failed, add generic error
       if (!hasSpecificErrors) {
         errors.push(
-          `Item ${index}: Object does not match Taxon interface structure`
+          `Item ${index}: Object does not match Trait interface structure`
         )
       }
     })

@@ -82,7 +82,7 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
       }
 
       // Check required fields
-      if (!item.id) {
+      if (!item.id && item.id !== '') {
         errors.push(`Item ${index}: Missing required field: id`)
         hasSpecificErrors = true
       } else if (typeof item.id !== 'string') {
@@ -93,7 +93,7 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
         hasSpecificErrors = true
       }
 
-      if (!item.term) {
+      if (!item.term && item.term !== '') {
         errors.push(`Item ${index}: Missing required field: term`)
         hasSpecificErrors = true
       } else if (typeof item.term !== 'string') {
@@ -104,7 +104,7 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
         hasSpecificErrors = true
       }
 
-      if (!item.definition) {
+      if (!item.definition && item.definition !== '') {
         errors.push(`Item ${index}: Missing required field: definition`)
         hasSpecificErrors = true
       } else if (typeof item.definition !== 'string') {
