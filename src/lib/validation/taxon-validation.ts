@@ -41,6 +41,17 @@ export const isTaxonObject = (obj: any): obj is Taxon => {
     return false
   }
 
+  if (obj.wikipediaUrl !== undefined && typeof obj.wikipediaUrl !== 'string') {
+    return false
+  }
+
+  if (
+    obj.inaturalistUrl !== undefined &&
+    typeof obj.inaturalistUrl !== 'string'
+  ) {
+    return false
+  }
+
   // All checks passed
   return true
 }
@@ -96,7 +107,7 @@ export function validateTaxonJson(jsonString: string): ValidationResult<Taxon> {
         hasSpecificErrors = true
       }
 
-      if (!item.vernacularName) {
+      if (!item.vernacularName && item.vernacularName !== '') {
         errors.push(`Item ${index}: Missing required field: vernacularName`)
         hasSpecificErrors = true
       } else if (typeof item.vernacularName !== 'string') {
@@ -107,7 +118,7 @@ export function validateTaxonJson(jsonString: string): ValidationResult<Taxon> {
         hasSpecificErrors = true
       }
 
-      if (!item.binomial) {
+      if (!item.binomial && item.binomial !== '') {
         errors.push(`Item ${index}: Missing required field: binomial`)
         hasSpecificErrors = true
       } else if (typeof item.binomial !== 'string') {
@@ -158,7 +169,7 @@ export function validateTaxonJson(jsonString: string): ValidationResult<Taxon> {
     // All checks passed
     return {
       isValid: true,
-      parsedData: isArray ? parsedJSON : parsedJSON[0], // Return in original format
+      parsedData: parsedJSON,
       errors: [],
     }
   } catch (error) {
