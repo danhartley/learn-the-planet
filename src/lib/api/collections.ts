@@ -4540,6 +4540,37 @@ export const getCollections = (): Promise<Collection<any>[]> => {
             inaturalistUrl:
               'https://www.inaturalist.org/taxa/82600-Pistacia-lentiscus',
           },
+          {
+            id: 57140,
+            iconicTaxon: 'Plantae',
+            binomial: 'Olea europaea',
+            rank: 'species',
+            vernacularName: 'Olive',
+            images: [
+              {
+                id: 377119924,
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377119924/square.jpeg',
+                licenceCode: 'cc0',
+              },
+              {
+                id: 377122421,
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/377122421/square.jpeg',
+                licenceCode: 'cc0',
+              },
+            ],
+            image: {
+              id: 87194494,
+              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/square.jpg',
+              licenceCode: 'cc-by-nc-nd',
+              mediumUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/medium.jpg',
+              squareUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/87194494/square.jpg',
+            },
+            observationUrl:
+              'https://www.inaturalist.org/observations/213389983',
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Olive',
+          },
         ],
       },
     ],

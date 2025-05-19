@@ -178,7 +178,7 @@ input {
 input[type='checkbox'],
 input[type='radio'] {
   width: initial;
-  margin: var(--spacing-sm);
+  margin: 0 var(--spacing-sm) 0 0;
   accent-color: var(--colour-fg-main);
   cursor: pointer;
 }

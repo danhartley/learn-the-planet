@@ -42,9 +42,13 @@ export const TraitCard = ({ trait }: Props) => {
           <div>
             <em>{trait.definition}</em>
           </div>
-          <div>
-            <a href={trait.source}>{trait.source}</a>
-          </div>
+          {!!trait.source ? (
+            <div>
+              <a href={trait.source}>{trait.source}</a>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </dd>
       </dl>
       <section aria-labelledby="morphology">

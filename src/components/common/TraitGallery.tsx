@@ -76,7 +76,7 @@ export function TraitGallery<T>({ collection }: Props<T>) {
     <section aria-labelledby="trait-gallery" className="group">
       <h1 id="trait-gallery">Traits</h1>
       <h2>{collection.name}</h2>
-      <section aria-labelledby="terms" className="group-block">
+      <section aria-labelledby="traits" className="group-block">
         <h3 id="traits">Traits</h3>
         <ul className="trait">{traitIndex}</ul>
         <div className="column-group">{traits}</div>
