@@ -279,6 +279,7 @@ li::marker {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
 }
 
 .row-group {

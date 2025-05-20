@@ -1,5 +1,6 @@
-import { Collection, Taxon } from '@/types'
+import { Collection } from '@/types'
 import { sortAlphabeticallyBy } from '@/utils/strings'
+import { generateGenusAndSpeciesFields } from '@/utils/taxa'
 
 const dedupe = (items: any[]) => {
   const deduped = Array.from(
@@ -7,23 +8,6 @@ const dedupe = (items: any[]) => {
   )
 
   return deduped
-}
-
-const generateGenusAndSpeciesFields = (collection: Collection<Taxon>) => {
-  collection?.items.forEach(i => {
-    const [genus, species] = i.binomial.split(' ')
-    i.genus = genus
-    i.species = species
-    i.image = i.image || i.images?.[0]
-    i?.distractors?.forEach(d => {
-      const [genus, species] = d.binomial.split(' ')
-      d.genus = genus
-      d.species = species
-      d.image = d.images?.[0]
-    })
-  })
-
-  return collection
 }
 
 export const getCollections = (): Promise<Collection<any>[]> => {

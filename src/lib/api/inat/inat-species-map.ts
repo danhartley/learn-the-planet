@@ -7,6 +7,7 @@ export const mapInatSpeciesToLTP = (results: any[]): Taxon[] | undefined => {
     const species: Taxon[] = results.map(s => {
       return {
         id: s.id.toString(),
+        rank: s.rank,
         iconicTaxon: s.iconic_taxon_name, // e.g. Plantae
         binomial: s.name,
         image: !!s.default_photo
