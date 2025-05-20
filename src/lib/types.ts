@@ -59,6 +59,8 @@ export type Image = {
   licenceCode?: string
   mediumUrl?: string
   squareUrl?: string
+  attribution?: string
+  attributionName?: string
 }
 
 export type Family = {
@@ -123,6 +125,7 @@ export interface Taxon extends LearningItem {
   observationURL?: string
   wikipediaUrl?: string
   inaturalistUrl?: string
+  observationsCount?: number
 }
 
 export interface Term extends LearningItem {

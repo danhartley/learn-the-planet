@@ -97,10 +97,12 @@ h1 {
   font-size: 1.1rem;
   letter-spacing: 0.1rem;
   position: initial;
+  margin-bottom: 0;
 }
 
 h2 {
   font-weight: 300;
+  margin-bottom: var(--spacing-sm);
 }
 
 h3 {
@@ -186,6 +188,7 @@ input[type='radio'] {
 input[type='checkbox'] + label,
 input[type='radio'] + label {
   cursor: pointer;
+  text-transform: capitalize;
 }
 
 button {
@@ -231,20 +234,21 @@ dt {
 ul {
   margin-block: 0;
   padding-inline: 0;
+  li {
+    margin: var(--spacing-sm) 0;
+    span {
+      text-transform: capitalize;
+    }
+  }
+  li:first-child {
+    margin-top: 0;
+  }
 }
 
 [aria-labelledby='trait-gallery'] .trait > li {
   text-transform: capitalize;
   margin: 0;
   font-size: var(--font-size-sm);
-}
-
-li {
-  margin: var(--spacing-sm) 0;
-
-  span {
-    text-transform: capitalize;
-  }
 }
 
 .menu + ul > * + * {
@@ -274,7 +278,7 @@ li::marker {
 .column-group {
   display: flex;
   flex-direction: column;
-  row-gap: var(--spacing-xl);
+  row-gap: var(--spacing-md);
 }
 
 .row-group {
@@ -347,9 +351,12 @@ li::marker {
 }
 
 .group-block {
+  display: flex;
+  flex-direction: column;
   border-radius: var(--border-radius-sm);
+  gap: var(--spacing-md);
   margin: var(--spacing-md) 0 0 0;
-  padding: 0 var(--spacing-md) var(--spacing-xl) var(--spacing-md);
+  padding: 0 var(--spacing-md);
   background-image:
     linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
@@ -363,17 +370,25 @@ li::marker {
   row-gap: var(--spacing-xl);
 }
 
+.question-progress {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  justify-content: right;
+}
+
 /* Forms */
 form {
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 }
 
 .form-row {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  margin: var(--spacing-lg) 0;
   border-radius: var(--border-radius-sm);
 }
 
@@ -436,6 +451,7 @@ form {
 .form-row.trait label,
 .form-row.topic label {
   color: var(--colour-fg-alt-main) !important;
+  text-transform: capitalize;
 }
 
 .form-row.bg-correct,
@@ -584,7 +600,7 @@ figcaption > div > div:nth-child(2) {
 .incorrect {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
 }
 
 .correct::before {
