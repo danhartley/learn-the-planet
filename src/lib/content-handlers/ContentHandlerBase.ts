@@ -181,7 +181,10 @@ export class ContentHandlerBase<T extends LearningItem>
       template.distractorCount,
       template.distractorType
     ) as MultipleSelectOption[]
-    const distractors = getRandomItems(distractorItems[0].value, 2)
+    const distractors =
+      distractorItems.length > 0
+        ? getRandomItems(distractorItems[0].value, 2)
+        : []
 
     const options = [...correctAnswers, ...distractors]
 

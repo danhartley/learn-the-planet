@@ -1,61 +1,45 @@
 // whttps://api.inaturalist.org/v1/docs/#!/Taxa/get_taxa
 
-type Photo = {
-  inatId: number
-  licenceCode: string
-  attribution: string
-  url: string
-  attributionName: string
-  squareUrl: string
-  mediumUrl: string
-}
+import { Image, Taxon } from '@/types'
 
-type InatSpecies = {
-  inatId: number
-  iconicTaxonId: number
-  binomial: string
-  defaultPhoto: Photo
-  observationsCount: number
-  taxonPhotos: Photo[]
-  wikipediaUrl: string
-  iconicTaxonName: string
-  vernacularName: string
-}
-
-export const mapInatSpeciesToLTP = (results: any[]): InatSpecies[] => {
-  const species: InatSpecies[] = results.map(s => {
-    return {
-      inatId: s.id,
-      iconicTaxonId: s.iconic_taxon_id,
-      binomial: s.name,
-      defaultPhoto: {
-        inatId: s.default_photo.id,
-        licenceCode: s.default_photo.license_code,
-        attribution: s.default_photo.attribution,
-        url: s.default_photo.url,
-        attributionName: s.default_photo.attribution_name,
-        squareUrl: s.default_photo.square_url,
-        mediumUrl: s.default_photo.medium_url,
-      } as Photo,
-      observationsCount: s.observations_count,
-      taxonPhotos: s.taxon_photos.map((item: any) => {
-        console.log('item', item)
-        return {
-          id: item.photo.id,
-          licenceCode: item.photo.license_code,
-          attribution: item.photo.attribution,
-          url: item.photo.url,
-          attributionName: item.photo.attribution_name,
-          squareUrl: item.photo.square_url,
-          mediumUrl: item.photo.medium_url,
-        }
-      }),
-      wikipediaUrl: s.wikipedia_url,
-      iconicTaxonName: s.iconic_taxon_name, // e.g. Plantae
-      vernacularName: s.preferred_common_name,
-    } as InatSpecies
-  })
-  return species
+export const mapInatSpeciesToLTP = (results: any[]): Taxon[] | undefined => {
+  try {
+    const species: Taxon[] = results.map(s => {
+      return {
+        id: s.id.toString(),
+        iconicTaxon: s.iconic_taxon_name, // e.g. Plantae
+        binomial: s.name,
+        image: !!s.default_photo
+          ? {
+              id: s.default_photo.id.toString(),
+              licenceCode: s.default_photo.license_code,
+              attribution: s.default_photo.attribution,
+              url: s.default_photo.url,
+              attributionName: s.default_photo.attribution_name,
+              squareUrl: s.default_photo.square_url,
+              mediumUrl: s.default_photo.medium_url,
+            }
+          : (undefined as Image | undefined),
+        observationsCount: s.observations_count,
+        images: s.taxon_photos.map((item: any) => {
+          return {
+            id: item.photo.id.toString(),
+            licenceCode: item.photo.license_code,
+            attribution: item.photo.attribution,
+            url: item.photo.url,
+            attributionName: item.photo.attribution_name,
+            squareUrl: item.photo.square_url,
+            mediumUrl: item.photo.medium_url,
+          }
+        }),
+        wikipediaUrl: s.wikipedia_url,
+        vernacularName: s.preferred_common_name,
+      }
+    })
+    return species
+  } catch (error) {
+    console.error((error as Error).message)
+  }
 }
 
 const input = [
@@ -629,4 +613,3 @@ const input = [
 ]
 
 const species = mapInatSpeciesToLTP(input.map(i => i.results).flat())
-console.log(species)

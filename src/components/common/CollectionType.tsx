@@ -50,12 +50,12 @@ export function CollectionType({
       break
   }
   return (
-    <section aria-labelledby="collection-type" className="group">
+    <section aria-labelledby="collection-type" className="group-block">
       <h2 id="collection-type">Collection type</h2>
-      <div>
-        Collection operation: <span>{operation}</span>
+      <div className="column-group">
+        <span>Select the type of collection you want to create</span>
+        {display}
       </div>
-      {display}
     </section>
   )
 }

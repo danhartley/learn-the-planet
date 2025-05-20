@@ -96,9 +96,7 @@ export default function MultipleTextChoiceComponent({
       <div className="block-container">
         <div className="grid-lg options">{buttons}</div>
       </div>
-      <div>
-        <div>{questionProgressText}</div>
-      </div>
+      <div className="question-progress">{questionProgressText}</div>
     </section>
   )
 }

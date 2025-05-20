@@ -18,7 +18,6 @@ var mapInatSpeciesToLTP = function (results) {
       },
       observationsCount: s.observations_count,
       taxonPhotos: s.taxon_photos.map(function (item) {
-        console.log('item', item)
         return {
           id: item.photo.id,
           licenceCode: item.photo.license_code,

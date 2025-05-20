@@ -56,9 +56,7 @@ const ImageChoiceComponent = ({
       <div className="block-container">
         <div className="grid-lg options">{images}</div>
       </div>
-      <div>
-        <div>{questionProgressText}</div>
-      </div>
+      <div className="question-progress">{questionProgressText}</div>
     </section>
   )
 }

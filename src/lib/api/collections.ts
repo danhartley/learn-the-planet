@@ -4573,6 +4573,593 @@ export const getCollections = (): Promise<Collection<any>[]> => {
           },
         ],
       },
+      {
+        id: '94782',
+        trait: 'seasonal dimorphism',
+        definition:
+          'Variation in leaf morphology between seasons, often involving larger, softer leaves in winter and smaller, tougher leaves in summer as an adaptation to Mediterranean climates.',
+        source: 'https://en.wikipedia.org/wiki/Sclerophyll#Leaf_dimorphism',
+        morphology: [
+          'Winter leaves: larger, thinner, more mesomorphic',
+          'Summer leaves: smaller, thicker, more xeromorphic',
+          'Visible change in leaf size, shape, or texture across seasons',
+        ],
+        phenology: [
+          'Winter: production of larger, softer leaves with higher photosynthetic capacity',
+          'Spring: transitional leaf forms may appear',
+          'Summer: smaller, tougher leaves predominate to reduce water loss',
+          'Autumn: older summer leaves may persist or drop before new growth',
+        ],
+        examples: [
+          {
+            inatId: 82673,
+            iconicTaxonId: 47126,
+            binomial: 'Cistus albidus',
+            image: {
+              inatId: 476982828,
+              licenceCode: 'cc-by',
+              attribution:
+                '(c) Borja Fierro, some rights reserved (CC BY), uploaded by Borja Fierro',
+              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/476982828/square.jpg',
+              attributionName: 'Borja Fierro',
+              squareUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/476982828/square.jpg',
+              mediumUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/476982828/medium.jpg',
+            },
+            observationsCount: 10842,
+            images: [
+              {
+                id: 476982828,
+                licenceCode: 'cc-by',
+                attribution:
+                  '(c) Borja Fierro, some rights reserved (CC BY), uploaded by Borja Fierro',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/476982828/square.jpg',
+                attributionName: 'Borja Fierro',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/476982828/square.jpg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/476982828/medium.jpg',
+              },
+              {
+                id: 2528235,
+                licenceCode: 'cc-by-nc',
+                attribution:
+                  '(c) Xavier Ma Ma, some rights reserved (CC BY-NC), uploaded by Xavier Ma Ma',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/2528235/square.JPG',
+                attributionName: 'Xavier Ma Ma',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/2528235/square.JPG',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/2528235/medium.JPG',
+              },
+              {
+                id: 6989168,
+                licenceCode: null,
+                attribution:
+                  '(c) Isabel Rubio, all rights reserved, uploaded by Isabel Rubio',
+                url: 'https://static.inaturalist.org/photos/6989168/square.jpg',
+                attributionName: 'Isabel Rubio',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/6989168/square.jpg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/6989168/medium.jpg',
+              },
+              {
+                id: 82654912,
+                licenceCode: 'cc-by-nc',
+                attribution:
+                  '(c) Maria José D. Martins, some rights reserved (CC BY-NC), uploaded by Maria José D. Martins',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/82654912/square.jpg',
+                attributionName: 'Maria José D. Martins',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/82654912/square.jpg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/82654912/medium.jpg',
+              },
+              {
+                id: 105421060,
+                licenceCode: null,
+                attribution:
+                  '(c) Hilda Adriana Fernandez De Simone, all rights reserved, uploaded by Hilda Adriana Fernandez De Simone',
+                url: 'https://static.inaturalist.org/photos/105421060/square.jpeg',
+                attributionName: 'Hilda Adriana Fernandez De Simone',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/105421060/square.jpeg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/105421060/medium.jpeg',
+              },
+              {
+                id: 33623078,
+                licenceCode: null,
+                attribution: '(c) jdjz, all rights reserved, uploaded by jdjz',
+                url: 'https://static.inaturalist.org/photos/33623078/square.jpeg',
+                attributionName: 'jdjz',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/33623078/square.jpeg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/33623078/medium.jpeg',
+              },
+              {
+                id: 2938747,
+                licenceCode: 'cc-by-nc-nd',
+                attribution:
+                  '(c) Joachim Louis, some rights reserved (CC BY-NC-ND), uploaded by Joachim Louis',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/2938747/square.jpg',
+                attributionName: 'Joachim Louis',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/2938747/square.jpg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/2938747/medium.jpg',
+              },
+              {
+                id: 7970660,
+                licenceCode: null,
+                attribution: '(c) weir_keepers, all rights reserved',
+                url: 'https://static.inaturalist.org/photos/7970660/square.jpg',
+                attributionName: 'weir_keepers',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/7970660/square.jpg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/7970660/medium.jpg',
+              },
+            ],
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Cistus_albidus',
+            iconicTaxonName: 'Plantae',
+            vernacularName: 'grey-leaved cistus',
+            id: '82673',
+            iconicTaxon: 'Plantae',
+            inaturalistUrl:
+              'https://www.inaturalist.org/taxa/82673-Cistus-albidus',
+          },
+          {
+            inatId: 320779,
+            iconicTaxonId: 47126,
+            binomial: 'Phlomis purpurea',
+            image: {
+              inatId: 25083740,
+              licenceCode: null,
+              attribution:
+                '(c) mjcorreia, all rights reserved, uploaded by mjcorreia',
+              url: 'https://static.inaturalist.org/photos/25083740/square.jpeg',
+              attributionName: 'mjcorreia',
+              squareUrl:
+                'https://static.inaturalist.org/photos/25083740/square.jpeg',
+              mediumUrl:
+                'https://static.inaturalist.org/photos/25083740/medium.jpeg',
+            },
+            observationsCount: 2225,
+            images: [
+              {
+                id: 25083740,
+                licenceCode: null,
+                attribution:
+                  '(c) mjcorreia, all rights reserved, uploaded by mjcorreia',
+                url: 'https://static.inaturalist.org/photos/25083740/square.jpeg',
+                attributionName: 'mjcorreia',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/25083740/square.jpeg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/25083740/medium.jpeg',
+              },
+              {
+                id: 803363,
+                licenceCode: 'cc-by-nc-sa',
+                attribution:
+                  '(c) Xavier Béjar, some rights reserved (CC BY-NC-SA)',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/803363/square.jpg',
+                attributionName: 'Xavier Béjar',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/803363/square.jpg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/803363/medium.jpg',
+              },
+              {
+                id: 22215833,
+                licenceCode: null,
+                attribution:
+                  '(c) Francisco Barros, all rights reserved, uploaded by Francisco Barros',
+                url: 'https://static.inaturalist.org/photos/22215833/square.jpeg',
+                attributionName: 'Francisco Barros',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/22215833/square.jpeg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/22215833/medium.jpeg',
+              },
+              {
+                id: 22221183,
+                licenceCode: null,
+                attribution:
+                  '(c) Francisco Barros, all rights reserved, uploaded by Francisco Barros',
+                url: 'https://static.inaturalist.org/photos/22221183/square.jpeg',
+                attributionName: 'Francisco Barros',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/22221183/square.jpeg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/22221183/medium.jpeg',
+              },
+              {
+                id: 22804917,
+                licenceCode: null,
+                attribution:
+                  '(c) mjcorreia, all rights reserved, uploaded by mjcorreia',
+                url: 'https://static.inaturalist.org/photos/22804917/square.jpeg',
+                attributionName: 'mjcorreia',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/22804917/square.jpeg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/22804917/medium.jpeg',
+              },
+            ],
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Phlomis_purpurea',
+            iconicTaxonName: 'Plantae',
+            vernacularName: 'purple phlomis',
+            id: '320779',
+            iconicTaxon: 'Plantae',
+            inaturalistUrl:
+              'https://www.inaturalist.org/taxa/320779-Phlomis-purpurea',
+          },
+          {
+            inatId: 636795,
+            iconicTaxonId: 47126,
+            binomial: 'Salvia rosmarinus',
+            image: {
+              inatId: 87326219,
+              licenceCode: null,
+              attribution:
+                '(c) Frank Walther, all rights reserved, uploaded by Frank Walther',
+              url: 'https://static.inaturalist.org/photos/87326219/square.jpg',
+              attributionName: 'Frank Walther',
+              squareUrl:
+                'https://static.inaturalist.org/photos/87326219/square.jpg',
+              mediumUrl:
+                'https://static.inaturalist.org/photos/87326219/medium.jpg',
+            },
+            observationsCount: 47046,
+            images: [
+              {
+                id: 87326219,
+                licenceCode: null,
+                attribution:
+                  '(c) Frank Walther, all rights reserved, uploaded by Frank Walther',
+                url: 'https://static.inaturalist.org/photos/87326219/square.jpg',
+                attributionName: 'Frank Walther',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/87326219/square.jpg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/87326219/medium.jpg',
+              },
+              {
+                id: 466148684,
+                licenceCode: 'cc-by-nc',
+                attribution:
+                  '(c) Sergio Ibarra, some rights reserved (CC BY-NC), uploaded by Sergio Ibarra',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/466148684/square.jpg',
+                attributionName: 'Sergio Ibarra',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/466148684/square.jpg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/466148684/medium.jpg',
+              },
+              {
+                id: 461220052,
+                licenceCode: null,
+                attribution:
+                  '(c) Joao Tiago Tavares, all rights reserved, uploaded by Joao Tiago Tavares',
+                url: 'https://static.inaturalist.org/photos/461220052/square.jpeg',
+                attributionName: 'Joao Tiago Tavares',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/461220052/square.jpeg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/461220052/medium.jpeg',
+              },
+              {
+                id: 9501415,
+                licenceCode: null,
+                attribution: '(c) leonlou, all rights reserved',
+                url: 'https://static.inaturalist.org/photos/9501415/square.jpg',
+                attributionName: 'leonlou',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/9501415/square.jpg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/9501415/medium.jpg',
+              },
+              {
+                id: 91642813,
+                licenceCode: 'cc-by-nc',
+                attribution: '(c) hoja, some rights reserved (CC BY-NC)',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/91642813/square.jpg',
+                attributionName: 'hoja',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/91642813/square.jpg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/91642813/medium.jpg',
+              },
+              {
+                id: 29954828,
+                licenceCode: null,
+                attribution:
+                  '(c) carlosd73, all rights reserved, uploaded by carlosd73',
+                url: 'https://static.inaturalist.org/photos/29954828/square.jpg',
+                attributionName: 'carlosd73',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/29954828/square.jpg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/29954828/medium.jpg',
+              },
+              {
+                id: 173884858,
+                licenceCode: 'cc-by-nc',
+                attribution:
+                  '(c) Παναγιώτης Ραφαηλίδης, some rights reserved (CC BY-NC), uploaded by Παναγιώτης Ραφαηλίδης',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/173884858/square.jpeg',
+                attributionName: 'Παναγιώτης Ραφαηλίδης',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/173884858/square.jpeg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/173884858/medium.jpeg',
+              },
+              {
+                id: 171057715,
+                licenceCode: 'cc-by-nc-sa',
+                attribution:
+                  '(c) Nuno Veríssimo P., some rights reserved (CC BY-NC-SA), uploaded by Nuno Veríssimo P.',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/171057715/square.jpeg',
+                attributionName: 'Nuno Veríssimo P.',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/171057715/square.jpeg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/171057715/medium.jpeg',
+              },
+              {
+                id: 22795785,
+                licenceCode: null,
+                attribution:
+                  '(c) mjcorreia, all rights reserved, uploaded by mjcorreia',
+                url: 'https://static.inaturalist.org/photos/22795785/square.jpeg',
+                attributionName: 'mjcorreia',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/22795785/square.jpeg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/22795785/medium.jpeg',
+              },
+            ],
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Salvia_rosmarinus',
+            iconicTaxonName: 'Plantae',
+            vernacularName: 'rosemary',
+            id: '636795',
+            iconicTaxon: 'Plantae',
+            inaturalistUrl:
+              'https://www.inaturalist.org/taxa/636795-Salvia-rosmarinus',
+          },
+          {
+            inatId: 333982,
+            iconicTaxonId: 47126,
+            binomial: 'Erica australis',
+            image: {
+              inatId: 119832658,
+              licenceCode: 'cc-by-nc',
+              attribution:
+                '(c) Felix Riegel, some rights reserved (CC BY-NC), uploaded by Felix Riegel',
+              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/119832658/square.jpeg',
+              attributionName: 'Felix Riegel',
+              squareUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/119832658/square.jpeg',
+              mediumUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/119832658/medium.jpeg',
+            },
+            observationsCount: 1864,
+            images: [
+              {
+                id: 119832658,
+                licenceCode: 'cc-by-nc',
+                attribution:
+                  '(c) Felix Riegel, some rights reserved (CC BY-NC), uploaded by Felix Riegel',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/119832658/square.jpeg',
+                attributionName: 'Felix Riegel',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/119832658/square.jpeg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/119832658/medium.jpeg',
+              },
+              {
+                id: 112261825,
+                licenceCode: 'cc-by-nc',
+                attribution:
+                  '(c) Antonio Rico García, some rights reserved (CC BY-NC), uploaded by Antonio Rico García',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/112261825/square.jpeg',
+                attributionName: 'Antonio Rico García',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/112261825/square.jpeg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/112261825/medium.jpeg',
+              },
+              {
+                id: 22809858,
+                licenceCode: null,
+                attribution:
+                  '(c) mjcorreia, all rights reserved, uploaded by mjcorreia',
+                url: 'https://static.inaturalist.org/photos/22809858/square.jpeg',
+                attributionName: 'mjcorreia',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/22809858/square.jpeg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/22809858/medium.jpeg',
+              },
+              {
+                id: 72277781,
+                licenceCode: 'cc-by',
+                attribution:
+                  '(c) William Stephens, some rights reserved (CC BY), uploaded by William Stephens',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/72277781/square.jpg',
+                attributionName: 'William Stephens',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/72277781/square.jpg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/72277781/medium.jpg',
+              },
+              {
+                id: 22044184,
+                licenceCode: null,
+                attribution:
+                  '(c) Francisco Barros, all rights reserved, uploaded by Francisco Barros',
+                url: 'https://static.inaturalist.org/photos/22044184/square.jpeg',
+                attributionName: 'Francisco Barros',
+                squareUrl:
+                  'https://static.inaturalist.org/photos/22044184/square.jpeg',
+                mediumUrl:
+                  'https://static.inaturalist.org/photos/22044184/medium.jpeg',
+              },
+              {
+                id: 179984955,
+                licenceCode: 'cc-by-nc',
+                attribution:
+                  '(c) jmneiva, some rights reserved (CC BY-NC), uploaded by jmneiva',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/179984955/square.jpg',
+                attributionName: 'jmneiva',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/179984955/square.jpg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/179984955/medium.jpg',
+              },
+            ],
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Erica_australis',
+            iconicTaxonName: 'Plantae',
+            vernacularName: 'Spanish heath',
+            id: '333982',
+            iconicTaxon: 'Plantae',
+            inaturalistUrl:
+              'https://www.inaturalist.org/taxa/333982-Erica-australis',
+          },
+          {
+            inatId: 1504284,
+            iconicTaxonId: 47126,
+            binomial: 'Santolina chamaecyparissus',
+            image: {
+              inatId: 52699902,
+              licenceCode: 'cc-by-nc',
+              attribution:
+                '(c) Muriel Bendel, some rights reserved (CC BY-NC), uploaded by Muriel Bendel',
+              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/52699902/square.jpg',
+              attributionName: 'Muriel Bendel',
+              squareUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/52699902/square.jpg',
+              mediumUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/52699902/medium.jpg',
+            },
+            observationsCount: 5538,
+            images: [
+              {
+                id: 52699902,
+                licenceCode: 'cc-by-nc',
+                attribution:
+                  '(c) Muriel Bendel, some rights reserved (CC BY-NC), uploaded by Muriel Bendel',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/52699902/square.jpg',
+                attributionName: 'Muriel Bendel',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/52699902/square.jpg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/52699902/medium.jpg',
+              },
+            ],
+            wikipediaUrl:
+              'http://en.wikipedia.org/wiki/Santolina_chamaecyparissus',
+            iconicTaxonName: 'Plantae',
+            vernacularName: 'cotton lavender',
+            id: '1504284',
+            iconicTaxon: 'Plantae',
+            inaturalistUrl:
+              'https://www.inaturalist.org/taxa/1504284-Santolina-chamaecyparissus',
+          },
+          {
+            inatId: 490801,
+            iconicTaxonId: 47126,
+            binomial: 'Anthyllis cytisoides',
+            image: {
+              inatId: 123703161,
+              licenceCode: 'cc-by',
+              attribution:
+                '(c) Santiago Martín-Bravo, some rights reserved (CC BY), uploaded by Santiago Martín-Bravo',
+              url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/123703161/square.jpeg',
+              attributionName: 'Santiago Martín-Bravo',
+              squareUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/123703161/square.jpeg',
+              mediumUrl:
+                'https://inaturalist-open-data.s3.amazonaws.com/photos/123703161/medium.jpeg',
+            },
+            observationsCount: 1448,
+            images: [
+              {
+                id: 123703161,
+                licenceCode: 'cc-by',
+                attribution:
+                  '(c) Santiago Martín-Bravo, some rights reserved (CC BY), uploaded by Santiago Martín-Bravo',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/123703161/square.jpeg',
+                attributionName: 'Santiago Martín-Bravo',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/123703161/square.jpeg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/123703161/medium.jpeg',
+              },
+              {
+                id: 123703177,
+                licenceCode: 'cc-by',
+                attribution:
+                  '(c) Santiago Martín-Bravo, some rights reserved (CC BY), uploaded by Santiago Martín-Bravo',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/123703177/square.jpeg',
+                attributionName: 'Santiago Martín-Bravo',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/123703177/square.jpeg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/123703177/medium.jpeg',
+              },
+              {
+                id: 99874200,
+                licenceCode: 'cc-by-nc',
+                attribution:
+                  '(c) Michal Ducháček, some rights reserved (CC BY-NC), uploaded by Michal Ducháček',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/99874200/square.jpg',
+                attributionName: 'Michal Ducháček',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/99874200/square.jpg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/99874200/medium.jpg',
+              },
+              {
+                id: 126380630,
+                licenceCode: 'cc-by-nc',
+                attribution:
+                  '(c) Víctor González García, some rights reserved (CC BY-NC), uploaded by Víctor González García',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/126380630/square.jpeg',
+                attributionName: 'Víctor González García',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/126380630/square.jpeg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/126380630/medium.jpeg',
+              },
+              {
+                id: 5922811,
+                licenceCode: 'cc-by',
+                attribution:
+                  '(c) Rafael Medina, some rights reserved (CC BY), uploaded by Rafael Medina',
+                url: 'https://inaturalist-open-data.s3.amazonaws.com/photos/5922811/square.jpeg',
+                attributionName: 'Rafael Medina',
+                squareUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/5922811/square.jpeg',
+                mediumUrl:
+                  'https://inaturalist-open-data.s3.amazonaws.com/photos/5922811/medium.jpeg',
+              },
+            ],
+            wikipediaUrl: 'http://en.wikipedia.org/wiki/Anthyllis_cytisoides',
+            iconicTaxonName: 'Plantae',
+            vernacularName: 'albaida',
+            id: '490801',
+            iconicTaxon: 'Plantae',
+            inaturalistUrl:
+              'https://www.inaturalist.org/taxa/490801-Anthyllis-cytisoides',
+          },
+        ],
+      },
     ],
   }
 

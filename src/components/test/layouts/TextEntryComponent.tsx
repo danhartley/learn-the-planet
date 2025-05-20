@@ -81,10 +81,8 @@ export default function TextEntryComponent({
             Submit answer
           </button>
         </div>
-        <div>
-          <div>{questionProgressText}</div>
-        </div>
       </form>
+      <div className="question-progress">{questionProgressText}</div>
     </section>
   )
 }

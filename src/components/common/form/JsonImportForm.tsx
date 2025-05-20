@@ -32,7 +32,9 @@ export const JsonImportForm: React.FC<JsonImportFormProps> = ({
     <>
       <form onSubmit={handleSubmit} className="column-group">
         <div className="column-group">
-          <label htmlFor="json-input">JSON input</label>
+          <label htmlFor="json-input">
+            Paste your JSON object in the text area
+          </label>
           <textarea
             id="json-input"
             value={jsonContent}
@@ -42,11 +44,13 @@ export const JsonImportForm: React.FC<JsonImportFormProps> = ({
             cols={40}
           />
         </div>
-        <button id="submit" type="submit">
-          Import
-        </button>
+        <div className="form-row">
+          <button id="submit" type="submit">
+            Import
+          </button>
+          <div className={isValid ? 'correct' : 'incorrect'}>{message}</div>
+        </div>
       </form>
-      <div className={isValid ? 'correct' : 'incorrect'}>{message}</div>
     </>
   )
 }

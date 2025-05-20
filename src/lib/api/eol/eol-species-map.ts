@@ -222,4 +222,3 @@ const input = {
 }
 
 const species = mapEolSpeciesToLTP(input)
-console.log(species)

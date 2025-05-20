@@ -106,9 +106,7 @@ export default function CheckBoxComponent({
           Submit answer
         </button>
       </div>
-      <div>
-        <div>{questionProgressText}</div>
-      </div>
+      <div className="question-progress">{questionProgressText}</div>
     </section>
   )
 }
