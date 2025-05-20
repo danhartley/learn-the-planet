@@ -6,6 +6,7 @@ import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
 
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
+import { getInatTaxonProperties } from '@/api/inat/api'
 
 import {
   Operation,
@@ -42,16 +43,20 @@ export default function CollectionOperations({
     setIsValid(nameValid && itemsValid)
   }, [name, items, type])
 
-  const createCollection = () => {
+  const createCollection = async (type: ContentHandlerType) => {
     if (isValid) {
+      if (!items) return
+
+      const collectionItems = await getInatTaxonProperties({ items, type })
+
       const collection: Collection<LearningItem> = {
         id: crypto.randomUUID(),
         type,
         name,
-        items: items!,
+        items: collectionItems!,
       }
-      startTest({ collection })
-      router.push('/test')
+      // startTest({ collection })
+      // router.push('/test')
     }
   }
 
@@ -72,7 +77,7 @@ export default function CollectionOperations({
       <CollectionItemPicker type={type} setItems={setItems} />
       <button
         id="create-collection"
-        onClick={createCollection}
+        onClick={() => createCollection(type)}
         disabled={!isValid}
       >
         Create collection
