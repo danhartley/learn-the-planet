@@ -16,7 +16,9 @@ export function CollectionItemTermPicker({ setItems }: Props) {
   const isValidTerm = () => {
     const result: ValidationResult<Term> = validateTermJson(jsonContent)
     setIsValid(result.isValid)
-    setMessage(result.isValid ? 'Term is valid' : 'Term is invalid')
+    setMessage(
+      result.isValid ? 'Your term data is valid' : 'Your term data is invalid'
+    )
 
     if (result.isValid && result.parsedData)
       setItems(result.parsedData as Term[])
@@ -24,14 +26,15 @@ export function CollectionItemTermPicker({ setItems }: Props) {
   }
 
   return (
-    <section aria-labelledby="term-entry" className="group-block">
-      <h2 id="term-entry">Term entry</h2>
+    <section aria-labelledby="collection-terms" className="group-block">
+      <h2 id="collection-terms">Collection terms</h2>
       <JsonImportForm
         jsonContent={jsonContent}
         onJsonContentChange={setJsonValue}
         onSubmit={isValidTerm}
         isValid={isValid}
         message={message}
+        type="term"
       />
     </section>
   )

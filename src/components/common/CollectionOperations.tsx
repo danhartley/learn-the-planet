@@ -36,6 +36,11 @@ export default function CollectionOperations({
     LearningItem[] | undefined
   >()
   const [isValid, setIsValid] = useState<boolean>(false)
+  const [isItemsValid, setIsItemsValid] = useState<boolean>(false)
+  const [message, setMessage] = useState('')
+  const [createCollectionMessage, setCreateCollectionMessage] = useState(
+    'Please complete the sections above'
+  )
 
   const router = useRouter()
   const { startTest } = useTestPlanner<LearningItem>()
@@ -43,19 +48,23 @@ export default function CollectionOperations({
   useEffect(() => {
     const nameValid = name.trim().length > 0
     const itemsValid = !!items && items.length > 0
+    setIsItemsValid(itemsValid)
     const collectionItemsValid = !!collectionItems && collectionItems.length > 0
-
-    setIsValid(nameValid && itemsValid && collectionItemsValid)
+    const isAllValid = nameValid && itemsValid && collectionItemsValid
+    setIsValid(isAllValid)
+    if (isAllValid)
+      setCreateCollectionMessage(
+        `You're ready to create a new ${type} collection`
+      )
   }, [name, items, type, collectionItems])
 
-  const appendSpeciesData = async (type: ContentHandlerType) => {
+  const addInaturalistProperties = async (type: ContentHandlerType) => {
     if (!items) return
-
     setCollectionItems(await getInatTaxonProperties({ items, type }))
+    setMessage('Properties added')
   }
 
   const createCollection = () => {
-    console.log('collectionItems', collectionItems)
     const collection: Collection<LearningItem> = {
       id: crypto.randomUUID(),
       type,
@@ -69,6 +78,27 @@ export default function CollectionOperations({
     })
     router.push('/test')
   }
+
+  const CollectionExtensions = (
+    <section aria-labelledby="inaturalist" className="group-block">
+      <h2 id="inaturalist">Collection taxa extensions</h2>
+      <div className="column-group">
+        <div>
+          Add CollectionExtensions fields to your species, including images
+        </div>
+        <div className="form-row">
+          <button
+            id="add-inat-props"
+            onClick={() => addInaturalistProperties(type)}
+            disabled={!isItemsValid}
+          >
+            Add iNaturalist properties
+          </button>
+          <div className={isValid ? 'correct' : 'incorrect'}>{message}</div>
+        </div>
+      </div>
+    </section>
+  )
 
   return (
     <>
@@ -85,21 +115,12 @@ export default function CollectionOperations({
         setType={setType}
       />
       <CollectionItemPicker type={type} setItems={setItems} />
-      <section aria-labelledby="inaturalist" className="group-block">
-        <h2 id="inaturalist">iNaturalist</h2>
-        <div className="column-group">
-          <div>Add additional fields to species, including images</div>
-          <button
-            id="create-collection"
-            onClick={() => appendSpeciesData(type)}
-            disabled={!(!!items && items.length > 0)}
-          >
-            Fetch data
-          </button>
+      {type === 'taxon' ? CollectionExtensions : null}
+      <section aria-labelledby="create-collection">
+        <div>
+          <h2 id="create-collection">Create {type} collection</h2>
+          <div>{createCollectionMessage}</div>
         </div>
-      </section>
-      <section>
-        <h2>Create collection</h2>
         <button disabled={!isValid} onClick={createCollection}>
           Create
         </button>

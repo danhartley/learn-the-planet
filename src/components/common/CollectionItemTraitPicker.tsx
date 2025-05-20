@@ -16,7 +16,9 @@ export function CollectionItemTraitPicker({ setItems }: Props) {
   const isValidTrait = () => {
     const result: ValidationResult<Trait> = validateTraitJson(jsonContent)
     setIsValid(result.isValid)
-    setMessage(result.isValid ? 'Trait is valid' : 'Trait is invalid')
+    setMessage(
+      result.isValid ? 'Your trait data is valid' : 'Your trait is invalid'
+    )
 
     if (result.isValid && result.parsedData)
       setItems(result.parsedData as Trait[])
@@ -24,14 +26,15 @@ export function CollectionItemTraitPicker({ setItems }: Props) {
   }
 
   return (
-    <section aria-labelledby="trait-entry" className="group-block">
-      <h2 id="trait-entry">Trait entry</h2>
+    <section aria-labelledby="collection-traits" className="group-block">
+      <h2 id="collection-traits">Collection traits</h2>
       <JsonImportForm
         jsonContent={jsonContent}
         onJsonContentChange={setJsonValue}
         onSubmit={isValidTrait}
         isValid={isValid}
         message={message}
+        type="trait"
       />
     </section>
   )

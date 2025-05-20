@@ -16,7 +16,9 @@ export function CollectionItemTopicPicker({ setItems }: Props) {
   const isValidTopic = () => {
     const result: ValidationResult<Topic> = validateTopicJson(jsonContent)
     setIsValid(result.isValid)
-    setMessage(result.isValid ? 'Topic is valid' : 'Topic is invalid')
+    setMessage(
+      result.isValid ? 'Your topic data is valid' : 'Your topic data is invalid'
+    )
 
     if (result.isValid && result.parsedData)
       setItems(result.parsedData as Topic[])
@@ -24,14 +26,15 @@ export function CollectionItemTopicPicker({ setItems }: Props) {
   }
 
   return (
-    <section aria-labelledby="topic-entry" className="group-block">
-      <h2 id="topic-entry">Topic entry</h2>
+    <section aria-labelledby="collection-text" className="group-block">
+      <h2 id="collection-text">Collection text</h2>
       <JsonImportForm
         jsonContent={jsonContent}
         onJsonContentChange={setJsonValue}
         onSubmit={isValidTopic}
         isValid={isValid}
         message={message}
+        type="topic"
       />
     </section>
   )

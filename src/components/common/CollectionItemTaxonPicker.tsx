@@ -16,7 +16,9 @@ export function CollectionItemTaxonPicker({ setItems }: Props) {
   const isValidTaxon = () => {
     const result: ValidationResult<Taxon> = validateTaxonJson(jsonContent)
     setIsValid(result.isValid)
-    setMessage(result.isValid ? 'Taxon is valid' : 'Taxon is invalid')
+    setMessage(
+      result.isValid ? 'Your taxon data is valid' : 'Your taxon data is invalid'
+    )
 
     if (result.isValid && result.parsedData)
       setItems(result.parsedData as Taxon[])
@@ -24,14 +26,15 @@ export function CollectionItemTaxonPicker({ setItems }: Props) {
   }
 
   return (
-    <section aria-labelledby="taxon-entry" className="group-block">
-      <h2 id="taxon-entry">Taxon entry</h2>
+    <section aria-labelledby="collection-taxa" className="group-block">
+      <h2 id="collection-taxa">Collection taxa</h2>
       <JsonImportForm
         jsonContent={jsonContent}
         onJsonContentChange={setJsonValue}
         onSubmit={isValidTaxon}
         isValid={isValid}
         message={message}
+        type="taxon"
       />
     </section>
   )

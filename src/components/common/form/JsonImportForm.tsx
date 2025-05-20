@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
+import { ContentHandlerType } from '@/types'
 
 interface JsonImportFormProps {
   jsonContent: string
@@ -7,6 +8,7 @@ interface JsonImportFormProps {
   message?: string
   isValid?: boolean
   onSubmit?: () => void
+  type: ContentHandlerType
 }
 
 export const JsonImportForm: React.FC<JsonImportFormProps> = ({
@@ -16,6 +18,7 @@ export const JsonImportForm: React.FC<JsonImportFormProps> = ({
   onSubmit,
   message,
   isValid,
+  type,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     onJsonContentChange(e.target.value)
@@ -33,7 +36,7 @@ export const JsonImportForm: React.FC<JsonImportFormProps> = ({
       <form onSubmit={handleSubmit} className="column-group">
         <div className="column-group">
           <label htmlFor="json-input">
-            Paste your JSON object in the text area
+            Please paste your {type} JSON object or array in the text area below
           </label>
           <textarea
             id="json-input"
@@ -46,7 +49,7 @@ export const JsonImportForm: React.FC<JsonImportFormProps> = ({
         </div>
         <div className="form-row">
           <button id="submit" type="submit">
-            Import
+            Import {type} data
           </button>
           <div className={isValid ? 'correct' : 'incorrect'}>{message}</div>
         </div>
