@@ -141,7 +141,10 @@ export interface TraitExample extends Taxon {
 
 export interface Trait extends LearningItem {
   trait: string
-  source?: string
+  source?: {
+    name: string
+    url: string
+  }
   definition: string
   morphology?: string[]
   phenology?: string[]

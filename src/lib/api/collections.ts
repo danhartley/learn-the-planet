@@ -4301,7 +4301,10 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         trait: 'sclerophyll',
         definition:
           'Plants with hard, leathery leaves adapted to conserve water in dry conditions',
-        source: 'https://en.wikipedia.org/wiki/Sclerophyll',
+        source: {
+          name: 'Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/Sclerophyll',
+        },
         morphology: [
           'Thick, leathery leaves',
           'Often small or narrow leaf shape',
@@ -4381,7 +4384,10 @@ export const getCollections = (): Promise<Collection<any>[]> => {
       {
         id: 't2',
         trait: 'serotiny',
-        source: 'https://en.wikipedia.org/wiki/Serotiny',
+        source: {
+          name: 'Wikipedia',
+          url: 'https://en.wikipedia.org/wiki/Serotiny',
+        },
         definition:
           'An ecological adaptation in which seed release occurs in response to an environmental trigger, such as fire or drought, rather than at seed maturation.',
         morphology: [
@@ -4562,7 +4568,10 @@ export const getCollections = (): Promise<Collection<any>[]> => {
         trait: 'seasonal dimorphism',
         definition:
           'Variation in leaf morphology between seasons, often involving larger, softer leaves in winter and smaller, tougher leaves in summer as an adaptation to Mediterranean climates.',
-        source: 'https://en.wikipedia.org/wiki/Sclerophyll#Leaf_dimorphism',
+        source: {
+          name: 'Beyond the Concept of Winter-Summer Leaves of Mediterranean Seasonal Dimorphic Species',
+          url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6554432/',
+        },
         morphology: [
           'Winter leaves: larger, thinner, more mesomorphic',
           'Summer leaves: smaller, thicker, more xeromorphic',

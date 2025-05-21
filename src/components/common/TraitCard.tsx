@@ -44,7 +44,7 @@ export const TraitCard = ({ trait }: Props) => {
           </div>
           {!!trait.source ? (
             <div>
-              <a href={trait.source}>{trait.source}</a>
+              <a href={trait.source.url}>{trait.source.name}</a>
             </div>
           ) : (
             <div></div>
