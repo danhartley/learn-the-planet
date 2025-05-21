@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect } from 'vitest'
-import { render, screen, cleanup } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { ScoreDisplayNotification } from './ScoreDisplayNotification'
 import '@testing-library/jest-dom'
 

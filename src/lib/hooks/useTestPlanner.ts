@@ -15,7 +15,7 @@ import { getTemplatesByContentType } from '../api/questionTemplates'
 export function useTestPlanner<T>() {
   const service = TestPlannerService.getInstance()
   const [layout, setLayout] = useState<Layout<T> | null>(
-    service.getCurrentLayout()
+    () => service.getCurrentLayout() as Layout<T> | null
   )
   const [isActive, setIsActive] = useState<boolean>(service.isTestActive())
   const [testState, setTestState] = useState<TestState | undefined>(
@@ -71,7 +71,7 @@ export function useTestPlanner<T>() {
       unsubscribeFromTestEnded()
       unsubscribeFromTestRestarted()
     }
-  }, [])
+  }, [service])
   return {
     startTest: ({
       collection,

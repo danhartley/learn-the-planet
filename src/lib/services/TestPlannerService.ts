@@ -14,7 +14,7 @@ import {
 import { TestPlannerEvent } from '@/utils/enums'
 
 class TestPlannerService<T> {
-  private static instance: TestPlannerService<T>
+  private static instance: TestPlannerService<any>
   private testPlanner: TestPlanner<T> | null = null
   private emitter = new EventEmitter()
 
