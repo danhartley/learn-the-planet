@@ -11,8 +11,6 @@ type Props<Taxon> = {
 }
 
 export const TaxonGallery = ({ collection }: Props<Taxon>) => {
-  if (!collection?.items?.[0]) return
-
   const router = useRouter()
   const { startTest } = useTestPlanner<Taxon>()
   const [config, setConfig] = useState({
@@ -22,6 +20,11 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
     ] as QuestionTemplateSelection[],
   })
 
+  // Early return after all hooks have been called
+  if (!collection?.items?.[0]) {
+    return null // Return null instead of undefined
+  }
+
   const handleStartTest = () => {
     startTest({ collection, config })
     router.push('/test')
@@ -30,7 +33,7 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
   const taxa = collection?.items.map(item => {
     const firstImage = item?.images ? item.images[0] : null
     const image = item?.image || firstImage
-    if (!image) return
+    if (!image) return null
     return <TaxonCard key={item.id + crypto.randomUUID()} taxon={item} />
   })
 

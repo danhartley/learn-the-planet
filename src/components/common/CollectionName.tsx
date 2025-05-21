@@ -24,7 +24,7 @@ export function CollectionName({ operation, name, setName, type }: Props) {
 
   useEffect(() => {
     name.length > minLength ? setMessage('Saved') : setMessage('')
-  }, [name])
+  }, [name, minLength])
 
   let display
   switch (operation) {

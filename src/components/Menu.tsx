@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link'
 export const Menu = () => {
   return (
     <nav>
@@ -9,13 +9,13 @@ export const Menu = () => {
         </h3>
         <ul>
           <li>
-            <a href="/collections">Collections</a>
+            <Link href="/collections">Collections</Link>
           </li>
           <li>
-            <a href="/collection/create">Create collection</a>
+            <Link href="/collection/create">Create collection</Link>
           </li>
           <li>
-            <a href="/flags">Flags</a>
+            <Link href="/flags">Flags</Link>
           </li>
         </ul>
       </section>

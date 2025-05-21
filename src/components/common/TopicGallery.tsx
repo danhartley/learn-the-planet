@@ -2,13 +2,13 @@
 
 import Link from 'next/link'
 
-import { Collection, Taxon, CollectionSummary } from '@/types'
+import { Collection, Taxon, CollectionSummary, Topic } from '@/types'
 
-type Props<T> = {
-  collection: Collection<T>
+type Props<Topic> = {
+  collection: Collection<Topic>
 }
 
-export const TopicGallery = ({ collection }: Props<T>) => {
+export const TopicGallery = ({ collection }: Props<Topic>) => {
   const fieldNotesUrl = collection?.fieldNotes?.url ? (
     <Link href={collection.fieldNotes.url}>Field notes</Link>
   ) : null
@@ -36,11 +36,11 @@ export const TopicGallery = ({ collection }: Props<T>) => {
         {/* Render credit information once per article item */}
         <div className="article-credit">
           <p>
-            <em>{section.credit.title}</em>
+            <em>{section?.credit?.title}</em>
           </p>
-          <p>Authors: {section.credit.authors.join(', ')}</p>
+          <p>Authors: {section?.credit?.authors.join(', ')}</p>
           <p>
-            <a href={section.credit.source}>Source</a>
+            <a href={section?.credit?.source}>Source</a>
           </p>
         </div>
       </div>

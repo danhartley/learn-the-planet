@@ -36,7 +36,7 @@ export default function TextEntryComponent({
     if (answerInputRef.current) {
       ;(answerInputRef.current as HTMLInputElement).focus()
     }
-  }, [question.key])
+  }, [question.key, layout.question])
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()

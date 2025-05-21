@@ -1,11 +1,14 @@
 import React, { useRef, useEffect } from 'react'
+
+import { HistoryItem } from '@/types'
+
 export const ScoreDisplayNotification = ({
   isCorrect,
   history,
   isVisibleClassName,
 }: {
   isCorrect: boolean
-  history: any
+  history: HistoryItem<any>[]
   isVisibleClassName: string
 }) => {
   const notificationDisplay = useRef(null)
@@ -26,7 +29,7 @@ export const ScoreDisplayNotification = ({
         notificationDisplay?.current as unknown as HTMLDivElement
       ).classList.remove(altVisibleClassName)
     }
-  }, [isVisibleClassName])
+  }, [isVisibleClassName, history.length])
 
   return (
     <div ref={notificationDisplay} className="notification hidden">

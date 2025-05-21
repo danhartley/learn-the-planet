@@ -1,7 +1,7 @@
 import { MultipleChoiceOption, Image, MultipleChoiceQuestion } from '@/types'
 import { ResponsiveImage } from '@/components/common/ResponsiveImage'
 
-type Props<T> = {
+type Props = {
   option: MultipleChoiceOption
   setAnswer: (answer: string) => void
   selectedAnswer: string | null
@@ -15,7 +15,7 @@ const ImageButton = ({
   selectedAnswer,
   correctAnswer,
   isAnswered = false,
-}: Props<MultipleChoiceQuestion>) => {
+}: Props) => {
   const handleClick = () => {
     setAnswer(option.key as string)
   }

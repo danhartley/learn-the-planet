@@ -65,7 +65,7 @@ export default function MultipleTextChoiceComponent({
         }
       }, 2000)
     },
-    [onSubmit]
+    [onSubmit, question.key, question.options]
   )
 
   const buttons = question.options.map((option: MultipleChoiceOption) => {

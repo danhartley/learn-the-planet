@@ -66,7 +66,7 @@ export function TestContainer<T>() {
       </section>
       <ScoreDisplayNotification
         isCorrect={score?.isCorrect || false}
-        history={history}
+        history={testHistory}
         isVisibleClassName={isVisibleClassName}
       />
     </>
