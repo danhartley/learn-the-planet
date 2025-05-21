@@ -22,7 +22,7 @@ function generateTraitDistractors(
   count: number,
   distractorType: DistractorType
 ): MultipleSelectOption[] {
-  let collectionDistractorNames = [] as any[]
+  let collectionDistractorNames = [] as unknown[]
   const itemDistractorNames =
     item.distractors && item.distractors?.length > 0
       ? shuffle(item.distractors)

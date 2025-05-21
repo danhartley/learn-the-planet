@@ -1,43 +1,57 @@
-import { Layout, QuestionType, Score } from '@/types'
+import React from 'react'
+import { Layout, QuestionType, Score, LearningItem } from '@/types'
 import ImageChoiceComponent from '@/components/test/layouts/ImageChoiceComponent'
 import MultipleTextChoiceComponent from '@/components/test/layouts/MultipleTextChoiceComponent'
 import TextEntryComponent from '@/components/test/layouts/TextEntryComponent'
 import CheckBoxComponent from '@/components/test/layouts/CheckBoxComponent'
 
-type Props<T> = {
+// Props for the TestDisplay component
+type Props<T extends LearningItem> = {
   layout: Layout<T>
   onSubmit: (answer: string | string[]) => Score | null
-  layouts: Layout<T>[]
+  layouts: Layout<unknown>[]
 }
 
+// Props for the child components
+type ComponentProps = {
+  layout: Layout<unknown>
+  onSubmit: (answer: string | string[]) => Score | null
+  questionProgressText: string
+}
+
+// Map of question types to their respective components
 type ComponentMap = {
   [key in QuestionType]: {
-    default: React.ComponentType<any>
-    image?: React.ComponentType<any>
+    default: React.ComponentType<ComponentProps>
+    image?: React.ComponentType<ComponentProps>
   }
 }
 
 const displayComponentMap: ComponentMap = {
   'Multiple choice': {
-    default: MultipleTextChoiceComponent,
-    image: ImageChoiceComponent,
+    default: MultipleTextChoiceComponent as React.ComponentType<ComponentProps>,
+    image: ImageChoiceComponent as React.ComponentType<ComponentProps>,
   },
   'Text entry': {
-    default: TextEntryComponent,
+    default: TextEntryComponent as React.ComponentType<ComponentProps>,
   },
   'Multiple select': {
-    default: CheckBoxComponent,
+    default: CheckBoxComponent as React.ComponentType<ComponentProps>,
   },
 }
 
-export function TestDisplay<T>({ layout, onSubmit, layouts }: Props<T>) {
+export function TestDisplay<T extends LearningItem>({
+  layout,
+  onSubmit,
+  layouts,
+}: Props<T>) {
   const distractorType = layout.distractorType ?? 'binomial'
   const questionType = layout.question.type
 
   // Get the map for this question type
   const questionMap = displayComponentMap[questionType]
 
-  let activeLayouts = layouts.filter(l => l.isActive)
+  const activeLayouts = layouts.filter(l => l.isActive)
   let activeIndex = 1
 
   activeLayouts.forEach((activeLayout, i) => {
@@ -57,7 +71,7 @@ export function TestDisplay<T>({ layout, onSubmit, layouts }: Props<T>) {
 
   return (
     <Component
-      layout={layout}
+      layout={layout as unknown as Layout<unknown>}
       onSubmit={onSubmit}
       questionProgressText={questionProgressText}
     />

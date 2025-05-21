@@ -12,6 +12,8 @@ import {
   Collection,
   DistractorType,
   MultipleSelectOption,
+  Taxon,
+  Term,
 } from '@/types'
 
 import { getPropByPath, shuffleArray, getRandomItems } from '@/utils/strings'
@@ -29,7 +31,7 @@ export class ContentHandlerBase<T extends LearningItem>
     item: T,
     count: number,
     distractorType: DistractorType
-  ) => any[]
+  ) => unknown[]
 
   /**
    * Constructor that takes a distractor generator function
@@ -40,9 +42,9 @@ export class ContentHandlerBase<T extends LearningItem>
       item: T,
       count: number,
       distractorType: DistractorType
-    ) => any[]
+    ) => unknown[]
   ) {
-    this.generateItemDistractors = distractorGenerator || <any>[]
+    this.generateItemDistractors = distractorGenerator || (() => [])
   }
 
   /**
@@ -53,7 +55,7 @@ export class ContentHandlerBase<T extends LearningItem>
     item: T,
     templates: QuestionTemplate[]
   ): Question[] {
-    return templates.map((template, index) => {
+    return templates.map(template => {
       const questionText = this.processTemplate(
         template.questionTextTemplate,
         item
@@ -64,27 +66,24 @@ export class ContentHandlerBase<T extends LearningItem>
             collection,
             item,
             template as MultipleChoiceTemplate,
-            questionText,
-            index
+            questionText
           )
         case 'textEntry':
           return this.createTextEntryQuestion(
             item,
             template as TextEntryTemplate,
-            questionText,
-            index
+            questionText
           )
         case 'multiSelect':
           return this.createMultiSelectQuestion(
             collection,
             item,
             template as MultiSelectTemplate,
-            questionText,
-            index
+            questionText
           )
         default:
           throw new Error(
-            `Unsupported question type: ${(template as any).type}`
+            `Unsupported question type: ${(template as QuestionTemplate).type}`
           )
       }
     })
@@ -98,7 +97,7 @@ export class ContentHandlerBase<T extends LearningItem>
     item: T,
     count: number,
     distractorType: DistractorType
-  ): any[] {
+  ): unknown[] {
     return this.generateItemDistractors(collection, item, count, distractorType)
   }
 
@@ -116,8 +115,7 @@ export class ContentHandlerBase<T extends LearningItem>
     collection: Collection<T>,
     item: T,
     template: MultipleChoiceTemplate,
-    questionText: string,
-    index: number
+    questionText: string
   ): MultipleChoiceQuestion {
     // Get the correct answer property
     const correctAnswer = this.getPropertyByPath(
@@ -152,7 +150,7 @@ export class ContentHandlerBase<T extends LearningItem>
       text: questionText,
       key: correctAnswer,
       options: shuffledOptions,
-    }
+    } as MultipleChoiceQuestion
   }
 
   /**
@@ -162,8 +160,7 @@ export class ContentHandlerBase<T extends LearningItem>
     collection: Collection<T>,
     item: T,
     template: MultiSelectTemplate,
-    questionText: string,
-    index: number
+    questionText: string
   ): MultipleSelectQuestion {
     // Get the correct answer property
 
@@ -172,7 +169,10 @@ export class ContentHandlerBase<T extends LearningItem>
       template.correctAnswerProperty
     )
 
-    const correctAnswers = this.getRandomPropertyItems(correctAnswerArray, 2)
+    const correctAnswers = this.getRandomPropertyItems(
+      correctAnswerArray as unknown as string[],
+      2
+    )
 
     // Generate distractors
     const distractorItems: MultipleSelectOption[] = this.generateDistractors(
@@ -196,7 +196,7 @@ export class ContentHandlerBase<T extends LearningItem>
       text: questionText,
       key: correctAnswerArray,
       options: shuffledOptions,
-    }
+    } as MultipleSelectQuestion
   }
 
   /**
@@ -205,8 +205,7 @@ export class ContentHandlerBase<T extends LearningItem>
   private createTextEntryQuestion(
     item: T,
     template: TextEntryTemplate,
-    questionText: string,
-    index: number
+    questionText: string
   ): TextEntryQuestion {
     // Get the correct answer
     const correctAnswer = this.getPropertyByPath(
@@ -220,7 +219,7 @@ export class ContentHandlerBase<T extends LearningItem>
       key: correctAnswer,
       hint: template.placeholder || 'Enter your answer',
       contentType: template.contentType,
-    }
+    } as TextEntryQuestion
   }
 
   /**
@@ -231,7 +230,8 @@ export class ContentHandlerBase<T extends LearningItem>
       let value = this.getPropertyByPath(item, propertyPath)
 
       /* Force terms to lower case */
-      if (match === '${term}') value = value.toLowerCase()
+      if (match === '${term}')
+        value = (value as unknown as string).toLowerCase()
 
       return value !== undefined ? String(value) : match
     })
@@ -242,16 +242,16 @@ export class ContentHandlerBase<T extends LearningItem>
    */
   private getIdentifierProperty(item: T): string {
     if ('binomial' in item) {
-      return (item as any).binomial
+      return (item as unknown as Taxon).binomial
     } else if ('term' in item) {
-      return ((item as any).term as string).toLowerCase()
+      return ((item as unknown as Term).term as string).toLowerCase()
     }
 
     // Default fallback
     return String(item.id)
   }
 
-  private getPropertyByPath(obj: any, path: string): any {
+  private getPropertyByPath(obj: unknown, path: string): unknown {
     return getPropByPath(obj, path)
   }
 
@@ -259,7 +259,7 @@ export class ContentHandlerBase<T extends LearningItem>
     return shuffleArray(array)
   }
 
-  private getRandomPropertyItems(arr: any, count: number): any {
+  private getRandomPropertyItems(arr: unknown[], count: number): unknown[] {
     return getRandomItems(arr, count)
   }
 }

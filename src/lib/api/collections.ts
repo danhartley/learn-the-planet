@@ -1,8 +1,8 @@
-import { Collection } from '@/types'
+import { Collection, Taxon } from '@/types'
 import { sortAlphabeticallyBy } from '@/utils/strings'
 import { generateGenusAndSpeciesFields } from '@/utils/taxa'
 
-const dedupe = (items: any[]) => {
+const dedupe = (items: Taxon[]) => {
   const deduped = Array.from(
     new Map(items.map(item => [item.id, item])).values()
   )
@@ -10,7 +10,7 @@ const dedupe = (items: any[]) => {
   return deduped
 }
 
-export const getCollections = (): Promise<Collection<any>[]> => {
+export const getCollections = (): Promise<Collection<unknown>[]> => {
   const collection1 = {
     id: '1',
     type: 'taxon',
@@ -5308,60 +5308,60 @@ export const getCollections = (): Promise<Collection<any>[]> => {
     ],
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     const collections = [
       generateGenusAndSpeciesFields({
         ...collection1,
-        items: dedupe(collection1.items),
+        items: dedupe(collection2.items as unknown as Taxon[]) as Taxon[],
       }),
       generateGenusAndSpeciesFields({
         ...collection2,
-        items: dedupe(collection2.items),
+        items: dedupe(collection2.items as unknown as Taxon[]) as Taxon[],
       }),
       generateGenusAndSpeciesFields({
         ...collection3,
-        items: dedupe(collection3.items),
+        items: dedupe(collection3.items as unknown as Taxon[]) as Taxon[],
       }),
       {
         ...collection4,
-        items: sortAlphabeticallyBy(dedupe(collection4.items), 'term'),
+        items: sortAlphabeticallyBy(collection4.items, 'term'),
       },
       {
         ...collection5,
-        items: sortAlphabeticallyBy(dedupe(collection5.items), 'term'),
+        items: sortAlphabeticallyBy(collection5.items, 'term'),
       },
       {
         ...collection6,
-        items: sortAlphabeticallyBy(dedupe(collection6.items), 'term'),
+        items: sortAlphabeticallyBy(collection6.items, 'term'),
       },
       generateGenusAndSpeciesFields({
         ...collection7,
-        items: dedupe(collection7.items),
+        items: dedupe(collection7.items as unknown as Taxon[]) as Taxon[],
       }),
       {
         ...collection8,
-        items: sortAlphabeticallyBy(dedupe(collection8.items), 'term'),
+        items: sortAlphabeticallyBy(collection8.items, 'term'),
       },
       {
         ...collection9,
-        items: sortAlphabeticallyBy(dedupe(collection9.items), 'term'),
+        items: sortAlphabeticallyBy(collection9.items, 'term'),
       },
       {
         ...collection10,
-        items: sortAlphabeticallyBy(dedupe(collection10.items), 'term'),
+        items: sortAlphabeticallyBy(collection10.items, 'term'),
       },
       {
         ...collection11,
-        items: sortAlphabeticallyBy(dedupe(collection11.items), 'term'),
+        items: sortAlphabeticallyBy(collection11.items, 'term'),
       },
       collection12,
       {
         ...collection13,
-        items: sortAlphabeticallyBy(dedupe(collection13.items), 'trait'),
+        items: sortAlphabeticallyBy(collection13.items, 'trait'),
       },
       generateGenusAndSpeciesFields({
         ...collection14,
-        items: dedupe(collection14.items),
+        items: dedupe(collection14.items as unknown as Taxon[]) as Taxon[],
       }),
     ]
 
@@ -5371,13 +5371,13 @@ export const getCollections = (): Promise<Collection<any>[]> => {
 
 export const getCollectionById = async (
   id: string
-): Promise<Collection<any> | undefined> => {
+): Promise<Collection<unknown> | undefined> => {
   const collections = await getCollections()
 
-  let collection = collections.find(c => c.id === id)
+  const collection = collections.find(c => c.id === id)
 
   if (collection?.type === 'taxon') {
-    generateGenusAndSpeciesFields(collection)
+    generateGenusAndSpeciesFields(collection as Collection<Taxon>)
   }
 
   return collection

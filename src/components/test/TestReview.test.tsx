@@ -4,6 +4,24 @@ import TestReview from './TestReview'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { useRouter } from 'next/navigation'
 
+// Define types for hook returns
+interface TestPlannerReturn {
+  startRetest: (option: string) => void
+  testHistory?: Array<{ isCorrect: boolean }>
+  currentLayout?: {
+    collection: {
+      id: string
+      name: string
+    }
+  }
+  [key: string]: unknown
+}
+
+interface RouterReturn {
+  push: (url: string) => void
+  [key: string]: unknown
+}
+
 // Mock the hooks
 vi.mock('@/hooks/useTestPlanner', () => ({
   useTestPlanner: vi.fn(),
@@ -24,12 +42,12 @@ describe('TestReview Component', () => {
     vi.mocked(useTestPlanner).mockReturnValue({
       startRetest: mockStartRetest,
       // Include other properties the hook might return as needed
-    } as any)
+    } as TestPlannerReturn)
 
     vi.mocked(useRouter).mockReturnValue({
       push: mockPush,
       // Include other properties the router might return as needed
-    } as any)
+    } as RouterReturn)
   })
 
   it('renders the component with default radio option selected', () => {
@@ -138,11 +156,11 @@ describe('TestReview Component when all answers are correct', () => {
       startRetest: mockStartRetest,
       testHistory: [{ isCorrect: true }, { isCorrect: true }], // All answers correct
       currentLayout: { collection: mockCollection },
-    } as any)
+    } as TestPlannerReturn)
 
     vi.mocked(useRouter).mockReturnValue({
       push: mockPush,
-    } as any)
+    } as RouterReturn)
   })
 
   it('renders only the "repeat the test in full" option when all answers are correct', () => {

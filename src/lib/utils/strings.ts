@@ -20,7 +20,7 @@ export const splitCamelCaseSmart = (str: string): string => {
 /**
  * Gets a property value from an object using a dotted path notation
  */
-export const getPropByPath = (obj: any, path: string): any => {
+export const getPropByPath = (obj: unknown, path: string): unknown => {
   // Return undefined for null/undefined objects
   if (obj == null) {
     return undefined
@@ -28,18 +28,23 @@ export const getPropByPath = (obj: any, path: string): any => {
 
   // Handle simple property access
   if (!path.includes('.') && !path.includes('[')) {
-    return obj[path]
+    return (obj as Record<string, unknown>)[path]
   }
 
   // Split by dots but preserve array notation
   const pathArray = path.match(/[^\.\[\]]+|\[\d+\]/g)
 
+  // If no valid path parts were found, return undefined
+  if (!pathArray) {
+    return undefined
+  }
+
   // Start with the object
-  let current = obj
+  let current: unknown = obj
 
   // Navigate through the path
-  for (let i = 0; i < pathArray!.length && current != null; i++) {
-    let key = pathArray![i]
+  for (let i = 0; i < pathArray.length && current != null; i++) {
+    const key = pathArray[i]
 
     // Handle array indexing
     if (key.startsWith('[') && key.endsWith(']')) {
@@ -59,13 +64,21 @@ export const getPropByPath = (obj: any, path: string): any => {
       }
     } else {
       // Regular property access
-      current = current[key]
+      if (
+        typeof current === 'object' &&
+        current !== null &&
+        !Array.isArray(current)
+      ) {
+        // The issue was here - need to maintain the unknown type for current
+        current = (current as Record<string, unknown>)[key]
+      } else {
+        return undefined
+      }
     }
   }
 
   return current
 }
-
 /**
  * Shuffles an array using Fisher-Yates algorithm
  */
@@ -110,8 +123,11 @@ export const formatHyphenatedString = (hyphenatedString: string): string => {
   return spacedString.charAt(0).toUpperCase() + spacedString.slice(1)
 }
 
-export const shuffle = (array: any) => {
-  var m = array.length,
+export const shuffle = (array: unknown) => {
+  if (!Array.isArray(array)) {
+    throw new TypeError('Input must be an array')
+  }
+  let m = array.length,
     t,
     i
 

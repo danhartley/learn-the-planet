@@ -2,15 +2,17 @@ import React, { useRef, useEffect } from 'react'
 
 import { HistoryItem } from '@/types'
 
-export const ScoreDisplayNotification = ({
+type Props<T> = {
+  isCorrect: boolean
+  history: HistoryItem<T>[]
+  isVisibleClassName: string
+}
+
+export const ScoreDisplayNotification = <T,>({
   isCorrect,
   history,
   isVisibleClassName,
-}: {
-  isCorrect: boolean
-  history: HistoryItem<any>[]
-  isVisibleClassName: string
-}) => {
+}: Props<T>) => {
   const notificationDisplay = useRef(null)
   const response = isCorrect
     ? 'That is the correct answer'

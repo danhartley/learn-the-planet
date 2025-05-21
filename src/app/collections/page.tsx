@@ -2,8 +2,8 @@ import { CollectionList } from '@/components/CollectionList'
 import { Collection } from '@/types'
 import { getCollections } from '@/api/collections'
 
-export default async function CollectionsPage<T>() {
-  const collections: Collection<T>[] = await getCollections()
+export default async function CollectionsPage() {
+  const collections: Collection<unknown>[] = await getCollections()
 
   const topics = collections.filter(c => c.type === 'topic')
   const traits = collections.filter(c => c.type === 'trait')

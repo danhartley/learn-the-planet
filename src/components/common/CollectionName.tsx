@@ -10,7 +10,7 @@ type Props = {
 
 export function CollectionName({ operation, name, setName, type }: Props) {
   const [inputValue, setInputValue] = useState('')
-  const [minLength, setMinLength] = useState(3)
+  const [minLength] = useState(3)
   const [message, setMessage] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +23,11 @@ export function CollectionName({ operation, name, setName, type }: Props) {
   }
 
   useEffect(() => {
-    name.length > minLength ? setMessage('Saved') : setMessage('')
+    if (name.length > minLength) {
+      setMessage('Saved')
+    } else {
+      setMessage('')
+    }
   }, [name, minLength])
 
   let display

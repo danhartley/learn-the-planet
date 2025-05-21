@@ -8,8 +8,9 @@ import Link from 'next/link'
 
 import { TestDisplay } from '@/components/test/TestDisplay'
 import { ScoreDisplayNotification } from '@/components/ScoreDisplayNotification'
+import { LearningItem } from '@/types'
 
-export function TestContainer<T>() {
+export function TestContainer<T extends LearningItem>() {
   const router = useRouter()
   const {
     currentLayout,

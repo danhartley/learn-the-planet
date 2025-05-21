@@ -6,35 +6,40 @@ import { Term } from '@/types'
  * @param obj - The object to check
  * @returns Boolean indicating whether the object conforms to the Term interface
  */
-export const isTermObject = (obj: any): obj is Term => {
+export const isTermObject = (obj: unknown): obj is Term => {
   // Check if obj is an object and not null
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
     return false
   }
 
   // Check required fields exist and have correct types
-  if (typeof obj.id !== 'string' || obj.id.trim() === '') {
+  const o = obj as Record<string, unknown>
+
+  if (typeof o.id !== 'string' || (o.id as string).trim() === '') {
     return false
   }
 
-  if (typeof obj.term !== 'string' || obj.term.trim() === '') {
+  if (typeof o.term !== 'string' || (o.term as string).trim() === '') {
     return false
   }
 
-  if (typeof obj.definition !== 'string' || obj.definition.trim() === '') {
+  if (
+    typeof o.definition !== 'string' ||
+    (o.definition as string).trim() === ''
+  ) {
     return false
   }
 
   // Check optional fields have correct types if present
-  if (obj.source !== undefined && typeof obj.source !== 'string') {
+  if (o.source !== undefined && typeof o.source !== 'string') {
     return false
   }
 
-  if (obj.example !== undefined && typeof obj.example !== 'string') {
+  if (o.example !== undefined && typeof o.example !== 'string') {
     return false
   }
 
-  if (obj.distractors !== undefined && !Array.isArray(obj.distractors)) {
+  if (o.distractors !== undefined && !Array.isArray(o.distractors)) {
     return false
   }
 
@@ -66,7 +71,7 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
     const itemsToValidate = isArray ? parsedJSON : [parsedJSON]
 
     // Step 3: Validate each item
-    itemsToValidate.forEach((item: any, index: number) => {
+    itemsToValidate.forEach((item: unknown, index: number) => {
       // Use isTermObject directly - if valid, no need to check anything else
       if (isTermObject(item)) {
         return // This item is valid, continue to next item
@@ -81,52 +86,55 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
         return // Skip further checks if not even an object
       }
 
+      // Cast item to Record<string, unknown> for property access
+      const obj = item as Record<string, unknown>
+
       // Check required fields
-      if (!item.id && item.id !== '') {
+      if (!obj.id && obj.id !== '') {
         errors.push(`Item ${index}: Missing required field: id`)
         hasSpecificErrors = true
-      } else if (typeof item.id !== 'string') {
+      } else if (typeof obj.id !== 'string') {
         errors.push(`Item ${index}: Field "id" must be a string`)
         hasSpecificErrors = true
-      } else if (item.id.trim() === '') {
+      } else if ((obj.id as string).trim() === '') {
         errors.push(`Item ${index}: Field "id" cannot be empty`)
         hasSpecificErrors = true
       }
 
-      if (!item.term && item.term !== '') {
+      if (!obj.term && obj.term !== '') {
         errors.push(`Item ${index}: Missing required field: term`)
         hasSpecificErrors = true
-      } else if (typeof item.term !== 'string') {
+      } else if (typeof obj.term !== 'string') {
         errors.push(`Item ${index}: Field "term" must be a string`)
         hasSpecificErrors = true
-      } else if (item.term.trim() === '') {
+      } else if ((obj.term as string).trim() === '') {
         errors.push(`Item ${index}: Field "term" cannot be empty`)
         hasSpecificErrors = true
       }
 
-      if (!item.definition && item.definition !== '') {
+      if (!obj.definition && obj.definition !== '') {
         errors.push(`Item ${index}: Missing required field: definition`)
         hasSpecificErrors = true
-      } else if (typeof item.definition !== 'string') {
+      } else if (typeof obj.definition !== 'string') {
         errors.push(`Item ${index}: Field "definition" must be a string`)
         hasSpecificErrors = true
-      } else if (item.definition.trim() === '') {
+      } else if ((obj.definition as string).trim() === '') {
         errors.push(`Item ${index}: Field "definition" cannot be empty`)
         hasSpecificErrors = true
       }
 
       // Check optional fields
-      if (item.source !== undefined && typeof item.source !== 'string') {
+      if (obj.source !== undefined && typeof obj.source !== 'string') {
         errors.push(`Item ${index}: Field "source" must be a string`)
         hasSpecificErrors = true
       }
 
-      if (item.example !== undefined && typeof item.example !== 'string') {
+      if (obj.example !== undefined && typeof obj.example !== 'string') {
         errors.push(`Item ${index}: Field "example" must be a string`)
         hasSpecificErrors = true
       }
 
-      if (item.distractors !== undefined && !Array.isArray(item.distractors)) {
+      if (obj.distractors !== undefined && !Array.isArray(obj.distractors)) {
         errors.push(`Item ${index}: Field "distractors" must be an array`)
         hasSpecificErrors = true
       }

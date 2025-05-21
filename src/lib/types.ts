@@ -93,7 +93,7 @@ export type Family = {
 
 export interface LearningItem {
   id: string
-  distractors?: any[]
+  distractors?: unknown[]
 }
 
 export interface Taxon extends LearningItem {
@@ -121,7 +121,7 @@ export interface Taxon extends LearningItem {
     genus?: string
     species?: string
   }
-  traits?: Record<string, any>
+  traits?: Record<string, unknown>
   observationURL?: string
   wikipediaUrl?: string
   inaturalistUrl?: string
@@ -151,7 +151,7 @@ export interface Trait extends LearningItem {
   examples?: TraitExample[]
 }
 
-export type CollectionSummary<T> = {
+export type CollectionSummary = {
   id: string
   name: string
   type: string
@@ -179,7 +179,7 @@ export type Collection<T> = {
     url: string
   }
   items: T[]
-  collections?: CollectionSummary<T>[]
+  collections?: CollectionSummary[]
 }
 
 export type Layout<T> = {
@@ -282,7 +282,7 @@ export interface ContentTypeHandler<T> {
     item: T,
     count: number,
     distractorType: DistractorType
-  ): any[]
+  ): unknown[]
 
   // Validate answers for this content type
   validateAnswer(question: Question, answer: string | string[]): boolean

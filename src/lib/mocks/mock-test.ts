@@ -1,9 +1,4 @@
-import {
-  MultipleChoiceOption,
-  MultipleChoiceQuestion,
-  TextEntryQuestion,
-  Test,
-} from '@/types'
+import { MultipleChoiceQuestion, TextEntryQuestion, Test } from '@/types'
 
 const test1: Test = {
   question: {

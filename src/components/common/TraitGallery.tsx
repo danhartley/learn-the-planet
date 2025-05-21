@@ -15,13 +15,13 @@ import {
 } from '@/types'
 import { TestConfigSettings } from '@/components/common/TestConfigSettings'
 
-type Props<T> = {
-  collection: Collection<T>
+type Props<Trait> = {
+  collection: Collection<Trait>
 }
 
-export function TraitGallery<T>({ collection }: Props<T>) {
+export function TraitGallery({ collection }: Props<Trait>) {
   const router = useRouter()
-  const { startTest } = useTestPlanner<T>()
+  const { startTest } = useTestPlanner<Trait>()
   const [config, setConfig] = useState({
     questionTemplateSelections: [
       { type: 'multipleChoice', isSelected: true },
@@ -54,7 +54,7 @@ export function TraitGallery<T>({ collection }: Props<T>) {
   })
 
   const collections = collection?.collections?.map(
-    (subCollection: CollectionSummary<T>) => {
+    (subCollection: CollectionSummary) => {
       return subCollection ? (
         <li key={subCollection.id}>
           <Link href={`/collection/${encodeURIComponent(subCollection.id)}`}>

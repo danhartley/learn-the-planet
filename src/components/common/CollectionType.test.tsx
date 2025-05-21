@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { expect } from 'vitest'
 import { CollectionType } from './CollectionType'
-import { ContentType } from '@/types'
 
 describe('CollectionType', () => {
   test('renders with default operation (read)', () => {
@@ -23,7 +22,7 @@ describe('CollectionType', () => {
   })
 
   test('handles missing operation prop by defaulting to read', () => {
-    // @ts-ignore - Intentionally omitting the prop to test default behavior
+    // @ts-expect-error - Intentionally omitting the prop to test default behavior
     render(<CollectionType />)
 
     expect(

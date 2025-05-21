@@ -1,25 +1,30 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { ContentHandlerType, LearningItem } from '@/types'
+import { ContentHandlerType } from '@/types'
 import { CollectionItemTermPicker } from './CollectionItemTermPicker'
 import { CollectionItemTaxonPicker } from './CollectionItemTaxonPicker'
 import { CollectionItemTraitPicker } from './CollectionItemTraitPicker'
 import { CollectionItemTopicPicker } from './CollectionItemTopicPicker'
 
+// Create a generic props type for component props
+type ComponentProps = {
+  setItems: Dispatch<SetStateAction<unknown[] | undefined>>
+}
+
+// Main props type for the CollectionItemPicker
 type Props = {
   type: ContentHandlerType
-  setItems: Dispatch<SetStateAction<LearningItem[] | undefined>>
+  setItems: Dispatch<SetStateAction<unknown[] | undefined>>
 }
 
 export function CollectionItemPicker({ type, setItems }: Props) {
-  type ComponentMap = {
-    [key in ContentHandlerType]: React.ComponentType<any>
-  }
-
-  const itemComponent: ComponentMap = {
-    term: CollectionItemTermPicker,
-    taxon: CollectionItemTaxonPicker,
-    topic: CollectionItemTopicPicker,
-    trait: CollectionItemTraitPicker,
+  // Create a type-safe component map
+  const itemComponent: {
+    [K in ContentHandlerType]: React.ComponentType<ComponentProps>
+  } = {
+    term: CollectionItemTermPicker as React.ComponentType<ComponentProps>,
+    taxon: CollectionItemTaxonPicker as React.ComponentType<ComponentProps>,
+    topic: CollectionItemTopicPicker as React.ComponentType<ComponentProps>,
+    trait: CollectionItemTraitPicker as React.ComponentType<ComponentProps>,
   }
 
   const Component = itemComponent[type]

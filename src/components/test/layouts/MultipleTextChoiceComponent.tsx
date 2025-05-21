@@ -38,9 +38,11 @@ export default function MultipleTextChoiceComponent({
         const isCorrect = answer === question.key
 
         // Change background to highlight correct or incorrect answer
-        isCorrect
-          ? buttonRefs.current[key].classList.add('bg-correct')
-          : buttonRefs.current[key].classList.add('bg-incorrect')
+        if (isCorrect) {
+          buttonRefs.current[key].classList.add('bg-correct')
+        } else {
+          buttonRefs.current[key].classList.add('bg-incorrect')
+        }
 
         // If answer was incorrect, show the correct response
         if (!isCorrect) {

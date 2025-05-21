@@ -4,16 +4,22 @@ import { TermGallery } from '@/components/common/TermGallery'
 import { TopicGallery } from '@/components/common/TopicGallery'
 import { TraitGallery } from '@/components/common/TraitGallery'
 
-interface GalleryProps<T> {
+type ComponentProps = {
+  collection: Collection<unknown>
+}
+
+type GalleryProps<T> = {
   collection: Collection<T> | undefined
 }
 
 export function Gallery<T>({ collection }: GalleryProps<T>) {
-  const pageMap: Record<ContentHandlerType, React.ComponentType<any>> = {
-    taxon: TaxonGallery,
-    term: TermGallery,
-    trait: TraitGallery,
-    topic: TopicGallery,
+  const pageMap: {
+    [K in ContentHandlerType]: React.ComponentType<ComponentProps>
+  } = {
+    term: TermGallery as React.ComponentType<ComponentProps>,
+    taxon: TaxonGallery as React.ComponentType<ComponentProps>,
+    topic: TopicGallery as React.ComponentType<ComponentProps>,
+    trait: TraitGallery as React.ComponentType<ComponentProps>,
   }
 
   if (!collection) {

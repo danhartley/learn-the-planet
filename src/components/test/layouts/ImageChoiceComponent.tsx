@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react'
-import { MultipleChoiceQuestion, MultipleChoiceOption, Layout } from '@/types'
+import {
+  MultipleChoiceQuestion,
+  MultipleChoiceOption,
+  Layout,
+  LearningItem,
+  Score,
+} from '@/types'
 import ImageButton from '@/components/common/ImageButton'
 
 type Props<T> = {
   layout: Layout<T>
-  onSubmit: (answer: string) => void
+  onSubmit: (answer: string) => Score
   questionProgressText: string
 }
 
@@ -12,7 +18,7 @@ const ImageChoiceComponent = ({
   layout,
   onSubmit,
   questionProgressText,
-}: Props<MultipleChoiceQuestion>) => {
+}: Props<LearningItem>) => {
   const [userAnswer, setUserAnswer] = useState<string | null>(null)
   const [isAnswered, setAnswered] = useState(false)
 

@@ -14,7 +14,7 @@ import {
 import { TestPlannerEvent } from '@/utils/enums'
 
 class TestPlannerService<T> {
-  private static instance: TestPlannerService<any>
+  private static instance: TestPlannerService<unknown>
   private testPlanner: TestPlanner<T> | null = null
   private emitter = new EventEmitter()
 
@@ -24,11 +24,11 @@ class TestPlannerService<T> {
   }
 
   // Singleton pattern: prevent more than one instance of the service from being created
-  static getInstance<U>(): TestPlannerService<U> {
+  static getInstance<T>(): TestPlannerService<T> {
     if (!TestPlannerService.instance) {
-      TestPlannerService.instance = new TestPlannerService<U>()
+      TestPlannerService.instance = new TestPlannerService<unknown>()
     }
-    return TestPlannerService.instance as TestPlannerService<U>
+    return TestPlannerService.instance as TestPlannerService<T>
   }
 
   startTest(
@@ -165,7 +165,7 @@ class TestPlannerService<T> {
   // Subscribe method to listen to specific events
   subscribeToEvent(
     eventName: string,
-    callback: (data?: any) => void
+    callback: (data?: unknown) => void
   ): () => void {
     this.emitter.on(eventName, callback)
     return () => this.emitter.off(eventName, callback)

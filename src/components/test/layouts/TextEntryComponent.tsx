@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, FormEvent, useEffect, useRef } from 'react'
-import { Layout, TextEntryQuestion, Score } from '@/types'
+import { Layout, TextEntryQuestion, Score, LearningItem } from '@/types'
 
 interface Props<T> {
   layout: Layout<T>
@@ -12,7 +12,7 @@ export default function TextEntryComponent({
   layout,
   onSubmit,
   questionProgressText,
-}: Props<TextEntryQuestion>) {
+}: Props<LearningItem>) {
   const [answer, setAnswer] = useState('')
   const answerInputRef = useRef(null)
   const [correctClassName, setCorrectClassName] = useState(

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import { Collection, Taxon, CollectionSummary, Topic } from '@/types'
+import { Collection, CollectionSummary, Topic } from '@/types'
 
 type Props<Topic> = {
   collection: Collection<Topic>
@@ -14,7 +14,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
   ) : null
 
   const collections = collection?.collections?.map(
-    (subCollection: CollectionSummary<Taxon>) => {
+    (subCollection: CollectionSummary) => {
       return subCollection ? (
         <li key={subCollection.id}>
           <Link href={`/collection/${encodeURIComponent(subCollection.id)}`}>

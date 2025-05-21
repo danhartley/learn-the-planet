@@ -6,7 +6,7 @@ import { TraitContentHandler } from './TraitContentHandler'
 
 export const contentHandlers: Record<
   ContentHandlerType,
-  ContentTypeHandler<any>
+  ContentTypeHandler<unknown>
 > = {
   taxon: new TaxonContentHandler(),
   term: new TermContentHandler(),

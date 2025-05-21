@@ -1,4 +1,4 @@
-import { MultipleChoiceOption, Image, MultipleChoiceQuestion } from '@/types'
+import { MultipleChoiceOption, Image } from '@/types'
 import { ResponsiveImage } from '@/components/common/ResponsiveImage'
 
 type Props = {

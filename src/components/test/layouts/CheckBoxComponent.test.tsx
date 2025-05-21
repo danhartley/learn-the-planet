@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import CheckBoxComponent from '@/components/test/layouts/CheckBoxComponent'
-import { MultipleChoiceQuestion, Trait, Layout, Score } from '@/types'
+import { Trait, Layout, Score } from '@/types'
 
 describe('CheckBoxComponent', () => {
   // Mock props
@@ -47,7 +47,7 @@ describe('CheckBoxComponent', () => {
     isActive: true,
   }
 
-  const mockOnSubmit = vi.fn((answer: string | string[]): Score => {
+  const mockOnSubmit = vi.fn((): Score => {
     return {
       isCorrect: true,
       questionCount: 10,

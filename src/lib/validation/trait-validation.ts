@@ -6,43 +6,67 @@ import { Trait } from '@/types'
  * @param obj - The object to check
  * @returns Boolean indicating whether the object conforms to the Trait interface
  */
-export const isTraitObject = (obj: any): obj is Trait => {
+export const isTraitObject = (obj: unknown): obj is Trait => {
   // Check if obj is an object and not null
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
     return false
   }
 
   // Check required fields exist and have correct types
-  if (typeof obj.id !== 'string' || obj.id.trim() === '') {
+  if (
+    typeof (obj as Record<string, unknown>).id !== 'string' ||
+    ((obj as Record<string, unknown>).id as string).trim() === ''
+  ) {
     return false
   }
 
-  if (typeof obj.trait !== 'string' || obj.trait.trim() === '') {
+  if (
+    typeof (obj as Record<string, unknown>).trait !== 'string' ||
+    ((obj as Record<string, unknown>).trait as string).trim() === ''
+  ) {
     return false
   }
 
-  if (typeof obj.definition !== 'string' || obj.definition.trim() === '') {
+  if (
+    typeof (obj as Record<string, unknown>).definition !== 'string' ||
+    ((obj as Record<string, unknown>).definition as string).trim() === ''
+  ) {
     return false
   }
 
   // Check optional fields have correct types if present
-  if (obj.source !== undefined && typeof obj.source !== 'string') {
+  if (
+    (obj as Record<string, unknown>).source !== undefined &&
+    typeof (obj as Record<string, unknown>).source !== 'string'
+  ) {
     return false
   }
 
-  if (obj.distractors !== undefined && !Array.isArray(obj.distractors)) {
+  if (
+    (obj as Record<string, unknown>).distractors !== undefined &&
+    !Array.isArray((obj as Record<string, unknown>).distractors)
+  ) {
     return false
   }
 
-  if (obj.morphology !== undefined && !Array.isArray(obj.morphology)) {
+  if (
+    (obj as Record<string, unknown>).morphology !== undefined &&
+    !Array.isArray((obj as Record<string, unknown>).morphology)
+  ) {
     return false
   }
 
-  if (obj.phenology !== undefined && !Array.isArray(obj.phenology)) {
+  if (
+    (obj as Record<string, unknown>).phenology !== undefined &&
+    !Array.isArray((obj as Record<string, unknown>).phenology)
+  ) {
     return false
   }
 
-  if (obj.examples !== undefined && !Array.isArray(obj.examples)) {
+  if (
+    (obj as Record<string, unknown>).examples !== undefined &&
+    !Array.isArray((obj as Record<string, unknown>).examples)
+  ) {
     return false
   }
 
@@ -74,7 +98,7 @@ export function validateTraitJson(jsonString: string): ValidationResult<Trait> {
     const itemsToValidate = isArray ? parsedJSON : [parsedJSON]
 
     // Step 3: Validate each item
-    itemsToValidate.forEach((item: any, index: number) => {
+    itemsToValidate.forEach((item: unknown, index: number) => {
       // Use isTraitObject directly - if valid, no need to check anything else
       if (isTraitObject(item)) {
         return // This item is valid, continue to next item
@@ -89,62 +113,65 @@ export function validateTraitJson(jsonString: string): ValidationResult<Trait> {
         return // Skip further checks if not even an object
       }
 
+      // Use type assertion to access properties
+      const obj = item as Record<string, unknown>
+
       // Check required fields
-      if (!item.id && item.id !== '') {
+      if (!obj.id && obj.id !== '') {
         errors.push(`Item ${index}: Missing required field: id`)
         hasSpecificErrors = true
-      } else if (typeof item.id !== 'string') {
+      } else if (typeof obj.id !== 'string') {
         errors.push(`Item ${index}: Field "id" must be a string`)
         hasSpecificErrors = true
-      } else if (item.id.trim() === '') {
+      } else if (obj.id.trim() === '') {
         errors.push(`Item ${index}: Field "id" cannot be empty`)
         hasSpecificErrors = true
       }
 
-      if (!item.trait && item.trait !== '') {
+      if (!obj.trait && obj.trait !== '') {
         errors.push(`Item ${index}: Missing required field: trait`)
         hasSpecificErrors = true
-      } else if (typeof item.trait !== 'string') {
+      } else if (typeof obj.trait !== 'string') {
         errors.push(`Item ${index}: Field "trait" must be a string`)
         hasSpecificErrors = true
-      } else if (item.trait.trim() === '') {
+      } else if (obj.trait.trim() === '') {
         errors.push(`Item ${index}: Field "trait" cannot be empty`)
         hasSpecificErrors = true
       }
 
-      if (!item.definition && item.definition !== '') {
+      if (!obj.definition && obj.definition !== '') {
         errors.push(`Item ${index}: Missing required field: definition`)
         hasSpecificErrors = true
-      } else if (typeof item.definition !== 'string') {
+      } else if (typeof obj.definition !== 'string') {
         errors.push(`Item ${index}: Field "definition" must be a string`)
         hasSpecificErrors = true
-      } else if (item.definition.trim() === '') {
+      } else if (obj.definition.trim() === '') {
         errors.push(`Item ${index}: Field "definition" cannot be empty`)
         hasSpecificErrors = true
       }
 
       // Check optional fields
-      if (item.source !== undefined && typeof item.source !== 'string') {
+      if (obj.source !== undefined && typeof obj.source !== 'string') {
         errors.push(`Item ${index}: Field "source" must be a string`)
         hasSpecificErrors = true
       }
 
-      if (item.distractors !== undefined && !Array.isArray(item.distractors)) {
+      if (obj.distractors !== undefined && !Array.isArray(obj.distractors)) {
         errors.push(`Item ${index}: Field "distractors" must be an array`)
         hasSpecificErrors = true
       }
 
-      if (item.morphology !== undefined && !Array.isArray(item.morphology)) {
+      if (obj.morphology !== undefined && !Array.isArray(obj.morphology)) {
         errors.push(`Item ${index}: Field "morphology" must be an array`)
         hasSpecificErrors = true
       }
 
-      if (item.phenology !== undefined && !Array.isArray(item.phenology)) {
+      if (obj.phenology !== undefined && !Array.isArray(obj.phenology)) {
         errors.push(`Item ${index}: Field "phenology" must be an array`)
         hasSpecificErrors = true
       }
 
-      if (item.examples !== undefined && !Array.isArray(item.examples)) {
+      if (obj.examples !== undefined && !Array.isArray(obj.examples)) {
         errors.push(`Item ${index}: Field "examples" must be an array`)
         hasSpecificErrors = true
       }

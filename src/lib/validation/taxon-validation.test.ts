@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest'
 import { isTaxonObject, validateTaxonJson } from './taxon-validation'
-import { Taxon } from '@/types'
 
 describe('isTaxonObject', () => {
   it('should return true for a valid Taxon object', () => {

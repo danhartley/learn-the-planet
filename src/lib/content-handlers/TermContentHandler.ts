@@ -16,7 +16,7 @@ function generateTermDistractors(
   item: Term,
   count: number,
   distractorType: DistractorType
-): any[] {
+): unknown[] {
   // Implementation for Term distractors
   const allDefinitions = collection.items.filter(def => def.id !== item.id)
 

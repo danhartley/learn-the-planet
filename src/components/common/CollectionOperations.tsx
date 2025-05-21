@@ -31,7 +31,7 @@ export default function CollectionOperations({
 }: Props) {
   const [type, setType] = useState<ContentHandlerType>(collectionType)
   const [name, setName] = useState<string>('')
-  const [items, setItems] = useState<LearningItem[] | undefined>()
+  const [items, setItems] = useState<unknown[] | undefined>()
   const [collectionItems, setCollectionItems] = useState<
     LearningItem[] | undefined
   >()
@@ -60,7 +60,9 @@ export default function CollectionOperations({
 
   const addInaturalistProperties = async (type: ContentHandlerType) => {
     if (!items) return
-    setCollectionItems(await getInatTaxonProperties({ items, type }))
+    setCollectionItems(
+      await getInatTaxonProperties({ items: items as Taxon[], type })
+    )
     setMessage('Properties added')
   }
 

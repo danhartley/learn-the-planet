@@ -7,13 +7,13 @@ import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { TestConfigSettings } from '@/components/common/TestConfigSettings'
 import { Collection, Term, QuestionTemplateSelection } from '@/types'
 
-type Props<T> = {
-  collection: Collection<T>
+type Props<Term> = {
+  collection: Collection<Term>
 }
 
-export function TermGallery<T>({ collection }: Props<T>) {
+export function TermGallery({ collection }: Props<Term>) {
   const router = useRouter()
-  const { startTest } = useTestPlanner<T>()
+  const { startTest } = useTestPlanner<Term>()
   const [config, setConfig] = useState({
     questionTemplateSelections: [
       { type: 'multipleChoice', isSelected: true },

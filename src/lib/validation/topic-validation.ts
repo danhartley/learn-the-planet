@@ -6,16 +6,16 @@ import { Topic, Credit } from '@/types'
  * @param obj - The object to check
  * @returns Boolean indicating whether the object conforms to the Topic interface
  */
-export const isCreditObject = (obj: any): obj is Credit => {
+export const isCreditObject = (obj: unknown): obj is Credit => {
   // Check if obj is an object and not null or array
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
     return false
   }
 
   // Check Credit fields exist and have correct types
-  if (typeof obj.title !== 'string') return false
-  if (typeof obj.source !== 'string') return false
-  if (!Array.isArray(obj.authors)) return false
+  if (typeof (obj as { title?: unknown }).title !== 'string') return false
+  if (typeof (obj as { source?: unknown }).source !== 'string') return false
+  if (!Array.isArray((obj as { authors?: unknown }).authors)) return false
 
   // All checks passed
   return true
@@ -26,37 +26,50 @@ export const isCreditObject = (obj: any): obj is Credit => {
  * @param obj - The object to check
  * @returns Boolean indicating whether the object conforms to the Topic interface
  */
-export const isTopicObject = (obj: any): obj is Topic => {
+export const isTopicObject = (obj: unknown): obj is Topic => {
   // Check if obj is an object and not null
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
     return false
   }
 
   // Check required fields exist and have correct types
-  if (typeof obj.id !== 'string' || obj.id.trim() === '') {
-    return false
-  }
-
-  if (typeof obj.topic !== 'string' || obj.topic.trim() === '') {
+  if (
+    !('id' in obj) ||
+    typeof (obj as { id: unknown }).id !== 'string' ||
+    (obj as { id: string }).id.trim() === ''
+  ) {
     return false
   }
 
   if (
-    obj.text === undefined ||
-    (obj.text !== undefined && !Array.isArray(obj.text))
+    !('topic' in obj) ||
+    typeof (obj as { topic: unknown }).topic !== 'string' ||
+    (obj as { topic: string }).topic.trim() === ''
+  ) {
+    return false
+  }
+
+  if (
+    (obj as { text?: unknown }).text === undefined ||
+    ((obj as { text?: unknown }).text !== undefined &&
+      !Array.isArray((obj as { text?: unknown }).text))
   ) {
     return false
   }
 
   // Check optional fields have correct types if present
   // Check credit field if present
-  if (obj.credit !== undefined) {
-    if (!isCreditObject(obj.credit)) {
+
+  if ((obj as { credit?: unknown }).credit !== undefined) {
+    if (!isCreditObject((obj as { credit?: unknown }).credit)) {
       return false
     }
   }
 
-  if (obj.distractors !== undefined && !Array.isArray(obj.distractors)) {
+  if (
+    (obj as { distractors?: unknown }).distractors !== undefined &&
+    !Array.isArray((obj as { distractors?: unknown }).distractors)
+  ) {
     return false
   }
 
@@ -88,7 +101,7 @@ export function validateTopicJson(jsonString: string): ValidationResult<Topic> {
     const itemsToValidate = isArray ? parsedJSON : [parsedJSON]
 
     // Step 3: Validate each item
-    itemsToValidate.forEach((item: any, index: number) => {
+    itemsToValidate.forEach((item: unknown, index: number) => {
       // Use isTopicObject directly - if valid, no need to check anything else
       if (isTopicObject(item)) {
         return // This item is valid, continue to next item
@@ -104,63 +117,74 @@ export function validateTopicJson(jsonString: string): ValidationResult<Topic> {
       }
 
       // Check required fields
-      if (!item.id && item.id !== '') {
+
+      if (
+        !(item as { id?: unknown }).id &&
+        (item as { id?: unknown }).id !== ''
+      ) {
         errors.push(`Item ${index}: Missing required field: id`)
         hasSpecificErrors = true
-      } else if (typeof item.id !== 'string') {
+      } else if (typeof (item as { id?: unknown }).id !== 'string') {
         errors.push(`Item ${index}: Field "id" must be a string`)
         hasSpecificErrors = true
-      } else if (item.id.trim() === '') {
+      } else if ((item as { id: string }).id.trim() === '') {
         errors.push(`Item ${index}: Field "id" cannot be empty`)
         hasSpecificErrors = true
       }
 
-      if (!item.topic && item.topic !== '') {
+      if (
+        !(item as { topic?: unknown }).topic &&
+        (item as { topic?: unknown }).topic !== ''
+      ) {
         errors.push(`Item ${index}: Missing required field: topic`)
         hasSpecificErrors = true
-      } else if (typeof item.topic !== 'string') {
+      } else if (typeof (item as { topic?: unknown }).topic !== 'string') {
         errors.push(`Item ${index}: Field "topic" must be a string`)
         hasSpecificErrors = true
-      } else if (item.topic.trim() === '') {
+      } else if ((item as { topic: string }).topic.trim() === '') {
         errors.push(`Item ${index}: Field "topic" cannot be empty`)
         hasSpecificErrors = true
       }
 
-      if (item.text === undefined) {
+      if ((item as { text?: unknown }).text === undefined) {
         errors.push(`Item ${index}: Missing required field: text`)
         hasSpecificErrors = true
-      } else if (!Array.isArray(item.text)) {
+      } else if (!Array.isArray((item as { text?: unknown }).text)) {
         errors.push(`Item ${index}: Field "text" must be an array`)
         hasSpecificErrors = true
       }
 
       // Check optional fields
 
-      if (item.distractors !== undefined && !Array.isArray(item.distractors)) {
+      if (
+        (item as { distractors?: unknown }).distractors !== undefined &&
+        !Array.isArray((item as { distractors?: unknown }).distractors)
+      ) {
         errors.push(`Item ${index}: Field "distractors" must be an array`)
         hasSpecificErrors = true
       }
 
       // Check credit object if present
-      if (item.credit !== undefined) {
-        if (typeof item.credit !== 'object' || Array.isArray(item.credit)) {
+
+      if ((item as { credit?: unknown }).credit !== undefined) {
+        const credit = (item as { credit?: unknown }).credit
+        if (typeof credit !== 'object' || Array.isArray(credit)) {
           errors.push(`Item ${index}: Field "credit" must be an object`)
           hasSpecificErrors = true
         } else {
           // Check each required property of the Credit type
-          const credit = item.credit
 
-          if (typeof credit.title !== 'string') {
+          if (typeof (credit as { title?: unknown }).title !== 'string') {
             errors.push(`Item ${index}: Field "credit.title" must be a string`)
             hasSpecificErrors = true
           }
 
-          if (typeof credit.source !== 'string') {
+          if (typeof (credit as { source?: unknown }).source !== 'string') {
             errors.push(`Item ${index}: Field "credit.source" must be a string`)
             hasSpecificErrors = true
           }
 
-          if (!Array.isArray(credit.authors)) {
+          if (!Array.isArray((credit as { authors?: unknown }).authors)) {
             errors.push(
               `Item ${index}: Field "credit.authors" must be an array`
             )
