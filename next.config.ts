@@ -4,6 +4,7 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  distDir: 'out', // output build directory
   basePath: '',
   images: {
     remotePatterns: [

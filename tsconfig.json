@@ -41,17 +41,18 @@
     ]
   },
   "include": [
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.test.tsx",
-    "prettier.config.js",
+    ".next/types/**/*.ts",
     "@testing-library/jest-dom/vitest",
-    "artefacts/data and examples/inat.js",
-    "src/lib/api/inat/inat-species-map.ts"
+    "**/*.test.tsx",
+    "build/types/**/*.ts",
+    "next-env.d.ts",
+    "prettier.config.js",
+    "src/lib/api/inat/inat-species-map.ts",
+    "out/types/**/*.ts"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "artefacts", "**/mocks/**/*.*"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"
