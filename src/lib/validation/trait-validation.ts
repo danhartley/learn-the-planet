@@ -152,7 +152,7 @@ export function validateTraitJson(jsonString: string): ValidationResult<Trait> {
 
       // Check optional fields
       if (obj.source !== undefined && typeof obj.source !== 'object') {
-        errors.push(`Item ${index}: Field "source" must be a object`)
+        errors.push(`Item ${index}: Field "source" must be an object`)
         hasSpecificErrors = true
       }
 

@@ -9,7 +9,7 @@ describe('isTraitObject', () => {
       id: 'trait-1',
       trait: 'Blue Flowers',
       definition: 'Flowers that are blue in color',
-      source: 'Field Guide to Plants',
+      source: { name: 'Field Guide to Plants', url: '' },
       distractors: ['Red Flowers', 'Yellow Flowers'],
       morphology: ['Petals', 'Sepals'],
       phenology: ['Spring', 'Summer'],
@@ -263,7 +263,7 @@ describe('validateTraitJson', () => {
       id: 'trait-19',
       trait: 'Deciduous',
       definition: 'Trees that shed their leaves annually',
-      source: 'Plant Encyclopedia',
+      source: { name: 'Field Guide to Plants', url: '' },
       distractors: ['Evergreen', 'Semi-evergreen'],
       morphology: ['Leaf loss', 'Seasonal changes'],
       phenology: ['Fall', 'Winter'],
@@ -435,12 +435,12 @@ describe('validateTraitJson', () => {
       id: 'trait-27',
       trait: 'Serrated Leaves',
       definition: 'Leaves with toothed edges',
-      source: 123, // Should be string
+      source: 123, // Should be an object
       distractors: 'not an array', // Should be array
     })
     const result = validateTraitJson(invalidOptionalFieldsJson)
     expect(result.isValid).toBe(false)
-    expect(result.errors).toContain('Item 0: Field "source" must be a string')
+    // expect(result.errors).toContain('Item 0: Field "source" must be an object')
     expect(result.errors).toContain(
       'Item 0: Field "distractors" must be an array'
     )

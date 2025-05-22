@@ -9,7 +9,7 @@ describe('isTraitObject', () => {
       id: 'trait-1',
       trait: 'Blue Flowers',
       definition: 'Flowers that are blue in color',
-      source: 'Field Guide to Plants',
+      source: { name: 'Field Guide to Plants', url: '' },
       distractors: ['Red Flowers', 'Yellow Flowers'],
       morphology: ['Petals', 'Sepals'],
       phenology: ['Spring', 'Summer'],
@@ -18,9 +18,10 @@ describe('isTraitObject', () => {
           id: 'example-1',
           binomial: 'Centaurea cyanus',
           vernacularName: 'Cornflower',
-          inaturalistUrl: 'https://www.inaturalist.org/taxa/47603-Centaurea-cyanus'
-        }
-      ]
+          inaturalistUrl:
+            'https://www.inaturalist.org/taxa/47603-Centaurea-cyanus',
+        },
+      ],
     }
     expect(isTraitObject(validTrait)).toBe(true)
   })
@@ -29,7 +30,7 @@ describe('isTraitObject', () => {
     const minimalTrait = {
       id: 'trait-2',
       trait: 'Red Berries',
-      definition: 'Berries that are red in color'
+      definition: 'Berries that are red in color',
     }
     expect(isTraitObject(minimalTrait)).toBe(true)
   })
@@ -52,124 +53,158 @@ describe('isTraitObject', () => {
 
   it('should return false when missing required fields', () => {
     // Missing id
-    expect(isTraitObject({
-      trait: 'Thorns',
-      definition: 'Sharp protective structures'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        trait: 'Thorns',
+        definition: 'Sharp protective structures',
+      })
+    ).toBe(false)
 
     // Missing trait
-    expect(isTraitObject({
-      id: 'trait-3',
-      definition: 'Sharp protective structures'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-3',
+        definition: 'Sharp protective structures',
+      })
+    ).toBe(false)
 
     // Missing definition
-    expect(isTraitObject({
-      id: 'trait-4',
-      trait: 'Thorns'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-4',
+        trait: 'Thorns',
+      })
+    ).toBe(false)
   })
 
   it('should return false when required fields are empty strings', () => {
-    expect(isTraitObject({
-      id: '',
-      trait: 'Thorns',
-      definition: 'Sharp protective structures'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: '',
+        trait: 'Thorns',
+        definition: 'Sharp protective structures',
+      })
+    ).toBe(false)
 
-    expect(isTraitObject({
-      id: 'trait-5',
-      trait: '',
-      definition: 'Sharp protective structures'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-5',
+        trait: '',
+        definition: 'Sharp protective structures',
+      })
+    ).toBe(false)
 
-    expect(isTraitObject({
-      id: 'trait-6',
-      trait: 'Thorns',
-      definition: ''
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-6',
+        trait: 'Thorns',
+        definition: '',
+      })
+    ).toBe(false)
   })
 
   it('should return false when required fields are whitespace strings', () => {
-    expect(isTraitObject({
-      id: '   ',
-      trait: 'Thorns',
-      definition: 'Sharp protective structures'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: '   ',
+        trait: 'Thorns',
+        definition: 'Sharp protective structures',
+      })
+    ).toBe(false)
 
-    expect(isTraitObject({
-      id: 'trait-7',
-      trait: '  ',
-      definition: 'Sharp protective structures'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-7',
+        trait: '  ',
+        definition: 'Sharp protective structures',
+      })
+    ).toBe(false)
 
-    expect(isTraitObject({
-      id: 'trait-8',
-      trait: 'Thorns',
-      definition: '  '
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-8',
+        trait: 'Thorns',
+        definition: '  ',
+      })
+    ).toBe(false)
   })
 
   it('should return false when required fields have wrong types', () => {
-    expect(isTraitObject({
-      id: 123,
-      trait: 'Thorns',
-      definition: 'Sharp protective structures'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 123,
+        trait: 'Thorns',
+        definition: 'Sharp protective structures',
+      })
+    ).toBe(false)
 
-    expect(isTraitObject({
-      id: 'trait-9',
-      trait: true,
-      definition: 'Sharp protective structures'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-9',
+        trait: true,
+        definition: 'Sharp protective structures',
+      })
+    ).toBe(false)
 
-    expect(isTraitObject({
-      id: 'trait-10',
-      trait: 'Thorns',
-      definition: ['Sharp protective structures']
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-10',
+        trait: 'Thorns',
+        definition: ['Sharp protective structures'],
+      })
+    ).toBe(false)
   })
 
   it('should return false when optional fields have wrong types', () => {
     // Wrong source type
-    expect(isTraitObject({
-      id: 'trait-11',
-      trait: 'Thorns',
-      definition: 'Sharp protective structures',
-      source: 123
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-11',
+        trait: 'Thorns',
+        definition: 'Sharp protective structures',
+        source: 123,
+      })
+    ).toBe(false)
 
     // Wrong distractors type
-    expect(isTraitObject({
-      id: 'trait-12',
-      trait: 'Thorns',
-      definition: 'Sharp protective structures',
-      distractors: 'Not thorns'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-12',
+        trait: 'Thorns',
+        definition: 'Sharp protective structures',
+        distractors: 'Not thorns',
+      })
+    ).toBe(false)
 
     // Wrong morphology type
-    expect(isTraitObject({
-      id: 'trait-13',
-      trait: 'Thorns',
-      definition: 'Sharp protective structures',
-      morphology: 'Stems'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-13',
+        trait: 'Thorns',
+        definition: 'Sharp protective structures',
+        morphology: 'Stems',
+      })
+    ).toBe(false)
 
     // Wrong phenology type
-    expect(isTraitObject({
-      id: 'trait-14',
-      trait: 'Thorns',
-      definition: 'Sharp protective structures',
-      phenology: 'All year'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-14',
+        trait: 'Thorns',
+        definition: 'Sharp protective structures',
+        phenology: 'All year',
+      })
+    ).toBe(false)
 
     // Wrong examples type
-    expect(isTraitObject({
-      id: 'trait-15',
-      trait: 'Thorns',
-      definition: 'Sharp protective structures',
-      examples: 'Rose'
-    })).toBe(false)
+    expect(
+      isTraitObject({
+        id: 'trait-15',
+        trait: 'Thorns',
+        definition: 'Sharp protective structures',
+        examples: 'Rose',
+      })
+    ).toBe(false)
   })
 })
 
@@ -179,7 +214,7 @@ describe('validateTraitJson', () => {
     const validTraitJson = JSON.stringify({
       id: 'trait-16',
       trait: 'Compound Leaves',
-      definition: 'Leaves composed of multiple leaflets'
+      definition: 'Leaves composed of multiple leaflets',
     })
 
     const result = validateTraitJson(validTraitJson)
@@ -188,7 +223,7 @@ describe('validateTraitJson', () => {
     expect(result.parsedData).toEqual({
       id: 'trait-16',
       trait: 'Compound Leaves',
-      definition: 'Leaves composed of multiple leaflets'
+      definition: 'Leaves composed of multiple leaflets',
     })
   })
 
@@ -197,13 +232,13 @@ describe('validateTraitJson', () => {
       {
         id: 'trait-17',
         trait: 'Compound Leaves',
-        definition: 'Leaves composed of multiple leaflets'
+        definition: 'Leaves composed of multiple leaflets',
       },
       {
         id: 'trait-18',
         trait: 'Simple Leaves',
-        definition: 'Leaves with a single blade'
-      }
+        definition: 'Leaves with a single blade',
+      },
     ])
 
     const result = validateTraitJson(validTraitArrayJson)
@@ -213,13 +248,13 @@ describe('validateTraitJson', () => {
       {
         id: 'trait-17',
         trait: 'Compound Leaves',
-        definition: 'Leaves composed of multiple leaflets'
+        definition: 'Leaves composed of multiple leaflets',
       },
       {
         id: 'trait-18',
         trait: 'Simple Leaves',
-        definition: 'Leaves with a single blade'
-      }
+        definition: 'Leaves with a single blade',
+      },
     ])
   })
 
@@ -228,7 +263,7 @@ describe('validateTraitJson', () => {
       id: 'trait-19',
       trait: 'Deciduous',
       definition: 'Trees that shed their leaves annually',
-      source: 'Plant Encyclopedia',
+      source: { name: 'Field Guide to Plants', url: '' },
       distractors: ['Evergreen', 'Semi-evergreen'],
       morphology: ['Leaf loss', 'Seasonal changes'],
       phenology: ['Fall', 'Winter'],
@@ -237,9 +272,10 @@ describe('validateTraitJson', () => {
           id: 'example-2',
           binomial: 'Quercus rubra',
           vernacularName: 'Red Oak',
-          inaturalistUrl: 'https://www.inaturalist.org/taxa/48734-Quercus-rubra'
-        }
-      ]
+          inaturalistUrl:
+            'https://www.inaturalist.org/taxa/48734-Quercus-rubra',
+        },
+      ],
     })
 
     const result = validateTraitJson(completeTraitJson)
@@ -271,7 +307,8 @@ describe('validateTraitJson', () => {
   })
 
   it('should reject malformed JSON', () => {
-    const malformedJson = '{"id": "trait-20", "trait": "Serrated Leaves", definition: "Leaves with toothed edges"}'
+    const malformedJson =
+      '{"id": "trait-20", "trait": "Serrated Leaves", definition: "Leaves with toothed edges"}'
     const result = validateTraitJson(malformedJson)
     expect(result.isValid).toBe(false)
     expect(result.errors.length).toBe(1)
@@ -283,29 +320,35 @@ describe('validateTraitJson', () => {
     // Missing id
     const missingIdJson = JSON.stringify({
       trait: 'Serrated Leaves',
-      definition: 'Leaves with toothed edges'
+      definition: 'Leaves with toothed edges',
     })
     const missingIdResult = validateTraitJson(missingIdJson)
     expect(missingIdResult.isValid).toBe(false)
-    expect(missingIdResult.errors).toContain('Item 0: Missing required field: id')
+    expect(missingIdResult.errors).toContain(
+      'Item 0: Missing required field: id'
+    )
 
     // Missing trait
     const missingTraitJson = JSON.stringify({
       id: 'trait-21',
-      definition: 'Leaves with toothed edges'
+      definition: 'Leaves with toothed edges',
     })
     const missingTraitResult = validateTraitJson(missingTraitJson)
     expect(missingTraitResult.isValid).toBe(false)
-    expect(missingTraitResult.errors).toContain('Item 0: Missing required field: trait')
+    expect(missingTraitResult.errors).toContain(
+      'Item 0: Missing required field: trait'
+    )
 
     // Missing definition
     const missingDefinitionJson = JSON.stringify({
       id: 'trait-22',
-      trait: 'Serrated Leaves'
+      trait: 'Serrated Leaves',
     })
     const missingDefinitionResult = validateTraitJson(missingDefinitionJson)
     expect(missingDefinitionResult.isValid).toBe(false)
-    expect(missingDefinitionResult.errors).toContain('Item 0: Missing required field: definition')
+    expect(missingDefinitionResult.errors).toContain(
+      'Item 0: Missing required field: definition'
+    )
   })
 
   // Test with invalid field types
@@ -314,31 +357,37 @@ describe('validateTraitJson', () => {
     const invalidIdTypeJson = JSON.stringify({
       id: 123,
       trait: 'Serrated Leaves',
-      definition: 'Leaves with toothed edges'
+      definition: 'Leaves with toothed edges',
     })
     const invalidIdResult = validateTraitJson(invalidIdTypeJson)
     expect(invalidIdResult.isValid).toBe(false)
-    expect(invalidIdResult.errors).toContain('Item 0: Field "id" must be a string')
+    expect(invalidIdResult.errors).toContain(
+      'Item 0: Field "id" must be a string'
+    )
 
     // Invalid trait type
     const invalidTraitTypeJson = JSON.stringify({
       id: 'trait-23',
       trait: true,
-      definition: 'Leaves with toothed edges'
+      definition: 'Leaves with toothed edges',
     })
     const invalidTraitResult = validateTraitJson(invalidTraitTypeJson)
     expect(invalidTraitResult.isValid).toBe(false)
-    expect(invalidTraitResult.errors).toContain('Item 0: Field "trait" must be a string')
+    expect(invalidTraitResult.errors).toContain(
+      'Item 0: Field "trait" must be a string'
+    )
 
     // Invalid definition type
     const invalidDefinitionTypeJson = JSON.stringify({
       id: 'trait-24',
       trait: 'Serrated Leaves',
-      definition: ['Leaves with toothed edges']
+      definition: ['Leaves with toothed edges'],
     })
     const invalidDefinitionResult = validateTraitJson(invalidDefinitionTypeJson)
     expect(invalidDefinitionResult.isValid).toBe(false)
-    expect(invalidDefinitionResult.errors).toContain('Item 0: Field "definition" must be a string')
+    expect(invalidDefinitionResult.errors).toContain(
+      'Item 0: Field "definition" must be a string'
+    )
   })
 
   // Test for array validation errors
@@ -347,18 +396,18 @@ describe('validateTraitJson', () => {
       {
         id: 'trait-25',
         trait: 'Serrated Leaves',
-        definition: 'Leaves with toothed edges'
+        definition: 'Leaves with toothed edges',
       },
       {
         // Missing id
         trait: 'Lobed Leaves',
-        definition: 'Leaves with rounded projections'
+        definition: 'Leaves with rounded projections',
       },
       {
         id: 'trait-26',
         // Missing trait
-        definition: 'Leaves with parallel veins'
-      }
+        definition: 'Leaves with parallel veins',
+      },
     ])
 
     const result = validateTraitJson(mixedValidityArrayJson)
@@ -373,7 +422,7 @@ describe('validateTraitJson', () => {
     const emptyFieldsJson = JSON.stringify({
       id: '',
       trait: 'Serrated Leaves',
-      definition: 'Leaves with toothed edges'
+      definition: 'Leaves with toothed edges',
     })
     const result = validateTraitJson(emptyFieldsJson)
     expect(result.isValid).toBe(false)
@@ -386,13 +435,15 @@ describe('validateTraitJson', () => {
       id: 'trait-27',
       trait: 'Serrated Leaves',
       definition: 'Leaves with toothed edges',
-      source: 123, // Should be string
-      distractors: 'not an array' // Should be array
+      source: 123, // Should be object
+      distractors: 'not an array', // Should be array
     })
     const result = validateTraitJson(invalidOptionalFieldsJson)
     expect(result.isValid).toBe(false)
-    expect(result.errors).toContain('Item 0: Field "source" must be a string')
-    expect(result.errors).toContain('Item 0: Field "distractors" must be an array')
+    expect(result.errors).toContain('Item 0: Field "source" must be an object')
+    expect(result.errors).toContain(
+      'Item 0: Field "distractors" must be an array'
+    )
   })
 
   // Test for non-object JSON
