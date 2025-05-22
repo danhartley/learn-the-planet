@@ -1,9 +1,7 @@
-import { Collection, Taxon } from '@/types'
+import { Taxon } from '@/types'
 
-export const generateGenusAndSpeciesFields = (
-  collection: Collection<Taxon>
-) => {
-  collection?.items.forEach((i: Taxon) => {
+export const generateGenusAndSpeciesFields = (taxa: Taxon[]) => {
+  taxa.forEach((i: Taxon) => {
     const [genus, species] = i.binomial.split(' ')
     i.genus = genus
     i.species = species
@@ -16,5 +14,5 @@ export const generateGenusAndSpeciesFields = (
     })
   })
 
-  return collection
+  return taxa
 }

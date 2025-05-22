@@ -16,6 +16,7 @@ import {
   LearningItem,
   Collection,
   Taxon,
+  Trait,
 } from '@/types'
 
 type Props = {
@@ -50,7 +51,7 @@ export default function CollectionOperations({
     const itemsValid = !!items && items.length > 0
     setIsItemsValid(itemsValid)
     let collectionItemsValid = true
-    if (['taxon'].includes(type)) {
+    if (['taxon', 'trait'].includes(type)) {
       collectionItemsValid = !!collectionItems && collectionItems.length > 0
     }
     const isAllValid = nameValid && itemsValid && collectionItemsValid
@@ -81,9 +82,22 @@ export default function CollectionOperations({
     let addedPropsCollection = collection
 
     if (['taxon'].includes(type)) {
-      addedPropsCollection = generateGenusAndSpeciesFields(
-        collection as Collection<Taxon>
-      )
+      addedPropsCollection = {
+        ...collection,
+        items: generateGenusAndSpeciesFields(collection.items as Taxon[]),
+      }
+    }
+
+    if (['trait'].includes(type)) {
+      addedPropsCollection = {
+        ...collection,
+        items: (collection.items as Trait[]).map(trait => {
+          return {
+            ...trait,
+            examples: generateGenusAndSpeciesFields(trait?.examples as Taxon[]),
+          }
+        }),
+      }
     }
 
     if (type !== 'topic') {
@@ -132,7 +146,7 @@ export default function CollectionOperations({
         setType={setType}
       />
       <CollectionItemPicker type={type} setItems={setItems} />
-      {type === 'taxon' ? CollectionExtensions : null}
+      {['taxon', 'trait'].includes(type) ? CollectionExtensions : null}
       <section aria-labelledby="create-collection">
         <div>
           <h2 id="create-collection">Create {type} collection</h2>
