@@ -9,8 +9,9 @@ export default defineConfig({
     environment: 'jsdom',
     coverage: {
       provider: 'v8', // or 'istanbul'
+      include: ['src/**/*'],
     },
     setupFiles: ['./setup.ts'],
-    include: ['./**/*.test.tsx', './**/*.test.ts'],
+    include: ['./src/**/*.test.tsx', './src/**/*.test.ts'],
   },
 })
