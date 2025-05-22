@@ -37,7 +37,7 @@ export const isTraitObject = (obj: unknown): obj is Trait => {
   // Check optional fields have correct types if present
   if (
     (obj as Record<string, unknown>).source !== undefined &&
-    typeof (obj as Record<string, unknown>).source !== 'string'
+    typeof (obj as Record<string, unknown>).source !== 'object'
   ) {
     return false
   }
@@ -151,8 +151,8 @@ export function validateTraitJson(jsonString: string): ValidationResult<Trait> {
       }
 
       // Check optional fields
-      if (obj.source !== undefined && typeof obj.source !== 'string') {
-        errors.push(`Item ${index}: Field "source" must be a string`)
+      if (obj.source !== undefined && typeof obj.source !== 'object') {
+        errors.push(`Item ${index}: Field "source" must be a object`)
         hasSpecificErrors = true
       }
 
