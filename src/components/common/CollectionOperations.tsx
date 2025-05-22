@@ -49,13 +49,17 @@ export default function CollectionOperations({
     const nameValid = name.trim().length > 0
     const itemsValid = !!items && items.length > 0
     setIsItemsValid(itemsValid)
-    const collectionItemsValid = !!collectionItems && collectionItems.length > 0
+    let collectionItemsValid = true
+    if (['taxon'].includes(type)) {
+      collectionItemsValid = !!collectionItems && collectionItems.length > 0
+    }
     const isAllValid = nameValid && itemsValid && collectionItemsValid
     setIsValid(isAllValid)
     if (isAllValid)
       setCreateCollectionMessage(
         `You're ready to create a new ${type} collection`
       )
+    setCollectionItems(items as LearningItem[])
   }, [name, items, type, collectionItems])
 
   const addInaturalistProperties = async (type: ContentHandlerType) => {
@@ -73,12 +77,23 @@ export default function CollectionOperations({
       name,
       items: collectionItems!,
     }
-    startTest({
-      collection: generateGenusAndSpeciesFields(
+
+    let addedPropsCollection = collection
+
+    if (['taxon'].includes(type)) {
+      addedPropsCollection = generateGenusAndSpeciesFields(
         collection as Collection<Taxon>
-      ),
-    })
-    router.push('/test')
+      )
+    }
+
+    if (type !== 'topic') {
+      startTest({
+        collection: addedPropsCollection,
+      })
+      router.push('/test')
+    } else {
+      console.log('Topic collections do not have their own tests')
+    }
   }
 
   const CollectionExtensions = (
@@ -124,7 +139,7 @@ export default function CollectionOperations({
           <div>{createCollectionMessage}</div>
         </div>
         <button disabled={!isValid} onClick={createCollection}>
-          Create
+          Create collection
         </button>
       </section>
     </>

@@ -2847,7 +2847,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
     name: 'Features of Mediterranean Plants',
     items: [
       {
-        id: 1,
+        id: '1',
         term: 'sclerophyll',
         definition:
           'Plants with hard, leathery leaves adapted to conserve water in dry conditions',
@@ -2856,7 +2856,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
           'Olive trees (Olea europaea) have small, leathery leaves that minimise water loss during hot summers',
       },
       {
-        id: 2,
+        id: '2',
         term: 'chaparral',
         definition:
           'A type of shrubland vegetation adapted to Mediterranean climate regions characterised by hot, dry summers and mild, wet winters',
@@ -2865,7 +2865,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
           'The coastal regions of California are dominated by chaparral ecosystems with drought-resistant shrubs',
       },
       {
-        id: 3,
+        id: '3',
         term: 'maquis',
         definition:
           'Dense, shrubby vegetation consisting of drought-resistant plants found in Mediterranean regions',
@@ -2874,7 +2874,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
           'The maquis of Corsica features aromatic plants like rosemary, lavender, and myrtle',
       },
       {
-        id: 4,
+        id: '4',
         term: 'garrigue',
         definition:
           'Low, open scrubland with aromatic, drought-resistant plants growing on limestone soils in Mediterranean regions',
@@ -2883,7 +2883,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
           'The garrigue landscape of southern France is characterised by thyme, sage, and juniper growing on rocky terrain',
       },
       {
-        id: 5,
+        id: '5',
         term: 'dehesa',
         definition:
           'A multifunctional agroforestry system found in Mediterranean regions, particularly Spain and Portugal, characterised by scattered oak trees with understory used for grazing',
@@ -2892,7 +2892,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
           'The dehesa landscapes of Extremadura support cork oak trees while providing grazing for livestock',
       },
       {
-        id: 6,
+        id: '6',
         term: 'pyrophyte',
         definition:
           'Plants adapted to survive and thrive in ecosystems where fire is common, often with fire-activated seeds or resprouting capabilities',
@@ -2901,7 +2901,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
           'Many Mediterranean pine species like Pinus halepensis are pyrophytes with serotinous cones that release seeds after fire',
       },
       {
-        id: 7,
+        id: '7',
         term: 'phreatophyte',
         definition:
           'Deep-rooted plants that obtain water from the water table or the capillary fringe above it',
@@ -2910,7 +2910,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
           'Oleander (Nerium oleander) is a phreatophyte commonly found along watercourses in Mediterranean regions',
       },
       {
-        id: 8,
+        id: '8',
         term: 'phrygana',
         definition:
           'A type of low shrubland found in the eastern Mediterranean region, consisting of aromatic, spiny shrubs adapted to grazing pressure and summer drought',
@@ -2919,7 +2919,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
           'The phrygana ecosystems of Greece and Turkey feature dwarf shrubs like thyme and sage growing on degraded soils',
       },
       {
-        id: 9,
+        id: '9',
         term: 'seasonal dimorphism',
         definition:
           'The phenomenon where plants produce different types of leaves during different seasons as an adaptation to seasonal changes in rainfall and temperature',
@@ -2928,7 +2928,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
           'Cistus species in Mediterranean regions often produce larger leaves during the wet winter and smaller leaves during the dry summer',
       },
       {
-        id: 10,
+        id: '10',
         term: 'riparian woodland',
         definition:
           'Forest ecosystems that occur along rivers and streams in Mediterranean regions, providing important refuge for biodiversity during dry summers',
