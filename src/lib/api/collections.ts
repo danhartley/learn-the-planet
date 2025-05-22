@@ -4320,7 +4320,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
         ],
         examples: [
           {
-            id: 78805,
+            id: '78805',
             iconicTaxon: 'Plantae',
             binomial: 'Quercus ilex',
             rank: 'species',
@@ -4340,7 +4340,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
               'https://www.inaturalist.org/taxa/78805-Quercus-ilex',
           },
           {
-            id: 57140,
+            id: '57140',
             iconicTaxon: 'Plantae',
             binomial: 'Olea europaea',
             rank: 'species',
@@ -4360,7 +4360,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
               'https://www.inaturalist.org/taxa/57140-Olea-europaea',
           },
           {
-            id: 82689,
+            id: '82689',
             iconicTaxon: 'Plantae',
             binomial: 'Arbutus unedo',
             rank: 'species',
@@ -4404,7 +4404,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
         ],
         examples: [
           {
-            id: 82723,
+            id: '82723',
             iconicTaxon: 'Plantae',
             binomial: 'Pinus pinaster',
             rank: 'species',
@@ -4424,7 +4424,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
               'https://www.inaturalist.org/taxa/82723-Pinus-pinaster',
           },
           {
-            id: 82722,
+            id: '82722',
             iconicTaxon: 'Plantae',
             binomial: 'Pinus halepensis',
             rank: 'species',
@@ -4444,7 +4444,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
               'https://www.inaturalist.org/taxa/82722-Pinus-halepensis',
           },
           {
-            id: 76362,
+            id: '76362',
             iconicTaxon: 'Plantae',
             binomial: 'Cistus ladanifer',
             rank: 'species',
@@ -4484,7 +4484,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
         ],
         examples: [
           {
-            id: 50868,
+            id: '50868',
             iconicTaxon: 'Plantae',
             binomial: 'Quercus suber',
             rank: 'species',
@@ -4504,14 +4504,15 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
               'https://www.inaturalist.org/taxa/50868-Quercus-suber',
           },
           {
-            commonName: 'Wild Olive',
-            scientificName: 'Olea europaea var. sylvestris',
+            id: '237528',
+            vernacularName: 'Wild Olive',
+            binomial: 'Olea europaea var. sylvestris',
             wikipedia: 'https://en.wikipedia.org/wiki/Olea_oleaster',
             inaturalist:
               'https://www.inaturalist.org/taxa/237528-Olea-europaea-europaea',
           },
           {
-            id: 82600,
+            id: '82600',
             iconicTaxon: 'Plantae',
             binomial: 'Pistacia lentiscus',
             rank: 'species',
@@ -4531,7 +4532,7 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
               'https://www.inaturalist.org/taxa/82600-Pistacia-lentiscus',
           },
           {
-            id: 57140,
+            id: '57140',
             iconicTaxon: 'Plantae',
             binomial: 'Olea europaea',
             rank: 'species',
@@ -4585,11 +4586,11 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
         ],
         examples: [
           {
-            inatId: 82673,
+            id: '82673',
             iconicTaxonId: 47126,
             binomial: 'Cistus albidus',
             image: {
-              inatId: 476982828,
+              id: 476982828,
               licenceCode: 'cc-by',
               attribution:
                 '(c) Borja Fierro, some rights reserved (CC BY), uploaded by Borja Fierro',
@@ -4700,17 +4701,16 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
             wikipediaUrl: 'http://en.wikipedia.org/wiki/Cistus_albidus',
             iconicTaxonName: 'Plantae',
             vernacularName: 'grey-leaved cistus',
-            id: '82673',
             iconicTaxon: 'Plantae',
             inaturalistUrl:
               'https://www.inaturalist.org/taxa/82673-Cistus-albidus',
           },
           {
-            inatId: 320779,
+            id: '320779',
             iconicTaxonId: 47126,
             binomial: 'Phlomis purpurea',
             image: {
-              inatId: 25083740,
+              id: 25083740,
               licenceCode: null,
               attribution:
                 '(c) mjcorreia, all rights reserved, uploaded by mjcorreia',
@@ -4787,17 +4787,16 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
             wikipediaUrl: 'http://en.wikipedia.org/wiki/Phlomis_purpurea',
             iconicTaxonName: 'Plantae',
             vernacularName: 'purple phlomis',
-            id: '320779',
             iconicTaxon: 'Plantae',
             inaturalistUrl:
               'https://www.inaturalist.org/taxa/320779-Phlomis-purpurea',
           },
           {
-            inatId: 636795,
+            id: '636795',
             iconicTaxonId: 47126,
             binomial: 'Salvia rosmarinus',
             image: {
-              inatId: 87326219,
+              id: '87326219',
               licenceCode: null,
               attribution:
                 '(c) Frank Walther, all rights reserved, uploaded by Frank Walther',
@@ -4920,17 +4919,16 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
             wikipediaUrl: 'http://en.wikipedia.org/wiki/Salvia_rosmarinus',
             iconicTaxonName: 'Plantae',
             vernacularName: 'rosemary',
-            id: '636795',
             iconicTaxon: 'Plantae',
             inaturalistUrl:
               'https://www.inaturalist.org/taxa/636795-Salvia-rosmarinus',
           },
           {
-            inatId: 333982,
+            id: '333982',
             iconicTaxonId: 47126,
             binomial: 'Erica australis',
             image: {
-              inatId: 119832658,
+              id: 119832658,
               licenceCode: 'cc-by-nc',
               attribution:
                 '(c) Felix Riegel, some rights reserved (CC BY-NC), uploaded by Felix Riegel',
@@ -5019,17 +5017,16 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
             wikipediaUrl: 'http://en.wikipedia.org/wiki/Erica_australis',
             iconicTaxonName: 'Plantae',
             vernacularName: 'Spanish heath',
-            id: '333982',
             iconicTaxon: 'Plantae',
             inaturalistUrl:
               'https://www.inaturalist.org/taxa/333982-Erica-australis',
           },
           {
-            inatId: 1504284,
+            id: '1504284',
             iconicTaxonId: 47126,
             binomial: 'Santolina chamaecyparissus',
             image: {
-              inatId: 52699902,
+              id: 52699902,
               licenceCode: 'cc-by-nc',
               attribution:
                 '(c) Muriel Bendel, some rights reserved (CC BY-NC), uploaded by Muriel Bendel',
@@ -5059,17 +5056,16 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
               'http://en.wikipedia.org/wiki/Santolina_chamaecyparissus',
             iconicTaxonName: 'Plantae',
             vernacularName: 'cotton lavender',
-            id: '1504284',
             iconicTaxon: 'Plantae',
             inaturalistUrl:
               'https://www.inaturalist.org/taxa/1504284-Santolina-chamaecyparissus',
           },
           {
-            inatId: 490801,
+            id: '490801',
             iconicTaxonId: 47126,
             binomial: 'Anthyllis cytisoides',
             image: {
-              inatId: 123703161,
+              id: 123703161,
               licenceCode: 'cc-by',
               attribution:
                 '(c) Santiago Martín-Bravo, some rights reserved (CC BY), uploaded by Santiago Martín-Bravo',
@@ -5146,7 +5142,6 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
             wikipediaUrl: 'http://en.wikipedia.org/wiki/Anthyllis_cytisoides',
             iconicTaxonName: 'Plantae',
             vernacularName: 'albaida',
-            id: '490801',
             iconicTaxon: 'Plantae',
             inaturalistUrl:
               'https://www.inaturalist.org/taxa/490801-Anthyllis-cytisoides',
@@ -5310,18 +5305,24 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
 
   return new Promise(resolve => {
     const collections = [
-      generateGenusAndSpeciesFields({
+      {
         ...collection1,
-        items: dedupe(collection2.items as unknown as Taxon[]) as Taxon[],
-      }),
-      generateGenusAndSpeciesFields({
+        items: generateGenusAndSpeciesFields(
+          dedupe(collection2.items as unknown as Taxon[]) as Taxon[]
+        ),
+      },
+      {
         ...collection2,
-        items: dedupe(collection2.items as unknown as Taxon[]) as Taxon[],
-      }),
-      generateGenusAndSpeciesFields({
+        items: generateGenusAndSpeciesFields(
+          dedupe(collection2.items as unknown as Taxon[]) as Taxon[]
+        ),
+      },
+      {
         ...collection3,
-        items: dedupe(collection3.items as unknown as Taxon[]) as Taxon[],
-      }),
+        items: generateGenusAndSpeciesFields(
+          dedupe(collection3.items as unknown as Taxon[]) as Taxon[]
+        ),
+      },
       {
         ...collection4,
         items: sortAlphabeticallyBy(collection4.items, 'term'),
@@ -5334,10 +5335,12 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
         ...collection6,
         items: sortAlphabeticallyBy(collection6.items, 'term'),
       },
-      generateGenusAndSpeciesFields({
+      {
         ...collection7,
-        items: dedupe(collection7.items as unknown as Taxon[]) as Taxon[],
-      }),
+        items: generateGenusAndSpeciesFields(
+          dedupe(collection7.items as unknown as Taxon[]) as Taxon[]
+        ),
+      },
       {
         ...collection8,
         items: sortAlphabeticallyBy(collection8.items, 'term'),
@@ -5359,10 +5362,12 @@ export const getCollections = (): Promise<Collection<unknown>[]> => {
         ...collection13,
         items: sortAlphabeticallyBy(collection13.items, 'trait'),
       },
-      generateGenusAndSpeciesFields({
+      {
         ...collection14,
-        items: dedupe(collection14.items as unknown as Taxon[]) as Taxon[],
-      }),
+        items: generateGenusAndSpeciesFields(
+          dedupe(collection14.items as unknown as Taxon[]) as Taxon[]
+        ),
+      },
     ]
 
     resolve(collections)
@@ -5377,7 +5382,10 @@ export const getCollectionById = async (
   const collection = collections.find(c => c.id === id)
 
   if (collection?.type === 'taxon') {
-    generateGenusAndSpeciesFields(collection as Collection<Taxon>)
+    return {
+      ...collection,
+      items: generateGenusAndSpeciesFields(collection.items as Taxon[]),
+    }
   }
 
   return collection
