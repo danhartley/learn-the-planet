@@ -1,6 +1,6 @@
 import { CollectionList } from '@/components/CollectionList'
 import { Collection } from '@/types'
-import { getCollections } from '@/api/collections'
+import { getCollections } from '@/api/database'
 
 export default async function CollectionsPage() {
   const collections: Collection<unknown>[] = await getCollections()

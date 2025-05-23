@@ -71,11 +71,12 @@ export default function CollectionOperations({
     setMessage('Properties added')
   }
 
-  const createCollection = () => {
+  const createCollection = async () => {
+    const slug = name.trim().toLowerCase().replace(/\s+/g, '-')
     const collection: Collection<LearningItem> = {
-      id: crypto.randomUUID(),
       type,
       name,
+      slug,
       items: collectionItems!,
     }
 
@@ -100,14 +101,17 @@ export default function CollectionOperations({
       }
     }
 
-    if (type !== 'topic') {
-      startTest({
-        collection: addedPropsCollection,
-      })
-      router.push('/test')
-    } else {
-      console.log('Topic collections do not have their own tests')
-    }
+    const result = await addCollection(addedPropsCollection)
+    console.log('Collection created:', result)
+
+    // if (type !== 'topic') {
+    //   startTest({
+    //     collection: addedPropsCollection,
+    //   })
+    //   router.push('/test')
+    // } else {
+    //   console.log('Topic collections do not have their own tests')
+    // }
   }
 
   const CollectionExtensions = (
@@ -158,4 +162,23 @@ export default function CollectionOperations({
       </section>
     </>
   )
+}
+
+export async function addCollection(
+  collection: Collection<unknown>
+): Promise<Collection<unknown>> {
+  const response = await fetch('/api/collections', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(collection),
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.message || 'Failed to add collection')
+  }
+
+  return response.json()
 }

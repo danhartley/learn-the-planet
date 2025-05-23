@@ -30,6 +30,7 @@
     "eslint-config-next": "latest",
     "jsdom": "latest",
     "launchdarkly-react-client-sdk": "latest",
+    "mongodb": "^6.16.0",
     "next": "latest",
     "prettier": "latest",
     "react": "latest",

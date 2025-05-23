@@ -170,9 +170,11 @@ export interface Topic extends LearningItem {
 }
 
 export type Collection<T> = {
-  id: string
+  id?: string
+  shortId?: string
   type: string
   name: string
+  slug: string
   date?: string
   location?: string
   fieldNotes?: {

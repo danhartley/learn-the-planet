@@ -263,7 +263,7 @@ li::marker {
 .block-container {
   display: flex;
   justify-content: center;
-  padding: var(--spacing-lg) 0;
+  padding: 0 0 var(--spacing-lg) 0;
 }
 
 .block {
@@ -357,7 +357,7 @@ li::marker {
   border-radius: var(--border-radius-sm);
   gap: var(--spacing-md);
   margin: var(--spacing-md) 0 0 0;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--spacing-md) var(--spacing-md) var(--spacing-md);
   background-image:
     linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
