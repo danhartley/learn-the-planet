@@ -43,7 +43,7 @@ export function CollectionItem<T>({ collection }: Props<T>) {
     <section className="group card" aria-labelledby="collection">
       <div className="group">
         <h3 id="collection">{collection.name}</h3>
-        <Link className="breadcrumb" href={`/collection/${collection.id}`}>
+        <Link className="breadcrumb" href={`/collection/${collection.shortId}`}>
           {linkText}
         </Link>
       </div>

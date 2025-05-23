@@ -1,17 +1,16 @@
 import { Collection } from '@/types'
-import { getCollectionById } from '@/api/collections'
+import { getCollectionByShortId } from '@/api/database'
 
 import { Gallery } from '@/components/common/Gallery'
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ id: string }>
+  params: Promise<{ shortId: string }>
 }) {
-  const { id } = await params
+  const { shortId } = await params
 
   const collection: Collection<unknown> | undefined =
-    await getCollectionById(id)
-
+    await getCollectionByShortId(shortId)
   return <Gallery collection={collection} />
 }

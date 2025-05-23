@@ -3,7 +3,9 @@ import { Collection } from '@/types'
 import { getCollections } from '@/api/database'
 
 export default async function CollectionsPage() {
-  const collections: Collection<unknown>[] = await getCollections()
+  const collections: Collection<unknown>[] | undefined = await getCollections()
+
+  if (!collections) return
 
   const topics = collections.filter(c => c.type === 'topic')
   const traits = collections.filter(c => c.type === 'trait')

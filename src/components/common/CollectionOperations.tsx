@@ -4,8 +4,8 @@ import { CollectionName } from '@/components/common/CollectionName'
 import { CollectionType } from '@/components/common/CollectionType'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
 
-import { useRouter } from 'next/navigation'
-import { useTestPlanner } from '@/hooks/useTestPlanner'
+// import { useRouter } from 'next/navigation'
+// import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { getInatTaxonProperties } from '@/api/inat/api'
 import { generateGenusAndSpeciesFields } from '@/utils/taxa'
 
@@ -43,8 +43,8 @@ export default function CollectionOperations({
     'Please complete the sections above'
   )
 
-  const router = useRouter()
-  const { startTest } = useTestPlanner<LearningItem>()
+  // const router = useRouter()
+  // const { startTest } = useTestPlanner<LearningItem>()
 
   useEffect(() => {
     const nameValid = name.trim().length > 0
@@ -71,7 +71,7 @@ export default function CollectionOperations({
     setMessage('Properties added')
   }
 
-  const createCollection = async () => {
+  const addCollection = async () => {
     const slug = name.trim().toLowerCase().replace(/\s+/g, '-')
     const collection: Collection<LearningItem> = {
       type,
@@ -101,7 +101,12 @@ export default function CollectionOperations({
       }
     }
 
-    const result = await addCollection(addedPropsCollection)
+    // Request from server side code, POST, at app/api/collections/route.ts
+    const result = await fetch('/api/collections', {
+      method: 'POST',
+      body: JSON.stringify(addedPropsCollection),
+    })
+
     console.log('Collection created:', result)
 
     // if (type !== 'topic') {
@@ -156,29 +161,10 @@ export default function CollectionOperations({
           <h2 id="create-collection">Create {type} collection</h2>
           <div>{createCollectionMessage}</div>
         </div>
-        <button disabled={!isValid} onClick={createCollection}>
+        <button disabled={!isValid} onClick={addCollection}>
           Create collection
         </button>
       </section>
     </>
   )
-}
-
-export async function addCollection(
-  collection: Collection<unknown>
-): Promise<Collection<unknown>> {
-  const response = await fetch('/api/collections', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(collection),
-  })
-
-  if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.message || 'Failed to add collection')
-  }
-
-  return response.json()
 }
