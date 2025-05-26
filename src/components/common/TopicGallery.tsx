@@ -16,8 +16,10 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
   const collections = collection?.collections?.map(
     (subCollection: CollectionSummary) => {
       return subCollection ? (
-        <li key={subCollection.id}>
-          <Link href={`/collection/${encodeURIComponent(subCollection.id)}`}>
+        <li key={subCollection.shortId}>
+          <Link
+            href={`/collection/${encodeURIComponent(subCollection?.shortId || '')}`}
+          >
             {subCollection.name}
           </Link>
         </li>

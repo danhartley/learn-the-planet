@@ -1,27 +1,43 @@
 'use client'
 
 import Link from 'next/link'
-
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
-import { Collection, ContentHandlerType } from '@/types'
+import { CollectionSummary, ContentHandlerType } from '@/types'
 
-type Props<T> = {
-  collection: Collection<T>
+type Props = {
+  collectionSummary: CollectionSummary
 }
 
-export function CollectionItem<T>({ collection }: Props<T>) {
+export function CollectionItem({ collectionSummary }: Props) {
   const router = useRouter()
-  const { startTest } = useTestPlanner<T>()
+  const { startTest } = useTestPlanner()
 
-  const handleStartTest = () => {
-    startTest({ collection })
-    router.push('/test')
+  const handleStartTest = async () => {
+    try {
+      const response = await fetch(
+        `/api/collection/${collectionSummary.shortId}`,
+        {
+          method: 'GET',
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const collection = await response.json()
+
+      startTest({ collection })
+      router.push('/test')
+    } catch (error) {
+      console.error('Failed to fetch collection:', error)
+    }
   }
 
   let linkText
 
-  switch (collection.type as ContentHandlerType) {
+  switch (collectionSummary.type as ContentHandlerType) {
     case 'taxon':
       linkText = 'View taxa'
       break
@@ -36,20 +52,20 @@ export function CollectionItem<T>({ collection }: Props<T>) {
       break
   }
 
-  const items =
-    collection.items?.length > 0 ? `${collection.items?.length} items` : ''
-
   return (
     <section className="group card" aria-labelledby="collection">
       <div className="group">
-        <h3 id="collection">{collection.name}</h3>
-        <Link className="breadcrumb" href={`/collection/${collection.shortId}`}>
+        <h3 id="collection">{collectionSummary.name}</h3>
+        <Link
+          className="breadcrumb"
+          href={`/collection/${collectionSummary.shortId}`}
+        >
           {linkText}
         </Link>
       </div>
-      <div>{collection.date}</div>
-      <div>{collection.location}</div>
-      <div>{items}</div>
+      <div>{collectionSummary.date}</div>
+      <div>{collectionSummary.location}</div>
+      {/* <div>{collection.items}</div> */}
       <button id="start-test" onClick={handleStartTest}>
         Start test
       </button>

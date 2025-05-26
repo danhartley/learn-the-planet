@@ -1,9 +1,10 @@
 import { CollectionList } from '@/components/CollectionList'
-import { Collection } from '@/types'
-import { getCollections } from '@/api/database'
+import { CollectionSummary } from '@/types'
+import { getCollectionsSummary } from '@/api/database'
 
 export default async function CollectionsPage() {
-  const collections: Collection<unknown>[] | undefined = await getCollections()
+  const collections: CollectionSummary[] | undefined =
+    await getCollectionsSummary()
 
   if (!collections) return
 

@@ -152,9 +152,14 @@ export interface Trait extends LearningItem {
 }
 
 export type CollectionSummary = {
-  id: string
-  name: string
+  id?: string
+  shortId?: string
   type: string
+  name: string
+  slug: string
+  date?: string
+  location?: string
+  itemCount: number
 }
 
 export type Credit = {
@@ -181,6 +186,7 @@ export type Collection<T> = {
     url: string
   }
   items: T[]
+  itemCount: number
   collections?: CollectionSummary[]
 }
 

@@ -78,6 +78,7 @@ export default function CollectionOperations({
       name,
       slug,
       items: collectionItems!,
+      itemCount: items?.length || 0,
     }
 
     let addedPropsCollection = collection

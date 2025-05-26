@@ -1,17 +1,17 @@
-import { Collection } from '@/types'
+import { CollectionSummary } from '@/types'
 import { CollectionItem } from '@/components/CollectionItem'
 
-type Props<T> = {
-  collections: Collection<T>[]
+type Props = {
+  collections: CollectionSummary[]
 }
 
-export function CollectionList<T>({ collections }: Props<T>) {
+export function CollectionList({ collections }: Props) {
   return (
     <div className="block-container">
       <ul className="grid-md">
-        {collections.map(collection => (
-          <li key={collection.id}>
-            <CollectionItem<T> collection={collection} />
+        {collections.map(collectionSummary => (
+          <li key={collectionSummary.shortId}>
+            <CollectionItem collectionSummary={collectionSummary} />
           </li>
         ))}
       </ul>
