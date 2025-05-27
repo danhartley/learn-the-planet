@@ -240,9 +240,6 @@ ul {
       text-transform: capitalize;
     }
   }
-  li:first-child {
-    margin-top: 0;
-  }
 }
 
 [aria-labelledby='trait-gallery'] .trait > li {
