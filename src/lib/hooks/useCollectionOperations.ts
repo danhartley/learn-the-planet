@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { getInatTaxonProperties } from '@/api/inat/api'
 import { generateGenusAndSpeciesFields } from '@/utils/taxa'
@@ -9,6 +9,7 @@ import {
   Collection,
   Taxon,
   Trait,
+  CollectionSummary,
 } from '@/types'
 
 export const useCollectionOperations = () => {
@@ -19,6 +20,20 @@ export const useCollectionOperations = () => {
     LearningItem[] | undefined
   >()
   const [message, setMessage] = useState('')
+  const [selectedCollections, setSelectedCollections] = useState<string[]>([])
+  const [collectionSummaries, setCollectionSummaries] = useState<
+    CollectionSummary[]
+  >([])
+
+  useEffect(() => {
+    const getSummaries = async () => {
+      const summaries: CollectionSummary[] = await getCollectionSummaries()
+      setCollectionSummaries(summaries)
+    }
+
+    getSummaries()
+  }, [])
+
   const router = useRouter()
 
   // Derived validation states
@@ -27,6 +42,7 @@ export const useCollectionOperations = () => {
   const needsCollectionItems = ['taxon', 'trait'].includes(type)
   const isCollectionItemsValid =
     !needsCollectionItems || (!!collectionItems && collectionItems.length > 0)
+
   const isValid = isNameValid && isItemsValid && isCollectionItemsValid
 
   const createCollectionMessage = isValid
@@ -70,19 +86,31 @@ export const useCollectionOperations = () => {
       type,
       name,
       slug,
-      items: collectionItems!,
-      itemCount: items?.length || 0,
+      items: collectionItems! || items!,
+      itemCount: (collectionItems! || items!).length || 0,
     }
 
     const transformedCollection = transformCollectionData(collection)
+    if (type === 'topic') {
+      const collections = collectionSummaries.filter(cs =>
+        selectedCollections.includes(cs.name)
+      )
 
-    const result = await fetch('/api/collection', {
+      transformedCollection.collections = collections
+    }
+
+    const response = await fetch('/api/collection', {
       method: 'POST',
       body: JSON.stringify(transformedCollection),
     })
 
-    const newCollection: Collection<unknown> = await result.json()
+    const newCollection: Collection<unknown> = await response.json()
     router.push(`/collection/${newCollection.shortId}`)
+  }
+
+  const getCollectionSummaries = async (): Promise<CollectionSummary[]> => {
+    const response = await fetch('/api/collection-summaries')
+    return response.json()
   }
 
   return {
@@ -91,7 +119,7 @@ export const useCollectionOperations = () => {
     name,
     setName,
     items,
-    setItems: setItems,
+    setItems,
     collectionItems,
     message,
     isValid,
@@ -100,5 +128,8 @@ export const useCollectionOperations = () => {
     createCollectionMessage,
     addInaturalistProperties,
     addCollection,
+    collectionSummaries,
+    selectedCollections,
+    setSelectedCollections,
   }
 }

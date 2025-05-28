@@ -40,7 +40,13 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
           <p>
             <em>{section?.credit?.title}</em>
           </p>
-          <p>Authors: {section?.credit?.authors.join(', ')}</p>
+
+          <p>
+            Authors:{' '}
+            {section?.credit?.authors
+              ? section.credit.authors.join(', ')
+              : 'Unknown'}
+          </p>
           <p>
             <a href={section?.credit?.source}>Source</a>
           </p>

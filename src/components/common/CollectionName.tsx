@@ -42,13 +42,13 @@ export function CollectionName({ operation, name, setName, type }: Props) {
     case 'create':
       display = (
         <>
-          <h2>Collection name</h2>
+          <h2 id="collection-name">Collection name</h2>
           <form onSubmit={handleSubmit}>
             <div className={`form-row ${type}`}>
-              <label htmlFor="collection-name">Name</label>
+              <label htmlFor="collection">Name</label>
               <input
                 type="text"
-                id="collection-name"
+                id="collection"
                 value={inputValue}
                 minLength={minLength}
                 onChange={handleInputChange}
@@ -69,5 +69,9 @@ export function CollectionName({ operation, name, setName, type }: Props) {
       )
   }
 
-  return <section className="group-block">{display}</section>
+  return (
+    <section className="group-block" aria-labelledby="collection-name">
+      {display}
+    </section>
+  )
 }

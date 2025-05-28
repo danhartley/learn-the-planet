@@ -29,7 +29,7 @@ export async function getCollections(): Promise<
   }
 }
 
-export async function getCollectionsSummary(): Promise<
+export async function getCollectionSummaries(): Promise<
   CollectionSummary[] | undefined
 > {
   try {
@@ -76,6 +76,7 @@ export const getCollectionByShortId = async (
     name: collection.name,
     type: collection.type,
     itemCount: collection.itemCount || collection.items?.length || 0,
+    collections: collection?.collections || [],
   }
 }
 

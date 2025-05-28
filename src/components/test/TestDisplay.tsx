@@ -3,7 +3,7 @@ import { Layout, QuestionType, Score, LearningItem } from '@/types'
 import ImageChoiceComponent from '@/components/test/layouts/ImageChoiceComponent'
 import MultipleTextChoiceComponent from '@/components/test/layouts/MultipleTextChoiceComponent'
 import TextEntryComponent from '@/components/test/layouts/TextEntryComponent'
-import CheckBoxComponent from '@/components/test/layouts/CheckBoxComponent'
+import MultiSelectTestQuestion from '@/components/test/layouts/MultiSelectTestQuestion'
 
 // Props for the TestDisplay component
 type Props<T extends LearningItem> = {
@@ -36,7 +36,7 @@ const displayComponentMap: ComponentMap = {
     default: TextEntryComponent as React.ComponentType<ComponentProps>,
   },
   'Multiple select': {
-    default: CheckBoxComponent as React.ComponentType<ComponentProps>,
+    default: MultiSelectTestQuestion as React.ComponentType<ComponentProps>,
   },
 }
 

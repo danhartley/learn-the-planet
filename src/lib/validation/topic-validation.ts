@@ -15,7 +15,12 @@ export const isCreditObject = (obj: unknown): obj is Credit => {
   // Check Credit fields exist and have correct types
   if (typeof (obj as { title?: unknown }).title !== 'string') return false
   if (typeof (obj as { source?: unknown }).source !== 'string') return false
-  if (!Array.isArray((obj as { authors?: unknown }).authors)) return false
+  // The authors field is optional, but if present must be an array
+  if (
+    (obj as { authors?: unknown }).authors !== undefined &&
+    !Array.isArray((obj as { authors?: unknown }).authors)
+  )
+    return false
 
   // All checks passed
   return true

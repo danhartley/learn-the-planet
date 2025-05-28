@@ -165,7 +165,7 @@ export type CollectionSummary = {
 export type Credit = {
   title: string
   source: string
-  authors: string[]
+  authors?: string[]
 }
 
 export interface Topic extends LearningItem {

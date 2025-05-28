@@ -4,6 +4,7 @@ import { CollectionName } from '@/components/common/CollectionName'
 import { CollectionType } from '@/components/common/CollectionType'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
 import { CollectionExtensions } from '@/components/common/CollectionExtensions'
+import { CollectionSelector } from '@/components/common/CollectionSelector'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
@@ -33,9 +34,11 @@ export default function CollectionOperations({
     createCollectionMessage,
     addInaturalistProperties,
     addCollection,
+    collectionSummaries,
+    selectedCollections,
+    setSelectedCollections,
   } = useCollectionOperations()
 
-  // Initialize type from props
   useState(() => {
     setType(collectionType)
   })
@@ -64,6 +67,14 @@ export default function CollectionOperations({
           isItemsValid={isItemsValid}
           isValid={isValid}
           message={message}
+        />
+      )}
+
+      {type === 'topic' && (
+        <CollectionSelector
+          options={collectionSummaries.map(c => c.name)}
+          selectedCollections={selectedCollections}
+          setSelectedCollections={setSelectedCollections}
         />
       )}
 

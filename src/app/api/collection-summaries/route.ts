@@ -1,7 +1,7 @@
-import { getCollectionsSummary } from '@/api/database'
+import { getCollectionSummaries } from '@/api/database'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const collectionSummaries = await getCollectionsSummary()
+  const collectionSummaries = await getCollectionSummaries()
   return NextResponse.json(collectionSummaries)
 }
