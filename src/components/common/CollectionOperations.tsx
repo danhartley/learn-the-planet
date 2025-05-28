@@ -1,23 +1,13 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { CollectionName } from '@/components/common/CollectionName'
 import { CollectionType } from '@/components/common/CollectionType'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
+import { CollectionExtensions } from '@/components/common/CollectionExtensions'
 
-// import { useRouter } from 'next/navigation'
-// import { useTestPlanner } from '@/hooks/useTestPlanner'
-import { getInatTaxonProperties } from '@/api/inat/api'
-import { generateGenusAndSpeciesFields } from '@/utils/taxa'
+import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
-import {
-  Operation,
-  ContentType,
-  ContentHandlerType,
-  LearningItem,
-  Collection,
-  Taxon,
-  Trait,
-} from '@/types'
+import { Operation, ContentType, ContentHandlerType } from '@/types'
 
 type Props = {
   operation: Operation
@@ -30,116 +20,25 @@ export default function CollectionOperations({
   types,
   collectionType = 'topic',
 }: Props) {
-  const [type, setType] = useState<ContentHandlerType>(collectionType)
-  const [name, setName] = useState<string>('')
-  const [items, setItems] = useState<unknown[] | undefined>()
-  const [collectionItems, setCollectionItems] = useState<
-    LearningItem[] | undefined
-  >()
-  const [isValid, setIsValid] = useState<boolean>(false)
-  const [isItemsValid, setIsItemsValid] = useState<boolean>(false)
-  const [message, setMessage] = useState('')
-  const [createCollectionMessage, setCreateCollectionMessage] = useState(
-    'Please complete the sections above'
-  )
+  const {
+    type,
+    setType,
+    name,
+    setName,
+    setItems,
+    message,
+    isValid,
+    isItemsValid,
+    needsCollectionItems,
+    createCollectionMessage,
+    addInaturalistProperties,
+    addCollection,
+  } = useCollectionOperations()
 
-  // const router = useRouter()
-  // const { startTest } = useTestPlanner<LearningItem>()
-
-  useEffect(() => {
-    const nameValid = name.trim().length > 0
-    const itemsValid = !!items && items.length > 0
-    setIsItemsValid(itemsValid)
-    let collectionItemsValid = true
-    if (['taxon', 'trait'].includes(type)) {
-      collectionItemsValid = !!collectionItems && collectionItems.length > 0
-    }
-    const isAllValid = nameValid && itemsValid && collectionItemsValid
-    setIsValid(isAllValid)
-    if (isAllValid)
-      setCreateCollectionMessage(
-        `You're ready to create a new ${type} collection`
-      )
-    setCollectionItems(items as LearningItem[])
-  }, [name, items, type, collectionItems])
-
-  const addInaturalistProperties = async (type: ContentHandlerType) => {
-    if (!items) return
-    setCollectionItems(
-      await getInatTaxonProperties({ items: items as Taxon[], type })
-    )
-    setMessage('Properties added')
-  }
-
-  const addCollection = async () => {
-    const slug = name.trim().toLowerCase().replace(/\s+/g, '-')
-    const collection: Collection<LearningItem> = {
-      type,
-      name,
-      slug,
-      items: collectionItems!,
-      itemCount: items?.length || 0,
-    }
-
-    let addedPropsCollection = collection
-
-    if (['taxon'].includes(type)) {
-      addedPropsCollection = {
-        ...collection,
-        items: generateGenusAndSpeciesFields(collection.items as Taxon[]),
-      }
-    }
-
-    if (['trait'].includes(type)) {
-      addedPropsCollection = {
-        ...collection,
-        items: (collection.items as Trait[]).map(trait => {
-          return {
-            ...trait,
-            examples: generateGenusAndSpeciesFields(trait?.examples as Taxon[]),
-          }
-        }),
-      }
-    }
-
-    // Request from server side code, POST, at app/api/collections/route.ts
-    const result = await fetch('/api/collections', {
-      method: 'POST',
-      body: JSON.stringify(addedPropsCollection),
-    })
-
-    console.log('Collection created:', result)
-
-    // if (type !== 'topic') {
-    //   startTest({
-    //     collection: addedPropsCollection,
-    //   })
-    //   router.push('/test')
-    // } else {
-    //   console.log('Topic collections do not have their own tests')
-    // }
-  }
-
-  const CollectionExtensions = (
-    <section aria-labelledby="inaturalist" className="group-block">
-      <h2 id="inaturalist">Collection taxa extensions</h2>
-      <div className="column-group">
-        <div>
-          Add CollectionExtensions fields to your species, including images
-        </div>
-        <div className="form-row">
-          <button
-            id="add-inat-props"
-            onClick={() => addInaturalistProperties(type)}
-            disabled={!isItemsValid}
-          >
-            Add iNaturalist properties
-          </button>
-          <div className={isValid ? 'correct' : 'incorrect'}>{message}</div>
-        </div>
-      </div>
-    </section>
-  )
+  // Initialize type from props
+  useState(() => {
+    setType(collectionType)
+  })
 
   return (
     <>
@@ -149,14 +48,25 @@ export default function CollectionOperations({
         setName={setName}
         type={type}
       />
+
       <CollectionType
         operation={operation}
         types={types}
         type={type}
         setType={setType}
       />
+
       <CollectionItemPicker type={type} setItems={setItems} />
-      {['taxon', 'trait'].includes(type) ? CollectionExtensions : null}
+
+      {needsCollectionItems && (
+        <CollectionExtensions
+          onAddProperties={addInaturalistProperties}
+          isItemsValid={isItemsValid}
+          isValid={isValid}
+          message={message}
+        />
+      )}
+
       <section aria-labelledby="create-collection">
         <div>
           <h2 id="create-collection">Create {type} collection</h2>
