@@ -5,9 +5,9 @@ import clientPromise from '@/api/mongodb'
 
 const DB_NAME = 'ltp'
 
-export async function getCollections(): Promise<
+export const getCollections = async (): Promise<
   Collection<unknown>[] | undefined
-> {
+> => {
   try {
     const client = await clientPromise
     const db = client.db(DB_NAME)
@@ -29,9 +29,9 @@ export async function getCollections(): Promise<
   }
 }
 
-export async function getCollectionSummaries(): Promise<
+export const getCollectionSummaries = async (): Promise<
   CollectionSummary[] | undefined
-> {
+> => {
   try {
     const client = await clientPromise
     const db = client.db(DB_NAME)
@@ -133,7 +133,6 @@ export const createCollection = async (collection: Collection<unknown>) => {
         )
       } catch (rollbackError) {
         console.error('Failed to rollback collection insertion:', rollbackError)
-        // Log this as a critical error - manual cleanup may be needed
       }
     }
 

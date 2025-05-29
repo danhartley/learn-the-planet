@@ -4,8 +4,8 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function GET(request: NextRequest) {
   try {
     const pathname = request.nextUrl.pathname
-    const shortId = pathname.split('/').pop()
-
+    const shortId = pathname.split('/')[0].split('-').pop()
+    console.log(shortId)
     if (!shortId) {
       return NextResponse.json(
         { error: 'Missing shortId in path' },

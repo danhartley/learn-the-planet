@@ -16,7 +16,8 @@ export function CollectionItem({ collectionSummary }: Props) {
   const handleStartTest = async () => {
     try {
       const response = await fetch(
-        `/api/collection/${collectionSummary.shortId}`,
+        `/api/collection/}${collectionSummary.slug}-${collectionSummary.shortId}`,
+        // `/api/collection/${collectionSummary.shortId}`,
         {
           method: 'GET',
         }
@@ -58,14 +59,13 @@ export function CollectionItem({ collectionSummary }: Props) {
         <h3 id="collection">{collectionSummary.name}</h3>
         <Link
           className="breadcrumb"
-          href={`/collection/${collectionSummary.shortId}`}
+          href={`/collection/${collectionSummary.slug}-${collectionSummary.shortId}`}
         >
           {linkText}
         </Link>
       </div>
       <div>{collectionSummary.date}</div>
       <div>{collectionSummary.location}</div>
-      {/* <div>{collection.items}</div> */}
       <button id="start-test" onClick={handleStartTest}>
         Start test
       </button>

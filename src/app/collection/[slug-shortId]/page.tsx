@@ -6,11 +6,16 @@ import { Gallery } from '@/components/common/Gallery'
 export default async function Page({
   params,
 }: {
-  params: Promise<{ shortId: string }>
+  params: Promise<{ 'slug-shortId': string }>
 }) {
-  const { shortId } = await params
+  const { 'slug-shortId': slugShortId } = await params
+
+  // Parse the combined slug-shortId to extract the shortId
+  const lastDashIndex = slugShortId.lastIndexOf('-')
+  const shortId = slugShortId.substring(lastDashIndex + 1)
 
   const collection: Collection<unknown> | undefined =
     await getCollectionByShortId(shortId)
+
   return <Gallery collection={collection} />
 }
