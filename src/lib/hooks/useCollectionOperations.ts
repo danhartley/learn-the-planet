@@ -55,7 +55,8 @@ export const useCollectionOperations = () => {
       items: items as Taxon[],
       type,
     })
-    setCollectionItems(inaturalistItems)
+
+    setCollectionItems(inaturalistItems as LearningItem[])
     setMessage('Properties added')
   }
 

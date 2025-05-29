@@ -50,20 +50,19 @@ export function TestContainer<T extends LearningItem>() {
     <>
       <section className="group" aria-labelledby="collection">
         <div className="group">
-          <h1 id="collection">Questions</h1>
-          <h2 id="collection">{currentLayout.collection.name}</h2>
-          <Link
-            className="breadcrumb"
-            href={`/collection/${currentLayout.collection.id}`}
-          >
-            Collection overview
-          </Link>
+          <h1 id="collection">{currentLayout.collection.name}</h1>
         </div>
         <TestDisplay
           layout={currentLayout}
           onSubmit={handleSubmitAnswer}
           layouts={layouts || []}
         />
+        <Link
+          className="breadcrumb"
+          href={`/collection/${currentLayout.collection.id}`}
+        >
+          Collection overview
+        </Link>
       </section>
       <ScoreDisplayNotification
         isCorrect={score?.isCorrect || false}

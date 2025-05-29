@@ -67,19 +67,20 @@ export function TraitGallery({ collection }: Props<Trait>) {
     }
   )
 
-  const terms = collections?.filter(sc => sc?.type === 'term') ? (
+  const hasCollections = Array.isArray(collections) && collections.length > 0
+
+  const terms = hasCollections ? (
     <section aria-labelledby="topic-gallery" className="sub-section">
-      <h3 id="topic-gallery">Terms</h3>
+      <h2 id="topic-gallery">Terms</h2>
       <ul>{collections}</ul>
     </section>
   ) : null
 
   return (
     <section aria-labelledby="trait-gallery" className="group">
-      <h1 id="trait-gallery">Traits</h1>
-      <h2>{collection.name}</h2>
+      <h1 id="trait-gallery">{collection.name}</h1>
       <section aria-labelledby="traits" className="group-block">
-        <h3 id="traits">Traits</h3>
+        <h2 id="traits">Traits</h2>
         <ul className="trait">{traitIndex}</ul>
         <div className="column-group">{traits}</div>
         {terms}

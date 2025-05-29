@@ -39,9 +39,7 @@ export const TraitCard = ({ trait }: Props) => {
       <dl>
         <dt>{trait.trait}</dt>
         <dd>
-          <div>
-            <em>{trait.definition}</em>
-          </div>
+          <div>{trait.definition}</div>
           {!!trait.source ? (
             <div>
               <a href={trait.source.url}>{trait.source.name}</a>

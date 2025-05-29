@@ -57,7 +57,7 @@ const ImageChoiceComponent = ({
       aria-labelledby="multiple-choice"
       data-type={layout.collection.type}
     >
-      <h3 id="multiple-choice">Multiple choice</h3>
+      <h2 id="multiple-choice">Multiple choice</h2>
       <div className="question-text">{question.text}</div>
       <div className="block-container">
         <div className="grid-lg options">{images}</div>

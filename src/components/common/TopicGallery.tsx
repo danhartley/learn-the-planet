@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import Link from 'next/link'
 
 import { Collection, CollectionSummary, Topic } from '@/types'
@@ -26,46 +27,43 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       ) : null
     }
   )
-
   const articles = collection.items.map((section, sectionIndex) => {
     return (
-      <div key={sectionIndex} className="article-item">
-        {/* Render all paragraphs */}
-        {section.text.map((para, paraIndex) => (
-          <p key={`${sectionIndex}-${paraIndex}`}>{para}</p>
-        ))}
+      <React.Fragment key={section.id}>
+        <h3>{section.topic}</h3>
+        <div key={sectionIndex} className="article-item">
+          {section.text.map((para, paraIndex) => (
+            <p key={`${sectionIndex}-${paraIndex}`}>{para}</p>
+          ))}
 
-        {/* Render credit information once per article item */}
-        <div className="article-credit">
-          <p>
-            <em>{section?.credit?.title}</em>
-          </p>
+          <div className="article-credit">
+            <p>
+              <a href={section?.credit?.source}>
+                <em>{section?.credit?.title}</em>
+              </a>
+            </p>
 
-          <p>
-            Authors:{' '}
-            {section?.credit?.authors
-              ? section.credit.authors.join(', ')
-              : 'Unknown'}
-          </p>
-          <p>
-            <a href={section?.credit?.source}>Source</a>
-          </p>
+            <p>
+              {section?.credit?.authors
+                ? `Authors: ${section.credit.authors.join(', ')}`
+                : null}
+            </p>
+          </div>
         </div>
-      </div>
+      </React.Fragment>
     )
   })
 
   const terms = collections?.filter(sc => sc?.type === 'term') ? (
     <section aria-labelledby="topic-gallery" className="sub-section">
-      <h3 id="topic-gallery">Terms</h3>
+      <h2 id="topic-gallery">Terms</h2>
       <ul>{collections}</ul>
     </section>
   ) : null
 
   return (
     <section aria-labelledby="collection" className="group">
-      <h1 id="collection">Collection overview</h1>
-      <h2>{collection.name}</h2>
+      <h1 id="collection">{collection.name}</h1>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
       <article>{articles}</article>

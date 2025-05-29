@@ -4,9 +4,9 @@ export const Menu = () => {
   return (
     <nav>
       <section aria-labelledby="collection-menu">
-        <h3 id="collection-menu" className="menu">
+        <h2 id="collection-menu" className="menu">
           Menu
-        </h3>
+        </h2>
         <ul>
           <li>
             <Link href="/collections">Collections</Link>

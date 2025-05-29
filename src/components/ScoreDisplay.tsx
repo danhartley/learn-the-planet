@@ -63,7 +63,7 @@ export function ScoreDisplay<T>() {
   return (
     <section aria-labelledby="score">
       <div className="group">
-        <h3 id="score">Test score</h3>
+        <h2 id="score">Test score</h2>
         {progress}
       </div>
       {feedback}
