@@ -194,7 +194,6 @@ describe('isTopicObject', () => {
         text: ['Introduction'],
         credit: {
           title: 'Strategies',
-          source: 'Wikipedia',
         },
       })
     ).toBe(false)
