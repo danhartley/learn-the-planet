@@ -17,7 +17,9 @@ export function CollectionItemTopicPicker({ setItems }: Props) {
     const result: ValidationResult<Topic> = validateTopicJson(jsonContent)
     setIsValid(result.isValid)
     setMessage(
-      result.isValid ? 'Your topic data is valid' : 'Your topic data is invalid'
+      result.isValid
+        ? 'Your topic data are valid'
+        : 'Your topic data are invalid'
     )
 
     if (result.isValid && result.parsedData)

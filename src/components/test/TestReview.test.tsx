@@ -54,7 +54,7 @@ describe('TestReview Component', () => {
     render(<TestReview />)
 
     // Verify component renders correctly
-    expect(screen.getByText('Test review')).toBeInTheDocument()
+    expect(screen.getByText('Test options')).toBeInTheDocument()
     expect(screen.getByText('Repeat the test in full')).toBeInTheDocument()
     expect(screen.getByText('Repeat failed questions only')).toBeInTheDocument()
     expect(screen.getByText('Start new test')).toBeInTheDocument()

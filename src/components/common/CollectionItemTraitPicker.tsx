@@ -17,7 +17,7 @@ export function CollectionItemTraitPicker({ setItems }: Props) {
     const result: ValidationResult<Trait> = validateTraitJson(jsonContent)
     setIsValid(result.isValid)
     setMessage(
-      result.isValid ? 'Your trait data is valid' : 'Your trait is invalid'
+      result.isValid ? 'Your trait data are valid' : 'Your trait is invalid'
     )
 
     if (result.isValid && result.parsedData)

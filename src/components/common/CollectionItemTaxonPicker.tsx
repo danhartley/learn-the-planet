@@ -17,7 +17,9 @@ export function CollectionItemTaxonPicker({ setItems }: Props) {
     const result: ValidationResult<Taxon> = validateTaxonJson(jsonContent)
     setIsValid(result.isValid)
     setMessage(
-      result.isValid ? 'Your taxon data is valid' : 'Your taxon data is invalid'
+      result.isValid
+        ? 'Your taxon data are valid'
+        : 'Your taxon data are invalid'
     )
 
     if (result.isValid && result.parsedData)

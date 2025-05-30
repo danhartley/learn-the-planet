@@ -10,8 +10,8 @@ import {
   Taxon,
   Trait,
   CollectionSummary,
+  Operation,
 } from '@/types'
-
 export const useCollectionOperations = () => {
   const [type, setType] = useState<ContentHandlerType>('topic')
   const [name, setName] = useState<string>('')
@@ -24,6 +24,9 @@ export const useCollectionOperations = () => {
   const [collectionSummaries, setCollectionSummaries] = useState<
     CollectionSummary[]
   >([])
+  const [collection, setCollection] = useState<Collection<unknown>>()
+  const [operation, setOperation] = useState<Operation>('create' as Operation)
+  const [operationMessage, setOperationMessage] = useState('')
 
   useEffect(() => {
     const getSummaries = async () => {
@@ -44,10 +47,28 @@ export const useCollectionOperations = () => {
     !needsCollectionItems || (!!collectionItems && collectionItems.length > 0)
 
   const isValid = isNameValid && isItemsValid && isCollectionItemsValid
+  const isUpdateValid = isItemsValid && isCollectionItemsValid
 
-  const createCollectionMessage = isValid
-    ? `You're ready to create a new ${type} collection`
-    : 'Please complete the sections above'
+  useEffect(() => {
+    let opsMessage = ''
+
+    switch (operation) {
+      case 'create':
+        opsMessage = isValid
+          ? `You're ready to create a new ${type} collection`
+          : 'Please complete the sections above'
+        setOperationMessage(opsMessage)
+        break
+      case 'update':
+        opsMessage = isValid
+          ? `You're ready to edit a new ${type} collection`
+          : 'Please complete the sections above'
+        setOperationMessage(opsMessage)
+        break
+      default:
+        opsMessage = ''
+    }
+  }, [operation, isValid, type])
 
   const addInaturalistProperties = async () => {
     if (!items) return
@@ -60,7 +81,7 @@ export const useCollectionOperations = () => {
     setMessage('Properties added')
   }
 
-  const transformCollectionData = (collection: Collection<LearningItem>) => {
+  const transformCollectionData = (collection: Collection<unknown>) => {
     if (type === 'taxon') {
       return {
         ...collection,
@@ -83,7 +104,7 @@ export const useCollectionOperations = () => {
 
   const addCollection = async () => {
     const slug = name.trim().toLowerCase().replace(/\s+/g, '-')
-    const collection: Collection<LearningItem> = {
+    const collection: Collection<unknown> = {
       type,
       name,
       slug,
@@ -106,12 +127,30 @@ export const useCollectionOperations = () => {
     })
 
     const newCollection: Collection<unknown> = await response.json()
-    router.push(`/collection/${newCollection.shortId}`)
+    router.push(`/collection/${newCollection.slug}/${newCollection.shortId}`)
   }
 
   const getCollectionSummaries = async (): Promise<CollectionSummary[]> => {
     const response = await fetch('/api/collection-summaries')
     return response.json()
+  }
+
+  const updateCollection = async () => {
+    if (!collection || !items) return
+    const url = `/api/collection/update/${collection.slug}-${collection.shortId}`
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(items),
+    })
+    router.push(`/collection/${collection.slug}/${collection.shortId}`)
+  }
+
+  const deleteCollection = async () => {
+    if (!collection) return
+    const url = `/api/collection/update/${collection.slug}-${collection.shortId}`
+    const response = await fetch(url, {
+      method: 'DELETE',
+    })
   }
 
   return {
@@ -126,11 +165,17 @@ export const useCollectionOperations = () => {
     isValid,
     isItemsValid,
     needsCollectionItems,
-    createCollectionMessage,
+    operationMessage,
     addInaturalistProperties,
     addCollection,
     collectionSummaries,
     selectedCollections,
     setSelectedCollections,
+    setCollection,
+    updateCollection,
+    isUpdateValid,
+    setOperation,
+    operation,
+    deleteCollection,
   }
 }

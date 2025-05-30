@@ -387,10 +387,10 @@ form {
   border-radius: var(--border-radius-sm);
 }
 
-.form-row input,
+/* .form-row input,
 .form-row button {
   width: 100%;
-}
+} */
 
 .form-row button {
   padding: var(--spacing-md);

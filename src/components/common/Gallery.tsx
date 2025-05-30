@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { Collection, ContentHandlerType } from '@/types'
 import { TaxonGallery } from '@/components/common/TaxonGallery'
 import { TermGallery } from '@/components/common/TermGallery'
@@ -30,5 +32,14 @@ export function Gallery<T>({ collection }: GalleryProps<T>) {
     pageMap[collection.type as ContentHandlerType] ||
     (() => <div>Component not found</div>)
 
-  return <Component collection={collection} />
+  return (
+    <>
+      <Component collection={collection} />
+      <Link
+        href={`/collection/update/${collection.slug}-${collection.shortId}`}
+      >
+        Edit collection
+      </Link>
+    </>
+  )
 }

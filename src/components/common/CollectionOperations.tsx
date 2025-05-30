@@ -31,7 +31,7 @@ export default function CollectionOperations({
     isValid,
     isItemsValid,
     needsCollectionItems,
-    createCollectionMessage,
+    operationMessage,
     addInaturalistProperties,
     addCollection,
     collectionSummaries,
@@ -81,7 +81,7 @@ export default function CollectionOperations({
       <section aria-labelledby="create-collection">
         <div>
           <h2 id="create-collection">Create {type} collection</h2>
-          <div>{createCollectionMessage}</div>
+          <div>{operationMessage}</div>
         </div>
         <button disabled={!isValid} onClick={addCollection}>
           Create collection

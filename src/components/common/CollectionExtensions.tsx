@@ -13,11 +13,9 @@ export const CollectionExtensions = ({
 }: Props) => {
   return (
     <section aria-labelledby="inaturalist" className="group-block">
-      <h2 id="inaturalist">Collection taxa extensions</h2>
+      <h2 id="inaturalist">iNaturalist taxa extensions</h2>
       <div className="column-group">
-        <div>
-          Add CollectionExtensions fields to your species, including images
-        </div>
+        <div>Add iNaturalist properties to your species, including images</div>
         <div className="form-row">
           <button
             id="add-inat-props"

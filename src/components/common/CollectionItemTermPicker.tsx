@@ -17,7 +17,7 @@ export function CollectionItemTermPicker({ setItems }: Props) {
     const result: ValidationResult<Term> = validateTermJson(jsonContent)
     setIsValid(result.isValid)
     setMessage(
-      result.isValid ? 'Your term data is valid' : 'Your term data is invalid'
+      result.isValid ? 'Your term data are valid' : 'Your term data are invalid'
     )
 
     if (result.isValid && result.parsedData)
