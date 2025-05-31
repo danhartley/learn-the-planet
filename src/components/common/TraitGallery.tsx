@@ -58,7 +58,7 @@ export function TraitGallery({ collection }: Props<Trait>) {
       return subCollection ? (
         <li key={subCollection.shortId}>
           <Link
-            href={`/collection/${encodeURIComponent(subCollection?.shortId || '')}`}
+            href={`/collection/${subCollection?.slug}-${encodeURIComponent(subCollection?.shortId || '')}`}
           >
             {subCollection.name}
           </Link>
@@ -70,8 +70,8 @@ export function TraitGallery({ collection }: Props<Trait>) {
   const hasCollections = Array.isArray(collections) && collections.length > 0
 
   const terms = hasCollections ? (
-    <section aria-labelledby="topic-gallery" className="sub-section">
-      <h2 id="topic-gallery">Terms</h2>
+    <section aria-labelledby="trait-gallery" className="sub-section">
+      <h2 id="trait-gallery">Terms</h2>
       <ul>{collections}</ul>
     </section>
   ) : null
