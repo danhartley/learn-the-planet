@@ -19,7 +19,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       return subCollection ? (
         <li key={subCollection.shortId}>
           <Link
-            href={`/collection/${encodeURIComponent(subCollection?.shortId || '')}`}
+            href={`/collection/${subCollection?.slug}-${encodeURIComponent(subCollection?.shortId || '')}`}
           >
             {subCollection.name}
           </Link>
