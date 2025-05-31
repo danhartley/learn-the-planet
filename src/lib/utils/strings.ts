@@ -218,3 +218,72 @@ export const formatCamelCase = (camelCase: string): string => {
   // Trim in case the string started with an uppercase letter
   return withSpaces.trim().charAt(0).toUpperCase() + withSpaces.slice(1)
 }
+
+/**
+ * Parses a slug-shortId string and returns the slug and shortId separately
+ * The shortId is always the last segment after the final dash
+ * The slug can contain multiple dashes
+ *
+ * @param slugShortId - String in format "slug-shortId" (e.g., "test-topic-cd787506")
+ * @returns Object with slug and shortId, or null if invalid format
+ */
+export function parseSlugShortId(
+  slugShortId: string | null | undefined | unknown
+): { slug: string; shortId: string } | null {
+  if (!slugShortId || typeof slugShortId !== 'string') {
+    return null
+  }
+
+  const lastDashIndex = slugShortId.lastIndexOf('-')
+
+  // Must have at least one dash and content on both sides
+  if (
+    lastDashIndex === -1 ||
+    lastDashIndex === 0 ||
+    lastDashIndex === slugShortId.length - 1
+  ) {
+    return null
+  }
+
+  const slug = slugShortId.substring(0, lastDashIndex)
+  const shortId = slugShortId.substring(lastDashIndex + 1)
+
+  return { slug, shortId }
+}
+
+/**
+ * Creates a slug-shortId string from separate slug and shortId
+ *
+ * @param slug - The slug part (can contain dashes)
+ * @param shortId - The shortId part (should not contain dashes)
+ * @returns Combined slug-shortId string
+ */
+export function createSlugShortId(slug: string, shortId: string): string {
+  if (!slug || !shortId) {
+    throw new Error('Both slug and shortId are required')
+  }
+
+  return `${slug}-${shortId}`
+}
+
+/**
+ * Extracts just the shortId from a slug-shortId string
+ *
+ * @param slugShortId - String in format "slug-shortId"
+ * @returns The shortId or null if invalid
+ */
+export function extractShortId(slugShortId: string): string | null {
+  const parsed = parseSlugShortId(slugShortId)
+  return parsed?.shortId || null
+}
+
+/**
+ * Extracts just the slug from a slug-shortId string
+ *
+ * @param slugShortId - String in format "slug-shortId"
+ * @returns The slug or null if invalid
+ */
+export function extractSlug(slugShortId: string): string | null {
+  const parsed = parseSlugShortId(slugShortId)
+  return parsed?.slug || null
+}

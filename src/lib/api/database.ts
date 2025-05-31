@@ -349,10 +349,10 @@ export const removeCollectionReference = async (
 
     // Step 3: Remove the child collection reference from the parent's collections array
     const result = await db
-      .collection('collections')
+      .collection<Collection<unknown>>('collections')
       .updateOne(
         { shortId: parentShortId },
-        { $pull: { collections: childShortId } }
+        { $pull: { collections: { shortId: childShortId } } }
       )
 
     if (result.matchedCount === 0) {
@@ -454,6 +454,77 @@ export const addCollectionReference = async (
     return {
       success: false,
       error: 'Database error occurred while adding collection reference',
+    }
+  }
+}
+
+export const updateCollectionReferences = async (
+  parentShortId: string,
+  collectionReferences: CollectionSummary[]
+): Promise<{ success: boolean; error?: string }> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+
+  try {
+    // Step 1: Check if the parent collection exists and is of type 'topic'
+    const parentCollection = await db
+      .collection('collections')
+      .findOne({ shortId: parentShortId })
+
+    if (!parentCollection) {
+      return {
+        success: false,
+        error: 'Parent collection not found',
+      }
+    }
+
+    if (parentCollection.type !== 'topic') {
+      return {
+        success: false,
+        error: 'Collections can only be added to collections of type "topic"',
+      }
+    }
+    console.log('collectionReferences', collectionReferences)
+    // Step 2: Validate that all child collections exist (if any provided)
+    if (collectionReferences.length > 0) {
+      const childCollections = await db
+        .collection('collections')
+        .find({ shortId: { $in: collectionReferences.map(c => c.shortId) } })
+        .toArray()
+
+      if (childCollections.length !== collectionReferences.length) {
+        const foundIds = childCollections.map(c => c.shortId)
+        const missingIds = collectionReferences
+          .map(c => c.shortId)
+          .filter(id => !foundIds.includes(id))
+        return {
+          success: false,
+          error: `Child collections not found: ${missingIds.join(', ')}`,
+        }
+      }
+    }
+
+    // Step 3: Update the parent collection's collections array
+    const result = await db
+      .collection('collections')
+      .updateOne(
+        { shortId: parentShortId },
+        { $set: { collections: collectionReferences } }
+      )
+
+    if (result.matchedCount === 0) {
+      return {
+        success: false,
+        error: 'Failed to update parent collection',
+      }
+    }
+
+    return { success: true }
+  } catch (error) {
+    console.error('Failed to update collection references:', error)
+    return {
+      success: false,
+      error: 'Database error occurred while updating collection references',
     }
   }
 }

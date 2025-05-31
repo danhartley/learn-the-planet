@@ -1,10 +1,11 @@
 import { getCollectionByShortId } from '@/api/database'
 import { NextRequest, NextResponse } from 'next/server'
+import { extractShortId } from '@/utils/strings'
 
 export async function GET(request: NextRequest) {
   try {
     const pathname = request.nextUrl.pathname
-    const shortId = pathname.split('/')[0].split('-').pop()
+    const shortId = extractShortId(pathname)
 
     if (!shortId) {
       return NextResponse.json(

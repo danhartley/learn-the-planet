@@ -1,10 +1,12 @@
-import { addItemsToCollection, deleteCollection } from '@/api/database'
 import { NextRequest, NextResponse } from 'next/server'
+import { addItemsToCollection, deleteCollection } from '@/api/database'
+import { extractShortId } from '@/utils/strings'
 
 export async function POST(req: NextRequest) {
   try {
     const pathname = req.nextUrl.pathname
-    const shortId = pathname.split('/').pop()?.split('-').pop()
+    const shortId = extractShortId(pathname)
+
     if (!shortId) {
       return NextResponse.json(
         { error: 'Missing shortId in path' },
@@ -36,7 +38,8 @@ export async function POST(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   try {
     const pathname = req.nextUrl.pathname
-    const shortId = pathname.split('/').pop()?.split('-').pop()
+    const shortId = extractShortId(pathname)
+
     if (!shortId) {
       return NextResponse.json(
         { error: 'Missing shortId in path' },

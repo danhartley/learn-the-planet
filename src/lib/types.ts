@@ -315,7 +315,13 @@ export type TestStrategy =
 export const isDefined = <T>(value: T | undefined): value is T =>
   value !== undefined
 
-export type Operation = 'create' | 'read' | 'update' | 'delete'
+export type Operation =
+  | 'create'
+  | 'read'
+  | 'update'
+  | 'delete'
+  | 'update-collections'
+  | 'update-terms'
 
 export type ContentType = {
   key: string
@@ -326,4 +332,9 @@ export interface ValidationResult<LearningItem> {
   isValid: boolean
   parsedData?: LearningItem[]
   errors: string[]
+}
+
+export type ApiResponse = {
+  success: boolean
+  message: string
 }

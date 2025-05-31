@@ -19,7 +19,7 @@ export const useCollectionOperations = () => {
   const [collectionItems, setCollectionItems] = useState<
     LearningItem[] | undefined
   >()
-  const [message, setMessage] = useState('')
+  const [inatMessage, setInatMessage] = useState('')
   const [selectedCollections, setSelectedCollections] = useState<string[]>([])
   const [collectionSummaries, setCollectionSummaries] = useState<
     CollectionSummary[]
@@ -27,6 +27,10 @@ export const useCollectionOperations = () => {
   const [collection, setCollection] = useState<Collection<unknown>>()
   const [operation, setOperation] = useState<Operation>('create' as Operation)
   const [operationMessage, setOperationMessage] = useState('')
+  const [apiResponse, setApiResponse] = useState({
+    success: false,
+    message: '',
+  })
 
   useEffect(() => {
     const getSummaries = async () => {
@@ -78,7 +82,7 @@ export const useCollectionOperations = () => {
     })
 
     setCollectionItems(inaturalistItems as LearningItem[])
-    setMessage('Properties added')
+    setInatMessage('Properties added')
   }
 
   const transformCollectionData = (collection: Collection<unknown>) => {
@@ -127,7 +131,7 @@ export const useCollectionOperations = () => {
     })
 
     const newCollection: Collection<unknown> = await response.json()
-    router.push(`/collection/${newCollection.slug}/${newCollection.shortId}`)
+    router.push(`/collection/${newCollection.slug}-${newCollection.shortId}`)
   }
 
   const getCollectionSummaries = async (): Promise<CollectionSummary[]> => {
@@ -138,7 +142,7 @@ export const useCollectionOperations = () => {
   const updateCollection = async () => {
     if (!collection || !items) return
     const url = `/api/collection/update/${collection.slug}-${collection.shortId}`
-    const response = await fetch(url, {
+    await fetch(url, {
       method: 'POST',
       body: JSON.stringify(items),
     })
@@ -151,6 +155,52 @@ export const useCollectionOperations = () => {
     const response = await fetch(url, {
       method: 'DELETE',
     })
+    if (response.status === 200) {
+      router.push('/collections')
+    } else {
+      setApiResponse({ success: false, message: 'Delete collection failed.' })
+    }
+  }
+
+  const updateCollections = async () => {
+    if (!collection) return
+
+    const url = `/api/collection/update-collections/${collection.slug}-${collection.shortId}`
+
+    const collections = selectedCollections
+      .map(n => collectionSummaries.find(cs => cs.name === n))
+      .filter(c => c !== undefined)
+
+    try {
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ collections }),
+      })
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error('Server error response:', errorText)
+        setApiResponse({
+          success: false,
+          message: 'Collections update failed.',
+        })
+        throw new Error(`HTTP ${response.status}: ${errorText}`)
+      }
+
+      const result = await response.json()
+      setApiResponse({
+        success: true,
+        message: 'Collections update succeeded.',
+      })
+      return result
+    } catch (error) {
+      console.error('Failed to update collections:', error)
+      setApiResponse({ success: false, message: 'Collections update failed.' })
+      throw error
+    }
   }
 
   return {
@@ -161,7 +211,7 @@ export const useCollectionOperations = () => {
     items,
     setItems,
     collectionItems,
-    message,
+    inatMessage,
     isValid,
     isItemsValid,
     needsCollectionItems,
@@ -177,5 +227,7 @@ export const useCollectionOperations = () => {
     setOperation,
     operation,
     deleteCollection,
+    apiResponse,
+    updateCollections,
   }
 }

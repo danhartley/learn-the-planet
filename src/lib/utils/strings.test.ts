@@ -10,6 +10,10 @@ import {
   getRandomItems,
   containsSourceInTargetArray,
   formatCamelCase,
+  parseSlugShortId,
+  createSlugShortId,
+  extractShortId,
+  extractSlug,
 } from '@/utils/strings'
 
 describe('Check for camel case', () => {
@@ -483,5 +487,248 @@ describe('formatCamelCase', () => {
   })
   it('should return standard text, capitalised for camel cased text', () => {
     expect(formatCamelCase('camelCaseText')).toBe('Camel case text')
+  })
+})
+
+describe('parseSlugShortId', () => {
+  it('should parse simple slug-shortId correctly', () => {
+    const result = parseSlugShortId('simple-abc123')
+    expect(result).toEqual({
+      slug: 'simple',
+      shortId: 'abc123',
+    })
+  })
+
+  it('should parse slug with multiple dashes correctly', () => {
+    const result = parseSlugShortId('test-topic-cd787506')
+    expect(result).toEqual({
+      slug: 'test-topic',
+      shortId: 'cd787506',
+    })
+  })
+
+  it('should parse complex multi-part slug correctly', () => {
+    const result = parseSlugShortId('multi-part-slug-name-xyz789')
+    expect(result).toEqual({
+      slug: 'multi-part-slug-name',
+      shortId: 'xyz789',
+    })
+  })
+
+  it('should handle slug with numbers and shortId with letters', () => {
+    const result = parseSlugShortId('product-123-category-456-abcdef')
+    expect(result).toEqual({
+      slug: 'product-123-category-456',
+      shortId: 'abcdef',
+    })
+  })
+
+  it('should return null for empty string', () => {
+    const result = parseSlugShortId('')
+    expect(result).toBeNull()
+  })
+
+  it('should return null for string without dashes', () => {
+    const result = parseSlugShortId('nodashes')
+    expect(result).toBeNull()
+  })
+
+  it('should return null for string starting with dash', () => {
+    const result = parseSlugShortId('-invalid')
+    expect(result).toBeNull()
+  })
+
+  it('should return null for string ending with dash', () => {
+    const result = parseSlugShortId('invalid-')
+    expect(result).toBeNull()
+  })
+
+  it('should return null for string with only dashes', () => {
+    const result = parseSlugShortId('---')
+    expect(result).toBeNull()
+  })
+
+  it('should return null for null input', () => {
+    const result = parseSlugShortId(null)
+    expect(result).toBeNull()
+  })
+
+  it('should return null for undefined input', () => {
+    const result = parseSlugShortId(undefined)
+    expect(result).toBeNull()
+  })
+
+  it('should return null for non-string input', () => {
+    const result = parseSlugShortId(123)
+    expect(result).toBeNull()
+  })
+
+  it('should handle single character parts', () => {
+    const result = parseSlugShortId('a-b')
+    expect(result).toEqual({
+      slug: 'a',
+      shortId: 'b',
+    })
+  })
+})
+
+describe('createSlugShortId', () => {
+  it('should create slug-shortId string correctly', () => {
+    const result = createSlugShortId('test-topic', 'cd787506')
+    expect(result).toBe('test-topic-cd787506')
+  })
+
+  it('should create simple slug-shortId string', () => {
+    const result = createSlugShortId('simple', 'abc123')
+    expect(result).toBe('simple-abc123')
+  })
+
+  it('should handle slug with multiple dashes', () => {
+    const result = createSlugShortId('multi-part-slug', 'xyz789')
+    expect(result).toBe('multi-part-slug-xyz789')
+  })
+
+  it('should throw error for empty slug', () => {
+    expect(() => createSlugShortId('', 'abc123')).toThrow(
+      'Both slug and shortId are required'
+    )
+  })
+
+  it('should throw error for empty shortId', () => {
+    expect(() => createSlugShortId('test', '')).toThrow(
+      'Both slug and shortId are required'
+    )
+  })
+
+  it('should throw error for null slug', () => {
+    expect(() => createSlugShortId(null, 'abc123')).toThrow(
+      'Both slug and shortId are required'
+    )
+  })
+
+  it('should throw error for null shortId', () => {
+    expect(() => createSlugShortId('test', null)).toThrow(
+      'Both slug and shortId are required'
+    )
+  })
+})
+
+describe('extractShortId', () => {
+  it('should extract shortId from simple slug-shortId', () => {
+    const result = extractShortId('simple-abc123')
+    expect(result).toBe('abc123')
+  })
+
+  it('should extract shortId from complex slug-shortId', () => {
+    const result = extractShortId('test-topic-cd787506')
+    expect(result).toBe('cd787506')
+  })
+
+  it('should extract shortId from multi-part slug', () => {
+    const result = extractShortId('multi-part-slug-name-xyz789')
+    expect(result).toBe('xyz789')
+  })
+
+  it('should return null for invalid input', () => {
+    const result = extractShortId('invalid')
+    expect(result).toBeNull()
+  })
+
+  it('should return null for empty string', () => {
+    const result = extractShortId('')
+    expect(result).toBeNull()
+  })
+
+  it('should return null for string ending with dash', () => {
+    const result = extractShortId('invalid-')
+    expect(result).toBeNull()
+  })
+})
+
+describe('extractSlug', () => {
+  it('should extract slug from simple slug-shortId', () => {
+    const result = extractSlug('simple-abc123')
+    expect(result).toBe('simple')
+  })
+
+  it('should extract slug from complex slug-shortId', () => {
+    const result = extractSlug('test-topic-cd787506')
+    expect(result).toBe('test-topic')
+  })
+
+  it('should extract slug from multi-part slug', () => {
+    const result = extractSlug('multi-part-slug-name-xyz789')
+    expect(result).toBe('multi-part-slug-name')
+  })
+
+  it('should return null for invalid input', () => {
+    const result = extractSlug('invalid')
+    expect(result).toBeNull()
+  })
+
+  it('should return null for empty string', () => {
+    const result = extractSlug('')
+    expect(result).toBeNull()
+  })
+
+  it('should return null for string starting with dash', () => {
+    const result = extractSlug('-invalid')
+    expect(result).toBeNull()
+  })
+})
+
+describe('round-trip functionality', () => {
+  it('should maintain consistency between parse and create functions', () => {
+    const original = 'test-topic-cd787506'
+    const parsed = parseSlugShortId(original)
+
+    expect(parsed).not.toBeNull()
+
+    if (parsed) {
+      const recreated = createSlugShortId(parsed.slug, parsed.shortId)
+      expect(recreated).toBe(original)
+    }
+  })
+
+  it('should work with complex multi-part slugs', () => {
+    const original = 'very-complex-multi-part-slug-name-abc123def'
+    const parsed = parseSlugShortId(original)
+
+    expect(parsed).not.toBeNull()
+
+    if (parsed) {
+      const recreated = createSlugShortId(parsed.slug, parsed.shortId)
+      expect(recreated).toBe(original)
+    }
+  })
+})
+
+describe('edge cases', () => {
+  it('should handle slug with special characters before shortId', () => {
+    const result = parseSlugShortId('my-awesome_project-abc123')
+    expect(result).toEqual({
+      slug: 'my-awesome_project',
+      shortId: 'abc123',
+    })
+  })
+
+  it('should handle shortId with mixed alphanumeric characters', () => {
+    const result = parseSlugShortId('project-abc123def456')
+    expect(result).toEqual({
+      slug: 'project',
+      shortId: 'abc123def456',
+    })
+  })
+
+  it('should handle very long slugs', () => {
+    const longSlug = 'this-is-a-very-long-slug-with-many-parts-and-dashes'
+    const shortId = 'xyz789'
+    const combined = `${longSlug}-${shortId}`
+
+    const result = parseSlugShortId(combined)
+    expect(result).toEqual({
+      slug: longSlug,
+      shortId: shortId,
+    })
   })
 })

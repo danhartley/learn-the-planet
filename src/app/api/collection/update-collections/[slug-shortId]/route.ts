@@ -1,0 +1,76 @@
+import { updateCollectionReferences } from '@/api/database'
+import { NextRequest, NextResponse } from 'next/server'
+import { extractShortId } from '@/utils/strings'
+
+type Props = {
+  params: Promise<{ 'slug-shortId': string }>
+}
+
+export async function PUT(
+  req: NextRequest,
+  { params }: Props
+): Promise<
+  | NextResponse<{
+      error: string | undefined
+    }>
+  | NextResponse<{
+      success: boolean
+    }>
+> {
+  try {
+    const { 'slug-shortId': slugShortId } = await params
+
+    const shortId = extractShortId(slugShortId)
+
+    if (!shortId) {
+      return NextResponse.json(
+        { error: 'Missing shortId in path' },
+        { status: 400 }
+      )
+    }
+
+    const body = await req.json()
+
+    const { collections } = body
+
+    if (!Array.isArray(collections)) {
+      console.log(
+        'ERROR: Collections is not an array:',
+        typeof collections,
+        collections
+      )
+      return NextResponse.json(
+        { error: 'Collections must be an array' },
+        { status: 400 }
+      )
+    }
+
+    // Check for undefined values in collections array
+    const hasUndefined = collections.some(c => c === undefined || c === null)
+    if (hasUndefined) {
+      console.log(
+        'ERROR: Collections array contains undefined/null values:',
+        collections
+      )
+      return NextResponse.json(
+        { error: 'Collections array contains invalid values' },
+        { status: 400 }
+      )
+    }
+
+    const result = await updateCollectionReferences(shortId, collections)
+
+    if (!result.success) {
+      console.log('ERROR from updateCollectionReferences:', result.error)
+      return NextResponse.json({ error: result.error }, { status: 400 })
+    }
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Failed to update collection references:', error)
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    )
+  }
+}

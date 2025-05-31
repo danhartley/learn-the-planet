@@ -2,6 +2,8 @@
 import { useEffect } from 'react'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
 import { CollectionExtensions } from '@/components/common/CollectionExtensions'
+import { CollectionSelector } from '@/components/common/CollectionSelector'
+import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
@@ -19,7 +21,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
     needsCollectionItems,
     addInaturalistProperties,
     isItemsValid,
-    message,
+    inatMessage,
     setType,
     type,
     isUpdateValid,
@@ -27,24 +29,35 @@ export const CollectionUpdate = ({ collection }: Props) => {
     operation,
     setOperation,
     deleteCollection,
+    collectionSummaries,
+    selectedCollections,
+    setSelectedCollections,
+    updateCollections,
+    apiResponse,
   } = useCollectionOperations()
 
   useEffect(() => {
     setCollection(collection)
     setOperation('update' as Operation)
-  }, [])
+    setSelectedCollections(collection.collections?.map(c => c.name) || [])
+  })
 
   useEffect(() => {
     setType(collection.type as ContentHandlerType)
     if (!items) return
-  }, [items])
+  }, [items, collection.type, setType])
 
   const handleOnChangeOperation = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedOperation = (e.target as HTMLInputElement).value
     setOperation(selectedOperation as Operation)
   }
 
-  const editOptions = ['update', 'delete'].map(option => {
+  const operationTypes =
+    type === 'topic'
+      ? ['update', 'delete', 'update-collections']
+      : ['update', 'delete', 'update-terms']
+
+  const editOptions = operationTypes.map(option => {
     return (
       <li key={option}>
         <input
@@ -54,9 +67,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
           checked={option === operation}
           onChange={handleOnChangeOperation}
         />
-        <label htmlFor={option}>
-          {option.charAt(0).toUpperCase() + option.slice(1)}
-        </label>
+        <label htmlFor={option}>{option.replace('-', ' ')}</label>
       </li>
     )
   })
@@ -65,42 +76,67 @@ export const CollectionUpdate = ({ collection }: Props) => {
     <>
       <section>
         <h2>{collection.name}</h2>
-        {operation}
-        {type !== 'topic' && operation === ('update' as Operation) && (
-          <CollectionItemPicker
-            type={collection.type as ContentHandlerType}
-            setItems={setItems}
-          />
-        )}
-        {needsCollectionItems && operation === ('update' as Operation) && (
-          <CollectionExtensions
-            onAddProperties={addInaturalistProperties}
-            isItemsValid={isItemsValid}
-            isValid={isItemsValid}
-            message={message}
-          />
-        )}
       </section>
       <section aria-labelledby="edit-options">
         <h2 id="edit-options">Edit options</h2>
         <ul>{editOptions}</ul>
       </section>
-      {operation === ('update' as Operation) ? (
+      {needsCollectionItems && operation === ('update' as Operation) && (
+        <CollectionExtensions
+          onAddProperties={addInaturalistProperties}
+          isItemsValid={isItemsValid}
+          isValid={isItemsValid}
+          message={inatMessage}
+        />
+      )}
+      {operation === ('update-collections' as Operation) && (
+        <>
+          <CollectionSelector
+            options={collectionSummaries.map(c => c.name)}
+            selectedCollections={selectedCollections}
+            setSelectedCollections={setSelectedCollections}
+          />
+          <div className="form-row">
+            <button
+              onClick={() => {
+                updateCollections()
+              }}
+            >
+              Update collections
+            </button>
+            <ApiResponseMessage apiResponse={apiResponse} />
+          </div>
+        </>
+      )}
+      {operation === ('delete' as Operation) && (
+        <section aria-labelledby="delete-collection">
+          <div>
+            <h2 id="delete-collection">Delete {type} collection</h2>
+          </div>
+          <div className="form-row">
+            <button onClick={deleteCollection}>Delete collection</button>
+            <ApiResponseMessage apiResponse={apiResponse} />
+          </div>
+        </section>
+      )}
+      {operation === ('update' as Operation) && (
+        <CollectionItemPicker
+          type={collection.type as ContentHandlerType}
+          setItems={setItems}
+        />
+      )}
+      {operation === ('update' as Operation) && (
         <section aria-labelledby="edit-collection">
           <div>
             <h2 id="edit-collection">Edit {type} collection</h2>
             <div>{operationMessage}</div>
           </div>
-          <button disabled={!isUpdateValid} onClick={updateCollection}>
-            Update collection
-          </button>
-        </section>
-      ) : (
-        <section aria-labelledby="delete-collection">
-          <div>
-            <h2 id="delete-collection">Delete {type} collection</h2>
+          <div className="form-row">
+            <button disabled={!isUpdateValid} onClick={updateCollection}>
+              Update collection
+            </button>
+            <ApiResponseMessage apiResponse={apiResponse} />
           </div>
-          <button onClick={deleteCollection}>Delete collection</button>
         </section>
       )}
     </>

@@ -1,6 +1,9 @@
+import { notFound } from 'next/navigation'
+
 import { CollectionUpdate } from '@/components/common/CollectionUpdate'
 import { Collection } from '@/types'
 import { getCollectionByShortId } from '@/api/database'
+import { extractShortId } from '@/utils/strings'
 
 export default async function Page({
   params,
@@ -9,8 +12,11 @@ export default async function Page({
 }) {
   const { 'slug-shortId': slugShortId } = await params
 
-  const lastDashIndex = slugShortId.lastIndexOf('-')
-  const shortId = slugShortId.substring(lastDashIndex + 1)
+  const shortId = extractShortId(slugShortId)
+
+  if (!shortId) {
+    notFound() // This will show the 404 page
+  }
 
   const collection: Collection<unknown> | undefined =
     await getCollectionByShortId(shortId)
@@ -18,7 +24,7 @@ export default async function Page({
   return (
     <>
       <h1>Edit collection</h1>
-      {collection! && <CollectionUpdate collection={collection} />}
+      {!!collection && <CollectionUpdate collection={collection} />}
     </>
   )
 }

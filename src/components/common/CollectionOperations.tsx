@@ -5,6 +5,7 @@ import { CollectionType } from '@/components/common/CollectionType'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
 import { CollectionExtensions } from '@/components/common/CollectionExtensions'
 import { CollectionSelector } from '@/components/common/CollectionSelector'
+import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
@@ -27,7 +28,7 @@ export default function CollectionOperations({
     name,
     setName,
     setItems,
-    message,
+    inatMessage,
     isValid,
     isItemsValid,
     needsCollectionItems,
@@ -37,6 +38,7 @@ export default function CollectionOperations({
     collectionSummaries,
     selectedCollections,
     setSelectedCollections,
+    apiResponse,
   } = useCollectionOperations()
 
   useState(() => {
@@ -66,7 +68,7 @@ export default function CollectionOperations({
           onAddProperties={addInaturalistProperties}
           isItemsValid={isItemsValid}
           isValid={isValid}
-          message={message}
+          message={inatMessage}
         />
       )}
 
@@ -83,9 +85,12 @@ export default function CollectionOperations({
           <h2 id="create-collection">Create {type} collection</h2>
           <div>{operationMessage}</div>
         </div>
-        <button disabled={!isValid} onClick={addCollection}>
-          Create collection
-        </button>
+        <div className="form-row">
+          <button disabled={!isValid} onClick={addCollection}>
+            Create collection
+          </button>
+          <ApiResponseMessage apiResponse={apiResponse} />
+        </div>
       </section>
     </>
   )
