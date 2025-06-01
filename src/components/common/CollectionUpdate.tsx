@@ -40,12 +40,24 @@ export const CollectionUpdate = ({ collection }: Props) => {
     setCollection(collection)
     setOperation('update' as Operation)
     setSelectedCollections(collection.collections?.map(c => c.name) || [])
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     setType(collection.type as ContentHandlerType)
     if (!items) return
   }, [items, collection.type, setType])
+
+  useEffect(() => {
+    const textarea = document.getElementById('json-input')
+    if (textarea) {
+      ;(textarea as HTMLTextAreaElement).value = JSON.stringify(
+        collection.items,
+        null,
+        2
+      )
+    }
+  }, [operation])
 
   const handleOnChangeOperation = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedOperation = (e.target as HTMLInputElement).value
@@ -55,7 +67,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
   const operationTypes =
     type === 'topic'
       ? ['update', 'delete', 'update-collections']
-      : ['update', 'delete', 'update-terms']
+      : ['update', 'delete', 'update-items']
 
   const editOptions = operationTypes.map(option => {
     return (
@@ -96,7 +108,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
             selectedCollections={selectedCollections}
             setSelectedCollections={setSelectedCollections}
           />
-          <div className="form-row">
+          <div className="textarea-row">
             <button
               onClick={() => {
                 updateCollections()
@@ -113,13 +125,13 @@ export const CollectionUpdate = ({ collection }: Props) => {
           <div>
             <h2 id="delete-collection">Delete {type} collection</h2>
           </div>
-          <div className="form-row">
+          <div className="textarea-row">
             <button onClick={deleteCollection}>Delete collection</button>
             <ApiResponseMessage apiResponse={apiResponse} />
           </div>
         </section>
       )}
-      {operation === ('update' as Operation) && (
+      {operation === ('update-items' as Operation) && (
         <CollectionItemPicker
           type={collection.type as ContentHandlerType}
           setItems={setItems}
@@ -131,7 +143,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
             <h2 id="edit-collection">Edit {type} collection</h2>
             <div>{operationMessage}</div>
           </div>
-          <div className="form-row">
+          <div className="textarea-row">
             <button disabled={!isUpdateValid} onClick={updateCollection}>
               Update collection
             </button>

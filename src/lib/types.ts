@@ -321,7 +321,7 @@ export type Operation =
   | 'update'
   | 'delete'
   | 'update-collections'
-  | 'update-terms'
+  | 'update-items'
 
 export type ContentType = {
   key: string
