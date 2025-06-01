@@ -17,7 +17,6 @@ export function CollectionItem({ collectionSummary }: Props) {
     try {
       const response = await fetch(
         `/api/collection/}${collectionSummary.slug}-${collectionSummary.shortId}`,
-        // `/api/collection/${collectionSummary.shortId}`,
         {
           method: 'GET',
         }

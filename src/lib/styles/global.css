@@ -233,6 +233,7 @@ dt {
   width: initial;
   font-weight: 800;
   text-transform: capitalize;
+  font-size: var(--font-size-lg);
 
   &:not(:first-child) {
     margin-top: var(--spacing-lg);
@@ -250,7 +251,7 @@ ul {
   }
 }
 
-[aria-labelledby='trait-gallery'] .trait > li {
+[aria-labelledby='trait-gallery'] li {
   text-transform: capitalize;
   margin: 0;
   font-size: var(--font-size-sm);
@@ -634,12 +635,8 @@ figcaption > div > div:nth-child(2) {
 }
 
 .sub-section {
-  padding-top: var(--spacing-xl);
+  padding: var(--spacing-xl) 0;
   border-top: 1px solid var(--colour-line);
-}
-
-.trait dt {
-  font-size: var(--font-size-lg);
 }
 
 /* Score section */

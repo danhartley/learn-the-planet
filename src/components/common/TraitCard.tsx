@@ -35,20 +35,22 @@ export const TraitCard = ({ trait }: Props) => {
   })
 
   return (
-    <div id={trait.trait} className="trait">
-      <dl>
-        <dt>{trait.trait}</dt>
-        <dd>
-          <div>{trait.definition}</div>
-          {!!trait.source ? (
-            <div>
-              <a href={trait.source.url}>{trait.source.name}</a>
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </dd>
-      </dl>
+    <section className="sub-section">
+      <section id={trait.trait} className="trait">
+        <dl>
+          <dt>{trait.trait}</dt>
+          <dd>
+            <div>{trait.definition}</div>
+            {!!trait.source ? (
+              <div>
+                <a href={trait.source.url}>{trait.source.name}</a>
+              </div>
+            ) : (
+              <div></div>
+            )}
+          </dd>
+        </dl>
+      </section>
       <section aria-labelledby="morphology">
         <h4 id="morphology">Morphology</h4>
         <ul>{morphology}</ul>
@@ -61,6 +63,6 @@ export const TraitCard = ({ trait }: Props) => {
         <h4 id="examples">Examples</h4>
         <div className="block">{examples}</div>
       </section>
-    </div>
+    </section>
   )
 }
