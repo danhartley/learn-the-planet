@@ -13,6 +13,13 @@ export function CollectionName({ operation, name, setName, type }: Props) {
   const [minLength] = useState(3)
   const [message, setMessage] = useState('')
 
+  // Initialize inputValue with the existing name when component mounts or name changes
+  useEffect(() => {
+    if (name && (operation === 'update' || operation === 'create')) {
+      setInputValue(name)
+    }
+  }, [name, operation])
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
   }
@@ -40,9 +47,13 @@ export function CollectionName({ operation, name, setName, type }: Props) {
       )
       break
     case 'create':
+    case 'update':
+      const isUpdate = operation === 'update'
       display = (
         <>
-          <h2 id="collection-name">Collection name</h2>
+          <h2 id="collection-name">
+            {isUpdate ? 'Update collection name' : 'Collection name'}
+          </h2>
           <form onSubmit={handleSubmit}>
             <div className={`form-row ${type}`}>
               <label htmlFor="collection">Name</label>
@@ -52,6 +63,9 @@ export function CollectionName({ operation, name, setName, type }: Props) {
                 value={inputValue}
                 minLength={minLength}
                 onChange={handleInputChange}
+                placeholder={
+                  isUpdate ? 'Enter new name' : 'Enter collection name'
+                }
               />
             </div>
             <div className="form-row">
@@ -60,7 +74,7 @@ export function CollectionName({ operation, name, setName, type }: Props) {
                 id="submit-name"
                 disabled={inputValue.length < minLength}
               >
-                Submit
+                {isUpdate ? 'Update Name' : 'Submit'}
               </button>
               <div className="correct">{message}</div>
             </div>

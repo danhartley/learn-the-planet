@@ -4,6 +4,7 @@ import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
 import { CollectionExtensions } from '@/components/common/CollectionExtensions'
 import { CollectionSelector } from '@/components/common/CollectionSelector'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
+import { CollectionName } from '@/components/common/CollectionName'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
@@ -34,19 +35,17 @@ export const CollectionUpdate = ({ collection }: Props) => {
     setSelectedCollections,
     updateCollections,
     apiResponse,
+    setName,
+    name,
   } = useCollectionOperations()
 
   useEffect(() => {
     setCollection(collection)
     setOperation('update' as Operation)
     setSelectedCollections(collection.collections?.map(c => c.name) || [])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
     setType(collection.type as ContentHandlerType)
-    if (!items) return
-  }, [items, collection.type, setType])
+    setName(collection.name)
+  }, [items, setType])
 
   useEffect(() => {
     const textarea = document.getElementById('json-input')
@@ -84,7 +83,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
     )
   })
 
-  return (
+  return !!collection ? (
     <>
       <section>
         <h2>{collection.name}</h2>
@@ -93,14 +92,12 @@ export const CollectionUpdate = ({ collection }: Props) => {
         <h2 id="edit-options">Edit options</h2>
         <ul>{editOptions}</ul>
       </section>
-      {needsCollectionItems && operation === ('update' as Operation) && (
-        <CollectionExtensions
-          onAddProperties={addInaturalistProperties}
-          isItemsValid={isItemsValid}
-          isValid={isItemsValid}
-          message={inatMessage}
-        />
-      )}
+      <CollectionName
+        operation={operation}
+        name={name}
+        setName={setName}
+        type={type}
+      />
       {operation === ('update-collections' as Operation) && (
         <>
           <CollectionSelector
@@ -119,6 +116,14 @@ export const CollectionUpdate = ({ collection }: Props) => {
             <ApiResponseMessage apiResponse={apiResponse} />
           </div>
         </>
+      )}
+      {needsCollectionItems && operation === ('update-items' as Operation) && (
+        <CollectionExtensions
+          onAddProperties={addInaturalistProperties}
+          isItemsValid={isItemsValid}
+          isValid={isItemsValid}
+          message={inatMessage}
+        />
       )}
       {operation === ('delete' as Operation) && (
         <section aria-labelledby="delete-collection">
@@ -152,5 +157,5 @@ export const CollectionUpdate = ({ collection }: Props) => {
         </section>
       )}
     </>
-  )
+  ) : null
 }

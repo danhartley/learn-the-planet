@@ -21,10 +21,10 @@ export default async function Page({
   const collection: Collection<unknown> | undefined =
     await getCollectionByShortId(shortId)
 
-  return (
+  return !!collection ? (
     <>
       <h1>Edit collection</h1>
-      {!!collection && <CollectionUpdate collection={collection} />}
+      <CollectionUpdate collection={collection} />
     </>
-  )
+  ) : null
 }
