@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from 'react'
 
-import { JsonImportForm } from '@/components/common/form/JsonImportForm'
+import { JsonImportForm } from '@/components/common/term-input/JsonImportForm'
 import { validateTopicJson } from '@/validation/topic-validation'
 import { ValidationResult, Topic } from '@/types'
 

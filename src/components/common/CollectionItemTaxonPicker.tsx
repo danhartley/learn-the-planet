@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from 'react'
 
-import { JsonImportForm } from '@/components/common/form/JsonImportForm'
+import { JsonImportForm } from '@/components/common/term-input/JsonImportForm'
 import { validateTaxonJson } from '@/validation/taxon-validation'
 import { ValidationResult, Taxon } from '@/types'
 
