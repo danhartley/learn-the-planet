@@ -59,7 +59,7 @@ export function TestContainer<T extends LearningItem>() {
         />
         <Link
           className="breadcrumb"
-          href={`/collection/${currentLayout.collection.id}`}
+          href={`/collection/${currentLayout.collection.slug}-${currentLayout.collection.shortId}`}
         >
           Collection overview
         </Link>

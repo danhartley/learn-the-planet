@@ -62,7 +62,7 @@ function TestReview<T>() {
       </section>
       <Link
         className="breadcrumb"
-        href={`/collection/${currentLayout?.collection.id}`}
+        href={`/collection/${currentLayout?.collection.slug}-${currentLayout?.collection.shortId}`}
       >
         Collection overview
       </Link>
