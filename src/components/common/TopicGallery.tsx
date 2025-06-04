@@ -3,6 +3,8 @@
 import React from 'react'
 import Link from 'next/link'
 
+import { groupCollectionsByType } from '@/utils/arrays'
+
 import { Collection, CollectionSummary, Topic } from '@/types'
 
 type Props<Topic> = {
@@ -14,8 +16,10 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
     <Link href={collection.fieldNotes.url}>Field notes</Link>
   ) : null
 
-  const collections = collection?.collections?.map(
-    (subCollection: CollectionSummary) => {
+  const collections = groupCollectionsByType(collection?.collections || [])
+
+  const collectionLinks = (collections: CollectionSummary[]) => {
+    return collections.map((subCollection: CollectionSummary) => {
       return subCollection ? (
         <li key={subCollection.shortId}>
           <Link
@@ -25,12 +29,13 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
           </Link>
         </li>
       ) : null
-    }
-  )
+    })
+  }
+
   const articles = collection.items.map((section, sectionIndex) => {
     return (
       <React.Fragment key={section.id}>
-        <h3>{section.topic}</h3>
+        <h2>{section.topic}</h2>
         <div key={sectionIndex} className="article-item">
           {section.text.map((para, paraIndex) => (
             <p key={`${sectionIndex}-${paraIndex}`}>{para}</p>
@@ -54,12 +59,37 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
     )
   })
 
-  const terms = collections?.filter(sc => sc?.type === 'term') ? (
-    <section aria-labelledby="topic-gallery" className="sub-section">
-      <h2 id="topic-gallery">Terms</h2>
-      <ul>{collections}</ul>
-    </section>
-  ) : null
+  const topics =
+    collections?.topic.length > 0 ? (
+      <section aria-labelledby="topic-gallery" className="sub-section">
+        <h2 id="topic-gallery">Related topics</h2>
+        <ul>{collectionLinks(collections.topic)}</ul>
+      </section>
+    ) : null
+
+  const taxa =
+    collections?.taxon.length > 0 ? (
+      <section aria-labelledby="taxon-gallery" className="sub-section">
+        <h2 id="taxon-gallery">Taxa</h2>
+        <ul>{collectionLinks(collections.taxon)}</ul>
+      </section>
+    ) : null
+
+  const terms =
+    collections?.term.length > 0 ? (
+      <section aria-labelledby="topic-gallery" className="sub-section">
+        <h2 id="topic-gallery">Terms</h2>
+        <ul>{collectionLinks(collections.term)}</ul>
+      </section>
+    ) : null
+
+  const traits =
+    collections?.trait.length > 0 ? (
+      <section aria-labelledby="trait-gallery" className="sub-section">
+        <h2 id="trait-gallery">Traits</h2>
+        <ul>{collectionLinks(collections.trait)}</ul>
+      </section>
+    ) : null
 
   return (
     <section aria-labelledby="collection" className="group">
@@ -67,7 +97,10 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       <div>{collection.date}</div>
       <div>{collection.location}</div>
       <article>{articles}</article>
+      {topics}
+      {taxa}
       {terms}
+      {traits}
       {fieldNotesUrl}
     </section>
   )

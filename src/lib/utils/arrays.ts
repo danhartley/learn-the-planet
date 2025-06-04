@@ -1,5 +1,10 @@
 import { LearningItem } from '@/types'
-import { QuestionTemplateSelection } from '@/types'
+import {
+  QuestionTemplateSelection,
+  GroupedCollectionSummaries,
+  CollectionSummary,
+  ContentHandlerType,
+} from '@/types'
 
 export const updateTemplate = (
   templates: QuestionTemplateSelection[],
@@ -19,4 +24,22 @@ export const dedupe = (items: LearningItem[]) => {
   )
 
   return deduped
+}
+
+export const groupCollectionsByType = <T>(
+  collections: CollectionSummary[]
+): GroupedCollectionSummaries => {
+  const groups: GroupedCollectionSummaries = {
+    taxon: [],
+    term: [],
+    topic: [],
+    trait: [],
+  }
+
+  collections.forEach(collection => {
+    const type = collection.type as ContentHandlerType
+    groups[type].push(collection)
+  })
+
+  return groups
 }

@@ -168,10 +168,14 @@ export type Credit = {
   authors?: string[]
 }
 
+export type TextType = 'aside'
+
 export interface Topic extends LearningItem {
+  name?: string
   text: string[]
   topic: string
   credit?: Credit
+  type?: TextType
 }
 
 export type Collection<T> = {
@@ -188,6 +192,12 @@ export type Collection<T> = {
   items: T[]
   itemCount: number
   collections?: CollectionSummary[]
+  credit?: Credit
+  topics?: CollectionSummary[] // of type topic
+}
+
+export type GroupedCollectionSummaries = {
+  [K in ContentHandlerType]: CollectionSummary[]
 }
 
 export type Layout<T> = {

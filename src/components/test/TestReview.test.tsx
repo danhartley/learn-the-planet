@@ -146,7 +146,12 @@ describe('TestReview Component', () => {
 describe('TestReview Component when all answers are correct', () => {
   const mockStartRetest = vi.fn()
   const mockPush = vi.fn()
-  const mockCollection = { id: '123', name: 'Test Collection' }
+  const mockCollection = {
+    id: '123',
+    name: 'Test Collection',
+    slug: 'test-collection',
+    shortId: '1',
+  }
 
   beforeEach(() => {
     vi.clearAllMocks()
@@ -198,6 +203,9 @@ describe('TestReview Component when all answers are correct', () => {
     render(<TestReview />)
 
     const collectionLink = screen.getByText('Collection overview')
-    expect(collectionLink).toHaveAttribute('href', '/collection/123')
+    expect(collectionLink).toHaveAttribute(
+      'href',
+      '/collection/test-collection-1'
+    )
   })
 })

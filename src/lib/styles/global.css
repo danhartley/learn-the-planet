@@ -92,10 +92,10 @@ main > section {
 article {
   max-width: 60ch;
   overflow-wrap: anywhere;
-}
 
-.article-item::after {
-  content: '***';
+  h2:not(:first-child) {
+    margin-top: var(--spacing-xl);
+  }
 }
 
 /* Typography */
