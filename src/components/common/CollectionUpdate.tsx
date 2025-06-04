@@ -45,7 +45,14 @@ export const CollectionUpdate = ({ collection }: Props) => {
     setSelectedCollections(collection.collections?.map(c => c.name) || [])
     setType(collection.type as ContentHandlerType)
     setName(collection.name)
-  }, [items, setType])
+  }, [
+    items,
+    setType,
+    collection,
+    setCollection,
+    setOperation,
+    setSelectedCollections,
+  ])
 
   useEffect(() => {
     const textarea = document.getElementById('json-input')
@@ -56,7 +63,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
         2
       )
     }
-  }, [operation])
+  }, [operation, collection.items])
 
   const handleOnChangeOperation = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedOperation = (e.target as HTMLInputElement).value
