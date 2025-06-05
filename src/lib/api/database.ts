@@ -1,6 +1,4 @@
 import { Collection, CollectionSummary } from '@/types'
-// import { sortAlphabeticallyBy } from '@/utils/strings'
-// import { generateGenusAndSpeciesFields } from '@/utils/taxa'
 import clientPromise from '@/api/mongodb'
 
 const DB_NAME = 'ltp'
@@ -202,23 +200,18 @@ export const addItemsToCollection = async (
   const itemsArray = Array.isArray(items) ? items : [items]
 
   try {
-    // Update the collection with new items and recalculate itemCount
+    // Replace the entire items array and recalculate itemCount
     const result = await db.collection('collections').findOneAndUpdate(
       { shortId },
       [
         {
           $set: {
-            items: {
-              $setUnion: [
-                { $ifNull: ['$items', []] }, // Handle case where items field doesn't exist
-                itemsArray,
-              ],
-            },
+            items: itemsArray, // Simply replace with the new array
           },
         },
         {
           $set: {
-            itemCount: { $size: '$items' },
+            itemCount: { $size: '$items' }, // Reference the field we just set
           },
         },
       ],
@@ -231,7 +224,7 @@ export const addItemsToCollection = async (
 
     // Update the summary collection with the new item count
     await updateCollectionSummary(shortId, {
-      itemCount: result.items?.length || 0,
+      itemCount: itemsArray.length, // Use the actual array length
     })
 
     // Return the updated collection in the same format as other functions

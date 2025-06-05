@@ -17,7 +17,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
   const {
     setItems,
     setCollection,
-    updateCollection,
+    updateCollectionItems,
     needsCollectionItems,
     addInaturalistProperties,
     isItemsValid,
@@ -132,20 +132,34 @@ export const CollectionUpdate = ({ collection }: Props) => {
           message={inatMessage}
         />
       )}
-      {(operation === 'update' || operation === 'update-items') && (
+      {operation === 'update-items' && (
         <section aria-labelledby="edit-collection">
           <div>
             <h2 id="edit-collection">Edit {type} collection</h2>
             <div>{operationMessage}</div>
           </div>
           <div className="textarea-row">
-            <button disabled={!isUpdateValid} onClick={updateCollection}>
+            <button disabled={!isUpdateValid} onClick={updateCollectionItems}>
               Update collection
             </button>
             <ApiResponseMessage apiResponse={apiResponse} />
           </div>
         </section>
       )}
+      {/* {(operation === 'update') && (
+        <section aria-labelledby="edit-collection">
+          <div>
+            <h2 id="edit-collection">Edit {type} collection</h2>
+            <div>{operationMessage}</div>
+          </div>
+          <div className="textarea-row">
+            <button disabled={!isUpdateValid} onClick={updateCollectionItems}>
+              Update collection
+            </button>
+            <ApiResponseMessage apiResponse={apiResponse} />
+          </div>
+        </section>
+      )} */}
     </>
   ) : null
 }

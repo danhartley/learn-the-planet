@@ -61,7 +61,7 @@ export default function CollectionOperations({
         setType={setType}
       />
 
-      <CollectionItemPicker type={type} setItems={setItems} />
+      <CollectionItemPicker type={type} setItems={setItems} items={''} />
 
       {needsCollectionItems && (
         <CollectionExtensions

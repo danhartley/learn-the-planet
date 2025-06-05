@@ -138,19 +138,46 @@ export const useCollectionOperations = () => {
     return response.json()
   }
 
-  const updateCollection = async () => {
+  const updateCollectionItems = async () => {
     if (!collection || !collectionItems) return
-    const url = `/api/collection/update/${collection.slug}-${collection.shortId}`
-    await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(collectionItems),
-    })
-    router.push(`/collection/${collection.slug}-${collection.shortId}`)
+
+    try {
+      const url = `/api/collection/update-items/${collection.slug}-${collection.shortId}`
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(collectionItems),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const result = await response.json()
+      console.log('Collection updated successfully:', result)
+
+      // Only navigate if the update was successful
+      router.push(`/collection/${collection.slug}-${collection.shortId}`)
+    } catch (error) {
+      console.error('Failed to update collection:', error)
+
+      // You might want to show a user-friendly error message here
+      // For example, using a toast notification or setting an error state
+      // setError(error.message)
+      // or
+      // toast.error('Failed to update collection. Please try again.')
+    }
   }
 
   const deleteCollection = async () => {
     if (!collection) return
-    const url = `/api/collection/update/${collection.slug}-${collection.shortId}`
+    const url = `/api/collection/delete/${collection.slug}-${collection.shortId}`
     const response = await fetch(url, {
       method: 'DELETE',
     })
@@ -221,7 +248,7 @@ export const useCollectionOperations = () => {
     selectedCollections,
     setSelectedCollections,
     setCollection,
-    updateCollection,
+    updateCollectionItems,
     isUpdateValid,
     setOperation,
     operation,
