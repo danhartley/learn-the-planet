@@ -15,7 +15,6 @@ type Props = {
 }
 export const CollectionUpdate = ({ collection }: Props) => {
   const {
-    items,
     setItems,
     setCollection,
     updateCollection,
@@ -45,14 +44,8 @@ export const CollectionUpdate = ({ collection }: Props) => {
     setSelectedCollections(collection.collections?.map(c => c.name) || [])
     setType(collection.type as ContentHandlerType)
     setName(collection.name)
-  }, [
-    items,
-    setType,
-    collection,
-    setCollection,
-    setOperation,
-    setSelectedCollections,
-  ])
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [collection.id])
 
   useEffect(() => {
     const textarea = document.getElementById('json-input')
@@ -124,14 +117,6 @@ export const CollectionUpdate = ({ collection }: Props) => {
           </div>
         </>
       )}
-      {needsCollectionItems && operation === ('update-items' as Operation) && (
-        <CollectionExtensions
-          onAddProperties={addInaturalistProperties}
-          isItemsValid={isItemsValid}
-          isValid={isItemsValid}
-          message={inatMessage}
-        />
-      )}
       {operation === ('delete' as Operation) && (
         <section aria-labelledby="delete-collection">
           <div>
@@ -149,7 +134,15 @@ export const CollectionUpdate = ({ collection }: Props) => {
           setItems={setItems}
         />
       )}
-      {operation === ('update' as Operation) && (
+      {needsCollectionItems && operation === ('update-items' as Operation) && (
+        <CollectionExtensions
+          onAddProperties={addInaturalistProperties}
+          isItemsValid={isItemsValid}
+          isValid={isItemsValid}
+          message={inatMessage}
+        />
+      )}
+      {(operation === 'update' || operation === 'update-items') && (
         <section aria-labelledby="edit-collection">
           <div>
             <h2 id="edit-collection">Edit {type} collection</h2>

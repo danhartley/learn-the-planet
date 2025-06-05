@@ -80,7 +80,6 @@ export const useCollectionOperations = () => {
       items: items as Taxon[],
       type,
     })
-
     setCollectionItems(inaturalistItems as LearningItem[])
     setInatMessage('Properties added')
   }
@@ -140,13 +139,13 @@ export const useCollectionOperations = () => {
   }
 
   const updateCollection = async () => {
-    if (!collection || !items) return
+    if (!collection || !collectionItems) return
     const url = `/api/collection/update/${collection.slug}-${collection.shortId}`
     await fetch(url, {
       method: 'POST',
-      body: JSON.stringify(items),
+      body: JSON.stringify(collectionItems),
     })
-    router.push(`/collection/${collection.slug}/${collection.shortId}`)
+    router.push(`/collection/${collection.slug}-${collection.shortId}`)
   }
 
   const deleteCollection = async () => {
