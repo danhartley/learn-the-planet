@@ -6,10 +6,11 @@ import { ValidationResult, Term } from '@/types'
 
 type Props = {
   setItems: Dispatch<SetStateAction<Term[]> | undefined>
+  items: string
 }
 
-export function CollectionItemTermPicker({ setItems }: Props) {
-  const [jsonContent, setJsonValue] = useState('')
+export function CollectionItemTermPicker({ setItems, items = '' }: Props) {
+  const [jsonContent, setJsonValue] = useState(items)
   const [isValid, setIsValid] = useState(true)
   const [message, setMessage] = useState('')
 

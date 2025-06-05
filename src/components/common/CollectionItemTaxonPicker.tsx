@@ -6,10 +6,11 @@ import { ValidationResult, Taxon } from '@/types'
 
 type Props = {
   setItems: Dispatch<SetStateAction<Taxon[]> | undefined>
+  items: string
 }
 
-export function CollectionItemTaxonPicker({ setItems }: Props) {
-  const [jsonContent, setJsonValue] = useState('')
+export function CollectionItemTaxonPicker({ setItems, items = '' }: Props) {
+  const [jsonContent, setJsonValue] = useState(items)
   const [isValid, setIsValid] = useState(true)
   const [message, setMessage] = useState('')
 

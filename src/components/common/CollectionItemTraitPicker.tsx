@@ -6,10 +6,11 @@ import { ValidationResult, Trait } from '@/types'
 
 type Props = {
   setItems: Dispatch<SetStateAction<Trait[]> | undefined>
+  items: string
 }
 
-export function CollectionItemTraitPicker({ setItems }: Props) {
-  const [jsonContent, setJsonValue] = useState('')
+export function CollectionItemTraitPicker({ setItems, items = '' }: Props) {
+  const [jsonContent, setJsonValue] = useState(items)
   const [isValid, setIsValid] = useState(true)
   const [message, setMessage] = useState('')
 

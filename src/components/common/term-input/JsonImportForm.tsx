@@ -49,7 +49,7 @@ export const JsonImportForm: React.FC<JsonImportFormProps> = ({
         </div>
         <div className="form-row">
           <button id="submit" type="submit">
-            Import {type} data
+            Validate {type} data
           </button>
           <div className={isValid ? 'correct' : 'incorrect'}>{message}</div>
         </div>

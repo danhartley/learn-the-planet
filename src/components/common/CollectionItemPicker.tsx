@@ -7,14 +7,16 @@ import { CollectionItemTopicPicker } from './CollectionItemTopicPicker'
 
 type ComponentProps = {
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
+  items: string
 }
 
 type Props = {
   type: ContentHandlerType
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
+  items: string
 }
 
-export function CollectionItemPicker({ type, setItems }: Props) {
+export function CollectionItemPicker({ type, setItems, items }: Props) {
   const itemComponent: {
     [K in ContentHandlerType]: React.ComponentType<ComponentProps>
   } = {
@@ -26,5 +28,5 @@ export function CollectionItemPicker({ type, setItems }: Props) {
 
   const Component = itemComponent[type]
 
-  return <Component setItems={setItems} />
+  return <Component setItems={setItems} items={items} />
 }

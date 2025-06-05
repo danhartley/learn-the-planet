@@ -47,17 +47,6 @@ export const CollectionUpdate = ({ collection }: Props) => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collection.id])
 
-  useEffect(() => {
-    const textarea = document.getElementById('json-input')
-    if (textarea) {
-      ;(textarea as HTMLTextAreaElement).value = JSON.stringify(
-        collection.items,
-        null,
-        2
-      )
-    }
-  }, [operation, collection.items])
-
   const handleOnChangeOperation = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedOperation = (e.target as HTMLInputElement).value
     setOperation(selectedOperation as Operation)
@@ -132,6 +121,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
         <CollectionItemPicker
           type={collection.type as ContentHandlerType}
           setItems={setItems}
+          items={JSON.stringify(collection.items, null, 2)}
         />
       )}
       {needsCollectionItems && operation === ('update-items' as Operation) && (
