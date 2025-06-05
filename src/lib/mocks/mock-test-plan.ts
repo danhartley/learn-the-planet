@@ -65,7 +65,7 @@ export const testPlan: TestPlan = {
       },
       {
         id: 579379,
-        binomial: 'Rosmarinus officinalis',
+        binomial: 'Salvia rosmarinus',
         vernacularName: 'Rosemary',
         family: 'Lamiaceae',
       },

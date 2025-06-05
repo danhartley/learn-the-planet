@@ -12,13 +12,6 @@ interface CollectionSummary {
   // Add other properties as needed
 }
 
-interface GroupedCollectionSummaries {
-  taxon: CollectionSummary[]
-  term: CollectionSummary[]
-  topic: CollectionSummary[]
-  trait: CollectionSummary[]
-}
-
 describe('groupCollectionsByType', () => {
   it('should return empty groups when given empty array', () => {
     const result = groupCollectionsByType([])

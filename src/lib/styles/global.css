@@ -326,6 +326,10 @@ li::marker {
   font-style: italic;
 }
 
+[data-type='taxon'] button span {
+  text-transform: capitalize;
+}
+
 [aria-labelledby='multiple-select'] {
   .grid-lg {
     row-gap: var(--spacing-sm);
@@ -546,6 +550,7 @@ figcaption > div {
 
 figcaption > div > div:nth-child(2) {
   font-size: var(--font-size-sm);
+  text-transform: capitalize;
 }
 
 /* Background colors */

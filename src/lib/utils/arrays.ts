@@ -26,7 +26,7 @@ export const dedupe = (items: LearningItem[]) => {
   return deduped
 }
 
-export const groupCollectionsByType = <T>(
+export const groupCollectionsByType = (
   collections: CollectionSummary[]
 ): GroupedCollectionSummaries => {
   const groups: GroupedCollectionSummaries = {
