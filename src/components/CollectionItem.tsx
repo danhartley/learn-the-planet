@@ -45,7 +45,7 @@ export function CollectionItem({ collectionSummary }: Props) {
       linkText = 'Review terms'
       break
     case 'topic':
-      linkText = 'Background'
+      linkText = 'Read field notes'
       break
     case 'trait':
       linkText = 'View traits'

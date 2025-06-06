@@ -107,19 +107,20 @@ h1 {
   letter-spacing: var(--letter-spacing);
   position: initial;
   margin-bottom: 0;
+  text-transform: uppercase;
 }
 
 h2 {
-  text-transform: uppercase;
-  font-size: var(--font-size-md);
+  text-transform: capitalize;
+  font-size: var(--font-size-lg);
   letter-spacing: var(--letter-spacing);
   font-weight: 300;
   margin: 0;
 }
 
 h3 {
-  /* font-weight: 500; */
-  font-size: var(--font-size-sm);
+  font-weight: 500;
+  font-size: var(--font-size-md);
   margin: 0;
   text-transform: capitalize;
 }

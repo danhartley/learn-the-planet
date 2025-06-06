@@ -160,6 +160,7 @@ export type CollectionSummary = {
   date?: string
   location?: string
   itemCount: number
+  imageUrl?: string
 }
 
 export type Credit = {
@@ -193,7 +194,7 @@ export type Collection<T> = {
   itemCount: number
   collections?: CollectionSummary[]
   credit?: Credit
-  image?: Image
+  imageUrl?: string
 }
 
 export type GroupedCollectionSummaries = {
@@ -349,8 +350,8 @@ export type ApiResponse = {
   message: string
 }
 
-export type UpdateCollectionFieldsOptions {
+export type UpdateCollectionFieldsOptions = {
   name?: string
   slug?: string
-  image?: string
+  imageUrl?: string
 }

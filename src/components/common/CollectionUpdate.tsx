@@ -96,11 +96,8 @@ export const CollectionUpdate = ({ collection }: Props) => {
   return (
     !!collection && (
       <>
-        <section>
-          <h2>{collection.name}</h2>
-        </section>
         <section aria-labelledby="edit-options">
-          <h2 id="edit-options">Edit options</h2>
+          <h2 id="edit-options">{collection.name}</h2>
           <ul>{editOptions}</ul>
         </section>
         {operation === 'update' && (

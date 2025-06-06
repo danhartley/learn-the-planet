@@ -526,6 +526,12 @@ export const updateCollectionReferences = async (
   }
 }
 
+export type UpdateCollectionFieldsOptions = {
+  name?: string
+  slug?: string
+  imageUrl?: string
+}
+
 export const updateCollectionFields = async (
   shortId: string,
   options: UpdateCollectionFieldsOptions
@@ -544,8 +550,8 @@ export const updateCollectionFields = async (
     updateFields.slug = options.slug
   }
 
-  if (options.image !== undefined) {
-    updateFields.image = options.image
+  if (options.imageUrl !== undefined) {
+    updateFields.imageUrl = options.imageUrl
   }
 
   // If no fields to update, return undefined
@@ -566,6 +572,14 @@ export const updateCollectionFields = async (
       return undefined
     }
 
+    // Also update the collectionsSummary collection with the same fields
+    await db.collection('collectionsSummary').updateOne(
+      { shortId },
+      {
+        $set: updateFields,
+      }
+    )
+
     // Return the updated collection in the same format as other functions
     return {
       id: result.id,
@@ -576,6 +590,7 @@ export const updateCollectionFields = async (
       type: result.type,
       itemCount: result.itemCount || result.items?.length || 0,
       collections: result?.collections || [],
+      imageUrl: result?.imageUrl || '',
     }
   } catch (error) {
     console.error('Failed to update collection fields:', error)
