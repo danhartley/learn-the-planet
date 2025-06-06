@@ -4,11 +4,16 @@ import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
 import { CollectionExtensions } from '@/components/common/CollectionExtensions'
 import { CollectionSelector } from '@/components/common/CollectionSelector'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
-import { CollectionName } from '@/components/common/CollectionName'
+import { CollectionTextField } from '@/components/common/CollectionTextField'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
-import { Collection, ContentHandlerType, Operation } from '@/types'
+import {
+  Collection,
+  ContentHandlerType,
+  Operation,
+  UpdateCollectionFieldsOptions,
+} from '@/types'
 
 type Props = {
   collection: Collection<unknown>
@@ -36,6 +41,10 @@ export const CollectionUpdate = ({ collection }: Props) => {
     apiResponse,
     setName,
     name,
+    slug,
+    setSlug,
+    setCollectionsFields,
+    updateCollectionFields,
   } = useCollectionOperations()
 
   useEffect(() => {
@@ -44,6 +53,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
     setSelectedCollections(collection.collections?.map(c => c.name) || [])
     setType(collection.type as ContentHandlerType)
     setName(collection.name)
+    setSlug(collection.slug)
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collection.id])
 
@@ -72,94 +82,127 @@ export const CollectionUpdate = ({ collection }: Props) => {
     )
   })
 
-  return !!collection ? (
-    <>
-      <section>
-        <h2>{collection.name}</h2>
-      </section>
-      <section aria-labelledby="edit-options">
-        <h2 id="edit-options">Edit options</h2>
-        <ul>{editOptions}</ul>
-      </section>
-      <CollectionName
-        operation={operation}
-        name={name}
-        setName={setName}
-        type={type}
-      />
-      {operation === ('update-collections' as Operation) && (
-        <>
-          <CollectionSelector
-            options={collectionSummaries.map(c => c.name)}
-            selectedCollections={selectedCollections}
-            setSelectedCollections={setSelectedCollections}
+  const handleUpdateFields = () => {
+    const fields: UpdateCollectionFieldsOptions = {
+      name,
+      slug,
+    }
+    setName(name)
+    setSlug(slug)
+    setCollectionsFields(fields)
+    updateCollectionFields(fields)
+  }
+
+  return (
+    !!collection && (
+      <>
+        <section>
+          <h2>{collection.name}</h2>
+        </section>
+        <section aria-labelledby="edit-options">
+          <h2 id="edit-options">Edit options</h2>
+          <ul>{editOptions}</ul>
+        </section>
+        {operation === 'update' && (
+          <>
+            <CollectionTextField
+              operation={operation}
+              fieldValue={name}
+              setFieldValue={setName}
+              fieldText="name"
+              type={type}
+            />
+            <CollectionTextField
+              operation={operation}
+              fieldValue={slug}
+              setFieldValue={setSlug}
+              fieldText="slug"
+              type={type}
+            />
+          </>
+        )}
+        {operation === ('update-collections' as Operation) && (
+          <>
+            <CollectionSelector
+              options={collectionSummaries.map(c => c.name)}
+              selectedCollections={selectedCollections}
+              setSelectedCollections={setSelectedCollections}
+            />
+            <div className="textarea-row">
+              <button
+                onClick={() => {
+                  updateCollections()
+                }}
+              >
+                Update collections
+              </button>
+              <div>
+                <ApiResponseMessage apiResponse={apiResponse} />
+              </div>
+            </div>
+          </>
+        )}
+        {operation === ('delete' as Operation) && (
+          <section aria-labelledby="delete-collection">
+            <div>
+              <h2 id="delete-collection">Delete {type} collection</h2>
+            </div>
+            <div className="textarea-row">
+              <button onClick={deleteCollection}>Delete collection</button>
+            </div>
+            <div>
+              <ApiResponseMessage apiResponse={apiResponse} />
+            </div>
+          </section>
+        )}
+        {operation === ('update-items' as Operation) && (
+          <CollectionItemPicker
+            type={collection.type as ContentHandlerType}
+            setItems={setItems}
+            items={JSON.stringify(collection.items, null, 2)}
           />
-          <div className="textarea-row">
-            <button
-              onClick={() => {
-                updateCollections()
-              }}
-            >
-              Update collections
-            </button>
-            <ApiResponseMessage apiResponse={apiResponse} />
-          </div>
-        </>
-      )}
-      {operation === ('delete' as Operation) && (
-        <section aria-labelledby="delete-collection">
-          <div>
-            <h2 id="delete-collection">Delete {type} collection</h2>
-          </div>
-          <div className="textarea-row">
-            <button onClick={deleteCollection}>Delete collection</button>
-            <ApiResponseMessage apiResponse={apiResponse} />
-          </div>
-        </section>
-      )}
-      {operation === ('update-items' as Operation) && (
-        <CollectionItemPicker
-          type={collection.type as ContentHandlerType}
-          setItems={setItems}
-          items={JSON.stringify(collection.items, null, 2)}
-        />
-      )}
-      {needsCollectionItems && operation === ('update-items' as Operation) && (
-        <CollectionExtensions
-          onAddProperties={addInaturalistProperties}
-          isItemsValid={isItemsValid}
-          isValid={isItemsValid}
-          message={inatMessage}
-        />
-      )}
-      {operation === 'update-items' && (
-        <section aria-labelledby="edit-collection">
-          <div>
-            <h2 id="edit-collection">Edit {type} collection</h2>
-            <div>{operationMessage}</div>
-          </div>
-          <div className="textarea-row">
-            <button disabled={!isUpdateValid} onClick={updateCollectionItems}>
-              Update collection
-            </button>
-            <ApiResponseMessage apiResponse={apiResponse} />
-          </div>
-        </section>
-      )}
-      {/* {(operation === 'update') && (
-        <section aria-labelledby="edit-collection">
-          <div>
-            <h2 id="edit-collection">Edit {type} collection</h2>
-            <div>{operationMessage}</div>
-          </div>
-          <div className="textarea-row">
-            <button disabled={!isUpdateValid} onClick={updateCollectionItems}>
-              Update collection
-            </button>
-            <ApiResponseMessage apiResponse={apiResponse} />
-          </div>
-        </section>
-      )} */}
-    </>
-  ) : null
+        )}
+        {needsCollectionItems &&
+          operation === ('update-items' as Operation) && (
+            <CollectionExtensions
+              onAddProperties={addInaturalistProperties}
+              isItemsValid={isItemsValid}
+              isValid={isItemsValid}
+              message={inatMessage}
+            />
+          )}
+        {operation === 'update-items' && (
+          <section aria-labelledby="edit-collection">
+            <div>
+              <h2 id="edit-collection">Edit {type} collection</h2>
+              <div>{operationMessage}</div>
+            </div>
+            <div className="textarea-row">
+              <button disabled={!isUpdateValid} onClick={updateCollectionItems}>
+                Update collection items
+              </button>
+              <div>
+                <ApiResponseMessage apiResponse={apiResponse} />
+              </div>
+            </div>
+          </section>
+        )}
+        {operation === 'update' && (
+          <section aria-labelledby="edit-collection">
+            <div>
+              <h2 id="edit-collection">Edit {type} collection</h2>
+            </div>
+            <div className="form-row">
+              <button onClick={handleUpdateFields}>
+                Update collection fields
+              </button>
+              <div>
+                <ApiResponseMessage apiResponse={apiResponse} />
+              </div>
+            </div>
+          </section>
+        )}
+      </>
+    )
+  )
 }

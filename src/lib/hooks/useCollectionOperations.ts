@@ -11,10 +11,12 @@ import {
   Trait,
   CollectionSummary,
   Operation,
+  UpdateCollectionFieldsOptions,
 } from '@/types'
 export const useCollectionOperations = () => {
   const [type, setType] = useState<ContentHandlerType>('topic')
   const [name, setName] = useState<string>('')
+  const [slug, setSlug] = useState<string>('')
   const [items, setItems] = useState<unknown[] | undefined>()
   const [collectionItems, setCollectionItems] = useState<
     LearningItem[] | undefined
@@ -31,6 +33,8 @@ export const useCollectionOperations = () => {
     success: false,
     message: '',
   })
+  const [collectionsFields, setCollectionsFields] =
+    useState<UpdateCollectionFieldsOptions>()
 
   useEffect(() => {
     const getSummaries = async () => {
@@ -64,9 +68,7 @@ export const useCollectionOperations = () => {
         setOperationMessage(opsMessage)
         break
       case 'update':
-        opsMessage = isValid
-          ? `You're ready to edit a new ${type} collection`
-          : 'Please complete the sections above'
+        opsMessage = ''
         setOperationMessage(opsMessage)
         break
       default:
@@ -141,6 +143,10 @@ export const useCollectionOperations = () => {
   const updateCollectionItems = async () => {
     if (!collection || !collectionItems) return
 
+    const transformedItems = generateGenusAndSpeciesFields(
+      collectionItems as Taxon[]
+    )
+
     try {
       const url = `/api/collection/update-items/${collection.slug}-${collection.shortId}`
 
@@ -149,7 +155,7 @@ export const useCollectionOperations = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(collectionItems),
+        body: JSON.stringify(transformedItems),
       })
 
       if (!response.ok) {
@@ -161,12 +167,66 @@ export const useCollectionOperations = () => {
 
       const result = await response.json()
       console.log('Collection updated successfully:', result)
+      setApiResponse({
+        success: false,
+        message: 'Collection items update succeeded.',
+      })
 
       // Only navigate if the update was successful
       router.push(`/collection/${collection.slug}-${collection.shortId}`)
     } catch (error) {
       console.error('Failed to update collection:', error)
+      setApiResponse({
+        success: false,
+        message: 'Collection items update failed.',
+      })
+      // You might want to show a user-friendly error message here
+      // For example, using a toast notification or setting an error state
+      // setError(error.message)
+      // or
+      // toast.error('Failed to update collection. Please try again.')
+    }
+  }
 
+  const updateCollectionFields = async (
+    fields: UpdateCollectionFieldsOptions
+  ) => {
+    console.log('collectionsFields', fields)
+    if (!collection || !fields) return
+
+    try {
+      const url = `/api/collection/update-fields/${collection.slug}-${collection.shortId}`
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(fields),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const result = await response.json()
+      console.log('Collection updated successfully:', result)
+      setApiResponse({
+        success: true,
+        message: 'Collection field updates succeeded.',
+      })
+
+      // Only navigate if the update was successful
+      // router.push(`/collection/${collection.slug}-${collection.shortId}`)
+    } catch (error) {
+      console.error('Failed to update collection:', error)
+      setApiResponse({
+        success: false,
+        message: 'Collection field updates failed.',
+      })
       // You might want to show a user-friendly error message here
       // For example, using a toast notification or setting an error state
       // setError(error.message)
@@ -255,5 +315,9 @@ export const useCollectionOperations = () => {
     deleteCollection,
     apiResponse,
     updateCollections,
+    slug,
+    setSlug,
+    setCollectionsFields,
+    updateCollectionFields,
   }
 }

@@ -348,3 +348,9 @@ export type ApiResponse = {
   success: boolean
   message: string
 }
+
+export type UpdateCollectionFieldsOptions {
+  name?: string
+  slug?: string
+  image?: string
+}

@@ -1,4 +1,8 @@
-import { Collection, CollectionSummary } from '@/types'
+import {
+  Collection,
+  CollectionSummary,
+  UpdateCollectionFieldsOptions,
+} from '@/types'
 import clientPromise from '@/api/mongodb'
 
 const DB_NAME = 'ltp'
@@ -519,5 +523,62 @@ export const updateCollectionReferences = async (
       success: false,
       error: 'Database error occurred while updating collection references',
     }
+  }
+}
+
+export const updateCollectionFields = async (
+  shortId: string,
+  options: UpdateCollectionFieldsOptions
+): Promise<Collection<unknown> | undefined> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+
+  // Build update object with only provided fields
+  const updateFields: Record<string, string> = {}
+
+  if (options.name !== undefined) {
+    updateFields.name = options.name
+  }
+
+  if (options.slug !== undefined) {
+    updateFields.slug = options.slug
+  }
+
+  if (options.image !== undefined) {
+    updateFields.image = options.image
+  }
+
+  // If no fields to update, return undefined
+  if (Object.keys(updateFields).length === 0) {
+    return undefined
+  }
+
+  try {
+    const result = await db.collection('collections').findOneAndUpdate(
+      { shortId },
+      {
+        $set: updateFields,
+      },
+      { returnDocument: 'after' }
+    )
+
+    if (!result) {
+      return undefined
+    }
+
+    // Return the updated collection in the same format as other functions
+    return {
+      id: result.id,
+      shortId: result.shortId || '',
+      slug: result.slug || '',
+      items: result.items,
+      name: result.name,
+      type: result.type,
+      itemCount: result.itemCount || result.items?.length || 0,
+      collections: result?.collections || [],
+    }
+  } catch (error) {
+    console.error('Failed to update collection fields:', error)
+    throw error
   }
 }
