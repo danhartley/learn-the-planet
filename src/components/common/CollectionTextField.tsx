@@ -2,23 +2,29 @@ import React, { useState, Dispatch, SetStateAction, useEffect } from 'react'
 import { Operation, ContentHandlerType } from '@/types'
 
 type Props = {
-  name: string
-  setName: Dispatch<SetStateAction<string>>
+  fieldValue: string
+  fieldText: string
+  setFieldValue: Dispatch<SetStateAction<string>>
   operation: Operation
   type: ContentHandlerType
 }
 
-export function CollectionName({ operation, name, setName, type }: Props) {
+export function CollectionTextField({
+  operation,
+  fieldValue,
+  fieldText,
+  setFieldValue,
+  type,
+}: Props) {
   const [inputValue, setInputValue] = useState('')
   const [minLength] = useState(3)
   const [message, setMessage] = useState('')
 
-  // Initialise inputValue with the existing name when component mounts or name changes
   useEffect(() => {
-    if (name && (operation === 'update' || operation === 'create')) {
-      setInputValue(name)
+    if (fieldValue && (operation === 'update' || operation === 'create')) {
+      setInputValue(fieldValue)
     }
-  }, [name, operation])
+  }, [fieldValue, operation])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
@@ -26,23 +32,23 @@ export function CollectionName({ operation, name, setName, type }: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setName(inputValue)
+    setFieldValue(inputValue)
   }
 
   useEffect(() => {
-    if (name.length > minLength) {
+    if (fieldValue.length > minLength) {
       setMessage('Saved')
     } else {
       setMessage('')
     }
-  }, [name, minLength])
+  }, [fieldValue, minLength])
 
   let display
   switch (operation) {
     case 'read':
       display = (
         <div>
-          Collection name: <span>{name}</span>
+          Collection name: <span>{fieldValue}</span>
         </div>
       )
       break
@@ -51,19 +57,21 @@ export function CollectionName({ operation, name, setName, type }: Props) {
       const isUpdate = operation === 'update'
       display = (
         <>
-          <h2 id="collection-name">
-            <label htmlFor={name}>Collection name</label>
+          <h2 id="collection-field">
+            <label htmlFor={fieldText}>{`Collection ${fieldText}`}</label>
           </h2>
           <form onBlur={handleSubmit}>
             <div className={`form-row ${type}`}>
               <input
                 type="text"
-                id={name}
+                id={fieldText}
                 value={inputValue}
                 minLength={minLength}
                 onChange={handleInputChange}
                 placeholder={
-                  isUpdate ? 'Enter new name' : 'Enter collection name'
+                  isUpdate
+                    ? `Enter new ${fieldText}`
+                    : `Enter collection ${fieldText}`
                 }
               />
             </div>
@@ -73,7 +81,7 @@ export function CollectionName({ operation, name, setName, type }: Props) {
   }
 
   return (
-    <section className="group-block" aria-labelledby="collection-name">
+    <section className="group-block" aria-labelledby="collection-field">
       {display}
     </section>
   )
