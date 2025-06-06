@@ -22,7 +22,7 @@ export const taxonTemplates: QuestionTemplate[] = [
   {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the binomial for ${vernacularName}',
+    questionTextTemplate: 'Select the BINOMIAL for ${vernacularName}',
     correctAnswerProperty: 'binomial',
     distractorCount: 3,
     distractorType: 'binomial',
@@ -30,7 +30,7 @@ export const taxonTemplates: QuestionTemplate[] = [
   {
     type: 'textEntry',
     level: 'level 1',
-    questionTextTemplate: 'Enter the genus for ${species}',
+    questionTextTemplate: 'Enter the GENUS for ${species}',
     correctAnswerProperty: 'genus',
     placeholder: 'Genus',
   },
@@ -45,14 +45,14 @@ export const taxonTemplates: QuestionTemplate[] = [
   {
     type: 'textEntry',
     level: 'level 1',
-    questionTextTemplate: 'Enter the common name for ${binomial}',
+    questionTextTemplate: 'Enter the COMMON NAME for ${binomial}',
     correctAnswerProperty: 'vernacularName',
     placeholder: 'Common',
   },
   {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the common name for ${binomial}',
+    questionTextTemplate: 'Select the COMMON NAME for ${binomial}',
     correctAnswerProperty: 'vernacularName',
     distractorCount: 3,
     distractorType: 'vernacularName',
@@ -63,7 +63,7 @@ export const traitTemplates: QuestionTemplate[] = [
   {
     type: 'multiSelect',
     level: 'level 1',
-    questionTextTemplate: 'Select the phenological traits that match: ${trait}',
+    questionTextTemplate: 'Select the PHENOLOGICAL TRAITS that match: ${trait}',
     correctAnswerProperty: 'phenology',
     distractorCount: 3,
     distractorType: 'phenology',
@@ -72,7 +72,7 @@ export const traitTemplates: QuestionTemplate[] = [
     type: 'multiSelect',
     level: 'level 1',
     questionTextTemplate:
-      'Select the morphological traits that match: ${trait}',
+      'Select the MORPHOLOGICAL TRAITS that match: ${trait}',
     correctAnswerProperty: 'morphology',
     distractorCount: 3,
     distractorType: 'morphology',
@@ -87,7 +87,7 @@ export const traitTemplates: QuestionTemplate[] = [
   {
     type: 'multipleChoice',
     level: 'level 1',
-    questionTextTemplate: 'Select the definition for ${trait}',
+    questionTextTemplate: 'Select the DEFINITION for ${trait}',
     correctAnswerProperty: 'definition',
     distractorCount: 3,
     distractorType: 'definition',

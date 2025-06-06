@@ -406,28 +406,34 @@ form {
 }
 
 /* Form row variants */
+.form-row.topic {
+  background-color: var(--colour-bg-topic-card);
+  border: 1px solid var(--colour-line);
+  padding: var(--spacing-sm);
+}
+
 .form-row.taxon {
   background-color: var(--colour-bg-taxon-card);
   border: 1px solid var(--colour-line);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-sm);
 }
 
 .form-row.term {
   background-color: var(--colour-bg-term-card);
   border: 1px solid var(--colour-line);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-sm);
 }
 
 .form-row.trait {
   background-color: var(--colour-bg-trait-card);
   border: 1px solid var(--colour-line);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-sm);
 }
 
 .form-row.topic {
   background-color: var(--colour-bg-topic-card);
   border: 1px solid var(--colour-line);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-sm);
 }
 
 [data-type='taxon'] button {
@@ -461,7 +467,7 @@ form {
 .form-row.bg-correct,
 .form-row.bg-incorrect {
   border-radius: var(--border-radius-sm);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-sm);
 }
 
 .form-row.bg-correct label,
@@ -472,7 +478,7 @@ form {
 
 /* Question elements */
 .question-text {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   font-weight: 500;
   background-color: var(--colour-bg-main);
   padding: var(--spacing-md);
@@ -714,6 +720,10 @@ progress {
 @media (min-width: 767px) and (max-width: 1186px) {
   .grid-md {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .question-text {
+    font-size: var(--font-size-xl);
   }
 }
 
