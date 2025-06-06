@@ -67,15 +67,6 @@ export function TraitGallery({ collection }: Props<Trait>) {
     }
   )
 
-  const hasCollections = Array.isArray(collections) && collections.length > 0
-
-  const terms = hasCollections ? (
-    <section aria-labelledby="trait-gallery">
-      <h2 id="trait-gallery">Terms</h2>
-      <ul>{collections}</ul>
-    </section>
-  ) : null
-
   return (
     <section aria-labelledby="trait-gallery" className="group">
       <h1 id="trait-gallery">{collection.name}</h1>
@@ -83,7 +74,6 @@ export function TraitGallery({ collection }: Props<Trait>) {
         <h2 id="traits">Traits</h2>
         <ul>{traitIndex}</ul>
         <div className="column-group">{traits}</div>
-        {terms}
       </section>
       <button id="start-test" onClick={handleStartTest}>
         Start test

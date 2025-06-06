@@ -193,7 +193,7 @@ export type Collection<T> = {
   itemCount: number
   collections?: CollectionSummary[]
   credit?: Credit
-  topics?: CollectionSummary[] // of type topic
+  image?: Image
 }
 
 export type GroupedCollectionSummaries = {

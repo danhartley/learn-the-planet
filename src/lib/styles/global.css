@@ -11,6 +11,8 @@
   --colour-bg-insecta: rgb(226, 220, 226);
   --colour-bg-mammalia: rgb(240, 199, 130);
   --colour-bg-reptilia: rgb(254, 226, 223);
+  --colour-bg-topic: rgb(255 255 255);
+  --colour-bg-topic-card: rgb(255 255 255);
   --colour-bg-taxon: rgb(43 73 34);
   --colour-bg-taxon-card: rgb(226 239 220);
   --colour-bg-term: rgb(73 64 34);
@@ -501,8 +503,16 @@ form {
   width: auto;
 }
 
+[aria-labelledby='topics'] .card {
+  background-color: var(--colour-bg-topic-card);
+}
+
 [aria-labelledby='taxa'] .card {
   background-color: var(--colour-bg-taxon-card);
+}
+
+[aria-labelledby='traits'] .card {
+  background-color: var(--colour-bg-trait-card);
 }
 
 [aria-labelledby='terms'] .card {
