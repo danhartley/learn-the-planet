@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { CollectionName } from '@/components/common/CollectionName'
+import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { CollectionType } from '@/components/common/CollectionType'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
 import { CollectionExtensions } from '@/components/common/CollectionExtensions'
@@ -47,10 +47,11 @@ export default function CollectionOperations({
 
   return (
     <>
-      <CollectionName
+      <CollectionTextField
         operation={operation}
-        name={name}
-        setName={setName}
+        fieldValue={name}
+        setFieldValue={setName}
+        fieldText="name"
         type={type}
       />
 

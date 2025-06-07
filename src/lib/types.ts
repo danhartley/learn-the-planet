@@ -169,7 +169,7 @@ export type Credit = {
   authors?: string[]
 }
 
-export type TextType = 'aside'
+export type TextType = 'aside' | 'article'
 
 export interface Topic extends LearningItem {
   name?: string

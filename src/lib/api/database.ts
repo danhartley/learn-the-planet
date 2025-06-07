@@ -23,6 +23,7 @@ export const getCollections = async (): Promise<
         name: collection.name,
         type: collection.type,
         itemCount: collection.itemCount || collection.items?.length || 0,
+        imageUrl: collection.imageUrl || '',
       }
     })
   } catch (error) {
@@ -51,6 +52,7 @@ export const getCollectionSummaries = async (): Promise<
         date: collection.date,
         location: collection.location,
         itemCount: collection.itemCount || 0,
+        imageUrl: collection.imageUrl || '',
       }
     })
   } catch (error) {
@@ -79,6 +81,7 @@ export const getCollectionByShortId = async (
     type: collection.type,
     itemCount: collection.itemCount || collection.items?.length || 0,
     collections: collection?.collections || [],
+    imageUrl: collection.imageUrl || '',
   }
 }
 
@@ -524,12 +527,6 @@ export const updateCollectionReferences = async (
       error: 'Database error occurred while updating collection references',
     }
   }
-}
-
-export type UpdateCollectionFieldsOptions = {
-  name?: string
-  slug?: string
-  imageUrl?: string
 }
 
 export const updateCollectionFields = async (

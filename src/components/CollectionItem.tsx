@@ -1,6 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
+
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { CollectionSummary, ContentHandlerType } from '@/types'
@@ -54,14 +56,30 @@ export function CollectionItem({ collectionSummary }: Props) {
 
   return (
     <section className="group card" aria-labelledby="collection">
-      <div className="group">
-        <h3 id="collection">{collectionSummary.name}</h3>
-        <Link
-          className="breadcrumb"
-          href={`/collection/${collectionSummary.slug}-${collectionSummary.shortId}`}
-        >
-          {linkText}
-        </Link>
+      <div className="group image">
+        <div>
+          {collectionSummary.imageUrl && (
+            <Image
+              id={collectionSummary.id}
+              src={collectionSummary.imageUrl}
+              alt={collectionSummary.name}
+              width={75}
+              height={75}
+              style={{
+                width: '100%',
+                height: '200px',
+                objectFit: 'cover',
+              }}
+            />
+          )}
+          <h3 id="collection">{collectionSummary.name}</h3>
+          <Link
+            className="breadcrumb"
+            href={`/collection/${collectionSummary.slug}-${collectionSummary.shortId}`}
+          >
+            {linkText}
+          </Link>
+        </div>
       </div>
       <div>{collectionSummary.date}</div>
       <div>{collectionSummary.location}</div>

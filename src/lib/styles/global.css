@@ -55,7 +55,7 @@
 
   /* Element sizes */
   --card-width: clamp(100px, 12rem, 240px);
-  --card-height: clamp(200px, 14rem, 300px);
+  --card-height: clamp(360px, 20rem, 440px);
   --img-size: clamp(180px, 16vw, 240px);
   --button-size: clamp(200px, 20vw, 260px);
 
@@ -69,7 +69,7 @@
 
 /* Base styles */
 body {
-  max-width: 70vw;
+  max-width: 75vw;
   margin: 0 auto;
   font-family: 'Open Sans', sans-serif;
   color: var(--colour-fg-text);
@@ -352,6 +352,16 @@ li::marker {
 .group > * {
   margin-bottom: 0;
 }
+
+/* .group.image {
+  display: flex;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+} */
 
 .group-block {
   display: flex;

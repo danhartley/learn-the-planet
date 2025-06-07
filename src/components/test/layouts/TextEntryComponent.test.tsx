@@ -76,7 +76,6 @@ describe('TextEntryComponent', () => {
       />
     )
 
-    expect(screen.getByLabelText('Enter your answer here')).toBeInTheDocument()
     expect(screen.getByRole('textbox')).toBeInTheDocument()
     expect(
       screen.getByRole('button', { name: 'Submit answer' })

@@ -45,6 +45,8 @@ export const CollectionUpdate = ({ collection }: Props) => {
     setSlug,
     setCollectionsFields,
     updateCollectionFields,
+    imageUrl,
+    setImageUrl,
   } = useCollectionOperations()
 
   useEffect(() => {
@@ -54,6 +56,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
     setType(collection.type as ContentHandlerType)
     setName(collection.name)
     setSlug(collection.slug)
+    setImageUrl(collection.imageUrl || '')
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collection.id])
 
@@ -64,7 +67,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
 
   const operationTypes =
     type === 'topic'
-      ? ['update', 'delete', 'update-collections']
+      ? ['update', 'delete', 'update-items', 'update-collections']
       : ['update', 'delete', 'update-items']
 
   const editOptions = operationTypes.map(option => {
@@ -86,9 +89,11 @@ export const CollectionUpdate = ({ collection }: Props) => {
     const fields: UpdateCollectionFieldsOptions = {
       name,
       slug,
+      imageUrl,
     }
     setName(name)
     setSlug(slug)
+    setImageUrl(imageUrl)
     setCollectionsFields(fields)
     updateCollectionFields(fields)
   }
@@ -116,6 +121,13 @@ export const CollectionUpdate = ({ collection }: Props) => {
               fieldText="slug"
               type={type}
             />
+            <CollectionTextField
+              operation={operation}
+              fieldValue={imageUrl}
+              setFieldValue={setImageUrl}
+              fieldText="image url"
+              type={type}
+            />
           </>
         )}
         {operation === ('update-collections' as Operation) && (
@@ -125,7 +137,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
               selectedCollections={selectedCollections}
               setSelectedCollections={setSelectedCollections}
             />
-            <div className="textarea-row">
+            <div className="form-row">
               <button
                 onClick={() => {
                   updateCollections()
@@ -133,9 +145,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
               >
                 Update collections
               </button>
-              <div>
-                <ApiResponseMessage apiResponse={apiResponse} />
-              </div>
+              <ApiResponseMessage apiResponse={apiResponse} />
             </div>
           </>
         )}
@@ -144,10 +154,8 @@ export const CollectionUpdate = ({ collection }: Props) => {
             <div>
               <h2 id="delete-collection">Delete {type} collection</h2>
             </div>
-            <div className="textarea-row">
+            <div className="form-row">
               <button onClick={deleteCollection}>Delete collection</button>
-            </div>
-            <div>
               <ApiResponseMessage apiResponse={apiResponse} />
             </div>
           </section>
@@ -174,13 +182,11 @@ export const CollectionUpdate = ({ collection }: Props) => {
               <h2 id="edit-collection">Edit {type} collection</h2>
               <div>{operationMessage}</div>
             </div>
-            <div className="textarea-row">
+            <div className="form-row">
               <button disabled={!isUpdateValid} onClick={updateCollectionItems}>
                 Update collection items
               </button>
-              <div>
-                <ApiResponseMessage apiResponse={apiResponse} />
-              </div>
+              <ApiResponseMessage apiResponse={apiResponse} />
             </div>
           </section>
         )}
@@ -193,9 +199,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
               <button onClick={handleUpdateFields}>
                 Update collection fields
               </button>
-              <div>
-                <ApiResponseMessage apiResponse={apiResponse} />
-              </div>
+              <ApiResponseMessage apiResponse={apiResponse} />
             </div>
           </section>
         )}

@@ -17,6 +17,7 @@ export const useCollectionOperations = () => {
   const [type, setType] = useState<ContentHandlerType>('topic')
   const [name, setName] = useState<string>('')
   const [slug, setSlug] = useState<string>('')
+  const [imageUrl, setImageUrl] = useState<string>('')
   const [items, setItems] = useState<unknown[] | undefined>()
   const [collectionItems, setCollectionItems] = useState<
     LearningItem[] | undefined
@@ -141,11 +142,12 @@ export const useCollectionOperations = () => {
   }
 
   const updateCollectionItems = async () => {
-    if (!collection || !collectionItems) return
+    if (!collection) return
 
-    const transformedItems = generateGenusAndSpeciesFields(
-      collectionItems as Taxon[]
-    )
+    const transformedItems =
+      collection.type === 'taxon'
+        ? generateGenusAndSpeciesFields(collectionItems as Taxon[])
+        : items
 
     try {
       const url = `/api/collection/update-items/${collection.slug}-${collection.shortId}`
@@ -319,5 +321,7 @@ export const useCollectionOperations = () => {
     setSlug,
     setCollectionsFields,
     updateCollectionFields,
+    imageUrl,
+    setImageUrl,
   }
 }
