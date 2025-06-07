@@ -1,5 +1,8 @@
 'use client'
 import { useEffect } from 'react'
+
+import Link from 'next/link'
+
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
 import { CollectionExtensions } from '@/components/common/CollectionExtensions'
 import { CollectionSelector } from '@/components/common/CollectionSelector'
@@ -47,6 +50,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
     updateCollectionFields,
     imageUrl,
     setImageUrl,
+    setInatMessage,
   } = useCollectionOperations()
 
   useEffect(() => {
@@ -102,7 +106,11 @@ export const CollectionUpdate = ({ collection }: Props) => {
     !!collection && (
       <>
         <section aria-labelledby="edit-options">
-          <h2 id="edit-options">{collection.name}</h2>
+          <h2 id="edit-options">
+            <Link href={`/collection/${collection.slug}-${collection.shortId}`}>
+              {collection.name}
+            </Link>
+          </h2>
           <ul>{editOptions}</ul>
         </section>
         {operation === 'update' && (
@@ -174,13 +182,14 @@ export const CollectionUpdate = ({ collection }: Props) => {
               isItemsValid={isItemsValid}
               isValid={isItemsValid}
               message={inatMessage}
+              setMessage={setInatMessage}
             />
           )}
         {operation === 'update-items' && (
           <section aria-labelledby="edit-collection">
             <div>
               <h2 id="edit-collection">Edit {type} collection</h2>
-              <div>{operationMessage}</div>
+              <ApiResponseMessage apiResponse={operationMessage} />
             </div>
             <div className="form-row">
               <button disabled={!isUpdateValid} onClick={updateCollectionItems}>

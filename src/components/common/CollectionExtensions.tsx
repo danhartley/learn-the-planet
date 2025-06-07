@@ -1,8 +1,15 @@
+import React, { Dispatch, SetStateAction } from 'react'
+
+import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
+
+import { ApiResponse } from '@/types'
+
 type Props = {
   onAddProperties: () => void
   isItemsValid: boolean
   isValid: boolean
-  message: string
+  message: ApiResponse
+  setMessage: Dispatch<SetStateAction<ApiResponse>>
 }
 
 export const CollectionExtensions = ({
@@ -10,7 +17,12 @@ export const CollectionExtensions = ({
   isItemsValid,
   isValid,
   message,
+  setMessage,
 }: Props) => {
+  const handleOnClick = () => {
+    onAddProperties()
+  }
+
   return (
     <section aria-labelledby="inaturalist" className="group-block">
       <h2 id="inaturalist">iNaturalist taxa extensions</h2>
@@ -19,12 +31,12 @@ export const CollectionExtensions = ({
         <div className="form-row">
           <button
             id="add-inat-props"
-            onClick={onAddProperties}
+            onClick={handleOnClick}
             disabled={!isItemsValid}
           >
             Add iNaturalist properties
           </button>
-          <div className={isValid ? 'correct' : 'incorrect'}>{message}</div>
+          <ApiResponseMessage apiResponse={message} />
         </div>
       </div>
     </section>

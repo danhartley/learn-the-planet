@@ -12,6 +12,7 @@ import {
   CollectionSummary,
   Operation,
   UpdateCollectionFieldsOptions,
+  ApiResponse,
 } from '@/types'
 export const useCollectionOperations = () => {
   const [type, setType] = useState<ContentHandlerType>('topic')
@@ -22,18 +23,24 @@ export const useCollectionOperations = () => {
   const [collectionItems, setCollectionItems] = useState<
     LearningItem[] | undefined
   >()
-  const [inatMessage, setInatMessage] = useState('')
+  const [inatMessage, setInatMessage] = useState({
+    success: false,
+    message: '',
+  } as ApiResponse)
   const [selectedCollections, setSelectedCollections] = useState<string[]>([])
   const [collectionSummaries, setCollectionSummaries] = useState<
     CollectionSummary[]
   >([])
   const [collection, setCollection] = useState<Collection<unknown>>()
   const [operation, setOperation] = useState<Operation>('create' as Operation)
-  const [operationMessage, setOperationMessage] = useState('')
+  const [operationMessage, setOperationMessage] = useState({
+    success: false,
+    message: '',
+  } as ApiResponse)
   const [apiResponse, setApiResponse] = useState({
     success: false,
     message: '',
-  })
+  } as ApiResponse)
   const [collectionsFields, setCollectionsFields] =
     useState<UpdateCollectionFieldsOptions>()
 
@@ -66,15 +73,17 @@ export const useCollectionOperations = () => {
         opsMessage = isValid
           ? `You're ready to create a new ${type} collection`
           : 'Please complete the sections above'
-        setOperationMessage(opsMessage)
         break
       case 'update':
         opsMessage = ''
-        setOperationMessage(opsMessage)
         break
       default:
         opsMessage = ''
     }
+    setOperationMessage({
+      success: false,
+      message: opsMessage,
+    } as ApiResponse)
   }, [operation, isValid, type])
 
   const addInaturalistProperties = async () => {
@@ -84,7 +93,10 @@ export const useCollectionOperations = () => {
       type,
     })
     setCollectionItems(inaturalistItems as LearningItem[])
-    setInatMessage('Properties added')
+    setInatMessage({
+      success: true,
+      message: 'Properties added',
+    } as ApiResponse)
   }
 
   const transformCollectionData = (collection: Collection<unknown>) => {
@@ -170,12 +182,12 @@ export const useCollectionOperations = () => {
       const result = await response.json()
       console.log('Collection updated successfully:', result)
       setApiResponse({
-        success: false,
+        success: true,
         message: 'Collection items update succeeded.',
       })
 
       // Only navigate if the update was successful
-      router.push(`/collection/${collection.slug}-${collection.shortId}`)
+      // router.push(`/collection/${collection.slug}-${collection.shortId}`)
     } catch (error) {
       console.error('Failed to update collection:', error)
       setApiResponse({
@@ -323,5 +335,6 @@ export const useCollectionOperations = () => {
     updateCollectionFields,
     imageUrl,
     setImageUrl,
+    setInatMessage,
   }
 }

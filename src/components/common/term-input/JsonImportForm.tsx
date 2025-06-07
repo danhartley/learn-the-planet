@@ -1,12 +1,15 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { ContentHandlerType } from '@/types'
+
+import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
+
+import { ContentHandlerType, ApiResponse } from '@/types'
 
 interface JsonImportFormProps {
   jsonContent: string
   onJsonContentChange: Dispatch<SetStateAction<string>>
+  setMessage: Dispatch<SetStateAction<ApiResponse>>
   placeholder?: string
-  message?: string
-  isValid?: boolean
+  message: ApiResponse
   onSubmit?: () => void
   type: ContentHandlerType
 }
@@ -17,10 +20,11 @@ export const JsonImportForm: React.FC<JsonImportFormProps> = ({
   placeholder = 'Paste your JSON here...',
   onSubmit,
   message,
-  isValid,
   type,
+  setMessage,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage({ success: false, message: '' })
     onJsonContentChange(e.target.value)
   }
 
@@ -51,7 +55,7 @@ export const JsonImportForm: React.FC<JsonImportFormProps> = ({
           <button id="submit" type="submit">
             Validate {type} data
           </button>
-          <div className={isValid ? 'correct' : 'incorrect'}>{message}</div>
+          <ApiResponseMessage apiResponse={message} />
         </div>
       </form>
     </>

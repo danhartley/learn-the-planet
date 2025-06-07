@@ -18,7 +18,10 @@ export function CollectionTextField({
 }: Props) {
   const [inputValue, setInputValue] = useState('')
   const [minLength] = useState(3)
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState({
+    success: false,
+    message: '',
+  })
 
   useEffect(() => {
     if (fieldValue && (operation === 'update' || operation === 'create')) {
@@ -36,11 +39,11 @@ export function CollectionTextField({
   }
 
   useEffect(() => {
-    if (fieldValue.length > minLength) {
-      setMessage('Saved')
-    } else {
-      setMessage('')
-    }
+    const msg = fieldValue.length > minLength ? 'Saved' : ''
+    setMessage({
+      success: false,
+      message: msg,
+    })
   }, [fieldValue, minLength])
 
   let display

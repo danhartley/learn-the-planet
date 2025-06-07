@@ -11,15 +11,17 @@ type Props = {
 
 export function CollectionItemTermPicker({ setItems, items = '' }: Props) {
   const [jsonContent, setJsonValue] = useState(items)
-  const [isValid, setIsValid] = useState(true)
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState({
+    success: false,
+    message: '',
+  })
 
   const isValidTerm = () => {
     const result: ValidationResult<Term> = validateTermJson(jsonContent)
-    setIsValid(result.isValid)
-    setMessage(
-      result.isValid ? 'Your term data are valid' : 'Your term data are invalid'
-    )
+    const msg = result.isValid
+      ? 'Your term data are valid'
+      : 'Your term data are invalid'
+    setMessage({ success: result.isValid, message: msg })
 
     if (result.isValid && result.parsedData)
       setItems(result.parsedData as Term[])
@@ -33,9 +35,9 @@ export function CollectionItemTermPicker({ setItems, items = '' }: Props) {
         jsonContent={jsonContent}
         onJsonContentChange={setJsonValue}
         onSubmit={isValidTerm}
-        isValid={isValid}
         message={message}
         type="term"
+        setMessage={setMessage}
       />
     </section>
   )

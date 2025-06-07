@@ -2,7 +2,7 @@ import React, { useState, Dispatch, SetStateAction } from 'react'
 
 import { JsonImportForm } from '@/components/common/term-input/JsonImportForm'
 import { validateTopicJson } from '@/validation/topic-validation'
-import { ValidationResult, Topic } from '@/types'
+import { ValidationResult, Topic, ApiResponse } from '@/types'
 
 type Props = {
   setItems: Dispatch<SetStateAction<Topic[]> | undefined>
@@ -11,17 +11,17 @@ type Props = {
 
 export function CollectionItemTopicPicker({ setItems, items = '' }: Props) {
   const [jsonContent, setJsonValue] = useState(items)
-  const [isValid, setIsValid] = useState(true)
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState({
+    success: false,
+    message: '',
+  } as ApiResponse)
 
   const isValidTopic = () => {
     const result: ValidationResult<Topic> = validateTopicJson(jsonContent)
-    setIsValid(result.isValid)
-    setMessage(
-      result.isValid
-        ? 'Your topic data are valid'
-        : 'Your topic data are invalid'
-    )
+    const msg = result.isValid
+      ? 'Your topic data are valid'
+      : 'Your topic data are invalid'
+    setMessage({ success: result.isValid, message: msg })
 
     if (result.isValid && result.parsedData)
       setItems(result.parsedData as Topic[])
@@ -35,9 +35,9 @@ export function CollectionItemTopicPicker({ setItems, items = '' }: Props) {
         jsonContent={jsonContent}
         onJsonContentChange={setJsonValue}
         onSubmit={isValidTopic}
-        isValid={isValid}
         message={message}
         type="topic"
+        setMessage={setMessage}
       />
     </section>
   )

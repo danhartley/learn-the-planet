@@ -2,7 +2,7 @@ import React, { useState, Dispatch, SetStateAction } from 'react'
 
 import { JsonImportForm } from '@/components/common/term-input/JsonImportForm'
 import { validateTaxonJson } from '@/validation/taxon-validation'
-import { ValidationResult, Taxon } from '@/types'
+import { ValidationResult, Taxon, ApiResponse } from '@/types'
 
 type Props = {
   setItems: Dispatch<SetStateAction<Taxon[]> | undefined>
@@ -11,17 +11,17 @@ type Props = {
 
 export function CollectionItemTaxonPicker({ setItems, items = '' }: Props) {
   const [jsonContent, setJsonValue] = useState(items)
-  const [isValid, setIsValid] = useState(true)
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState({
+    success: false,
+    message: '',
+  } as ApiResponse)
 
   const isValidTaxon = () => {
     const result: ValidationResult<Taxon> = validateTaxonJson(jsonContent)
-    setIsValid(result.isValid)
-    setMessage(
-      result.isValid
-        ? 'Your taxon data are valid'
-        : 'Your taxon data are invalid'
-    )
+    const msg = result.isValid
+      ? 'Your taxon data are valid'
+      : 'Your taxon data are invalid'
+    setMessage({ success: result.isValid, message: msg })
 
     if (result.isValid && result.parsedData)
       setItems(result.parsedData as Taxon[])
@@ -35,9 +35,9 @@ export function CollectionItemTaxonPicker({ setItems, items = '' }: Props) {
         jsonContent={jsonContent}
         onJsonContentChange={setJsonValue}
         onSubmit={isValidTaxon}
-        isValid={isValid}
         message={message}
         type="taxon"
+        setMessage={setMessage}
       />
     </section>
   )

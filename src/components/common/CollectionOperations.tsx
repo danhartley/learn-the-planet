@@ -84,7 +84,7 @@ export default function CollectionOperations({
       <section aria-labelledby="create-collection">
         <div>
           <h2 id="create-collection">Create {type} collection</h2>
-          <div>{operationMessage}</div>
+          <ApiResponseMessage apiResponse={operationMessage} />
         </div>
         <div className="form-row">
           <button disabled={!isValid} onClick={addCollection}>

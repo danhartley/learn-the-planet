@@ -11,15 +11,20 @@ type Props = {
 
 export function CollectionItemTraitPicker({ setItems, items = '' }: Props) {
   const [jsonContent, setJsonValue] = useState(items)
-  const [isValid, setIsValid] = useState(true)
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState({
+    success: false,
+    message: '',
+  })
 
   const isValidTrait = () => {
     const result: ValidationResult<Trait> = validateTraitJson(jsonContent)
-    setIsValid(result.isValid)
-    setMessage(
-      result.isValid ? 'Your trait data are valid' : 'Your trait is invalid'
-    )
+    const msg = result.isValid
+      ? 'Your trait data are valid'
+      : 'Your trait data are invalid'
+    setMessage({
+      success: result.isValid,
+      message: msg,
+    })
 
     if (result.isValid && result.parsedData)
       setItems(result.parsedData as Trait[])
@@ -33,9 +38,9 @@ export function CollectionItemTraitPicker({ setItems, items = '' }: Props) {
         jsonContent={jsonContent}
         onJsonContentChange={setJsonValue}
         onSubmit={isValidTrait}
-        isValid={isValid}
         message={message}
         type="trait"
+        setMessage={setMessage}
       />
     </section>
   )

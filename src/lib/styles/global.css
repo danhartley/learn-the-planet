@@ -255,7 +255,6 @@ ul {
 }
 
 [aria-labelledby='trait-gallery'] li {
-  text-transform: capitalize;
   margin: 0;
   font-size: var(--font-size-sm);
 }
