@@ -75,6 +75,7 @@ export function TraitGallery({ collection }: Props<Trait>) {
         <ul>{traitIndex}</ul>
         <div className="column-group">{traits}</div>
       </section>
+      {collections}
       <button id="start-test" onClick={handleStartTest}>
         Start test
       </button>

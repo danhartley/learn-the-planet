@@ -41,6 +41,7 @@ export const useCollectionOperations = () => {
     success: false,
     message: '',
   } as ApiResponse)
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [collectionsFields, setCollectionsFields] =
     useState<UpdateCollectionFieldsOptions>()
 

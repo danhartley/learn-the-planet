@@ -15,9 +15,7 @@ type Props = {
 export const CollectionExtensions = ({
   onAddProperties,
   isItemsValid,
-  isValid,
   message,
-  setMessage,
 }: Props) => {
   const handleOnClick = () => {
     onAddProperties()

@@ -18,6 +18,7 @@ export function CollectionTextField({
 }: Props) {
   const [inputValue, setInputValue] = useState('')
   const [minLength] = useState(3)
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [message, setMessage] = useState({
     success: false,
     message: '',

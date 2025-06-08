@@ -39,6 +39,7 @@ export default function CollectionOperations({
     selectedCollections,
     setSelectedCollections,
     apiResponse,
+    setInatMessage,
   } = useCollectionOperations()
 
   useState(() => {
@@ -70,6 +71,7 @@ export default function CollectionOperations({
           isItemsValid={isItemsValid}
           isValid={isValid}
           message={inatMessage}
+          setMessage={setInatMessage}
         />
       )}
 
