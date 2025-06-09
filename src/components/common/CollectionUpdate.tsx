@@ -192,7 +192,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
               <ApiResponseMessage apiResponse={operationMessage} />
             </div>
             <div className="form-row">
-              <button disabled={!isUpdateValid} onClick={updateCollectionItems}>
+              <button disabled={!isItemsValid} onClick={updateCollectionItems}>
                 Update collection items
               </button>
               <ApiResponseMessage apiResponse={apiResponse} />

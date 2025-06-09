@@ -59,9 +59,9 @@ export const useCollectionOperations = () => {
   // Derived validation states
   const isNameValid = name.trim().length > 0
   const isItemsValid = !!items && items.length > 0
-  const needsCollectionItems = ['taxon', 'trait'].includes(type)
+  const needsCollectionItems = ['topic', 'trait', 'taxon'].includes(type)
   const isCollectionItemsValid =
-    !needsCollectionItems || (!!collectionItems && collectionItems.length > 0)
+    !needsCollectionItems || (!!items && items.length > 0)
 
   const isValid = isNameValid && isItemsValid && isCollectionItemsValid
   const isUpdateValid = isItemsValid && isCollectionItemsValid
@@ -93,7 +93,7 @@ export const useCollectionOperations = () => {
       items: items as Taxon[],
       type,
     })
-    setCollectionItems(inaturalistItems as LearningItem[])
+    setItems(inaturalistItems as LearningItem[])
     setInatMessage({
       success: true,
       message: 'Properties added',
@@ -127,8 +127,8 @@ export const useCollectionOperations = () => {
       type,
       name,
       slug,
-      items: collectionItems! || items!,
-      itemCount: (collectionItems! || items!).length || 0,
+      items: items!,
+      itemCount: (items! || items!).length || 0,
     }
 
     const transformedCollection = transformCollectionData(collection)
@@ -159,12 +159,12 @@ export const useCollectionOperations = () => {
 
     const transformedItems =
       collection.type === 'taxon'
-        ? generateGenusAndSpeciesFields(collectionItems as Taxon[])
+        ? generateGenusAndSpeciesFields(items as Taxon[])
         : items
 
     try {
       const url = `/api/collection/update-items/${collection.slug}-${collection.shortId}`
-
+      console.log('transformedItems', transformedItems)
       const response = await fetch(url, {
         method: 'PUT',
         headers: {

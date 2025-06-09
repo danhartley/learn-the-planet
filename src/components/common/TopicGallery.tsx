@@ -3,8 +3,10 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { groupCollectionsByType } from '@/utils/arrays'
+import { TaxonCard } from '@/components/common/TaxonCard'
+import { NextCloudinaryImage } from '@/components/image/NextCloudinaryImage'
 
+import { groupCollectionsByType } from '@/utils/arrays'
 import { Collection, CollectionSummary, Topic } from '@/types'
 
 type Props<Topic> = {
@@ -35,7 +37,20 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
   const articles = collection.items.map((section, sectionIndex) => {
     return (
       <React.Fragment key={section.id}>
-        <h2>{section.topic}</h2>
+        <h2>
+          <em>{section.topic}</em>
+        </h2>
+        {section.images &&
+          section.images.map(img => {
+            return (
+              <NextCloudinaryImage
+                key={img.src}
+                src={img.src}
+                alt={img.alt}
+                caption={img.caption}
+              />
+            )
+          })}
         <div key={sectionIndex} className="article-item">
           {section.text.map((para, paraIndex) => (
             <p key={`${sectionIndex}-${paraIndex}`}>{para}</p>
@@ -54,6 +69,16 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
                 : null}
             </p>
           </div>
+        </div>
+        <div className="block">
+          {section.examples?.map(taxon => {
+            return (
+              <TaxonCard
+                key={taxon.id + crypto.randomUUID()}
+                taxon={taxon}
+              ></TaxonCard>
+            )
+          })}
         </div>
       </React.Fragment>
     )
@@ -85,14 +110,14 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
 
   const traits =
     collections?.trait.length > 0 ? (
-      <section aria-labelledby="topic-gallery" className="sub-section">
-        <h2 id="topic-gallery">Traits</h2>
+      <section aria-labelledby="trait-gallery" className="sub-section">
+        <h2 id="trait-gallery">Traits</h2>
         <ul>{collectionLinks(collections.trait)}</ul>
       </section>
     ) : null
 
   return (
-    <section aria-labelledby="topics" className="group">
+    <section aria-labelledby="topic-gallery" className="group">
       <h1 id="topics">{collection.name}</h1>
       <div>{collection.date}</div>
       <div>{collection.location}</div>

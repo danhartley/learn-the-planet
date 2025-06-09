@@ -1,5 +1,5 @@
 import { mapInatSpeciesToLTP } from '@/api/inat/inat-species-map'
-import { ContentHandlerType, LearningItem, Taxon, Trait } from '@/types'
+import { ContentHandlerType, LearningItem, Taxon, Trait, Topic } from '@/types'
 
 async function getInatData(url: string) {
   try {
@@ -54,6 +54,26 @@ export const getInatTaxonProperties = async ({
             return {
               ...example,
               ...inatProperties?.find(prop => prop.id === example.id),
+            }
+          }),
+        }
+      })
+    case 'topic':
+      ids = (items as Topic[]).flatMap(i => i.examples?.map(e => e.id) ?? [])
+      url = `https://api.inaturalist.org/v1/taxa/${ids.join(',')}`
+      inatProperties = await getInatData(url)
+      if (!inatProperties) {
+        return items
+      }
+      return (items as Topic[]).map((item: Topic) => {
+        return {
+          ...item,
+          examples: item.examples?.map((example: Taxon) => {
+            return {
+              ...example,
+              ...inatProperties?.find(
+                prop => prop.id.toString() === example.id.toString()
+              ),
             }
           }),
         }

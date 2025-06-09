@@ -1,0 +1,32 @@
+'use client'
+import { CldImage } from 'next-cloudinary'
+
+import { NextCloudImage } from '@/types'
+
+export const NextCloudinaryImage = ({
+  src,
+  width = 500,
+  height = 356,
+  alt,
+  sizes = `(max-width: 768px) 100vw,
+           (max-width: 1200px) 50vw,
+            33vw`,
+  caption,
+}: NextCloudImage) => {
+  return (
+    <div className="cloudinary">
+      <figure>
+        <CldImage
+          src={src}
+          width={width}
+          height={height}
+          alt={alt}
+          sizes={sizes}
+        />
+        <figcaption>
+          <div>{caption}</div>
+        </figcaption>
+      </figure>
+    </div>
+  )
+}

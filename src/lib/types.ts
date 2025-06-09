@@ -63,6 +63,15 @@ export type Image = {
   attributionName?: string
 }
 
+export type NextCloudImage = {
+  src: string
+  width?: number
+  height?: number
+  alt: string
+  sizes?: string
+  caption: string
+}
+
 export type Family = {
   genera?: number
   members?: string[]
@@ -135,10 +144,6 @@ export interface Term extends LearningItem {
   example?: string
 }
 
-export interface TraitExample extends Taxon {
-  inaturalistUrl?: string
-}
-
 export interface Trait extends LearningItem {
   trait: string
   source?: {
@@ -148,7 +153,7 @@ export interface Trait extends LearningItem {
   definition: string
   morphology?: string[]
   phenology?: string[]
-  examples?: TraitExample[]
+  examples?: Taxon[]
 }
 
 export type CollectionSummary = {
@@ -177,6 +182,8 @@ export interface Topic extends LearningItem {
   topic: string
   credit?: Credit
   type?: TextType
+  examples?: Taxon[]
+  images?: NextCloudImage[]
 }
 
 export type Collection<T> = {

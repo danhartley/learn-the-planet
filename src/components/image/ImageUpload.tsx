@@ -27,6 +27,9 @@ export const ImageUpload = () => {
       uploadPreset="LTP Collection Context Images"
       options={{
         maxFileSize: 1000000, // 1MB in bytes
+        context: {
+          name: 'Stones in the clearing',
+        },
       }}
       onSuccess={handleUploadSuccess}
       onError={handleUploadError}
