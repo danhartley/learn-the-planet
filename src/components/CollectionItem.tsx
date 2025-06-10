@@ -59,18 +59,23 @@ export function CollectionItem({ collectionSummary }: Props) {
       <div className="group image">
         <div>
           {collectionSummary.imageUrl && (
-            <Image
-              id={collectionSummary.id}
-              src={collectionSummary.imageUrl}
-              alt={collectionSummary.name}
-              width={75}
-              height={75}
-              style={{
-                width: '100%',
-                height: '200px',
-                objectFit: 'cover',
-              }}
-            />
+            <Link
+              className="breadcrumb"
+              href={`/collection/${collectionSummary.slug}-${collectionSummary.shortId}`}
+            >
+              <Image
+                id={collectionSummary.id}
+                src={collectionSummary.imageUrl}
+                alt={collectionSummary.name}
+                width={75}
+                height={75}
+                style={{
+                  width: '100%',
+                  height: '200px',
+                  objectFit: 'cover',
+                }}
+              />
+            </Link>
           )}
           <h3 id="collection">{collectionSummary.name}</h3>
           <Link
