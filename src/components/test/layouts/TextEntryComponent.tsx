@@ -64,7 +64,6 @@ export default function TextEntryComponent({
       <div className="question-text">{question.text}</div>
       <form onSubmit={handleSubmit}>
         <div className={correctClassName}>
-          {/* <label htmlFor="answer">{question.hint}</label> */}
           <input
             id="answer"
             type="text"

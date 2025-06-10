@@ -20,9 +20,7 @@ export const useCollectionOperations = () => {
   const [slug, setSlug] = useState<string>('')
   const [imageUrl, setImageUrl] = useState<string>('')
   const [items, setItems] = useState<unknown[] | undefined>()
-  const [collectionItems, setCollectionItems] = useState<
-    LearningItem[] | undefined
-  >()
+  const [collectionItems] = useState<LearningItem[] | undefined>()
   const [inatMessage, setInatMessage] = useState({
     success: false,
     message: '',

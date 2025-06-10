@@ -32,7 +32,6 @@ export const CollectionUpdate = ({ collection }: Props) => {
     inatMessage,
     setType,
     type,
-    isUpdateValid,
     operationMessage,
     operation,
     setOperation,
