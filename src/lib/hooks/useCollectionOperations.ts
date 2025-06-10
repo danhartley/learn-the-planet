@@ -162,7 +162,6 @@ export const useCollectionOperations = () => {
 
     try {
       const url = `/api/collection/update-items/${collection.slug}-${collection.shortId}`
-      console.log('transformedItems', transformedItems)
       const response = await fetch(url, {
         method: 'PUT',
         headers: {

@@ -102,8 +102,8 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
 
   const terms =
     collections?.term.length > 0 ? (
-      <section aria-labelledby="topic-gallery" className="sub-section">
-        <h2 id="topic-gallery">Terms</h2>
+      <section aria-labelledby="term-gallery" className="sub-section">
+        <h2 id="term-gallery">Terms</h2>
         <ul>{collectionLinks(collections.term)}</ul>
       </section>
     ) : null
