@@ -3,10 +3,22 @@ import { CollectionSummary } from '@/types'
 import { getCollectionSummaries } from '@/api/database'
 
 export default async function CollectionsPage() {
-  const collections: CollectionSummary[] | undefined =
-    await getCollectionSummaries()
+  let collections: CollectionSummary[] | undefined
 
-  if (!collections) return
+  try {
+    console.log('Attempting to fetch collections...')
+    collections = await getCollectionSummaries()
+    console.log('Collections fetched:', collections?.length || 0)
+  } catch (error) {
+    console.error('Error fetching collections:', error)
+    // You might want to show an error state here
+    return <div>Error loading collections</div>
+  }
+
+  if (!collections) {
+    console.log('No collections returned')
+    return <div>No collections found</div>
+  }
 
   const topics = collections.filter(c => c.type === 'topic')
   const traits = collections.filter(c => c.type === 'trait')

@@ -80,7 +80,7 @@ export const useCollectionOperations = () => {
         opsMessage = ''
     }
     setOperationMessage({
-      success: false,
+      success: isValid,
       message: opsMessage,
     } as ApiResponse)
   }, [operation, isValid, type])
