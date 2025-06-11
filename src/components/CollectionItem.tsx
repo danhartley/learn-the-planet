@@ -47,7 +47,7 @@ export function CollectionItem({ collectionSummary }: Props) {
       linkText = 'Review terms'
       break
     case 'topic':
-      linkText = 'Read field notes'
+      linkText = 'Read notes'
       break
     case 'trait':
       linkText = 'View traits'
@@ -78,6 +78,11 @@ export function CollectionItem({ collectionSummary }: Props) {
             </Link>
           )}
           <h3 id="collection">{collectionSummary.name}</h3>
+          {collectionSummary.type === 'term' && (
+            <div>
+              <em>{`${collectionSummary.itemCount} items`}</em>
+            </div>
+          )}
           <Link
             className="breadcrumb"
             href={`/collection/${collectionSummary.slug}-${collectionSummary.shortId}`}
@@ -86,8 +91,12 @@ export function CollectionItem({ collectionSummary }: Props) {
           </Link>
         </div>
       </div>
-      <div>{collectionSummary.date}</div>
-      <div>{collectionSummary.location}</div>
+      {collectionSummary.type === 'topic' && (
+        <>
+          <div>{collectionSummary.date}</div>
+          <div>{collectionSummary.location}</div>
+        </>
+      )}
       <button id="start-test" onClick={handleStartTest}>
         Start test
       </button>

@@ -7,7 +7,8 @@ import { Menu } from '@/components/Menu'
 
 export const metadata = {
   title: 'Learn the Planet',
-  description: 'Lessons to help you to learn more about the natural world',
+  description:
+    'Lessons to help you to learn more about the natural world. Overcoming plant blindness. Prevent the extinction of experience.',
 }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {

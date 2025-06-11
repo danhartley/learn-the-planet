@@ -57,11 +57,13 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
           ))}
 
           <div className="article-credit">
-            <p>
-              <a href={section?.credit?.source}>
-                <em>{section?.credit?.title}</em>
-              </a>
-            </p>
+            {section.credit?.source && (
+              <p>
+                <a href={section?.credit?.source}>
+                  <em>{section?.credit?.title}</em>
+                </a>
+              </p>
+            )}
 
             <p>
               {section?.credit?.authors
@@ -118,7 +120,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
 
   return (
     <section aria-labelledby="topic-gallery" className="group">
-      <h1 id="topics">{collection.name}</h1>
+      <h1 id="topic-gallery">{collection.name}</h1>
       <div>{collection.date}</div>
       <div>{collection.location}</div>
       <article>{articles}</article>
