@@ -52,7 +52,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
             )
           })}
         <div key={sectionIndex} className="article-item">
-          {section.text.map((para, paraIndex) => (
+          {section?.text?.map((para, paraIndex) => (
             <p key={`${sectionIndex}-${paraIndex}`}>{para}</p>
           ))}
 

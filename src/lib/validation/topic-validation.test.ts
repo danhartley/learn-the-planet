@@ -3,32 +3,33 @@ import { isTopicObject, validateTopicJson } from './topic-validation'
 import type { Topic } from '@/types'
 
 describe('isTopicObject', () => {
-  it('should return true for valid Topic objects', () => {
+  it('should return true for valid Topic objects with minimal fields', () => {
     const validTopic: Topic = {
       id: 'topic-1',
-      topic: 'TypeScript Basics',
-      text: ['Introduction to TypeScript', 'Type safety in JavaScript'],
+      text: [],
     }
 
     expect(isTopicObject(validTopic)).toBe(true)
   })
 
-  it('should return true for valid Topic objects with all optional fields', () => {
-    const validTopicWithAllFields: Topic = {
+  it('should return true for valid Topic objects with optional fields', () => {
+    const validTopicWithFields: Topic = {
       id: 'topic-1',
-      topic: 'TypeScript Basics',
-      text: ['Introduction to TypeScript', 'Type safety in JavaScript'],
-      source: 'TypeScript Documentation',
-      example: 'let x: number = 5;',
-      distractors: ['JavaScript', 'C#'],
+      name: 'TypeScript Basics',
+      topic: 'Introduction to TypeScript',
+      text: ['Type safety in JavaScript', 'Basic syntax'],
       credit: {
         title: 'Strategies',
-        source: 'Wikipedia',
-        authors: ['Anders Hejlsberg', 'Wikipedia Team'],
+        source: 'TypeScript Documentation',
+        authors: ['Anders Hejlsberg'],
       },
+      examples: [
+        { id: 'ex1', binomial: 'binomial', vernacularName: 'Hello World' },
+      ],
+      images: [{ src: 'src', alt: 'alt', caption: 'caption' }],
     }
 
-    expect(isTopicObject(validTopicWithAllFields)).toBe(true)
+    expect(isTopicObject(validTopicWithFields)).toBe(true)
   })
 
   it('should return false for null or undefined', () => {
@@ -43,39 +44,46 @@ describe('isTopicObject', () => {
     expect(isTopicObject(true)).toBe(false)
   })
 
-  it('should return false when required fields are missing', () => {
-    // Missing id
+  it('should return false when required id field is missing', () => {
     expect(
       isTopicObject({
-        topic: 'Life history strategies',
-        text: ['Introduction'],
-      })
-    ).toBe(false)
-
-    // Missing topic
-    expect(
-      isTopicObject({
-        id: 'topic-1',
-        text: ['Introduction'],
-      })
-    ).toBe(false)
-
-    // Missing text
-    expect(
-      isTopicObject({
-        id: 'topic-1',
-        topic: 'Life history strategies',
+        name: 'TypeScript Basics',
+        topic: 'Introduction',
       })
     ).toBe(false)
   })
 
-  it('should return false when required fields have wrong types', () => {
-    // id is not a string
+  it('should return false when required id field has wrong type', () => {
     expect(
       isTopicObject({
         id: 123,
-        topic: 'Life history strategies',
-        text: ['Introduction'],
+        name: 'TypeScript Basics',
+      })
+    ).toBe(false)
+  })
+
+  it('should return false when required id field is empty', () => {
+    expect(
+      isTopicObject({
+        id: '',
+        name: 'TypeScript Basics',
+      })
+    ).toBe(false)
+
+    expect(
+      isTopicObject({
+        id: '   ',
+        name: 'TypeScript Basics',
+      })
+    ).toBe(false)
+  })
+
+  it('should return false when optional fields have wrong types', () => {
+    // name is not a string
+    expect(
+      isTopicObject({
+        id: 'topic-1',
+        name: 123,
       })
     ).toBe(false)
 
@@ -84,7 +92,6 @@ describe('isTopicObject', () => {
       isTopicObject({
         id: 'topic-1',
         topic: 123,
-        text: ['Introduction'],
       })
     ).toBe(false)
 
@@ -92,49 +99,23 @@ describe('isTopicObject', () => {
     expect(
       isTopicObject({
         id: 'topic-1',
-        topic: 'Life history strategies',
-        text: 'Introduction',
-      })
-    ).toBe(false)
-  })
-
-  it('should return false when required string fields are empty', () => {
-    // Empty id
-    expect(
-      isTopicObject({
-        id: '',
-        topic: 'Life history strategies',
-        text: ['Introduction'],
+        text: 'not an array',
       })
     ).toBe(false)
 
-    // Empty topic
+    // examples is not an array
     expect(
       isTopicObject({
         id: 'topic-1',
-        topic: '',
-        text: ['Introduction'],
+        examples: 'not an array',
       })
     ).toBe(false)
 
-    // Empty with whitespace
-    expect(
-      isTopicObject({
-        id: '   ',
-        topic: 'Life history strategies',
-        text: ['Introduction'],
-      })
-    ).toBe(false)
-  })
-
-  it('should return false when optional fields have wrong types', () => {
-    // distractors is not an array
+    // images is not an array
     expect(
       isTopicObject({
         id: 'topic-1',
-        topic: 'Life history strategies',
-        text: ['Introduction'],
-        distractors: 'wrong',
+        images: 'not an array',
       })
     ).toBe(false)
   })
@@ -144,8 +125,6 @@ describe('isTopicObject', () => {
     expect(
       isTopicObject({
         id: 'topic-1',
-        topic: 'Life history strategies',
-        text: ['Introduction'],
         credit: 'wrong',
       })
     ).toBe(false)
@@ -154,8 +133,6 @@ describe('isTopicObject', () => {
     expect(
       isTopicObject({
         id: 'topic-1',
-        topic: 'Life history strategies',
-        text: ['Introduction'],
         credit: ['wrong'],
       })
     ).toBe(false)
@@ -164,8 +141,6 @@ describe('isTopicObject', () => {
     expect(
       isTopicObject({
         id: 'topic-1',
-        topic: 'Life history strategies',
-        text: ['Introduction'],
         credit: {
           source: 'Wikipedia',
           authors: ['Wikipedia Team'],
@@ -177,8 +152,6 @@ describe('isTopicObject', () => {
     expect(
       isTopicObject({
         id: 'topic-1',
-        topic: 'Life history strategies',
-        text: ['Introduction'],
         credit: {
           title: 'Strategies',
           authors: ['Wikipedia Team'],
@@ -186,24 +159,10 @@ describe('isTopicObject', () => {
       })
     ).toBe(false)
 
-    // missing authors in credit
+    // authors is not an array (when present)
     expect(
       isTopicObject({
         id: 'topic-1',
-        topic: 'Life history strategies',
-        text: ['Introduction'],
-        credit: {
-          title: 'Strategies',
-        },
-      })
-    ).toBe(false)
-
-    // authors is not an array
-    expect(
-      isTopicObject({
-        id: 'topic-1',
-        topic: 'Life history strategies',
-        text: ['Introduction'],
         credit: {
           title: 'Strategies',
           source: 'Wikipedia',
@@ -212,14 +171,38 @@ describe('isTopicObject', () => {
       })
     ).toBe(false)
   })
+
+  it('should return true when credit has valid structure with optional authors', () => {
+    expect(
+      isTopicObject({
+        id: 'topic-1',
+        credit: {
+          title: 'Strategies',
+          source: 'Wikipedia',
+        },
+      })
+    ).toBe(true)
+  })
 })
 
 describe('validateTopicJson', () => {
-  it('should return isValid=true for valid Topic JSON', () => {
+  it('should return isValid=true for minimal valid Topic JSON', () => {
     const validTopicJson = JSON.stringify({
       id: 'topic-1',
-      topic: 'TypeScript Basics',
-      text: ['Introduction to TypeScript'],
+    })
+
+    const result = validateTopicJson(validTopicJson)
+    expect(result.isValid).toBe(true)
+    expect(result.errors).toEqual([])
+    expect(result.parsedData).toBeDefined()
+  })
+
+  it('should return isValid=true for valid Topic JSON with optional fields', () => {
+    const validTopicJson = JSON.stringify({
+      id: 'topic-1',
+      name: 'TypeScript Basics',
+      topic: 'Introduction to TypeScript',
+      text: ['Type safety', 'Basic syntax'],
     })
 
     const result = validateTopicJson(validTopicJson)
@@ -232,14 +215,15 @@ describe('validateTopicJson', () => {
     const validTopicJson = JSON.stringify([
       {
         id: 'topic-1',
-        topic: 'TypeScript Basics',
-        text: ['Introduction to TypeScript'],
+        name: 'TypeScript Basics',
       },
       {
         id: 'topic-2',
-        topic: 'JavaScript Basics',
+        name: 'JavaScript Basics',
         text: ['Introduction to JavaScript'],
-        distractors: ['Life history strategies', 'Java'],
+        examples: [
+          { id: 'ex1', binomial: 'binomial', vernacularName: 'Hello World' },
+        ],
       },
     ])
 
@@ -248,7 +232,7 @@ describe('validateTopicJson', () => {
     expect(result.errors).toEqual([])
     expect(result.parsedData).toBeDefined()
     expect(Array.isArray(result.parsedData)).toBe(true)
-    expect(result.parsedData.length).toBe(2)
+    expect(result?.parsedData?.length).toBe(2)
   })
 
   it('should return isValid=false for empty JSON string', () => {
@@ -258,74 +242,70 @@ describe('validateTopicJson', () => {
   })
 
   it('should return isValid=false for invalid JSON syntax', () => {
-    const invalidJson = '{ "id": "topic-1", "topic": "TypeScript", text: [] }' // Missing quotes around text
+    const invalidJson = '{ "id": "topic-1", name: "TypeScript" }' // Missing quotes around name
 
     const result = validateTopicJson(invalidJson)
     expect(result.isValid).toBe(false)
     expect(result.errors[0]).toContain('Invalid JSON:')
   })
 
-  it('should return specific errors for missing required fields', () => {
-    // Missing id
-    let json = JSON.stringify({
-      topic: 'Life history strategies',
-      text: ['Introduction'],
+  it('should return specific errors for missing required id field', () => {
+    const json = JSON.stringify({
+      name: 'TypeScript Basics',
+      topic: 'Introduction',
     })
 
-    let result = validateTopicJson(json)
+    const result = validateTopicJson(json)
     expect(result.isValid).toBe(false)
     expect(result.errors).toContain('Item 0: Missing required field: id')
-
-    // Missing topic
-    json = JSON.stringify({
-      id: 'topic-1',
-      text: ['Introduction'],
-    })
-
-    result = validateTopicJson(json)
-    expect(result.isValid).toBe(false)
-    expect(result.errors).toContain('Item 0: Missing required field: topic')
-
-    // Missing text
-    json = JSON.stringify({
-      id: 'topic-1',
-      topic: 'Life history strategies',
-    })
-
-    result = validateTopicJson(json)
-    expect(result.isValid).toBe(false)
-    expect(result.errors).toContain('Item 0: Missing required field: text')
   })
 
   it('should return specific errors for wrong field types', () => {
     // id is not a string
     let json = JSON.stringify({
       id: 123,
-      topic: 'Life history strategies',
-      text: ['Introduction'],
+      name: 'TypeScript Basics',
     })
 
     let result = validateTopicJson(json)
     expect(result.isValid).toBe(false)
     expect(result.errors).toContain('Item 0: Field "id" must be a string')
 
+    // name is not a string
+    json = JSON.stringify({
+      id: 'topic-1',
+      name: 123,
+    })
+
+    result = validateTopicJson(json)
+    expect(result.isValid).toBe(false)
+    expect(result.errors).toContain('Item 0: Field "name" must be a string')
+
     // text is not an array
     json = JSON.stringify({
       id: 'topic-1',
-      topic: 'Life history strategies',
       text: 'Not an array',
     })
 
     result = validateTopicJson(json)
     expect(result.isValid).toBe(false)
     expect(result.errors).toContain('Item 0: Field "text" must be an array')
+
+    // examples is not an array
+    json = JSON.stringify({
+      id: 'topic-1',
+      examples: 'Not an array',
+    })
+
+    result = validateTopicJson(json)
+    expect(result.isValid).toBe(false)
+    expect(result.errors).toContain('Item 0: Field "examples" must be an array')
   })
 
-  it('should return specific errors for empty required string fields', () => {
+  it('should return specific errors for empty required id field', () => {
     const json = JSON.stringify({
       id: '',
-      topic: 'Life history strategies',
-      text: ['Introduction'],
+      name: 'TypeScript Basics',
     })
 
     const result = validateTopicJson(json)
@@ -337,8 +317,6 @@ describe('validateTopicJson', () => {
     // title is not a string
     let json = JSON.stringify({
       id: 'topic-1',
-      topic: 'Life history strategies',
-      text: ['Introduction'],
       credit: {
         title: 123,
         source: 'Wikipedia',
@@ -352,11 +330,9 @@ describe('validateTopicJson', () => {
       'Item 0: Field "credit.title" must be a string'
     )
 
-    // authors is not an array
+    // authors is not an array (when present)
     json = JSON.stringify({
       id: 'topic-1',
-      topic: 'Life history strategies',
-      text: ['Introduction'],
       credit: {
         title: 'Strategies',
         source: 'Wikipedia',
@@ -375,12 +351,12 @@ describe('validateTopicJson', () => {
     const json = JSON.stringify([
       {
         id: '',
-        topic: 123,
+        name: 123,
         text: 'not an array',
       },
       {
-        // Completely invalid item
-        name: 'Wrong property',
+        // Missing required id
+        name: 'Valid name but no id',
       },
     ])
 
@@ -388,11 +364,9 @@ describe('validateTopicJson', () => {
     expect(result.isValid).toBe(false)
     expect(result.errors.length).toBeGreaterThan(3)
     expect(result.errors).toContain('Item 0: Field "id" cannot be empty')
-    expect(result.errors).toContain('Item 0: Field "topic" must be a string')
+    expect(result.errors).toContain('Item 0: Field "name" must be a string')
     expect(result.errors).toContain('Item 0: Field "text" must be an array')
     expect(result.errors).toContain('Item 1: Missing required field: id')
-    expect(result.errors).toContain('Item 1: Missing required field: topic')
-    expect(result.errors).toContain('Item 1: Missing required field: text')
   })
 
   it('should handle non-object JSON values', () => {
@@ -401,5 +375,20 @@ describe('validateTopicJson', () => {
     const result = validateTopicJson(nonObjectJson)
     expect(result.isValid).toBe(false)
     expect(result.errors).toContain('Item 0: Not a valid object')
+  })
+
+  it('should validate credit objects with optional authors', () => {
+    const json = JSON.stringify({
+      id: 'topic-1',
+      credit: {
+        title: 'Strategies',
+        source: 'Wikipedia',
+        // authors is optional
+      },
+    })
+
+    const result = validateTopicJson(json)
+    expect(result.isValid).toBe(true)
+    expect(result.errors).toEqual([])
   })
 })

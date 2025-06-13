@@ -1,10 +1,11 @@
 import { ValidationResult } from '@/types'
 import { Topic, Credit } from '@/types'
+import { isTextType, isTaxon, isNextCloudImage } from '@/type-guards'
 
 /**
- * Type guard to check if an object is a valid Topic
+ * Type guard to check if an object is a valid Credit
  * @param obj - The object to check
- * @returns Boolean indicating whether the object conforms to the Topic interface
+ * @returns Boolean indicating whether the object conforms to the Credit interface
  */
 export const isCreditObject = (obj: unknown): obj is Credit => {
   // Check if obj is an object and not null or array
@@ -37,7 +38,7 @@ export const isTopicObject = (obj: unknown): obj is Topic => {
     return false
   }
 
-  // Check required fields exist and have correct types
+  // Check required fields from LearningItem (assuming id is required)
   if (
     !('id' in obj) ||
     typeof (obj as { id: unknown }).id !== 'string' ||
@@ -46,36 +47,69 @@ export const isTopicObject = (obj: unknown): obj is Topic => {
     return false
   }
 
-  if (
-    !('topic' in obj) ||
-    typeof (obj as { topic: unknown }).topic !== 'string' ||
-    (obj as { topic: string }).topic.trim() === ''
-  ) {
-    return false
-  }
-
-  if (
-    (obj as { text?: unknown }).text === undefined ||
-    ((obj as { text?: unknown }).text !== undefined &&
-      !Array.isArray((obj as { text?: unknown }).text))
-  ) {
-    return false
-  }
-
   // Check optional fields have correct types if present
-  // Check credit field if present
+  if (
+    (obj as { name?: unknown }).name !== undefined &&
+    typeof (obj as { name?: unknown }).name !== 'string'
+  ) {
+    return false
+  }
 
+  if (
+    (obj as { topic?: unknown }).topic !== undefined &&
+    typeof (obj as { topic?: unknown }).topic !== 'string'
+  ) {
+    return false
+  }
+
+  if (
+    (obj as { text?: unknown }).text !== undefined &&
+    !Array.isArray((obj as { text?: unknown }).text)
+  ) {
+    return false
+  }
+
+  // Check credit field if present
   if ((obj as { credit?: unknown }).credit !== undefined) {
     if (!isCreditObject((obj as { credit?: unknown }).credit)) {
       return false
     }
   }
 
+  // Check type field if present
   if (
-    (obj as { distractors?: unknown }).distractors !== undefined &&
-    !Array.isArray((obj as { distractors?: unknown }).distractors)
+    (obj as { type?: unknown }).type !== undefined &&
+    !isTextType((obj as { type?: unknown }).type)
   ) {
     return false
+  }
+
+  // Check examples field if present
+  if ((obj as { examples?: unknown }).examples !== undefined) {
+    const examples = (obj as { examples?: unknown }).examples
+    if (!Array.isArray(examples)) {
+      return false
+    }
+    // Check each example is a valid Taxon
+    for (const example of examples) {
+      if (!isTaxon(example)) {
+        return false
+      }
+    }
+  }
+
+  // Check images field if present
+  if ((obj as { images?: unknown }).images !== undefined) {
+    const images = (obj as { images?: unknown }).images
+    if (!Array.isArray(images)) {
+      return false
+    }
+    // Check each image is a valid NextCloudImage
+    for (const image of images) {
+      if (!isNextCloudImage(image)) {
+        return false
+      }
+    }
   }
 
   // All checks passed
@@ -115,14 +149,13 @@ export function validateTopicJson(jsonString: string): ValidationResult<Topic> {
       // Item is invalid, collect specific errors
       let hasSpecificErrors = false
 
-      // Check required fields
+      // Check if it's a valid object
       if (!item || typeof item !== 'object' || Array.isArray(item)) {
         errors.push(`Item ${index}: Not a valid object`)
         return // Skip further checks if not even an object
       }
 
-      // Check required fields
-
+      // Check required field (id from LearningItem)
       if (
         !(item as { id?: unknown }).id &&
         (item as { id?: unknown }).id !== ''
@@ -137,40 +170,68 @@ export function validateTopicJson(jsonString: string): ValidationResult<Topic> {
         hasSpecificErrors = true
       }
 
+      // Check optional fields
       if (
-        !(item as { topic?: unknown }).topic &&
-        (item as { topic?: unknown }).topic !== ''
+        (item as { name?: unknown }).name !== undefined &&
+        typeof (item as { name?: unknown }).name !== 'string'
       ) {
-        errors.push(`Item ${index}: Missing required field: topic`)
-        hasSpecificErrors = true
-      } else if (typeof (item as { topic?: unknown }).topic !== 'string') {
-        errors.push(`Item ${index}: Field "topic" must be a string`)
-        hasSpecificErrors = true
-      } else if ((item as { topic: string }).topic.trim() === '') {
-        errors.push(`Item ${index}: Field "topic" cannot be empty`)
+        errors.push(`Item ${index}: Field "name" must be a string`)
         hasSpecificErrors = true
       }
 
-      if ((item as { text?: unknown }).text === undefined) {
-        errors.push(`Item ${index}: Missing required field: text`)
+      if (
+        (item as { topic?: unknown }).topic !== undefined &&
+        typeof (item as { topic?: unknown }).topic !== 'string'
+      ) {
+        errors.push(`Item ${index}: Field "topic" must be a string`)
         hasSpecificErrors = true
-      } else if (!Array.isArray((item as { text?: unknown }).text)) {
+      }
+
+      if (
+        (item as { text?: unknown }).text !== undefined &&
+        !Array.isArray((item as { text?: unknown }).text)
+      ) {
         errors.push(`Item ${index}: Field "text" must be an array`)
         hasSpecificErrors = true
       }
 
-      // Check optional fields
+      if ((item as { examples?: unknown }).examples !== undefined) {
+        const examples = (item as { examples?: unknown }).examples
+        if (!Array.isArray(examples)) {
+          errors.push(`Item ${index}: Field "examples" must be an array`)
+          hasSpecificErrors = true
+        } else {
+          // Check each example
+          examples.forEach((example, exampleIndex) => {
+            if (!isTaxon(example)) {
+              errors.push(
+                `Item ${index}: examples[${exampleIndex}] is not a valid Taxon object`
+              )
+              hasSpecificErrors = true
+            }
+          })
+        }
+      }
 
-      if (
-        (item as { distractors?: unknown }).distractors !== undefined &&
-        !Array.isArray((item as { distractors?: unknown }).distractors)
-      ) {
-        errors.push(`Item ${index}: Field "distractors" must be an array`)
-        hasSpecificErrors = true
+      if ((item as { images?: unknown }).images !== undefined) {
+        const images = (item as { images?: unknown }).images
+        if (!Array.isArray(images)) {
+          errors.push(`Item ${index}: Field "images" must be an array`)
+          hasSpecificErrors = true
+        } else {
+          // Check each image
+          images.forEach((image, imageIndex) => {
+            if (!isNextCloudImage(image)) {
+              errors.push(
+                `Item ${index}: images[${imageIndex}] is not a valid NextCloudImage object`
+              )
+              hasSpecificErrors = true
+            }
+          })
+        }
       }
 
       // Check credit object if present
-
       if ((item as { credit?: unknown }).credit !== undefined) {
         const credit = (item as { credit?: unknown }).credit
         if (typeof credit !== 'object' || Array.isArray(credit)) {
@@ -178,7 +239,6 @@ export function validateTopicJson(jsonString: string): ValidationResult<Topic> {
           hasSpecificErrors = true
         } else {
           // Check each required property of the Credit type
-
           if (typeof (credit as { title?: unknown }).title !== 'string') {
             errors.push(`Item ${index}: Field "credit.title" must be a string`)
             hasSpecificErrors = true
@@ -189,7 +249,10 @@ export function validateTopicJson(jsonString: string): ValidationResult<Topic> {
             hasSpecificErrors = true
           }
 
-          if (!Array.isArray((credit as { authors?: unknown }).authors)) {
+          if (
+            (credit as { authors?: unknown }).authors !== undefined &&
+            !Array.isArray((credit as { authors?: unknown }).authors)
+          ) {
             errors.push(
               `Item ${index}: Field "credit.authors" must be an array`
             )

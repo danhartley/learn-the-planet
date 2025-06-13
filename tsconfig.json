@@ -30,7 +30,8 @@
       "@/api/*": ["lib/api/*"],
       "@/mocks/*": ["lib/mocks/*"],
       "@/registry": ["lib/registry"],
-      "@/validation/*": ["lib/validation/*"]
+      "@/validation/*": ["lib/validation/*"],
+      "@/type-guards": ["lib/type-guards"]
     },
     "types": [
       "cypress",

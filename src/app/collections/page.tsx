@@ -9,9 +9,7 @@ export default async function CollectionsPage() {
   let collections: CollectionSummary[] | undefined
 
   try {
-    console.log('Attempting to fetch collections...')
     collections = await getCollectionSummaries()
-    console.log('Collections fetched:', collections?.length || 0)
   } catch (error) {
     console.error('Error fetching collections:', error)
     // You might want to show an error state here
