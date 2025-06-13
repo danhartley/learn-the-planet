@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from 'react'
 
-import { JsonImportForm } from '@/components/common/term-input/JsonImportForm'
+import { ItemInput } from '@/components/common/term-input/ItemInput'
 import { validateTopicJson } from '@/validation/topic-validation'
 import { ValidationResult, Topic, ApiResponse } from '@/types'
 
@@ -31,7 +31,7 @@ export function CollectionItemTopicPicker({ setItems, items = '' }: Props) {
   return (
     <section aria-labelledby="collection-text" className="group-block">
       <h2 id="collection-text">Collection text</h2>
-      <JsonImportForm
+      <ItemInput
         jsonContent={jsonContent}
         onJsonContentChange={setJsonValue}
         onSubmit={isValidTopic}

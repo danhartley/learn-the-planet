@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from 'react'
 
-import { JsonImportForm } from '@/components/common/term-input/JsonImportForm'
+import { ItemInput } from '@/components/common/term-input/ItemInput'
 import { validateTraitJson } from '@/validation/trait-validation'
 import { ValidationResult, Trait } from '@/types'
 
@@ -34,7 +34,7 @@ export function CollectionItemTraitPicker({ setItems, items = '' }: Props) {
   return (
     <section aria-labelledby="collection-traits" className="group-block">
       <h2 id="collection-traits">Collection traits</h2>
-      <JsonImportForm
+      <ItemInput
         jsonContent={jsonContent}
         onJsonContentChange={setJsonValue}
         onSubmit={isValidTrait}

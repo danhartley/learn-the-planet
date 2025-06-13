@@ -4,7 +4,7 @@ import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { ContentHandlerType, ApiResponse } from '@/types'
 
-interface JsonImportFormProps {
+interface ItemInputProps {
   jsonContent: string
   onJsonContentChange: Dispatch<SetStateAction<string>>
   setMessage: Dispatch<SetStateAction<ApiResponse>>
@@ -14,7 +14,7 @@ interface JsonImportFormProps {
   type: ContentHandlerType
 }
 
-export const JsonImportForm: React.FC<JsonImportFormProps> = ({
+export const ItemInput: React.FC<ItemInputProps> = ({
   jsonContent,
   onJsonContentChange,
   placeholder = 'Paste your JSON here...',
@@ -47,7 +47,7 @@ export const JsonImportForm: React.FC<JsonImportFormProps> = ({
             value={jsonContent}
             onChange={handleChange}
             placeholder={placeholder}
-            rows={20}
+            rows={40}
             cols={40}
           />
         </div>

@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from 'react'
 
-import { JsonImportForm } from '@/components/common/term-input/JsonImportForm'
+import { ItemInput } from '@/components/common/term-input/ItemInput'
 import { validateTaxonJson } from '@/validation/taxon-validation'
 import { ValidationResult, Taxon, ApiResponse } from '@/types'
 
@@ -31,7 +31,7 @@ export function CollectionItemTaxonPicker({ setItems, items = '' }: Props) {
   return (
     <section aria-labelledby="collection-taxa" className="group-block">
       <h2 id="collection-taxa">Collection taxa</h2>
-      <JsonImportForm
+      <ItemInput
         jsonContent={jsonContent}
         onJsonContentChange={setJsonValue}
         onSubmit={isValidTaxon}
