@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 import { CollectionList } from '@/components/CollectionList'
 import { CollectionSummary } from '@/types'
 import { getCollectionSummaries } from '@/api/database'
