@@ -179,7 +179,7 @@ export type TextType = 'aside' | 'article'
 
 export interface Topic extends LearningItem {
   name?: string
-  text: string[]
+  text?: string[]
   topic?: string
   credit?: Credit
   type?: TextType
