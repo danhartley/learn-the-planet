@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from 'react'
 
-import { ItemInput } from '@/components/common/term-input/ItemInput'
+import { ItemInput } from '@/components/common/item-input/ItemInput'
 import { validateTaxonJson } from '@/validation/taxon-validation'
 import { ValidationResult, Taxon, ApiResponse } from '@/types'
 

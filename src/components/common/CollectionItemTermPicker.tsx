@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from 'react'
 
-import { ItemInput } from '@/components/common/term-input/ItemInput'
+import { ItemInput } from '@/components/common/item-input/ItemInput'
 import { validateTermJson } from '@/validation/term-validation'
 import { ValidationResult, Term } from '@/types'
 
