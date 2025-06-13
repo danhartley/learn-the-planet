@@ -7,6 +7,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { TestConfigSettings } from '@/components/common/TestConfigSettings'
+import { NextCloudinaryImage } from '@/components/image/NextCloudinaryImage'
+
 import { Collection, Term, QuestionTemplateSelection } from '@/types'
 
 type Props<Term> = {
@@ -40,6 +42,17 @@ export function TermGallery({ collection }: Props<Term>) {
           <div>
             <a href={item.source}>{item.source}</a>
           </div>
+          {item.images &&
+            item.images.map(img => {
+              return (
+                <NextCloudinaryImage
+                  key={img.src}
+                  src={img.src}
+                  alt={img.alt}
+                  caption={img.caption}
+                />
+              )
+            })}
         </dd>
       </React.Fragment>
     )

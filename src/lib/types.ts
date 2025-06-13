@@ -142,6 +142,7 @@ export interface Term extends LearningItem {
   definition: string
   source?: string
   example?: string
+  images?: NextCloudImage[]
 }
 
 export interface Trait extends LearningItem {
@@ -169,8 +170,8 @@ export type CollectionSummary = {
 }
 
 export type Credit = {
-  title: string
-  source: string
+  title?: string
+  source?: string
   authors?: string[]
 }
 
@@ -179,7 +180,7 @@ export type TextType = 'aside' | 'article'
 export interface Topic extends LearningItem {
   name?: string
   text: string[]
-  topic: string
+  topic?: string
   credit?: Credit
   type?: TextType
   examples?: Taxon[]

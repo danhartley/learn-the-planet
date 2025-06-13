@@ -55,9 +55,9 @@ export function CollectionItem({ collectionSummary }: Props) {
   }
 
   return (
-    <section className="group card" aria-labelledby="collection">
-      <div className="group image">
-        <div>
+    <section className="card" aria-labelledby="collection">
+      <div className="image">
+        <>
           {collectionSummary.imageUrl && (
             <Link
               className="breadcrumb"
@@ -83,20 +83,24 @@ export function CollectionItem({ collectionSummary }: Props) {
               <em>{`${collectionSummary.itemCount} items`}</em>
             </div>
           )}
+          {collectionSummary.type === 'topic' && (
+            <>
+              <div>
+                <em>{collectionSummary.date}</em>
+              </div>
+              <div>
+                <em>{collectionSummary.location}</em>
+              </div>
+            </>
+          )}
           <Link
             className="breadcrumb"
             href={`/collection/${collectionSummary.slug}-${collectionSummary.shortId}`}
           >
             {linkText}
           </Link>
-        </div>
-      </div>
-      {collectionSummary.type === 'topic' && (
-        <>
-          <div>{collectionSummary.date}</div>
-          <div>{collectionSummary.location}</div>
         </>
-      )}
+      </div>
       <button id="start-test" onClick={handleStartTest}>
         Start test
       </button>

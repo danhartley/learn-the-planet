@@ -82,6 +82,7 @@ export const getCollectionByShortId = async (
     itemCount: collection.itemCount || collection.items?.length || 0,
     collections: collection?.collections || [],
     imageUrl: collection.imageUrl || '',
+    credit: collection.credit,
   }
 }
 

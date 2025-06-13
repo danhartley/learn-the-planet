@@ -34,7 +34,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
     })
   }
 
-  const articles = collection.items.map((section, sectionIndex) => {
+  const article = collection.items.map((section, sectionIndex) => {
     return (
       <React.Fragment key={section.id}>
         <h2>
@@ -118,12 +118,17 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       </section>
     ) : null
 
+  const authors = collection.credit?.authors?.join(',')
+
   return (
     <section aria-labelledby="topic-gallery" className="group">
-      <h1 id="topic-gallery">{collection.name}</h1>
-      <div>{collection.date}</div>
-      <div>{collection.location}</div>
-      <article>{articles}</article>
+      <div className="group">
+        <h1 id="topic-gallery">{collection.name}</h1>
+        <div>{authors}</div>
+        <div>{collection.date}</div>
+        <div>{collection.location}</div>
+      </div>
+      <article>{article}</article>
       {topics}
       {taxa}
       {terms}
