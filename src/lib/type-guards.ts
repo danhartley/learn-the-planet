@@ -108,14 +108,6 @@ export const isTaxon = (obj: unknown): obj is Taxon => {
     }
   }
 
-  // Check number field
-  if (
-    taxon.observationsCount !== undefined &&
-    typeof taxon.observationsCount !== 'number'
-  ) {
-    return false
-  }
-
   return true
 }
 

@@ -2,6 +2,7 @@ import {
   Collection,
   CollectionSummary,
   UpdateCollectionFieldsOptions,
+  Topic,
 } from '@/types'
 import clientPromise from '@/api/mongodb'
 
@@ -53,6 +54,7 @@ export const getCollectionSummaries = async (): Promise<
         location: collection.location,
         itemCount: collection.itemCount || 0,
         imageUrl: collection.imageUrl || '',
+        status: collection.status,
       }
     })
   } catch (error) {
@@ -116,6 +118,7 @@ export const createCollection = async (collection: Collection<unknown>) => {
       date: collection.date,
       location: collection.location,
       itemCount,
+      status: 'private',
     }
 
     await db.collection('collectionsSummary').insertOne({
@@ -592,6 +595,65 @@ export const updateCollectionFields = async (
     }
   } catch (error) {
     console.error('Failed to update collection fields:', error)
+    throw error
+  }
+}
+
+export const updateCollectionItem = async (
+  shortId: string,
+  itemId: string,
+  updatedItem: Topic
+): Promise<Topic | undefined> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+
+  try {
+    // First, try to update existing item
+    const updateResult = await db.collection('collections').findOneAndUpdate(
+      {
+        shortId,
+        'items.id': itemId,
+      },
+      {
+        $set: {
+          'items.$': updatedItem,
+        },
+      },
+      { returnDocument: 'after' }
+    )
+
+    // If item was found and updated, return the updated item
+    if (updateResult) {
+      const updatedCollection = updateResult
+      const item = updatedCollection.items.find(
+        (item: Topic) => item.id === itemId
+      )
+      return item
+    }
+
+    // If item wasn't found, add it to the collection
+    const addResult = await db.collection('collections').findOneAndUpdate(
+      { shortId },
+      {
+        $push: {
+          items: updatedItem,
+          //eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } as any,
+        $inc: {
+          itemCount: 1,
+        },
+      },
+      { returnDocument: 'after' }
+    )
+
+    if (!addResult) {
+      return undefined
+    }
+
+    // Return the newly added item
+    return updatedItem
+  } catch (error) {
+    console.error('Failed to update collection item:', error)
     throw error
   }
 }

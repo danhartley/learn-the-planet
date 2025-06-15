@@ -13,6 +13,7 @@ import {
   Operation,
   UpdateCollectionFieldsOptions,
   ApiResponse,
+  Topic,
 } from '@/types'
 export const useCollectionOperations = () => {
   const [type, setType] = useState<ContentHandlerType>('topic')
@@ -57,12 +58,13 @@ export const useCollectionOperations = () => {
   // Derived validation states
   const isNameValid = name.trim().length > 0
   const isItemsValid = !!items && items.length > 0
-  const needsCollectionItems = ['topic', 'trait', 'taxon'].includes(type)
+  const needsCollectionItems = ['trait', 'taxon'].includes(type)
   const isCollectionItemsValid =
     !needsCollectionItems || (!!items && items.length > 0)
 
   const isValid = isNameValid && isItemsValid && isCollectionItemsValid
   const isUpdateValid = isItemsValid && isCollectionItemsValid
+  const isTopic = type === 'topic'
 
   useEffect(() => {
     let opsMessage = ''
@@ -203,7 +205,6 @@ export const useCollectionOperations = () => {
   const updateCollectionFields = async (
     fields: UpdateCollectionFieldsOptions
   ) => {
-    console.log('collectionsFields', fields)
     if (!collection || !fields) return
 
     try {
@@ -225,9 +226,9 @@ export const useCollectionOperations = () => {
       }
 
       const result = await response.json()
-      console.log('Collection updated successfully:', result)
+
       setApiResponse({
-        success: true,
+        success: result.success,
         message: 'Collection field updates succeeded.',
       })
 
@@ -301,6 +302,45 @@ export const useCollectionOperations = () => {
     }
   }
 
+  const updateCollectionItem = async (
+    collection: Collection<Topic>,
+    updatedItem: Topic
+  ) => {
+    if (!collection) return
+    try {
+      const itemId = updatedItem.id
+      const url = `/api/collection/update-item/${collection.slug}-${collection.shortId}-${itemId}`
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedItem),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const result = await response.json()
+
+      setApiResponse({
+        success: result.success,
+        message: 'Collection item update succeeded.',
+      })
+    } catch (error) {
+      console.error('Failed to update collection:', error)
+      setApiResponse({
+        success: false,
+        message: 'Collection items update failed.',
+      })
+    }
+  }
+
   return {
     type,
     setType,
@@ -334,5 +374,7 @@ export const useCollectionOperations = () => {
     imageUrl,
     setImageUrl,
     setInatMessage,
+    updateCollectionItem,
+    isTopic,
   }
 }

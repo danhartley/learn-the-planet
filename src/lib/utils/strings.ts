@@ -252,6 +252,49 @@ export function parseSlugShortId(
 }
 
 /**
+ * Parses a slug-shortId-itemId string and returns the slug, shortId, and itemId separately
+ * The itemId is always the last segment after the final dash
+ * The shortId is the second-to-last segment after a dash
+ * The slug can contain multiple dashes
+ *
+ * @param slugShortIdItemId - String in format "slug-shortId-itemId" (e.g., "test-topic-cd787506-section-1")
+ * @returns Object with slug, shortId, and itemId, or null if invalid format
+ */
+export function parseSlugShortIdItemId(
+  slugShortIdItemId: string | null | undefined | unknown
+): { slug: string; shortId: string; itemId: string } | null {
+  if (!slugShortIdItemId || typeof slugShortIdItemId !== 'string') {
+    return null
+  }
+
+  const lastDashIndex = slugShortIdItemId.lastIndexOf('-')
+
+  // Must have at least one dash
+  if (
+    lastDashIndex === -1 ||
+    lastDashIndex === 0 ||
+    lastDashIndex === slugShortIdItemId.length - 1
+  ) {
+    return null
+  }
+
+  const itemId = slugShortIdItemId.substring(lastDashIndex + 1)
+  const slugShortIdPart = slugShortIdItemId.substring(0, lastDashIndex)
+
+  // Parse the remaining part as slug-shortId
+  const parsed = parseSlugShortId(slugShortIdPart)
+  if (!parsed) {
+    return null
+  }
+
+  return {
+    slug: parsed.slug,
+    shortId: parsed.shortId,
+    itemId,
+  }
+}
+
+/**
  * Creates a slug-shortId string from separate slug and shortId
  *
  * @param slug - The slug part (can contain dashes)
@@ -264,6 +307,26 @@ export function createSlugShortId(slug: string, shortId: string): string {
   }
 
   return `${slug}-${shortId}`
+}
+
+/**
+ * Creates a slug-shortId-itemId string from separate slug, shortId, and itemId
+ *
+ * @param slug - The slug part (can contain dashes)
+ * @param shortId - The shortId part (should not contain dashes)
+ * @param itemId - The itemId part (should not contain dashes)
+ * @returns Combined slug-shortId-itemId string
+ */
+export function createSlugShortIdItemId(
+  slug: string,
+  shortId: string,
+  itemId: string
+): string {
+  if (!slug || !shortId || !itemId) {
+    throw new Error('slug, shortId, and itemId are all required')
+  }
+
+  return `${slug}-${shortId}-${itemId}`
 }
 
 /**
@@ -285,5 +348,42 @@ export function extractShortId(slugShortId: string): string | null {
  */
 export function extractSlug(slugShortId: string): string | null {
   const parsed = parseSlugShortId(slugShortId)
+  return parsed?.slug || null
+}
+
+/**
+ * Extracts just the itemId from a slug-shortId-itemId string
+ *
+ * @param slugShortIdItemId - String in format "slug-shortId-itemId"
+ * @returns The itemId or null if invalid
+ */
+export function extractItemId(slugShortIdItemId: string): string | null {
+  const parsed = parseSlugShortIdItemId(slugShortIdItemId)
+  return parsed?.itemId || null
+}
+
+/**
+ * Extracts the shortId from a slug-shortId-itemId string
+ *
+ * @param slugShortIdItemId - String in format "slug-shortId-itemId"
+ * @returns The shortId or null if invalid
+ */
+export function extractShortIdFromThreeParams(
+  slugShortIdItemId: string
+): string | null {
+  const parsed = parseSlugShortIdItemId(slugShortIdItemId)
+  return parsed?.shortId || null
+}
+
+/**
+ * Extracts the slug from a slug-shortId-itemId string
+ *
+ * @param slugShortIdItemId - String in format "slug-shortId-itemId"
+ * @returns The slug or null if invalid
+ */
+export function extractSlugFromThreeParams(
+  slugShortIdItemId: string
+): string | null {
+  const parsed = parseSlugShortIdItemId(slugShortIdItemId)
   return parsed?.slug || null
 }

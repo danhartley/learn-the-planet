@@ -8,6 +8,7 @@ import { CollectionExtensions } from '@/components/common/CollectionExtensions'
 import { CollectionSelector } from '@/components/common/CollectionSelector'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
+import { CollectionTopicUpdate } from '@/components/common/edit/CollectionTopicUpdate'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
@@ -16,6 +17,7 @@ import {
   ContentHandlerType,
   Operation,
   UpdateCollectionFieldsOptions,
+  Topic,
 } from '@/types'
 
 type Props = {
@@ -50,6 +52,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
     imageUrl,
     setImageUrl,
     setInatMessage,
+    isTopic,
   } = useCollectionOperations()
 
   useEffect(() => {
@@ -114,27 +117,35 @@ export const CollectionUpdate = ({ collection }: Props) => {
         </section>
         {operation === 'update' && (
           <>
-            <CollectionTextField
-              operation={operation}
-              fieldValue={name}
-              setFieldValue={setName}
-              fieldText="name"
-              type={type}
-            />
-            <CollectionTextField
-              operation={operation}
-              fieldValue={slug}
-              setFieldValue={setSlug}
-              fieldText="slug"
-              type={type}
-            />
-            <CollectionTextField
-              operation={operation}
-              fieldValue={imageUrl}
-              setFieldValue={setImageUrl}
-              fieldText="image url"
-              type={type}
-            />
+            <div className="group-block">
+              <CollectionTextField
+                operation={operation}
+                fieldValue={name}
+                setFieldValue={setName}
+                fieldText="Collection name"
+                type={type}
+              />
+            </div>
+
+            <div className="group-block">
+              <CollectionTextField
+                operation={operation}
+                fieldValue={slug}
+                setFieldValue={setSlug}
+                fieldText="Collection slug"
+                type={type}
+              />
+            </div>
+
+            <div className="group-block">
+              <CollectionTextField
+                operation={operation}
+                fieldValue={imageUrl}
+                setFieldValue={setImageUrl}
+                fieldText="Collection image url"
+                type={type}
+              />
+            </div>
           </>
         )}
         {operation === ('update-collections' as Operation) && (
@@ -167,12 +178,15 @@ export const CollectionUpdate = ({ collection }: Props) => {
             </div>
           </section>
         )}
-        {operation === ('update-items' as Operation) && (
+        {operation === ('update-items' as Operation) && !isTopic && (
           <CollectionItemPicker
             type={collection.type as ContentHandlerType}
             setItems={setItems}
             items={JSON.stringify(collection.items, null, 2)}
           />
+        )}
+        {operation === ('update-items' as Operation) && isTopic && (
+          <CollectionTopicUpdate collection={collection as Collection<Topic>} />
         )}
         {needsCollectionItems &&
           operation === ('update-items' as Operation) && (
@@ -184,7 +198,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
               setMessage={setInatMessage}
             />
           )}
-        {operation === 'update-items' && (
+        {operation === 'update-items' && !isTopic && (
           <section aria-labelledby="edit-collection">
             <div>
               <h2 id="edit-collection">Edit {type} collection</h2>
