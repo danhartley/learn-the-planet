@@ -10,7 +10,7 @@ type Props = {
 }
 
 export function CollectionItemTraitPicker({ setItems, items = '' }: Props) {
-  const [jsonContent, setJsonValue] = useState(items)
+  const [jsonContent, setJsonContent] = useState(items)
   const [message, setMessage] = useState({
     success: false,
     message: '',
@@ -36,7 +36,7 @@ export function CollectionItemTraitPicker({ setItems, items = '' }: Props) {
       <h2 id="collection-traits">Collection traits</h2>
       <ItemInput
         jsonContent={jsonContent}
-        onJsonContentChange={setJsonValue}
+        onJsonContentChange={setJsonContent}
         onSubmit={isValidTrait}
         message={message}
         type="trait"

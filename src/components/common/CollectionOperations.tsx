@@ -48,13 +48,15 @@ export default function CollectionOperations({
 
   return (
     <>
-      <CollectionTextField
-        operation={operation}
-        fieldValue={name}
-        setFieldValue={setName}
-        fieldText="name"
-        type={type}
-      />
+      <div className="group-block">
+        <CollectionTextField
+          operation={operation}
+          fieldValue={name}
+          setFieldValue={setName}
+          fieldText="Collection name"
+          type={type}
+        />
+      </div>
 
       <CollectionType
         operation={operation}

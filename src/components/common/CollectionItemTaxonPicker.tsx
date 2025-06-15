@@ -10,7 +10,7 @@ type Props = {
 }
 
 export function CollectionItemTaxonPicker({ setItems, items = '' }: Props) {
-  const [jsonContent, setJsonValue] = useState(items)
+  const [jsonContent, setJsonContent] = useState(items)
   const [message, setMessage] = useState({
     success: false,
     message: '',
@@ -33,7 +33,7 @@ export function CollectionItemTaxonPicker({ setItems, items = '' }: Props) {
       <h2 id="collection-taxa">Collection taxa</h2>
       <ItemInput
         jsonContent={jsonContent}
-        onJsonContentChange={setJsonValue}
+        onJsonContentChange={setJsonContent}
         onSubmit={isValidTaxon}
         message={message}
         type="taxon"

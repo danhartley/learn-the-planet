@@ -134,7 +134,6 @@ export interface Taxon extends LearningItem {
   observationURL?: string
   wikipediaUrl?: string
   inaturalistUrl?: string
-  observationsCount?: number
 }
 
 export interface Term extends LearningItem {
@@ -167,6 +166,7 @@ export type CollectionSummary = {
   location?: string
   itemCount: number
   imageUrl?: string
+  status: string
 }
 
 export type Credit = {
@@ -178,7 +178,6 @@ export type Credit = {
 export type TextType = 'aside' | 'article'
 
 export interface Topic extends LearningItem {
-  name?: string
   text?: string[]
   topic?: string
   credit?: Credit

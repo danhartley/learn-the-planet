@@ -62,7 +62,7 @@ export function CollectionTextField({
       display = (
         <>
           <h2 id="collection-field">
-            <label htmlFor={fieldText}>{`Collection ${fieldText}`}</label>
+            <label htmlFor={fieldText}>{`${fieldText}`}</label>
           </h2>
           <form onBlur={handleSubmit}>
             <div className={`form-row ${type}`}>
@@ -84,9 +84,5 @@ export function CollectionTextField({
       )
   }
 
-  return (
-    <section className="group-block" aria-labelledby="collection-field">
-      {display}
-    </section>
-  )
+  return <section aria-labelledby="collection-field">{display}</section>
 }

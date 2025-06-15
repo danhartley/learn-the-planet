@@ -21,10 +21,18 @@ export default async function CollectionsPage() {
     return <div>No collections found</div>
   }
 
-  const topics = collections.filter(c => c.type === 'topic')
-  const traits = collections.filter(c => c.type === 'trait')
-  const taxa = collections.filter(c => c.type === 'taxon')
-  const terms = collections.filter(c => c.type === 'term')
+  const topics = collections.filter(
+    c => c.type === 'topic' && c.status === 'public'
+  )
+  const traits = collections.filter(
+    c => c.type === 'trait' && c.status === 'public'
+  )
+  const taxa = collections.filter(
+    c => c.type === 'taxon' && c.status === 'public'
+  )
+  const terms = collections.filter(
+    c => c.type === 'term' && c.status === 'public'
+  )
 
   return (
     <section aria-labelledby="collections">
