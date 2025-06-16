@@ -31,13 +31,13 @@ export async function PUT(
 
     const body = await req.json()
 
-    const { collections } = body
+    const { collectionReferences } = body
 
-    if (!Array.isArray(collections)) {
+    if (!Array.isArray(collectionReferences)) {
       console.log(
         'ERROR: Collections is not an array:',
-        typeof collections,
-        collections
+        typeof collectionReferences,
+        collectionReferences
       )
       return NextResponse.json(
         { error: 'Collections must be an array' },
@@ -46,11 +46,13 @@ export async function PUT(
     }
 
     // Check for undefined values in collections array
-    const hasUndefined = collections.some(c => c === undefined || c === null)
+    const hasUndefined = collectionReferences.some(
+      c => c === undefined || c === null
+    )
     if (hasUndefined) {
       console.log(
         'ERROR: Collections array contains undefined/null values:',
-        collections
+        collectionReferences
       )
       return NextResponse.json(
         { error: 'Collections array contains invalid values' },
@@ -58,8 +60,11 @@ export async function PUT(
       )
     }
 
-    const result = await updateCollectionReferences(shortId, collections)
-
+    const result = await updateCollectionReferences(
+      shortId,
+      collectionReferences
+    )
+    console.log('result', result)
     if (!result.success) {
       console.log('ERROR from updateCollectionReferences:', result.error)
       return NextResponse.json({ error: result.error }, { status: 400 })

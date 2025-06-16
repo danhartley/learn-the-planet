@@ -362,3 +362,5 @@ export type UpdateCollectionFieldsOptions = {
   slug?: string
   imageUrl?: string
 }
+
+export type CollectionStatus = 'private' | 'public'

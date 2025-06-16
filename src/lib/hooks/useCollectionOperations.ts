@@ -58,13 +58,11 @@ export const useCollectionOperations = () => {
   // Derived validation states
   const isNameValid = name.trim().length > 0
   const isItemsValid = !!items && items.length > 0
-  const needsCollectionItems = ['trait', 'taxon'].includes(type)
   const isCollectionItemsValid =
-    !needsCollectionItems || (!!items && items.length > 0)
+    !['trait', 'taxon'].includes(type) || (!!items && items.length > 0)
 
   const isValid = isNameValid && isItemsValid && isCollectionItemsValid
   const isUpdateValid = isItemsValid && isCollectionItemsValid
-  const isTopic = type === 'topic'
 
   useEffect(() => {
     let opsMessage = ''
@@ -179,15 +177,12 @@ export const useCollectionOperations = () => {
         )
       }
 
-      const result = await response.json()
-      console.log('Collection updated successfully:', result)
+      await response.json()
+
       setApiResponse({
         success: true,
         message: 'Collection items update succeeded.',
       })
-
-      // Only navigate if the update was successful
-      // router.push(`/collection/${collection.slug}-${collection.shortId}`)
     } catch (error) {
       console.error('Failed to update collection:', error)
       setApiResponse({
@@ -225,10 +220,10 @@ export const useCollectionOperations = () => {
         )
       }
 
-      const result = await response.json()
+      await response.json()
 
       setApiResponse({
-        success: result.success,
+        success: true,
         message: 'Collection field updates succeeded.',
       })
 
@@ -261,14 +256,16 @@ export const useCollectionOperations = () => {
     }
   }
 
-  const updateCollections = async () => {
+  const updateCollectionReferences = async ({
+    collection,
+    collectionReferences,
+  }: {
+    collection: Collection<unknown>
+    collectionReferences: CollectionSummary[]
+  }) => {
     if (!collection) return
 
     const url = `/api/collection/update-collections/${collection.slug}-${collection.shortId}`
-
-    const collections = selectedCollections
-      .map(n => collectionSummaries.find(cs => cs.name === n))
-      .filter(c => c !== undefined)
 
     try {
       const response = await fetch(url, {
@@ -276,7 +273,7 @@ export const useCollectionOperations = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ collections }),
+        body: JSON.stringify({ collectionReferences }),
       })
 
       if (!response.ok) {
@@ -290,9 +287,10 @@ export const useCollectionOperations = () => {
       }
 
       const result = await response.json()
+
       setApiResponse({
         success: true,
-        message: 'Collections update succeeded.',
+        message: 'Collection references update succeeded.',
       })
       return result
     } catch (error) {
@@ -352,7 +350,6 @@ export const useCollectionOperations = () => {
     inatMessage,
     isValid,
     isItemsValid,
-    needsCollectionItems,
     operationMessage,
     addInaturalistProperties,
     addCollection,
@@ -366,7 +363,7 @@ export const useCollectionOperations = () => {
     operation,
     deleteCollection,
     apiResponse,
-    updateCollections,
+    updateCollectionReferences,
     slug,
     setSlug,
     setCollectionsFields,
@@ -375,6 +372,5 @@ export const useCollectionOperations = () => {
     setImageUrl,
     setInatMessage,
     updateCollectionItem,
-    isTopic,
   }
 }

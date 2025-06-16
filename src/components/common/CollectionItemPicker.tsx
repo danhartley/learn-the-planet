@@ -1,9 +1,11 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { ContentHandlerType } from '@/types'
+
 import { CollectionItemTermPicker } from './CollectionItemTermPicker'
 import { CollectionItemTaxonPicker } from './CollectionItemTaxonPicker'
 import { CollectionItemTraitPicker } from './CollectionItemTraitPicker'
 import { CollectionItemTopicPicker } from './CollectionItemTopicPicker'
+
+import { ContentHandlerType, Operation } from '@/types'
 
 type ComponentProps = {
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
@@ -14,9 +16,15 @@ type Props = {
   type: ContentHandlerType
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
   items: string
+  operation: Operation
 }
 
-export function CollectionItemPicker({ type, setItems, items }: Props) {
+export function CollectionItemPicker({
+  type,
+  setItems,
+  items,
+  operation,
+}: Props) {
   const itemComponent: {
     [K in ContentHandlerType]: React.ComponentType<ComponentProps>
   } = {
@@ -28,5 +36,10 @@ export function CollectionItemPicker({ type, setItems, items }: Props) {
 
   const Component = itemComponent[type]
 
-  return <Component setItems={setItems} items={items} />
+  return (
+    ['update-items', 'create'].includes(operation) &&
+    type !== ('topic' as ContentHandlerType) && (
+      <Component setItems={setItems} items={items} />
+    )
+  )
 }

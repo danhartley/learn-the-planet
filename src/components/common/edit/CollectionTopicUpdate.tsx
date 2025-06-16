@@ -1,8 +1,6 @@
 'use client'
 import React, { useEffect } from 'react'
 
-import Link from 'next/link'
-
 import { CollectionTopicSection } from '@/components/common/edit/CollectionTopicSection'
 import { CollectionTopicCloudImage } from '@/components/common/edit/CollectionTopicCloudImage'
 
@@ -12,9 +10,10 @@ import { Collection, Topic, ContentHandlerType, Operation } from '@/types'
 
 type Props = {
   collection: Collection<Topic>
+  operation: Operation
 }
 
-export const CollectionTopicUpdate = ({ collection }: Props) => {
+export const CollectionTopicUpdate = ({ collection, operation }: Props) => {
   const {
     setCollection,
     setType,
@@ -38,11 +37,10 @@ export const CollectionTopicUpdate = ({ collection }: Props) => {
 
   return (
     !!collection &&
-    !!collection.items && (
+    !!collection.items &&
+    operation === ('update-items' as Operation) &&
+    collection.type === ('topic' as ContentHandlerType) && (
       <>
-        <Link href={`/collection/${collection.slug}-${collection.shortId}`}>
-          {collection.name}
-        </Link>
         {collection.items.map(section => {
           return (
             <React.Fragment key={section.id}>

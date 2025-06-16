@@ -3,6 +3,7 @@ import {
   CollectionSummary,
   UpdateCollectionFieldsOptions,
   Topic,
+  CollectionStatus,
 } from '@/types'
 import clientPromise from '@/api/mongodb'
 
@@ -118,7 +119,7 @@ export const createCollection = async (collection: Collection<unknown>) => {
       date: collection.date,
       location: collection.location,
       itemCount,
-      status: 'private',
+      status: 'public' as CollectionStatus,
     }
 
     await db.collection('collectionsSummary').insertOne({

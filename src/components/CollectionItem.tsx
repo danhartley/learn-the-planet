@@ -37,22 +37,12 @@ export function CollectionItem({ collectionSummary }: Props) {
     }
   }
 
-  let linkText
-
-  switch (collectionSummary.type as ContentHandlerType) {
-    case 'taxon':
-      linkText = 'View taxa'
-      break
-    case 'term':
-      linkText = 'Review terms'
-      break
-    case 'topic':
-      linkText = 'Read notes'
-      break
-    case 'trait':
-      linkText = 'View traits'
-      break
-  }
+  const linkText = {
+    taxon: 'View taxa',
+    term: 'Review terms',
+    topic: 'Read notes',
+    trait: 'View traits',
+  }[collectionSummary.type as ContentHandlerType]
 
   return (
     <section className="card" aria-labelledby="collection">

@@ -3,16 +3,20 @@ import React, { useRef, Dispatch } from 'react'
 
 import MultiSelectList from '@/components/common/MultiSelectList'
 
+import { ContentHandlerType } from '@/types'
+
 type Props = {
   options: string[]
   selectedCollections: string[]
   setSelectedCollections: Dispatch<string[]>
+  type: ContentHandlerType
 }
 
 export const CollectionSelector = ({
   options,
   selectedCollections,
   setSelectedCollections,
+  type,
 }: Props) => {
   const checkboxRefsRef = useRef<Record<string, HTMLInputElement | null>>({})
 
@@ -25,17 +29,19 @@ export const CollectionSelector = ({
   }
 
   return (
-    <section className="group-block" aria-labelledby="referenced-collections">
-      <h2 id="referenced-collections">Referenced collections</h2>
-      <div className="block-container">
-        <MultiSelectList
-          options={options}
-          selectedValues={selectedCollections}
-          onSelectionChange={handleSelectionChange}
-          onRefsReady={handleRefsReady}
-          className="grid-md"
-        />
-      </div>
-    </section>
+    type === 'topic' && (
+      <section className="group-block" aria-labelledby="referenced-collections">
+        <h2 id="referenced-collections">Referenced collections</h2>
+        <div className="block-container">
+          <MultiSelectList
+            options={options}
+            selectedValues={selectedCollections}
+            onSelectionChange={handleSelectionChange}
+            onRefsReady={handleRefsReady}
+            className="grid-md"
+          />
+        </div>
+      </section>
+    )
   )
 }

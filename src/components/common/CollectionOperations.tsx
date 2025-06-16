@@ -5,7 +5,7 @@ import { CollectionType } from '@/components/common/CollectionType'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
 import { CollectionExtensions } from '@/components/common/CollectionExtensions'
 import { CollectionSelector } from '@/components/common/CollectionSelector'
-import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
+import { CollectionSaveItems } from '@/components/common/CollectionSaveItems'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
@@ -31,7 +31,6 @@ export default function CollectionOperations({
     inatMessage,
     isValid,
     isItemsValid,
-    needsCollectionItems,
     operationMessage,
     addInaturalistProperties,
     addCollection,
@@ -65,38 +64,38 @@ export default function CollectionOperations({
         setType={setType}
       />
 
-      <CollectionItemPicker type={type} setItems={setItems} items={''} />
+      <CollectionItemPicker
+        type={type}
+        setItems={setItems}
+        items={''}
+        operation={operation}
+      />
 
-      {needsCollectionItems && (
-        <CollectionExtensions
-          onAddProperties={addInaturalistProperties}
-          isItemsValid={isItemsValid}
-          isValid={isValid}
-          message={inatMessage}
-          setMessage={setInatMessage}
-        />
-      )}
+      <CollectionExtensions
+        onAddProperties={addInaturalistProperties}
+        isItemsValid={isItemsValid}
+        isValid={isValid}
+        message={inatMessage}
+        setMessage={setInatMessage}
+        operation={operation}
+        type={type}
+      />
 
-      {type === 'topic' && (
-        <CollectionSelector
-          options={collectionSummaries.map(c => c.name)}
-          selectedCollections={selectedCollections}
-          setSelectedCollections={setSelectedCollections}
-        />
-      )}
+      <CollectionSelector
+        options={collectionSummaries.map(c => c.name)}
+        selectedCollections={selectedCollections}
+        setSelectedCollections={setSelectedCollections}
+        type={type}
+      />
 
-      <section aria-labelledby="create-collection">
-        <div>
-          <h2 id="create-collection">Create {type} collection</h2>
-          <ApiResponseMessage apiResponse={operationMessage} />
-        </div>
-        <div className="form-row">
-          <button disabled={!isValid} onClick={addCollection}>
-            Create collection
-          </button>
-          <ApiResponseMessage apiResponse={apiResponse} />
-        </div>
-      </section>
+      <CollectionSaveItems
+        operation={operation}
+        type={type}
+        operationMessage={operationMessage}
+        apiResponse={apiResponse}
+        isValid={isValid}
+        saveAction={addCollection}
+      />
     </>
   )
 }
