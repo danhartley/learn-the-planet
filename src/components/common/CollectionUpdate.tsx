@@ -74,6 +74,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
         />
       </section>
 
+      {/* update */}
       <CollectionUpdateCollectionFields
         operation={operation}
         name={name}
@@ -88,6 +89,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
         updateCollectionFields={updateCollectionFields}
       />
 
+      {/* update-collections */}
       <CollectionUpdateCollectionReferences
         collection={collection}
         collectionSummaries={collectionSummaries}
@@ -99,6 +101,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
         type={type}
       />
 
+      {/* delete */}
       <CollectionUpdateDelete
         type={type}
         operation={operation}
@@ -106,6 +109,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
         deleteCollection={deleteCollection}
       />
 
+      {/* create or (update-items and not topic)  */}
       <CollectionItemPicker
         type={collection.type as ContentHandlerType}
         setItems={setItems}
@@ -113,11 +117,13 @@ export const CollectionUpdate = ({ collection }: Props) => {
         operation={operation}
       />
 
+      {/* update-items and topic */}
       <CollectionTopicUpdate
         collection={collection as Collection<Topic>}
         operation={operation}
       />
 
+      {/* (create or update-items) and (either taxon or trait) */}
       <CollectionExtensions
         onAddProperties={addInaturalistProperties}
         isItemsValid={isItemsValid}
@@ -128,6 +134,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
         type={type}
       />
 
+      {/* update-items and not topic */}
       <CollectionSaveUpdatedItems
         operation={operation}
         type={type}
