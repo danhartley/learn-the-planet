@@ -16,9 +16,10 @@ export const CollectionSaveUpdatedItems = ({
   isItemsValid,
   saveAction,
 }: Props) => {
+  const showComponent = operation === 'update-items' && type !== 'topic'
+
   return (
-    operation === 'update-items' &&
-    type !== 'topic' && (
+    showComponent && (
       <section aria-labelledby={operation}>
         <div>
           <h2 id={operation}>{`Edit' ${type} collection`}</h2>

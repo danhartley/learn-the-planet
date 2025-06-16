@@ -36,10 +36,8 @@ export function CollectionItemPicker({
 
   const Component = itemComponent[type]
 
-  return (
-    ['update-items', 'create'].includes(operation) &&
-    type !== ('topic' as ContentHandlerType) && (
-      <Component setItems={setItems} items={items} />
-    )
-  )
+  const showComponent =
+    operation === 'create' || (operation === 'update-items' && type !== 'topic')
+
+  return showComponent && <Component setItems={setItems} items={items} />
 }

@@ -82,3 +82,38 @@ export const getInatTaxonProperties = async ({
       return items!
   }
 }
+
+type TaxaProps = {
+  taxaIds: string[]
+  locale: string
+  per_page: number
+}
+
+export const getInatTaxa = async ({
+  taxaIds,
+  locale = 'en',
+  per_page,
+}: TaxaProps) => {
+  const buffer = 50 // request more records than species count to ensure we don't miss one…
+  const url =
+    `https://api.inaturalist.org/v1/taxa?locale=${locale}&per_page=${per_page + buffer}&taxon_id=` +
+    taxaIds.join('%2C')
+  const response = await fetch(url)
+  const json = await response.json()
+  return json
+}
+
+type AutoCompleteProps = {
+  by: string // taxa
+  toComplete: string // taxon name
+}
+
+export const getIdByAutocomplete = async ({
+  by,
+  toComplete,
+}: AutoCompleteProps) => {
+  const url = `https://api.inaturalist.org/v1/${by}/autocomplete?q=${toComplete}&per_page=10`
+  const response = await fetch(url)
+  const json = await response.json()
+  return json
+}
