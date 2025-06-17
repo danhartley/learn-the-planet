@@ -22,10 +22,5 @@ export default async function Page({
   const collection: Collection<unknown> | undefined =
     await getCollectionByShortId(shortId)
 
-  return !!collection ? (
-    <>
-      <h1>Edit collection</h1>
-      <CollectionUpdate collection={collection} />
-    </>
-  ) : null
+  return !!collection && <CollectionUpdate collection={collection} />
 }

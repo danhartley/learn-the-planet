@@ -35,7 +35,9 @@ export const CollectionTopicText = ({ id, text, setSectionText }: Props) => {
   return (
     !!text && (
       <form>
-        <label htmlFor={id}>Text</label>
+        <h2>
+          <label htmlFor={id}>Text</label>
+        </h2>
         <textarea
           id={id}
           value={paras}

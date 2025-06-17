@@ -1,0 +1,64 @@
+import React, { useState, useEffect } from 'react'
+
+import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+
+import { TaxonAutocomplete } from '@/components/common/taxon/TaxonAutocomplete'
+import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
+
+import { Collection, Topic, Taxon } from '@/types'
+
+type Props = {
+  collection: Collection<Topic>
+  section: Topic
+}
+
+export const CollectionSectionExamples = ({ collection, section }: Props) => {
+  const [changesToSave, setChangesToSave] = useState(false)
+  const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
+    section?.examples || []
+  )
+  const { updateCollectionItem, apiResponse } = useCollectionOperations()
+
+  useEffect(() => {
+    setChangesToSave(true)
+  }, [section?.examples])
+
+  const saveChanges = () => {
+    section.examples = selectedTaxa || []
+    updateCollectionItem(collection, section)
+  }
+
+  const handleTaxonToggle = (taxon: Taxon) => {
+    setSelectedTaxa(prev => {
+      const isSelected = prev.some(selected => selected.id === taxon.id)
+
+      if (isSelected) {
+        // Remove taxon
+        return prev.filter(selected => selected.id !== taxon.id)
+      } else {
+        // Add taxon
+        return [...prev, taxon]
+      }
+    })
+  }
+
+  return (
+    <>
+      <TaxonAutocomplete
+        selectedTaxa={selectedTaxa}
+        onTaxonToggle={handleTaxonToggle}
+      />
+      <div className="form-row">
+        <button
+          type="button"
+          id="edit-section"
+          disabled={!changesToSave}
+          onClick={saveChanges}
+        >
+          Save changes
+        </button>
+        <ApiResponseMessage apiResponse={apiResponse} />
+      </div>
+    </>
+  )
+}

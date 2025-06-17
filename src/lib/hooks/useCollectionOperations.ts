@@ -324,10 +324,10 @@ export const useCollectionOperations = () => {
         )
       }
 
-      const result = await response.json()
+      await response.json()
 
       setApiResponse({
-        success: result.success,
+        success: true,
         message: 'Collection item update succeeded.',
       })
     } catch (error) {

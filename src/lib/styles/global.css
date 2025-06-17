@@ -783,6 +783,7 @@ progress {
   .form-row.topic input {
     font-size: var(--font-size-md);
   }
+  padding: 0;
 }
 
 /* Media queries */

@@ -36,17 +36,19 @@ export const CollectionTopicSection = ({ collection, section }: Props) => {
           setSectionText={setSectionText}
         />
       )}
-      <div className="form-row">
-        <button
-          type="button"
-          id="edit-section"
-          disabled={!changesToSave}
-          onClick={saveChanges}
-        >
-          Save changes
-        </button>
-        <ApiResponseMessage apiResponse={apiResponse} />
-      </div>
+      {!!sectionText && (
+        <div className="form-row">
+          <button
+            type="button"
+            id="edit-section"
+            disabled={!changesToSave}
+            onClick={saveChanges}
+          >
+            Save changes
+          </button>
+          <ApiResponseMessage apiResponse={apiResponse} />
+        </div>
+      )}
     </div>
   )
 }

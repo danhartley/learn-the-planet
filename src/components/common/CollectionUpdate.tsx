@@ -50,7 +50,9 @@ export const CollectionUpdate = ({ collection }: Props) => {
 
   useEffect(() => {
     setCollection(collection)
-    setOperation('update' as Operation)
+    setOperation(
+      (collection.type === 'topic' ? 'update-items' : 'update') as Operation
+    )
     setSelectedCollections(collection.collections?.map(c => c.name) || [])
     setType(collection.type as ContentHandlerType)
     setName(collection.name)
@@ -62,11 +64,11 @@ export const CollectionUpdate = ({ collection }: Props) => {
   return (
     <>
       <section aria-labelledby="edit-options">
-        <h2 id="edit-options">
+        <h1 id="edit-options">
           <Link href={`/collection/${collection.slug}-${collection.shortId}`}>
             {collection.name}
           </Link>
-        </h2>
+        </h1>
         <CollectionUpdateOperationSelector
           type={type}
           operation={operation}

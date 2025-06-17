@@ -1,5 +1,7 @@
 import React, { useState, useCallback } from 'react'
 
+import Image from 'next/image'
+
 import { Taxon } from '@/types'
 
 import { debounce } from '@/api/inat/utils'
@@ -36,25 +38,30 @@ export const TaxonAutocomplete = ({
 
           // Transform API response to match our Taxon interface
           const transformedSuggestions =
-            response.results?.map((item: any) => ({
-              id: item.id,
-              name: item.name,
-              binomial: item.name,
-              vernacularName:
-                item.preferred_common_name || item.english_common_name || '',
-              image: item.default_photo
-                ? {
-                    id: item.default_photo.id,
-                    url: item.default_photo.url,
-                    squareUrl: item.default_photo.square_url,
-                    mediumUrl: item.default_photo.medium_url,
-                    attribution: item.default_photo.attribution,
-                    attributionName: item.default_photo.attribution_name,
-                  }
-                : undefined,
-              rank: item.rank,
-              iconicTaxon: item.iconic_taxon_name,
-            })) || []
+            response.results?.map(
+              //eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (item: any) =>
+                ({
+                  id: item.id.toString(),
+                  binomial: item.name,
+                  vernacularName:
+                    item.preferred_common_name ||
+                    item.english_common_name ||
+                    '',
+                  image: item.default_photo
+                    ? {
+                        id: item.default_photo.id.toString(),
+                        url: item.default_photo.url,
+                        squareUrl: item.default_photo.square_url,
+                        mediumUrl: item.default_photo.medium_url,
+                        attribution: item.default_photo.attribution,
+                        attributionName: item.default_photo.attribution_name,
+                      }
+                    : undefined,
+                  rank: item.rank,
+                  iconicTaxon: item.iconic_taxon_name,
+                }) as Taxon
+            ) || []
 
           setSuggestions(transformedSuggestions)
         } catch (error) {
@@ -87,9 +94,12 @@ export const TaxonAutocomplete = ({
   return (
     <section aria-labelledby="inat-taxa-search">
       <div className="group-block">
-        <h2 id="inat-taxa-search">
-          <label htmlFor="taxon-search">Search for Taxa</label>
-        </h2>
+        <div className="group">
+          <h2 id="inat-taxa-search">
+            <label htmlFor="taxon-search">Search for Taxa</label>
+          </h2>
+          <div>Search by common or scientific name</div>
+        </div>
         <form action="">
           <div className="form-row taxon">
             <input
@@ -97,7 +107,7 @@ export const TaxonAutocomplete = ({
               type="text"
               value={inputValue}
               onChange={handleInputChange}
-              placeholder="Start typing taxon name..."
+              placeholder="Start typing name..."
             />
           </div>
         </form>
@@ -134,26 +144,24 @@ export const TaxonAutocomplete = ({
       )}
 
       {selectedTaxa.length > 0 && (
-        <div>
-          <h3>Selected Taxa ({selectedTaxa.length})</h3>
-          <div>
-            {selectedTaxa.map(taxon => (
-              <div key={taxon.id}>
-                {taxon.image?.squareUrl && (
-                  <img
-                    src={taxon.image.squareUrl}
-                    alt={taxon.vernacularName || taxon.binomial}
-                  />
-                )}
-                <div>
-                  <div>{taxon.vernacularName || 'No common name'}</div>
-                  <div>{taxon.binomial}</div>
-                </div>
-                <button onClick={() => handleTaxonToggle(taxon)}>×</button>
+        <section aria-labelledby="selected-taxa" className="group-block">
+          <h2 id="selected-taxa">Selected Taxa ({selectedTaxa.length})</h2>
+          {selectedTaxa.map(taxon => (
+            <div key={taxon.id} className="form-row">
+              {taxon.image?.squareUrl && (
+                <Image
+                  src={taxon.image.squareUrl}
+                  alt={taxon.vernacularName || taxon.binomial}
+                />
+              )}
+              <div>
+                <div>{taxon.vernacularName || 'No common name'}</div>
+                <div>{taxon.binomial}</div>
               </div>
-            ))}
-          </div>
-        </div>
+              <button onClick={() => handleTaxonToggle(taxon)}>Deselect</button>
+            </div>
+          ))}
+        </section>
       )}
     </section>
   )

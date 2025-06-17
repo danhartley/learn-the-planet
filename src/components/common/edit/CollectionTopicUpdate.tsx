@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 
 import { CollectionTopicSection } from '@/components/common/edit/CollectionTopicSection'
 import { CollectionTopicCloudImage } from '@/components/common/edit/CollectionTopicCloudImage'
+import { CollectionSectionExamples } from '@/components/common/taxon/CollectionSectionExamples'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
@@ -26,7 +27,7 @@ export const CollectionTopicUpdate = ({ collection, operation }: Props) => {
 
   useEffect(() => {
     setCollection(collection)
-    setOperation('update' as Operation)
+    setOperation(operation)
     setSelectedCollections(collection.collections?.map(c => c.name) || [])
     setType(collection.type as ContentHandlerType)
     setName(collection.name)
@@ -49,7 +50,6 @@ export const CollectionTopicUpdate = ({ collection, operation }: Props) => {
                 collection={collection}
                 section={section}
               />
-
               {section.images?.map(img => {
                 return (
                   <CollectionTopicCloudImage
@@ -60,6 +60,12 @@ export const CollectionTopicUpdate = ({ collection, operation }: Props) => {
                   />
                 )
               })}
+              {section.examples && (
+                <CollectionSectionExamples
+                  collection={collection}
+                  section={section}
+                />
+              )}
             </React.Fragment>
           )
         })}
