@@ -11,6 +11,7 @@
   --colour-bg-insecta: rgb(226, 220, 226);
   --colour-bg-mammalia: rgb(240, 199, 130);
   --colour-bg-reptilia: rgb(254, 226, 223);
+  --colour-bg-aves: rgb(215 227 241);
   --colour-bg-topic: rgb(255 255 255);
   --colour-bg-topic-card: rgb(255 255 255);
   --colour-bg-taxon: rgb(73 64 34);
@@ -602,6 +603,10 @@ figcaption > div > div:nth-child(2) {
 
 .bg-reptilia {
   background-color: var(--colour-bg-reptilia);
+}
+
+.bg-aves {
+  background-color: var(--colour-bg-aves);
 }
 
 .bg-correct {
