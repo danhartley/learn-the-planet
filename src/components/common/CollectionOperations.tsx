@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { CollectionType } from '@/components/common/CollectionType'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
-import { CollectionExtensions } from '@/components/common/CollectionExtensions'
 import { CollectionSelector } from '@/components/common/CollectionSelector'
 import { CollectionSaveItems } from '@/components/common/CollectionSaveItems'
 
@@ -28,17 +27,13 @@ export default function CollectionOperations({
     name,
     setName,
     setItems,
-    inatMessage,
     isValid,
-    isItemsValid,
     operationMessage,
-    addInaturalistProperties,
     addCollection,
     collectionSummaries,
     selectedCollections,
     setSelectedCollections,
     apiResponse,
-    setInatMessage,
   } = useCollectionOperations()
 
   useState(() => {
@@ -71,16 +66,7 @@ export default function CollectionOperations({
         operation={operation}
       />
 
-      <CollectionExtensions
-        onAddProperties={addInaturalistProperties}
-        isItemsValid={isItemsValid}
-        isValid={isValid}
-        message={inatMessage}
-        setMessage={setInatMessage}
-        operation={operation}
-        type={type}
-      />
-
+      {/* type === 'topic' */}
       <CollectionSelector
         options={collectionSummaries.map(c => c.name)}
         selectedCollections={selectedCollections}

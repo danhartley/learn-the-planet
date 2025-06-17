@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
-import { CollectionExtensions } from '@/components/common/CollectionExtensions'
 import { CollectionUpdateCollectionReferences } from '@/components/common/edit/CollectionUpdateCollectionReferences'
 import { CollectionUpdateCollectionFields } from '@/components/common/edit/CollectionUpdateCollectionFields'
 import { CollectionTopicUpdate } from '@/components/common/edit/CollectionTopicUpdate'
@@ -24,9 +23,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
     setItems,
     setCollection,
     updateCollectionItems,
-    addInaturalistProperties,
     isItemsValid,
-    inatMessage,
     setType,
     type,
     operation,
@@ -45,14 +42,12 @@ export const CollectionUpdate = ({ collection }: Props) => {
     updateCollectionFields,
     imageUrl,
     setImageUrl,
-    setInatMessage,
+    items,
   } = useCollectionOperations()
 
   useEffect(() => {
     setCollection(collection)
-    setOperation(
-      (collection.type === 'topic' ? 'update-items' : 'update') as Operation
-    )
+    setOperation('update-items' as Operation)
     setSelectedCollections(collection.collections?.map(c => c.name) || [])
     setType(collection.type as ContentHandlerType)
     setName(collection.name)
@@ -117,6 +112,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
         setItems={setItems}
         items={JSON.stringify(collection.items, null, 2)}
         operation={operation}
+        collection={collection}
       />
 
       {/* update-items and topic */}
@@ -125,24 +121,13 @@ export const CollectionUpdate = ({ collection }: Props) => {
         operation={operation}
       />
 
-      {/* (create or update-items) and (either taxon or trait) */}
-      <CollectionExtensions
-        onAddProperties={addInaturalistProperties}
-        isItemsValid={isItemsValid}
-        isValid={isItemsValid}
-        message={inatMessage}
-        setMessage={setInatMessage}
-        operation={operation}
-        type={type}
-      />
-
       {/* update-items and not topic */}
       <CollectionSaveUpdatedItems
         operation={operation}
         type={type}
         apiResponse={apiResponse}
         isItemsValid={isItemsValid}
-        saveAction={updateCollectionItems}
+        saveAction={() => updateCollectionItems(collection, items || [])}
       />
     </>
   )
