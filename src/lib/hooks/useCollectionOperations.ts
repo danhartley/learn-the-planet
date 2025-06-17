@@ -152,7 +152,10 @@ export const useCollectionOperations = () => {
     return response.json()
   }
 
-  const updateCollectionItems = async () => {
+  const updateCollectionItems = async (
+    collection: Collection<unknown>,
+    items: unknown[]
+  ) => {
     if (!collection) return
 
     const transformedItems =
