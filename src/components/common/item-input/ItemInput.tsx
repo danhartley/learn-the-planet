@@ -47,7 +47,7 @@ export const ItemInput: React.FC<ItemInputProps> = ({
             value={jsonContent}
             onChange={handleChange}
             placeholder={placeholder}
-            rows={40}
+            rows={20}
             cols={40}
           />
         </div>

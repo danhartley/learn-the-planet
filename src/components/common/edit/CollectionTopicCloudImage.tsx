@@ -7,6 +7,7 @@ import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
+import { ImageUpload } from '@/components/image/ImageUpload'
 
 import { Collection, Topic, NextCloudImage } from '@/types'
 
@@ -24,8 +25,10 @@ export const CollectionTopicCloudImage = ({
   const [captionValue, setCaption] = useState<string>(image.caption)
   const [altValue, setAlt] = useState(image.alt)
   const [changesToSave, setChangesToSave] = useState(false)
+  const [cloudImage, setCloudImage] = useState<NextCloudImage | undefined>()
 
-  const { apiResponse, updateCollectionItem } = useCollectionOperations()
+  const { apiResponse, updateCollectionItem, setCollection } =
+    useCollectionOperations()
 
   const sizes = `(max-width: 768px) 100vw,
            (max-width: 1200px) 50vw,
@@ -37,6 +40,18 @@ export const CollectionTopicCloudImage = ({
     setChangesToSave(true)
   }, [captionValue, altValue])
 
+  useEffect(() => {
+    const updateImages = async () => {
+      if (cloudImage) {
+        section.images = [...(section?.images ?? []), cloudImage]
+        await updateCollectionItem(collection, section)
+        setCollection(collection)
+      }
+    }
+    updateImages()
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cloudImage?.src])
+
   const saveChanges = () => {
     section.images = section.images?.map(img =>
       img.src === image.src
@@ -44,6 +59,11 @@ export const CollectionTopicCloudImage = ({
         : img
     )
 
+    updateCollectionItem(collection, section)
+  }
+
+  const removeImage = () => {
+    section.images = section.images?.filter(img => img.src !== image.src)
     updateCollectionItem(collection, section)
   }
 
@@ -86,13 +106,14 @@ export const CollectionTopicCloudImage = ({
           >
             Save changes
           </button>
-          <button>Remove image</button>
+          <button onClick={removeImage}>Remove image</button>
           <ApiResponseMessage apiResponse={apiResponse} />
         </div>
         <div>
           Removing the image from the topic collection will not remove it from
           Cloudinary.
         </div>
+        <ImageUpload setImage={setCloudImage} />
       </div>
     </div>
   )

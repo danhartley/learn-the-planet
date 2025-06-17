@@ -1,13 +1,20 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { CloudinaryUploadWidgetOptions } from 'next-cloudinary'
 
 import { ImageUpload } from '@/components/image/ImageUpload'
 
+import { NextCloudImage } from '@/types'
+
 export default function Page() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [image, setImage] = useState<NextCloudImage | undefined>({
+    src: '',
+    caption: '',
+    alt: '',
+  })
 
   const options: CloudinaryUploadWidgetOptions = {
     maxFileSize: 1000000, // 1MB in bytes
@@ -16,6 +23,12 @@ export default function Page() {
       description,
     },
   }
+
+  useEffect(() => {
+    console.log(image)
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [image?.src])
+
   return (
     <>
       <h1>Upload a new image</h1>
@@ -39,7 +52,7 @@ export default function Page() {
           onChange={e => setDescription(e.target.value)}
         />
       </form>
-      <ImageUpload options={options} />
+      <ImageUpload options={options} setImage={setImage} />
     </>
   )
 }

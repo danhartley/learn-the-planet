@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
 import { TaxonAutocomplete } from '@/components/common/taxon/TaxonAutocomplete'
-import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { Collection, Topic, Taxon } from '@/types'
 
