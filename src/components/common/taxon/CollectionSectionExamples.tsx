@@ -43,22 +43,12 @@ export const CollectionSectionExamples = ({ collection, section }: Props) => {
   }
 
   return (
-    <>
-      <TaxonAutocomplete
-        selectedTaxa={selectedTaxa}
-        onTaxonToggle={handleTaxonToggle}
-      />
-      <div className="form-row">
-        <button
-          type="button"
-          id="edit-section"
-          disabled={!changesToSave}
-          onClick={saveChanges}
-        >
-          Save changes
-        </button>
-        <ApiResponseMessage apiResponse={apiResponse} />
-      </div>
-    </>
+    <TaxonAutocomplete
+      selectedTaxa={selectedTaxa}
+      onTaxonToggle={handleTaxonToggle}
+      changesToSave={changesToSave}
+      saveChanges={saveChanges}
+      apiResponse={apiResponse}
+    />
   )
 }

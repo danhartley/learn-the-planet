@@ -2,7 +2,9 @@ import React, { useState, useCallback } from 'react'
 
 import Image from 'next/image'
 
-import { Taxon } from '@/types'
+import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
+
+import { Taxon, ApiResponse } from '@/types'
 
 import { debounce } from '@/api/inat/utils'
 import { getIdByAutocomplete } from '@/api/inat/api'
@@ -11,11 +13,17 @@ import { getIdByAutocomplete } from '@/api/inat/api'
 interface TaxonAutocompleteProps {
   selectedTaxa: Taxon[]
   onTaxonToggle: (taxon: Taxon) => void
+  changesToSave: boolean
+  saveChanges: () => void
+  apiResponse: ApiResponse
 }
 
 export const TaxonAutocomplete = ({
   selectedTaxa,
   onTaxonToggle,
+  changesToSave,
+  saveChanges,
+  apiResponse,
 }: TaxonAutocompleteProps) => {
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState<Taxon[]>([])
@@ -149,24 +157,37 @@ export const TaxonAutocomplete = ({
       {selectedTaxa.length > 0 && (
         <section aria-labelledby="selected-taxa" className="group-block">
           <h2 id="selected-taxa">Selected Taxa ({selectedTaxa.length})</h2>
-          {selectedTaxa.map(taxon => (
-            <div key={taxon.id} className="form-row">
-              {taxon.image?.squareUrl && (
-                <Image
-                  id={taxon.id}
-                  src={taxon.image.squareUrl}
-                  alt={taxon.vernacularName || taxon.binomial}
-                  width={75}
-                  height={75}
-                />
-              )}
-              <div>
-                <div>{taxon.vernacularName || 'No common name'}</div>
-                <div>{taxon.binomial}</div>
+          <form>
+            {selectedTaxa.map(taxon => (
+              <div key={taxon.id} className="form-row">
+                {taxon.image?.squareUrl && (
+                  <Image
+                    id={taxon.id}
+                    src={taxon.image.squareUrl}
+                    alt={taxon.vernacularName || taxon.binomial}
+                    width={75}
+                    height={75}
+                  />
+                )}
+                <div>
+                  <div>{taxon.vernacularName || 'No common name'}</div>
+                  <div>{taxon.binomial}</div>
+                </div>
+                <button onClick={() => handleTaxonToggle(taxon)}>Remove</button>
               </div>
-              <button onClick={() => handleTaxonToggle(taxon)}>Deselect</button>
-            </div>
-          ))}
+            ))}
+          </form>
+          <div className="form-row">
+            <button
+              type="button"
+              id="edit-section"
+              disabled={!changesToSave}
+              onClick={saveChanges}
+            >
+              Save changes
+            </button>
+            <ApiResponseMessage apiResponse={apiResponse} />
+          </div>
         </section>
       )}
     </section>
