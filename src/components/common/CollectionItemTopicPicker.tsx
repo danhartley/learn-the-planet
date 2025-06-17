@@ -2,14 +2,19 @@ import React, { useState, Dispatch, SetStateAction } from 'react'
 
 import { ItemInput } from '@/components/common/item-input/ItemInput'
 import { validateTopicJson } from '@/validation/topic-validation'
-import { ValidationResult, Topic, ApiResponse } from '@/types'
+import { ValidationResult, Topic, ApiResponse, Collection } from '@/types'
 
 type Props = {
   setItems: Dispatch<SetStateAction<Topic[]> | undefined>
   items: string
+  collection?: Collection<unknown>
 }
 
-export function CollectionItemTopicPicker({ setItems, items = '' }: Props) {
+export function CollectionItemTopicPicker({
+  setItems,
+  items = '',
+  collection,
+}: Props) {
   const [jsonContent, setJsonContent] = useState(items)
   const [message, setMessage] = useState({
     success: false,

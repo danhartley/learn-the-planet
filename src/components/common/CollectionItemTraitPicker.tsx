@@ -2,14 +2,19 @@ import React, { useState, Dispatch, SetStateAction } from 'react'
 
 import { ItemInput } from '@/components/common/item-input/ItemInput'
 import { validateTraitJson } from '@/validation/trait-validation'
-import { ValidationResult, Trait } from '@/types'
+import { ValidationResult, Trait, Collection } from '@/types'
 
 type Props = {
   setItems: Dispatch<SetStateAction<Trait[]> | undefined>
   items: string
+  collection?: Collection<unknown>
 }
 
-export function CollectionItemTraitPicker({ setItems, items = '' }: Props) {
+export function CollectionItemTraitPicker({
+  setItems,
+  items = '',
+  collection,
+}: Props) {
   const [jsonContent, setJsonContent] = useState(items)
   const [message, setMessage] = useState({
     success: false,

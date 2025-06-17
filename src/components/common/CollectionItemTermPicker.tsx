@@ -2,14 +2,19 @@ import React, { useState, Dispatch, SetStateAction } from 'react'
 
 import { ItemInput } from '@/components/common/item-input/ItemInput'
 import { validateTermJson } from '@/validation/term-validation'
-import { ValidationResult, Term } from '@/types'
+import { ValidationResult, Term, Collection } from '@/types'
 
 type Props = {
   setItems: Dispatch<SetStateAction<Term[]> | undefined>
   items: string
+  collection?: Collection<unknown>
 }
 
-export function CollectionItemTermPicker({ setItems, items = '' }: Props) {
+export function CollectionItemTermPicker({
+  setItems,
+  items = '',
+  collection,
+}: Props) {
   const [jsonContent, setJsonContent] = useState(items)
   const [message, setMessage] = useState({
     success: false,
