@@ -126,9 +126,12 @@ export const TaxonAutocomplete = ({
 
               <div className="form-row">
                 {taxon.image?.squareUrl && (
-                  <img
+                  <Image
+                    id={taxon.id}
                     src={taxon.image.squareUrl}
                     alt={taxon.vernacularName || taxon.binomial}
+                    width={75}
+                    height={75}
                   />
                 )}
 
@@ -150,8 +153,11 @@ export const TaxonAutocomplete = ({
             <div key={taxon.id} className="form-row">
               {taxon.image?.squareUrl && (
                 <Image
+                  id={taxon.id}
                   src={taxon.image.squareUrl}
                   alt={taxon.vernacularName || taxon.binomial}
+                  width={75}
+                  height={75}
                 />
               )}
               <div>
