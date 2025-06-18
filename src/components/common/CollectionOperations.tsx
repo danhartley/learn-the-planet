@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { CollectionType } from '@/components/common/CollectionType'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
@@ -12,13 +12,11 @@ import { Operation, ContentType, ContentHandlerType } from '@/types'
 
 type Props = {
   operation: Operation
-  types?: ContentType[]
   collectionType?: ContentHandlerType
 }
 
 export default function CollectionOperations({
   operation = 'read',
-  types,
   collectionType = 'topic',
 }: Props) {
   const {
@@ -34,14 +32,22 @@ export default function CollectionOperations({
     selectedCollections,
     setSelectedCollections,
     apiResponse,
+    items,
   } = useCollectionOperations()
 
   useState(() => {
     setType(collectionType)
   })
 
+  useEffect(() => {
+    console.log('name', name)
+    console.log('isValid', isValid)
+  }, [name, items])
+
   return (
     <>
+      <CollectionType operation={operation} type={type} setType={setType} />
+
       <div className="group-block">
         <CollectionTextField
           operation={operation}
@@ -51,13 +57,6 @@ export default function CollectionOperations({
           type={type}
         />
       </div>
-
-      <CollectionType
-        operation={operation}
-        types={types}
-        type={type}
-        setType={setType}
-      />
 
       <CollectionItemPicker
         type={type}

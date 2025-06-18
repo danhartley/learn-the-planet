@@ -8,12 +8,40 @@ type Props = {
   setType?: Dispatch<SetStateAction<ContentHandlerType>>
 }
 
-export function CollectionType({
+export const CollectionType = ({
   operation = 'read',
-  types,
   type = 'topic',
   setType,
-}: Props) {
+}: Props) => {
+  const types: ContentType[] = [
+    {
+      key: 'topic',
+      value: 'topic',
+      description: 'Create a guide, lesson or overview',
+    },
+    {
+      key: 'trait',
+      value: 'trait',
+      description: 'Create a collection of traits with examples',
+    },
+    {
+      key: 'taxon',
+      value: 'taxon',
+      description: 'Create a collection of iNaturalist taxa',
+    },
+    {
+      key: 'term',
+      value: 'term',
+      description: 'Create a collection of terms and their definitions',
+    },
+  ]
+
+  // Get the description for the currently selected type
+  const getCurrentTypeDescription = () => {
+    const currentType = types.find(t => t.value === type)
+    return currentType?.description || ''
+  }
+
   let display
   const handleSelectType = (e: React.FormEvent) => {
     const selectedType = (e.target as HTMLInputElement)
@@ -39,7 +67,16 @@ export function CollectionType({
           </li>
         )
       })
-      display = <ul>{rbTypes}</ul>
+      display = (
+        <>
+          <div>
+            <ul>{rbTypes}</ul>
+          </div>
+          <div>
+            <em>{getCurrentTypeDescription()}</em>
+          </div>
+        </>
+      )
       break
     default:
       display = (
@@ -53,7 +90,7 @@ export function CollectionType({
     <section aria-labelledby="collection-type" className="group-block">
       <h2 id="collection-type">Collection type</h2>
       <div className="column-group">
-        <span>Select the type of collection you want to create</span>
+        <span>Select the type of collection you want to create.</span>
         {display}
       </div>
     </section>

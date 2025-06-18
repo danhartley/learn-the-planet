@@ -23,12 +23,12 @@ export const CollectionSaveItems = ({
       <section aria-labelledby={operation}>
         <div>
           <h2 id="create-collection">Create {type} collection</h2>
-          <ApiResponseMessage apiResponse={operationMessage} />
         </div>
         <div className="form-row">
           <button disabled={!isValid} onClick={saveAction}>
             Create collection
           </button>
+          <ApiResponseMessage apiResponse={operationMessage} />
           <ApiResponseMessage apiResponse={apiResponse} />
         </div>
       </section>

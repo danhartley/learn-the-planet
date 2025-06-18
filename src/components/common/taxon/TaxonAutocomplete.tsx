@@ -189,7 +189,7 @@ export const TaxonAutocomplete = ({
               </div>
             ))}
           </form>
-          {operation === 'update-items' && (
+          {['create', 'update-items'].includes(operation as Operation) && (
             <div className="form-row">
               <button
                 type="button"

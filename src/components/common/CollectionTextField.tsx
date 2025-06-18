@@ -73,9 +73,7 @@ export function CollectionTextField({
                 minLength={minLength}
                 onChange={handleInputChange}
                 placeholder={
-                  isUpdate
-                    ? `Enter new ${fieldText}`
-                    : `Enter collection ${fieldText}`
+                  isUpdate ? `Enter new ${fieldText}` : `Enter ${fieldText}`
                 }
               />
             </div>

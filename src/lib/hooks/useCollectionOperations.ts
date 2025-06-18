@@ -56,13 +56,9 @@ export const useCollectionOperations = () => {
   const router = useRouter()
 
   // Derived validation states
-  const isNameValid = name.trim().length > 0
-  const isItemsValid = !!items && items.length > 0
-  const isCollectionItemsValid =
-    !['trait', 'taxon'].includes(type) || (!!items && items.length > 0)
-
-  const isValid = isNameValid && isItemsValid && isCollectionItemsValid
-  const isUpdateValid = isItemsValid && isCollectionItemsValid
+  const isNameValid = !!name.trim()
+  const isItemsValid = !!items?.length
+  const isValid = isNameValid && isItemsValid
 
   useEffect(() => {
     let opsMessage = ''
@@ -361,7 +357,6 @@ export const useCollectionOperations = () => {
     setSelectedCollections,
     setCollection,
     updateCollectionItems,
-    isUpdateValid,
     setOperation,
     operation,
     deleteCollection,

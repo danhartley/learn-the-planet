@@ -344,6 +344,7 @@ export type Operation =
 export type ContentType = {
   key: string
   value: ContentHandlerType
+  description?: string
 }
 
 export interface ValidationResult<LearningItem> {
