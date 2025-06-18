@@ -18,7 +18,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body>
         <header>
           <div>
-            <Link href="/">Learn the Planet</Link>
+            <Link href="/collections">Learn the Planet</Link>
           </div>
         </header>
         <main>{children}</main>
