@@ -8,7 +8,7 @@ import { CollectionSaveItems } from '@/components/common/CollectionSaveItems'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
-import { Operation, ContentType, ContentHandlerType } from '@/types'
+import { Operation, ContentHandlerType } from '@/types'
 
 type Props = {
   operation: Operation

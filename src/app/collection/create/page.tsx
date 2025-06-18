@@ -1,7 +1,5 @@
 import CollectionOperations from '@/components/common/CollectionOperations'
 
-import { ContentType } from '@/types'
-
 export default function Page() {
   return (
     <>

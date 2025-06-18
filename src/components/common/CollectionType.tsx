@@ -36,7 +36,6 @@ export const CollectionType = ({
     },
   ]
 
-  // Get the description for the currently selected type
   const getCurrentTypeDescription = () => {
     const currentType = types.find(t => t.value === type)
     return currentType?.description || ''
