@@ -33,6 +33,8 @@ export default function CollectionOperations({
     setSelectedCollections,
     apiResponse,
     items,
+    imageUrl,
+    setImageUrl,
   } = useCollectionOperations()
 
   useState(() => {
@@ -54,6 +56,16 @@ export default function CollectionOperations({
           fieldValue={name}
           setFieldValue={setName}
           fieldText="Collection name"
+          type={type}
+        />
+      </div>
+
+      <div className="group-block">
+        <CollectionTextField
+          operation={operation}
+          fieldValue={imageUrl}
+          setFieldValue={setImageUrl}
+          fieldText="Collection image url"
           type={type}
         />
       </div>

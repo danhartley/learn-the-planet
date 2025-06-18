@@ -123,6 +123,7 @@ export const useCollectionOperations = () => {
       slug,
       items: items!,
       itemCount: (items! || items!).length || 0,
+      imageUrl,
     }
 
     const transformedCollection = transformCollectionData(collection)

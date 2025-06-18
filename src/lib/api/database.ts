@@ -120,6 +120,7 @@ export const createCollection = async (collection: Collection<unknown>) => {
       location: collection.location,
       itemCount,
       status: 'public' as CollectionStatus,
+      imageUrl: collection.imageUrl,
     }
 
     await db.collection('collectionsSummary').insertOne({
