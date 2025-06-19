@@ -5,21 +5,22 @@ import { CollectionItemTraitPicker } from './CollectionItemTraitPicker'
 import { CollectionInatTaxonPicker } from '@/components/common/taxon/CollectionInatTaxonPicker'
 import { CreateTopicCollection } from '@/components/common/topic/CreateTopicCollection'
 
-import { ContentHandlerType, Operation, Taxon, Collection } from '@/types'
+import { ContentHandlerType, Operation, Collection, ApiResponse } from '@/types'
 
 type ComponentProps = {
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
-  items: string | Taxon[]
+  items: string | unknown[] | undefined
   operation?: Operation
   collection?: Collection<unknown>
+  apiResponse?: ApiResponse
 }
 
 type Props = {
   type: ContentHandlerType
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
-  items: string
+  items: string | unknown[] | undefined
   operation: Operation
-  collection?: Collection<unknown> | undefined
+  apiResponse: ApiResponse
 }
 
 export function CollectionItemPicker({
@@ -27,7 +28,7 @@ export function CollectionItemPicker({
   setItems,
   items,
   operation,
-  collection,
+  apiResponse,
 }: Props) {
   const itemComponent: {
     [K in ContentHandlerType]: React.ComponentType<ComponentProps>
@@ -49,7 +50,7 @@ export function CollectionItemPicker({
         setItems={setItems}
         items={items}
         operation={operation}
-        collection={collection}
+        apiResponse={apiResponse}
       />
     )
   )

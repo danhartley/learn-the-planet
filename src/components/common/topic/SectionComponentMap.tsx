@@ -8,12 +8,13 @@ import { SectionType, ApiResponse } from '@/types'
 
 type ComponentProps = {
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
+  apiResponse: ApiResponse
 }
 
 type Props = {
   sectionType: SectionType
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
-  apiResponse?: ApiResponse
+  apiResponse: ApiResponse
 }
 
 export const SectionComponentMap = ({
@@ -31,5 +32,5 @@ export const SectionComponentMap = ({
 
   const Component = sectionComponent[sectionType]
 
-  return <Component setItems={setItems} />
+  return <Component setItems={setItems} apiResponse={apiResponse} />
 }

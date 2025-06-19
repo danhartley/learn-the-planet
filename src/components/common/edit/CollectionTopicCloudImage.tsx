@@ -82,7 +82,6 @@ export const CollectionTopicCloudImage = ({
         </figure>
 
         <CollectionTextField
-          operation="update"
           fieldValue={image.caption}
           setFieldValue={setCaption}
           fieldText="Image caption"
@@ -90,7 +89,6 @@ export const CollectionTopicCloudImage = ({
         />
 
         <CollectionTextField
-          operation="update"
           fieldValue={image.alt}
           setFieldValue={setAlt}
           fieldText="Image alt text"

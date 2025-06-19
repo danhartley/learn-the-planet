@@ -8,7 +8,8 @@ type Props = {
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
   apiResponse: ApiResponse
 }
-export const AddTaxaSection = ({ apiResponse, setItems }: Props) => {
+
+export const AddTaxaSection = ({ setItems, apiResponse }: Props) => {
   return (
     <section aria-labelledby="new-section">
       <h2 id="new-section">Add taxa</h2>

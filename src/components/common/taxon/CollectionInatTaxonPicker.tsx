@@ -1,16 +1,13 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
-
 import { TaxonAutocomplete } from '@/components/common/taxon/TaxonAutocomplete'
 
-import { Taxon, Operation, Collection, ApiResponse } from '@/types'
+import { Taxon, Operation, ApiResponse } from '@/types'
 
 type Props = {
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
   items?: string
   operation?: Operation
-  collection?: Collection<unknown>
   apiResponse: ApiResponse
 }
 
@@ -18,17 +15,12 @@ export const CollectionInatTaxonPicker = ({
   setItems,
   items,
   operation,
-  collection,
+  apiResponse,
 }: Props) => {
   const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
     items ? JSON.parse(items) : []
   )
-  const [isTaxonArrayValid, setIsTaxonArrayValid] = useState<ApiResponse>({
-    success: false,
-    message: '',
-  })
-  const { apiResponse, updateCollectionItems } = useCollectionOperations()
 
   useEffect(() => {
     setChangesToSave(true)
@@ -36,13 +28,6 @@ export const CollectionInatTaxonPicker = ({
 
   const saveChanges = async () => {
     setItems(selectedTaxa)
-    if (collection) {
-      await updateCollectionItems(collection, selectedTaxa)
-      setIsTaxonArrayValid(apiResponse)
-    } else {
-      setItems(selectedTaxa)
-      setIsTaxonArrayValid({ success: true, message: 'Taxa added' })
-    }
   }
 
   const handleTaxonToggle = (taxon: Taxon) => {
@@ -65,7 +50,7 @@ export const CollectionInatTaxonPicker = ({
       onTaxonToggle={handleTaxonToggle}
       changesToSave={changesToSave}
       saveChanges={saveChanges}
-      apiResponse={isTaxonArrayValid}
+      apiResponse={apiResponse}
       operation={operation}
     />
   )

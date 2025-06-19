@@ -3,25 +3,41 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { SectionTypeSelector } from '@/components/common/topic/SectionTypeSelector'
 import { SectionComponentMap } from '@/components/common/topic/SectionComponentMap'
 
-import { SectionType, ApiResponse } from '@/types'
+import { SectionType, ApiResponse, Topic, Taxon, NextCloudImage } from '@/types'
 
 type Props = {
+  items: unknown[]
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
   apiResponse: ApiResponse
 }
 
-export const CreateTopicCollection = ({ setItems, apiResponse }: Props) => {
+export const CreateTopicCollection = ({
+  items,
+  setItems,
+  apiResponse,
+}: Props) => {
   const [selectedOption, setSelectedOption] = useState<SectionType>('text')
-  const [examples, setExamples] = useState<unknown[] | undefined>()
+  const [childItems, setChildItems] = useState<unknown[]>()
 
   useEffect(() => {
-    setItems([
-      {
-        id: crypto.randomUUID().split('-')[0],
-        examples,
-      },
-    ])
-  }, [examples])
+    if (!childItems) return
+
+    const item = items[0] as Topic
+
+    switch (selectedOption) {
+      case 'text':
+        item.text = childItems as string[]
+        break
+      case 'taxon':
+        item.examples = childItems as Taxon[]
+        break
+      case 'image':
+        item.images = childItems as NextCloudImage[]
+        break
+    }
+    console.log(item)
+    setItems([item])
+  }, [childItems])
 
   return (
     <>
@@ -32,7 +48,7 @@ export const CreateTopicCollection = ({ setItems, apiResponse }: Props) => {
 
       <SectionComponentMap
         sectionType={selectedOption}
-        setItems={setExamples}
+        setItems={setChildItems}
         apiResponse={apiResponse}
       />
     </>

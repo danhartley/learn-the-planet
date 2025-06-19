@@ -387,3 +387,10 @@ export function extractSlugFromThreeParams(
   const parsed = parseSlugShortIdItemId(slugShortIdItemId)
   return parsed?.slug || null
 }
+
+export function textToArray(text: string): string[] {
+  return text
+    .split(/\n\s*\n/) // Split on one or more newlines with optional whitespace
+    .map(paragraph => paragraph.replace(/^\s+|\s+$/g, '')) // Only trim leading/trailing whitespace, preserve internal spaces
+    .filter(paragraph => paragraph.length > 0 || paragraph.trim() === '') // Keep paragraphs that are either non-empty or contain only whitespace
+}

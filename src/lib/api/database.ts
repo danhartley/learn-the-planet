@@ -128,7 +128,7 @@ export const createCollection = async (collection: Collection<unknown>) => {
       _id: result.insertedId, // Use the same ID as the main collection
     })
 
-    return { id: insertedId, shortId, slug }
+    return { id: insertedId, ...collection, shortId, slug, itemCount }
   } catch (error) {
     console.error('Failed to create collection:', error)
 

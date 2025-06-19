@@ -17,12 +17,12 @@ import {
 } from '@/types'
 
 export const useCollectionOperations = () => {
+  const [collection, setCollection] = useState<Collection<unknown>>()
   const [type, setType] = useState<ContentHandlerType>('topic')
   const [name, setName] = useState<string>('')
   const [slug, setSlug] = useState<string>('')
   const [imageUrl, setImageUrl] = useState<string>('')
   const [items, setItems] = useState<unknown[] | undefined>()
-  const [collectionItems] = useState<LearningItem[] | undefined>()
   const [inatMessage, setInatMessage] = useState({
     success: false,
     message: '',
@@ -31,7 +31,6 @@ export const useCollectionOperations = () => {
   const [collectionSummaries, setCollectionSummaries] = useState<
     CollectionSummary[]
   >([])
-  const [collection, setCollection] = useState<Collection<unknown>>()
   const [operation, setOperation] = useState<Operation>('create' as Operation)
   const [operationMessage, setOperationMessage] = useState({
     success: false,
@@ -103,6 +102,16 @@ export const useCollectionOperations = () => {
       }
     }
 
+    if (type === 'topic') {
+      return {
+        ...collection,
+        items: (collection.items as Topic[]).map(topic => ({
+          ...topic,
+          examples: generateGenusAndSpeciesFields(topic?.examples as Taxon[]),
+        })),
+      }
+    }
+
     if (type === 'trait') {
       return {
         ...collection,
@@ -116,19 +125,21 @@ export const useCollectionOperations = () => {
     return collection
   }
 
-  const addCollection = async () => {
+  const addCollection = async (name: string, type: ContentHandlerType) => {
     const slug = name.trim().toLowerCase().replace(/\s+/g, '-')
-
+    const items = [{ id: crypto.randomUUID().split('-')[0] }]
+    setName(name)
     const collection: Collection<unknown> = {
       type,
       name,
       slug,
-      items: items!,
-      itemCount: (items! || items!).length || 0,
-      imageUrl,
+      items,
+      itemCount: 1,
+      imageUrl: '',
     }
 
-    const transformedCollection = transformCollectionData(collection)
+    // const transformedCollection = transformCollectionData(collection)
+    const transformedCollection = collection
     if (type === 'topic') {
       const collections = collectionSummaries.filter(cs =>
         selectedCollections.includes(cs.name)
@@ -137,13 +148,23 @@ export const useCollectionOperations = () => {
       transformedCollection.collections = collections
     }
 
+    console.log('transformedCollection', transformedCollection)
+
     const response = await fetch('/api/collection', {
       method: 'POST',
       body: JSON.stringify(transformedCollection),
     })
 
     const newCollection: Collection<unknown> = await response.json()
-    router.push(`/collection/${newCollection.slug}-${newCollection.shortId}`)
+
+    setApiResponse({
+      success: true,
+      message: 'New collection created.',
+    })
+
+    setCollection(newCollection)
+
+    return newCollection
   }
 
   const getCollectionSummaries = async (): Promise<CollectionSummary[]> => {
@@ -259,10 +280,10 @@ export const useCollectionOperations = () => {
   }
 
   const updateCollectionReferences = async ({
-    collection,
+    // collection,
     collectionReferences,
   }: {
-    collection: Collection<unknown>
+    // collection: Collection<unknown>
     collectionReferences: CollectionSummary[]
   }) => {
     if (!collection) return
@@ -303,14 +324,12 @@ export const useCollectionOperations = () => {
   }
 
   const updateCollectionItem = async (
-    collection: Collection<Topic>,
-    updatedItem: Topic
+    collection: Collection<unknown>,
+    updatedItem: unknown
   ) => {
     if (!collection) return
-    console.log('collection', collection)
-    if (!collection) return
     try {
-      const itemId = updatedItem.id
+      const itemId = (updatedItem as { id: string }).id
       const url = `/api/collection/update-item/${collection.slug}-${collection.shortId}-${itemId}`
 
       const response = await fetch(url, {
@@ -350,7 +369,6 @@ export const useCollectionOperations = () => {
     setName,
     items,
     setItems,
-    collectionItems,
     inatMessage,
     isValid,
     isItemsValid,
@@ -375,5 +393,6 @@ export const useCollectionOperations = () => {
     setImageUrl,
     setInatMessage,
     updateCollectionItem,
+    collection,
   }
 }

@@ -9,7 +9,6 @@ import { Taxon, ApiResponse, Operation } from '@/types'
 import { debounce } from '@/api/inat/utils'
 import { getIdByAutocomplete } from '@/api/inat/api'
 
-// Component props
 interface TaxonAutocompleteProps {
   selectedTaxa: Taxon[]
   onTaxonToggle: (taxon: Taxon) => void

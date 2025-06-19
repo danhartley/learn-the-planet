@@ -2,21 +2,23 @@
 import React, { useRef, Dispatch } from 'react'
 
 import MultiSelectList from '@/components/common/MultiSelectList'
+import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { ContentHandlerType } from '@/types'
+import { ApiResponse } from '@/types'
 
 type Props = {
   options: string[]
   selectedCollections: string[]
   setSelectedCollections: Dispatch<string[]>
-  type: ContentHandlerType
+
+  apiResponse: ApiResponse
 }
 
 export const CollectionSelector = ({
   options,
   selectedCollections,
   setSelectedCollections,
-  type,
+  apiResponse,
 }: Props) => {
   const checkboxRefsRef = useRef<Record<string, HTMLInputElement | null>>({})
 
@@ -29,19 +31,17 @@ export const CollectionSelector = ({
   }
 
   return (
-    type === 'topic' && (
-      <section className="group-block" aria-labelledby="referenced-collections">
-        <h2 id="referenced-collections">Referenced collections</h2>
-        <div className="block-container">
-          <MultiSelectList
-            options={options}
-            selectedValues={selectedCollections}
-            onSelectionChange={handleSelectionChange}
-            onRefsReady={handleRefsReady}
-            className="grid-md"
-          />
-        </div>
-      </section>
-    )
+    <section className="group-block" aria-labelledby="referenced-collections">
+      <h2 id="referenced-collections">Referenced collections</h2>
+      <div className="block-container">
+        <MultiSelectList
+          options={options}
+          selectedValues={selectedCollections}
+          onSelectionChange={handleSelectionChange}
+          onRefsReady={handleRefsReady}
+          className="grid-md"
+        />
+      </div>
+    </section>
   )
 }

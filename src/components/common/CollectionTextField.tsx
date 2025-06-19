@@ -5,82 +5,55 @@ type Props = {
   fieldValue: string
   fieldText: string
   setFieldValue: Dispatch<SetStateAction<string>>
-  operation: Operation
   type: ContentHandlerType
+  notification?: string
 }
 
 export function CollectionTextField({
-  operation,
   fieldValue,
   fieldText,
   setFieldValue,
   type,
+  notification,
 }: Props) {
   const [inputValue, setInputValue] = useState('')
   const [minLength] = useState(3)
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [message, setMessage] = useState({
-    success: false,
-    message: '',
-  })
 
   useEffect(() => {
-    if (fieldValue && (operation === 'update' || operation === 'create')) {
-      setInputValue(fieldValue)
-    }
-  }, [fieldValue, operation])
+    // Show existing value in input
+    setInputValue(fieldValue)
+  }, [fieldValue])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Track state locally
     setInputValue(e.target.value)
   }
 
   const handleSubmit = (e: React.FormEvent) => {
+    // Notify parent of current state
     e.preventDefault()
     setFieldValue(inputValue)
   }
 
-  useEffect(() => {
-    const msg = fieldValue.length > minLength ? 'Saved' : ''
-    setMessage({
-      success: false,
-      message: msg,
-    })
-  }, [fieldValue, minLength])
-
-  let display
-  switch (operation) {
-    case 'read':
-      display = (
-        <div>
-          Collection name: <span>{fieldValue}</span>
+  return (
+    <section aria-labelledby="collection-field">
+      <h2 id="collection-field">
+        <label htmlFor={fieldText}>{`${fieldText}`}</label>
+      </h2>
+      <form>
+        <div className={`form-row ${type}`}>
+          <input
+            type="text"
+            id={fieldText}
+            value={inputValue}
+            minLength={minLength}
+            onChange={handleInputChange}
+            onBlur={handleSubmit}
+            placeholder={`Enter ${fieldText}`}
+          />
         </div>
-      )
-      break
-    case 'create':
-    case 'update':
-      const isUpdate = operation === 'update'
-      display = (
-        <>
-          <h2 id="collection-field">
-            <label htmlFor={fieldText}>{`${fieldText}`}</label>
-          </h2>
-          <form onBlur={handleSubmit}>
-            <div className={`form-row ${type}`}>
-              <input
-                type="text"
-                id={fieldText}
-                value={inputValue}
-                minLength={minLength}
-                onChange={handleInputChange}
-                placeholder={
-                  isUpdate ? `Enter new ${fieldText}` : `Enter ${fieldText}`
-                }
-              />
-            </div>
-          </form>
-        </>
-      )
-  }
-
-  return <section aria-labelledby="collection-field">{display}</section>
+        {notification && <div>{notification}</div>}
+      </form>
+    </section>
+  )
 }

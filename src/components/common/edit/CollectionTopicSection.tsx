@@ -24,7 +24,7 @@ export const CollectionTopicSection = ({ collection, section }: Props) => {
 
   const saveChanges = () => {
     section.text = sectionText
-    updateCollectionItem(collection, section)
+    // updateCollectionItem(collection, section)
   }
 
   return (

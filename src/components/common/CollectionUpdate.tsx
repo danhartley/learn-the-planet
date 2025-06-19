@@ -112,7 +112,6 @@ export const CollectionUpdate = ({ collection }: Props) => {
         setItems={setItems}
         items={JSON.stringify(collection.items, null, 2)}
         operation={operation}
-        collection={collection}
       />
 
       {/* update-items and topic */}
