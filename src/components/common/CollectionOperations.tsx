@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { CollectionType } from '@/components/common/CollectionType'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
@@ -32,7 +32,6 @@ export default function CollectionOperations({
     selectedCollections,
     setSelectedCollections,
     apiResponse,
-    items,
     imageUrl,
     setImageUrl,
   } = useCollectionOperations()
@@ -40,11 +39,6 @@ export default function CollectionOperations({
   useState(() => {
     setType(collectionType)
   })
-
-  useEffect(() => {
-    console.log('name', name)
-    console.log('isValid', isValid)
-  }, [name, items])
 
   return (
     <>

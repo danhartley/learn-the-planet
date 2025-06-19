@@ -24,6 +24,7 @@
   --colour-bg-button: rgb(233 228 208);
   --colour-bg-card-button: rgba(255, 255, 255, 0.5);
   --colour-bg-body: rgb(248 244 240);
+  --colour-bg-section-type-selector: rgb(255 238 187);
   --colour-form-label: rgb(64 64 65);
   --colour-correct: rgb(106, 176, 84);
   --colour-correct-light: rgb(189 219 178);
@@ -791,6 +792,14 @@ progress {
   padding: 0;
 }
 
+#section-type-selector-section {
+  top: 0;
+  z-index: 1;
+  padding-bottom: var(--spacing-md);
+  background-color: var(--colour-bg-section-type-selector);
+  border-bottom: var(--spacing-md) solid var(--colour-bg-body);
+}
+
 /* Media queries */
 @media screen and (min-width: 768px) {
   header {
@@ -815,6 +824,9 @@ progress {
     figcaption {
       min-width: calc(var(--caption-width) * 1.5);
     }
+  }
+  #section-type-selector-section {
+    top: var(--spacing-sm);
   }
 }
 

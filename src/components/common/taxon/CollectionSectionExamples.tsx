@@ -4,7 +4,7 @@ import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
 import { TaxonAutocomplete } from '@/components/common/taxon/TaxonAutocomplete'
 
-import { Collection, Topic, Taxon } from '@/types'
+import { Collection, Topic, Taxon, Operation } from '@/types'
 
 type Props = {
   collection: Collection<Topic>
@@ -48,6 +48,7 @@ export const CollectionSectionExamples = ({ collection, section }: Props) => {
       changesToSave={changesToSave}
       saveChanges={saveChanges}
       apiResponse={apiResponse}
+      operation={'update-items' as Operation}
     />
   )
 }

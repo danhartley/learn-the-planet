@@ -365,3 +365,11 @@ export type UpdateCollectionFieldsOptions = {
 }
 
 export type CollectionStatus = 'private' | 'public'
+
+export type SectionType = 'text' | 'image' | 'taxon'
+
+export type SectionTypeOption = {
+  key: SectionType
+  value: string
+  description: string
+}

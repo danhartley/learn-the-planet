@@ -15,6 +15,7 @@ import {
   ApiResponse,
   Topic,
 } from '@/types'
+
 export const useCollectionOperations = () => {
   const [type, setType] = useState<ContentHandlerType>('topic')
   const [name, setName] = useState<string>('')
@@ -117,6 +118,7 @@ export const useCollectionOperations = () => {
 
   const addCollection = async () => {
     const slug = name.trim().toLowerCase().replace(/\s+/g, '-')
+
     const collection: Collection<unknown> = {
       type,
       name,
@@ -304,6 +306,8 @@ export const useCollectionOperations = () => {
     collection: Collection<Topic>,
     updatedItem: Topic
   ) => {
+    if (!collection) return
+    console.log('collection', collection)
     if (!collection) return
     try {
       const itemId = updatedItem.id
