@@ -4,11 +4,11 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
-import { CollectionUpdateCollectionReferences } from '@/components/common/edit/CollectionUpdateCollectionReferences'
+import { CollectionUpdateCollectionReferences } from '@/components/archived/CollectionUpdateCollectionReferences'
 import { CollectionUpdateCollectionFields } from '@/components/common/edit/CollectionUpdateCollectionFields'
 import { CollectionTopicUpdate } from '@/components/common/edit/CollectionTopicUpdate'
-import { CollectionUpdateOperationSelector } from '@/components/common/edit/CollectionUpdateOperationSelector'
-import { CollectionUpdateDelete } from '@/components/common/edit/CollectionUpdateDelete'
+import { CollectionUpdateOperationSelector } from '@/components/archived/CollectionUpdateOperationSelector'
+import { CollectionUpdateDelete } from '@/components/archived/CollectionUpdateDelete'
 import { CollectionSaveUpdatedItems } from '@/components/common/edit/CollectionSaveUpdatedItems'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
@@ -32,7 +32,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
     collectionSummaries,
     selectedCollections,
     setSelectedCollections,
-    updateCollectionReferences,
+    updateLinkedCollections,
     apiResponse,
     setName,
     name,
@@ -93,7 +93,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
         selectedCollections={selectedCollections}
         setSelectedCollections={setSelectedCollections}
         apiResponse={apiResponse}
-        updateCollectionReferences={updateCollectionReferences}
+        updateLinkedCollections={updateLinkedCollections}
         operation={operation}
         type={type}
       />

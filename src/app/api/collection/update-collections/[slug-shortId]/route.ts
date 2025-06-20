@@ -1,4 +1,4 @@
-import { updateCollectionReferences } from '@/api/database'
+import { updateLinkedCollections } from '@/api/database'
 import { NextRequest, NextResponse } from 'next/server'
 import { extractShortId } from '@/utils/strings'
 
@@ -31,13 +31,13 @@ export async function PUT(
 
     const body = await req.json()
 
-    const { collectionReferences } = body
+    const { linkedCollections } = body
 
-    if (!Array.isArray(collectionReferences)) {
+    if (!Array.isArray(linkedCollections)) {
       console.log(
         'ERROR: Collections is not an array:',
-        typeof collectionReferences,
-        collectionReferences
+        typeof linkedCollections,
+        linkedCollections
       )
       return NextResponse.json(
         { error: 'Collections must be an array' },
@@ -46,13 +46,13 @@ export async function PUT(
     }
 
     // Check for undefined values in collections array
-    const hasUndefined = collectionReferences.some(
+    const hasUndefined = linkedCollections.some(
       c => c === undefined || c === null
     )
     if (hasUndefined) {
       console.log(
         'ERROR: Collections array contains undefined/null values:',
-        collectionReferences
+        linkedCollections
       )
       return NextResponse.json(
         { error: 'Collections array contains invalid values' },
@@ -60,17 +60,14 @@ export async function PUT(
       )
     }
 
-    const result = await updateCollectionReferences(
-      shortId,
-      collectionReferences
-    )
-    console.log('result', result)
+    const result = await updateLinkedCollections(shortId, linkedCollections)
+
     if (!result.success) {
-      console.log('ERROR from updateCollectionReferences:', result.error)
+      console.log('ERROR from updateLinkedCollections:', result.error)
       return NextResponse.json({ error: result.error }, { status: 400 })
     }
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true, collection: result.collection })
   } catch (error) {
     console.error('Failed to update collection references:', error)
     return NextResponse.json(

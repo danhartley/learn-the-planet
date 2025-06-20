@@ -377,7 +377,7 @@ li::marker {
   flex-direction: column;
   border-radius: var(--border-radius-sm);
   row-gap: var(--spacing-md);
-  margin: var(--spacing-md) 0 0 0;
+  /* margin: var(--spacing-md) 0 0 0; */
   padding: var(--spacing-lg);
   background-image:
     linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),

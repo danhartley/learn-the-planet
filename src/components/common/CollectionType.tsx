@@ -72,7 +72,7 @@ export const CollectionType = ({
             <ul>{rbTypes}</ul>
           </div>
           <div>
-            <strong>{getCurrentTypeDescription()}</strong>
+            <em>{getCurrentTypeDescription()}</em>
           </div>
         </>
       )

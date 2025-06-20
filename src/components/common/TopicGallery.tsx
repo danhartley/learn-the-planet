@@ -34,57 +34,59 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
     })
   }
 
-  const article = collection.items.map((section, sectionIndex) => {
-    return (
-      <React.Fragment key={section.id}>
-        <h2>
-          <em>{section.topic}</em>
-        </h2>
-        {section.images &&
-          section.images.map(img => {
-            return (
-              <NextCloudinaryImage
-                key={img.src}
-                src={img.src}
-                alt={img.alt}
-                caption={img.caption}
-              />
-            )
-          })}
-        <div key={sectionIndex} className="article-item">
-          {section?.text?.map((para, paraIndex) => (
-            <p key={`${sectionIndex}-${paraIndex}`}>{para}</p>
-          ))}
+  const article =
+    collection.items &&
+    collection.items.map((section, sectionIndex) => {
+      return (
+        <React.Fragment key={section.id}>
+          <h2>
+            <em>{section.topic}</em>
+          </h2>
+          {section.images &&
+            section.images.map(img => {
+              return (
+                <NextCloudinaryImage
+                  key={img.src}
+                  src={img.src}
+                  alt={img.alt}
+                  caption={img.caption}
+                />
+              )
+            })}
+          <div key={sectionIndex} className="article-item">
+            {section?.text?.map((para, paraIndex) => (
+              <p key={`${sectionIndex}-${paraIndex}`}>{para}</p>
+            ))}
 
-          <div className="article-credit">
-            {section.credit?.source && (
+            <div className="article-credit">
+              {section.credit?.source && (
+                <p>
+                  <a href={section?.credit?.source}>
+                    <em>{section?.credit?.title}</em>
+                  </a>
+                </p>
+              )}
+
               <p>
-                <a href={section?.credit?.source}>
-                  <em>{section?.credit?.title}</em>
-                </a>
+                {section?.credit?.authors
+                  ? `Authors: ${section.credit.authors.join(', ')}`
+                  : null}
               </p>
-            )}
-
-            <p>
-              {section?.credit?.authors
-                ? `Authors: ${section.credit.authors.join(', ')}`
-                : null}
-            </p>
+            </div>
           </div>
-        </div>
-        <div className="block">
-          {section.examples?.map(taxon => {
-            return (
-              <TaxonCard
-                key={taxon.id + crypto.randomUUID()}
-                taxon={taxon}
-              ></TaxonCard>
-            )
-          })}
-        </div>
-      </React.Fragment>
-    )
-  })
+          <div className="block">
+            {section.examples?.map(taxon => {
+              return (
+                <TaxonCard
+                  key={taxon.id + crypto.randomUUID()}
+                  taxon={taxon}
+                ></TaxonCard>
+              )
+            })}
+          </div>
+        </React.Fragment>
+      )
+    })
 
   const topics =
     collections?.topic.length > 0 ? (

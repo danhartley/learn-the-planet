@@ -1,5 +1,8 @@
 'use client'
 import { useEffect, useState } from 'react'
+
+import { useRouter } from 'next/navigation'
+
 import { CollectionNewNameField } from '@/components/common/CollectionNewNameField'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { CollectionType } from '@/components/common/CollectionType'
@@ -28,32 +31,36 @@ export default function CollectionOperations({
   collectionType = 'topic',
 }: Props) {
   const {
-    collection,
-    name,
+    // collection,
+    // name,
     type,
     setType,
-    slug,
-    setSlug,
+    // slug,
+    // setSlug,
     imageUrl,
     setImageUrl,
-    items,
-    setItems,
-    collectionSummaries,
-    selectedCollections,
-    setSelectedCollections,
+    // items,
+    // setItems,
+    // collectionSummaries,
+    // selectedCollections,
+    // setSelectedCollections,
 
     addCollection,
-    updateCollectionItems,
-    updateCollectionFields,
-    updateCollectionReferences,
+    // updateCollectionItems,
+    // updateCollectionFields,
+    // updateLinkedCollections,
 
     apiResponse,
   } = useCollectionOperations()
 
+  const MIN_NAME_LENGTH = 5
+
+  const router = useRouter()
+
   useState(() => {
     setType(collectionType)
   })
-  const [collectionName, setCollectionName] = useState<string>()
+  const [collectionName, setCollectionName] = useState<string>('')
 
   useEffect(() => {
     const createCollection = async () => {
@@ -62,90 +69,96 @@ export default function CollectionOperations({
       }
     }
 
-    createCollection()
+    // createCollection()
   }, [collectionName])
 
-  useEffect(() => {
-    const updateItems = async () => {
-      if (collection && items)
-        if (collection) {
-          await updateCollectionItems(items)
-        }
+  // useEffect(() => {
+  //   const updateItems = async () => {
+  //     if (collection && items)
+  //       if (collection) {
+  //         await updateCollectionItems(items)
+  //       }
+  //   }
+
+  //   updateItems()
+  // }, [items, collection])
+
+  // useEffect(() => {
+  //   const updateField = async () => {
+  //     if (collection) {
+  //       await updateCollectionFields({
+  //         name,
+  //         slug,
+  //         imageUrl,
+  //       } as UpdateCollectionFieldsOptions)
+  //     }
+  //   }
+  //   updateField()
+  // }, [name, slug, imageUrl])
+
+  // useEffect(() => {
+  //   const updateReferences = async () => {
+  //     const collectionReferences = selectedCollections
+  //       .map(n => collectionSummaries.find(cs => cs.name === n))
+  //       .filter(c => c !== undefined)
+
+  //     await updateLinkedCollections({
+  //       collectionReferences,
+  //     })
+  //   }
+
+  //   updateReferences()
+  // }, [selectedCollections])
+
+  const createCollection = () => {
+    const create = async () => {
+      const newCollection = await addCollection(collectionName, type)
+      router.push(
+        `/collection/edit/${newCollection?.slug}-${newCollection?.shortId}`
+      )
     }
-
-    updateItems()
-  }, [items, collection])
-
-  useEffect(() => {
-    const updateField = async () => {
-      if (collection) {
-        await updateCollectionFields({
-          name,
-          slug,
-          imageUrl,
-        } as UpdateCollectionFieldsOptions)
-      }
-    }
-    updateField()
-  }, [name, slug, imageUrl])
-
-  useEffect(() => {
-    const updateReferences = async () => {
-      const collectionReferences = selectedCollections
-        .map(n => collectionSummaries.find(cs => cs.name === n))
-        .filter(c => c !== undefined)
-
-      await updateCollectionReferences({
-        collectionReferences,
-      })
-    }
-
-    updateReferences()
-  }, [selectedCollections])
-
-  {
-    console.log('collection', collection)
-  }
-  {
-    console.log('slug', slug)
-  }
-  {
-    console.log('type', type)
-  }
-  {
-    console.log('name', name)
-  }
-  {
-    console.log('items', items)
+    if (collectionName && collectionName.length > MIN_NAME_LENGTH) create()
   }
 
   return (
     <>
       <CollectionType operation={operation} type={type} setType={setType} />
 
-      <CollectionNewNameField
+      {/* <CollectionNewNameField
         type={type}
         setCollectionName={setCollectionName}
+      /> */}
+
+      <CollectionTextField
+        fieldValue={imageUrl}
+        setFieldValue={setCollectionName}
+        fieldText="collection name"
+        type={type}
+        required={true}
       />
 
-      {collection && (
-        <CollectionTextField
-          fieldValue={slug}
-          setFieldValue={setSlug}
-          fieldText="Collection slug"
-          type={type}
-        />
-      )}
+      {/* <CollectionTextField
+        fieldValue={slug}
+        setFieldValue={setSlug}
+        fieldText="Collection slug"
+        type={type}
+      /> */}
 
-      {collection && (
-        <CollectionTextField
-          fieldValue={imageUrl}
-          setFieldValue={setImageUrl}
-          fieldText="Collection image url"
-          type={type}
-        />
-      )}
+      <CollectionTextField
+        fieldValue={imageUrl}
+        setFieldValue={setImageUrl}
+        fieldText="collection image url"
+        type={type}
+      />
 
+      <button
+        onClick={createCollection}
+        disabled={collectionName.length < MIN_NAME_LENGTH}
+      >
+        Create collection
+      </button>
+
+      {/* 
       {collection && collection.items && type === 'topic' && (
         <CollectionTopicUpdate
           collection={collection as Collection<Topic>}
@@ -170,7 +183,7 @@ export default function CollectionOperations({
           operation={operation}
           apiResponse={apiResponse}
         />
-      )}
+      )} */}
     </>
   )
 }

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 
-import { CollectionUpdate } from '@/components/common/CollectionUpdate'
+import { CollectionUpdate } from '@/components/archived/CollectionUpdate'
 
 import { Collection } from '@/types'
 import { getCollectionByShortId } from '@/api/database'

@@ -464,10 +464,14 @@ export const addCollectionReference = async (
   }
 }
 
-export const updateCollectionReferences = async (
+export const updateLinkedCollections = async (
   parentShortId: string,
-  collectionReferences: CollectionSummary[]
-): Promise<{ success: boolean; error?: string }> => {
+  linkedCollections: CollectionSummary[]
+): Promise<{
+  success: boolean
+  error?: string
+  collection?: Collection<unknown>
+}> => {
   const client = await clientPromise
   const db = client.db(DB_NAME)
 
@@ -490,17 +494,17 @@ export const updateCollectionReferences = async (
         error: 'Collections can only be added to collections of type "topic"',
       }
     }
-    console.log('collectionReferences', collectionReferences)
+
     // Step 2: Validate that all child collections exist (if any provided)
-    if (collectionReferences.length > 0) {
+    if (linkedCollections.length > 0) {
       const childCollections = await db
         .collection('collections')
-        .find({ shortId: { $in: collectionReferences.map(c => c.shortId) } })
+        .find({ shortId: { $in: linkedCollections.map(c => c.shortId) } })
         .toArray()
 
-      if (childCollections.length !== collectionReferences.length) {
+      if (childCollections.length !== linkedCollections.length) {
         const foundIds = childCollections.map(c => c.shortId)
-        const missingIds = collectionReferences
+        const missingIds = linkedCollections
           .map(c => c.shortId)
           .filter(id => !foundIds.includes(id))
         return {
@@ -513,24 +517,28 @@ export const updateCollectionReferences = async (
     // Step 3: Update the parent collection's collections array
     const result = await db
       .collection('collections')
-      .updateOne(
+      .findOneAndUpdate(
         { shortId: parentShortId },
-        { $set: { collections: collectionReferences } }
+        { $set: { collections: linkedCollections } },
+        { returnDocument: 'after' }
       )
 
-    if (result.matchedCount === 0) {
+    if (result?.matchedCount === 0) {
       return {
         success: false,
         error: 'Failed to update parent collection',
       }
     }
 
-    return { success: true }
+    return {
+      success: true,
+      collection: result as unknown as Collection<unknown>,
+    }
   } catch (error) {
-    console.error('Failed to update collection references:', error)
+    console.error('Failed to update linked collections:', error)
     return {
       success: false,
-      error: 'Database error occurred while updating collection references',
+      error: 'Database error occurred while updating linked collections',
     }
   }
 }

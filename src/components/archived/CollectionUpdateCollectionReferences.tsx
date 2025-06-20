@@ -16,7 +16,7 @@ type Props = {
   collectionSummaries: CollectionSummary[]
   selectedCollections: string[]
   setSelectedCollections: Dispatch<SetStateAction<string[]>>
-  updateCollectionReferences: ({
+  updateLinkedCollections: ({
     collection,
     collectionReferences,
   }: {
@@ -34,7 +34,7 @@ export const CollectionUpdateCollectionReferences = ({
   selectedCollections,
   setSelectedCollections,
   apiResponse,
-  updateCollectionReferences,
+  updateLinkedCollections,
   operation,
   type,
 }: Props) => {
@@ -48,7 +48,7 @@ export const CollectionUpdateCollectionReferences = ({
       .map(n => collectionSummaries.find(cs => cs.name === n))
       .filter(c => c !== undefined)
 
-    await updateCollectionReferences({
+    await updateLinkedCollections({
       collection,
       collectionReferences,
     })
@@ -61,7 +61,7 @@ export const CollectionUpdateCollectionReferences = ({
           options={permittedCollections.map(c => c.name)}
           selectedCollections={selectedCollections}
           setSelectedCollections={setSelectedCollections}
-          type={type}
+          apiResponse={apiResponse}
         />
         <div className="form-row">
           <button onClick={updateReferences}>Update collections</button>

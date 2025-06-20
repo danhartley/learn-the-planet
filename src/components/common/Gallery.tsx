@@ -36,7 +36,8 @@ export function Gallery<T>({ collection }: GalleryProps<T>) {
     <>
       <Component collection={collection} />
       <Link
-        href={`/collection/update/${collection.slug}-${collection.shortId}`}
+        href={`/collection/edit/${collection.slug}-${collection.shortId}`}
+        // href={`/collection/update/${collection.slug}-${collection.shortId}`}
       >
         Edit collection
       </Link>

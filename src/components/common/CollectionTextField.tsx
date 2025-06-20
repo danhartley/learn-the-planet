@@ -7,6 +7,7 @@ type Props = {
   setFieldValue: Dispatch<SetStateAction<string>>
   type: ContentHandlerType
   notification?: string
+  required?: boolean
 }
 
 export function CollectionTextField({
@@ -15,6 +16,7 @@ export function CollectionTextField({
   setFieldValue,
   type,
   notification,
+  required = false,
 }: Props) {
   const [inputValue, setInputValue] = useState('')
   const [minLength] = useState(3)
@@ -40,21 +42,20 @@ export function CollectionTextField({
       <div>
         <h3 id="collection-field">
           <label htmlFor={fieldText}>{`${fieldText}`}</label>
+          <span>{required ? ' *' : ''}</span>
         </h3>
-        <form>
-          <div className={`form-row ${type}`}>
-            <input
-              type="text"
-              id={fieldText}
-              value={inputValue}
-              minLength={minLength}
-              onChange={handleInputChange}
-              onBlur={handleSubmit}
-              placeholder={`Enter ${fieldText}`}
-            />
-          </div>
-          {notification && <div>{notification}</div>}
-        </form>
+        <div className={`form-row ${type}`}>
+          <input
+            type="text"
+            id={fieldText}
+            value={inputValue}
+            minLength={minLength}
+            onChange={handleInputChange}
+            onBlur={handleSubmit}
+            placeholder={`Enter ${fieldText}`}
+          />
+        </div>
+        {notification && <div>{notification}</div>}
       </div>
     </section>
   )

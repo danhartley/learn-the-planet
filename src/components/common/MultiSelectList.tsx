@@ -24,9 +24,9 @@ export default function MultiSelectList({
     if (disabled) return
 
     const value = e.target.value
-    const newSelection = selectedValues.includes(value)
+    const newSelection = selectedValues?.includes(value)
       ? selectedValues.filter(v => v !== value)
-      : [...selectedValues, value]
+      : [...selectedValues!!, value]
 
     onSelectionChange(newSelection)
   }
@@ -45,7 +45,7 @@ export default function MultiSelectList({
         type="checkbox"
         onChange={handleChange}
         value={option}
-        checked={selectedValues.includes(option)}
+        checked={selectedValues?.includes(option)}
         disabled={disabled}
         ref={el => {
           checkboxRefs.current[option] = el

@@ -42,33 +42,34 @@ export const CollectionTopicUpdate = ({ collection, operation }: Props) => {
 
   return (
     <>
-      {collection.items.map(section => {
-        return (
-          <React.Fragment key={section.id}>
-            <CollectionTopicSection
-              key={section.id}
-              collection={collection}
-              section={section}
-            />
-            {section.images?.map(img => {
-              return (
-                <CollectionTopicCloudImage
-                  collection={collection}
-                  section={section}
-                  key={img.src}
-                  image={img}
-                />
-              )
-            })}
-            {section.examples && (
-              <CollectionSectionExamples
+      {collection.items &&
+        collection.items.map(section => {
+          return (
+            <React.Fragment key={section.id}>
+              <CollectionTopicSection
+                key={section.id}
                 collection={collection}
                 section={section}
               />
-            )}
-          </React.Fragment>
-        )
-      })}
+              {section.images?.map(img => {
+                return (
+                  <CollectionTopicCloudImage
+                    collection={collection}
+                    section={section}
+                    key={img.src}
+                    image={img}
+                  />
+                )
+              })}
+              {section.examples && (
+                <CollectionSectionExamples
+                  collection={collection}
+                  section={section}
+                />
+              )}
+            </React.Fragment>
+          )
+        })}
     </>
   )
 }

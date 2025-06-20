@@ -17,12 +17,17 @@ import {
 } from '@/types'
 
 export const useCollectionOperations = () => {
+  // These are for convenience, we don't rely on them for state between components, only within components
   const [collection, setCollection] = useState<Collection<unknown>>()
+
   const [type, setType] = useState<ContentHandlerType>('topic')
+
   const [name, setName] = useState<string>('')
   const [slug, setSlug] = useState<string>('')
   const [imageUrl, setImageUrl] = useState<string>('')
+
   const [items, setItems] = useState<unknown[] | undefined>()
+
   const [inatMessage, setInatMessage] = useState({
     success: false,
     message: '',
@@ -127,29 +132,29 @@ export const useCollectionOperations = () => {
 
   const addCollection = async (name: string, type: ContentHandlerType) => {
     const slug = name.trim().toLowerCase().replace(/\s+/g, '-')
-    const items = [{ id: crypto.randomUUID().split('-')[0] }]
+    // const items = [{ id: crypto.randomUUID().split('-')[0] }]
     const collection: Collection<unknown> = {
       type,
       name,
       slug,
       items,
-      itemCount: 1,
+      itemCount: 0,
       imageUrl: '',
     }
 
     // const transformedCollection = transformCollectionData(collection)
-    const transformedCollection = collection
-    if (type === 'topic') {
-      const collections = collectionSummaries.filter(cs =>
-        selectedCollections.includes(cs.name)
-      )
+    // const transformedCollection = collection
+    // if (type === 'topic') {
+    //   const collections = collectionSummaries.filter(cs =>
+    //     selectedCollections.includes(cs.name)
+    //   )
 
-      transformedCollection.collections = collections
-    }
+    //   transformedCollection.collections = collections
+    // }
 
     const response = await fetch('/api/collection', {
       method: 'POST',
-      body: JSON.stringify(transformedCollection),
+      body: JSON.stringify(collection),
     })
 
     const newCollection: Collection<unknown> = await response.json()
@@ -218,6 +223,7 @@ export const useCollectionOperations = () => {
   }
 
   const updateCollectionFields = async (
+    collection: Collection<unknown>,
     fields: UpdateCollectionFieldsOptions
   ) => {
     if (!collection || !fields) return
@@ -244,7 +250,7 @@ export const useCollectionOperations = () => {
 
       setApiResponse({
         success: true,
-        message: 'Collection field updates succeeded.',
+        message: 'Collection properties updated',
       })
 
       // Only navigate if the update was successful
@@ -263,7 +269,7 @@ export const useCollectionOperations = () => {
     }
   }
 
-  const deleteCollection = async () => {
+  const deleteCollection = async (collection: Collection<unknown>) => {
     if (!collection) return
     const url = `/api/collection/delete/${collection.slug}-${collection.shortId}`
     const response = await fetch(url, {
@@ -276,11 +282,10 @@ export const useCollectionOperations = () => {
     }
   }
 
-  const updateCollectionReferences = async ({
-    collectionReferences,
-  }: {
-    collectionReferences: CollectionSummary[]
-  }) => {
+  const updateLinkedCollections = async (
+    collection: Collection<unknown>,
+    linkedCollections: CollectionSummary[]
+  ) => {
     if (!collection) return
 
     const url = `/api/collection/update-collections/${collection.slug}-${collection.shortId}`
@@ -291,7 +296,7 @@ export const useCollectionOperations = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ collectionReferences }),
+        body: JSON.stringify({ linkedCollections }),
       })
 
       if (!response.ok) {
@@ -304,13 +309,15 @@ export const useCollectionOperations = () => {
         throw new Error(`HTTP ${response.status}: ${errorText}`)
       }
 
-      const result = await response.json()
+      const jsonResponse = await response.json()
+
+      setCollection(jsonResponse.collection)
 
       setApiResponse({
         success: true,
         message: 'Collection references update succeeded.',
       })
-      return result
+      return jsonResponse.collection
     } catch (error) {
       console.error('Failed to update collections:', error)
       setApiResponse({ success: false, message: 'Collections update failed.' })
@@ -379,7 +386,7 @@ export const useCollectionOperations = () => {
     operation,
     deleteCollection,
     apiResponse,
-    updateCollectionReferences,
+    updateLinkedCollections,
     slug,
     setSlug,
     setCollectionsFields,
@@ -389,5 +396,6 @@ export const useCollectionOperations = () => {
     setInatMessage,
     updateCollectionItem,
     collection,
+    updateLinkedCollections,
   }
 }

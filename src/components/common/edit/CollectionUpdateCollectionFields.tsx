@@ -55,50 +55,45 @@ export const CollectionUpdateCollectionFields = ({
   }
 
   return (
-    operation === 'update' && (
-      <>
-        <div className="group-block">
-          <CollectionTextField
-            operation={operation}
-            fieldValue={name}
-            setFieldValue={setName}
-            fieldText="Collection name"
-            type={type}
-          />
-        </div>
+    // operation === 'update' && (
+    <>
+      <div className="group-block">
+        <CollectionTextField
+          fieldValue={name}
+          setFieldValue={setName}
+          fieldText="Collection name"
+          type={type}
+        />
+      </div>
 
-        <div className="group-block">
-          <CollectionTextField
-            operation={operation}
-            fieldValue={slug}
-            setFieldValue={setSlug}
-            fieldText="Collection slug"
-            type={type}
-          />
-        </div>
+      <div className="group-block">
+        <CollectionTextField
+          fieldValue={slug}
+          setFieldValue={setSlug}
+          fieldText="Collection slug"
+          type={type}
+        />
+      </div>
 
-        <div className="group-block">
-          <CollectionTextField
-            operation={operation}
-            fieldValue={imageUrl}
-            setFieldValue={setImageUrl}
-            fieldText="Collection image url"
-            type={type}
-          />
-        </div>
+      <div className="group-block">
+        <CollectionTextField
+          fieldValue={imageUrl}
+          setFieldValue={setImageUrl}
+          fieldText="Collection image url"
+          type={type}
+        />
+      </div>
 
-        <section aria-labelledby="edit-collection">
-          <div>
-            <h2 id="edit-collection">Edit {type} collection</h2>
-          </div>
-          <div className="form-row">
-            <button onClick={handleUpdateFields}>
-              Update collection fields
-            </button>
-            <ApiResponseMessage apiResponse={apiResponse} />
-          </div>
-        </section>
-      </>
-    )
+      <section aria-labelledby="edit-collection">
+        <div>
+          <h2 id="edit-collection">Edit {type} collection</h2>
+        </div>
+        <div className="form-row">
+          <button onClick={handleUpdateFields}>Update collection fields</button>
+          <ApiResponseMessage apiResponse={apiResponse} />
+        </div>
+      </section>
+    </>
+    // )
   )
 }

@@ -197,7 +197,7 @@ export type Collection<T> = {
   fieldNotes?: {
     url: string
   }
-  items: T[]
+  items?: T[]
   itemCount: number
   collections?: CollectionSummary[]
   credit?: Credit
@@ -359,8 +359,8 @@ export type ApiResponse = {
 }
 
 export type UpdateCollectionFieldsOptions = {
-  name?: string
-  slug?: string
+  name: string
+  slug: string
   imageUrl?: string
 }
 
