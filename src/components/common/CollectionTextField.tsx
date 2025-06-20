@@ -37,23 +37,25 @@ export function CollectionTextField({
 
   return (
     <section aria-labelledby="collection-field">
-      <h2 id="collection-field">
-        <label htmlFor={fieldText}>{`${fieldText}`}</label>
-      </h2>
-      <form>
-        <div className={`form-row ${type}`}>
-          <input
-            type="text"
-            id={fieldText}
-            value={inputValue}
-            minLength={minLength}
-            onChange={handleInputChange}
-            onBlur={handleSubmit}
-            placeholder={`Enter ${fieldText}`}
-          />
-        </div>
-        {notification && <div>{notification}</div>}
-      </form>
+      <div>
+        <h3 id="collection-field">
+          <label htmlFor={fieldText}>{`${fieldText}`}</label>
+        </h3>
+        <form>
+          <div className={`form-row ${type}`}>
+            <input
+              type="text"
+              id={fieldText}
+              value={inputValue}
+              minLength={minLength}
+              onChange={handleInputChange}
+              onBlur={handleSubmit}
+              placeholder={`Enter ${fieldText}`}
+            />
+          </div>
+          {notification && <div>{notification}</div>}
+        </form>
+      </div>
     </section>
   )
 }

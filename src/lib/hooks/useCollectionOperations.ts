@@ -128,7 +128,6 @@ export const useCollectionOperations = () => {
   const addCollection = async (name: string, type: ContentHandlerType) => {
     const slug = name.trim().toLowerCase().replace(/\s+/g, '-')
     const items = [{ id: crypto.randomUUID().split('-')[0] }]
-    setName(name)
     const collection: Collection<unknown> = {
       type,
       name,
@@ -148,8 +147,6 @@ export const useCollectionOperations = () => {
       transformedCollection.collections = collections
     }
 
-    console.log('transformedCollection', transformedCollection)
-
     const response = await fetch('/api/collection', {
       method: 'POST',
       body: JSON.stringify(transformedCollection),
@@ -162,6 +159,9 @@ export const useCollectionOperations = () => {
       message: 'New collection created.',
     })
 
+    setName(name)
+    setSlug(slug)
+    setItems(items)
     setCollection(newCollection)
 
     return newCollection
@@ -172,10 +172,7 @@ export const useCollectionOperations = () => {
     return response.json()
   }
 
-  const updateCollectionItems = async (
-    collection: Collection<unknown>,
-    items: unknown[]
-  ) => {
+  const updateCollectionItems = async (items: unknown[]) => {
     if (!collection) return
 
     const transformedItems =
@@ -280,10 +277,8 @@ export const useCollectionOperations = () => {
   }
 
   const updateCollectionReferences = async ({
-    // collection,
     collectionReferences,
   }: {
-    // collection: Collection<unknown>
     collectionReferences: CollectionSummary[]
   }) => {
     if (!collection) return

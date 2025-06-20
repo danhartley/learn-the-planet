@@ -32,7 +32,7 @@ export const CollectionSelector = ({
 
   return (
     <section className="group-block" aria-labelledby="referenced-collections">
-      <h2 id="referenced-collections">Referenced collections</h2>
+      <h2 id="referenced-collections">Link to other collections</h2>
       <div className="block-container">
         <MultiSelectList
           options={options}

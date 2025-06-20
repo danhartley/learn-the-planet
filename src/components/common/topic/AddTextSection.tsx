@@ -34,8 +34,7 @@ export const AddTextSection = ({ setItems, apiResponse }: Props) => {
             value={text}
             onChange={handleChange}
             placeholder=""
-            rows={20}
-            cols={40}
+            rows={10}
           />
         </div>
         <div className="form-row">

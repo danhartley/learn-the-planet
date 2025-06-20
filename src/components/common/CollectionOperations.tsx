@@ -6,12 +6,16 @@ import { CollectionType } from '@/components/common/CollectionType'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
 import { CollectionSelector } from '@/components/common/CollectionSelector'
 
+import { CollectionTopicUpdate } from '@/components/common/edit/CollectionTopicUpdate'
+
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
 import {
   Operation,
   ContentHandlerType,
   UpdateCollectionFieldsOptions,
+  Collection,
+  Topic,
 } from '@/types'
 
 type Props = {
@@ -20,12 +24,11 @@ type Props = {
 }
 
 export default function CollectionOperations({
-  operation = 'read',
+  operation = 'create',
   collectionType = 'topic',
 }: Props) {
   const {
     collection,
-    addCollection,
     name,
     type,
     setType,
@@ -33,15 +36,18 @@ export default function CollectionOperations({
     setSlug,
     imageUrl,
     setImageUrl,
-    updateCollectionItems,
     items,
     setItems,
-    updateCollectionFields,
     collectionSummaries,
     selectedCollections,
     setSelectedCollections,
-    apiResponse,
+
+    addCollection,
+    updateCollectionItems,
+    updateCollectionFields,
     updateCollectionReferences,
+
+    apiResponse,
   } = useCollectionOperations()
 
   useState(() => {
@@ -60,14 +66,15 @@ export default function CollectionOperations({
   }, [collectionName])
 
   useEffect(() => {
-    console.log(items)
-    const addItems = async () => {
+    const updateItems = async () => {
       if (collection && items)
-        if (collection) await updateCollectionItems(collection, items)
+        if (collection) {
+          await updateCollectionItems(items)
+        }
     }
 
-    addItems()
-  }, [items])
+    updateItems()
+  }, [items, collection])
 
   useEffect(() => {
     const updateField = async () => {
@@ -96,55 +103,71 @@ export default function CollectionOperations({
     updateReferences()
   }, [selectedCollections])
 
+  {
+    console.log('collection', collection)
+  }
+  {
+    console.log('slug', slug)
+  }
+  {
+    console.log('type', type)
+  }
+  {
+    console.log('name', name)
+  }
+  {
+    console.log('items', items)
+  }
+
   return (
     <>
       <CollectionType operation={operation} type={type} setType={setType} />
 
-      <div className="group-block">
-        <CollectionNewNameField
+      <CollectionNewNameField
+        type={type}
+        setCollectionName={setCollectionName}
+      />
+
+      {collection && (
+        <CollectionTextField
+          fieldValue={slug}
+          setFieldValue={setSlug}
+          fieldText="Collection slug"
           type={type}
-          setCollectionName={setCollectionName}
-          collection={collection}
         />
-      </div>
-
-      {collection && (
-        <div className="group-block">
-          <CollectionTextField
-            fieldValue={slug || collection.slug}
-            setFieldValue={setSlug}
-            fieldText="Collection slug"
-            type={type}
-          />
-        </div>
       )}
 
       {collection && (
-        <div className="group-block">
-          <CollectionTextField
-            fieldValue={imageUrl || collection.imageUrl || ''}
-            setFieldValue={setImageUrl}
-            fieldText="Collection image url"
-            type={type}
-          />
-        </div>
-      )}
-
-      {collection && (
-        <CollectionItemPicker
+        <CollectionTextField
+          fieldValue={imageUrl}
+          setFieldValue={setImageUrl}
+          fieldText="Collection image url"
           type={type}
-          setItems={setItems}
-          items={collection.items || collection.items}
+        />
+      )}
+
+      {collection && collection.items && type === 'topic' && (
+        <CollectionTopicUpdate
+          collection={collection as Collection<Topic>}
           operation={operation}
-          apiResponse={apiResponse}
         />
       )}
 
       {collection && type === 'topic' && (
         <CollectionSelector
           options={collectionSummaries.map(c => c.name)}
-          selectedCollections={selectedCollections || collection.collections}
+          selectedCollections={selectedCollections}
           setSelectedCollections={setSelectedCollections}
+          apiResponse={apiResponse}
+        />
+      )}
+
+      {collection && (
+        <CollectionItemPicker
+          type={type}
+          setItems={setItems}
+          items={items}
+          operation={operation}
           apiResponse={apiResponse}
         />
       )}

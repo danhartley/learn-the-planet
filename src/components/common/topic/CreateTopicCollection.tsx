@@ -3,6 +3,8 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { SectionTypeSelector } from '@/components/common/topic/SectionTypeSelector'
 import { SectionComponentMap } from '@/components/common/topic/SectionComponentMap'
 
+import { getShortId } from '@/utils/strings'
+
 import { SectionType, ApiResponse, Topic, Taxon, NextCloudImage } from '@/types'
 
 type Props = {
@@ -22,7 +24,9 @@ export const CreateTopicCollection = ({
   useEffect(() => {
     if (!childItems) return
 
-    const item = items[0] as Topic
+    const item = {
+      id: getShortId(),
+    } as Topic
 
     switch (selectedOption) {
       case 'text':
@@ -35,7 +39,7 @@ export const CreateTopicCollection = ({
         item.images = childItems as NextCloudImage[]
         break
     }
-    console.log(item)
+
     setItems([item])
   }, [childItems])
 

@@ -36,40 +36,39 @@ export const CollectionTopicUpdate = ({ collection, operation }: Props) => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collection.id])
 
+  {
+    console.log('collection in topic update', collection)
+  }
+
   return (
-    !!collection &&
-    !!collection.items &&
-    operation === ('update-items' as Operation) &&
-    collection.type === ('topic' as ContentHandlerType) && (
-      <>
-        {collection.items.map(section => {
-          return (
-            <React.Fragment key={section.id}>
-              <CollectionTopicSection
-                key={section.id}
+    <>
+      {collection.items.map(section => {
+        return (
+          <React.Fragment key={section.id}>
+            <CollectionTopicSection
+              key={section.id}
+              collection={collection}
+              section={section}
+            />
+            {section.images?.map(img => {
+              return (
+                <CollectionTopicCloudImage
+                  collection={collection}
+                  section={section}
+                  key={img.src}
+                  image={img}
+                />
+              )
+            })}
+            {section.examples && (
+              <CollectionSectionExamples
                 collection={collection}
                 section={section}
               />
-              {section.images?.map(img => {
-                return (
-                  <CollectionTopicCloudImage
-                    collection={collection}
-                    section={section}
-                    key={img.src}
-                    image={img}
-                  />
-                )
-              })}
-              {section.examples && (
-                <CollectionSectionExamples
-                  collection={collection}
-                  section={section}
-                />
-              )}
-            </React.Fragment>
-          )
-        })}
-      </>
-    )
+            )}
+          </React.Fragment>
+        )
+      })}
+    </>
   )
 }

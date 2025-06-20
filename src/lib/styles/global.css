@@ -13,7 +13,7 @@
   --colour-bg-reptilia: rgb(254, 226, 223);
   --colour-bg-aves: rgb(215 227 241);
   --colour-bg-topic: rgb(255 255 255);
-  --colour-bg-topic-card: rgb(255 255 255);
+  --colour-bg-topic-card: rgb(245 245 245);
   --colour-bg-taxon: rgb(73 64 34);
   --colour-bg-taxon-card: rgb(245, 243, 234);
   --colour-bg-term: rgb(43 73 34);
@@ -292,7 +292,6 @@ li::marker {
 .block-container {
   display: flex;
   justify-content: center;
-  /* padding: 0 0 var(--spacing-lg) 0; */
 }
 
 .block {
@@ -308,13 +307,13 @@ li::marker {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
+  /* margin-bottom: var(--spacing-md); */
 }
 
 .row-group {
   display: flex;
   align-items: center;
-  min-height: calc(var(--spacing-lg) * 2);
+  /* min-height: calc(var(--spacing-lg) * 2); */
   border-radius: var(--border-radius-sm);
   padding: var(--spacing-sm);
 }
@@ -798,6 +797,13 @@ progress {
   padding-bottom: var(--spacing-md);
   background-color: var(--colour-bg-section-type-selector);
   border-bottom: var(--spacing-md) solid var(--colour-bg-body);
+  position: sticky;
+}
+
+[aria-labelledby='collection-field'] {
+  input {
+    font-size: var(--font-size-md);
+  }
 }
 
 /* Media queries */

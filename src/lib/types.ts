@@ -189,7 +189,7 @@ export interface Topic extends LearningItem {
 export type Collection<T> = {
   id?: string
   shortId?: string
-  type: string
+  type: ContentHandlerType
   name: string
   slug: string
   date?: string

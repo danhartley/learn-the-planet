@@ -112,6 +112,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
         setItems={setItems}
         items={JSON.stringify(collection.items, null, 2)}
         operation={operation}
+        apiResponse={apiResponse}
       />
 
       {/* update-items and topic */}
@@ -126,7 +127,7 @@ export const CollectionUpdate = ({ collection }: Props) => {
         type={type}
         apiResponse={apiResponse}
         isItemsValid={isItemsValid}
-        saveAction={() => updateCollectionItems(collection, items || [])}
+        saveAction={() => updateCollectionItems(items || [])}
       />
     </>
   )
