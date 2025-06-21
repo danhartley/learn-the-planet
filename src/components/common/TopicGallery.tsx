@@ -40,7 +40,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       return (
         <React.Fragment key={section.id}>
           <h2>
-            <em>{section.topic}</em>
+            <em>{section.topic || 'missing topic'}</em>
           </h2>
           {section.images &&
             section.images.map(img => {
@@ -68,9 +68,11 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
               )}
 
               <p>
-                {section?.credit?.authors
-                  ? `Authors: ${section.credit.authors.join(', ')}`
-                  : null}
+                {section?.credit?.authors ? (
+                  <span key={section.credit?.title}>
+                    `Authors: ${section.credit.authors.join(', ')}`
+                  </span>
+                ) : null}
               </p>
             </div>
           </div>

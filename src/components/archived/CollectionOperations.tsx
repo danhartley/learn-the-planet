@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import { CollectionNewNameField } from '@/components/common/CollectionNewNameField'
+import { CollectionNewNameField } from '@/components/archived/CollectionNewNameField'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { CollectionType } from '@/components/common/CollectionType'
 import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react'
 
-import { TaxonAutocomplete } from '@/components/common/taxon/TaxonAutocomplete'
+import { TaxonAutocomplete } from '@/components/taxon/TaxonAutocomplete'
 
 import { Taxon, Operation, ApiResponse } from '@/types'
 
@@ -11,7 +11,7 @@ type Props = {
   apiResponse: ApiResponse
 }
 
-export const CollectionInatTaxonPicker = ({
+export const InatTaxonPicker = ({
   setItems,
   items,
   operation,

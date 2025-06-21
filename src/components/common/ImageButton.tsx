@@ -36,8 +36,8 @@ const ImageButton = ({
 
   return (
     <button
-      id={option.key}
       key={option.key}
+      id={option.key}
       data-key={option.key as string}
       onClick={handleClick}
       title={`Option: ${option.key}`}
@@ -45,6 +45,7 @@ const ImageButton = ({
       disabled={isAnswered}
     >
       <ResponsiveImage
+        key={option.key}
         id={option.key}
         img={option.value as Image}
         alt={option.key}

@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react'
 
-import { CollectionInatTaxonPicker } from '@/components/common/taxon/CollectionInatTaxonPicker'
+import { InatTaxonPicker } from '@/components/taxon/InatTaxonPicker'
 
 import { Operation, ApiResponse } from '@/types'
 
@@ -13,7 +13,7 @@ export const AddTaxaSection = ({ setItems, apiResponse }: Props) => {
   return (
     <section aria-labelledby="new-section">
       <h2 id="new-section">Add taxa</h2>
-      <CollectionInatTaxonPicker
+      <InatTaxonPicker
         setItems={setItems}
         operation={'create' as Operation}
         apiResponse={apiResponse}

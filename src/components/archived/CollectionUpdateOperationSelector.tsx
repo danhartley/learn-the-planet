@@ -15,7 +15,7 @@ export const CollectionUpdateOperationSelector = ({
 }: Props) => {
   const operationTypes =
     type === 'topic'
-      ? ['update', 'delete', 'update-items', 'update-collections']
+      ? ['update', 'delete', 'update-items', 'linked-collections']
       : ['update', 'delete', 'update-items']
 
   const editOptions = operationTypes.map(option => {
@@ -24,7 +24,7 @@ export const CollectionUpdateOperationSelector = ({
       read: 'View collection',
       update: 'Edit collection',
       delete: 'Delete collection',
-      'update-collections': 'Edit referenced collections',
+      'linked-collections': 'Edit referenced collections',
       'update-items': 'Edit collection items',
     }[option as Operation]
 

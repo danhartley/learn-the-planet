@@ -1,42 +1,46 @@
 'use client'
 import React from 'react'
 
-import { CollectionTopicSection } from '@/components/common/edit/CollectionTopicSection'
-import { CollectionTopicCloudImage } from '@/components/common/edit/CollectionTopicCloudImage'
-import { CollectionSectionExamples } from '@/components/common/taxon/CollectionSectionExamples'
+import { useCollection } from '@/contexts/CollectionContext'
+
+import { TopicSections } from '@/components/collection/TopicSections'
+import { TopicCloudImage } from '@/components/collection/TopicCloudImage'
+import { ExampleTaxa } from '@/components/taxon/ExampleTaxa'
 
 import { Collection, Topic } from '@/types'
 
-type Props = {
-  collection: Collection<Topic>
-}
+export const TopicItems = () => {
+  const { collection } = useCollection()
+  const topicCollection = collection as Collection<Topic>
 
-export const TopicItems = ({ collection }: Props) => {
   return (
     <>
-      {collection.items &&
-        collection.items.map(section => {
+      {topicCollection?.items &&
+        topicCollection.items.map((section, index) => {
           return (
             <React.Fragment key={section.id}>
-              <CollectionTopicSection
+              <TopicSections
                 key={section.id}
-                collection={collection}
+                collection={topicCollection}
                 section={section}
+                sectionIndex={index + 1}
               />
               {section.images?.map(img => {
                 return (
-                  <CollectionTopicCloudImage
-                    collection={collection}
-                    section={section}
+                  <TopicCloudImage
                     key={img.src}
+                    collection={topicCollection}
+                    section={section}
                     image={img}
+                    sectionIndex={index + 1}
                   />
                 )
               })}
               {section.examples && (
-                <CollectionSectionExamples
-                  collection={collection}
+                <ExampleTaxa
+                  collection={topicCollection}
                   section={section}
+                  sectionIndex={index + 1}
                 />
               )}
             </React.Fragment>

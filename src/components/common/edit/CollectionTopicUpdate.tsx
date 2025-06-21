@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 
 import { CollectionTopicSection } from '@/components/common/edit/CollectionTopicSection'
 import { CollectionTopicCloudImage } from '@/components/common/edit/CollectionTopicCloudImage'
-import { CollectionSectionExamples } from '@/components/common/taxon/CollectionSectionExamples'
+import { ExampleTaxa } from '@/components/taxon/ExampleTaxa'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
@@ -58,10 +58,7 @@ export const CollectionTopicUpdate = ({ collection, operation }: Props) => {
                 )
               })}
               {section.examples && (
-                <CollectionSectionExamples
-                  collection={collection}
-                  section={section}
-                />
+                <ExampleTaxa collection={collection} section={section} />
               )}
             </React.Fragment>
           )

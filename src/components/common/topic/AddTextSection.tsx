@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 import React, { Dispatch, SetStateAction } from 'react'
 
+import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
+
 import { ApiResponse } from '@/types'
 import { textToArray } from '@/utils/strings'
 
@@ -41,6 +43,7 @@ export const AddTextSection = ({ setItems, apiResponse }: Props) => {
           <button id="submit" type="submit">
             Add text
           </button>
+          <ApiResponseMessage apiResponse={apiResponse} />
         </div>
       </form>
     </section>

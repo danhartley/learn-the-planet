@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
-import { TaxonAutocomplete } from '@/components/common/taxon/TaxonAutocomplete'
+import { TaxonAutocomplete } from '@/components/taxon/TaxonAutocomplete'
 
 import { Collection, Topic, Taxon, Operation } from '@/types'
 
 type Props = {
   collection: Collection<Topic>
   section: Topic
+  sectionIndex: number
 }
 
-export const CollectionSectionExamples = ({ collection, section }: Props) => {
+export const ExampleTaxa = ({ collection, section, sectionIndex }: Props) => {
   const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
     section?.examples || []
@@ -49,6 +50,7 @@ export const CollectionSectionExamples = ({ collection, section }: Props) => {
       saveChanges={saveChanges}
       apiResponse={apiResponse}
       operation={'update-items' as Operation}
+      sectionIndex={sectionIndex}
     />
   )
 }

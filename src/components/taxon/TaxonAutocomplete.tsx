@@ -16,6 +16,7 @@ interface TaxonAutocompleteProps {
   saveChanges: () => void
   operation: Operation | undefined
   apiResponse: ApiResponse
+  sectionIndex: number
 }
 
 export const TaxonAutocomplete = ({
@@ -25,6 +26,7 @@ export const TaxonAutocomplete = ({
   saveChanges,
   operation,
   apiResponse,
+  sectionIndex,
 }: TaxonAutocompleteProps) => {
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState<Taxon[]>([])
@@ -51,6 +53,7 @@ export const TaxonAutocomplete = ({
               //eslint-disable-next-line @typescript-eslint/no-explicit-any
               (item: any) =>
                 ({
+                  key: item.id.toString(),
                   id: item.id.toString(),
                   binomial: item.name,
                   vernacularName:
@@ -113,14 +116,16 @@ export const TaxonAutocomplete = ({
       <div className="group-block">
         <div className="group">
           <h2 id="inat-taxa-search">
-            <label htmlFor="taxon-search">Search for Taxa</label>
+            <label htmlFor={`${sectionIndex}-taxon-search`}>
+              Search for Taxa
+            </label>
           </h2>
           <div>Search by common or scientific name</div>
         </div>
         <form>
           <div className="form-row taxon">
             <input
-              id="taxon-search"
+              id={`${sectionIndex}-taxon-search`}
               type="text"
               value={inputValue}
               onChange={handleInputChange}

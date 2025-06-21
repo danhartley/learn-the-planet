@@ -55,7 +55,7 @@ export const CollectionUpdateCollectionReferences = ({
   }
 
   return (
-    operation === ('update-collections' as Operation) && (
+    operation === ('linked-collections' as Operation) && (
       <>
         <CollectionSelector
           options={permittedCollections.map(c => c.name)}

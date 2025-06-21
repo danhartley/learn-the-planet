@@ -1,10 +1,10 @@
-import CollectionOperations from '@/components/common/CollectionOperations'
+import CreateOperation from '@/components/collection/CreateOperation'
 
 export default function Page() {
   return (
     <>
       <h1>Create collection</h1>
-      <CollectionOperations operation="create" />
+      <CreateOperation operation="create" />
     </>
   )
 }

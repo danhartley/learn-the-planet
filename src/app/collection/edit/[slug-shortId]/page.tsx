@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { notFound } from 'next/navigation'
 
 import { EditOperations } from '@/components/collection/EditOperations'
+import { CollectionProvider } from '@/contexts/CollectionContext'
 import { Collection } from '@/types'
 import { extractShortId, extractSlug } from '@/utils/strings'
 
@@ -27,9 +28,7 @@ export default function Page({
           return
         }
 
-        // Fetch from your API endpoint instead of calling database directly
-        // const response = await fetch(`/api/collections/${shortId}`)
-        const response = await fetch(`/api/collection/}${slug}-${shortId}`)
+        const response = await fetch(`/api/collection/${slug}-${shortId}`)
 
         if (!response.ok) {
           setError(true)
@@ -54,9 +53,8 @@ export default function Page({
   if (!collection) return <div>Collection not found</div>
 
   return (
-    <EditOperations
-      collection={collection}
-      onCollectionUpdate={setCollection}
-    />
+    <CollectionProvider initialCollection={collection}>
+      <EditOperations collection={collection} />
+    </CollectionProvider>
   )
 }

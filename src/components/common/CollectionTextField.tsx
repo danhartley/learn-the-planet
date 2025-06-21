@@ -8,6 +8,7 @@ type Props = {
   type: ContentHandlerType
   notification?: string
   required?: boolean
+  sectionIndex?: number
 }
 
 export function CollectionTextField({
@@ -17,6 +18,7 @@ export function CollectionTextField({
   type,
   notification,
   required = false,
+  sectionIndex,
 }: Props) {
   const [inputValue, setInputValue] = useState('')
   const [minLength] = useState(3)
@@ -41,13 +43,15 @@ export function CollectionTextField({
     <section aria-labelledby="collection-field">
       <div>
         <h3 id="collection-field">
-          <label htmlFor={fieldText}>{`${fieldText}`}</label>
+          <label
+            htmlFor={`${fieldText}-${sectionIndex}`}
+          >{`${fieldText} ${sectionIndex}`}</label>
           <span>{required ? ' *' : ''}</span>
         </h3>
         <div className={`form-row ${type}`}>
           <input
             type="text"
-            id={fieldText}
+            id={`${fieldText}-${sectionIndex}`}
             value={inputValue}
             minLength={minLength}
             onChange={handleInputChange}

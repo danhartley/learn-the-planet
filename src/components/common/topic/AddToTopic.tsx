@@ -1,18 +1,16 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+import { useCollection } from '@/contexts/CollectionContext'
 
 import { SectionTypeSelector } from '@/components/common/topic/SectionTypeSelector'
 import { SectionComponentMap } from '@/components/common/topic/SectionComponentMap'
 
 import { getShortId } from '@/utils/strings'
 
-import { SectionType, ApiResponse, Topic, Taxon, NextCloudImage } from '@/types'
+import { SectionType, Topic, Taxon, NextCloudImage } from '@/types'
 
-type Props = {
-  setItems: Dispatch<SetStateAction<unknown[] | undefined>>
-  apiResponse: ApiResponse
-}
-
-export const CreateTopicCollection = ({ setItems, apiResponse }: Props) => {
+export const AddToTopic = () => {
+  const { collection, addItem, apiResponse } = useCollection()
   const [selectedOption, setSelectedOption] = useState<SectionType>('text')
   const [childItems, setChildItems] = useState<unknown[]>()
 
@@ -35,7 +33,7 @@ export const CreateTopicCollection = ({ setItems, apiResponse }: Props) => {
         break
     }
 
-    setItems([item])
+    if (collection) addItem(collection, item)
   }, [childItems])
 
   return (

@@ -338,7 +338,7 @@ export type Operation =
   | 'read'
   | 'update'
   | 'delete'
-  | 'update-collections'
+  | 'linked-collections'
   | 'update-items'
 
 export type ContentType = {

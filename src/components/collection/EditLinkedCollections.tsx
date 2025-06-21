@@ -2,39 +2,34 @@ import React, { useState } from 'react'
 
 import { CollectionSelector } from '@/components/collection/CollectionSelector'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
+import { useCollection } from '@/contexts/CollectionContext'
 
-import { Collection, CollectionSummary, ApiResponse } from '@/types'
+import { CollectionSummary } from '@/types'
 
 type Props = {
-  collection: Collection<unknown>
   collectionSummaries: CollectionSummary[]
-  handleLinkedCollectionsChange: (
-    updatedLinkedConnections: CollectionSummary[]
-  ) => void
-  apiResponse: ApiResponse
 }
 
-export const EditLinkedCollections = ({
-  collection,
-  collectionSummaries,
-  handleLinkedCollectionsChange,
-  apiResponse,
-}: Props) => {
+export const EditLinkedCollections = ({ collectionSummaries }: Props) => {
+  const { collection, updateLinkedCollections, apiResponse } = useCollection()
+
   const [linkedCollections, setLinkedCollections] = useState(
     collection?.collections?.map(collection => collection.name) || []
   )
+
+  if (!collection) return null
 
   // Exclude the current collection
   const permittedCollections = collectionSummaries.filter(
     c => c.id !== collection.id
   )
 
-  const handleChange = () => {
+  const handleChange = async () => {
     const collections = linkedCollections
       ?.map(name => collectionSummaries.find(cs => cs.name === name))
-      .filter(c => c !== undefined)
+      .filter(c => c !== undefined) as CollectionSummary[]
 
-    handleLinkedCollectionsChange(collections || [])
+    await updateLinkedCollections(collections || [])
   }
 
   return (
