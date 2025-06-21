@@ -29,7 +29,6 @@ type Props = {
 }
 
 export const CollectionUpdateCollectionFields = ({
-  operation,
   name,
   type,
   setName,
@@ -55,7 +54,6 @@ export const CollectionUpdateCollectionFields = ({
   }
 
   return (
-    // operation === 'update' && (
     <>
       <div className="group-block">
         <CollectionTextField
@@ -94,6 +92,5 @@ export const CollectionUpdateCollectionFields = ({
         </div>
       </section>
     </>
-    // )
   )
 }

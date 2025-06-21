@@ -1,5 +1,5 @@
 import React, { useState, Dispatch, SetStateAction, useEffect } from 'react'
-import { Operation, ContentHandlerType } from '@/types'
+import { ContentHandlerType } from '@/types'
 
 type Props = {
   fieldValue: string

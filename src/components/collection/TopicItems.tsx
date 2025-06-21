@@ -1,41 +1,17 @@
 'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { CollectionTopicSection } from '@/components/common/edit/CollectionTopicSection'
 import { CollectionTopicCloudImage } from '@/components/common/edit/CollectionTopicCloudImage'
 import { CollectionSectionExamples } from '@/components/common/taxon/CollectionSectionExamples'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
-
-import { Collection, Topic, ContentHandlerType, Operation } from '@/types'
+import { Collection, Topic } from '@/types'
 
 type Props = {
   collection: Collection<Topic>
-  operation: Operation
 }
 
-export const CollectionTopicUpdate = ({ collection, operation }: Props) => {
-  const {
-    setCollection,
-    setType,
-    setOperation,
-    setSelectedCollections,
-    setName,
-    setSlug,
-    setImageUrl,
-  } = useCollectionOperations()
-
-  useEffect(() => {
-    setCollection(collection)
-    setOperation(operation)
-    setSelectedCollections(collection.collections?.map(c => c.name) || [])
-    setType(collection.type as ContentHandlerType)
-    setName(collection.name)
-    setSlug(collection.slug)
-    setImageUrl(collection.imageUrl || '')
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [collection.id])
-
+export const TopicItems = ({ collection }: Props) => {
   return (
     <>
       {collection.items &&

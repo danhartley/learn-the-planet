@@ -5,6 +5,7 @@ import { OperationSelector } from '@/components/collection/OperationSelector'
 import { EditProperties } from '@/components/collection/EditProperties'
 import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
+import { TopicItems } from '@/components/collection/TopicItems'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
@@ -13,6 +14,8 @@ import {
   CollectionSummary,
   Operation,
   UpdateCollectionFieldsOptions,
+  Topic,
+  ContentHandlerType,
 } from '@/types'
 
 type Props = {
@@ -98,6 +101,10 @@ export const EditOperations = ({ collection, onCollectionUpdate }: Props) => {
           deleteCollection={() => deleteCollection(collection)}
           apiResponse={apiResponse}
         />
+      )}
+
+      {collection.type === ('topic' as ContentHandlerType) && (
+        <TopicItems collection={collection as Collection<Topic>} />
       )}
     </>
   )

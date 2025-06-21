@@ -16,7 +16,7 @@ export const CollectionTopicSection = ({ collection, section }: Props) => {
   const [sectionText, setSectionText] = useState(section.text)
   const [changesToSave, setChangesToSave] = useState(false)
 
-  const { updateCollectionItem, apiResponse } = useCollectionOperations()
+  const { apiResponse, updateCollectionItem } = useCollectionOperations()
 
   useEffect(() => {
     setChangesToSave(true)
@@ -24,7 +24,7 @@ export const CollectionTopicSection = ({ collection, section }: Props) => {
 
   const saveChanges = () => {
     section.text = sectionText
-    // updateCollectionItem(collection, section)
+    updateCollectionItem(collection, section)
   }
 
   return (

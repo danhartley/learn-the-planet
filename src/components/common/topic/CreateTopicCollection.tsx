@@ -8,16 +8,11 @@ import { getShortId } from '@/utils/strings'
 import { SectionType, ApiResponse, Topic, Taxon, NextCloudImage } from '@/types'
 
 type Props = {
-  items: unknown[]
   setItems: Dispatch<SetStateAction<unknown[] | undefined>>
   apiResponse: ApiResponse
 }
 
-export const CreateTopicCollection = ({
-  items,
-  setItems,
-  apiResponse,
-}: Props) => {
+export const CreateTopicCollection = ({ setItems, apiResponse }: Props) => {
   const [selectedOption, setSelectedOption] = useState<SectionType>('text')
   const [childItems, setChildItems] = useState<unknown[]>()
 

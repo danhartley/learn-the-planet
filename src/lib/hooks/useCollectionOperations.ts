@@ -386,7 +386,6 @@ export const useCollectionOperations = () => {
     operation,
     deleteCollection,
     apiResponse,
-    updateLinkedCollections,
     slug,
     setSlug,
     setCollectionsFields,

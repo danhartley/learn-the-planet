@@ -26,7 +26,7 @@ export default function MultiSelectList({
     const value = e.target.value
     const newSelection = selectedValues?.includes(value)
       ? selectedValues.filter(v => v !== value)
-      : [...selectedValues!!, value]
+      : [...selectedValues, value]
 
     onSelectionChange(newSelection)
   }

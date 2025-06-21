@@ -58,7 +58,6 @@ export const CollectionTopicCloudImage = ({
         ? { ...img, caption: captionValue, alt: altValue }
         : img
     )
-
     updateCollectionItem(collection, section)
   }
 

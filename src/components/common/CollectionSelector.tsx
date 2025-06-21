@@ -2,7 +2,6 @@
 import React, { useRef, Dispatch } from 'react'
 
 import MultiSelectList from '@/components/common/MultiSelectList'
-import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { ApiResponse } from '@/types'
 
@@ -18,7 +17,6 @@ export const CollectionSelector = ({
   options,
   selectedCollections,
   setSelectedCollections,
-  apiResponse,
 }: Props) => {
   const checkboxRefsRef = useRef<Record<string, HTMLInputElement | null>>({})
 
