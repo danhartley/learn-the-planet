@@ -41,7 +41,7 @@ export const EditOperations = ({ collection }: Props) => {
           collection.type === ('topic' as ContentHandlerType) && <TopicItems />}
       </>
 
-      <AddToTopic />
+      {collection.type === ('topic' as ContentHandlerType) && <AddToTopic />}
     </>
   )
 }

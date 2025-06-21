@@ -44,14 +44,14 @@ export function CollectionTextField({
       <div>
         <h3 id="collection-field">
           <label
-            htmlFor={`${fieldText}-${sectionIndex}`}
+            htmlFor={`${fieldText}-${sectionIndex}-${fieldValue}`}
           >{`${fieldText} ${sectionIndex}`}</label>
           <span>{required ? ' *' : ''}</span>
         </h3>
         <div className={`form-row ${type}`}>
           <input
             type="text"
-            id={`${fieldText}-${sectionIndex}`}
+            id={`${fieldText}-${sectionIndex}-${fieldValue}`}
             value={inputValue}
             minLength={minLength}
             onChange={handleInputChange}

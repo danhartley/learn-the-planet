@@ -1,16 +1,15 @@
-import React, { Dispatch, SetStateAction, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+
+import { useCollection } from '@/contexts/CollectionContext'
 
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { ImageUpload } from '@/components/image/ImageUpload'
 
-import { ApiResponse, NextCloudImage } from '@/types'
+import { Topic, NextCloudImage } from '@/types'
+import { getShortId } from '@/utils/strings'
 
-type Props = {
-  setItems: Dispatch<SetStateAction<unknown> | undefined>
-  apiResponse: ApiResponse
-}
-
-export const AddImageSection = ({ setItems, apiResponse }: Props) => {
+export const AddToTopicImage = () => {
+  const { collection, addItem, apiResponse } = useCollection()
   const [images, setImages] = useState<NextCloudImage[] | undefined>()
   const [image, setImage] = useState<NextCloudImage | undefined>()
 
@@ -23,7 +22,12 @@ export const AddImageSection = ({ setItems, apiResponse }: Props) => {
   }, [image])
 
   const saveImages = () => {
-    setItems(images)
+    const item = {
+      id: getShortId(),
+      images: images as NextCloudImage[],
+    } as Topic
+
+    if (collection) addItem(collection, item)
   }
 
   return (

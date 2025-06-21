@@ -1,18 +1,14 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
-import React, { Dispatch, SetStateAction } from 'react'
+import { useCollection } from '@/contexts/CollectionContext'
 
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { ApiResponse } from '@/types'
-import { textToArray } from '@/utils/strings'
+import { Topic } from '@/types'
+import { textToArray, getShortId } from '@/utils/strings'
 
-type Props = {
-  setItems: Dispatch<SetStateAction<unknown[] | undefined>>
-  apiResponse: ApiResponse
-}
-
-export const AddTextSection = ({ setItems, apiResponse }: Props) => {
+export const AddToTopicText = () => {
+  const { collection, addItem, apiResponse } = useCollection()
   const [text, setText] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -21,7 +17,13 @@ export const AddTextSection = ({ setItems, apiResponse }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setItems(textToArray(text))
+
+    const item = {
+      id: getShortId(),
+      text: textToArray(text) as string[],
+    } as Topic
+
+    if (collection) addItem(collection, item)
   }
 
   return (

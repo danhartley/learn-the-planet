@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useCollection } from '@/contexts/CollectionContext'
 
 import { SectionTypeSelector } from '@/components/common/topic/SectionTypeSelector'
-import { SectionComponentMap } from '@/components/common/topic/SectionComponentMap'
+import { AddToTopicMap } from '@/components/common/topic/AddToTopicMap'
 
 import { getShortId } from '@/utils/strings'
 
@@ -43,7 +43,7 @@ export const AddToTopic = () => {
         setSelectedOption={setSelectedOption}
       />
 
-      <SectionComponentMap
+      <AddToTopicMap
         sectionType={selectedOption}
         setItems={setChildItems}
         apiResponse={apiResponse}

@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 
 import Link from 'next/link'
 
-import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
+import { CollectionItemPicker } from '@/components/archived/CollectionItemPicker'
 import { CollectionUpdateCollectionReferences } from '@/components/archived/CollectionUpdateCollectionReferences'
 import { CollectionUpdateCollectionFields } from '@/components/common/edit/CollectionUpdateCollectionFields'
 import { CollectionTopicUpdate } from '@/components/common/edit/CollectionTopicUpdate'

@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react'
 
-import { CollectionItemTermPicker } from './CollectionItemTermPicker'
-import { CollectionItemTraitPicker } from './CollectionItemTraitPicker'
-import { InatTaxonPicker } from '@/components/taxon/InatTaxonPicker'
+import { CollectionItemTermPicker } from '@/components/common/CollectionItemTermPicker'
+import { CollectionItemTraitPicker } from '@/components/common/CollectionItemTraitPicker'
+import { AddTaxa } from '@/components/taxon/AddTaxa'
 import { AddToTopic } from '@/components/common/topic/AddToTopic'
 
 import { ContentHandlerType, Operation, Collection, ApiResponse } from '@/types'
@@ -23,7 +23,7 @@ type Props = {
   apiResponse: ApiResponse
 }
 
-export function CollectionItemPicker({
+export function Items({
   type,
   setItems,
   items,
@@ -34,7 +34,7 @@ export function CollectionItemPicker({
     [K in ContentHandlerType]: React.ComponentType<ComponentProps>
   } = {
     term: CollectionItemTermPicker as React.ComponentType<ComponentProps>,
-    taxon: InatTaxonPicker as React.ComponentType<ComponentProps>,
+    taxon: AddTaxa as React.ComponentType<ComponentProps>,
     topic: AddToTopic as React.ComponentType<ComponentProps>,
     trait: CollectionItemTraitPicker as React.ComponentType<ComponentProps>,
   }

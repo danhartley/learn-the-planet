@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { CollectionNewNameField } from '@/components/archived/CollectionNewNameField'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { CollectionType } from '@/components/common/CollectionType'
-import { CollectionItemPicker } from '@/components/common/CollectionItemPicker'
+import { CollectionItemPicker } from '@/components/archived/CollectionItemPicker'
 import { CollectionSelector } from '@/components/common/CollectionSelector'
 
 import { CollectionTopicUpdate } from '@/components/common/edit/CollectionTopicUpdate'
