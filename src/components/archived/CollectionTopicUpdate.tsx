@@ -1,9 +1,9 @@
 'use client'
 import React, { useEffect } from 'react'
 
-import { CollectionTopicSection } from '@/components/common/edit/CollectionTopicSection'
-import { CollectionTopicCloudImage } from '@/components/common/edit/CollectionTopicCloudImage'
-import { ExampleTaxa } from '@/components/taxon/ExampleTaxa'
+import { CollectionTopicSection } from '@/components/archived/edit/CollectionTopicSection'
+import { CollectionTopicCloudImage } from '@/components/archived/edit/CollectionTopicCloudImage'
+import { ExampleTaxa } from '@/components/collection/topic/TopicExamples'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 

@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
-import { AddTaxa } from '@/components/taxon/AddTaxa'
+import { AddTaxa } from '@/components/collection/taxon/add/AddTaxa'
 
-import { Topic, Operation } from '@/types'
+import { Topic, Taxon, Operation } from '@/types'
 import { getShortId } from '@/utils/strings'
 
 export const AddToTopicTaxa = () => {
-  const { collection, addItem, apiResponse } = useCollection()
-  const [items, setItems] = useState<unknown[] | undefined>()
+  const { collection, addItem } = useCollection()
+  const [items, setItems] = useState<Taxon[] | undefined>()
 
   useEffect(() => {
     if (collection && items) {
@@ -26,9 +26,9 @@ export const AddToTopicTaxa = () => {
     <section aria-labelledby="new-section">
       <h2 id="new-section">Add taxa</h2>
       <AddTaxa
+        items={items}
         setItems={setItems}
         operation={'create' as Operation}
-        apiResponse={apiResponse}
       />
     </section>
   )

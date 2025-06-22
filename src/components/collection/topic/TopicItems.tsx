@@ -3,9 +3,9 @@ import React from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
-import { TopicSections } from '@/components/collection/TopicSections'
-import { TopicCloudImage } from '@/components/collection/TopicCloudImage'
-import { ExampleTaxa } from '@/components/taxon/ExampleTaxa'
+import { TopicSections } from '@/components/collection/topic/TopicSections'
+import { TopicCloudImage } from '@/components/collection/topic/TopicCloudImage'
+import { TopicExamples } from '@/components/collection/topic/TopicExamples'
 
 import { Collection, Topic } from '@/types'
 
@@ -37,7 +37,7 @@ export const TopicItems = () => {
                 )
               })}
               {section.examples && (
-                <ExampleTaxa
+                <TopicExamples
                   collection={topicCollection}
                   section={section}
                   sectionIndex={index + 1}

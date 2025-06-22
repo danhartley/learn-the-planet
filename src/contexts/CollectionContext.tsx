@@ -24,6 +24,11 @@ type CollectionContextType = {
     collection: Collection<unknown>,
     fields: UpdateCollectionFieldsOptions
   ) => Promise<void>
+  getCollectionSummaries: () => Promise<CollectionSummary[]>
+  updateCollectionItems: (
+    collection: Collection<unknown>,
+    items: unknown[]
+  ) => Promise<void>
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -278,6 +283,52 @@ export const CollectionProvider = ({
     }
   }
 
+  const getCollectionSummaries = async (): Promise<CollectionSummary[]> => {
+    const response = await fetch('/api/collection-summaries')
+    return response.json()
+  }
+
+  const updateCollectionItems = async (
+    collection: Collection<unknown>,
+    items: unknown[]
+  ) => {
+    // const transformedItems =
+    //   collection.type === 'taxon'
+    //     ? generateGenusAndSpeciesFields(items as Taxon[])
+    //     : items
+
+    try {
+      const url = `/api/collection/update-items/${collection.slug}-${collection.shortId}`
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(items),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      await response.json()
+
+      setApiResponse({
+        success: true,
+        message: 'Collection items update succeeded.',
+      })
+    } catch (error) {
+      console.error('Failed to update collection:', error)
+      setApiResponse({
+        success: false,
+        message: 'Collection items update failed.',
+      })
+    }
+  }
+
   return (
     <CollectionContext.Provider
       value={{
@@ -291,6 +342,8 @@ export const CollectionProvider = ({
         updateLinkedCollections,
         deleteCollection,
         updateCollectionFields,
+        getCollectionSummaries,
+        updateCollectionItems,
       }}
     >
       {children}

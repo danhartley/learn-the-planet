@@ -1,31 +1,30 @@
-import React, { useState, Dispatch, SetStateAction } from 'react'
+import React, { useState } from 'react'
 
-import { ItemInput } from '@/components/common/item-input/ItemInput'
+import { useCollection } from '@/contexts/CollectionContext'
+
+import { ItemInput } from '@/components/collection/item/ItemInput'
 import { validateTermJson } from '@/validation/term-validation'
 import { ValidationResult, Term } from '@/types'
 
-type Props = {
-  setItems: Dispatch<SetStateAction<Term[]> | undefined>
-  items: string
-}
-
-export function CollectionItemTermPicker({ setItems, items = '' }: Props) {
-  const [jsonContent, setJsonContent] = useState(items)
+export function TermJson() {
+  const { collection, updateCollectionItems, apiResponse } = useCollection()
+  const [jsonContent, setJsonContent] = useState<string | undefined>('')
   const [message, setMessage] = useState({
     success: false,
     message: '',
   })
 
   const isValidTerm = () => {
-    const result: ValidationResult<Term> = validateTermJson(jsonContent)
+    const result: ValidationResult<Term> = validateTermJson(jsonContent || '')
     const msg = result.isValid
       ? 'Your term data are valid'
       : 'Your term data are invalid'
     setMessage({ success: result.isValid, message: msg })
 
-    if (result.isValid && result.parsedData)
-      setItems(result.parsedData as Term[])
-    else console.log(result.errors)
+    if (result.isValid && result.parsedData) {
+      if (collection)
+        updateCollectionItems(collection, result.parsedData as Term[])
+    } else console.log(result.errors)
   }
 
   return (

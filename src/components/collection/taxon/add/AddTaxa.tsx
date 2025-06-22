@@ -1,21 +1,21 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useState, useEffect } from 'react'
 
-import { TaxonAutocomplete } from '@/components/taxon/TaxonAutocomplete'
+import { useCollection } from '@/contexts/CollectionContext'
 
-import { Taxon, Operation, ApiResponse } from '@/types'
+import { TaxonAutocomplete } from '@/components/collection/taxon/TaxonAutocomplete'
+
+import { Taxon, Operation } from '@/types'
 
 type Props = {
-  setItems: Dispatch<SetStateAction<unknown[] | undefined>>
-  items?: string
+  setItems: Dispatch<SetStateAction<Taxon[] | undefined>>
+  items: Taxon[] | undefined
   operation?: Operation
-  apiResponse: ApiResponse
 }
 
-export const AddTaxa = ({ setItems, items, operation, apiResponse }: Props) => {
+export const AddTaxa = ({ items, setItems, operation }: Props) => {
+  const { apiResponse } = useCollection()
   const [changesToSave, setChangesToSave] = useState(false)
-  const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
-    items ? JSON.parse(items) : []
-  )
+  const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(items || [])
 
   useEffect(() => {
     setChangesToSave(true)
@@ -47,6 +47,7 @@ export const AddTaxa = ({ setItems, items, operation, apiResponse }: Props) => {
       saveChanges={saveChanges}
       apiResponse={apiResponse}
       operation={operation}
+      sectionIndex={1}
     />
   )
 }

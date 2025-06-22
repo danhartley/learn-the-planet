@@ -1,31 +1,33 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+import { TaxonAutocomplete } from '@/components/collection/taxon/TaxonAutocomplete'
 
-import { TaxonAutocomplete } from '@/components/taxon/TaxonAutocomplete'
-
-import { Collection, Topic, Taxon, Operation } from '@/types'
+import { Taxon, Operation, ApiResponse } from '@/types'
 
 type Props = {
-  collection: Collection<Topic>
-  section: Topic
-  sectionIndex: number
+  setItems: Dispatch<SetStateAction<unknown[] | undefined>>
+  items?: string
+  operation?: Operation
+  apiResponse: ApiResponse
 }
 
-export const ExampleTaxa = ({ collection, section, sectionIndex }: Props) => {
+export const InatTaxonPicker = ({
+  setItems,
+  items,
+  operation,
+  apiResponse,
+}: Props) => {
   const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
-    section?.examples || []
+    items ? JSON.parse(items) : []
   )
-  const { updateCollectionItem, apiResponse } = useCollectionOperations()
 
   useEffect(() => {
     setChangesToSave(true)
-  }, [section?.examples])
+  }, [selectedTaxa])
 
-  const saveChanges = () => {
-    section.examples = selectedTaxa || []
-    updateCollectionItem(collection, section)
+  const saveChanges = async () => {
+    setItems(selectedTaxa)
   }
 
   const handleTaxonToggle = (taxon: Taxon) => {
@@ -49,8 +51,7 @@ export const ExampleTaxa = ({ collection, section, sectionIndex }: Props) => {
       changesToSave={changesToSave}
       saveChanges={saveChanges}
       apiResponse={apiResponse}
-      operation={'update-items' as Operation}
-      sectionIndex={sectionIndex}
+      operation={operation}
     />
   )
 }

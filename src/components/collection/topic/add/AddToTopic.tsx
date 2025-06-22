@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
-import { SectionTypeSelector } from '@/components/common/topic/SectionTypeSelector'
-import { AddToTopicMap } from '@/components/common/topic/AddToTopicMap'
+import { SectionTypeSelector } from '@/components/collection/topic/add/SectionTypeSelector'
+import { AddToTopicMap } from '@/components/collection/topic/add/AddToTopicMap'
 
 import { getShortId } from '@/utils/strings'
 

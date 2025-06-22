@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react'
 
-import { CollectionSelector } from '@/components/common/CollectionSelector'
+import { CollectionSelector } from '@/components/archived/CollectionSelector'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import {

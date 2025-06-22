@@ -5,11 +5,11 @@ import Link from 'next/link'
 
 import { CollectionItemPicker } from '@/components/archived/CollectionItemPicker'
 import { CollectionUpdateCollectionReferences } from '@/components/archived/CollectionUpdateCollectionReferences'
-import { CollectionUpdateCollectionFields } from '@/components/common/edit/CollectionUpdateCollectionFields'
+import { CollectionUpdateCollectionFields } from '@/components/archived/edit/CollectionUpdateCollectionFields'
 import { CollectionTopicUpdate } from '@/components/common/edit/CollectionTopicUpdate'
 import { CollectionUpdateOperationSelector } from '@/components/archived/CollectionUpdateOperationSelector'
 import { CollectionUpdateDelete } from '@/components/archived/CollectionUpdateDelete'
-import { CollectionSaveUpdatedItems } from '@/components/common/edit/CollectionSaveUpdatedItems'
+import { CollectionSaveUpdatedItems } from '@/components/archived/CollectionSaveUpdatedItems'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 

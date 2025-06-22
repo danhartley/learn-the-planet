@@ -5,8 +5,8 @@ import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { ContentHandlerType, ApiResponse } from '@/types'
 
 interface ItemInputProps {
-  jsonContent: string
-  onJsonContentChange: Dispatch<SetStateAction<string>>
+  jsonContent: string | undefined
+  onJsonContentChange: Dispatch<SetStateAction<string | undefined>>
   setMessage: Dispatch<SetStateAction<ApiResponse>>
   placeholder?: string
   message: ApiResponse

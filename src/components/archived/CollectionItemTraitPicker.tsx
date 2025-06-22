@@ -1,6 +1,6 @@
 import React, { useState, Dispatch, SetStateAction } from 'react'
 
-import { ItemInput } from '@/components/common/item-input/ItemInput'
+import { ItemInput } from '@/components/collection/item/ItemInput'
 import { validateTraitJson } from '@/validation/trait-validation'
 import { ValidationResult, Trait, Collection } from '@/types'
 

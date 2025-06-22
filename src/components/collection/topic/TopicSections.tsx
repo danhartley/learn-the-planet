@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
-import { CollectionTopicText } from '@/components/common/edit/CollectionTopicText'
+import { TopicText } from '@/components/collection/topic/add/TopicText'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { Collection, Topic } from '@/types'
@@ -10,9 +10,10 @@ import { Collection, Topic } from '@/types'
 type Props = {
   collection: Collection<Topic>
   section: Topic
+  sectionIndex: number
 }
 
-export const CollectionTopicSection = ({ collection, section }: Props) => {
+export const TopicSections = ({ collection, section, sectionIndex }: Props) => {
   const [sectionText, setSectionText] = useState(section.text)
   const [changesToSave, setChangesToSave] = useState(false)
 
@@ -30,10 +31,12 @@ export const CollectionTopicSection = ({ collection, section }: Props) => {
   return (
     <div className="group-block">
       {sectionText && (
-        <CollectionTopicText
+        <TopicText
+          key={section.id}
           id={section.id}
           text={sectionText}
           setSectionText={setSectionText}
+          sectionIndex={sectionIndex}
         />
       )}
       {!!sectionText && (

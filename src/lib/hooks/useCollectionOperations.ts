@@ -49,14 +49,14 @@ export const useCollectionOperations = () => {
   const [collectionsFields, setCollectionsFields] =
     useState<UpdateCollectionFieldsOptions>()
 
-  useEffect(() => {
-    const getSummaries = async () => {
-      const summaries: CollectionSummary[] = await getCollectionSummaries()
-      setCollectionSummaries(summaries)
-    }
+  // useEffect(() => {
+  //   const getSummaries = async () => {
+  //     const summaries: CollectionSummary[] = await getCollectionSummaries()
+  //     setCollectionSummaries(summaries)
+  //   }
 
-    getSummaries()
-  }, [])
+  //   getSummaries()
+  // }, [])
 
   const router = useRouter()
 

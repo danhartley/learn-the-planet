@@ -193,7 +193,7 @@ export const TaxonAutocomplete = ({
             ))}
           </form>
 
-          {['create', 'update-items'].includes(operation as Operation) && (
+          {
             <div className="form-row">
               <button
                 type="button"
@@ -205,7 +205,7 @@ export const TaxonAutocomplete = ({
               </button>
               <ApiResponseMessage apiResponse={apiResponse} />
             </div>
-          )}
+          }
         </section>
       )}
     </section>

@@ -1,27 +1,46 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+import Link from 'next/link'
+
+import { useCollection } from '@/contexts/CollectionContext'
 
 import { OperationSelector } from '@/components/collection/OperationSelector'
 import { EditProperties } from '@/components/collection/EditProperties'
 import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
-import { TopicItems } from '@/components/collection/TopicItems'
-import { AddToTopic } from '@/components/common/topic/AddToTopic'
+import { TopicItems } from '@/components/collection/topic/TopicItems'
+import { AddToItems } from '@/components/collection/AddToItems'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
-
-import { Collection, Operation, ContentHandlerType } from '@/types'
+import {
+  Collection,
+  Operation,
+  CollectionSummary,
+  ContentHandlerType,
+} from '@/types'
 
 type Props = {
   collection: Collection<unknown>
 }
 
 export const EditOperations = ({ collection }: Props) => {
+  const { getCollectionSummaries } = useCollection()
   const [operation, setOperation] = useState<Operation>('update-items')
-  const { collectionSummaries } = useCollectionOperations()
+  const [collectionSummaries, setCollectionSummaries] =
+    useState<CollectionSummary[]>()
+
+  useEffect(() => {
+    getCollectionSummaries().then(setCollectionSummaries)
+  }, [])
 
   return (
     <>
+      <h1 id="edit-options">
+        <Link href={`/collection/${collection.slug}-${collection.shortId}`}>
+          {collection.name}
+        </Link>
+      </h1>
+
       <OperationSelector
         operation={operation}
         setOperation={setOperation}
@@ -31,17 +50,18 @@ export const EditOperations = ({ collection }: Props) => {
       <>
         {operation === ('update' as Operation) && <EditProperties />}
 
-        {operation === ('linked-collections' as Operation) && (
-          <EditLinkedCollections collectionSummaries={collectionSummaries} />
-        )}
+        {operation === ('linked-collections' as Operation) &&
+          collectionSummaries && (
+            <EditLinkedCollections collectionSummaries={collectionSummaries} />
+          )}
 
         {operation === ('delete' as Operation) && <DeleteCollection />}
-
-        {operation === ('update-items' as Operation) &&
-          collection.type === ('topic' as ContentHandlerType) && <TopicItems />}
       </>
 
-      {collection.type === ('topic' as ContentHandlerType) && <AddToTopic />}
+      {operation === ('update-items' as Operation) &&
+        collection.type === ('topic' as ContentHandlerType) && <TopicItems />}
+
+      <AddToItems />
     </>
   )
 }

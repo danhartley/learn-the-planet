@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react'
 
-import { AddToTopicImage } from '@/components/common/topic/AddToTopicImage'
-import { AddToTopicTaxa } from '@/components/common/topic/AddToTopicTaxa'
-import { AddToTopicText } from '@/components/common/topic/AddToTopicText'
+import { AddToTopicImage } from '@/components/collection/topic/add/AddToTopicImage'
+import { AddToTopicTaxa } from '@/components/collection/topic/add/AddToTopicTaxa'
+import { AddToTopicText } from '@/components/collection/topic/add/AddToTopicText'
 
 import { SectionType, ApiResponse } from '@/types'
 
