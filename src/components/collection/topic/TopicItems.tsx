@@ -29,7 +29,6 @@ export const TopicItems = () => {
                 return (
                   <TopicCloudImage
                     key={img.src}
-                    collection={topicCollection}
                     section={section}
                     image={img}
                     sectionIndex={index + 1}

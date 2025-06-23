@@ -3,34 +3,26 @@ import { useState, useEffect } from 'react'
 
 import { CldImage } from 'next-cloudinary'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+import { useCollection } from '@/contexts/CollectionContext'
 
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { ImageUpload } from '@/components/image/ImageUpload'
 
-import { Collection, Topic, NextCloudImage } from '@/types'
+import { Topic, NextCloudImage } from '@/types'
 
 type Props = {
-  collection: Collection<Topic>
   section: Topic
   image: NextCloudImage
   sectionIndex: number
 }
 
-export const TopicCloudImage = ({
-  collection,
-  section,
-  image,
-  sectionIndex,
-}: Props) => {
+export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
+  const { collection, updateCollectionItem, apiResponse } = useCollection()
   const [captionValue, setCaption] = useState<string>(image.caption)
   const [altValue, setAlt] = useState(image.alt)
   const [changesToSave, setChangesToSave] = useState(false)
   const [cloudImage, setCloudImage] = useState<NextCloudImage | undefined>()
-
-  const { apiResponse, updateCollectionItem, setCollection } =
-    useCollectionOperations()
 
   const sizes = `(max-width: 768px) 100vw,
            (max-width: 1200px) 50vw,
@@ -43,29 +35,26 @@ export const TopicCloudImage = ({
   }, [captionValue, altValue])
 
   useEffect(() => {
-    const updateImages = async () => {
-      if (cloudImage) {
-        section.images = [...(section?.images ?? []), cloudImage]
-        await updateCollectionItem(collection, section)
-        setCollection(collection)
-      }
+    if (cloudImage) {
+      section.images = [...(section?.images ?? []), cloudImage]
     }
-    updateImages()
-    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cloudImage?.src])
 
-  const saveChanges = () => {
+  const saveChanges = async () => {
     section.images = section.images?.map(img =>
       img.src === image.src
         ? { ...img, caption: captionValue, alt: altValue }
         : img
     )
-    updateCollectionItem(collection, section)
+    if (cloudImage) {
+      section.images = [...(section?.images ?? []), cloudImage]
+      if (collection) await updateCollectionItem(collection, section)
+    }
   }
 
   const removeImage = () => {
     section.images = section.images?.filter(img => img.src !== image.src)
-    updateCollectionItem(collection, section)
+    if (collection) updateCollectionItem(collection, section)
   }
 
   return (

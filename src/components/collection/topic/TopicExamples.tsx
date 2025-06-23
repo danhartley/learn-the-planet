@@ -49,7 +49,6 @@ export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
       changesToSave={changesToSave}
       saveChanges={saveChanges}
       apiResponse={apiResponse}
-      operation={'update-items' as Operation}
       sectionIndex={sectionIndex}
     />
   )

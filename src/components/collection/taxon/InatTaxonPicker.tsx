@@ -51,7 +51,7 @@ export const InatTaxonPicker = ({
       changesToSave={changesToSave}
       saveChanges={saveChanges}
       apiResponse={apiResponse}
-      operation={operation}
+      sectionIndex={1}
     />
   )
 }

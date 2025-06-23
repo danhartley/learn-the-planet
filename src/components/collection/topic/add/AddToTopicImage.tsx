@@ -36,7 +36,7 @@ export const AddToTopicImage = () => {
       <div className="form-row">
         <ImageUpload setImage={setImage} />
         <div className="form-row">
-          <button onClick={saveImages}>Save images</button>
+          <button onClick={saveImages}>Save image</button>
           <ApiResponseMessage apiResponse={apiResponse} />
         </div>
       </div>

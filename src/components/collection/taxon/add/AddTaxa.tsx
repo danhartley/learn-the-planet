@@ -46,7 +46,6 @@ export const AddTaxa = ({ items, setItems, operation }: Props) => {
       changesToSave={changesToSave}
       saveChanges={saveChanges}
       apiResponse={apiResponse}
-      operation={operation}
       sectionIndex={1}
     />
   )

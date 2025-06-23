@@ -42,7 +42,7 @@ export const TopicText = ({
     !!text && (
       <form key={id}>
         <h2>
-          <label htmlFor={id}>Text</label>
+          <label htmlFor={id}>Text {sectionIndex}</label>
         </h2>
         <textarea
           id={id}

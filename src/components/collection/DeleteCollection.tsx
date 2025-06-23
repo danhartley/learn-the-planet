@@ -14,7 +14,7 @@ export const DeleteCollection = () => {
 
   useEffect(() => {
     if (apiResponse.success) {
-      router.push('/collections')
+      // router.push('/collections')
     }
   }, [apiResponse.success, router])
 

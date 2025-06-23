@@ -14,7 +14,6 @@ interface TaxonAutocompleteProps {
   onTaxonToggle: (taxon: Taxon) => void
   changesToSave: boolean
   saveChanges: () => void
-  operation: Operation | undefined
   apiResponse: ApiResponse
   sectionIndex: number
 }
@@ -24,7 +23,6 @@ export const TaxonAutocomplete = ({
   onTaxonToggle,
   changesToSave,
   saveChanges,
-  operation,
   apiResponse,
   sectionIndex,
 }: TaxonAutocompleteProps) => {

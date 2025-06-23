@@ -29,6 +29,10 @@ type CollectionContextType = {
     collection: Collection<unknown>,
     items: unknown[]
   ) => Promise<void>
+  updateCollectionItem: (
+    collection: Collection<unknown>,
+    updatedItem: unknown
+  ) => Promise<void>
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -292,10 +296,19 @@ export const CollectionProvider = ({
     collection: Collection<unknown>,
     items: unknown[]
   ) => {
-    // const transformedItems =
-    //   collection.type === 'taxon'
-    //     ? generateGenusAndSpeciesFields(items as Taxon[])
-    //     : items
+    if (!collection || !items) return
+
+    // Optimistic update
+    const previousCollection = collection
+    setCollection(prev =>
+      prev
+        ? {
+            ...prev,
+            items: items,
+            itemCount: items.length,
+          }
+        : null
+    )
 
     try {
       const url = `/api/collection/update-items/${collection.slug}-${collection.shortId}`
@@ -309,12 +322,19 @@ export const CollectionProvider = ({
 
       if (!response.ok) {
         const errorData = await response.json()
+
+        // Revert optimistic update on error
+        setCollection(previousCollection)
+
         throw new Error(
           errorData.error || `HTTP error! status: ${response.status}`
         )
       }
 
-      await response.json()
+      const updatedCollection = await response.json()
+
+      // Update with server response (in case server made additional changes)
+      setCollection(updatedCollection)
 
       setApiResponse({
         success: true,
@@ -322,9 +342,79 @@ export const CollectionProvider = ({
       })
     } catch (error) {
       console.error('Failed to update collection:', error)
+
+      // Ensure revert on any error (in case it wasn't caught above)
+      setCollection(previousCollection)
+
       setApiResponse({
         success: false,
         message: 'Collection items update failed.',
+      })
+    }
+  }
+
+  const updateCollectionItem = async (
+    collection: Collection<unknown>,
+    updatedItem: unknown
+  ) => {
+    if (!collection || !updatedItem) return
+
+    const itemId = (updatedItem as { id: string }).id
+    if (!itemId) return
+
+    // Optimistic update
+    const previousCollection = collection
+    setCollection(prev =>
+      prev && prev.items
+        ? {
+            ...prev,
+            items: prev.items.map(item =>
+              (item as { id: string }).id === itemId ? updatedItem : item
+            ),
+          }
+        : prev
+    )
+
+    try {
+      const url = `/api/collection/update-item/${collection.slug}-${collection.shortId}-${itemId}`
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedItem),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+
+        // Revert optimistic update on error
+        setCollection(previousCollection)
+
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const updatedCollection = await response.json()
+
+      // Update with server response (in case server made additional changes)
+      setCollection(updatedCollection)
+
+      setApiResponse({
+        success: true,
+        message: 'Collection item update succeeded.',
+      })
+    } catch (error) {
+      console.error('Failed to update collection:', error)
+
+      // Ensure revert on any error (in case it wasn't caught above)
+      setCollection(previousCollection)
+
+      setApiResponse({
+        success: false,
+        message: 'Collection item update failed.',
       })
     }
   }
@@ -344,6 +434,7 @@ export const CollectionProvider = ({
         updateCollectionFields,
         getCollectionSummaries,
         updateCollectionItems,
+        updateCollectionItem,
       }}
     >
       {children}
