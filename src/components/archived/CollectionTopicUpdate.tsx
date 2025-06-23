@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 
 import { CollectionTopicSection } from '@/components/archived/edit/CollectionTopicSection'
 import { CollectionTopicCloudImage } from '@/components/archived/edit/CollectionTopicCloudImage'
-import { ExampleTaxa } from '@/components/collection/topic/TopicExamples'
+import { TopicExamples } from '@/components/collection/topic/TopicExamples'
 
 import { useCollectionOperations } from '@/hooks/useCollectionOperations'
 
@@ -39,7 +39,7 @@ export const CollectionTopicUpdate = ({ collection, operation }: Props) => {
   return (
     <>
       {collection.items &&
-        collection.items.map(section => {
+        collection.items.map((section, sectionIndex) => {
           return (
             <React.Fragment key={section.id}>
               <CollectionTopicSection
@@ -58,7 +58,11 @@ export const CollectionTopicUpdate = ({ collection, operation }: Props) => {
                 )
               })}
               {section.examples && (
-                <ExampleTaxa collection={collection} section={section} />
+                <TopicExamples
+                  collection={collection}
+                  section={section}
+                  sectionIndex={sectionIndex}
+                />
               )}
             </React.Fragment>
           )

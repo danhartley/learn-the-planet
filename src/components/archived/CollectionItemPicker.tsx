@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction } from 'react'
 import { CollectionItemTermPicker } from './CollectionItemTermPicker'
 import { CollectionItemTraitPicker } from './CollectionItemTraitPicker'
 import { InatTaxonPicker } from '@/components/collection/taxon/InatTaxonPicker'
-import { AddToTopic } from '@/components/common/topic/AddToTopic'
+import { AddToTopic } from '@/components/collection/topic/add/AddToTopic'
 
 import { ContentHandlerType, Operation, Collection, ApiResponse } from '@/types'
 
