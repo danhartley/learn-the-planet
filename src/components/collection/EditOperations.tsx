@@ -19,12 +19,13 @@ import {
   ContentHandlerType,
 } from '@/types'
 
-type Props = {
-  collection: Collection<unknown>
-}
+// type Props = {
+//   collection: Collection<unknown>
+// }
 
-export const EditOperations = ({ collection }: Props) => {
-  const { getCollectionSummaries } = useCollection()
+// export const EditOperations = ({ collection }: Props) => {
+export const EditOperations = () => {
+  const { collection, getCollectionSummaries } = useCollection()
   const [operation, setOperation] = useState<Operation>('update-items')
   const [collectionSummaries, setCollectionSummaries] =
     useState<CollectionSummary[]>()
@@ -36,17 +37,15 @@ export const EditOperations = ({ collection }: Props) => {
   return (
     <>
       <h1 id="edit-options">
-        <Link href={`/collection/${collection.slug}-${collection.shortId}`}>
-          {collection.name}
+        <Link href={`/collection/${collection?.slug}-${collection?.shortId}`}>
+          {collection?.name}
         </Link>
       </h1>
-
       <OperationSelector
         operation={operation}
         setOperation={setOperation}
         type={collection?.type || 'topic'}
       />
-
       <>
         {operation === ('update' as Operation) && <EditProperties />}
 
@@ -57,11 +56,10 @@ export const EditOperations = ({ collection }: Props) => {
 
         {operation === ('delete' as Operation) && <DeleteCollection />}
       </>
-
       {operation === ('update-items' as Operation) &&
-        collection.type === ('topic' as ContentHandlerType) && <TopicItems />}
+        collection?.type === ('topic' as ContentHandlerType) && <TopicItems />}
 
-      <AddToItems />
+      {operation === ('update-items' as Operation) && <AddToItems />}
     </>
   )
 }
