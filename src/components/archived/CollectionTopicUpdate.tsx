@@ -5,7 +5,7 @@ import { CollectionTopicSection } from '@/components/archived/edit/CollectionTop
 import { CollectionTopicCloudImage } from '@/components/archived/edit/CollectionTopicCloudImage'
 import { TopicExamples } from '@/components/collection/topic/TopicExamples'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+import { useCollectionOperations } from '@/components/archived/useCollectionOperations'
 
 import { Collection, Topic, ContentHandlerType, Operation } from '@/types'
 

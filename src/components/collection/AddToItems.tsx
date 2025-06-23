@@ -10,7 +10,7 @@ import { AddToTopic } from '@/components/collection/topic/add/AddToTopic'
 import { ContentHandlerType } from '@/types'
 
 export function AddToItems() {
-  const { collection, apiResponse } = useCollection()
+  const { collection } = useCollection()
   const itemComponent: {
     [K in ContentHandlerType]: React.ComponentType
   } = {

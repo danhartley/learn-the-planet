@@ -13,12 +13,12 @@ export const SectionTypeSelector = ({
     {
       key: 'text' as SectionType,
       value: 'Text',
-      description: 'Add a new text section',
+      description: 'Add text',
     },
     {
       key: 'image' as SectionType,
       value: 'Image',
-      description: 'Add an new image or images',
+      description: 'Add a new image',
     },
     {
       key: 'taxon' as SectionType,
@@ -92,7 +92,7 @@ export const SectionTypeSelector = ({
     >
       <h2 id="section-type-selector">Section type</h2>
       <div className="column-group">
-        <span>Select the type of section you want to create.</span>
+        <span>Select the type of section you want to add.</span>
 
         <div>
           <ul>{options}</ul>

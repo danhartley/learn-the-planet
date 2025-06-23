@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { CollectionType } from '@/components/common/CollectionType'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+import { useCollectionOperations } from '@/components/archived/useCollectionOperations'
 
 import { Operation, ContentHandlerType } from '@/types'
 

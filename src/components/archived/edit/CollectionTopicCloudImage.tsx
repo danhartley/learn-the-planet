@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 import { CldImage } from 'next-cloudinary'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+import { useCollectionOperations } from '@/components/archived/useCollectionOperations'
 
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { CollectionTextField } from '@/components/common/CollectionTextField'

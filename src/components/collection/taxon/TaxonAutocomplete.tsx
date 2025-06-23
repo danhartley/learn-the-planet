@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { Taxon, ApiResponse, Operation } from '@/types'
+import { Taxon, ApiResponse, Topic, Trait, Term } from '@/types'
 
 import { debounce } from '@/api/inat/utils'
 import { getIdByAutocomplete } from '@/api/inat/api'
@@ -17,6 +17,7 @@ interface TaxonAutocompleteProps {
   apiResponse: ApiResponse
   sectionIndex: number
   deleteTaxa: () => void
+  section: Topic | Taxon | Trait | Term
 }
 
 export const TaxonAutocomplete = ({
@@ -27,6 +28,7 @@ export const TaxonAutocomplete = ({
   apiResponse,
   sectionIndex,
   deleteTaxa,
+  section,
 }: TaxonAutocompleteProps) => {
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState<Taxon[]>([])
@@ -113,7 +115,7 @@ export const TaxonAutocomplete = ({
 
   return (
     <section aria-labelledby="inat-taxa-search">
-      <div className="group-block">
+      <div id={section?.id} className="group-block">
         <div className="group">
           <h2 id="inat-taxa-search">
             <label htmlFor={`${sectionIndex}-taxon-search`}>

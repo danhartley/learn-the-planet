@@ -11,12 +11,7 @@ type Props = {
   apiResponse: ApiResponse
 }
 
-export const InatTaxonPicker = ({
-  setItems,
-  items,
-  operation,
-  apiResponse,
-}: Props) => {
+export const InatTaxonPicker = ({ setItems, items, apiResponse }: Props) => {
   const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
     items ? JSON.parse(items) : []

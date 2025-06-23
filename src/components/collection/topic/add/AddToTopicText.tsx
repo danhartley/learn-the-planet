@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
@@ -10,6 +10,9 @@ import { textToArray, getShortId } from '@/utils/strings'
 export const AddToTopicText = () => {
   const { collection, addItem, apiResponse } = useCollection()
   const [text, setText] = useState('')
+  const [lastSectionId, setLastSectionId] = useState(
+    collection?.items?.findLast(item => (item as Topic).id)
+  )
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value)
@@ -23,6 +26,26 @@ export const AddToTopicText = () => {
 
     if (collection) addItem(collection, item)
   }
+
+  useEffect(() => {
+    setLastSectionId(collection?.items?.findLast(item => (item as Topic).id))
+  }, [collection?.items?.length])
+
+  useEffect(() => {
+    if (!collection) return
+    const section = collection.items
+      ? collection.items[collection.itemCount - 1]
+      : undefined
+    if (section) {
+      const sectionId = (section as Topic)?.id || undefined
+      if (sectionId)
+        document.getElementById(sectionId)?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest',
+        })
+    }
+  }, [lastSectionId])
 
   return (
     <section aria-labelledby="new-section">

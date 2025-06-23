@@ -12,7 +12,7 @@ type Props = {
   operation?: Operation
 }
 
-export const AddTaxa = ({ items, setItems, operation }: Props) => {
+export const AddTaxa = ({ items, setItems }: Props) => {
   const { apiResponse } = useCollection()
   const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(items || [])

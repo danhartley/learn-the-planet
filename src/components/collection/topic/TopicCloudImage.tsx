@@ -9,22 +9,17 @@ import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { ImageUpload } from '@/components/image/ImageUpload'
 
-import { Collection, Topic, NextCloudImage } from '@/types'
+import { Topic, NextCloudImage } from '@/types'
 
 type Props = {
-  collection: Collection<Topic>
   section: Topic
   image: NextCloudImage
   sectionIndex: number
 }
 
-export const TopicCloudImage = ({
-  collection,
-  section,
-  image,
-  sectionIndex,
-}: Props) => {
-  const { updateCollectionItem, deleteItem, apiResponse } = useCollection()
+export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
+  const { collection, updateCollectionItem, deleteItem, apiResponse } =
+    useCollection()
   const [captionValue, setCaption] = useState<string>(image.caption)
   const [altValue, setAlt] = useState(image.alt)
   const [changesToSave, setChangesToSave] = useState(false)
@@ -63,7 +58,7 @@ export const TopicCloudImage = ({
   }
 
   return (
-    <div className="cloudinary update">
+    <div id={section.id} className="cloudinary update">
       <div className="group-block">
         <h2>Cloudinary Image</h2>
         <figure>

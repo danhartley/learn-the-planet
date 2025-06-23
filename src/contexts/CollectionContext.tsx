@@ -6,6 +6,7 @@ import {
   CollectionSummary,
   ApiResponse,
   UpdateCollectionFieldsOptions,
+  ContentHandlerType,
 } from '@/types'
 
 type CollectionContextType = {
@@ -14,7 +15,6 @@ type CollectionContextType = {
   apiResponse: ApiResponse
   setApiResponse: (response: ApiResponse) => void
   addItem: (collection: Collection<unknown>, item: unknown) => Promise<void>
-  updateItem: (id: string, updates: Partial<unknown>) => Promise<void>
   removeItem: (id: string) => Promise<void>
   updateLinkedCollections: (
     linkedCollections: CollectionSummary[]
@@ -34,6 +34,11 @@ type CollectionContextType = {
     updatedItem: unknown
   ) => Promise<void>
   deleteItem: (collection: Collection<unknown>, itemId: string) => Promise<void>
+  addCollection: (
+    name: string,
+    type: ContentHandlerType,
+    imageUrl?: string
+  ) => Promise<void>
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -42,7 +47,7 @@ const CollectionContext = createContext<CollectionContextType | undefined>(
 
 type CollectionProviderProps = {
   children: ReactNode
-  initialCollection: Collection<unknown>
+  initialCollection?: Collection<unknown>
 }
 
 export const CollectionProvider = ({
@@ -118,26 +123,6 @@ export const CollectionProvider = ({
         message: 'Failed to add item to collection.',
       })
     }
-  }
-
-  const updateItem = async (id: string, updates: Partial<unknown>) => {
-    if (!collection) return
-
-    // API call stub - add your implementation
-    console.log('Updating item:', id, updates)
-
-    // Optimistic update
-    setCollection(prev =>
-      prev
-        ? {
-            ...prev,
-            items: (prev.items || []).map(item =>
-              //eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (item as any).id === id ? { ...item, ...updates } : item
-            ),
-          }
-        : null
-    )
   }
 
   const removeItem = async (id: string) => {
@@ -224,7 +209,9 @@ export const CollectionProvider = ({
 
   const deleteCollection = async (collection: Collection<unknown>) => {
     if (!collection) return
+
     const url = `/api/collection/delete/${collection.slug}-${collection.shortId}`
+
     const response = await fetch(url, {
       method: 'DELETE',
     })
@@ -415,7 +402,7 @@ export const CollectionProvider = ({
       }
 
       const updatedCollection = await response.json()
-
+      console.log('updatedCollection', updatedCollection)
       // Update with server response (in case server made additional changes)
       setCollection(updatedCollection)
 
@@ -485,7 +472,6 @@ export const CollectionProvider = ({
 
       const updatedCollection = await response.json()
 
-      // Update with server response (in case server made additional changes)
       setCollection(updatedCollection)
 
       setApiResponse({
@@ -505,6 +491,61 @@ export const CollectionProvider = ({
     }
   }
 
+  const addCollection = async (
+    name: string,
+    type: ContentHandlerType,
+    imageUrl?: string
+  ) => {
+    if (!name?.trim() || !type) return
+
+    const slug = name.trim().toLowerCase().replace(/\s+/g, '-')
+    const newCollection: Collection<unknown> = {
+      type,
+      name: name.trim(),
+      slug,
+      items: [],
+      itemCount: 0,
+      imageUrl: imageUrl || '',
+    }
+
+    try {
+      const response = await fetch('/api/collection', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newCollection),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const createdCollection = await response.json()
+      console.log('createdCollection', createdCollection)
+      // Update with server response (in case server made additional changes like adding id/shortId)
+      setCollection(createdCollection)
+
+      setApiResponse({
+        success: true,
+        message: 'New collection created.',
+      })
+    } catch (error) {
+      console.error('Failed to create collection:', error)
+
+      setApiResponse({
+        success: false,
+        message: 'Failed to create collection.',
+      })
+
+      throw error // Re-throw if caller needs to handle it
+    }
+  }
+
   return (
     <CollectionContext.Provider
       value={{
@@ -513,7 +554,6 @@ export const CollectionProvider = ({
         apiResponse,
         setApiResponse,
         addItem,
-        updateItem,
         removeItem,
         updateLinkedCollections,
         deleteCollection,
@@ -522,6 +562,7 @@ export const CollectionProvider = ({
         updateCollectionItems,
         updateCollectionItem,
         deleteItem,
+        addCollection,
       }}
     >
       {children}

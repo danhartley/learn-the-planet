@@ -22,16 +22,16 @@ export async function DELETE(req: NextRequest) {
       )
     }
 
-    const success = await deleteCollectionItem(shortId, itemId)
+    const updatedCollection = await deleteCollectionItem(shortId, itemId)
 
-    if (!success) {
+    if (!updatedCollection) {
       return NextResponse.json(
         { error: 'Failed to delete item' },
         { status: 500 }
       )
     }
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json(updatedCollection)
   } catch (error) {
     console.error('Failed to delete item:', error)
     return NextResponse.json(

@@ -1,60 +1,45 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { CollectionType } from '@/components/common/CollectionType'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+import { useCollection } from '@/contexts/CollectionContext'
 
-import { Operation, ContentHandlerType } from '@/types'
+import { ContentHandlerType } from '@/types'
 
-type Props = {
-  operation: Operation
-  collectionType?: ContentHandlerType
-}
-
-export default function CreateOperation({
-  operation = 'create',
-  collectionType = 'topic',
-}: Props) {
-  const {
-    type,
-    setType,
-
-    imageUrl,
-    setImageUrl,
-
-    addCollection,
-  } = useCollectionOperations()
+export const CreateOperation = () => {
+  const { collection, addCollection } = useCollection()
+  const [name, setName] = useState<string>('')
+  const [type, setType] = useState<ContentHandlerType>('topic')
+  const [imageUrl, setImageUrl] = useState<string>('')
 
   const MIN_NAME_LENGTH = 5
 
   const router = useRouter()
 
-  useState(() => {
-    setType(collectionType)
-  })
-  const [collectionName, setCollectionName] = useState<string>('')
-
   const createCollection = () => {
     const create = async () => {
-      const newCollection = await addCollection(collectionName, type)
-      router.push(
-        `/collection/edit/${newCollection?.slug}-${newCollection?.shortId}`
-      )
+      await addCollection(name, type)
     }
-    if (collectionName && collectionName.length > MIN_NAME_LENGTH) create()
+    if (name && name.length > MIN_NAME_LENGTH) create()
   }
+
+  useEffect(() => {
+    console.log(collection)
+    if (collection)
+      router.push(`/collection/edit/${collection?.slug}-${collection?.shortId}`)
+  }, [collection])
 
   return (
     <>
-      <CollectionType operation={operation} type={type} setType={setType} />
+      <CollectionType operation={'create'} type={type} setType={setType} />
 
       <CollectionTextField
-        fieldValue={imageUrl}
-        setFieldValue={setCollectionName}
+        fieldValue={name}
+        setFieldValue={setName}
         fieldText="collection name"
         type={type}
         required={true}
@@ -69,7 +54,7 @@ export default function CreateOperation({
 
       <button
         onClick={createCollection}
-        disabled={collectionName.length < MIN_NAME_LENGTH}
+        disabled={name.length < MIN_NAME_LENGTH}
       >
         Create collection
       </button>

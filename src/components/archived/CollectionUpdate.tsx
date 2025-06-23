@@ -11,7 +11,7 @@ import { CollectionUpdateOperationSelector } from '@/components/archived/Collect
 import { CollectionUpdateDelete } from '@/components/archived/CollectionUpdateDelete'
 import { CollectionSaveUpdatedItems } from '@/components/archived/CollectionSaveUpdatedItems'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+import { useCollectionOperations } from '@/components/archived/useCollectionOperations'
 
 import { Collection, ContentHandlerType, Operation, Topic } from '@/types'
 

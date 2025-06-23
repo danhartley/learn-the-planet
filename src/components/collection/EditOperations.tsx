@@ -12,18 +12,8 @@ import { EditLinkedCollections } from '@/components/collection/EditLinkedCollect
 import { TopicItems } from '@/components/collection/topic/TopicItems'
 import { AddToItems } from '@/components/collection/AddToItems'
 
-import {
-  Collection,
-  Operation,
-  CollectionSummary,
-  ContentHandlerType,
-} from '@/types'
+import { Operation, CollectionSummary, ContentHandlerType } from '@/types'
 
-// type Props = {
-//   collection: Collection<unknown>
-// }
-
-// export const EditOperations = ({ collection }: Props) => {
 export const EditOperations = () => {
   const { collection, getCollectionSummaries } = useCollection()
   const [operation, setOperation] = useState<Operation>('update-items')
@@ -46,16 +36,16 @@ export const EditOperations = () => {
         setOperation={setOperation}
         type={collection?.type || 'topic'}
       />
-      <>
-        {operation === ('update' as Operation) && <EditProperties />}
 
-        {operation === ('linked-collections' as Operation) &&
-          collectionSummaries && (
-            <EditLinkedCollections collectionSummaries={collectionSummaries} />
-          )}
+      {operation === ('update' as Operation) && <EditProperties />}
 
-        {operation === ('delete' as Operation) && <DeleteCollection />}
-      </>
+      {operation === ('linked-collections' as Operation) &&
+        collectionSummaries && (
+          <EditLinkedCollections collectionSummaries={collectionSummaries} />
+        )}
+
+      {operation === ('delete' as Operation) && <DeleteCollection />}
+
       {operation === ('update-items' as Operation) &&
         collection?.type === ('topic' as ContentHandlerType) && <TopicItems />}
 

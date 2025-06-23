@@ -5,16 +5,16 @@ import { useCollection } from '@/contexts/CollectionContext'
 import { TopicText } from '@/components/collection/topic/add/TopicText'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { Collection, Topic } from '@/types'
+import { Topic } from '@/types'
 
 type Props = {
-  collection: Collection<Topic>
   section: Topic
   sectionIndex: number
 }
 
-export const TopicSections = ({ collection, section, sectionIndex }: Props) => {
-  const { updateCollectionItem, deleteItem, apiResponse } = useCollection()
+export const TopicSections = ({ section, sectionIndex }: Props) => {
+  const { collection, updateCollectionItem, deleteItem, apiResponse } =
+    useCollection()
   const [sectionText, setSectionText] = useState(section.text)
   const [changesToSave, setChangesToSave] = useState(false)
 
@@ -24,10 +24,14 @@ export const TopicSections = ({ collection, section, sectionIndex }: Props) => {
 
   const saveChanges = () => {
     section.text = sectionText
-    updateCollectionItem(collection, section)
+    if (collection) {
+      updateCollectionItem(collection, section).then(() => {
+        setSectionText([])
+      })
+    }
   }
   const deleteText = () => {
-    if (section) deleteItem(collection, section.id)
+    if (collection) if (section) deleteItem(collection, section.id)
   }
 
   return (

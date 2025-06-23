@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+import { useCollectionOperations } from '@/components/archived/useCollectionOperations'
 
 import { CollectionTopicText } from '@/components/archived/edit/CollectionTopicText'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'

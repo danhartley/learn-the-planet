@@ -2,8 +2,9 @@
 import { useState, useEffect } from 'react'
 import { notFound } from 'next/navigation'
 
-import { EditOperations } from '@/components/collection/EditOperations'
 import { CollectionProvider } from '@/contexts/CollectionContext'
+
+import { EditOperations } from '@/components/collection/EditOperations'
 import { Collection } from '@/types'
 import { extractShortId, extractSlug } from '@/utils/strings'
 
@@ -54,7 +55,7 @@ export default function Page({
 
   return (
     <CollectionProvider initialCollection={collection}>
-      <EditOperations collection={collection} />
+      <EditOperations />
     </CollectionProvider>
   )
 }
