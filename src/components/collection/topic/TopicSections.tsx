@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+import { useCollection } from '@/contexts/CollectionContext'
 
 import { TopicText } from '@/components/collection/topic/add/TopicText'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
@@ -14,10 +14,9 @@ type Props = {
 }
 
 export const TopicSections = ({ collection, section, sectionIndex }: Props) => {
+  const { updateCollectionItem, deleteItem, apiResponse } = useCollection()
   const [sectionText, setSectionText] = useState(section.text)
   const [changesToSave, setChangesToSave] = useState(false)
-
-  const { apiResponse, updateCollectionItem } = useCollectionOperations()
 
   useEffect(() => {
     setChangesToSave(true)
@@ -26,6 +25,9 @@ export const TopicSections = ({ collection, section, sectionIndex }: Props) => {
   const saveChanges = () => {
     section.text = sectionText
     updateCollectionItem(collection, section)
+  }
+  const deleteText = () => {
+    if (section) deleteItem(collection, section.id)
   }
 
   return (
@@ -49,6 +51,7 @@ export const TopicSections = ({ collection, section, sectionIndex }: Props) => {
           >
             Save changes
           </button>
+          <button onClick={deleteText}>Delete text</button>
           <ApiResponseMessage apiResponse={apiResponse} />
         </div>
       )}

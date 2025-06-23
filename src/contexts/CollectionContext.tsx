@@ -33,6 +33,7 @@ type CollectionContextType = {
     collection: Collection<unknown>,
     updatedItem: unknown
   ) => Promise<void>
+  deleteItem: (collection: Collection<unknown>, itemId: string) => Promise<void>
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -56,12 +57,26 @@ export const CollectionProvider = ({
     message: '',
   })
 
+  // Add or update item
   const addItem = async (collection: Collection<unknown>, item: unknown) => {
-    if (!collection) return
+    if (!collection || !item) return
 
-    if (!collection) return
+    const itemId = (item as { id: string }).id
+    if (!itemId) return
+
+    // Optimistic update (moved to beginning)
+    const previousCollection = collection
+    setCollection(prev =>
+      prev
+        ? {
+            ...prev,
+            items: [...(prev.items || []), item],
+            itemCount: (prev.items?.length || 0) + 1,
+          }
+        : null
+    )
+
     try {
-      const itemId = (item as { id: string }).id
       const url = `/api/collection/update-item/${collection.slug}-${collection.shortId}-${itemId}`
 
       const response = await fetch(url, {
@@ -74,33 +89,35 @@ export const CollectionProvider = ({
 
       if (!response.ok) {
         const errorData = await response.json()
+
+        // Revert optimistic update on error
+        setCollection(previousCollection)
+
         throw new Error(
           errorData.error || `HTTP error! status: ${response.status}`
         )
       }
 
-      await response.json()
+      const updatedCollection = await response.json()
+
+      // Update with server response (in case server made additional changes)
+      setCollection(updatedCollection)
 
       setApiResponse({
         success: true,
-        message: 'Collection item update succeeded.',
+        message: 'Collection item added successfully.',
       })
     } catch (error) {
-      console.error('Failed to update collection:', error)
+      console.error('Failed to add item to collection:', error)
+
+      // Ensure revert on any error (in case it wasn't caught above)
+      setCollection(previousCollection)
+
       setApiResponse({
         success: false,
-        message: 'Collection items update failed.',
+        message: 'Failed to add item to collection.',
       })
     }
-    // Optimistic update
-    setCollection(prev =>
-      prev
-        ? {
-            ...prev,
-            items: [...(prev.items || []), item],
-          }
-        : null
-    )
   }
 
   const updateItem = async (id: string, updates: Partial<unknown>) => {
@@ -419,6 +436,75 @@ export const CollectionProvider = ({
     }
   }
 
+  const deleteItem = async (
+    collection: Collection<unknown>,
+    itemId: string
+  ) => {
+    if (!collection || !itemId) return
+
+    // Check if item exists in collection
+    const itemExists = collection.items?.some(
+      item => (item as { id: string }).id === itemId
+    )
+    if (!itemExists) return
+
+    // Optimistic update
+    const previousCollection = collection
+    setCollection(prev =>
+      prev && prev.items
+        ? {
+            ...prev,
+            items: prev.items.filter(
+              item => (item as { id: string }).id !== itemId
+            ),
+            itemCount: Math.max((prev.itemCount || 0) - 1, 0),
+          }
+        : prev
+    )
+
+    try {
+      const url = `/api/collection/delete-item/${collection.slug}-${collection.shortId}-${itemId}`
+
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+
+        // Revert optimistic update on error
+        setCollection(previousCollection)
+
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const updatedCollection = await response.json()
+
+      // Update with server response (in case server made additional changes)
+      setCollection(updatedCollection)
+
+      setApiResponse({
+        success: true,
+        message: 'Collection item deleted successfully.',
+      })
+    } catch (error) {
+      console.error('Failed to delete item from collection:', error)
+
+      // Ensure revert on any error (in case it wasn't caught above)
+      setCollection(previousCollection)
+
+      setApiResponse({
+        success: false,
+        message: 'Failed to delete item from collection.',
+      })
+    }
+  }
+
   return (
     <CollectionContext.Provider
       value={{
@@ -435,6 +521,7 @@ export const CollectionProvider = ({
         getCollectionSummaries,
         updateCollectionItems,
         updateCollectionItem,
+        deleteItem,
       }}
     >
       {children}

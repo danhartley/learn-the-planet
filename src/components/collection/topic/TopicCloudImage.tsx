@@ -9,16 +9,22 @@ import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { ImageUpload } from '@/components/image/ImageUpload'
 
-import { Topic, NextCloudImage } from '@/types'
+import { Collection, Topic, NextCloudImage } from '@/types'
 
 type Props = {
+  collection: Collection<Topic>
   section: Topic
   image: NextCloudImage
   sectionIndex: number
 }
 
-export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
-  const { collection, updateCollectionItem, apiResponse } = useCollection()
+export const TopicCloudImage = ({
+  collection,
+  section,
+  image,
+  sectionIndex,
+}: Props) => {
+  const { updateCollectionItem, deleteItem, apiResponse } = useCollection()
   const [captionValue, setCaption] = useState<string>(image.caption)
   const [altValue, setAlt] = useState(image.alt)
   const [changesToSave, setChangesToSave] = useState(false)
@@ -53,8 +59,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
   }
 
   const removeImage = () => {
-    section.images = section.images?.filter(img => img.src !== image.src)
-    if (collection) updateCollectionItem(collection, section)
+    if (collection) deleteItem(collection, section.id)
   }
 
   return (

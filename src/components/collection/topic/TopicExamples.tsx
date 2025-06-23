@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+// import { useCollectionOperations } from '@/hooks/useCollectionOperations'
+import { useCollection } from '@/contexts/CollectionContext'
 
 import { TaxonAutocomplete } from '@/components/collection/taxon/TaxonAutocomplete'
 
@@ -13,11 +14,13 @@ type Props = {
 }
 
 export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
+  const { addItem, updateCollectionItem, deleteItem, apiResponse } =
+    useCollection()
   const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
     section?.examples || []
   )
-  const { updateCollectionItem, apiResponse } = useCollectionOperations()
+  // const { updateCollectionItem, apiResponse } = useCollectionOperations()
 
   useEffect(() => {
     setChangesToSave(true)
@@ -42,6 +45,10 @@ export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
     })
   }
 
+  const deleteTaxa = () => {
+    deleteItem(collection, section.id)
+  }
+
   return (
     <TaxonAutocomplete
       selectedTaxa={selectedTaxa}
@@ -50,6 +57,7 @@ export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
       saveChanges={saveChanges}
       apiResponse={apiResponse}
       sectionIndex={sectionIndex}
+      deleteTaxa={deleteTaxa}
     />
   )
 }

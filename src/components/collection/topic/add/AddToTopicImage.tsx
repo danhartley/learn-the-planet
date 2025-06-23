@@ -21,7 +21,7 @@ export const AddToTopicImage = () => {
     }
   }, [image])
 
-  const saveImages = () => {
+  const saveImage = () => {
     const item = {
       id: getShortId(),
       images: images as NextCloudImage[],
@@ -32,11 +32,11 @@ export const AddToTopicImage = () => {
 
   return (
     <section aria-labelledby="new-section">
-      <h2 id="new-section">Add images</h2>
+      <h2 id="new-section">Add image</h2>
       <div className="form-row">
         <ImageUpload setImage={setImage} />
         <div className="form-row">
-          <button onClick={saveImages}>Save image</button>
+          <button onClick={saveImage}>Save image</button>
           <ApiResponseMessage apiResponse={apiResponse} />
         </div>
       </div>

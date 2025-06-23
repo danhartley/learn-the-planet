@@ -20,14 +20,15 @@ export const TopicItems = () => {
           return (
             <React.Fragment key={section.id}>
               <TopicSections
-                key={section.id}
                 collection={topicCollection}
+                key={section.id}
                 section={section}
                 sectionIndex={index + 1}
               />
               {section.images?.map(img => {
                 return (
                   <TopicCloudImage
+                    collection={topicCollection}
                     key={img.src}
                     section={section}
                     image={img}

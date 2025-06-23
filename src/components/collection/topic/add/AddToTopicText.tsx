@@ -15,9 +15,7 @@ export const AddToTopicText = () => {
     setText(e.target.value)
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
+  const saveText = () => {
     const item = {
       id: getShortId(),
       text: textToArray(text) as string[],
@@ -29,25 +27,22 @@ export const AddToTopicText = () => {
   return (
     <section aria-labelledby="new-section">
       <h2 id="new-section">Add text</h2>
-
-      <form onSubmit={handleSubmit} className="column-group">
-        <div className="column-group">
-          <label htmlFor="json-input">Add text here</label>
-          <textarea
-            id="json-input"
-            value={text}
-            onChange={handleChange}
-            placeholder=""
-            rows={10}
-          />
-        </div>
-        <div className="form-row">
-          <button id="submit" type="submit">
-            Add text
-          </button>
-          <ApiResponseMessage apiResponse={apiResponse} />
-        </div>
-      </form>
+      <div className="column-group">
+        <label htmlFor="json-input">Add text here</label>
+        <textarea
+          id="json-input"
+          value={text}
+          onChange={handleChange}
+          placeholder=""
+          rows={10}
+        />
+      </div>
+      <div className="form-row">
+        <button id="submit" type="submit" onClick={saveText}>
+          Add text
+        </button>
+        <ApiResponseMessage apiResponse={apiResponse} />
+      </div>
     </section>
   )
 }
