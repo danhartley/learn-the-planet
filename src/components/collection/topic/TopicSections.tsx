@@ -35,7 +35,7 @@ export const TopicSections = ({ section, sectionIndex }: Props) => {
   }
 
   return (
-    <div className="group-block">
+    <>
       {sectionText && (
         <TopicText
           key={section.id}
@@ -52,13 +52,16 @@ export const TopicSections = ({ section, sectionIndex }: Props) => {
             id="edit-section"
             disabled={!changesToSave}
             onClick={saveChanges}
+            className="save"
           >
             Save changes
           </button>
-          <button onClick={deleteText}>Delete text</button>
+          <button onClick={deleteText} className="delete">
+            Delete text
+          </button>
           <ApiResponseMessage apiResponse={apiResponse} />
         </div>
       )}
-    </div>
+    </>
   )
 }

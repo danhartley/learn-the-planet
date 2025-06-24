@@ -38,11 +38,15 @@ export const TopicItems = () => {
   // )
 
   return (
-    <>
+    <div>
       {topicCollection.items &&
         topicCollection.items.map((section, index) => {
           return (
-            <React.Fragment key={section.id}>
+            <div
+              key={section.id}
+              id={section.id}
+              className="group-block navigable"
+            >
               <TopicSections
                 key={section.id}
                 section={section}
@@ -65,9 +69,9 @@ export const TopicItems = () => {
                   sectionIndex={index + 1}
                 />
               )}
-            </React.Fragment>
+            </div>
           )
         })}
-    </>
+    </div>
   )
 }

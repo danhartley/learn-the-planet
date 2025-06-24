@@ -21,8 +21,8 @@ export const CollectionSelector = ({
   }
 
   return (
-    <section className="group-block" aria-labelledby="referenced-collections">
-      <h2 id="referenced-collections">Link to other collections</h2>
+    <section className="group-block" aria-labelledby="linked-collections">
+      <h2 id="linked-collections">Link to other collections</h2>
       <div className="block-container">
         <MultiSelectList
           options={options}

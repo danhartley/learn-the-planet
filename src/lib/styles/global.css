@@ -25,6 +25,8 @@
   --colour-bg-card-button: rgba(255, 255, 255, 0.5);
   --colour-bg-body: rgb(248 244 240);
   --colour-bg-section-type-selector: rgb(255 238 187);
+  --colour-bg-save-btn: rgb(226 233 241);
+  --colour-bg-delete-btn: rgb(234 213 223);
   --colour-form-label: rgb(64 64 65);
   --colour-correct: rgb(106, 176, 84);
   --colour-correct-light: rgb(189 219 178);
@@ -191,6 +193,13 @@ button {
   width: 100%;
   border-radius: var(--border-radius-sm);
   color: var(--colour-fg-text);
+
+  &.save {
+    background-color: var(--colour-bg-save-btn);
+  }
+  &.delete {
+    background-color: var(--colour-bg-delete-btn);
+  }
 }
 
 button:focus-visible {
@@ -377,12 +386,15 @@ li::marker {
   flex-direction: column;
   border-radius: var(--border-radius-sm);
   row-gap: var(--spacing-md);
-  /* margin: var(--spacing-md) 0 0 0; */
   padding: var(--spacing-lg);
   background-image:
     linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
   background-size: 3px 3px;
+
+  &.navigable {
+    margin-bottom: var(--spacing-lg);
+  }
 }
 
 [aria-labelledby='taxon-gallery'] .group-block,
@@ -779,18 +791,6 @@ progress {
   }
 }
 
-.cloudinary.update {
-  flex-direction: column;
-  figure {
-    margin: initial;
-    width: fit-content;
-  }
-  .form-row.topic input {
-    font-size: var(--font-size-md);
-  }
-  padding: 0;
-}
-
 #section-type-selector-section {
   top: 0;
   z-index: 1;
@@ -836,7 +836,38 @@ progress {
   }
 }
 
+#edit-navigation {
+  display: none;
+}
+
 /* Large grid */
+
+@media (min-width: 767px) {
+  #edit-navigation {
+    position: fixed;
+    top: 50%;
+    right: var(--spacing-xl);
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--colour-bg-main);
+    padding: var(--spacing-sm) var(--spacing-lg);
+  }
+
+  #edit-navigation div {
+    cursor: pointer;
+    font-size: var(--font-size-xl);
+    line-height: 1.15;
+  }
+
+  #edit-navigation div:first-child::before {
+    content: '\25B2';
+  }
+
+  #edit-navigation div:last-child::before {
+    content: '\25BC';
+  }
+}
 
 @media (min-width: 767px) and (max-width: 1286px) {
   .grid-lg {

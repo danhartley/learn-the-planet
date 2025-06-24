@@ -115,7 +115,7 @@ export const TaxonAutocomplete = ({
 
   return (
     <section aria-labelledby="inat-taxa-search">
-      <div id={section?.id} className="group-block">
+      <div id={section?.id} className="column-group">
         <div className="group">
           <h2 id="inat-taxa-search">
             <label htmlFor={`${sectionIndex}-taxon-search`}>
@@ -172,7 +172,7 @@ export const TaxonAutocomplete = ({
       )}
 
       {selectedTaxa.length > 0 && (
-        <section aria-labelledby="selected-taxa" className="group-block">
+        <section aria-labelledby="selected-taxa" className="column-group">
           <h2 id="selected-taxa">Selected Taxa ({selectedTaxa.length})</h2>
           <form>
             {selectedTaxa.map(taxon => (
@@ -202,6 +202,7 @@ export const TaxonAutocomplete = ({
                 id="edit-section"
                 disabled={!changesToSave}
                 onClick={saveChanges}
+                className="save"
               >
                 Save changes
               </button>

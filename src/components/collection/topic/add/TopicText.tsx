@@ -40,19 +40,21 @@ export const TopicText = ({
 
   return (
     !!text && (
-      <form key={id}>
-        <h2>
-          <label htmlFor={id}>Text {sectionIndex}</label>
-        </h2>
-        <textarea
-          id={id}
-          value={paras}
-          onChange={handleTextareaChange}
-          onBlur={handleTextareaBlur}
-          cols={40}
-          rows={10}
-        />
-      </form>
+      <>
+        <form key={id}>
+          <h2>
+            <label htmlFor={`text-${id}`}>Text</label>
+          </h2>
+          <textarea
+            id={`text-${id}`}
+            value={paras}
+            onChange={handleTextareaChange}
+            onBlur={handleTextareaBlur}
+            cols={40}
+            rows={10}
+          />
+        </form>
+      </>
     )
   )
 }

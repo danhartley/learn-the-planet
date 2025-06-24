@@ -12,6 +12,8 @@ import { EditLinkedCollections } from '@/components/collection/EditLinkedCollect
 import { TopicItems } from '@/components/collection/topic/TopicItems'
 import { AddToItems } from '@/components/collection/AddToItems'
 
+import { ElementNavigator, createElementIdArray } from '@/utils/navigation'
+
 import { Operation, CollectionSummary, ContentHandlerType } from '@/types'
 
 export const EditOperations = () => {
@@ -23,6 +25,32 @@ export const EditOperations = () => {
   useEffect(() => {
     getCollectionSummaries().then(setCollectionSummaries)
   }, [getCollectionSummaries])
+
+  useEffect(() => {
+    const elementIds = createElementIdArray()
+
+    if (elementIds.length > 0) {
+      const navigator = new ElementNavigator(
+        elementIds,
+        'up-arrow',
+        'down-arrow'
+      )
+
+      const handleUpClick = () => navigator.navigateUp()
+      const handleDownClick = () => navigator.navigateDown()
+
+      const upButton = document.getElementById('up-arrow')
+      const downButton = document.getElementById('down-arrow')
+
+      upButton?.addEventListener('click', handleUpClick)
+      downButton?.addEventListener('click', handleDownClick)
+
+      return () => {
+        upButton?.removeEventListener('click', handleUpClick)
+        downButton?.removeEventListener('click', handleDownClick)
+      }
+    }
+  }, [])
 
   return (
     <>
@@ -38,18 +66,19 @@ export const EditOperations = () => {
       />
 
       {operation === ('update' as Operation) && <EditProperties />}
-
       {operation === ('linked-collections' as Operation) &&
         collectionSummaries && (
           <EditLinkedCollections collectionSummaries={collectionSummaries} />
         )}
-
       {operation === ('delete' as Operation) && <DeleteCollection />}
-
       {operation === ('update-items' as Operation) &&
         collection?.type === ('topic' as ContentHandlerType) && <TopicItems />}
-
       {operation === ('update-items' as Operation) && <AddToItems />}
+
+      <div id="edit-navigation">
+        <div id="up-arrow"> </div>
+        <div id="down-arrow"> </div>
+      </div>
     </>
   )
 }

@@ -59,53 +59,54 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
   }
 
   return (
-    <div id={section.id} className="cloudinary update">
-      <div className="group-block">
-        <h2>Cloudinary Image</h2>
-        <figure>
-          <CldImage
-            src={image.src}
-            width={width}
-            height={height}
-            alt={image.alt}
-            sizes={sizes}
-          />
-        </figure>
-
-        <CollectionTextField
-          fieldValue={image.caption}
-          setFieldValue={setCaption}
-          fieldText="Image caption"
-          type="topic"
-          sectionIndex={sectionIndex}
+    <>
+      <h2>Cloudinary Image</h2>
+      <figure>
+        <CldImage
+          src={image.src}
+          width={width}
+          height={height}
+          alt={image.alt}
+          sizes={sizes}
         />
+      </figure>
 
-        <CollectionTextField
-          fieldValue={image.alt}
-          setFieldValue={setAlt}
-          fieldText="Image alt text"
-          type="topic"
-          sectionIndex={sectionIndex}
-        />
+      <CollectionTextField
+        fieldValue={image.caption}
+        setFieldValue={setCaption}
+        fieldText="Image caption"
+        type="topic"
+        sectionIndex={sectionIndex}
+      />
 
-        <div className="form-row">
-          <button
-            type="button"
-            id="edit-section"
-            disabled={!changesToSave}
-            onClick={saveChanges}
-          >
-            Save changes
-          </button>
-          <button onClick={removeImage}>Remove image</button>
-          <ApiResponseMessage apiResponse={apiResponse} />
-        </div>
-        <div>
-          Removing the image from the topic collection will not remove it from
-          Cloudinary.
-        </div>
-        <ImageUpload setImage={setCloudImage} />
+      <CollectionTextField
+        fieldValue={image.alt}
+        setFieldValue={setAlt}
+        fieldText="Image alt text"
+        type="topic"
+        sectionIndex={sectionIndex}
+      />
+
+      <div className="form-row">
+        <button
+          type="button"
+          id="edit-section"
+          disabled={!changesToSave}
+          onClick={saveChanges}
+          className="save"
+        >
+          Save changes
+        </button>
+        <button onClick={removeImage} className="delete">
+          Delete image
+        </button>
+        <ApiResponseMessage apiResponse={apiResponse} />
       </div>
-    </div>
+      <div>
+        Deleting the image from the topic collection will not remove it from
+        Cloudinary.
+      </div>
+      <ImageUpload setImage={setCloudImage} />
+    </>
   )
 }
