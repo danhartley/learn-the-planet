@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
@@ -12,9 +12,13 @@ export const AddToTaxon = () => {
     (collection as Collection<Taxon>)?.items
   )
 
-  useEffect(() => {
-    if (collection) updateCollectionItems(collection, items ?? [])
-  }, [items])
+  const handleSaveItems = (newItems: Taxon[]) => {
+    setItems(newItems)
 
-  return <AddTaxa items={items} setItems={setItems} />
+    if (collection) {
+      updateCollectionItems(collection, newItems)
+    }
+  }
+
+  return <AddTaxa items={items} setItems={handleSaveItems} />
 }

@@ -16,8 +16,8 @@ interface TaxonAutocompleteProps {
   saveChanges: () => void
   apiResponse: ApiResponse
   sectionIndex: number
-  deleteTaxa: () => void
-  section: Topic | Taxon | Trait | Term
+  deleteTaxa?: () => void
+  section?: Topic | Taxon | Trait | Term
 }
 
 export const TaxonAutocomplete = ({

@@ -2,7 +2,6 @@ import {
   Collection,
   CollectionSummary,
   UpdateCollectionFieldsOptions,
-  Topic,
   CollectionStatus,
 } from '@/types'
 import clientPromise from '@/api/mongodb'
@@ -681,6 +680,7 @@ export const deleteCollectionItem = async (
       {
         $pull: {
           items: { id: itemId },
+          //eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any,
         $inc: {
           itemCount: -1,

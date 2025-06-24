@@ -14,10 +14,8 @@ export const AddToTopicImage = () => {
   const [image, setImage] = useState<NextCloudImage | undefined>()
 
   useEffect(() => {
-    if (image && images) {
-      setImages([...images, image])
-    } else if (image) {
-      setImages([image])
+    if (image) {
+      setImages(prevImages => (prevImages ? [...prevImages, image] : [image]))
     }
   }, [image])
 

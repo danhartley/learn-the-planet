@@ -55,7 +55,7 @@ export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
       apiResponse={apiResponse}
       sectionIndex={sectionIndex}
       deleteTaxa={deleteTaxa}
-      section={section as unknown}
+      section={section as Topic}
     />
   )
 }

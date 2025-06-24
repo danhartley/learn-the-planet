@@ -22,7 +22,7 @@ export const EditOperations = () => {
 
   useEffect(() => {
     getCollectionSummaries().then(setCollectionSummaries)
-  }, [])
+  }, [getCollectionSummaries])
 
   return (
     <>

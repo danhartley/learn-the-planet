@@ -13,6 +13,30 @@ export const TopicItems = () => {
   const { collection } = useCollection()
   const topicCollection = collection as Collection<Topic>
 
+  // const updateSectionImages = useCallback(
+  //   (sectionIndex: number, newImage: CloudImage) => {
+  //     setCollection(prev => {
+  //       if (!prev) return prev
+  //       const newItems = [...prev.items]
+  //       const section = newItems[sectionIndex] as Topic
+  //       newItems[sectionIndex] = {
+  //         ...section,
+  //         images: [...(section.images ?? []), newImage],
+  //       }
+  //       return { ...prev, items: newItems }
+  //     })
+  //   },
+  //   []
+  // )
+
+  //   collection.items.map((section, index) =>
+  //   <TopicCloudImage
+  //     key={section.id}
+  //     section={section}
+  //     onUpdateImages={(image) => updateSectionImages(index, image)}
+  //   />
+  // )
+
   return (
     <>
       {topicCollection.items &&

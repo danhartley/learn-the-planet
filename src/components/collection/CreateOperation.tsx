@@ -28,10 +28,9 @@ export const CreateOperation = () => {
   }
 
   useEffect(() => {
-    console.log(collection)
     if (collection)
       router.push(`/collection/edit/${collection?.slug}-${collection?.shortId}`)
-  }, [collection])
+  }, [collection, router])
 
   return (
     <>

@@ -1,5 +1,11 @@
 'use client'
-import { createContext, useContext, useState, ReactNode } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useCallback,
+} from 'react'
 
 import {
   Collection,
@@ -63,67 +69,70 @@ export const CollectionProvider = ({
   })
 
   // Add or update item
-  const addItem = async (collection: Collection<unknown>, item: unknown) => {
-    if (!collection || !item) return
+  const addItem = useCallback(
+    async (collection: Collection<unknown>, item: unknown) => {
+      if (!collection || !item) return
 
-    const itemId = (item as { id: string }).id
-    if (!itemId) return
+      const itemId = (item as { id: string }).id
+      if (!itemId) return
 
-    // Optimistic update (moved to beginning)
-    const previousCollection = collection
-    setCollection(prev =>
-      prev
-        ? {
-            ...prev,
-            items: [...(prev.items || []), item],
-            itemCount: (prev.items?.length || 0) + 1,
-          }
-        : null
-    )
+      // Optimistic update (moved to beginning)
+      const previousCollection = collection
+      setCollection(prev =>
+        prev
+          ? {
+              ...prev,
+              items: [...(prev.items || []), item],
+              itemCount: (prev.items?.length || 0) + 1,
+            }
+          : null
+      )
 
-    try {
-      const url = `/api/collection/update-item/${collection.slug}-${collection.shortId}-${itemId}`
+      try {
+        const url = `/api/collection/update-item/${collection.slug}-${collection.shortId}-${itemId}`
 
-      const response = await fetch(url, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(item),
-      })
+        const response = await fetch(url, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(item),
+        })
 
-      if (!response.ok) {
-        const errorData = await response.json()
+        if (!response.ok) {
+          const errorData = await response.json()
 
-        // Revert optimistic update on error
+          // Revert optimistic update on error
+          setCollection(previousCollection)
+
+          throw new Error(
+            errorData.error || `HTTP error! status: ${response.status}`
+          )
+        }
+
+        const updatedCollection = await response.json()
+
+        // Update with server response (in case server made additional changes)
+        setCollection(updatedCollection)
+
+        setApiResponse({
+          success: true,
+          message: 'Collection item added successfully.',
+        })
+      } catch (error) {
+        console.error('Failed to add item to collection:', error)
+
+        // Ensure revert on any error (in case it wasn't caught above)
         setCollection(previousCollection)
 
-        throw new Error(
-          errorData.error || `HTTP error! status: ${response.status}`
-        )
+        setApiResponse({
+          success: false,
+          message: 'Failed to add item to collection.',
+        })
       }
-
-      const updatedCollection = await response.json()
-
-      // Update with server response (in case server made additional changes)
-      setCollection(updatedCollection)
-
-      setApiResponse({
-        success: true,
-        message: 'Collection item added successfully.',
-      })
-    } catch (error) {
-      console.error('Failed to add item to collection:', error)
-
-      // Ensure revert on any error (in case it wasn't caught above)
-      setCollection(previousCollection)
-
-      setApiResponse({
-        success: false,
-        message: 'Failed to add item to collection.',
-      })
-    }
-  }
+    },
+    [setCollection, setApiResponse]
+  )
 
   const removeItem = async (id: string) => {
     if (!collection) return
@@ -291,71 +300,73 @@ export const CollectionProvider = ({
     }
   }
 
-  const getCollectionSummaries = async (): Promise<CollectionSummary[]> => {
+  const getCollectionSummaries = useCallback(async (): Promise<
+    CollectionSummary[]
+  > => {
     const response = await fetch('/api/collection-summaries')
     return response.json()
-  }
+  }, [])
 
-  const updateCollectionItems = async (
-    collection: Collection<unknown>,
-    items: unknown[]
-  ) => {
-    if (!collection || !items) return
+  const updateCollectionItems = useCallback(
+    async (collection: Collection<unknown>, items: unknown[]) => {
+      if (!collection || !items) return
 
-    // Optimistic update
-    const previousCollection = collection
-    setCollection(prev =>
-      prev
-        ? {
-            ...prev,
-            items: items,
-            itemCount: items.length,
-          }
-        : null
-    )
+      // Optimistic update
+      const previousCollection = collection
+      setCollection(prev =>
+        prev
+          ? {
+              ...prev,
+              items: items,
+              itemCount: items.length,
+            }
+          : null
+      )
 
-    try {
-      const url = `/api/collection/update-items/${collection.slug}-${collection.shortId}`
-      const response = await fetch(url, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(items),
-      })
+      try {
+        const url = `/api/collection/update-items/${collection.slug}-${collection.shortId}`
+        const response = await fetch(url, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(items),
+        })
 
-      if (!response.ok) {
-        const errorData = await response.json()
+        if (!response.ok) {
+          const errorData = await response.json()
 
-        // Revert optimistic update on error
+          // Revert optimistic update on error
+          setCollection(previousCollection)
+
+          throw new Error(
+            errorData.error || `HTTP error! status: ${response.status}`
+          )
+        }
+
+        const updatedCollection = await response.json()
+
+        // Update with server response (in case server made additional changes)
+        setCollection(updatedCollection)
+
+        setApiResponse({
+          success: true,
+          message: 'Collection items update succeeded.',
+        })
+      } catch (error) {
+        console.error('Failed to update collection:', error)
+
+        // Ensure revert on any error (in case it wasn't caught above)
         setCollection(previousCollection)
 
-        throw new Error(
-          errorData.error || `HTTP error! status: ${response.status}`
-        )
+        setApiResponse({
+          success: false,
+          message: 'Collection items update failed.',
+        })
       }
-
-      const updatedCollection = await response.json()
-
-      // Update with server response (in case server made additional changes)
-      setCollection(updatedCollection)
-
-      setApiResponse({
-        success: true,
-        message: 'Collection items update succeeded.',
-      })
-    } catch (error) {
-      console.error('Failed to update collection:', error)
-
-      // Ensure revert on any error (in case it wasn't caught above)
-      setCollection(previousCollection)
-
-      setApiResponse({
-        success: false,
-        message: 'Collection items update failed.',
-      })
-    }
-  }
+    },
+    [setCollection, setApiResponse]
+  )
 
   const updateCollectionItem = async (
     collection: Collection<unknown>,

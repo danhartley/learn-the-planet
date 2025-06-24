@@ -29,7 +29,7 @@ export const AddToTopicText = () => {
 
   useEffect(() => {
     setLastSectionId(collection?.items?.findLast(item => (item as Topic).id))
-  }, [collection?.items?.length])
+  }, [collection?.items])
 
   useEffect(() => {
     if (!collection) return
@@ -45,7 +45,7 @@ export const AddToTopicText = () => {
           inline: 'nearest',
         })
     }
-  }, [lastSectionId])
+  }, [collection, lastSectionId])
 
   return (
     <section aria-labelledby="new-section">

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
@@ -7,7 +7,7 @@ import { TaxonAutocomplete } from '@/components/collection/taxon/TaxonAutocomple
 import { Taxon, Operation } from '@/types'
 
 type Props = {
-  setItems: Dispatch<SetStateAction<Taxon[] | undefined>>
+  setItems: (items: Taxon[]) => void // Changed from Dispatch<SetStateAction<...>>
   items: Taxon[] | undefined
   operation?: Operation
 }
@@ -22,7 +22,8 @@ export const AddTaxa = ({ items, setItems }: Props) => {
   }, [selectedTaxa])
 
   const saveChanges = async () => {
-    setItems(selectedTaxa)
+    setItems(selectedTaxa) // This now calls the parent's handler
+    setChangesToSave(false)
   }
 
   const handleTaxonToggle = (taxon: Taxon) => {

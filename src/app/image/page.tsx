@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import { CloudinaryUploadWidgetOptions } from 'next-cloudinary'
 
@@ -10,7 +10,7 @@ import { NextCloudImage } from '@/types'
 export default function Page() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [image, setImage] = useState<NextCloudImage | undefined>({
+  const [setImage] = useState<NextCloudImage | undefined>({
     src: '',
     caption: '',
     alt: '',
@@ -23,11 +23,6 @@ export default function Page() {
       description,
     },
   }
-
-  useEffect(() => {
-    console.log(image)
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [image?.src])
 
   return (
     <>

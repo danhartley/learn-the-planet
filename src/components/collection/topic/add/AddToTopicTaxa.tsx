@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
@@ -11,23 +11,25 @@ export const AddToTopicTaxa = () => {
   const { collection, addItem } = useCollection()
   const [items, setItems] = useState<Taxon[] | undefined>()
 
-  useEffect(() => {
-    if (collection && items) {
+  const handleSaveItems = (newItems: Taxon[]) => {
+    setItems(newItems)
+
+    if (collection && newItems.length > 0) {
       const item = {
         id: getShortId(),
-        examples: items,
+        examples: newItems,
       } as Topic
 
       addItem(collection, item)
     }
-  }, [items])
+  }
 
   return (
     <section aria-labelledby="new-section">
       <h2 id="new-section">Add taxa</h2>
       <AddTaxa
         items={items}
-        setItems={setItems}
+        setItems={handleSaveItems}
         operation={'create' as Operation}
       />
     </section>

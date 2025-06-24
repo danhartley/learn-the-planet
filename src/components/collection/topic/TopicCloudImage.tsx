@@ -37,9 +37,10 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
 
   useEffect(() => {
     if (cloudImage) {
+      // should not be directly mutating value…
       section.images = [...(section?.images ?? []), cloudImage]
     }
-  }, [cloudImage?.src])
+  }, [cloudImage, section])
 
   const saveChanges = async () => {
     section.images = section.images?.map(img =>
