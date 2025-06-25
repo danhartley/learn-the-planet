@@ -18,8 +18,12 @@ type Props = {
 }
 
 export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
-  const { collection, updateCollectionItem, deleteItem, apiResponse } =
-    useCollection()
+  const {
+    collection,
+    updateCollectionItem,
+    deleteCollectionItem,
+    apiResponse,
+  } = useCollection()
   const [captionValue, setCaption] = useState<string>(image.caption)
   const [altValue, setAlt] = useState(image.alt)
   const [changesToSave, setChangesToSave] = useState(false)
@@ -55,7 +59,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
   }
 
   const removeImage = () => {
-    if (collection) deleteItem(collection, section.id)
+    if (collection) deleteCollectionItem(collection, section.id)
   }
 
   return (

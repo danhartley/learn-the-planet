@@ -9,7 +9,7 @@ import { Topic, NextCloudImage } from '@/types'
 import { getShortId } from '@/utils/strings'
 
 export const AddToTopicImage = () => {
-  const { collection, addItem, apiResponse } = useCollection()
+  const { collection, addCollectionItem, apiResponse } = useCollection()
   const [images, setImages] = useState<NextCloudImage[] | undefined>()
   const [image, setImage] = useState<NextCloudImage | undefined>()
 
@@ -25,7 +25,7 @@ export const AddToTopicImage = () => {
       images: images as NextCloudImage[],
     } as Topic
 
-    if (collection) addItem(collection, item)
+    if (collection) addCollectionItem(collection, item)
   }
 
   return (

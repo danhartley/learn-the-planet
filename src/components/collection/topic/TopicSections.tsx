@@ -12,8 +12,12 @@ type Props = {
 }
 
 export const TopicSections = ({ section }: Props) => {
-  const { collection, updateCollectionItem, deleteItem, apiResponse } =
-    useCollection()
+  const {
+    collection,
+    updateCollectionItem,
+    deleteCollectionItem,
+    apiResponse,
+  } = useCollection()
   const [sectionText, setSectionText] = useState(section.text)
   const [changesToSave, setChangesToSave] = useState(false)
 
@@ -30,7 +34,7 @@ export const TopicSections = ({ section }: Props) => {
     }
   }
   const deleteText = () => {
-    if (collection) if (section) deleteItem(collection, section.id)
+    if (collection) if (section) deleteCollectionItem(collection, section.id)
   }
 
   return (

@@ -40,7 +40,9 @@ export const TermsList = () => {
     <section aria-labelledby="terms-list" className="group-block">
       <div className="group">
         <h2 id="terms-list">Terms ({terms.length})</h2>
-        <div>Click on a term to edit or delete it</div>
+        <div>
+          <em>Click to edit or delete a term.</em>
+        </div>
       </div>
       <div className="column-group">
         {terms.map(term => (

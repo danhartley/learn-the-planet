@@ -8,7 +8,7 @@ import { Topic, Taxon, Operation } from '@/types'
 import { getShortId } from '@/utils/strings'
 
 export const AddToTopicTaxa = () => {
-  const { collection, addItem } = useCollection()
+  const { collection, addCollectionItem } = useCollection()
   const [items, setItems] = useState<Taxon[] | undefined>()
 
   const handleSaveItems = (newItems: Taxon[]) => {
@@ -20,7 +20,7 @@ export const AddToTopicTaxa = () => {
         examples: newItems,
       } as Topic
 
-      addItem(collection, item)
+      addCollectionItem(collection, item)
     }
   }
 

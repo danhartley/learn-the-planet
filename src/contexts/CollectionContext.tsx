@@ -20,7 +20,10 @@ type CollectionContextType = {
   setCollection: (collection: Collection<unknown>) => void
   apiResponse: ApiResponse
   setApiResponse: (response: ApiResponse) => void
-  addItem: (collection: Collection<unknown>, item: unknown) => Promise<void>
+  addCollectionItem: (
+    collection: Collection<unknown>,
+    item: unknown
+  ) => Promise<void>
   removeItem: (id: string) => Promise<void>
   updateLinkedCollections: (
     linkedCollections: CollectionSummary[]
@@ -39,7 +42,10 @@ type CollectionContextType = {
     collection: Collection<unknown>,
     updatedItem: unknown
   ) => Promise<void>
-  deleteItem: (collection: Collection<unknown>, itemId: string) => Promise<void>
+  deleteCollectionItem: (
+    collection: Collection<unknown>,
+    itemId: string
+  ) => Promise<void>
   addCollection: (
     name: string,
     type: ContentHandlerType,
@@ -69,7 +75,7 @@ export const CollectionProvider = ({
   })
 
   // Add or update item
-  const addItem = useCallback(
+  const addCollectionItem = useCallback(
     async (collection: Collection<unknown>, item: unknown) => {
       if (!collection || !item) return
 
@@ -434,7 +440,7 @@ export const CollectionProvider = ({
     }
   }
 
-  const deleteItem = async (
+  const deleteCollectionItem = async (
     collection: Collection<unknown>,
     itemId: string
   ) => {
@@ -564,7 +570,7 @@ export const CollectionProvider = ({
         setCollection,
         apiResponse,
         setApiResponse,
-        addItem,
+        addCollectionItem,
         removeItem,
         updateLinkedCollections,
         deleteCollection,
@@ -572,7 +578,7 @@ export const CollectionProvider = ({
         getCollectionSummaries,
         updateCollectionItems,
         updateCollectionItem,
-        deleteItem,
+        deleteCollectionItem,
         addCollection,
       }}
     >

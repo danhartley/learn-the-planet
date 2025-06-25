@@ -19,8 +19,12 @@ export const EditTerm: React.FC<EditTermProps> = ({
   onSave,
   onDelete,
 }) => {
-  const { collection, updateCollectionItem, deleteItem, apiResponse } =
-    useCollection()
+  const {
+    collection,
+    updateCollectionItem,
+    deleteCollectionItem,
+    apiResponse,
+  } = useCollection()
 
   const [termValue, setTermValue] = useState(term.term)
   const [definition, setDefinition] = useState(term.definition)
@@ -71,7 +75,7 @@ export const EditTerm: React.FC<EditTermProps> = ({
       collection &&
       confirm(`Are you sure you want to delete the term "${term.term}"?`)
     ) {
-      deleteItem(collection, term.id)
+      deleteCollectionItem(collection, term.id)
       onDelete()
     }
   }
@@ -90,7 +94,7 @@ export const EditTerm: React.FC<EditTermProps> = ({
   const isFormValid = termValue.trim() && definition.trim()
 
   return (
-    <div className="column-group">
+    <div className="column-group edit">
       <section aria-labelledby={`${term.id}-term`} className="collection-field">
         <h3 id={`${term.id}-term`}>
           <label htmlFor={`term-input-${term.id}`}>Term *</label>
@@ -122,7 +126,7 @@ export const EditTerm: React.FC<EditTermProps> = ({
             onChange={handleDefinitionChange}
             onKeyDown={handleKeyPress}
             placeholder="Enter the definition"
-            rows={4}
+            rows={2}
             required
           />
         </div>
@@ -161,22 +165,27 @@ export const EditTerm: React.FC<EditTermProps> = ({
             onChange={handleExampleChange}
             onKeyDown={handleKeyPress}
             placeholder="Provide an example (optional)"
-            rows={3}
+            rows={2}
           />
         </div>
       </section>
 
       <div className="form-row">
-        <button type="button" onClick={handleSave} disabled={!isFormValid}>
+        <button
+          type="button"
+          onClick={handleSave}
+          disabled={!isFormValid}
+          className="save"
+        >
           Save
         </button>
-        <button type="button" onClick={onCancel}>
+        <button type="button" onClick={onCancel} className="cancel">
           Cancel
         </button>
         <button
           type="button"
           onClick={handleDelete}
-          className="delete-button"
+          className="delete"
           aria-label={`Delete term: ${term.term}`}
         >
           Delete

@@ -24,7 +24,7 @@
   --colour-bg-button: rgb(233 228 208);
   --colour-bg-card-button: rgba(255, 255, 255, 0.5);
   --colour-bg-body: rgb(248 244 240);
-  --colour-bg-section-type-selector: rgb(255 238 187);
+  --colour-bg-add-element: rgb(255 238 187);
   --colour-bg-save-btn: rgb(226 233 241);
   --colour-bg-delete-btn: rgb(234 213 223);
   --colour-form-label: rgb(64 64 65);
@@ -194,8 +194,14 @@ button {
   border-radius: var(--border-radius-sm);
   color: var(--colour-fg-text);
 
+  &.add {
+    background-color: var(--colour-bg-add-element);
+  }
   &.save {
     background-color: var(--colour-bg-save-btn);
+  }
+  &.cancel {
+    background-color: var(--colour-bg-body);
   }
   &.delete {
     background-color: var(--colour-bg-delete-btn);
@@ -318,6 +324,11 @@ li::marker {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-md);
+
+  &.edit {
+    padding: var(--spacing-md);
+    background-color: var(--colour-bg-main);
+  }
 }
 
 .row-group {
@@ -431,6 +442,7 @@ form {
   align-items: center;
   gap: var(--spacing-md);
   border-radius: var(--border-radius-sm);
+  flex-wrap: wrap;
 }
 
 .form-row button {
@@ -802,7 +814,7 @@ progress {
   top: 0;
   z-index: 1;
   padding-bottom: var(--spacing-md);
-  background-color: var(--colour-bg-section-type-selector);
+  background-color: var(--colour-bg-add-element);
   border-bottom: var(--spacing-md) solid var(--colour-bg-body);
   position: sticky;
 }

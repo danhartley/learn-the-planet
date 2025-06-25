@@ -13,7 +13,8 @@ type Props = {
 }
 
 export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
-  const { updateCollectionItem, deleteItem, apiResponse } = useCollection()
+  const { updateCollectionItem, deleteCollectionItem, apiResponse } =
+    useCollection()
   const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
     section?.examples || []
@@ -43,7 +44,7 @@ export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
   }
 
   const deleteTaxa = () => {
-    deleteItem(collection, section.id)
+    deleteCollectionItem(collection, section.id)
   }
 
   return (

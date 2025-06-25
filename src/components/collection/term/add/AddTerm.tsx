@@ -8,7 +8,7 @@ import { Term } from '@/types'
 import { getShortId } from '@/utils/strings'
 
 export const AddTerm = () => {
-  const { collection, addItem, apiResponse } = useCollection()
+  const { collection, addCollectionItem, apiResponse } = useCollection()
   const [term, setTerm] = useState('')
   const [definition, setDefinition] = useState('')
   const [source, setSource] = useState('')
@@ -49,7 +49,7 @@ export const AddTerm = () => {
     }
 
     if (collection) {
-      addItem(collection, item)
+      addCollectionItem(collection, item)
       // Clear form after successful save
       setTerm('')
       setDefinition('')
@@ -119,7 +119,7 @@ export const AddTerm = () => {
             onChange={handleDefinitionChange}
             onKeyDown={handleKeyPress}
             placeholder="Enter the definition"
-            rows={4}
+            rows={2}
             required
           />
         </div>
@@ -152,7 +152,7 @@ export const AddTerm = () => {
             onChange={handleExampleChange}
             onKeyDown={handleKeyPress}
             placeholder="Provide an example (optional)"
-            rows={3}
+            rows={2}
           />
         </div>
       </section>
@@ -163,6 +163,7 @@ export const AddTerm = () => {
           type="submit"
           onClick={saveTerm}
           disabled={!isFormValid}
+          className="add"
         >
           Add Term
         </button>

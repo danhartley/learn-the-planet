@@ -8,7 +8,7 @@ import { Topic } from '@/types'
 import { textToArray, getShortId } from '@/utils/strings'
 
 export const AddToTopicText = () => {
-  const { collection, addItem, apiResponse } = useCollection()
+  const { collection, addCollectionItem, apiResponse } = useCollection()
   const [text, setText] = useState('')
   const [lastSectionId, setLastSectionId] = useState(
     collection?.items?.findLast(item => (item as Topic).id)
@@ -24,7 +24,7 @@ export const AddToTopicText = () => {
       text: textToArray(text) as string[],
     } as Topic
 
-    if (collection) addItem(collection, item)
+    if (collection) addCollectionItem(collection, item)
   }
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export const AddToTopicText = () => {
         />
       </div>
       <div className="form-row">
-        <button id="submit" type="submit" onClick={saveText}>
+        <button id="submit" type="submit" onClick={saveText} className="add">
           Add text
         </button>
         <ApiResponseMessage apiResponse={apiResponse} />

@@ -206,7 +206,12 @@ export const TaxonAutocomplete = ({
               >
                 Save changes
               </button>
-              <button type="button" id="delete-section" onClick={deleteTaxa}>
+              <button
+                type="button"
+                id="delete-section"
+                onClick={deleteTaxa}
+                className="delete"
+              >
                 Delete taxa
               </button>
               <ApiResponseMessage apiResponse={apiResponse} />
