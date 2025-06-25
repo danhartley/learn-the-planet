@@ -3,7 +3,8 @@ import React from 'react'
 import { useCollection } from '@/contexts/CollectionContext'
 
 // import { TermItems } from '@/components/collection/TermItems'
-import { TermJson } from '@/components/collection/term/TermJson'
+// import { TermJson } from '@/components/collection/term/TermJson'
+import { AddTerm } from '@/components/collection/term/add/AddTerm'
 import { AddToTaxon } from '@/components/collection/taxon/add/AddToTaxon'
 import { AddToTopic } from '@/components/collection/topic/add/AddToTopic'
 
@@ -14,7 +15,7 @@ export function AddToItems() {
   const itemComponent: {
     [K in ContentHandlerType]: React.ComponentType
   } = {
-    term: TermJson,
+    term: AddTerm,
     taxon: AddToTaxon,
     topic: AddToTopic,
     trait: () => {

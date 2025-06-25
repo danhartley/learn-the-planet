@@ -39,9 +39,11 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
     collection.items.map((section, sectionIndex) => {
       return (
         <React.Fragment key={section.id}>
-          <h2>
-            <em>{section.topic || 'missing topic'}</em>
-          </h2>
+          {section.topic && (
+            <h2>
+              <em>{section.topic}</em>
+            </h2>
+          )}
           {section.images &&
             section.images.map(img => {
               return (

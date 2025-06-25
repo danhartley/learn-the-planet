@@ -40,9 +40,12 @@ export function CollectionTextField({
   }
 
   return (
-    <section aria-labelledby="collection-field">
+    <section
+      aria-labelledby={`${fieldText}-${sectionIndex}-section`}
+      className="collection-field"
+    >
       <div>
-        <h3 id="collection-field">
+        <h3 id={`${fieldText}-${sectionIndex}-section`}>
           <label htmlFor={`${fieldText}-${sectionIndex}-${fieldValue}`}>
             {fieldText}
           </label>

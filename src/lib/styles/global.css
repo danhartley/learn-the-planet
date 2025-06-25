@@ -253,6 +253,8 @@ textarea {
   font-size: var(--font-size-md);
   font-family: var(--font-family-sans-serif);
   line-height: var(--line-height-md);
+  width: 100%;
+  border: none;
 }
 
 /* Lists and term lists */
@@ -805,7 +807,7 @@ progress {
   position: sticky;
 }
 
-[aria-labelledby='collection-field'] {
+.collection-field {
   input {
     font-size: var(--font-size-md);
   }

@@ -11,6 +11,7 @@ import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
 import { TopicItems } from '@/components/collection/topic/TopicItems'
 import { AddToItems } from '@/components/collection/AddToItems'
+import { TermsList } from '@/components/collection/term/edit/TermsList'
 
 import { ElementNavigator, createElementIdArray } from '@/utils/navigation'
 
@@ -91,8 +92,13 @@ export const EditOperations = () => {
           <EditLinkedCollections collectionSummaries={collectionSummaries} />
         )}
       {operation === ('delete' as Operation) && <DeleteCollection />}
+
       {operation === ('update-items' as Operation) &&
         collection?.type === ('topic' as ContentHandlerType) && <TopicItems />}
+
+      {operation === ('update-items' as Operation) &&
+        collection?.type === ('term' as ContentHandlerType) && <TermsList />}
+
       {operation === ('update-items' as Operation) && <AddToItems />}
 
       {showNavigation && (
