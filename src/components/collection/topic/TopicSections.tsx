@@ -9,10 +9,9 @@ import { Topic } from '@/types'
 
 type Props = {
   section: Topic
-  sectionIndex: number
 }
 
-export const TopicSections = ({ section, sectionIndex }: Props) => {
+export const TopicSections = ({ section }: Props) => {
   const { collection, updateCollectionItem, deleteItem, apiResponse } =
     useCollection()
   const [sectionText, setSectionText] = useState(section.text)
@@ -42,7 +41,6 @@ export const TopicSections = ({ section, sectionIndex }: Props) => {
           id={section.id}
           text={sectionText}
           setSectionText={setSectionText}
-          sectionIndex={sectionIndex}
         />
       )}
       {!!sectionText && (

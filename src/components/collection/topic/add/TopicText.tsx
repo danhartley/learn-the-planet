@@ -4,15 +4,9 @@ type Props = {
   id: string
   text: string[] | undefined
   setSectionText: Dispatch<SetStateAction<string[] | undefined>>
-  sectionIndex: number
 }
 
-export const TopicText = ({
-  id,
-  text,
-  setSectionText,
-  sectionIndex,
-}: Props) => {
+export const TopicText = ({ id, text, setSectionText }: Props) => {
   const [paras, setParas] = useState<string>('')
 
   function textToArray(text: string): string[] {

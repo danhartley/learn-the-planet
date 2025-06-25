@@ -85,6 +85,7 @@ export const TaxonAutocomplete = ({
       },
       wait: 350,
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
 
@@ -105,9 +106,7 @@ export const TaxonAutocomplete = ({
     onTaxonToggle(taxon)
   }
 
-  interface ClearSearchEvent extends React.MouseEvent<HTMLButtonElement> {}
-
-  const clearSearch = (e: ClearSearchEvent) => {
+  const clearSearch = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setSuggestions([])
     setInputValue('')

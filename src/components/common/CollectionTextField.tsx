@@ -43,9 +43,9 @@ export function CollectionTextField({
     <section aria-labelledby="collection-field">
       <div>
         <h3 id="collection-field">
-          <label
-            htmlFor={`${fieldText}-${sectionIndex}-${fieldValue}`}
-          >{`${fieldText} ${sectionIndex || ''}`}</label>
+          <label htmlFor={`${fieldText}-${sectionIndex}-${fieldValue}`}>
+            {fieldText}
+          </label>
           <span>{required ? ' *' : ''}</span>
         </h3>
         <div className={`form-row ${type}`}>

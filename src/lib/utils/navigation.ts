@@ -21,7 +21,6 @@ export class ElementNavigator {
   }
 
   private scrollToElement(elementId: string): void {
-    console.log('elementId', elementId)
     const element = document.getElementById(elementId)
     if (element) {
       element.scrollIntoView({
@@ -75,7 +74,6 @@ export class ElementNavigator {
 
 export const createElementIdArray = (): string[] => {
   const elements = document.querySelectorAll('.navigable')
-  console.log(elements)
   return Array.from(elements)
     .filter(element => element.id)
     .map(element => element.id)

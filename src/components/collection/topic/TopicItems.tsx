@@ -38,38 +38,35 @@ export const TopicItems = () => {
   // )
 
   return (
-    <div>
+    <div className="column-group">
       {topicCollection.items &&
         topicCollection.items.map((section, index) => {
           return (
-            <div
-              key={section.id}
-              id={section.id}
-              className="group-block navigable"
-            >
-              <TopicSections
-                key={section.id}
-                section={section}
-                sectionIndex={index + 1}
-              />
-              {section.images?.map(img => {
-                return (
-                  <TopicCloudImage
-                    key={img.src}
+            <>
+              <div id={section.id} className="navigable">
+                <div>{index + 1}</div>
+              </div>
+              <div key={section.id} className="group-block">
+                <TopicSections key={section.id} section={section} />
+                {section.images?.map(img => {
+                  return (
+                    <TopicCloudImage
+                      key={img.src}
+                      section={section}
+                      image={img}
+                      sectionIndex={index + 1}
+                    />
+                  )
+                })}
+                {section.examples && (
+                  <TopicExamples
+                    collection={topicCollection}
                     section={section}
-                    image={img}
                     sectionIndex={index + 1}
                   />
-                )
-              })}
-              {section.examples && (
-                <TopicExamples
-                  collection={topicCollection}
-                  section={section}
-                  sectionIndex={index + 1}
-                />
-              )}
-            </div>
+                )}
+              </div>
+            </>
           )
         })}
     </div>

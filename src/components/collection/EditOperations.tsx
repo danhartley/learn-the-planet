@@ -21,6 +21,7 @@ export const EditOperations = () => {
   const [operation, setOperation] = useState<Operation>('update-items')
   const [collectionSummaries, setCollectionSummaries] =
     useState<CollectionSummary[]>()
+  const [showNavigation, setShowNavigation] = useState(true)
 
   useEffect(() => {
     getCollectionSummaries().then(setCollectionSummaries)
@@ -29,28 +30,47 @@ export const EditOperations = () => {
   useEffect(() => {
     const elementIds = createElementIdArray()
 
-    if (elementIds.length > 0) {
-      const navigator = new ElementNavigator(
-        elementIds,
-        'up-arrow',
-        'down-arrow'
-      )
+    if (elementIds.length > 0 && operation === 'update-items') {
+      setShowNavigation(true)
 
-      const handleUpClick = () => navigator.navigateUp()
-      const handleDownClick = () => navigator.navigateDown()
+      // Add a small delay to ensure DOM elements are rendered
+      const timeoutId = setTimeout(() => {
+        const upButton = document.getElementById('up-arrow')
+        const downButton = document.getElementById('down-arrow')
 
-      const upButton = document.getElementById('up-arrow')
-      const downButton = document.getElementById('down-arrow')
+        // Only create navigator if both buttons exist
+        if (upButton && downButton) {
+          const navigator = new ElementNavigator(
+            elementIds,
+            'up-arrow',
+            'down-arrow'
+          )
 
-      upButton?.addEventListener('click', handleUpClick)
-      downButton?.addEventListener('click', handleDownClick)
+          const handleUpClick = () => navigator.navigateUp()
+          const handleDownClick = () => navigator.navigateDown()
 
+          upButton.addEventListener('click', handleUpClick)
+          downButton.addEventListener('click', handleDownClick)
+
+          // Store cleanup function
+          const cleanup = () => {
+            upButton.removeEventListener('click', handleUpClick)
+            downButton.removeEventListener('click', handleDownClick)
+          }
+
+          // Return cleanup function
+          return cleanup
+        }
+      }, 0)
+
+      // Cleanup timeout if component unmounts
       return () => {
-        upButton?.removeEventListener('click', handleUpClick)
-        downButton?.removeEventListener('click', handleDownClick)
+        clearTimeout(timeoutId)
       }
+    } else {
+      setShowNavigation(false)
     }
-  }, [])
+  }, [operation])
 
   return (
     <>
@@ -75,10 +95,12 @@ export const EditOperations = () => {
         collection?.type === ('topic' as ContentHandlerType) && <TopicItems />}
       {operation === ('update-items' as Operation) && <AddToItems />}
 
-      <div id="edit-navigation">
-        <div id="up-arrow"> </div>
-        <div id="down-arrow"> </div>
-      </div>
+      {showNavigation && (
+        <div id="edit-navigation">
+          <div id="up-arrow"> </div>
+          <div id="down-arrow"> </div>
+        </div>
+      )}
     </>
   )
 }

@@ -12,7 +12,7 @@ export const TaxonItems = () => {
   return (
     <>
       {TaxonCollection?.items &&
-        TaxonCollection.items.map((section, index) => {
+        TaxonCollection.items.map(section => {
           return <React.Fragment key={section.id}></React.Fragment>
         })}
     </>

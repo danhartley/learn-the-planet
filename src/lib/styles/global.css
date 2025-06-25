@@ -316,7 +316,6 @@ li::marker {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-md);
-  /* margin-bottom: var(--spacing-md); */
 }
 
 .row-group {
@@ -391,9 +390,15 @@ li::marker {
     linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
   background-size: 3px 3px;
+}
 
-  &.navigable {
-    margin-bottom: var(--spacing-lg);
+.navigable {
+  padding: var(--spacing-xs) 0;
+  align-self: flex-end;
+  div {
+    background-color: var(--colour-bg-main);
+    padding: var(--spacing-md) var(--spacing-lg);
+    width: fit-content;
   }
 }
 
