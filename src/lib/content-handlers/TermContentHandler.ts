@@ -18,7 +18,9 @@ function generateTermDistractors(
   distractorType: DistractorType
 ): unknown[] {
   // Implementation for Term distractors
-  const allDefinitions = collection.items.filter(def => def.id !== item.id)
+  const allDefinitions = (collection.items ?? []).filter(
+    def => def.id !== item.id
+  )
 
   // Randomly select the requested number of distractors
   const selectedDistractors = shuffleArray(allDefinitions).slice(0, count)

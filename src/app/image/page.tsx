@@ -10,7 +10,8 @@ import { NextCloudImage } from '@/types'
 export default function Page() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [setImage] = useState<NextCloudImage | undefined>({
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [image, setImage] = useState<NextCloudImage | undefined>({
     src: '',
     caption: '',
     alt: '',

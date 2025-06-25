@@ -61,7 +61,7 @@ export class TestPlanner<T> {
 
   private generateLayouts(): void {
     // For each item in the collection, create layouts based on templates
-    shuffleArray(this.collection.items).forEach((item, itemIndex) => {
+    shuffleArray(this.collection.items ?? []).forEach((item, itemIndex) => {
       const questions = this.contentHandler.createQuestions(
         this.collection,
         item,

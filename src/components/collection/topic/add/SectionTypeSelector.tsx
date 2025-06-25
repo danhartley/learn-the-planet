@@ -29,10 +29,10 @@ export const SectionTypeSelector = ({
 
   const scrollToNewSection = () => {
     // Find the height of the section type selector
-    const sectionTypeSelector = document.getElementById(
-      'section-type-selector-section'
-    )
-    const sectionTypeSelectorHeight = sectionTypeSelector?.offsetHeight || 0
+    // const sectionTypeSelector = document.getElementById(
+    //   'section-type-selector-section'
+    // )
+    // const sectionTypeSelectorHeight = sectionTypeSelector?.offsetHeight || 0
 
     // Find the component to display
     const newSection = document.getElementById('new-section')

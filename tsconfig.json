@@ -54,7 +54,7 @@
     "src/lib/api/inat/inat-species-map.ts",
     "out/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "artefacts", "**/mocks/**/*.*", "archived"],
+  "exclude": ["node_modules", "artefacts", "**/mocks/**/*.*", "_archived"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"

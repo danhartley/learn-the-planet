@@ -25,7 +25,7 @@ export function generateTaxonDistractors(
       : []
   const extras = count - distractorBinomials.length
   const collectionBinomials = shuffleArray(
-    collection.items.filter(d => d.binomial !== item.binomial)
+    (collection.items ?? []).filter(d => d.binomial !== item.binomial)
   ).slice(0, extras)
 
   const distractors = [...distractorBinomials, ...collectionBinomials]

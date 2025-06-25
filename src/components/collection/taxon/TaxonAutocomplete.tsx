@@ -75,6 +75,7 @@ export const TaxonAutocomplete = ({
                   rank: item.rank,
                   iconicTaxon: item.iconic_taxon_name,
                 }) as Taxon
+              // eslint-disable-next-line react-hooks/exhaustive-deps
             ) || []
 
           setSuggestions(transformedSuggestions)

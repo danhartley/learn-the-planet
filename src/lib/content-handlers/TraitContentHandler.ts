@@ -32,7 +32,9 @@ function generateTraitDistractors(
   switch (distractorType) {
     case 'morphology':
     case 'phenology':
-      return shuffleArray(collection.items.filter(d => d.trait !== item.trait))
+      return shuffleArray(
+        (collection.items ?? []).filter(d => d.trait !== item.trait)
+      )
         .slice(0, extras)
         .map(d => {
           return {
@@ -42,7 +44,7 @@ function generateTraitDistractors(
         }) as MultipleSelectOption[]
     default:
       collectionDistractorNames = shuffleArray(
-        collection.items.filter(d => d.trait !== item.trait)
+        (collection.items ?? []).filter(d => d.trait !== item.trait)
       ).slice(0, extras) as Trait[]
       const distractorItems = [
         ...itemDistractorNames,

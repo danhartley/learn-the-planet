@@ -61,7 +61,7 @@ export const CollectionProvider = ({
   initialCollection,
 }: CollectionProviderProps) => {
   const [collection, setCollection] = useState<Collection<unknown> | null>(
-    initialCollection
+    initialCollection ?? null
   )
   const [apiResponse, setApiResponse] = useState<ApiResponse>({
     success: false,
