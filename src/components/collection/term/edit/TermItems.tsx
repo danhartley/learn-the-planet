@@ -5,7 +5,7 @@ import { useCollection } from '@/contexts/CollectionContext'
 import { Term } from '@/types'
 import { EditTerm } from '@/components/collection/term/edit/EditTerm'
 
-export const TermsList = () => {
+export const TermItems = () => {
   const { collection } = useCollection()
   const [editingTermId, setEditingTermId] = useState<string | null>(null)
 

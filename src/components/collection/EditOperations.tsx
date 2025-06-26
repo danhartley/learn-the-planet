@@ -10,8 +10,10 @@ import { EditProperties } from '@/components/collection/EditProperties'
 import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
 import { TopicItems } from '@/components/collection/topic/TopicItems'
-import { AddToItems } from '@/components/collection/AddToItems'
-import { TermsList } from '@/components/collection/term/edit/TermsList'
+import { EditTopic } from '@/components/collection/topic/edit/EditTopic'
+import { EditTaxa } from '@/components/collection/taxon/EditTaxa'
+import { TermItems } from '@/components/collection/term/edit/TermItems'
+import { AddTerm } from '@/components/collection/term/add/AddTerm'
 
 import { ElementNavigator, createElementIdArray } from '@/utils/navigation'
 
@@ -97,9 +99,15 @@ export const EditOperations = () => {
         collection?.type === ('topic' as ContentHandlerType) && <TopicItems />}
 
       {operation === ('update-items' as Operation) &&
-        collection?.type === ('term' as ContentHandlerType) && <TermsList />}
+        collection?.type === ('topic' as ContentHandlerType) && <EditTopic />}
 
-      {operation === ('update-items' as Operation) && <AddToItems />}
+      {operation === ('update-items' as Operation) &&
+        collection?.type === ('taxon' as ContentHandlerType) && <EditTaxa />}
+
+      {operation === ('update-items' as Operation) &&
+        collection?.type === ('term' as ContentHandlerType) && (
+          <TermItems />
+        ) && <AddTerm />}
 
       {showNavigation && (
         <div id="edit-navigation">

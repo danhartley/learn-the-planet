@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
-import { AddTaxa } from '@/components/collection/taxon/add/AddTaxa'
+import { AddTaxa } from '@/components/collection/taxon/AddTaxa'
 
 import { Taxon, Collection } from '@/types'
 
-export const AddToTaxon = () => {
+export const EditTaxa = () => {
   const { collection, updateCollectionItems } = useCollection()
   const [items, setItems] = useState<Taxon[] | undefined>(
     (collection as Collection<Taxon>)?.items

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-import { SectionTypeSelector } from '@/components/collection/topic/add/SectionTypeSelector'
-import { AddToTopicMap } from '@/components/collection/topic/add/AddToTopicMap'
+import { SectionTypeSelector } from '@/components/collection/topic/edit/SectionTypeSelector'
+import { EditTopicMap } from '@/components/collection/topic/edit/EditTopicMap'
 
 import { SectionType } from '@/types'
 
-export const AddToTopic = () => {
+export const EditTopic = () => {
   const [selectedOption, setSelectedOption] = useState<SectionType>('text')
 
   return (
@@ -15,7 +15,7 @@ export const AddToTopic = () => {
         setSelectedOption={setSelectedOption}
       />
 
-      <AddToTopicMap sectionType={selectedOption} />
+      <EditTopicMap sectionType={selectedOption} />
     </>
   )
 }

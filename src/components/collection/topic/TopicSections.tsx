@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
-import { TopicText } from '@/components/collection/topic/add/TopicText'
+import { TopicText } from '@/components/collection/topic/edit/TopicText'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { Topic } from '@/types'

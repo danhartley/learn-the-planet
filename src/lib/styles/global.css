@@ -571,8 +571,13 @@ form {
   background-color: var(--colour-bg-trait-card);
 }
 
-[aria-labelledby='terms'] .card {
-  background-color: var(--colour-bg-term-card);
+[aria-labelledby='terms'] {
+  .card {
+    background-color: var(--colour-bg-term-card);
+  }
+  ul {
+    column-count: 1;
+  }
 }
 
 .card button {
@@ -853,6 +858,12 @@ progress {
   #section-type-selector-section {
     top: var(--spacing-sm);
   }
+
+  [aria-labelledby='terms'] {
+    ul {
+      column-count: 2;
+    }
+  }
 }
 
 #edit-navigation {
@@ -903,6 +914,11 @@ progress {
 @media (min-width: 1441px) {
   .grid-lg {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+  [aria-labelledby='terms'] {
+    ul {
+      column-count: 3;
+    }
   }
 }
 
