@@ -15,9 +15,10 @@ interface TaxonAutocompleteProps {
   changesToSave: boolean
   saveChanges: () => void
   apiResponse: ApiResponse
-  sectionIndex: number
+  sectionIndex?: number
   deleteTaxa?: () => void
   section?: Topic | Taxon | Trait | Term
+  saveText?: string
 }
 
 export const TaxonAutocomplete = ({
@@ -28,6 +29,8 @@ export const TaxonAutocomplete = ({
   apiResponse,
   sectionIndex,
   section,
+  saveText = 'Save',
+  deleteTaxa,
 }: TaxonAutocompleteProps) => {
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState<Taxon[]>([])
@@ -193,9 +196,9 @@ export const TaxonAutocomplete = ({
                 </div>
                 <button
                   onClick={() => handleTaxonToggle(taxon)}
-                  className="delete"
+                  className="remove"
                 >
-                  Delete
+                  Remove
                 </button>
               </div>
             ))}
@@ -209,8 +212,9 @@ export const TaxonAutocomplete = ({
                 onClick={saveChanges}
                 className="save"
               >
-                Save changes
+                {saveText}
               </button>
+
               <ApiResponseMessage apiResponse={apiResponse} />
             </div>
           }

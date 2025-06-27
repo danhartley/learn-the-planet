@@ -74,14 +74,14 @@ export const EditTrait: React.FC<EditTraitProps> = ({
     // Convert textarea content to arrays, filtering out empty paragraphs
     const morphologyArray = morphology.trim()
       ? morphology
-          .split('\n\n')
+          .split('\n')
           .map(p => p.trim())
           .filter(p => p.length > 0)
       : undefined
 
     const phenologyArray = phenology.trim()
       ? phenology
-          .split('\n\n')
+          .split('\n')
           .map(p => p.trim())
           .filter(p => p.length > 0)
       : undefined
@@ -102,6 +102,7 @@ export const EditTrait: React.FC<EditTraitProps> = ({
       ...(sourceObject && { source: sourceObject }),
       ...(morphologyArray && { morphology: morphologyArray }),
       ...(phenologyArray && { phenology: phenologyArray }),
+      examples,
     }
 
     // Remove source, morphology, phenology if they're empty
@@ -165,7 +166,6 @@ export const EditTrait: React.FC<EditTraitProps> = ({
           />
         </div>
       </section>
-
       <section
         aria-labelledby={`${trait.id}-definition`}
         className="collection-field"
@@ -185,7 +185,6 @@ export const EditTrait: React.FC<EditTraitProps> = ({
           />
         </div>
       </section>
-
       <section
         aria-labelledby={`${trait.id}-source-name`}
         className="collection-field"
@@ -204,7 +203,6 @@ export const EditTrait: React.FC<EditTraitProps> = ({
           />
         </div>
       </section>
-
       <section
         aria-labelledby={`${trait.id}-source-url`}
         className="collection-field"
@@ -223,9 +221,7 @@ export const EditTrait: React.FC<EditTraitProps> = ({
           />
         </div>
       </section>
-
       <h3>Biological Aspects</h3>
-
       <section
         aria-labelledby={`${trait.id}-morphology`}
         className="collection-field"
@@ -244,7 +240,6 @@ export const EditTrait: React.FC<EditTraitProps> = ({
           />
         </div>
       </section>
-
       <section
         aria-labelledby={`${trait.id}-phenology`}
         className="collection-field"
@@ -263,7 +258,7 @@ export const EditTrait: React.FC<EditTraitProps> = ({
           />
         </div>
       </section>
-
+      <section></section>
       <div className="form-row">
         <button
           type="button"

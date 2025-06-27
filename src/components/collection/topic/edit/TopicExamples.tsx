@@ -4,26 +4,30 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { TaxonAutocomplete } from '@/components/collection/taxon/TaxonAutocomplete'
 
-import { Taxon, Operation } from '@/types'
+import { Collection, Topic, Taxon } from '@/types'
 
 type Props = {
-  setItems: (items: Taxon[]) => void // Changed from Dispatch<SetStateAction<...>>
-  items: Taxon[] | undefined
-  operation?: Operation
+  collection: Collection<Topic>
+  section: Topic
+  sectionIndex: number
 }
 
-export const AddTaxa = ({ items, setItems }: Props) => {
-  const { apiResponse } = useCollection()
+export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
+  const { updateCollectionItem, deleteCollectionItem, apiResponse } =
+    useCollection()
   const [changesToSave, setChangesToSave] = useState(false)
-  const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(items || [])
+  const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
+    section?.examples || []
+  )
 
   useEffect(() => {
     setChangesToSave(true)
-  }, [selectedTaxa])
+  }, [section?.examples])
 
-  const saveChanges = async () => {
-    setItems(selectedTaxa) // This now calls the parent's handler
-    setChangesToSave(false)
+  const saveChanges = () => {
+    section.examples = selectedTaxa || []
+    updateCollectionItem(collection, section)
+    setSelectedTaxa([])
   }
 
   const handleTaxonToggle = (taxon: Taxon) => {
@@ -40,6 +44,11 @@ export const AddTaxa = ({ items, setItems }: Props) => {
     })
   }
 
+  const deleteTaxa = () => {
+    console.log('remove taxa but do not delete section!')
+    // deleteCollectionItem(collection, section.id)
+  }
+
   return (
     <TaxonAutocomplete
       selectedTaxa={selectedTaxa}
@@ -47,7 +56,10 @@ export const AddTaxa = ({ items, setItems }: Props) => {
       changesToSave={changesToSave}
       saveChanges={saveChanges}
       apiResponse={apiResponse}
-      sectionIndex={1}
+      sectionIndex={sectionIndex}
+      deleteTaxa={deleteTaxa}
+      section={section as Topic}
+      saveText="Save taxa"
     />
   )
 }

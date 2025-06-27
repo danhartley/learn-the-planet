@@ -24,7 +24,6 @@ type CollectionContextType = {
     collection: Collection<unknown>,
     item: unknown
   ) => Promise<void>
-  removeItem: (id: string) => Promise<void>
   updateLinkedCollections: (
     linkedCollections: CollectionSummary[]
   ) => Promise<Collection<unknown> | undefined>
@@ -139,24 +138,6 @@ export const CollectionProvider = ({
     },
     [setCollection, setApiResponse]
   )
-
-  const removeItem = async (id: string) => {
-    if (!collection) return
-
-    // API call stub - add your implementation
-    console.log('Removing item:', id)
-
-    // Optimistic update
-    setCollection(prev =>
-      prev
-        ? {
-            ...prev,
-            //eslint-disable-next-line @typescript-eslint/no-explicit-any
-            items: (prev.items || []).filter(item => (item as any).id !== id),
-          }
-        : null
-    )
-  }
 
   const updateLinkedCollections = async (
     linkedCollections: CollectionSummary[]
@@ -445,7 +426,7 @@ export const CollectionProvider = ({
     itemId: string
   ) => {
     if (!collection || !itemId) return
-
+    console.log(collection, itemId)
     // Check if item exists in collection
     const itemExists = collection.items?.some(
       item => (item as { id: string }).id === itemId
@@ -571,7 +552,6 @@ export const CollectionProvider = ({
         apiResponse,
         setApiResponse,
         addCollectionItem,
-        removeItem,
         updateLinkedCollections,
         deleteCollection,
         updateCollectionFields,

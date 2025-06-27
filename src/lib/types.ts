@@ -367,9 +367,10 @@ export type UpdateCollectionFieldsOptions = {
 export type CollectionStatus = 'private' | 'public'
 
 export type SectionType = 'text' | 'image' | 'taxon'
+export type TraitSectionType = 'morphology' | 'phenology' | 'taxon'
 
 export type SectionTypeOption = {
-  key: SectionType
+  key: SectionType | TraitSectionType
   value: string
   description: string
 }

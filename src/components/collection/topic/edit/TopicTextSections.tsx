@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
-import { TopicText } from '@/components/collection/topic/TopicText'
+import { TopicText } from '@/components/collection/topic/edit/TopicText'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { Topic } from '@/types'
@@ -11,7 +11,7 @@ type Props = {
   section: Topic
 }
 
-export const TopicSections = ({ section }: Props) => {
+export const TopicTextSections = ({ section }: Props) => {
   const {
     collection,
     updateCollectionItem,
@@ -56,7 +56,7 @@ export const TopicSections = ({ section }: Props) => {
             onClick={saveChanges}
             className="save"
           >
-            Save changes
+            Save
           </button>
           <button onClick={deleteText} className="delete">
             Delete text

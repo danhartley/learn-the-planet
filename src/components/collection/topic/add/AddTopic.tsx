@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { SectionTypeSelector } from '@/components/collection/topic/add/SectionTypeSelector'
-import { AddTopicMap } from '@/components/collection/topic/add/AddTopicMap'
+import { SectionTypeSelectionToTopicMap } from '@/components/collection/topic/add/SectionTypeSelectionToTopicMap'
 
 import { SectionType } from '@/types'
 
@@ -15,7 +15,7 @@ export const AddTopic = () => {
         setSelectedOption={setSelectedOption}
       />
 
-      <AddTopicMap sectionType={selectedOption} />
+      <SectionTypeSelectionToTopicMap sectionType={selectedOption} />
     </>
   )
 }

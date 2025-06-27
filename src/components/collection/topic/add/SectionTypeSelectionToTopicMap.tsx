@@ -8,7 +8,7 @@ type Props = {
   sectionType: SectionType
 }
 
-export const AddTopicMap = ({ sectionType }: Props) => {
+export const SectionTypeSelectionToTopicMap = ({ sectionType }: Props) => {
   const sectionComponent: {
     [K in SectionType]: React.ComponentType
   } = {

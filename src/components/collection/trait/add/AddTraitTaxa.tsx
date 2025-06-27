@@ -7,7 +7,7 @@ import { TaxonAutocomplete } from '@/components/collection/taxon/TaxonAutocomple
 import { Topic, Taxon } from '@/types'
 import { getShortId } from '@/utils/strings'
 
-export const AddTopicTaxa = () => {
+export const AddTraitTaxa = () => {
   const { collection, addCollectionItem, apiResponse } = useCollection()
   const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>([])
@@ -23,7 +23,10 @@ export const AddTopicTaxa = () => {
         examples: selectedTaxa,
       } as Topic
 
-      addCollectionItem(collection, item)
+      addCollectionItem(collection, {
+        ...item,
+        examples: selectedTaxa,
+      })
       setSelectedTaxa([])
     }
     setChangesToSave(false)

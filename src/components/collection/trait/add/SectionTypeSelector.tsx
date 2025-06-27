@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import { SectionType, SectionTypeOption } from '@/types'
+import { TraitSectionType, SectionTypeOption } from '@/types'
 
 type Props = {
-  selectedOption: SectionType
-  setSelectedOption: Dispatch<SetStateAction<SectionType>>
+  selectedOption: TraitSectionType
+  setSelectedOption: Dispatch<SetStateAction<TraitSectionType>>
 }
 export const SectionTypeSelector = ({
   selectedOption,
@@ -11,17 +11,17 @@ export const SectionTypeSelector = ({
 }: Props) => {
   const sectionTypes = [
     {
-      key: 'text' as SectionType,
-      value: 'Text',
-      description: 'Add text',
+      key: 'morphology' as TraitSectionType,
+      value: 'Morphology',
+      description: 'Add morphology',
     },
     {
-      key: 'image' as SectionType,
-      value: 'Image',
-      description: 'Add a new image',
+      key: 'phenology' as TraitSectionType,
+      value: 'Phenology',
+      description: 'Add phenology',
     },
     {
-      key: 'taxon' as SectionType,
+      key: 'taxon' as TraitSectionType,
       value: 'Taxon',
       description: 'Add taxa from iNaturalist',
     },
@@ -45,7 +45,7 @@ export const SectionTypeSelector = ({
   }
 
   const selectOption = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(e.target.value as SectionType)
+    setSelectedOption(e.target.value as TraitSectionType)
     // Allow time for component to render
     setTimeout(() => {
       scrollToNewSection()

@@ -4,17 +4,15 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { TaxonAutocomplete } from '@/components/collection/taxon/TaxonAutocomplete'
 
-import { Collection, Topic, Taxon } from '@/types'
+import { Collection, Trait, Taxon } from '@/types'
 
 type Props = {
-  collection: Collection<Topic>
-  section: Topic
-  sectionIndex: number
+  collection: Collection<Trait>
+  section: Trait
 }
 
-export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
-  const { updateCollectionItem, deleteCollectionItem, apiResponse } =
-    useCollection()
+export const TraitExamples = ({ collection, section }: Props) => {
+  const { updateCollectionItem, apiResponse } = useCollection()
   const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
     section?.examples || []
@@ -27,6 +25,7 @@ export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
   const saveChanges = () => {
     section.examples = selectedTaxa || []
     updateCollectionItem(collection, section)
+    setSelectedTaxa([])
   }
 
   const handleTaxonToggle = (taxon: Taxon) => {
@@ -43,10 +42,6 @@ export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
     })
   }
 
-  const deleteTaxa = () => {
-    deleteCollectionItem(collection, section.id)
-  }
-
   return (
     <TaxonAutocomplete
       selectedTaxa={selectedTaxa}
@@ -54,9 +49,8 @@ export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
       changesToSave={changesToSave}
       saveChanges={saveChanges}
       apiResponse={apiResponse}
-      sectionIndex={sectionIndex}
-      deleteTaxa={deleteTaxa}
-      section={section as Topic}
+      section={section as Trait}
+      saveText={'Update trait taxa'}
     />
   )
 }

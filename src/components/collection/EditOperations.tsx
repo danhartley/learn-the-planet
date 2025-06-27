@@ -9,12 +9,17 @@ import { OperationSelector } from '@/components/collection/OperationSelector'
 import { EditProperties } from '@/components/collection/EditProperties'
 import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
-import { TopicItems } from '@/components/collection/topic/TopicItems'
+
+import { TopicItems } from '@/components/collection/topic/edit/TopicItems'
 import { AddTopic } from '@/components/collection/topic/add/AddTopic'
+
+import { TraitItems } from '@/components/collection/trait/edit/TraitItems'
+import { AddTrait } from '@/components/collection/trait/add/AddTrait'
+
 import { EditTaxa } from '@/components/collection/taxon/EditTaxa'
+
 import { TermItems } from '@/components/collection/term/edit/TermItems'
 import { AddTerm } from '@/components/collection/term/add/AddTerm'
-import { TraitItems } from '@/components/collection/trait/TraitItems'
 
 import { ElementNavigator, createElementIdArray } from '@/utils/navigation'
 
@@ -22,7 +27,7 @@ import { Operation, CollectionSummary, ContentHandlerType } from '@/types'
 
 export const EditOperations = () => {
   const { collection, getCollectionSummaries } = useCollection()
-  const [operation, setOperation] = useState<Operation>('update-items')
+  const [operation, setOperation] = useState<Operation>('delete')
   const [collectionSummaries, setCollectionSummaries] =
     useState<CollectionSummary[]>()
   const [showNavigation, setShowNavigation] = useState(true)
@@ -103,6 +108,9 @@ export const EditOperations = () => {
 
       {operation === ('update-items' as Operation) &&
         collection?.type === ('trait' as ContentHandlerType) && <TraitItems />}
+
+      {operation === ('update-items' as Operation) &&
+        collection?.type === ('trait' as ContentHandlerType) && <AddTrait />}
 
       {operation === ('update-items' as Operation) &&
         collection?.type === ('taxon' as ContentHandlerType) && <EditTaxa />}

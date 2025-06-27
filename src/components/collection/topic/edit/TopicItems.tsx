@@ -3,15 +3,24 @@ import React from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
-import { TopicSections } from '@/components/collection/topic/TopicSections'
-import { TopicCloudImage } from '@/components/collection/topic/TopicCloudImage'
-import { TopicExamples } from '@/components/collection/topic/TopicExamples'
+import { TopicTextSections } from '@/components/collection/topic/edit/TopicTextSections'
+import { TopicCloudImage } from '@/components/collection/topic/edit/TopicCloudImage'
+import { TopicExamples } from '@/components/collection/topic/edit/TopicExamples'
 
 import { Collection, Topic } from '@/types'
 
 export const TopicItems = () => {
   const { collection } = useCollection()
   const topicCollection = collection as Collection<Topic>
+
+  if (!topicCollection.items) {
+    return (
+      <section aria-labelledby="traits-list">
+        <h2 id="traits-list">Topics</h2>
+        <p>Nothing to show yet!</p>
+      </section>
+    )
+  }
 
   return (
     <div className="column-group">
@@ -23,7 +32,7 @@ export const TopicItems = () => {
                 <div>{index + 1}</div>
               </div>
               <div key={section.id} className="group-block">
-                <TopicSections key={section.id} section={section} />
+                <TopicTextSections key={section.id} section={section} />
                 {section.images?.map(img => {
                   return (
                     <TopicCloudImage

@@ -206,6 +206,10 @@ button {
   &.delete {
     background-color: var(--colour-bg-delete-btn);
   }
+  &.remove {
+    background-color: var(--colour-bg-delete-btn);
+    font-size: var(--font-size-sm);
+  }
 }
 
 button:focus-visible {

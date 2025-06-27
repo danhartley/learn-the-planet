@@ -99,7 +99,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
           onClick={saveChanges}
           className="save"
         >
-          Save changes
+          Save
         </button>
         <button onClick={removeImage} className="delete">
           Delete image
