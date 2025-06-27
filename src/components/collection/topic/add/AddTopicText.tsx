@@ -7,7 +7,7 @@ import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { Topic } from '@/types'
 import { textToArray, getShortId } from '@/utils/strings'
 
-export const EditTopicText = () => {
+export const AddTopicText = () => {
   const { collection, addCollectionItem, apiResponse } = useCollection()
   const [text, setText] = useState('')
   const [lastSectionId, setLastSectionId] = useState(

@@ -24,7 +24,9 @@ export const DeleteCollection = () => {
         <h2 id="delete-collection">Delete {collection?.type} collection</h2>
       </div>
       <div className="form-row">
-        <button onClick={handleDeleteCollection}>Delete collection</button>
+        <button onClick={handleDeleteCollection} className="delete">
+          Delete collection
+        </button>
         <ApiResponseMessage apiResponse={apiResponse} />
       </div>
     </section>

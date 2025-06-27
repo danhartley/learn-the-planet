@@ -8,7 +8,7 @@ import { ImageUpload } from '@/components/image/ImageUpload'
 import { Topic, NextCloudImage } from '@/types'
 import { getShortId } from '@/utils/strings'
 
-export const EditTopicImage = () => {
+export const AddTopicImage = () => {
   const { collection, addCollectionItem, apiResponse } = useCollection()
   const [images, setImages] = useState<NextCloudImage[] | undefined>()
   const [image, setImage] = useState<NextCloudImage | undefined>()

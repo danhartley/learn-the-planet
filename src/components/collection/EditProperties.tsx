@@ -56,7 +56,9 @@ export const EditProperties = () => {
           <h2 id="edit-collection">Edit {collection?.type} collection</h2>
         </div>
         <div className="form-row">
-          <button onClick={handleFieldsChange}>Update collection fields</button>
+          <button onClick={handleFieldsChange} className="save">
+            Update collection fields
+          </button>
           <ApiResponseMessage apiResponse={apiResponse} />
         </div>
       </section>

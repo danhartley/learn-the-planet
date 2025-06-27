@@ -27,7 +27,6 @@ export const TaxonAutocomplete = ({
   saveChanges,
   apiResponse,
   sectionIndex,
-  // deleteTaxa,
   section,
 }: TaxonAutocompleteProps) => {
   const [inputValue, setInputValue] = useState('')
@@ -134,7 +133,9 @@ export const TaxonAutocomplete = ({
               placeholder="Start typing name..."
             />
           </div>
-          <button onClick={clearSearch}>Clear search</button>
+          <div className="form-row">
+            <button onClick={clearSearch}>Clear search</button>
+          </div>
         </form>
       </div>
 
@@ -190,11 +191,15 @@ export const TaxonAutocomplete = ({
                   <div>{taxon.vernacularName || 'No common name'}</div>
                   <div>{taxon.binomial}</div>
                 </div>
-                <button onClick={() => handleTaxonToggle(taxon)}>Remove</button>
+                <button
+                  onClick={() => handleTaxonToggle(taxon)}
+                  className="delete"
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </form>
-
           {
             <div className="form-row">
               <button
@@ -206,14 +211,6 @@ export const TaxonAutocomplete = ({
               >
                 Save changes
               </button>
-              {/* <button
-                type="button"
-                id="delete-section"
-                onClick={deleteTaxa}
-                className="delete"
-              >
-                Delete taxa
-              </button> */}
               <ApiResponseMessage apiResponse={apiResponse} />
             </div>
           }

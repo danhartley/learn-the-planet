@@ -7,7 +7,7 @@ import { AddTaxa } from '@/components/collection/taxon/AddTaxa'
 import { Topic, Taxon, Operation } from '@/types'
 import { getShortId } from '@/utils/strings'
 
-export const EditTopicTaxa = () => {
+export const AddTopicTaxa = () => {
   const { collection, addCollectionItem } = useCollection()
   const [items, setItems] = useState<Taxon[] | undefined>()
 

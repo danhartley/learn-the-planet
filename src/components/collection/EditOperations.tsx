@@ -10,10 +10,11 @@ import { EditProperties } from '@/components/collection/EditProperties'
 import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
 import { TopicItems } from '@/components/collection/topic/TopicItems'
-import { EditTopic } from '@/components/collection/topic/edit/EditTopic'
+import { AddTopic } from '@/components/collection/topic/add/AddTopic'
 import { EditTaxa } from '@/components/collection/taxon/EditTaxa'
 import { TermItems } from '@/components/collection/term/edit/TermItems'
 import { AddTerm } from '@/components/collection/term/add/AddTerm'
+import { TraitItems } from '@/components/collection/trait/TraitItems'
 
 import { ElementNavigator, createElementIdArray } from '@/utils/navigation'
 
@@ -93,21 +94,26 @@ export const EditOperations = () => {
         collectionSummaries && (
           <EditLinkedCollections collectionSummaries={collectionSummaries} />
         )}
-      {operation === ('delete' as Operation) && <DeleteCollection />}
 
       {operation === ('update-items' as Operation) &&
         collection?.type === ('topic' as ContentHandlerType) && <TopicItems />}
 
       {operation === ('update-items' as Operation) &&
-        collection?.type === ('topic' as ContentHandlerType) && <EditTopic />}
+        collection?.type === ('topic' as ContentHandlerType) && <AddTopic />}
+
+      {operation === ('update-items' as Operation) &&
+        collection?.type === ('trait' as ContentHandlerType) && <TraitItems />}
 
       {operation === ('update-items' as Operation) &&
         collection?.type === ('taxon' as ContentHandlerType) && <EditTaxa />}
 
       {operation === ('update-items' as Operation) &&
-        collection?.type === ('term' as ContentHandlerType) && (
-          <TermItems />
-        ) && <AddTerm />}
+        collection?.type === ('term' as ContentHandlerType) && <TermItems />}
+
+      {operation === ('update-items' as Operation) &&
+        collection?.type === ('term' as ContentHandlerType) && <AddTerm />}
+
+      {operation === ('delete' as Operation) && <DeleteCollection />}
 
       {showNavigation && (
         <div id="edit-navigation">
