@@ -1,4 +1,7 @@
 import React, { useState, Dispatch, SetStateAction, useEffect } from 'react'
+
+import { hyphenateText } from '@/utils/strings'
+
 import { ContentHandlerType } from '@/types'
 
 type Props = {
@@ -41,12 +44,16 @@ export function CollectionTextField({
 
   return (
     <section
-      aria-labelledby={`${fieldText}-${sectionIndex}-section`}
+      aria-labelledby={hyphenateText(`${fieldText}-${sectionIndex}-section`)}
       className="collection-field"
     >
       <div>
-        <h3 id={`${fieldText}-${sectionIndex}-section`}>
-          <label htmlFor={`${fieldText}-${sectionIndex}-${fieldValue}`}>
+        <h3 id={hyphenateText(`${fieldText}-${sectionIndex}-section`)}>
+          <label
+            htmlFor={hyphenateText(
+              `${fieldText}-${sectionIndex}-${fieldValue}`
+            )}
+          >
             {fieldText}
           </label>
           <span>{required ? ' *' : ''}</span>
@@ -54,7 +61,7 @@ export function CollectionTextField({
         <div className={`form-row ${type}`}>
           <input
             type="text"
-            id={`${fieldText}-${sectionIndex}-${fieldValue}`}
+            id={hyphenateText(`${fieldText}-${sectionIndex}-${fieldValue}`)}
             value={inputValue}
             minLength={minLength}
             onChange={handleInputChange}

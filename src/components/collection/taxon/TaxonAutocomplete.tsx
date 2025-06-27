@@ -197,8 +197,9 @@ export const TaxonAutocomplete = ({
                 <button
                   onClick={() => handleTaxonToggle(taxon)}
                   className="remove"
+                  disabled={selectedTaxa.length < 2}
                 >
-                  Remove
+                  Deselect
                 </button>
               </div>
             ))}
@@ -214,7 +215,14 @@ export const TaxonAutocomplete = ({
               >
                 {saveText}
               </button>
-
+              <button
+                type="button"
+                id="delete-section"
+                onClick={deleteTaxa}
+                className="delete"
+              >
+                Delete taxa
+              </button>
               <ApiResponseMessage apiResponse={apiResponse} />
             </div>
           }

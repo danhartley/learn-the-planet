@@ -27,7 +27,6 @@ export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
   const saveChanges = () => {
     section.examples = selectedTaxa || []
     updateCollectionItem(collection, section)
-    setSelectedTaxa([])
   }
 
   const handleTaxonToggle = (taxon: Taxon) => {
@@ -45,8 +44,7 @@ export const TopicExamples = ({ collection, section, sectionIndex }: Props) => {
   }
 
   const deleteTaxa = () => {
-    console.log('remove taxa but do not delete section!')
-    // deleteCollectionItem(collection, section.id)
+    deleteCollectionItem(collection, section.id)
   }
 
   return (

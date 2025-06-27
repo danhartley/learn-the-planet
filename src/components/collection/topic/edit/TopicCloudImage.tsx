@@ -7,7 +7,6 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
-import { ImageUpload } from '@/components/image/ImageUpload'
 
 import { Topic, NextCloudImage } from '@/types'
 
@@ -26,7 +25,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
   } = useCollection()
   const [captionValue, setCaption] = useState<string>(image.caption)
   const [altValue, setAlt] = useState(image.alt)
-  const [changesToSave, setChangesToSave] = useState(false)
+  const [isUpdating, setIsUpdating] = useState(false)
   const [cloudImage, setCloudImage] = useState<NextCloudImage | undefined>()
 
   const sizes = `(max-width: 768px) 100vw,
@@ -36,10 +35,6 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
   const height = 178
 
   useEffect(() => {
-    setChangesToSave(true)
-  }, [captionValue, altValue])
-
-  useEffect(() => {
     if (cloudImage) {
       // should not be directly mutating value…
       section.images = [...(section?.images ?? []), cloudImage]
@@ -47,6 +42,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
   }, [cloudImage, section])
 
   const saveChanges = async () => {
+    setIsUpdating(true)
     section.images = section.images?.map(img =>
       img.src === image.src
         ? { ...img, caption: captionValue, alt: altValue }
@@ -54,8 +50,11 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
     )
     if (cloudImage) {
       section.images = [...(section?.images ?? []), cloudImage]
-      if (collection) await updateCollectionItem(collection, section)
     }
+    if (collection)
+      await updateCollectionItem(collection, section).then(() => {
+        setIsUpdating(false)
+      })
   }
 
   const removeImage = () => {
@@ -95,7 +94,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
         <button
           type="button"
           id="edit-section"
-          disabled={!changesToSave}
+          disabled={isUpdating}
           onClick={saveChanges}
           className="save"
         >
@@ -110,7 +109,6 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
         Deleting the image from the topic collection will not remove it from
         Cloudinary.
       </div>
-      <ImageUpload setImage={setCloudImage} />
     </>
   )
 }

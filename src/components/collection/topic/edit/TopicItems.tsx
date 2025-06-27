@@ -27,7 +27,7 @@ export const TopicItems = () => {
       {topicCollection.items &&
         topicCollection.items.map((section, index) => {
           return (
-            <>
+            <React.Fragment key={`${section.id}-${index}`}>
               <div id={section.id} className="navigable">
                 <div>{index + 1}</div>
               </div>
@@ -51,7 +51,7 @@ export const TopicItems = () => {
                   />
                 )}
               </div>
-            </>
+            </React.Fragment>
           )
         })}
     </div>

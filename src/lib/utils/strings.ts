@@ -398,3 +398,7 @@ export function textToArray(text: string): string[] {
 export const getShortId = () => {
   return crypto.randomUUID().split('-')[0]
 }
+
+export const hyphenateText = (text: string) => {
+  return text.trim().replace(/\s+/g, '-')
+}

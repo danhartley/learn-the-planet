@@ -27,7 +27,7 @@ import { Operation, CollectionSummary, ContentHandlerType } from '@/types'
 
 export const EditOperations = () => {
   const { collection, getCollectionSummaries } = useCollection()
-  const [operation, setOperation] = useState<Operation>('delete')
+  const [operation, setOperation] = useState<Operation>('update-items')
   const [collectionSummaries, setCollectionSummaries] =
     useState<CollectionSummary[]>()
   const [showNavigation, setShowNavigation] = useState(true)

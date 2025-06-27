@@ -19,17 +19,14 @@ export const TopicTextSections = ({ section }: Props) => {
     apiResponse,
   } = useCollection()
   const [sectionText, setSectionText] = useState(section.text)
-  const [changesToSave, setChangesToSave] = useState(false)
-
-  useEffect(() => {
-    setChangesToSave(true)
-  }, [sectionText])
+  const [isUpdating, setIsUpdating] = useState(false)
 
   const saveChanges = () => {
+    setIsUpdating(true)
     section.text = sectionText
     if (collection) {
       updateCollectionItem(collection, section).then(() => {
-        setSectionText([])
+        setIsUpdating(false)
       })
     }
   }
@@ -52,7 +49,7 @@ export const TopicTextSections = ({ section }: Props) => {
           <button
             type="button"
             id="edit-section"
-            disabled={!changesToSave}
+            disabled={isUpdating}
             onClick={saveChanges}
             className="save"
           >
