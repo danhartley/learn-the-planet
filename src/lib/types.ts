@@ -147,8 +147,8 @@ export interface Term extends LearningItem {
 export interface Trait extends LearningItem {
   trait: string
   source?: {
-    name: string
-    url: string
+    name?: string
+    url?: string
   }
   definition: string
   morphology?: string[]
