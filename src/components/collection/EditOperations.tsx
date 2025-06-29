@@ -30,7 +30,7 @@ export const EditOperations = () => {
   const [operation, setOperation] = useState<Operation>('update-items')
   const [collectionSummaries, setCollectionSummaries] =
     useState<CollectionSummary[]>()
-  const [showNavigation, setShowNavigation] = useState(true)
+  const [showNavigation, setShowNavigation] = useState(false)
 
   useEffect(() => {
     getCollectionSummaries().then(setCollectionSummaries)
@@ -40,7 +40,7 @@ export const EditOperations = () => {
     const elementIds = createElementIdArray()
 
     if (elementIds.length > 0 && operation === 'update-items') {
-      setShowNavigation(true)
+      // setShowNavigation(true)
 
       // Add a small delay to ensure DOM elements are rendered
       const timeoutId = setTimeout(() => {
