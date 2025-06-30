@@ -257,12 +257,12 @@ button:disabled {
 }
 
 textarea {
-  padding: var(--spacing-xl) calc(var(--spacing-xl) * 2);
+  padding: var(--spacing-md);
+  line-height: (--line-height-sm);
   resize: none;
   white-space: pre-wrap;
   font-size: var(--font-size-md);
   font-family: var(--font-family-sans-serif);
-  line-height: calc(var(--line-height-md) * 1.25);
   width: 100%;
   border: none;
 }
@@ -912,6 +912,13 @@ progress {
 @media (min-width: 767px) and (max-width: 1286px) {
   .grid-lg {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  textarea {
+    padding: var(--spacing-xl) calc(var(--spacing-xl) * 2);
+    line-height: calc(var(--line-height-md) * 1.25);
   }
 }
 

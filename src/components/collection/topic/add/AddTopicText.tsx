@@ -24,7 +24,10 @@ export const AddTopicText = () => {
       text: textToArray(text) as string[],
     } as Topic
 
-    if (collection) addCollectionItem(collection, item)
+    if (collection) {
+      addCollectionItem(collection, item)
+      setText('')
+    }
   }
 
   useEffect(() => {
