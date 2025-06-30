@@ -50,6 +50,10 @@ type CollectionContextType = {
     type: ContentHandlerType,
     imageUrl?: string
   ) => Promise<void>
+  updateSectionOrder: (
+    collection: Collection<unknown>,
+    sectionOrder: string[]
+  ) => void
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -544,6 +548,74 @@ export const CollectionProvider = ({
     }
   }
 
+  const updateSectionOrder = async (
+    collection: Collection<unknown>,
+    sectionOrder: string[]
+  ) => {
+    if (!collection || !collection.items || !sectionOrder) return
+
+    const orderedItems = sectionOrder.map(order => {
+      return collection?.items?.find(
+        item => (item as { id: string }).id === order
+      )
+    })
+
+    // Optimistic update
+    const previousCollection = collection
+    setCollection(prev =>
+      prev
+        ? {
+            ...prev,
+            sectionOrder: sectionOrder ?? prev.sectionOrder,
+            items: orderedItems,
+          }
+        : null
+    )
+
+    // setTimeout(async () => {
+    try {
+      const url = `/api/collection/update-section-order/${collection.slug}-${collection.shortId}`
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sectionOrder),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+
+        // Revert optimistic update on error
+        setCollection(previousCollection)
+
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const updatedCollection = await response.json()
+
+      // Update with server response (in case server made additional changes)
+      // setCollection(updatedCollection)
+
+      // Only navigate if the update was successful
+      // router.push(`/collection/${collection.slug}-${collection.shortId}`)
+    } catch (error) {
+      console.error('Failed to update collection:', error)
+
+      // Ensure revert on any error (in case it wasn't caught above)
+      setCollection(previousCollection)
+
+      setApiResponse({
+        success: false,
+        message: 'Collection field updates failed.',
+      })
+    }
+    // }, 2000)
+  }
+
   return (
     <CollectionContext.Provider
       value={{
@@ -560,6 +632,7 @@ export const CollectionProvider = ({
         updateCollectionItem,
         deleteCollectionItem,
         addCollection,
+        updateSectionOrder,
       }}
     >
       {children}

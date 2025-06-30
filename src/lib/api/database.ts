@@ -74,7 +74,7 @@ export const getCollectionByShortId = async (
     return undefined
   }
 
-  return {
+  const selectedCollection = {
     id: collection._id.toString(),
     shortId: collection.shortId || '',
     slug: collection.slug || '',
@@ -85,6 +85,18 @@ export const getCollectionByShortId = async (
     collections: collection?.collections || [],
     imageUrl: collection.imageUrl || '',
     credit: collection.credit,
+    sectionOrder: collection.sectionOrder,
+  }
+
+  const orderedItems = selectedCollection.sectionOrder.map((order: string) => {
+    return selectedCollection.items.find(
+      (item: { id: string }) => (item.id as string) === order
+    )
+  })
+
+  return {
+    ...selectedCollection,
+    items: orderedItems,
   }
 }
 
@@ -95,6 +107,9 @@ export const createCollection = async (collection: Collection<unknown>) => {
   const shortId = crypto.randomUUID().split('-')[0]
   const slug = collection.name.toLowerCase().replace(/\s+/g, '-')
   const itemCount = collection.items?.length || 0
+  const sectionOrder = collection.items?.map(
+    item => (item as { id: string }).id
+  )
 
   let insertedId: string | null = null
 
@@ -105,6 +120,7 @@ export const createCollection = async (collection: Collection<unknown>) => {
       shortId,
       slug,
       itemCount,
+      sectionOrder,
     })
 
     insertedId = result.insertedId.toString()
@@ -249,6 +265,7 @@ export const addItemsToCollection = async (
       type: result.type,
       itemCount: result.itemCount || result.items?.length || 0,
       collections: result?.collections || [],
+      sectionOrder: result?.sectionOrder,
     }
   } catch (error) {
     console.error('Failed to add items to collection:', error)
@@ -601,6 +618,48 @@ export const updateCollectionFields = async (
       itemCount: result.itemCount || result.items?.length || 0,
       collections: result?.collections || [],
       imageUrl: result?.imageUrl || '',
+      sectionOrder: result?.sectionOrder,
+    }
+  } catch (error) {
+    console.error('Failed to update collection fields:', error)
+    throw error
+  }
+}
+
+export const updateCollectionSectionOrder = async (
+  shortId: string,
+  sectionOrder: string[]
+): Promise<Collection<unknown> | undefined> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+  console.log('sectionOrder', sectionOrder)
+  try {
+    const result = await db.collection('collections').findOneAndUpdate(
+      { shortId },
+      {
+        $set: {
+          sectionOrder: sectionOrder, // Simply replace with the new array
+        },
+      },
+      { returnDocument: 'after' }
+    )
+
+    if (!result) {
+      return undefined
+    }
+
+    // Return the updated collection in the same format as other functions
+    return {
+      id: result.id,
+      shortId: result.shortId || '',
+      slug: result.slug || '',
+      items: result.items,
+      name: result.name,
+      type: result.type,
+      itemCount: result.itemCount || result.items?.length || 0,
+      collections: result?.collections || [],
+      imageUrl: result?.imageUrl || '',
+      sectionOrder: result?.sectionOrder,
     }
   } catch (error) {
     console.error('Failed to update collection fields:', error)

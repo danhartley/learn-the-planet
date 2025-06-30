@@ -7,7 +7,7 @@ import { TopicTextSections } from '@/components/collection/topic/edit/TopicTextS
 import { TopicCloudImage } from '@/components/collection/topic/edit/TopicCloudImage'
 import { TopicExamples } from '@/components/collection/topic/edit/TopicExamples'
 
-import { Collection, Topic, Taxon, Image } from '@/types'
+import { Collection, Topic } from '@/types'
 
 export const TopicItems = () => {
   const { collection } = useCollection()
@@ -81,7 +81,7 @@ export const TopicItems = () => {
                 <button
                   type="button"
                   id={section.id}
-                  className="navigable"
+                  className="draggable"
                   onClick={() => toggleSection(section.id)}
                   aria-expanded={isVisible}
                   aria-controls={`section-content-${section.id}`}

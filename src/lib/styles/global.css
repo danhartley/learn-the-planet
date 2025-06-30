@@ -840,6 +840,23 @@ progress {
   }
 }
 
+/* Drag and drop */
+
+.dragging {
+  button {
+    border-style: dashed;
+    cursor: grabbing;
+  }
+}
+
+.drag-over-top {
+  opacity: 0.5;
+}
+
+.drag-over-bottom {
+  opacity: 0.5;
+}
+
 /* Media queries */
 @media screen and (min-width: 768px) {
   header {

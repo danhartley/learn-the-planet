@@ -202,6 +202,7 @@ export type Collection<T> = {
   collections?: CollectionSummary[]
   credit?: Credit
   imageUrl?: string
+  sectionOrder: string[]
 }
 
 export type GroupedCollectionSummaries = {

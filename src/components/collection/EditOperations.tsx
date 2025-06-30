@@ -10,7 +10,8 @@ import { EditProperties } from '@/components/collection/EditProperties'
 import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
 
-import { TopicItems } from '@/components/collection/topic/edit/TopicItems'
+import { TopicItems } from '@/components/collection/topic/edit/topicItems/TopicItems'
+// import { TopicItems } from '@/components/collection/topic/edit/TopicItems'
 import { AddTopic } from '@/components/collection/topic/add/AddTopic'
 
 import { TraitItems } from '@/components/collection/trait/edit/TraitItems'
