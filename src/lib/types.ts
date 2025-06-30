@@ -341,6 +341,7 @@ export type Operation =
   | 'delete'
   | 'linked-collections'
   | 'update-items'
+  | 'add-item'
 
 export type ContentType = {
   key: string

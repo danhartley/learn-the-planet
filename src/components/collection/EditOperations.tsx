@@ -11,7 +11,6 @@ import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
 
 import { TopicItems } from '@/components/collection/topic/edit/topicItems/TopicItems'
-// import { TopicItems } from '@/components/collection/topic/edit/TopicItems'
 import { AddTopic } from '@/components/collection/topic/add/AddTopic'
 
 import { TraitItems } from '@/components/collection/trait/edit/TraitItems'
@@ -22,8 +21,6 @@ import { EditTaxa } from '@/components/collection/taxon/EditTaxa'
 import { TermItems } from '@/components/collection/term/edit/TermItems'
 import { AddTerm } from '@/components/collection/term/add/AddTerm'
 
-import { ElementNavigator, createElementIdArray } from '@/utils/navigation'
-
 import { Operation, CollectionSummary, ContentHandlerType } from '@/types'
 
 export const EditOperations = () => {
@@ -31,56 +28,17 @@ export const EditOperations = () => {
   const [operation, setOperation] = useState<Operation>('update-items')
   const [collectionSummaries, setCollectionSummaries] =
     useState<CollectionSummary[]>()
-  const [showNavigation, setShowNavigation] = useState(false)
 
   useEffect(() => {
     getCollectionSummaries().then(setCollectionSummaries)
   }, [getCollectionSummaries])
 
-  useEffect(() => {
-    const elementIds = createElementIdArray()
+  const isTopic = collection?.type === ('topic' as ContentHandlerType)
+  const isTrait = collection?.type === ('trait' as ContentHandlerType)
+  const isTaxon = collection?.type === ('taxon' as ContentHandlerType)
+  const isTerm = collection?.type === ('term' as ContentHandlerType)
 
-    if (elementIds.length > 0 && operation === 'update-items') {
-      // setShowNavigation(true)
-
-      // Add a small delay to ensure DOM elements are rendered
-      const timeoutId = setTimeout(() => {
-        const upButton = document.getElementById('up-arrow')
-        const downButton = document.getElementById('down-arrow')
-
-        // Only create navigator if both buttons exist
-        if (upButton && downButton) {
-          const navigator = new ElementNavigator(
-            elementIds,
-            'up-arrow',
-            'down-arrow'
-          )
-
-          const handleUpClick = () => navigator.navigateUp()
-          const handleDownClick = () => navigator.navigateDown()
-
-          upButton.addEventListener('click', handleUpClick)
-          downButton.addEventListener('click', handleDownClick)
-
-          // Store cleanup function
-          const cleanup = () => {
-            upButton.removeEventListener('click', handleUpClick)
-            downButton.removeEventListener('click', handleDownClick)
-          }
-
-          // Return cleanup function
-          return cleanup
-        }
-      }, 0)
-
-      // Cleanup timeout if component unmounts
-      return () => {
-        clearTimeout(timeoutId)
-      }
-    } else {
-      setShowNavigation(false)
-    }
-  }, [operation])
+  const isUpdateItems = operation === ('update-items' as Operation)
 
   return (
     <>
@@ -101,35 +59,18 @@ export const EditOperations = () => {
           <EditLinkedCollections collectionSummaries={collectionSummaries} />
         )}
 
-      {operation === ('update-items' as Operation) &&
-        collection?.type === ('topic' as ContentHandlerType) && <TopicItems />}
+      {isUpdateItems && isTopic && <TopicItems />}
+      {operation === ('add-item' as Operation) && <AddTopic />}
 
-      {operation === ('update-items' as Operation) &&
-        collection?.type === ('topic' as ContentHandlerType) && <AddTopic />}
+      {isUpdateItems && isTrait && <TraitItems />}
+      {isUpdateItems && isTrait && <AddTrait />}
 
-      {operation === ('update-items' as Operation) &&
-        collection?.type === ('trait' as ContentHandlerType) && <TraitItems />}
+      {isUpdateItems && isTaxon && <EditTaxa />}
 
-      {operation === ('update-items' as Operation) &&
-        collection?.type === ('trait' as ContentHandlerType) && <AddTrait />}
-
-      {operation === ('update-items' as Operation) &&
-        collection?.type === ('taxon' as ContentHandlerType) && <EditTaxa />}
-
-      {operation === ('update-items' as Operation) &&
-        collection?.type === ('term' as ContentHandlerType) && <TermItems />}
-
-      {operation === ('update-items' as Operation) &&
-        collection?.type === ('term' as ContentHandlerType) && <AddTerm />}
+      {isUpdateItems && isTerm && <TermItems />}
+      {isUpdateItems && isTerm && <AddTerm />}
 
       {operation === ('delete' as Operation) && <DeleteCollection />}
-
-      {showNavigation && (
-        <div id="edit-navigation">
-          <div id="up-arrow"> </div>
-          <div id="down-arrow"> </div>
-        </div>
-      )}
     </>
   )
 }
