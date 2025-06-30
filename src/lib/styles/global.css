@@ -208,7 +208,8 @@ button {
   }
   &.remove {
     background-color: var(--colour-bg-delete-btn);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-sm) !important;
   }
 }
 

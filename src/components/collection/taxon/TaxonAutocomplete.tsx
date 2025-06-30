@@ -190,17 +190,17 @@ export const TaxonAutocomplete = ({
                     height={75}
                   />
                 )}
-                <div>
-                  <div>{taxon.vernacularName || 'No common name'}</div>
-                  <div>{taxon.binomial}</div>
-                </div>
                 <button
                   onClick={() => handleTaxonToggle(taxon)}
                   className="remove"
                   disabled={selectedTaxa.length < 2}
                 >
-                  Deselect
+                  Remove
                 </button>
+                <div>
+                  <div>{taxon.vernacularName || 'No common name'}</div>
+                  <div>{taxon.binomial}</div>
+                </div>
               </div>
             ))}
           </form>
