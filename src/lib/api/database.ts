@@ -705,6 +705,7 @@ export const updateCollectionItem = async (
       {
         $push: {
           items: updatedItem,
+          sectionOrder: itemId, // Add the itemId to sectionOrder array
           //eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any,
         $inc: {
@@ -743,6 +744,7 @@ export const deleteCollectionItem = async (
       {
         $pull: {
           items: { id: itemId },
+          sectionOrder: itemId, // Remove the itemId from sectionOrder array
           //eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any,
         $inc: {

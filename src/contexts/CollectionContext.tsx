@@ -93,6 +93,7 @@ export const CollectionProvider = ({
               ...prev,
               items: [...(prev.items || []), item],
               itemCount: (prev.items?.length || 0) + 1,
+              sectionOrder: [...(prev.sectionOrder || []), itemId],
             }
           : null
       )
@@ -447,6 +448,7 @@ export const CollectionProvider = ({
               item => (item as { id: string }).id !== itemId
             ),
             itemCount: Math.max((prev.itemCount || 0) - 1, 0),
+            sectionOrder: prev.sectionOrder.filter(id => id !== itemId),
           }
         : prev
     )
