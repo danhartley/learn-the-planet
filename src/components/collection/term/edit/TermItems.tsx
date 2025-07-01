@@ -39,7 +39,7 @@ export const TermItems = () => {
   return (
     <section aria-labelledby="terms-list" className="group-block">
       <div className="group">
-        <h2 id="terms-list">Terms ({terms.length})</h2>
+        <h2 id="terms-list">Terms</h2>
         <div>
           <em>Click to edit or delete a term.</em>
         </div>

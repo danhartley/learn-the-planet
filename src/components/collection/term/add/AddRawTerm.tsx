@@ -3,26 +3,26 @@ import React, { useState } from 'react'
 import { useCollection } from '@/contexts/CollectionContext'
 
 import { ItemInput } from '@/components/collection/item/ItemInput'
-import { validateTraitJson } from '@/validation/trait-validation'
-import { ValidationResult, Trait } from '@/types'
+import { validateTermJson } from '@/validation/term-validation'
+import { ValidationResult, Term } from '@/types'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { getShortId } from '@/utils/strings'
 
-export function AddRawTrait() {
+export function AddRawTerm() {
   const { collection, addCollectionItem, apiResponse } = useCollection()
   const [jsonContent, setJsonContent] = useState('')
   const [message, setMessage] = useState({
     success: false,
     message: '',
   })
-  const [item, setItems] = useState<Trait[] | undefined>()
+  const [item, setItems] = useState<Term[] | undefined>()
 
-  const isValidTrait = () => {
-    const result: ValidationResult<Trait> = validateTraitJson(jsonContent)
+  const isValidTerm = () => {
+    const result: ValidationResult<Term> = validateTermJson(jsonContent)
     const msg = result.isValid
-      ? 'Your trait data are valid'
-      : 'Your trait data are invalid'
+      ? 'Your term data are valid'
+      : 'Your term data are invalid'
     setMessage({
       success: result.isValid,
       message: msg,
@@ -38,23 +38,23 @@ export function AddRawTrait() {
     }
   }
 
-  const saveTrait = () => {
-    const trait = {
+  const saveTerm = () => {
+    const term = {
       ...(item?.find(i => i) || {}),
       id: getShortId(),
     }
-    if (collection) addCollectionItem(collection, trait)
+    if (collection) addCollectionItem(collection, term)
   }
 
   return (
-    <section aria-labelledby="collection-traits" className="group-block">
-      <h2 id="collection-traits">Collection traits</h2>
+    <section aria-labelledby="collection-terms" className="group-block">
+      <h2 id="collection-terms">Collection terms</h2>
       <ItemInput
         jsonContent={jsonContent}
         onJsonContentChange={setJsonContent}
-        onSubmit={isValidTrait}
+        onSubmit={isValidTerm}
         message={message}
-        type="trait"
+        type="term"
         setMessage={setMessage}
       />
       <div className="form-row">
@@ -62,7 +62,7 @@ export function AddRawTrait() {
           type="button"
           className="save"
           disabled={!message.success}
-          onClick={saveTrait}
+          onClick={saveTerm}
         >
           Save
         </button>

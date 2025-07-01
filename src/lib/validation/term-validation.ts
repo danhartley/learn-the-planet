@@ -156,9 +156,10 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
     }
 
     // All checks passed
+    console.log('parsedJSON', parsedJSON)
     return {
       isValid: true,
-      parsedData: isArray ? parsedJSON : parsedJSON[0], // Return in original format
+      parsedData: isArray ? parsedJSON[0] : parsedJSON, // Return in original format
       errors: [],
     }
   } catch (error) {

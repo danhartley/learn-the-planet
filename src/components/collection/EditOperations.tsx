@@ -17,6 +17,7 @@ import { EditTaxa } from '@/components/collection/taxon/EditTaxa'
 import { TermItems } from '@/components/collection/term/edit/TermItems'
 import { AddTerm } from '@/components/collection/term/add/AddTerm'
 import { AddRawTrait } from '@/components/collection/trait/add/AddRawTrait'
+import { AddRawTerm } from '@/components/collection/term/add/AddRawTerm'
 
 import { Operation, CollectionSummary, ContentHandlerType } from '@/types'
 
@@ -68,7 +69,8 @@ export const EditOperations = () => {
       {isUpdateItems && isTaxon && <EditTaxa />}
 
       {isUpdateItems && isTerm && <TermItems />}
-      {isUpdateItems && isTerm && <AddTerm />}
+      {isAddItem && isTerm && <AddTerm />}
+      {isAddRawData && isTerm && <AddRawTerm />}
 
       {operation === ('delete' as Operation) && <DeleteCollection />}
     </>
