@@ -11,7 +11,7 @@ export const AddTrait = () => {
   const { collection, addCollectionItem, apiResponse } = useCollection()
   const [Trait, setTrait] = useState('')
   const [definition, setDefinition] = useState('')
-  const [source, setSource] = useState()
+  // const [source, setSource] = useState()
   const [lastTraitId, setLastTraitId] = useState(
     collection?.items?.findLast(item => (item as Trait).id)
   )

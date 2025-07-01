@@ -25,6 +25,7 @@ export const getCollections = async (): Promise<
         type: collection.type,
         itemCount: collection.itemCount || collection.items?.length || 0,
         imageUrl: collection.imageUrl || '',
+        sectionOrder: collection.sectionOrder,
       }
     })
   } catch (error) {

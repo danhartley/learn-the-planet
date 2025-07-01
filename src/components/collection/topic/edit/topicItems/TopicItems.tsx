@@ -11,9 +11,7 @@ import { Collection, Topic } from '@/types'
 export const TopicItems = () => {
   const { collection } = useCollection()
   const topicCollection = collection as Collection<Topic>
-  const { visibleSectionId, toggleSection } = useAccordion(
-    topicCollection.items
-  )
+  const { visibleSectionId, toggleSection } = useAccordion()
   const {
     draggedItemId,
     dragOverItemId,

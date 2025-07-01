@@ -26,6 +26,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
   const [captionValue, setCaption] = useState<string>(image.caption)
   const [altValue, setAlt] = useState(image.alt)
   const [isUpdating, setIsUpdating] = useState(false)
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cloudImage, setCloudImage] = useState<NextCloudImage | undefined>()
 
   const sizes = `(max-width: 768px) 100vw,

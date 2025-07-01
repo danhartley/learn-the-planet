@@ -28,7 +28,7 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
   const [phenology, setPhenology] = useState(
     trait.phenology ? trait.phenology.join('\n') : ''
   )
-  const [examples, setExamples] = useState(trait.examples)
+  const [examples] = useState(trait.examples)
 
   const handleTraitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTraitValue(e.target.value)
@@ -119,7 +119,6 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
       confirm(`Are you sure you want to delete the trait "${trait.trait}"?`)
     ) {
       deleteCollectionItem(collection, trait.id)
-      onDelete()
     }
   }
 
@@ -130,7 +129,6 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
     }
     if (e.key === 'Escape') {
       e.preventDefault()
-      onCancel()
     }
   }
 

@@ -24,10 +24,6 @@ export const EditTaxa = () => {
     setChangesToSave(false)
   }
 
-  const deleteTaxa = () => {
-    // deleteCollectionItem(collection, section.id)
-  }
-
   const handleTaxonToggle = (taxon: Taxon) => {
     setSelectedTaxa(prev => {
       const isSelected = prev.some(selected => selected.id === taxon.id)

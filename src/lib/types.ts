@@ -342,6 +342,7 @@ export type Operation =
   | 'linked-collections'
   | 'update-items'
   | 'add-item'
+  | 'add-raw-data'
 
 export type ContentType = {
   key: string

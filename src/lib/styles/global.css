@@ -329,11 +329,6 @@ li::marker {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-md);
-  /* 
-  &.edit {
-    padding: var(--spacing-md);
-    background-color: var(--colour-bg-main);
-  } */
 }
 
 .row-group {

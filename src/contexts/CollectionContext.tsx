@@ -508,6 +508,7 @@ export const CollectionProvider = ({
       items: [],
       itemCount: 0,
       imageUrl: imageUrl || '',
+      sectionOrder: [],
     }
 
     try {

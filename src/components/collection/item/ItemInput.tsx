@@ -6,7 +6,7 @@ import { ContentHandlerType, ApiResponse } from '@/types'
 
 interface ItemInputProps {
   jsonContent: string | undefined
-  onJsonContentChange: Dispatch<SetStateAction<string | undefined>>
+  onJsonContentChange: Dispatch<SetStateAction<string>>
   setMessage: Dispatch<SetStateAction<ApiResponse>>
   placeholder?: string
   message: ApiResponse
@@ -38,9 +38,10 @@ export const ItemInput: React.FC<ItemInputProps> = ({
   return (
     <>
       <form onSubmit={handleSubmit} className="column-group">
-        <div className="column-group">
+        <div className="form-row">
           <label htmlFor="json-input">
-            Please paste your {type} JSON object or array in the text area below
+            Please paste your {type} JSON object or array in the text area
+            below.
           </label>
           <textarea
             id="json-input"

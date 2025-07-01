@@ -22,7 +22,13 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
       ]
       break
     case 'trait':
-      operationTypes = ['update', 'update-items', 'delete', 'add-item']
+      operationTypes = [
+        'update',
+        'update-items',
+        'delete',
+        'add-item',
+        'add-raw-data',
+      ]
       break
     default:
       operationTypes = ['update', 'update-items', 'delete']
@@ -37,6 +43,7 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
       'linked-collections': 'Edit linked collections',
       'update-items': 'Edit collection items',
       'add-item': 'Add item',
+      'add-raw-data': 'Add raw data',
     }[option as Operation]
 
     const handleOnChangeOperation = (

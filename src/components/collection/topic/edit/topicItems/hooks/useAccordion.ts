@@ -1,9 +1,6 @@
 import { useState } from 'react'
-import { Topic } from '@/types'
 
-export const useAccordion = (items?: Topic[]) => {
-  // State to track which section is visible (only one at a time)
-  // items?.length ? items[0].id : null
+export const useAccordion = () => {
   const [visibleSectionId, setVisibleSectionId] = useState<string | null>()
 
   // Toggle visibility of a section (only one can be open at a time)

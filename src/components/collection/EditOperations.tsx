@@ -9,17 +9,14 @@ import { OperationSelector } from '@/components/collection/OperationSelector'
 import { EditProperties } from '@/components/collection/EditProperties'
 import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
-
 import { TopicItems } from '@/components/collection/topic/edit/topicItems/TopicItems'
 import { AddTopic } from '@/components/collection/topic/add/AddTopic'
-
 import { TraitItems } from '@/components/collection/trait/edit/TraitItems'
 import { AddTrait } from '@/components/collection/trait/add/AddTrait'
-
 import { EditTaxa } from '@/components/collection/taxon/EditTaxa'
-
 import { TermItems } from '@/components/collection/term/edit/TermItems'
 import { AddTerm } from '@/components/collection/term/add/AddTerm'
+import { AddRawTrait } from '@/components/collection/trait/add/AddRawTrait'
 
 import { Operation, CollectionSummary, ContentHandlerType } from '@/types'
 
@@ -40,6 +37,7 @@ export const EditOperations = () => {
 
   const isUpdateItems = operation === ('update-items' as Operation)
   const isAddItem = operation === ('add-item' as Operation)
+  const isAddRawData = operation === ('add-raw-data' as Operation)
 
   return (
     <>
@@ -65,6 +63,7 @@ export const EditOperations = () => {
 
       {isUpdateItems && isTrait && <TraitItems />}
       {isAddItem && isTrait && <AddTrait />}
+      {isAddRawData && isTrait && <AddRawTrait />}
 
       {isUpdateItems && isTaxon && <EditTaxa />}
 

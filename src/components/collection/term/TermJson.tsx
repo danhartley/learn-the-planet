@@ -8,7 +8,7 @@ import { ValidationResult, Term } from '@/types'
 
 export function TermJson() {
   const { collection, updateCollectionItems } = useCollection()
-  const [jsonContent, setJsonContent] = useState<string | undefined>('')
+  const [jsonContent, setJsonContent] = useState<string>('')
   const [message, setMessage] = useState({
     success: false,
     message: '',

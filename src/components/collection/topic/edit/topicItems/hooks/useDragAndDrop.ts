@@ -29,7 +29,7 @@ export const useDragAndDrop = (
       }
       pendingOrderRef.current = null
     },
-    [updateSectionOrder]
+    [updateSectionOrder, topicCollection]
   )
 
   const reorderItems = useCallback(
