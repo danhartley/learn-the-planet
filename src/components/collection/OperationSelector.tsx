@@ -9,10 +9,24 @@ type Props = {
 }
 
 export const OperationSelector = ({ type, operation, setOperation }: Props) => {
-  const operationTypes =
-    type === 'topic'
-      ? ['update', 'update-items', 'linked-collections', 'delete', 'add-item']
-      : ['update', 'update-items', 'delete']
+  let operationTypes
+
+  switch (type) {
+    case 'topic':
+      operationTypes = [
+        'update',
+        'update-items',
+        'linked-collections',
+        'delete',
+        'add-item',
+      ]
+      break
+    case 'trait':
+      operationTypes = ['update', 'update-items', 'delete', 'add-item']
+      break
+    default:
+      operationTypes = ['update', 'update-items', 'delete']
+  }
 
   const editOptions = operationTypes.map(option => {
     const operationTypeText = {

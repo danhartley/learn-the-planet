@@ -29,41 +29,52 @@ export const TopicItems = () => {
 
   if (!topicCollection.items) {
     return (
-      <section aria-labelledby="traits-list">
-        <h2 id="traits-list">Topics</h2>
+      <section aria-labelledby="topics-list">
+        <h2 id="topics-list">Topics</h2>
         <p>Nothing to show yet!</p>
       </section>
     )
   }
 
   return (
-    <div>
+    <>
       {error && (
         <div role="alert" className="error-message">
           Failed to save section order: {error}
         </div>
       )}
-      <ul>
-        {topicCollection.items.map((section, index) => (
-          <TopicItem
-            key={`${section.id}-${index}`}
-            section={section}
-            index={index}
-            isVisible={visibleSectionId === section.id}
-            isDragged={draggedItemId === section.id}
-            isDraggedOver={dragOverItemId === section.id}
-            isReorderMode={isReorderMode}
-            onToggle={() => toggleSection(section.id)}
-            onDragStart={handleDragStart}
-            onDragOver={handleDragOver}
-            onDragEnd={handleDragEnd}
-            onDrop={handleDrop}
-            onKeyDown={handleKeyDown}
-            onReorderModeChange={setIsReorderMode}
-            topicCollection={topicCollection}
-          />
-        ))}
-      </ul>
-    </div>
+      <section aria-labelledby="topics-list">
+        <div className="group">
+          <h2 id="traits-list">Topic sections</h2>
+          <div>
+            <em>
+              Click to edit or delete a topic. To change the position of a
+              section, click on its button and move up or down.
+            </em>
+          </div>
+        </div>
+        <ul>
+          {topicCollection.items.map((section, index) => (
+            <TopicItem
+              key={`${section.id}-${index}`}
+              section={section}
+              index={index}
+              isVisible={visibleSectionId === section.id}
+              isDragged={draggedItemId === section.id}
+              isDraggedOver={dragOverItemId === section.id}
+              isReorderMode={isReorderMode}
+              onToggle={() => toggleSection(section.id)}
+              onDragStart={handleDragStart}
+              onDragOver={handleDragOver}
+              onDragEnd={handleDragEnd}
+              onDrop={handleDrop}
+              onKeyDown={handleKeyDown}
+              onReorderModeChange={setIsReorderMode}
+              topicCollection={topicCollection}
+            />
+          ))}
+        </ul>
+      </section>
+    </>
   )
 }

@@ -8,17 +8,9 @@ import { Trait } from '@/types'
 
 interface EditTraitProps {
   trait: Trait
-  onCancel: () => void
-  onSave: () => void
-  onDelete: () => void
 }
 
-export const EditTrait: React.FC<EditTraitProps> = ({
-  trait,
-  onCancel,
-  onSave,
-  onDelete,
-}) => {
+export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
   const {
     collection,
     updateCollectionItem,
@@ -118,7 +110,6 @@ export const EditTrait: React.FC<EditTraitProps> = ({
 
     if (collection) {
       updateCollectionItem(collection, updatedTrait)
-      onSave()
     }
   }
 
@@ -146,7 +137,7 @@ export const EditTrait: React.FC<EditTraitProps> = ({
   const isFormValid = traitValue.trim() && definition.trim()
 
   return (
-    <div id={trait.id} className="column-group edit">
+    <div id={trait.id} className="group-block">
       <section
         aria-labelledby={`${trait.id}-trait`}
         className="collection-field"
@@ -268,9 +259,9 @@ export const EditTrait: React.FC<EditTraitProps> = ({
         >
           Save
         </button>
-        <button type="button" onClick={onCancel} className="cancel">
+        {/* <button type="button" className="cancel">
           Cancel
-        </button>
+        </button> */}
         <button
           type="button"
           onClick={handleDelete}

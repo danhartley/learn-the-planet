@@ -177,7 +177,7 @@ export const TaxonAutocomplete = ({
 
       {selectedTaxa.length > 0 && (
         <section aria-labelledby="selected-taxa" className="column-group">
-          <h2 id="selected-taxa">Selected Taxa ({selectedTaxa.length})</h2>
+          <h2 id="selected-taxa">Selected Taxa</h2>
           <form>
             {selectedTaxa.map(taxon => (
               <div key={taxon.id} className="form-row">

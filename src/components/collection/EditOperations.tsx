@@ -39,6 +39,7 @@ export const EditOperations = () => {
   const isTerm = collection?.type === ('term' as ContentHandlerType)
 
   const isUpdateItems = operation === ('update-items' as Operation)
+  const isAddItem = operation === ('add-item' as Operation)
 
   return (
     <>
@@ -60,10 +61,10 @@ export const EditOperations = () => {
         )}
 
       {isUpdateItems && isTopic && <TopicItems />}
-      {operation === ('add-item' as Operation) && <AddTopic />}
+      {isAddItem && isTopic && <AddTopic />}
 
       {isUpdateItems && isTrait && <TraitItems />}
-      {isUpdateItems && isTrait && <AddTrait />}
+      {isAddItem && isTrait && <AddTrait />}
 
       {isUpdateItems && isTaxon && <EditTaxa />}
 

@@ -88,11 +88,14 @@ export const getCollectionByShortId = async (
     sectionOrder: collection.sectionOrder,
   }
 
-  const orderedItems = selectedCollection.sectionOrder.map((order: string) => {
-    return selectedCollection.items.find(
-      (item: { id: string }) => (item.id as string) === order
-    )
-  })
+  const orderedItems =
+    collection.type === 'topic'
+      ? selectedCollection.sectionOrder.map((order: string) => {
+          return selectedCollection.items.find(
+            (item: { id: string }) => (item.id as string) === order
+          )
+        })
+      : collection.items
 
   return {
     ...selectedCollection,

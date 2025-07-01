@@ -595,13 +595,7 @@ export const CollectionProvider = ({
         )
       }
 
-      const updatedCollection = await response.json()
-
-      // Update with server response (in case server made additional changes)
-      // setCollection(updatedCollection)
-
-      // Only navigate if the update was successful
-      // router.push(`/collection/${collection.slug}-${collection.shortId}`)
+      await response.json()
     } catch (error) {
       console.error('Failed to update collection:', error)
 

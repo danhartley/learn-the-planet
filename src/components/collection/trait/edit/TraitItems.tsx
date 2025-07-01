@@ -9,7 +9,7 @@ import { Collection, Trait } from '@/types'
 export const TraitItems = () => {
   const { collection } = useCollection()
   const traitCollection = collection as Collection<Trait>
-  const [editingTraitId, setEditingTraitId] = useState<string | null>(null)
+  const [selectedTraitId, setSelectedTraitId] = useState<string | null>(null)
 
   if (!traitCollection.items) {
     return (
@@ -20,42 +20,31 @@ export const TraitItems = () => {
     )
   }
 
-  const handleTraitClick = (traitId: string) => {
-    setEditingTraitId(traitId)
-  }
-
-  const handleCancelEdit = () => {
-    setEditingTraitId(null)
-  }
-
-  const handleSaveEdit = () => {
-    setEditingTraitId(null)
-  }
-
-  const handleDeleteTrait = () => {
-    setEditingTraitId(null)
+  const handleTraitToggle = (traitId: string) => {
+    setSelectedTraitId(selectedTraitId === traitId ? null : traitId)
   }
 
   return (
-    <section aria-labelledby="traits-list" className="group-block">
+    <section aria-labelledby="traits-list">
       <div className="group">
-        <h2 id="traits-list">Traits ({traitCollection.items.length})</h2>
+        <h2 id="traits-list">Traits</h2>
         <div>
           <em>Click to edit or delete a trait.</em>
         </div>
       </div>
-      <div className="column-group">
+      <ul>
         {traitCollection.items.map((trait, index) => (
-          <div key={trait.id}>
-            <EditTrait
-              trait={trait}
-              onCancel={handleCancelEdit}
-              onSave={handleSaveEdit}
-              onDelete={handleDeleteTrait}
-            />
-          </div>
+          <li key={trait.id} className="column-group">
+            <div className="horizontal-group">
+              <button onClick={() => handleTraitToggle(trait.id)}>
+                <div className="index">{index + 1}</div>
+              </button>
+              <span>{trait.trait}</span>
+            </div>
+            {selectedTraitId === trait.id && <EditTrait trait={trait} />}
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   )
 }
