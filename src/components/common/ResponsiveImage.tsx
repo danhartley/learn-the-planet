@@ -16,7 +16,7 @@ export const ResponsiveImage = ({ id, img, alt }: Props) => {
       alt={alt}
       width={230}
       height={230}
-      style={{ objectFit: 'cover' }}
+      style={{ objectFit: 'contain' }}
     />
   )
 }

@@ -12,6 +12,9 @@
   --colour-bg-mammalia: rgb(240, 199, 130);
   --colour-bg-reptilia: rgb(254, 226, 223);
   --colour-bg-aves: rgb(215 227 241);
+  --colour-bg-amphibia: rgb(220 239 163);
+  --colour-bg-actinopterygii: rgb(241 229 215);
+  --colour-bg-mollusca: rgb(241 229 215);
   --colour-bg-topic: rgb(255 255 255);
   --colour-bg-topic-card: rgb(245 245 245);
   --colour-bg-taxon: rgb(73 64 34);
@@ -392,6 +395,7 @@ li::marker {
   width: var(--img-size);
   height: var(--img-size);
   border-radius: var(--border-radius-sm);
+  border-bottom: 1px solid var(--colour-line);
 }
 
 .group > * {
@@ -633,22 +637,74 @@ figcaption > div > div:nth-child(2) {
 /* Background colors */
 .bg-plantae {
   background-color: var(--colour-bg-plantae);
+  img {
+    background-color: var(--colour-bg-body);
+    border: 1px solid var(--colour-bg-plantae);
+    border-bottom: none;
+  }
 }
 
 .bg-insecta {
   background-color: var(--colour-bg-insecta);
+  img {
+    background-color: var(--colour-bg-body);
+    border: 1px solid var(--colour-bg-insecta);
+    border-bottom: none;
+  }
 }
 
 .bg-mammalia {
   background-color: var(--colour-bg-mammalia);
+  img {
+    background-color: var(--colour-bg-body);
+    border: 1px solid var(--colour-bg-mammalia);
+    border-bottom: none;
+  }
 }
 
 .bg-reptilia {
   background-color: var(--colour-bg-reptilia);
+  img {
+    background-color: var(--colour-bg-body);
+    border: 1px solid var(--colour-bg-reptilia);
+    border-bottom: none;
+  }
 }
 
 .bg-aves {
   background-color: var(--colour-bg-aves);
+  img {
+    background-color: var(--colour-bg-body);
+    border: 1px solid var(--colour-bg-aves);
+    border-bottom: none;
+  }
+}
+
+.bg-amphibia {
+  background-color: var(--colour-bg-amphibia);
+  img {
+    background-color: var(--colour-bg-body);
+    border: 1px solid var(--colour-bg-amphibia);
+    border-bottom: none;
+  }
+}
+
+.bg-actinopterygii {
+  background-color: var(--colour-bg-actinopterygii);
+  img {
+    background-color: var(--colour-bg-body);
+    border: 1px solid var(--colour-bg-actinopterygii);
+    border-bottom: none;
+  }
+}
+
+.bg-mollusca {
+  background-color: var(--colour-bg-mollusca);
+  img {
+    background-color: var(--colour-bg-body);
+    border: 1px solid var(--colour-bg-mollusca);
+    border-bottom: none;
+  }
 }
 
 .bg-correct {
