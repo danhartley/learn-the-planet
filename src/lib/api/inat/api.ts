@@ -112,7 +112,7 @@ export const getIdByAutocomplete = async ({
   by,
   toComplete,
 }: AutoCompleteProps) => {
-  const url = `https://api.inaturalist.org/v1/${by}/autocomplete?q=${toComplete}&per_page=10&rank=species`
+  const url = `https://api.inaturalist.org/v1/${by}/autocomplete?q=${toComplete}&per_page=10&rank=species,genus`
   const response = await fetch(url)
   const json = await response.json()
   return json
