@@ -1,13 +1,25 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 
+import { useRouter } from 'next/navigation'
+
+import { useTestPlanner } from '@/hooks/useTestPlanner'
+
+import { TestConfigSettings } from '@/components/common/TestConfigSettings'
 import { TaxonCard } from '@/components/common/TaxonCard'
 import { NextCloudinaryImage } from '@/components/image/NextCloudinaryImage'
 
 import { groupCollectionsByType } from '@/utils/arrays'
-import { Collection, CollectionSummary, Topic } from '@/types'
+
+import {
+  Collection,
+  CollectionSummary,
+  Topic,
+  Taxon,
+  QuestionTemplateSelection,
+} from '@/types'
 
 type Props<Topic> = {
   collection: Collection<Topic>
@@ -17,6 +29,46 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
   const fieldNotesUrl = collection?.fieldNotes?.url ? (
     <Link href={collection.fieldNotes.url}>Field notes</Link>
   ) : null
+  const [config, setConfig] = useState({
+    questionTemplateSelections: [
+      { type: 'multipleChoice', isSelected: true },
+      { type: 'textEntry', isSelected: true },
+    ] as QuestionTemplateSelection[],
+  })
+  const { startTest } = useTestPlanner<Taxon>() // Changed to Taxon since we're testing examples
+  const router = useRouter()
+
+  // Extract all examples from topics to create a testable collection
+  const createExamplesCollection = (): Collection<Taxon> => {
+    const allExamples: Taxon[] = []
+
+    collection.items?.forEach(topic => {
+      if (topic.examples && topic.examples.length > 0) {
+        allExamples.push(...topic.examples)
+      }
+    })
+
+    return {
+      ...collection,
+      type: 'taxon', // Set type to taxon for proper question template selection
+      items: allExamples,
+    } as Collection<Taxon>
+  }
+
+  const handleStartTest = () => {
+    const examplesCollection = createExamplesCollection()
+
+    // Only start test if there are examples to test
+    if (examplesCollection.items && examplesCollection.items.length > 0) {
+      startTest({ collection: examplesCollection, config })
+      router.push('/test')
+    }
+  }
+
+  // Check if there are any examples available for testing
+  const hasExamples = collection.items?.some(
+    topic => topic.examples && topic.examples.length > 0
+  )
 
   const collections = groupCollectionsByType(collection?.collections || [])
 
@@ -72,7 +124,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
               <p>
                 {section?.credit?.authors ? (
                   <span key={section.credit?.title}>
-                    `Authors: ${section.credit.authors.join(', ')}`
+                    {`Authors: ${section.credit.authors.join(', ')}`}
                   </span>
                 ) : null}
               </p>
@@ -140,6 +192,14 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       {terms}
       {traits}
       {fieldNotesUrl}
+      {hasExamples && (
+        <>
+          <button id="start-test" onClick={handleStartTest}>
+            Start test
+          </button>
+          <TestConfigSettings config={config} setConfig={setConfig} />
+        </>
+      )}
     </section>
   )
 }

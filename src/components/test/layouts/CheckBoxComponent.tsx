@@ -91,8 +91,10 @@ export default function CheckBoxComponent({
       aria-labelledby="multiple-select"
       data-type={layout.collection.type}
     >
-      <h3 id="multiple-select">Multiple select</h3>
-      <div className="question-text">{question.text}</div>
+      <div>
+        <h2 id="multiple-select">Multiple select</h2>
+        <div className="question-text">{question.text}</div>
+      </div>
       <div className="block-container">
         <div className="grid-lg options">{options}</div>
       </div>

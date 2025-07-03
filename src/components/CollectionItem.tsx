@@ -91,9 +91,11 @@ export function CollectionItem({ collectionSummary }: Props) {
           </Link>
         </>
       </div>
-      <button id="start-test" onClick={handleStartTest}>
-        Start test
-      </button>
+      {collectionSummary.type !== 'topic' && (
+        <button id="start-test" onClick={handleStartTest}>
+          Start test
+        </button>
+      )}
     </section>
   )
 }

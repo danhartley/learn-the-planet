@@ -93,8 +93,10 @@ export default function MultipleTextChoiceComponent({
       aria-labelledby="multiple-choice"
       data-type={layout.collection.type}
     >
-      <h2 id="multiple-choice">Multiple choice</h2>
-      <div className="question-text">{question.text}</div>
+      <div>
+        <h2 id="multiple-choice">Multiple choice</h2>
+        <div className="question-text">{question.text}</div>
+      </div>
       <div className="block-container">
         <div className="grid-lg options">{buttons}</div>
       </div>

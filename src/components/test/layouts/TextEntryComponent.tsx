@@ -58,10 +58,14 @@ export default function TextEntryComponent({
       aria-labelledby="text-entry"
       data-type={layout.collection.type}
     >
-      <h2 id="text-entry">
-        <label htmlFor="answer">{question.contentType || question.type}</label>
-      </h2>
-      <div className="question-text">{question.text}</div>
+      <div>
+        <h2 id="text-entry">
+          <label htmlFor="answer">
+            {question.contentType || question.type}
+          </label>
+        </h2>
+        <div className="question-text">{question.text}</div>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className={correctClassName}>
           <input

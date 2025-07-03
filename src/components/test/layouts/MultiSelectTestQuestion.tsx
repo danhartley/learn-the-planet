@@ -76,8 +76,10 @@ export default function MultiSelectTestQuestion({
       aria-labelledby="multiple-select"
       data-type={layout.collection.type}
     >
-      <h3 id="multiple-select">Multiple select</h3>
-      <div className="question-text">{question.text}</div>
+      <div>
+        <h2 id="multiple-select">Multiple select</h2>
+        <div className="question-text">{question.text}</div>
+      </div>
       <div className="block-container">
         <MultiSelectList
           options={question.options}

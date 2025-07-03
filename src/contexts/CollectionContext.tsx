@@ -7,12 +7,15 @@ import {
   useCallback,
 } from 'react'
 
+import { processCollectionTaxa } from '@/utils/taxa'
+
 import {
   Collection,
   CollectionSummary,
   ApiResponse,
   UpdateCollectionFieldsOptions,
   ContentHandlerType,
+  Taxon,
 } from '@/types'
 
 type CollectionContextType = {
@@ -303,44 +306,44 @@ export const CollectionProvider = ({
     async (collection: Collection<unknown>, items: unknown[]) => {
       if (!collection || !items) return
 
-      // Optimistic update
+      // Store previous state for rollback
       const previousCollection = collection
+
+      const processedCollectionItems = processCollectionTaxa(
+        collection.type,
+        collection.items
+      )
+
+      // Optimistic update
       setCollection(prev =>
         prev
           ? {
               ...prev,
-              items: items,
-              itemCount: items.length,
+              items: processedCollectionItems,
+              itemCount: processedCollectionItems?.length || 0,
             }
           : null
       )
 
       try {
-        const url = `/api/collection/update-items/${collection.slug}-${collection.shortId}`
-        const response = await fetch(url, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(items),
-        })
+        const response = await fetch(
+          `/api/collection/update-items/${collection.slug}-${collection.shortId}`,
+          {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(processedCollectionItems), // Send original items to server
+          }
+        )
 
         if (!response.ok) {
           const errorData = await response.json()
-
-          // Revert optimistic update on error
-          setCollection(previousCollection)
-
           throw new Error(
             errorData.error || `HTTP error! status: ${response.status}`
           )
         }
 
         const updatedCollection = await response.json()
-
-        // Update with server response (in case server made additional changes)
         setCollection(updatedCollection)
-
         setApiResponse({
           success: true,
           message: 'Collection items update succeeded.',
@@ -348,9 +351,8 @@ export const CollectionProvider = ({
       } catch (error) {
         console.error('Failed to update collection:', error)
 
-        // Ensure revert on any error (in case it wasn't caught above)
+        // Revert optimistic update
         setCollection(previousCollection)
-
         setApiResponse({
           success: false,
           message: 'Collection items update failed.',
@@ -382,6 +384,10 @@ export const CollectionProvider = ({
         : prev
     )
 
+    const processedItem = processCollectionTaxa(collection.type, [
+      updatedItem,
+    ])?.find(taxon => taxon)
+    console.log(processedItem)
     try {
       const url = `/api/collection/update-item/${collection.slug}-${collection.shortId}-${itemId}`
 
@@ -390,7 +396,7 @@ export const CollectionProvider = ({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedItem),
+        body: JSON.stringify(processedItem),
       })
 
       if (!response.ok) {
@@ -405,7 +411,7 @@ export const CollectionProvider = ({
       }
 
       const updatedCollection = await response.json()
-      console.log('updatedCollection', updatedCollection)
+
       // Update with server response (in case server made additional changes)
       setCollection(updatedCollection)
 
