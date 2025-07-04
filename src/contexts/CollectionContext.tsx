@@ -15,7 +15,6 @@ import {
   ApiResponse,
   UpdateCollectionFieldsOptions,
   ContentHandlerType,
-  Taxon,
 } from '@/types'
 
 type CollectionContextType = {
@@ -51,6 +50,7 @@ type CollectionContextType = {
   addCollection: (
     name: string,
     type: ContentHandlerType,
+    ownerId: string,
     imageUrl?: string
   ) => Promise<void>
   updateSectionOrder: (
@@ -504,6 +504,7 @@ export const CollectionProvider = ({
   const addCollection = async (
     name: string,
     type: ContentHandlerType,
+    ownerId: string,
     imageUrl?: string
   ) => {
     if (!name?.trim() || !type) return
@@ -517,6 +518,7 @@ export const CollectionProvider = ({
       itemCount: 0,
       imageUrl: imageUrl || '',
       sectionOrder: [],
+      ownerId,
     }
 
     try {

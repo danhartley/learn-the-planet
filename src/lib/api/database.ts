@@ -26,6 +26,7 @@ export const getCollections = async (): Promise<
         itemCount: collection.itemCount || collection.items?.length || 0,
         imageUrl: collection.imageUrl || '',
         sectionOrder: collection.sectionOrder,
+        ownerId: collection.ownerId,
       }
     })
   } catch (error) {
@@ -56,6 +57,7 @@ export const getCollectionSummaries = async (): Promise<
         itemCount: collection.itemCount || 0,
         imageUrl: collection.imageUrl || '',
         status: collection.status,
+        ownerId: collection.ownerId,
       }
     })
   } catch (error) {
@@ -87,6 +89,7 @@ export const getCollectionByShortId = async (
     imageUrl: collection.imageUrl || '',
     credit: collection.credit,
     sectionOrder: collection.sectionOrder,
+    ownerId: collection.ownerId,
   }
 
   const orderedItems =
@@ -140,6 +143,7 @@ export const createCollection = async (collection: Collection<unknown>) => {
       itemCount,
       status: 'public' as CollectionStatus,
       imageUrl: collection.imageUrl,
+      ownerId: collection.ownerId,
     }
 
     await db.collection('collectionsSummary').insertOne({
@@ -270,6 +274,7 @@ export const addItemsToCollection = async (
       itemCount: result.itemCount || result.items?.length || 0,
       collections: result?.collections || [],
       sectionOrder: result?.sectionOrder,
+      ownerId: result?.ownerId,
     }
   } catch (error) {
     console.error('Failed to add items to collection:', error)
@@ -623,6 +628,7 @@ export const updateCollectionFields = async (
       collections: result?.collections || [],
       imageUrl: result?.imageUrl || '',
       sectionOrder: result?.sectionOrder,
+      ownerId: result?.ownerId,
     }
   } catch (error) {
     console.error('Failed to update collection fields:', error)
@@ -664,6 +670,7 @@ export const updateCollectionSectionOrder = async (
       collections: result?.collections || [],
       imageUrl: result?.imageUrl || '',
       sectionOrder: result?.sectionOrder,
+      ownerId: result?.ownerId,
     }
   } catch (error) {
     console.error('Failed to update collection fields:', error)

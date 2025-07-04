@@ -32,7 +32,8 @@
       "@/registry": ["lib/registry"],
       "@/validation/*": ["lib/validation/*"],
       "@/type-guards": ["lib/type-guards"],
-      "@/contexts/*": ["contexts/*"]
+      "@/contexts/*": ["contexts/*"],
+      "@/auth": ["../auth.ts"]
     },
     "types": [
       "cypress",

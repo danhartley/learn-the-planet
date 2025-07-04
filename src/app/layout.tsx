@@ -3,6 +3,8 @@ import Link from 'next/link'
 import '@/css/global.css'
 import '@/css/fonts.css'
 
+import { SessionProvider } from 'next-auth/react'
+
 import { Menu } from '@/components/Menu'
 
 export const metadata = {
@@ -21,7 +23,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <Link href="/collections">Learn the Planet</Link>
           </div>
         </header>
-        <main>{children}</main>
+        <main>
+          <SessionProvider>{children}</SessionProvider>
+        </main>
         <footer>
           <div></div>
           <Menu />

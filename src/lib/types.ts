@@ -167,6 +167,7 @@ export type CollectionSummary = {
   itemCount: number
   imageUrl?: string
   status: string
+  ownerId: string
 }
 
 export type Credit = {
@@ -203,6 +204,7 @@ export type Collection<T> = {
   credit?: Credit
   imageUrl?: string
   sectionOrder: string[]
+  ownerId: string
 }
 
 export type GroupedCollectionSummaries = {
@@ -376,4 +378,18 @@ export type SectionTypeOption = {
   key: SectionType | TraitSectionType
   value: string
   description: string
+}
+
+export type SessionState = {
+  user: {
+    id: string
+    name: string
+    email: string
+    image: string
+    emailVerified?: boolean
+  }
+  id: string
+  sessionToken: string
+  userId: string
+  expires: string
 }

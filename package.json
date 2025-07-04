@@ -41,6 +41,8 @@
   },
   "source": "./src/page.tsx",
   "dependencies": {
+    "@auth/mongodb-adapter": "^3.10.0",
+    "next-auth": "^5.0.0-beta.29",
     "next-cloudinary": "^6.16.0"
   }
 }

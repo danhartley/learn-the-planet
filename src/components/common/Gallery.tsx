@@ -1,10 +1,13 @@
 import Link from 'next/link'
 
+import { auth } from '@/auth'
+
 import { Collection, ContentHandlerType } from '@/types'
 import { TaxonGallery } from '@/components/common/TaxonGallery'
 import { TermGallery } from '@/components/common/TermGallery'
 import { TopicGallery } from '@/components/common/TopicGallery'
 import { TraitGallery } from '@/components/common/TraitGallery'
+import { SignIn } from '@/components/oauth/SignIn'
 
 type ComponentProps = {
   collection: Collection<unknown>
@@ -14,7 +17,7 @@ type GalleryProps<T> = {
   collection: Collection<T> | undefined
 }
 
-export function Gallery<T>({ collection }: GalleryProps<T>) {
+export async function Gallery<T>({ collection }: GalleryProps<T>) {
   const pageMap: {
     [K in ContentHandlerType]: React.ComponentType<ComponentProps>
   } = {
@@ -32,15 +35,21 @@ export function Gallery<T>({ collection }: GalleryProps<T>) {
     pageMap[collection.type as ContentHandlerType] ||
     (() => <div>Component not found</div>)
 
+  // Get session on server side
+  const session = await auth()
+  const canEdit = session?.user?.id === collection.ownerId
+
   return (
     <>
       <Component collection={collection} />
-      <Link
-        href={`/collection/edit/${collection.slug}-${collection.shortId}`}
-        // href={`/collection/update/${collection.slug}-${collection.shortId}`}
-      >
-        Edit collection
-      </Link>
+      <SignIn signInText={'Sign in to edit collection'} />
+      {canEdit && (
+        <Link
+          href={`/collection/edit/${collection.slug}-${collection.shortId}`}
+        >
+          Edit collection
+        </Link>
+      )}
     </>
   )
 }

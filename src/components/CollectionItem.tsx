@@ -91,10 +91,12 @@ export function CollectionItem({ collectionSummary }: Props) {
           </Link>
         </>
       </div>
-      {collectionSummary.type !== 'topic' && (
+      {collectionSummary.type !== 'topic' ? (
         <button id="start-test" onClick={handleStartTest}>
           Start test
         </button>
+      ) : (
+        <div></div>
       )}
     </section>
   )
