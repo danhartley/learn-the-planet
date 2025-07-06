@@ -13,4 +13,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
+  callbacks: {
+    session: async ({ session, user }) => {
+      // When using a database adapter, user object is available
+      if (session?.user && user?.id) {
+        session.user.id = user.id
+      }
+      return session
+    },
+  },
 })
