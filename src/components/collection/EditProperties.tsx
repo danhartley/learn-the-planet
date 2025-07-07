@@ -12,13 +12,18 @@ export const EditProperties = () => {
   const [name, setName] = useState<string>(collection?.name || '')
   const [slug, setSlug] = useState<string>(collection?.slug || '')
   const [imageUrl, setImageUrl] = useState<string>(collection?.imageUrl || '')
+  const [date, setDate] = useState<string>(collection?.date || '')
+  const [location, setLocation] = useState<string>(collection?.location || '')
 
   const handleFieldsChange = () => {
     const newFields = {
       name,
       slug,
       imageUrl,
+      date: date || null,
+      location: location || null,
     } as UpdateCollectionFieldsOptions
+    console.log('newFields', newFields)
     if (collection) updateCollectionFields(collection, newFields)
   }
 
@@ -30,6 +35,7 @@ export const EditProperties = () => {
           setFieldValue={setName}
           fieldText="Collection name"
           type={collection?.type || 'topic'}
+          sectionIndex={1}
         />
       </div>
 
@@ -39,6 +45,7 @@ export const EditProperties = () => {
           setFieldValue={setSlug}
           fieldText="Collection slug"
           type={collection?.type || 'topic'}
+          sectionIndex={1}
         />
       </div>
 
@@ -48,6 +55,35 @@ export const EditProperties = () => {
           setFieldValue={setImageUrl}
           fieldText="Collection image url"
           type={collection?.type || 'topic'}
+          sectionIndex={1}
+        />
+      </div>
+
+      <div className="group-block">
+        <div>
+          <h3>
+            <label htmlFor="collection-date">Collection Date</label>
+          </h3>
+          <div className={`form-row ${collection?.type}`}>
+            <input
+              type="date"
+              value={date}
+              onChange={e => setDate(e.target.value)}
+              title="Select collection date"
+              placeholder="YYYY-MM-DD"
+              id="collection-date"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="group-block">
+        <CollectionTextField
+          fieldValue={location}
+          setFieldValue={setLocation}
+          fieldText="Collection location"
+          type={collection?.type || 'topic'}
+          sectionIndex={1}
         />
       </div>
 

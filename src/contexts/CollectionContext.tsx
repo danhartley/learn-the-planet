@@ -244,6 +244,8 @@ export const CollectionProvider = ({
             name: fields.name ?? prev.name,
             slug: fields.slug ?? prev.slug,
             imageUrl: fields.imageUrl ?? prev.imageUrl,
+            date: fields.date ?? prev.date,
+            location: fields.location ?? prev.location,
           }
         : null
     )

@@ -27,6 +27,8 @@ export const getCollections = async (): Promise<
         imageUrl: collection.imageUrl || '',
         sectionOrder: collection.sectionOrder,
         ownerId: collection.ownerId,
+        date: collection.date,
+        location: collection.location,
       }
     })
   } catch (error) {
@@ -90,6 +92,8 @@ export const getCollectionByShortId = async (
     credit: collection.credit,
     sectionOrder: collection.sectionOrder,
     ownerId: collection.ownerId,
+    date: collection.date,
+    location: collection.location,
   }
 
   const orderedItems =
@@ -275,6 +279,8 @@ export const addItemsToCollection = async (
       collections: result?.collections || [],
       sectionOrder: result?.sectionOrder,
       ownerId: result?.ownerId,
+      date: result?.date,
+      location: result?.location,
     }
   } catch (error) {
     console.error('Failed to add items to collection:', error)
@@ -590,6 +596,14 @@ export const updateCollectionFields = async (
     updateFields.imageUrl = options.imageUrl
   }
 
+  if (options.date !== undefined && options.date !== '') {
+    updateFields.date = options.date
+  }
+
+  if (options.location !== undefined && options.location !== '') {
+    updateFields.location = options.location
+  }
+
   // If no fields to update, return undefined
   if (Object.keys(updateFields).length === 0) {
     return undefined
@@ -629,6 +643,8 @@ export const updateCollectionFields = async (
       imageUrl: result?.imageUrl || '',
       sectionOrder: result?.sectionOrder,
       ownerId: result?.ownerId,
+      date: result?.date,
+      location: result?.location,
     }
   } catch (error) {
     console.error('Failed to update collection fields:', error)
@@ -671,6 +687,8 @@ export const updateCollectionSectionOrder = async (
       imageUrl: result?.imageUrl || '',
       sectionOrder: result?.sectionOrder,
       ownerId: result?.ownerId,
+      date: result?.date,
+      location: result?.location,
     }
   } catch (error) {
     console.error('Failed to update collection fields:', error)
