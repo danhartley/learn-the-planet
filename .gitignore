@@ -19,7 +19,8 @@ out/
 *.pem
 .env
 .env.local
-.env.staging
+.env.test
+
 .env.development.local
 .env.test.local
 .env.production.local
