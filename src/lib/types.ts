@@ -166,7 +166,7 @@ export type CollectionSummary = {
   location?: string
   itemCount: number
   imageUrl?: string
-  status: string
+  status: CollectionStatus
   ownerId: string
 }
 
@@ -345,6 +345,7 @@ export type Operation =
   | 'update-items'
   | 'add-item'
   | 'add-raw-data'
+  | 'edit-state'
 
 export type ContentType = {
   key: string

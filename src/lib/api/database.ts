@@ -145,7 +145,7 @@ export const createCollection = async (collection: Collection<unknown>) => {
       date: collection.date,
       location: collection.location,
       itemCount,
-      status: 'public' as CollectionStatus,
+      status: 'private' as CollectionStatus,
       imageUrl: collection.imageUrl,
       ownerId: collection.ownerId,
     }
@@ -786,6 +786,44 @@ export const deleteCollectionItem = async (
     return deleteResult
   } catch (error) {
     console.error('Failed to delete collection item:', error)
+    throw error
+  }
+}
+
+export const updateCollectionStatus = async (
+  shortId: string,
+  status: CollectionStatus
+): Promise<CollectionSummary | null> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+
+  try {
+    const result = await db
+      .collection('collectionsSummary')
+      .findOneAndUpdate(
+        { shortId },
+        { $set: { status } },
+        { returnDocument: 'after' }
+      )
+
+    if (!result) {
+      console.log(`Collection with shortId ${shortId} not found`)
+      return null
+    }
+
+    // Convert MongoDB _id to string id for the return type
+    const updatedDocument: CollectionSummary = {
+      ...result,
+      id: result._id.toString(),
+    } as unknown as CollectionSummary
+
+    // Remove the _id field since we're using id
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    delete (updatedDocument as any)._id
+
+    return updatedDocument
+  } catch (error) {
+    console.error('Failed to update collection status:', error)
     throw error
   }
 }

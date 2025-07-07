@@ -15,6 +15,7 @@ import {
   ApiResponse,
   UpdateCollectionFieldsOptions,
   ContentHandlerType,
+  CollectionStatus,
 } from '@/types'
 
 type CollectionContextType = {
@@ -57,6 +58,12 @@ type CollectionContextType = {
     collection: Collection<unknown>,
     sectionOrder: string[]
   ) => void
+  updateCollectionState: (
+    collectionSummary: CollectionSummary,
+    status: CollectionStatus
+  ) => Promise<void>
+  collectionSummary: CollectionSummary | null | undefined
+  collectionSummaries: CollectionSummary[] | null | undefined
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -75,6 +82,11 @@ export const CollectionProvider = ({
   const [collection, setCollection] = useState<Collection<unknown> | null>(
     initialCollection ?? null
   )
+  const [collectionSummary, setCollectionSummary] =
+    useState<CollectionSummary | null>()
+  const [collectionSummaries, setCollectionSummaries] = useState<
+    CollectionSummary[] | null
+  >()
   const [apiResponse, setApiResponse] = useState<ApiResponse>({
     success: false,
     message: '',
@@ -301,7 +313,13 @@ export const CollectionProvider = ({
     CollectionSummary[]
   > => {
     const response = await fetch('/api/collection-summaries')
-    return response.json()
+    const summaries = await response.json()
+
+    if (summaries) {
+      setCollectionSummaries(summaries)
+    }
+
+    return summaries
   }, [])
 
   const updateCollectionItems = useCallback(
@@ -623,6 +641,93 @@ export const CollectionProvider = ({
     // }, 2000)
   }
 
+  const updateCollectionState = async (
+    collectionSummary: CollectionSummary,
+    status: CollectionStatus
+  ) => {
+    if (!collectionSummary || !status) return
+
+    // Store previous states for rollback
+    const previousCollectionSummary = collectionSummary
+    const previousCollectionSummaries = collectionSummaries
+
+    // Optimistic update for single collection summary
+    setCollectionSummary(prev =>
+      prev
+        ? {
+            ...prev,
+            status,
+          }
+        : null
+    )
+
+    // Optimistic update for collection summaries array
+    setCollectionSummaries(prev =>
+      prev?.map(summary =>
+        summary.shortId === collectionSummary.shortId
+          ? { ...summary, status }
+          : summary
+      )
+    )
+
+    try {
+      const url = `/api/collection-summary/${collectionSummary.slug}-${collectionSummary.shortId}`
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+
+        // Revert optimistic updates on error
+        setCollectionSummary(previousCollectionSummary)
+        setCollectionSummaries(previousCollectionSummaries)
+
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const updatedCollectionSummary = await response.json()
+
+      // Update with server response (in case server made additional changes)
+      setCollectionSummary(updatedCollectionSummary)
+
+      // Update the array with server response
+      setCollectionSummaries(prev =>
+        prev?.map(summary =>
+          summary.shortId === collectionSummary.shortId
+            ? updatedCollectionSummary
+            : summary
+        )
+      )
+
+      setApiResponse({
+        success: true,
+        message: 'Collection status updated',
+      })
+
+      // Only navigate if the update was successful
+      // router.push(`/collection/${collectionSummary.slug}-${collectionSummary.shortId}`)
+    } catch (error) {
+      console.error('Failed to update collection status:', error)
+
+      // Ensure revert on any error (in case it wasn't caught above)
+      setCollectionSummary(previousCollectionSummary)
+      setCollectionSummaries(previousCollectionSummaries)
+
+      setApiResponse({
+        success: false,
+        message: 'Collection status update failed.',
+      })
+    }
+  }
+
   return (
     <CollectionContext.Provider
       value={{
@@ -640,6 +745,9 @@ export const CollectionProvider = ({
         deleteCollectionItem,
         addCollection,
         updateSectionOrder,
+        updateCollectionState,
+        collectionSummary,
+        collectionSummaries,
       }}
     >
       {children}

@@ -11,6 +11,7 @@ import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
 import { TopicItems } from '@/components/collection/topic/edit/topicItems/TopicItems'
 import { AddTopic } from '@/components/collection/topic/add/AddTopic'
+import { TopicState } from '@/components/collection/topic/edit/TopicState'
 import { TraitItems } from '@/components/collection/trait/edit/TraitItems'
 import { AddTrait } from '@/components/collection/trait/add/AddTrait'
 import { EditTaxa } from '@/components/collection/taxon/EditTaxa'
@@ -39,6 +40,7 @@ export const EditOperations = () => {
   const isUpdateItems = operation === ('update-items' as Operation)
   const isAddItem = operation === ('add-item' as Operation)
   const isAddRawData = operation === ('add-raw-data' as Operation)
+  const isEditState = operation === ('edit-state' as Operation)
 
   return (
     <>
@@ -61,6 +63,7 @@ export const EditOperations = () => {
 
       {isUpdateItems && isTopic && <TopicItems />}
       {isAddItem && isTopic && <AddTopic />}
+      {isEditState && isTopic && <TopicState />}
 
       {isUpdateItems && isTrait && <TraitItems />}
       {isAddItem && isTrait && <AddTrait />}

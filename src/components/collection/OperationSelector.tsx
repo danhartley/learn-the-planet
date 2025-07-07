@@ -15,6 +15,7 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
     case 'topic':
       operationTypes = [
         'update',
+        'edit-state',
         'update-items',
         'linked-collections',
         'delete',
@@ -25,6 +26,7 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
     case 'term':
       operationTypes = [
         'update',
+        'edit-state',
         'update-items',
         'delete',
         'add-item',
@@ -32,7 +34,7 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
       ]
       break
     default:
-      operationTypes = ['update', 'update-items', 'delete']
+      operationTypes = ['update', 'edit-state', 'update-items', 'delete']
   }
 
   const editOptions = operationTypes.map(option => {
@@ -45,6 +47,7 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
       'update-items': 'Edit collection items',
       'add-item': 'Add item',
       'add-raw-data': 'Add raw data',
+      'edit-state': 'Edit Collection Availability',
     }[option as Operation]
 
     const handleOnChangeOperation = (
