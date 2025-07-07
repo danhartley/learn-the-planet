@@ -15,7 +15,7 @@
   --colour-bg-amphibia: rgb(220 239 163);
   --colour-bg-actinopterygii: rgb(241 229 215);
   --colour-bg-mollusca: rgb(241 229 215);
-  --colour-bg-topic: rgb(255 255 255);
+  --colour-bg-topic: rgb(128 128 128);
   --colour-bg-topic-card: rgb(245 245 245);
   --colour-bg-taxon: rgb(73 64 34);
   --colour-bg-taxon-card: rgb(245, 243, 234);
@@ -23,7 +23,6 @@
   --colour-bg-term-card: rgb(241 247 238);
   --colour-bg-trait: rgb(64 34 73);
   --colour-bg-trait-card: rgb(243 235 245);
-  --colour-bg-topic: rgb(128 128 128);
   --colour-bg-button: rgb(233 228 208);
   --colour-bg-card-button: rgba(255, 255, 255, 0.5);
   --colour-bg-body: rgb(248 244 240);
@@ -244,6 +243,10 @@ input[type='checkbox'] + label,
 input[type='radio'] + label {
   cursor: pointer;
   text-transform: capitalize;
+}
+
+input[type='date'] {
+  font-size: var(--font-size-md);
 }
 
 button {
@@ -905,6 +908,19 @@ progress {
 
 .drag-over-bottom {
   opacity: 0.5;
+}
+
+button.draggable {
+  width: fit-content;
+}
+
+button.draggable + div {
+  display: flex;
+  align-items: center;
+  & > span {
+    font-size: var(--font-size-xs);
+    margin: 0 var(--spacing-xs) 0 0;
+  }
 }
 
 /* Media queries */

@@ -15,9 +15,9 @@ export const Menu = () => {
           <li>
             <Link href="/collection/create">Create collection</Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/flags">Flags</Link>
-          </li>
+          </li> */}
         </ul>
       </section>
     </nav>
