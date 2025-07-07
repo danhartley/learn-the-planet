@@ -25,6 +25,43 @@ type Props<Topic> = {
   collection: Collection<Topic>
 }
 
+// New component for rendering collection links sections
+const CollectionLinksSection: React.FC<{
+  collections: CollectionSummary[]
+  currentCollection: Collection<unknown>
+  sectionId: string
+  title: string
+}> = ({ collections, currentCollection, sectionId, title }) => {
+  if (!collections || collections.length === 0) {
+    return null
+  }
+
+  const filteredCollections = collections.filter(
+    linkedCollection => linkedCollection.shortId !== currentCollection.shortId
+  )
+
+  if (filteredCollections.length === 0) {
+    return null
+  }
+
+  return (
+    <section aria-labelledby={sectionId} className="sub-section">
+      <h2 id={sectionId}>{title}</h2>
+      <ul>
+        {filteredCollections.map((linkedCollection: CollectionSummary) => (
+          <li key={linkedCollection.shortId}>
+            <Link
+              href={`/collection/${linkedCollection?.slug}-${encodeURIComponent(linkedCollection?.shortId || '')}`}
+            >
+              {linkedCollection.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
 export const TopicGallery = ({ collection }: Props<Topic>) => {
   const fieldNotesUrl = collection?.fieldNotes?.url ? (
     <Link href={collection.fieldNotes.url}>Field notes</Link>
@@ -71,20 +108,6 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
   )
 
   const collections = groupCollectionsByType(collection?.collections || [])
-
-  const collectionLinks = (collections: CollectionSummary[]) => {
-    return collections.map((subCollection: CollectionSummary) => {
-      return subCollection ? (
-        <li key={subCollection.shortId}>
-          <Link
-            href={`/collection/${subCollection?.slug}-${encodeURIComponent(subCollection?.shortId || '')}`}
-          >
-            {subCollection.name}
-          </Link>
-        </li>
-      ) : null
-    })
-  }
 
   const article =
     collection.items &&
@@ -144,38 +167,6 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       )
     })
 
-  const topics =
-    collections?.topic.length > 0 ? (
-      <section aria-labelledby="item-gallery" className="sub-section">
-        <h2 id="item-gallery">Related topics</h2>
-        <ul>{collectionLinks(collections.topic)}</ul>
-      </section>
-    ) : null
-
-  const taxa =
-    collections?.taxon.length > 0 ? (
-      <section aria-labelledby="taxon-gallery" className="sub-section">
-        <h2 id="taxon-gallery">Taxa</h2>
-        <ul>{collectionLinks(collections.taxon)}</ul>
-      </section>
-    ) : null
-
-  const terms =
-    collections?.term.length > 0 ? (
-      <section aria-labelledby="term-gallery" className="sub-section">
-        <h2 id="term-gallery">Terms</h2>
-        <ul>{collectionLinks(collections.term)}</ul>
-      </section>
-    ) : null
-
-  const traits =
-    collections?.trait.length > 0 ? (
-      <section aria-labelledby="trait-gallery" className="sub-section">
-        <h2 id="trait-gallery">Traits</h2>
-        <ul>{collectionLinks(collections.trait)}</ul>
-      </section>
-    ) : null
-
   const authors = collection.credit?.authors?.join(',')
 
   return (
@@ -187,10 +178,35 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
         <div>{collection.location}</div>
       </div>
       <article>{article}</article>
-      {topics}
-      {taxa}
-      {terms}
-      {traits}
+
+      <CollectionLinksSection
+        collections={collections?.topic}
+        currentCollection={collection}
+        sectionId="item-gallery"
+        title="Related topics"
+      />
+
+      <CollectionLinksSection
+        collections={collections?.taxon}
+        currentCollection={collection}
+        sectionId="taxon-gallery"
+        title="Taxa"
+      />
+
+      <CollectionLinksSection
+        collections={collections?.term}
+        currentCollection={collection}
+        sectionId="term-gallery"
+        title="Terms"
+      />
+
+      <CollectionLinksSection
+        collections={collections?.trait}
+        currentCollection={collection}
+        sectionId="trait-gallery"
+        title="Traits"
+      />
+
       {fieldNotesUrl}
       {hasExamples && (
         <>

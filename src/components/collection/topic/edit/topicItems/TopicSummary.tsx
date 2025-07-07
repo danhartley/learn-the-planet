@@ -7,24 +7,38 @@ interface TopicSummaryProps {
 }
 
 export const TopicSummary: React.FC<TopicSummaryProps> = ({ section }) => {
-  const getSummaryText = (section: Topic): string => {
+  const getSummaryText = (section: Topic): React.ReactElement => {
     if (section.topic) {
-      return `Text: ${section.topic}`
+      return <>{section.topic}</>
     }
 
     if (section.text?.length) {
       const firstText = section.text.find(t => t && t.trim())
       if (firstText) {
-        return `Text: ${firstText.length > 100 ? firstText.slice(0, 100) + '…' : firstText}`
+        return (
+          <>
+            {firstText.length > 100 ? firstText.slice(0, 100) + '…' : firstText}
+          </>
+        )
       }
     }
 
     if (section.images?.length) {
       const firstImage = section.images.find(i => i?.caption)
       if (firstImage?.caption) {
-        return `Image: ${firstImage.caption}`
+        return (
+          <>
+            <span>[Image]</span>
+            {firstImage.caption}
+          </>
+        )
       }
-      return `Image: ${section.images.length} image${section.images.length > 1 ? 's' : ''}`
+      return (
+        <>
+          <span>[Image]</span>
+          {section.images.length > 1 ? 's' : ''}
+        </>
+      )
     }
 
     if (section.examples?.length) {
@@ -36,12 +50,26 @@ export const TopicSummary: React.FC<TopicSummaryProps> = ({ section }) => {
       if (binomials.length > 0) {
         const taxaText = binomials.join(', ')
         const remaining = section.examples.length - binomials.length
-        return `Taxa: ${taxaText}${remaining > 0 ? ` (+${remaining} more)` : ''}`
+        return (
+          <>
+            <span>[Taxa]</span>
+            {taxaText}
+            {remaining > 0 ? ` (+${remaining} more)` : ''}
+          </>
+        )
       }
-      return `Taxa: ${section.examples.length} example${section.examples.length > 1 ? 's' : ''}`
+      return (
+        <>
+          <span>[Taxa]</span>`${section.examples.length} example
+          {section.examples.length > 1 ? 's' : ''}`
+        </>
+      )
     }
-
-    return `Section ${section.id}`
+    return (
+      <>
+        <span>Section</span> {section.id}
+      </>
+    )
   }
 
   return <div>{getSummaryText(section)}</div>
