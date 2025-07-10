@@ -13,7 +13,7 @@ export const SectionTypeSelector = ({
     {
       key: 'text' as SectionType,
       value: 'Text',
-      description: 'Add text',
+      description: 'Add your own text',
     },
     {
       key: 'image' as SectionType,

@@ -51,27 +51,33 @@ export const TopicItems = () => {
             </em>
           </div>
         </div>
-        <ul>
-          {topicCollection.items.map((section, index) => (
-            <TopicItem
-              key={`${section.id}-${index}`}
-              section={section}
-              index={index}
-              isVisible={visibleSectionId === section.id}
-              isDragged={draggedItemId === section.id}
-              isDraggedOver={dragOverItemId === section.id}
-              isReorderMode={isReorderMode}
-              onToggle={() => toggleSection(section.id)}
-              onDragStart={handleDragStart}
-              onDragOver={handleDragOver}
-              onDragEnd={handleDragEnd}
-              onDrop={handleDrop}
-              onKeyDown={handleKeyDown}
-              onReorderModeChange={setIsReorderMode}
-              topicCollection={topicCollection}
-            />
-          ))}
-        </ul>
+        {topicCollection.items.length > 0 ? (
+          <ul>
+            {topicCollection.items.map((section, index) => (
+              <TopicItem
+                key={`${section.id}-${index}`}
+                section={section}
+                index={index}
+                isVisible={visibleSectionId === section.id}
+                isDragged={draggedItemId === section.id}
+                isDraggedOver={dragOverItemId === section.id}
+                isReorderMode={isReorderMode}
+                onToggle={() => toggleSection(section.id)}
+                onDragStart={handleDragStart}
+                onDragOver={handleDragOver}
+                onDragEnd={handleDragEnd}
+                onDrop={handleDrop}
+                onKeyDown={handleKeyDown}
+                onReorderModeChange={setIsReorderMode}
+                topicCollection={topicCollection}
+              />
+            ))}
+          </ul>
+        ) : (
+          <div>
+            <strong>Select "Add Item" to begin creating content.</strong>
+          </div>
+        )}
       </section>
     </>
   )

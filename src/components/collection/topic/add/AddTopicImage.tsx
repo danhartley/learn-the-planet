@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
-import { ImageUpload } from '@/components/image/ImageUpload'
+import { InteractiveImagesList } from '@/components/image/InteractiveImagesList'
 
 import { Topic, NextCloudImage } from '@/types'
 import { getShortId } from '@/utils/strings'
@@ -11,13 +11,6 @@ import { getShortId } from '@/utils/strings'
 export const AddTopicImage = () => {
   const { collection, addCollectionItem, apiResponse } = useCollection()
   const [images, setImages] = useState<NextCloudImage[] | undefined>()
-  const [image, setImage] = useState<NextCloudImage | undefined>()
-
-  useEffect(() => {
-    if (image) {
-      setImages(prevImages => (prevImages ? [...prevImages, image] : [image]))
-    }
-  }, [image])
 
   const saveImage = () => {
     const item = {
@@ -31,11 +24,11 @@ export const AddTopicImage = () => {
   return (
     <section aria-labelledby="new-section">
       <h2 id="new-section">Add image</h2>
-      <div className="form-row">
-        <ImageUpload setImage={setImage} />
+      <div className="group-block">
+        <InteractiveImagesList images={images} setImages={setImages} />
         <div className="form-row">
           <button onClick={saveImage} className="save">
-            Save image
+            Save selection
           </button>
           <ApiResponseMessage apiResponse={apiResponse} />
         </div>

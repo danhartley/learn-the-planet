@@ -64,6 +64,13 @@ type CollectionContextType = {
   ) => Promise<void>
   collectionSummary: CollectionSummary | null | undefined
   collectionSummaries: CollectionSummary[] | null | undefined
+  getImages: ({
+    userId,
+    collectionId,
+  }: {
+    userid?: string
+    collectionId?: string
+  }) => Promise<any>
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -92,7 +99,6 @@ export const CollectionProvider = ({
     message: '',
   })
 
-  // Add or update item
   const addCollectionItem = useCallback(
     async (collection: Collection<unknown>, item: unknown) => {
       if (!collection || !item) return
@@ -603,7 +609,6 @@ export const CollectionProvider = ({
         : null
     )
 
-    // setTimeout(async () => {
     try {
       const url = `/api/collection/update-section-order/${collection.slug}-${collection.shortId}`
 
@@ -638,7 +643,6 @@ export const CollectionProvider = ({
         message: 'Collection field updates failed.',
       })
     }
-    // }, 2000)
   }
 
   const updateCollectionState = async (
@@ -728,6 +732,53 @@ export const CollectionProvider = ({
     }
   }
 
+  const getImages = useCallback(
+    async ({
+      userId,
+      collectionId,
+    }: {
+      userId?: string
+      collectionId?: string
+    }) => {
+      try {
+        const params = new URLSearchParams()
+        if (userId) params.append('userId', userId)
+        if (collectionId) params.append('collectionId', collectionId)
+        const queryString = params.toString()
+        const response = await fetch(
+          `/api/images${queryString ? `?${queryString}` : ''}`
+        )
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+
+        const result = await response.json()
+
+        if (!result.success) {
+          throw new Error(result.error || 'Failed to fetch images')
+        }
+
+        setApiResponse({
+          success: true,
+          message: 'Images ready.',
+        })
+
+        return result.data // Return the actual images array
+      } catch (error) {
+        console.error('Error fetching images:', error)
+
+        setApiResponse({
+          success: false,
+          message: 'Failed to fetch images.',
+        })
+
+        return []
+      }
+    },
+    []
+  ) // Empty dependency array since this function doesn't depend on any context values
+
   return (
     <CollectionContext.Provider
       value={{
@@ -748,6 +799,7 @@ export const CollectionProvider = ({
         updateCollectionState,
         collectionSummary,
         collectionSummaries,
+        getImages,
       }}
     >
       {children}

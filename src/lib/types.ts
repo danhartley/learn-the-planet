@@ -64,6 +64,7 @@ export type Image = {
 }
 
 export type NextCloudImage = {
+  id: string
   src: string
   width?: number
   height?: number
@@ -71,6 +72,14 @@ export type NextCloudImage = {
   sizes?: string
   caption: string
 }
+
+export type CloudImage = {
+  asset_id: string
+  public_id: string
+  display_name?: string
+}
+
+export type NextCloudImageTagType = 'collection' | 'user'
 
 export type Family = {
   genera?: number
@@ -346,6 +355,7 @@ export type Operation =
   | 'add-item'
   | 'add-raw-data'
   | 'edit-state'
+  | 'upload-images'
 
 export type ContentType = {
   key: string

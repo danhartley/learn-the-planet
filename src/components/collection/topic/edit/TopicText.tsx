@@ -37,7 +37,7 @@ export const TopicText = ({ id, text, setSectionText }: Props) => {
       <>
         <form key={id}>
           <h2>
-            <label htmlFor={`text-${id}`}>Text</label>
+            <label htmlFor={`text-${id}`}>Edit Text</label>
           </h2>
           <div className="form-row topic">
             <textarea

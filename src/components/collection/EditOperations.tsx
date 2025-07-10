@@ -19,6 +19,7 @@ import { TermItems } from '@/components/collection/term/edit/TermItems'
 import { AddTerm } from '@/components/collection/term/add/AddTerm'
 import { AddRawTrait } from '@/components/collection/trait/add/AddRawTrait'
 import { AddRawTerm } from '@/components/collection/term/add/AddRawTerm'
+import { UploadImages } from '@/components/collection/image/UploadImages'
 
 import { Operation, CollectionSummary, ContentHandlerType } from '@/types'
 
@@ -41,6 +42,7 @@ export const EditOperations = () => {
   const isAddItem = operation === ('add-item' as Operation)
   const isAddRawData = operation === ('add-raw-data' as Operation)
   const isEditState = operation === ('edit-state' as Operation)
+  const isUploadImages = operation === ('upload-images' as Operation)
 
   return (
     <>
@@ -64,6 +66,7 @@ export const EditOperations = () => {
       {isUpdateItems && isTopic && <TopicItems />}
       {isAddItem && isTopic && <AddTopic />}
       {isEditState && isTopic && <TopicState />}
+      {isUploadImages && isTopic && <UploadImages />}
 
       {isUpdateItems && isTrait && <TraitItems />}
       {isAddItem && isTrait && <AddTrait />}

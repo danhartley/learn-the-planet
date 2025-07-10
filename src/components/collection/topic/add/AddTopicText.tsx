@@ -52,22 +52,28 @@ export const AddTopicText = () => {
 
   return (
     <section aria-labelledby="new-section">
-      <h2 id="new-section">Add text</h2>
-      <div className="column-group">
-        <label htmlFor="json-input">Add text here</label>
-        <textarea
-          id="json-input"
-          value={text}
-          onChange={handleChange}
-          placeholder=""
-          rows={10}
-        />
-      </div>
-      <div className="form-row">
-        <button id="submit" type="submit" onClick={saveText} className="add">
-          Add text
-        </button>
-        <ApiResponseMessage apiResponse={apiResponse} />
+      <div className="group-block">
+        <form action="">
+          <h2 id="new-section">
+            <label htmlFor="json-input">Add text</label>
+          </h2>
+          <div className="form-row">
+            <textarea
+              id="json-input"
+              value={text}
+              onChange={handleChange}
+              placeholder=""
+              rows={10}
+            />
+          </div>
+        </form>
+
+        <div className="form-row">
+          <button id="submit" type="submit" onClick={saveText} className="add">
+            Add text
+          </button>
+          <ApiResponseMessage apiResponse={apiResponse} />
+        </div>
       </div>
     </section>
   )

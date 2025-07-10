@@ -50,7 +50,7 @@ export const CollectionSummaries = ({ session }: Props) => {
       (summary.status as CollectionStatus) === 'public' ||
       summary.ownerId === session?.userId
   )
-  console.log('userCollections', userCollections)
+
   const topics = userCollections.filter(c => c.type === 'topic')
   const traits = userCollections.filter(c => c.type === 'trait')
   const taxa = userCollections.filter(c => c.type === 'taxon')

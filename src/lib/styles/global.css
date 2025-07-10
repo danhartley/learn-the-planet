@@ -106,6 +106,16 @@ main > section {
   }
 }
 
+body {
+  background-color: rgb(242 235 226);
+}
+
+main {
+  background-color: rgb(248 244 240);
+  border: 1px dashed var(--colour-line);
+  padding: var(--spacing-md);
+}
+
 article {
   font-family: var(--font-family-serif);
   overflow-wrap: anywhere;
@@ -242,7 +252,7 @@ input[type='radio'] {
 input[type='checkbox'] + label,
 input[type='radio'] + label {
   cursor: pointer;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
 }
 
 input[type='date'] {
@@ -265,13 +275,19 @@ button:disabled {
 
 textarea {
   padding: var(--spacing-md);
-  line-height: (--line-height-sm);
+  line-height: (var(--spacing-lg));
   resize: none;
   white-space: pre-wrap;
   font-size: var(--font-size-md);
   font-family: var(--font-family-serif);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-md);
   width: 100%;
-  border: none;
+
+  &:focus-visible {
+    outline: none;
+    border: 1px solid var(--colour-fg-main);
+  }
 }
 
 /* Lists and term lists */
@@ -926,7 +942,7 @@ button.draggable + div {
 /* Media queries */
 @media screen and (min-width: 768px) {
   header {
-    height: 4vh;
+    height: 5vh;
   }
 
   header > div {

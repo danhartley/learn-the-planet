@@ -1,9 +1,11 @@
 'use client'
 import { useState } from 'react'
+import { CollectionProvider } from '@/contexts/CollectionContext'
 
 import { CloudinaryUploadWidgetOptions } from 'next-cloudinary'
 
 import { ImageUpload } from '@/components/image/ImageUpload'
+import { ImagesList } from '@/components/image/ImagesList'
 
 import { NextCloudImage } from '@/types'
 
@@ -26,7 +28,7 @@ export default function Page() {
   }
 
   return (
-    <>
+    <CollectionProvider>
       <h1>Upload a new image</h1>
       <form action="">
         <label htmlFor="image-title">Title</label>
@@ -49,6 +51,7 @@ export default function Page() {
         />
       </form>
       <ImageUpload options={options} setImage={setImage} />
-    </>
+      <ImagesList />
+    </CollectionProvider>
   )
 }

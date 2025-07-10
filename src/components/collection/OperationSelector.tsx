@@ -20,6 +20,7 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
         'linked-collections',
         'delete',
         'add-item',
+        'upload-images',
       ]
       break
     case 'trait':
@@ -47,7 +48,8 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
       'update-items': 'Edit collection items',
       'add-item': 'Add item',
       'add-raw-data': 'Add raw data',
-      'edit-state': 'Edit Collection Availability',
+      'edit-state': 'Edit collection availability',
+      'upload-images': 'Upload images',
     }[option as Operation]
 
     const handleOnChangeOperation = (
