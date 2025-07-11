@@ -107,13 +107,17 @@ export const CollectionProvider = ({
       const itemId = (item as { id: string }).id
       if (!itemId) return
 
+      const processedItem = processCollectionTaxa(collection.type, [
+        item,
+      ])?.find(taxon => taxon)
+
       // Optimistic update (moved to beginning)
       const previousCollection = collection
       setCollection(prev =>
         prev
           ? {
               ...prev,
-              items: [...(prev.items || []), item],
+              items: [...(prev.items || []), processedItem],
               itemCount: (prev.items?.length || 0) + 1,
               sectionOrder: [...(prev.sectionOrder || []), itemId],
             }
@@ -128,7 +132,7 @@ export const CollectionProvider = ({
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(item),
+          body: JSON.stringify(processedItem),
         })
 
         if (!response.ok) {
@@ -398,6 +402,10 @@ export const CollectionProvider = ({
     const itemId = (updatedItem as { id: string }).id
     if (!itemId) return
 
+    const processedItem = processCollectionTaxa(collection.type, [
+      updatedItem,
+    ])?.find(taxon => taxon)
+
     // Optimistic update
     const previousCollection = collection
     setCollection(prev =>
@@ -405,16 +413,12 @@ export const CollectionProvider = ({
         ? {
             ...prev,
             items: prev.items.map(item =>
-              (item as { id: string }).id === itemId ? updatedItem : item
+              (item as { id: string }).id === itemId ? processedItem : item
             ),
           }
         : prev
     )
 
-    const processedItem = processCollectionTaxa(collection.type, [
-      updatedItem,
-    ])?.find(taxon => taxon)
-    console.log(processedItem)
     try {
       const url = `/api/collection/update-item/${collection.slug}-${collection.shortId}-${itemId}`
 

@@ -644,6 +644,11 @@ figcaption > div {
   flex-direction: column;
   row-gap: 0.2rem;
   padding: var(--spacing-xs) var(--spacing-sm);
+  text-transform: capitalize;
+}
+
+figcaption > div > div:nth-child(1) span:nth-child(2) {
+  text-transform: lowercase;
 }
 
 figcaption > div > div:nth-child(2) {
