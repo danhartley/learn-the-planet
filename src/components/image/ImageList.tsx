@@ -28,6 +28,7 @@ export const ImageList = () => {
                 id: cloudImage.asset_id,
                 src: cloudImage.public_id,
                 caption: cloudImage.display_name || '',
+                alt: cloudImage.display_name || '',
               } as NextCloudImage
             }
           )

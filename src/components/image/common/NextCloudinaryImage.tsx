@@ -4,6 +4,7 @@ import { CldImage } from 'next-cloudinary'
 import { NextCloudImage } from '@/types'
 
 export const NextCloudinaryImage = ({
+  id,
   src,
   width = 500,
   height = 356,
@@ -17,10 +18,11 @@ export const NextCloudinaryImage = ({
     <div className="cloudinary">
       <figure>
         <CldImage
+          id={id}
           src={src}
           width={width}
           height={height}
-          alt={alt}
+          alt={alt || caption}
           sizes={sizes}
         />
         <figcaption>

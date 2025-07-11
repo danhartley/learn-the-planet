@@ -68,7 +68,7 @@ export type NextCloudImage = {
   src: string
   width?: number
   height?: number
-  alt: string
+  alt?: string
   sizes?: string
   caption: string
 }

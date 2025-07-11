@@ -34,6 +34,7 @@ export const AddFromImageList = ({ setSelectedImages }: Props) => {
               return {
                 id: cloudImage.asset_id,
                 src: cloudImage.public_id,
+                alt: cloudImage.display_name || '',
                 caption: cloudImage.display_name || '',
               } as NextCloudImage
             }
