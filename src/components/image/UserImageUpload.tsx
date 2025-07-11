@@ -12,7 +12,6 @@ import { NextCloudImage } from '@/types'
 
 type Props = {
   options?: CloudinaryUploadWidgetOptions
-  setImage: Dispatch<SetStateAction<NextCloudImage | undefined>>
   userId: string
   collectionId: string
   maxFileSize?: number
@@ -27,7 +26,6 @@ type Props = {
 
 export const UserImageUpload = ({
   options,
-  setImage,
   userId,
   collectionId,
   maxFileSize = 1000000, // 1MB default
@@ -44,12 +42,12 @@ export const UserImageUpload = ({
     const info: CloudinaryUploadWidgetInfo = result.info
 
     const image: NextCloudImage = {
+      id: info.public_id,
       src: info.public_id,
       alt: info.display_name || '',
       caption: info.display_name || '',
     }
-
-    setImage(image)
+    console.log(image)
   }
 
   // Generate folder path based on userId and collectionId
@@ -152,6 +150,7 @@ export const UserImageUpload = ({
     },
 
     // Pre-processing callback
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     preBatch: (cb: Function, data: any) => {
       // You can add custom validation here
       console.log('Pre-batch processing:', data)
@@ -159,6 +158,7 @@ export const UserImageUpload = ({
     },
 
     // Upload parameters preparation
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     prepareUploadParams: (cb: Function, params: any) => {
       // Add any custom parameters before upload
       params.timestamp = Date.now()

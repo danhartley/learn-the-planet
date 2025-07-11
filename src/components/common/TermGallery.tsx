@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { TestConfigSettings } from '@/components/common/TestConfigSettings'
-import { NextCloudinaryImage } from '@/components/image/NextCloudinaryImage'
+import { NextCloudinaryImage } from '@/components/image/common/NextCloudinaryImage'
 
 import { Collection, Term, QuestionTemplateSelection } from '@/types'
 

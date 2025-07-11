@@ -9,7 +9,7 @@ import { useTestPlanner } from '@/hooks/useTestPlanner'
 
 import { TestConfigSettings } from '@/components/common/TestConfigSettings'
 import { TaxonCard } from '@/components/common/TaxonCard'
-import { NextCloudinaryImage } from '@/components/image/NextCloudinaryImage'
+import { NextCloudinaryImage } from '@/components/image/common/NextCloudinaryImage'
 
 import { groupCollectionsByType } from '@/utils/arrays'
 

@@ -99,6 +99,7 @@ export async function GET(request: Request) {
     }
 
     // Otherwise, list images with optional filters
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     const searchOptions: any = {
       resource_type: resource_type as string,
       max_results: parseInt(max_results, 10),
@@ -126,6 +127,7 @@ export async function GET(request: Request) {
       : await cloudinary.api.resources(searchOptions)
 
     // Add transformed URLs to each image
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     const transformedResources = result.resources.map((resource: any) => {
       console.log('Resource public_id:', resource.public_id) // Debug log
 

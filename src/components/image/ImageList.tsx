@@ -1,31 +1,26 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useSession } from 'next-auth/react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
-import { NextCloudinaryImageList } from '@/components/image/NextCloudinaryImageList'
-
+import { ImageListItem } from '@/components/image/common/ImageListItem'
 import { NextCloudImage, NextCloudImageTagType, CloudImage } from '@/types'
 
-type Props = {
-  images: NextCloudImage[] | undefined
-  setImages: React.Dispatch<React.SetStateAction<NextCloudImage[] | undefined>>
-}
-
-export const InteractiveImagesList = ({ images, setImages }: Props) => {
+export const ImageList = () => {
   const { data: session } = useSession()
   const { collection, getImages } = useCollection()
   const [tagType, setTagType] = useState<NextCloudImageTagType>('collection')
+  const [images, setImages] = useState<NextCloudImage[] | undefined>()
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const cloudImages =
           tagType === 'user'
-            ? await getImages({ userid: session?.user?.id })
+            ? await getImages({ userId: session?.user?.id })
             : await getImages({ collectionId: collection?.id })
-        console.log(cloudImages)
+
         setImages(
           (cloudImages as CloudImage[]).map(
             (cloudImage: CloudImage): NextCloudImage => {
@@ -81,7 +76,14 @@ export const InteractiveImagesList = ({ images, setImages }: Props) => {
         </ul>
       }
       {(images?.length ?? 0) > 0 ? (
-        <NextCloudinaryImageList images={images} />
+        <ul>
+          {!!images &&
+            images.map(image => (
+              <React.Fragment key={image.id}>
+                <ImageListItem image={image} showCheckbox={false} />
+              </React.Fragment>
+            ))}
+        </ul>
       ) : (
         <div className="form-row">
           <em>You've no images saved.</em>

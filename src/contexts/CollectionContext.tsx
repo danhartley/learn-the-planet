@@ -16,6 +16,7 @@ import {
   UpdateCollectionFieldsOptions,
   ContentHandlerType,
   CollectionStatus,
+  CloudImage,
 } from '@/types'
 
 type CollectionContextType = {
@@ -68,9 +69,9 @@ type CollectionContextType = {
     userId,
     collectionId,
   }: {
-    userid?: string
+    userId?: string
     collectionId?: string
-  }) => Promise<any>
+  }) => Promise<CloudImage[]>
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(

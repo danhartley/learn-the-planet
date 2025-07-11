@@ -1,14 +1,20 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useSession } from 'next-auth/react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
-import { NextCloudinaryImageList } from '@/components/image/NextCloudinaryImageList'
+import { ImageListItem } from '@/components/image/common/ImageListItem'
 
 import { NextCloudImage, NextCloudImageTagType, CloudImage } from '@/types'
 
-export const ImagesList = () => {
+type Props = {
+  setSelectedImages: React.Dispatch<
+    React.SetStateAction<NextCloudImage[] | undefined>
+  >
+}
+
+export const AddFromImageList = ({ setSelectedImages }: Props) => {
   const { data: session } = useSession()
   const { collection, getImages } = useCollection()
   const [tagType, setTagType] = useState<NextCloudImageTagType>('collection')
@@ -19,7 +25,7 @@ export const ImagesList = () => {
       try {
         const cloudImages =
           tagType === 'user'
-            ? await getImages({ userid: session?.user?.id })
+            ? await getImages({ userId: session?.user?.id })
             : await getImages({ collectionId: collection?.id })
 
         setImages(
@@ -44,6 +50,26 @@ export const ImagesList = () => {
   const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const tagType = event.target.value as NextCloudImageTagType
     setTagType(tagType)
+  }
+
+  const handleImageToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const imageId = (e.target as HTMLInputElement).id
+    const cloudImage = images?.find(image => image.id === imageId)
+    console.log(cloudImage)
+    setSelectedImages(prev => {
+      const isSelected = prev?.some(selected => selected.id === cloudImage?.id)
+
+      if (isSelected) {
+        // Remove cloudImage
+        return prev?.filter(selected => selected.id !== cloudImage?.id)
+      } else if (cloudImage) {
+        // Add cloudImage only if it's defined
+        return [...(prev ?? []), cloudImage]
+      } else {
+        // If cloudImage is undefined, return prev unchanged
+        return prev
+      }
+    })
   }
 
   return (
@@ -77,7 +103,17 @@ export const ImagesList = () => {
         </ul>
       }
       {(images?.length ?? 0) > 0 ? (
-        <NextCloudinaryImageList images={images} />
+        <ul>
+          {!!images &&
+            images.map(image => (
+              <React.Fragment key={image.id}>
+                <ImageListItem
+                  image={image}
+                  handleImageToggle={handleImageToggle}
+                />
+              </React.Fragment>
+            ))}
+        </ul>
       ) : (
         <div className="form-row">
           <em>You've no images saved.</em>
