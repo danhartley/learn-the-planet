@@ -406,3 +406,27 @@ export type SessionState = {
   userId: string
   expires: string
 }
+
+export interface CloudinaryResource {
+  public_id: string
+  format: string
+  version: number
+  resource_type: string
+  type: string
+  created_at: string
+  bytes: number
+  width: number
+  height: number
+  url: string
+  secure_url: string
+}
+
+export interface ImageResponse {
+  success: boolean
+  data?: CloudinaryResource | CloudinaryResource[]
+  error?: string
+  pagination?: {
+    next_cursor?: string
+    total_count?: number
+  }
+}

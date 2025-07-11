@@ -1,40 +1,14 @@
 import { v2 as cloudinary } from 'cloudinary'
 
-// Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-interface CloudinaryResource {
-  public_id: string
-  format: string
-  version: number
-  resource_type: string
-  type: string
-  created_at: string
-  bytes: number
-  width: number
-  height: number
-  url: string
-  secure_url: string
-}
-
-interface ImageResponse {
-  success: boolean
-  data?: CloudinaryResource | CloudinaryResource[]
-  error?: string
-  pagination?: {
-    next_cursor?: string
-    total_count?: number
-  }
-}
-
-// For App Router (app/api/images/route.ts)
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  console.log('searchParams', searchParams)
+
   const public_id = searchParams.get('public_id')
   const folder = searchParams.get('folder')
   const max_results = searchParams.get('max_results') || '10'
@@ -43,8 +17,6 @@ export async function GET(request: Request) {
   const tags = searchParams.get('tags')
   const collectionId = searchParams.get('collectionId')
   const userId = searchParams.get('userId')
-  console.log('collectionId', collectionId)
-  console.log('userId', userId)
 
   // Image transformation parameters
   const width = searchParams.get('width')
@@ -149,9 +121,6 @@ export async function GET(request: Request) {
         secure: true,
       })
 
-      // console.log('Generated transformed URL:', transformedUrl) // Debug log
-      // console.log('Generated thumbnail URL:', thumbnailUrl) // Debug log
-
       return {
         ...resource,
         transformed_url: transformedUrl,
@@ -179,23 +148,3 @@ export async function GET(request: Request) {
     )
   }
 }
-
-// Helper function to generate transformed URLs
-export function getTransformedImageUrl(
-  publicId: string,
-  transformations: {
-    width?: number
-    height?: number
-    crop?: string
-    quality?: string
-    format?: string
-  } = {}
-): string {
-  return cloudinary.url(publicId, {
-    ...transformations,
-    secure: true,
-  })
-}
-
-// TypeScript types for client-side usage
-export type { CloudinaryResource, ImageResponse }

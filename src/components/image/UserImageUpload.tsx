@@ -150,7 +150,7 @@ export const UserImageUpload = ({
     },
 
     // Pre-processing callback
-    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-function-type
     preBatch: (cb: Function, data: any) => {
       // You can add custom validation here
       console.log('Pre-batch processing:', data)
@@ -158,7 +158,7 @@ export const UserImageUpload = ({
     },
 
     // Upload parameters preparation
-    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-function-type
     prepareUploadParams: (cb: Function, params: any) => {
       // Add any custom parameters before upload
       params.timestamp = Date.now()
@@ -222,6 +222,7 @@ export const MultipleImageUpload = ({
     const info: CloudinaryUploadWidgetInfo = result.info
 
     const image: NextCloudImage = {
+      id: info.public_id,
       src: info.public_id,
       alt: info.display_name || '',
       caption: info.display_name || '',

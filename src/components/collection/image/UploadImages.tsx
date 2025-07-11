@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import { useSession } from 'next-auth/react'
 
@@ -6,8 +6,6 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { UserImageUpload } from '@/components/image/UserImageUpload'
 import { ImageList } from '@/components/image/ImageList'
-
-import { NextCloudImage } from '@/types'
 
 export const UploadImages = () => {
   const { data: session } = useSession()

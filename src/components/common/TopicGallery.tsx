@@ -123,7 +123,8 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
             section.images.map(img => {
               return (
                 <NextCloudinaryImage
-                  key={img.src}
+                  key={img.id}
+                  id={img.id}
                   src={img.src}
                   alt={img.alt}
                   caption={img.caption}
