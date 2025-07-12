@@ -52,11 +52,11 @@ export const AddTopicText = () => {
 
   return (
     <section aria-labelledby="new-section">
-      <div className="group-block">
-        <form action="">
-          <h2 id="new-section">
-            <label htmlFor="json-input">Add text</label>
-          </h2>
+      <form action="">
+        <h2 id="new-section">
+          <label htmlFor="json-input">Add text</label>
+        </h2>
+        <div className="group-block">
           <div className="form-row">
             <textarea
               id="json-input"
@@ -66,14 +66,14 @@ export const AddTopicText = () => {
               rows={10}
             />
           </div>
-        </form>
-
-        <div className="form-row">
-          <button id="submit" type="submit" onClick={saveText} className="add">
-            Add text
-          </button>
-          <ApiResponseMessage apiResponse={apiResponse} />
         </div>
+      </form>
+
+      <div className="form-row">
+        <button id="submit" type="submit" onClick={saveText} className="add">
+          Add text
+        </button>
+        <ApiResponseMessage apiResponse={apiResponse} />
       </div>
     </section>
   )

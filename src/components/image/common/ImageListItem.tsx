@@ -23,31 +23,33 @@ export const ImageListItem = ({
           onChange={handleImageToggle}
         />
       )}
-      <CldImage
-        key={image.src}
-        src={image.src}
-        width={75}
-        height={75}
-        alt={image.alt || ''}
-        onClick={
-          showCheckbox && handleImageToggle
-            ? () => {
-                const checkbox = document.getElementById(
-                  image.id
-                ) as HTMLInputElement | null
-                if (checkbox) {
-                  checkbox.checked = !checkbox.checked
-                  const syntheticEvent = {
-                    target: checkbox,
-                    currentTarget: checkbox,
-                  } as React.ChangeEvent<HTMLInputElement>
-                  handleImageToggle(syntheticEvent)
+      <figure className="inat">
+        <CldImage
+          key={image.src}
+          src={image.src}
+          width={75}
+          height={75}
+          alt={image.alt || ''}
+          onClick={
+            showCheckbox && handleImageToggle
+              ? () => {
+                  const checkbox = document.getElementById(
+                    image.id
+                  ) as HTMLInputElement | null
+                  if (checkbox) {
+                    checkbox.checked = !checkbox.checked
+                    const syntheticEvent = {
+                      target: checkbox,
+                      currentTarget: checkbox,
+                    } as React.ChangeEvent<HTMLInputElement>
+                    handleImageToggle(syntheticEvent)
+                  }
                 }
-              }
-            : undefined
-        }
-        style={showCheckbox ? { cursor: 'pointer' } : undefined}
-      />
+              : undefined
+          }
+          style={showCheckbox ? { cursor: 'pointer' } : undefined}
+        />
+      </figure>
       <label htmlFor={image.id}>{image.caption}</label>
     </li>
   )

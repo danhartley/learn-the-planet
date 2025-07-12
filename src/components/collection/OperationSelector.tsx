@@ -18,7 +18,6 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
         'edit-state',
         'update-items',
         'linked-collections',
-        'delete',
         'add-item',
         'upload-images',
       ]
@@ -29,13 +28,12 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
         'update',
         'edit-state',
         'update-items',
-        'delete',
         'add-item',
         'add-raw-data',
       ]
       break
     default:
-      operationTypes = ['update', 'edit-state', 'update-items', 'delete']
+      operationTypes = ['update', 'edit-state', 'update-items']
   }
 
   const editOptions = operationTypes.map(option => {
@@ -43,10 +41,9 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
       create: 'Create collection',
       read: 'View collection',
       update: 'Edit collection properties',
-      delete: 'Delete collection',
       'linked-collections': 'Edit linked collections',
       'update-items': 'Edit collection items',
-      'add-item': 'Add item',
+      'add-item': 'Add text, taxa and images',
       'add-raw-data': 'Add raw data',
       'edit-state': 'Edit collection availability',
       'upload-images': 'Upload images',
@@ -73,5 +70,10 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
     )
   })
 
-  return <ul>{editOptions}</ul>
+  return (
+    <>
+      <ul className="list-group">{editOptions}</ul>
+      <hr />
+    </>
+  )
 }

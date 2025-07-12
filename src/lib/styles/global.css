@@ -198,6 +198,13 @@ footer {
   border-top: 1px dashed var(--colour-line);
 }
 
+hr {
+  height: 2px;
+  background-color: var(--colour-bg-main);
+  border: none;
+  width: 100%;
+}
+
 /* Form elements */
 input,
 button {
@@ -252,7 +259,6 @@ input[type='radio'] {
 input[type='checkbox'] + label,
 input[type='radio'] + label {
   cursor: pointer;
-  /* text-transform: capitalize; */
 }
 
 input[type='date'] {
@@ -312,7 +318,6 @@ ul {
   margin-block: 0;
   padding-inline: 0;
   li {
-    margin: var(--spacing-sm) 0;
     span {
       text-transform: capitalize;
     }
@@ -351,6 +356,12 @@ li::marker {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-md);
+}
+
+.list-group {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-sm);
 }
 
 .row-group {
@@ -424,6 +435,10 @@ li::marker {
   margin-bottom: 0;
 }
 
+.group > *:last-child {
+  margin-bottom: var(--spacing-sm);
+}
+
 .group-block {
   display: flex;
   flex-direction: column;
@@ -474,8 +489,7 @@ form {
   align-items: center;
   gap: var(--spacing-md);
   border-radius: var(--border-radius-sm);
-  flex-wrap: wrap;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-sm) 0;
 }
 
 .form-row button {
@@ -547,6 +561,7 @@ form {
 .form-row.bg-incorrect {
   border-radius: var(--border-radius-sm);
   border: 1px solid transparent;
+  padding: var(--spacing-sm);
 }
 
 .form-row.bg-correct label,
@@ -625,6 +640,12 @@ form {
 figure {
   margin-block: 0;
   margin-inline: 0;
+
+  &.inat {
+    display: flex;
+    border: thin #c0c0c0 solid;
+    padding: var(--spacing-sm);
+  }
 }
 
 .block figure img {
@@ -973,7 +994,9 @@ button.draggable + div {
     top: var(--spacing-sm);
   }
 
-  [aria-labelledby='terms'] {
+  [aria-labelledby='terms'],
+  [aria-labelledby='images-list'],
+  [aria-labelledby='new-section'] {
     ul {
       column-count: 2;
     }
@@ -1004,7 +1027,9 @@ button.draggable + div {
   .grid-lg {
     grid-template-columns: 1fr 1fr 1fr;
   }
-  [aria-labelledby='terms'] {
+  [aria-labelledby='terms'],
+  [aria-labelledby='images-list'],
+  [aria-labelledby='new-section'] {
     ul {
       column-count: 3;
     }
@@ -1015,7 +1040,9 @@ button.draggable + div {
   .grid-lg {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-  [aria-labelledby='terms'] {
+  [aria-labelledby='terms'],
+  [aria-labelledby='images-list'],
+  [aria-labelledby='new-section'] {
     ul {
       column-count: 3;
     }

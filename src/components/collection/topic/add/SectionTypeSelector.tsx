@@ -84,7 +84,7 @@ export const SectionTypeSelector = ({
         <span>Select the type of section you want to add.</span>
 
         <div>
-          <ul>{options}</ul>
+          <ul className="list-group">{options}</ul>
         </div>
         <div>
           <strong>{getCurrentTypeDescription()}</strong>

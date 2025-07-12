@@ -81,7 +81,7 @@ export const TopicItem: React.FC<TopicItemProps> = ({
 
   return (
     <li
-      className={`column-group ${isDragged ? 'dragging' : ''} ${isDraggedOver ? 'drag-over' : ''}`}
+      className={`list-group ${isDragged ? 'dragging' : ''} ${isDraggedOver ? 'drag-over' : ''}`}
       draggable="true"
       onMouseDown={handleMouseDown}
       onDragStart={handleDragStart}

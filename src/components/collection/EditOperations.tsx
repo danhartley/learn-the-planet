@@ -7,7 +7,6 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { OperationSelector } from '@/components/collection/OperationSelector'
 import { EditProperties } from '@/components/collection/EditProperties'
-import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
 import { TopicItems } from '@/components/collection/topic/edit/topicItems/TopicItems'
 import { AddTopic } from '@/components/collection/topic/add/AddTopic'
@@ -77,8 +76,6 @@ export const EditOperations = () => {
       {isUpdateItems && isTerm && <TermItems />}
       {isAddItem && isTerm && <AddTerm />}
       {isAddRawData && isTerm && <AddRawTerm />}
-
-      {operation === ('delete' as Operation) && <DeleteCollection />}
     </>
   )
 }

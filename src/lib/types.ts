@@ -349,7 +349,6 @@ export type Operation =
   | 'create'
   | 'read'
   | 'update'
-  | 'delete'
   | 'linked-collections'
   | 'update-items'
   | 'add-item'

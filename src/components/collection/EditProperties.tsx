@@ -28,7 +28,14 @@ export const EditProperties = () => {
   }
 
   return (
-    <>
+    <section aria-labelledby="collection-properties">
+      <div className="group">
+        <h2 id="collection-properties">Collection properties</h2>
+        {/* <div>
+          Public collections are available to everyone. Private collections are
+          only available to their owner.
+        </div> */}
+      </div>
       <div className="group-block">
         <CollectionTextField
           fieldValue={name}
@@ -88,9 +95,9 @@ export const EditProperties = () => {
       </div>
 
       <section aria-labelledby="edit-collection">
-        <div>
+        {/* <div>
           <h2 id="edit-collection">Edit {collection?.type} collection</h2>
-        </div>
+        </div> */}
         <div className="form-row">
           <button onClick={handleFieldsChange} className="save">
             Update collection fields
@@ -98,6 +105,6 @@ export const EditProperties = () => {
           <ApiResponseMessage apiResponse={apiResponse} />
         </div>
       </section>
-    </>
+    </section>
   )
 }

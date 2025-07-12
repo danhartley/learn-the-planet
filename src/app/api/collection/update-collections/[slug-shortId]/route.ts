@@ -69,7 +69,7 @@ export async function PUT(
 
     return NextResponse.json({ success: true, collection: result.collection })
   } catch (error) {
-    console.error('Failed to update collection references:', error)
+    console.error('Failed to update linked collections:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

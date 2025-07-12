@@ -47,9 +47,9 @@ export const ImageList = () => {
   }
 
   return (
-    <div>
+    <div className="column-group">
       {
-        <ul>
+        <ul className="list-group">
           <li>
             <input
               id="rbCollection"
@@ -77,14 +77,18 @@ export const ImageList = () => {
         </ul>
       }
       {(images?.length ?? 0) > 0 ? (
-        <ul>
-          {!!images &&
-            images.map(image => (
-              <React.Fragment key={image.id}>
-                <ImageListItem image={image} showCheckbox={false} />
-              </React.Fragment>
-            ))}
-        </ul>
+        <div className="group-block">
+          <section aria-labelledby="images-list">
+            <ul>
+              {!!images &&
+                images.map(image => (
+                  <React.Fragment key={image.id}>
+                    <ImageListItem image={image} showCheckbox={false} />
+                  </React.Fragment>
+                ))}
+            </ul>
+          </section>
+        </div>
       ) : (
         <div className="form-row">
           <em>You've no images saved.</em>

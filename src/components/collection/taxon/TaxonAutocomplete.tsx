@@ -182,13 +182,15 @@ export const TaxonAutocomplete = ({
             {selectedTaxa.map(taxon => (
               <div key={taxon.id} className="form-row">
                 {taxon.image?.squareUrl && (
-                  <Image
-                    id={taxon.id}
-                    src={taxon.image.squareUrl}
-                    alt={taxon.vernacularName || taxon.binomial}
-                    width={75}
-                    height={75}
-                  />
+                  <figure className="inat">
+                    <Image
+                      id={taxon.id}
+                      src={taxon.image.squareUrl}
+                      alt={taxon.vernacularName || taxon.binomial}
+                      width={75}
+                      height={75}
+                    />
+                  </figure>
                 )}
                 <button
                   onClick={() => handleTaxonToggle(taxon)}

@@ -14,17 +14,13 @@ export const UploadImages = () => {
   const userId = session?.user?.id
 
   return (
-    <section aria-labelledby="new-section">
-      <h2 id="new-section">Add images to collection</h2>
-      <div className="group-block">
-        <UserImageUpload
-          collectionId={collection?.id || ''}
-          userId={userId || ''}
-        />
-        <div className="form-row">
-          <ImageList />
-        </div>
-      </div>
+    <section aria-labelledby="upload-images">
+      <h2 id="upload-images">Add images to collection</h2>
+      <UserImageUpload
+        collectionId={collection?.id || ''}
+        userId={userId || ''}
+      />
+      <ImageList />
     </section>
   )
 }

@@ -3,6 +3,7 @@ import React from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
+import { DeleteCollection } from '@/components/collection/DeleteCollection'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { CollectionStatus, CollectionSummary } from '@/types'
@@ -37,35 +38,36 @@ export const TopicState = () => {
           only available to their owner.
         </div>
       </div>
-      <div className={`form-row ${collection?.type}`}>
+
+      <div className="form-row">
         <ul>
           <li>
-            <label>
-              <input
-                type="radio"
-                name="collectionStatus"
-                value="private"
-                checked={collectionSummary.status === 'private'}
-                onChange={handleStatusChange}
-              />
-              Private
-            </label>
+            <input
+              id="private"
+              type="radio"
+              name="collectionStatus"
+              value="private"
+              checked={collectionSummary.status === 'private'}
+              onChange={handleStatusChange}
+            />
+            <label htmlFor="private">Private</label>
           </li>
           <li>
-            <label>
-              <input
-                type="radio"
-                name="collectionStatus"
-                value="public"
-                checked={collectionSummary.status === 'public'}
-                onChange={handleStatusChange}
-              />
-              Public
-            </label>
+            <input
+              id="public"
+              type="radio"
+              name="collectionStatus"
+              value="public"
+              checked={collectionSummary.status === 'public'}
+              onChange={handleStatusChange}
+            />
+            <label htmlFor="public">Public</label>
           </li>
         </ul>
         <ApiResponseMessage apiResponse={apiResponse} />
       </div>
+
+      <DeleteCollection />
     </section>
   )
 }

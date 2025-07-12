@@ -42,7 +42,7 @@ export const EditLinkedCollections = ({ collectionSummaries }: Props) => {
       />
       <div className="form-row">
         <button onClick={handleChange} className="save">
-          Update collections
+          Update linked collections
         </button>
         <ApiResponseMessage apiResponse={apiResponse} />
       </div>

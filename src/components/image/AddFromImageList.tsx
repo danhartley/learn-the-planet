@@ -74,9 +74,9 @@ export const AddFromImageList = ({ setSelectedImages }: Props) => {
   }
 
   return (
-    <div>
+    <div className="column-group">
       {
-        <ul>
+        <ul className="list-group">
           <li>
             <input
               id="rbCollection"

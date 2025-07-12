@@ -52,7 +52,7 @@ export const TopicItems = () => {
           </div>
         </div>
         {topicCollection.items.length > 0 ? (
-          <ul>
+          <ul className="list-group">
             {topicCollection.items.map((section, index) => (
               <TopicItem
                 key={`${section.id}-${index}`}

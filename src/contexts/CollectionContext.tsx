@@ -219,7 +219,7 @@ export const CollectionProvider = ({
 
       setApiResponse({
         success: true,
-        message: 'Collection references update succeeded.',
+        message: 'Linked collections updated.',
       })
 
       return updatedCollection
@@ -718,13 +718,13 @@ export const CollectionProvider = ({
 
       setApiResponse({
         success: true,
-        message: 'Collection status updated',
+        message: 'Collection visibility updated',
       })
 
       // Only navigate if the update was successful
       // router.push(`/collection/${collectionSummary.slug}-${collectionSummary.shortId}`)
     } catch (error) {
-      console.error('Failed to update collection status:', error)
+      console.error('Failed to update collection visibility:', error)
 
       // Ensure revert on any error (in case it wasn't caught above)
       setCollectionSummary(previousCollectionSummary)
