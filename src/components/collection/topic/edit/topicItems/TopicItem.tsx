@@ -4,7 +4,8 @@ import React from 'react'
 import { TopicTextSections } from '@/components/collection/topic/edit/TopicTextSections'
 import { TopicCloudImage } from '@/components/collection/topic/edit/TopicCloudImage'
 import { TopicExamples } from '@/components/collection/topic/edit/TopicExamples'
-import { TopicSummary } from './TopicSummary'
+import { TopicCredit } from '@/components/collection/topic/edit/TopicCredit'
+import { TopicSummary } from '@/components/collection/topic/edit/topicItems//TopicSummary'
 
 import { Collection, Topic } from '@/types'
 
@@ -121,6 +122,13 @@ export const TopicItem: React.FC<TopicItemProps> = ({
           ))}
           {section.examples && (
             <TopicExamples
+              collection={topicCollection}
+              section={section}
+              sectionIndex={index + 1}
+            />
+          )}
+          {section.credit && (
+            <TopicCredit
               collection={topicCollection}
               section={section}
               sectionIndex={index + 1}

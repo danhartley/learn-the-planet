@@ -3,6 +3,7 @@ import {
   CollectionSummary,
   UpdateCollectionFieldsOptions,
   CollectionStatus,
+  Credit,
 } from '@/types'
 import clientPromise from '@/api/mongodb'
 
@@ -29,6 +30,7 @@ export const getCollections = async (): Promise<
         ownerId: collection.ownerId,
         date: collection.date,
         location: collection.location,
+        author: collection?.author,
       }
     })
   } catch (error) {
@@ -60,6 +62,7 @@ export const getCollectionSummaries = async (): Promise<
         imageUrl: collection.imageUrl || '',
         status: collection.status,
         ownerId: collection.ownerId,
+        author: collection?.author,
       }
     })
   } catch (error) {
@@ -89,11 +92,11 @@ export const getCollectionByShortId = async (
     itemCount: collection.itemCount || collection.items?.length || 0,
     collections: collection?.collections || [],
     imageUrl: collection.imageUrl || '',
-    credit: collection.credit,
     sectionOrder: collection.sectionOrder,
     ownerId: collection.ownerId,
     date: collection.date,
     location: collection.location,
+    author: collection?.author,
   }
 
   const orderedItems =
@@ -582,7 +585,7 @@ export const updateCollectionFields = async (
   const db = client.db(DB_NAME)
 
   // Build update object with only provided fields
-  const updateFields: Record<string, string> = {}
+  const updateFields: Record<string, string | Credit> = {}
 
   if (options.name !== undefined) {
     updateFields.name = options.name
@@ -602,6 +605,14 @@ export const updateCollectionFields = async (
 
   if (options.location !== undefined && options.location !== '') {
     updateFields.location = options.location
+  }
+
+  if (
+    options.author !== undefined &&
+    Array.isArray(options.author.authors) &&
+    options.author.authors.length > 0
+  ) {
+    updateFields.author = options.author
   }
 
   // If no fields to update, return undefined
@@ -645,6 +656,7 @@ export const updateCollectionFields = async (
       ownerId: result?.ownerId,
       date: result?.date,
       location: result?.location,
+      author: result?.author,
     }
   } catch (error) {
     console.error('Failed to update collection fields:', error)
@@ -658,7 +670,7 @@ export const updateCollectionSectionOrder = async (
 ): Promise<Collection<unknown> | undefined> => {
   const client = await clientPromise
   const db = client.db(DB_NAME)
-  console.log('sectionOrder', sectionOrder)
+
   try {
     const result = await db.collection('collections').findOneAndUpdate(
       { shortId },
@@ -689,6 +701,52 @@ export const updateCollectionSectionOrder = async (
       ownerId: result?.ownerId,
       date: result?.date,
       location: result?.location,
+      author: result?.author,
+    }
+  } catch (error) {
+    console.error('Failed to update collection fields:', error)
+    throw error
+  }
+}
+
+export const updateAuthor = async (
+  shortId: string,
+  author: Credit
+): Promise<Collection<unknown> | undefined> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+
+  try {
+    const result = await db.collection('collections').findOneAndUpdate(
+      { shortId },
+      {
+        $set: {
+          author: author,
+        },
+      },
+      { returnDocument: 'after' }
+    )
+
+    if (!result) {
+      return undefined
+    }
+
+    // Return the updated collection in the same format as other functions
+    return {
+      id: result.id,
+      shortId: result.shortId || '',
+      slug: result.slug || '',
+      items: result.items,
+      name: result.name,
+      type: result.type,
+      itemCount: result.itemCount || result.items?.length || 0,
+      collections: result?.collections || [],
+      imageUrl: result?.imageUrl || '',
+      sectionOrder: result?.sectionOrder,
+      ownerId: result?.ownerId,
+      date: result?.date,
+      location: result?.location,
+      author: result?.author,
     }
   } catch (error) {
     console.error('Failed to update collection fields:', error)

@@ -890,6 +890,11 @@ progress {
   font-weight: var(--font-weight-600);
 }
 
+.information {
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-sm) 0 0 0;
+}
+
 /* Hosted images */
 .cloudinary {
   display: flex;

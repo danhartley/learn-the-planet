@@ -5,11 +5,14 @@ import { useCollection } from '@/contexts/CollectionContext'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { UpdateCollectionFieldsOptions } from '@/types'
+import { UpdateCollectionFieldsOptions, Credit } from '@/types'
 
 export const EditProperties = () => {
   const { collection, updateCollectionFields, apiResponse } = useCollection()
   const [name, setName] = useState<string>(collection?.name || '')
+  const [author, setAuthor] = useState<string>(
+    collection?.author?.authors?.join(', ') || ''
+  )
   const [slug, setSlug] = useState<string>(collection?.slug || '')
   const [imageUrl, setImageUrl] = useState<string>(collection?.imageUrl || '')
   const [date, setDate] = useState<string>(collection?.date || '')
@@ -22,8 +25,11 @@ export const EditProperties = () => {
       imageUrl,
       date: date || null,
       location: location || null,
+      author: {
+        authors: author ? author.split(',').map(a => a.trim()) : [],
+      } as Credit,
     } as UpdateCollectionFieldsOptions
-    console.log('newFields', newFields)
+
     if (collection) updateCollectionFields(collection, newFields)
   }
 
@@ -31,10 +37,6 @@ export const EditProperties = () => {
     <section aria-labelledby="collection-properties">
       <div className="group">
         <h2 id="collection-properties">Collection properties</h2>
-        {/* <div>
-          Public collections are available to everyone. Private collections are
-          only available to their owner.
-        </div> */}
       </div>
       <div className="group-block">
         <CollectionTextField
@@ -43,6 +45,17 @@ export const EditProperties = () => {
           fieldText="Collection name"
           type={collection?.type || 'topic'}
           sectionIndex={1}
+        />
+      </div>
+
+      <div className="group-block">
+        <CollectionTextField
+          fieldValue={author}
+          setFieldValue={setAuthor}
+          fieldText="Collection author"
+          type={collection?.type || 'topic'}
+          sectionIndex={1}
+          information="Enter authors as a comma-separated list"
         />
       </div>
 
@@ -95,9 +108,6 @@ export const EditProperties = () => {
       </div>
 
       <section aria-labelledby="edit-collection">
-        {/* <div>
-          <h2 id="edit-collection">Edit {collection?.type} collection</h2>
-        </div> */}
         <div className="form-row">
           <button onClick={handleFieldsChange} className="save">
             Update collection fields

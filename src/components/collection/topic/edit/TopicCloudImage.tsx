@@ -24,7 +24,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
     apiResponse,
   } = useCollection()
   const [captionValue, setCaption] = useState<string>(image.caption)
-  const [altValue, setAlt] = useState(image.alt)
+  const [altValue, setAlt] = useState(image.alt || image.caption)
   const [isUpdating, setIsUpdating] = useState(false)
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cloudImage, setCloudImage] = useState<NextCloudImage | undefined>()
@@ -70,7 +70,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
           src={image.src}
           width={width}
           height={height}
-          alt={image.alt}
+          alt={image.alt || image.caption}
           sizes={sizes}
         />
       </figure>
@@ -84,7 +84,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
       />
 
       <CollectionTextField
-        fieldValue={image.alt}
+        fieldValue={image.alt || image.caption}
         setFieldValue={setAlt}
         fieldText="Image alt text"
         type="topic"

@@ -43,7 +43,7 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
       update: 'Edit collection properties',
       'linked-collections': 'Edit linked collections',
       'update-items': 'Edit collection items',
-      'add-item': 'Add text, taxa and images',
+      'add-item': 'Add text, taxa, credits, and images',
       'add-raw-data': 'Add raw data',
       'edit-state': 'Edit collection availability',
       'upload-images': 'Upload images',

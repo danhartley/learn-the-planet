@@ -5,6 +5,7 @@ import { useCollection } from '@/contexts/CollectionContext'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { Topic } from '@/types'
+
 import { textToArray, getShortId } from '@/utils/strings'
 
 export const AddTopicText = () => {
@@ -70,7 +71,7 @@ export const AddTopicText = () => {
       </form>
 
       <div className="form-row">
-        <button id="submit" type="submit" onClick={saveText} className="add">
+        <button id="submit" type="submit" onClick={saveText} className="save">
           Add text
         </button>
         <ApiResponseMessage apiResponse={apiResponse} />

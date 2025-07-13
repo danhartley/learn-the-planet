@@ -9,7 +9,7 @@ type Props = {
   fieldText: string
   setFieldValue: Dispatch<SetStateAction<string>>
   type: ContentHandlerType
-  notification?: string
+  information?: tring
   required?: boolean
   sectionIndex?: number
 }
@@ -19,7 +19,7 @@ export function CollectionTextField({
   fieldText,
   setFieldValue,
   type,
-  notification,
+  information,
   required = false,
   sectionIndex,
 }: Props) {
@@ -58,6 +58,7 @@ export function CollectionTextField({
           </label>
           <span>{required ? ' *' : ''}</span>
         </h3>
+
         <div className={`form-row ${type}`}>
           <input
             type="text"
@@ -69,7 +70,7 @@ export function CollectionTextField({
             placeholder={`Enter ${fieldText}`}
           />
         </div>
-        {notification && <div>{notification}</div>}
+        <div className="information">{information && `[${information}]`}</div>
       </div>
     </section>
   )

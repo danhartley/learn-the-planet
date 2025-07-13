@@ -137,21 +137,27 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
             ))}
 
             <div className="article-credit">
-              {section.credit?.source && (
-                <p>
-                  <a href={section?.credit?.source}>
-                    <em>{section?.credit?.title}</em>
-                  </a>
-                </p>
+              {section?.credit && (
+                <>
+                  <h2>Credit</h2>
+                  <div key={section.credit?.title}>
+                    {section?.credit?.authors && (
+                      <div>
+                        {section.credit.authors &&
+                          `Authors: ${section.credit.authors.join(', ')}`}
+                      </div>
+                    )}
+                    {section?.credit?.source && (
+                      <div>
+                        <span>Source: </span>
+                        <Link href={section.credit.source}>
+                          {section.credit.title}
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                </>
               )}
-
-              <p>
-                {section?.credit?.authors ? (
-                  <span key={section.credit?.title}>
-                    {`Authors: ${section.credit.authors.join(', ')}`}
-                  </span>
-                ) : null}
-              </p>
             </div>
           </div>
           <div className="block">
@@ -168,7 +174,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       )
     })
 
-  const authors = collection.credit?.authors?.join(',')
+  const authors = collection.author?.authors?.join(',')
 
   return (
     <section aria-labelledby="topic-gallery" className="group">

@@ -40,7 +40,7 @@ export const TopicState = () => {
       </div>
 
       <div className="form-row">
-        <ul>
+        <ul className="list-group">
           <li>
             <input
               id="private"

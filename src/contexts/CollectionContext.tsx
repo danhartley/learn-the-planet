@@ -17,6 +17,7 @@ import {
   ContentHandlerType,
   CollectionStatus,
   CloudImage,
+  Credit,
 } from '@/types'
 
 type CollectionContextType = {
@@ -72,6 +73,10 @@ type CollectionContextType = {
     userId?: string
     collectionId?: string
   }) => Promise<CloudImage[]>
+  updateAuthor: (
+    collection: Collection<unknown>,
+    author: Credit
+  ) => Promise<void>
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -269,6 +274,7 @@ export const CollectionProvider = ({
             imageUrl: fields.imageUrl ?? prev.imageUrl,
             date: fields.date ?? prev.date,
             location: fields.location ?? prev.location,
+            author: fields.author ?? prev.author,
           }
         : null
     )
@@ -638,14 +644,67 @@ export const CollectionProvider = ({
 
       await response.json()
     } catch (error) {
-      console.error('Failed to update collection:', error)
+      console.error('Failed to update section order:', error)
 
       // Ensure revert on any error (in case it wasn't caught above)
       setCollection(previousCollection)
 
       setApiResponse({
         success: false,
-        message: 'Collection field updates failed.',
+        message: 'Collection section order failed.',
+      })
+    }
+  }
+
+  const updateAuthor = async (
+    collection: Collection<unknown>,
+    author: Credit
+  ) => {
+    if (!collection || !collection.items || !author) return
+
+    // Optimistic update
+    const previousCollection = collection
+    setCollection(prev =>
+      prev
+        ? {
+            ...prev,
+            author: author ?? prev.author,
+          }
+        : null
+    )
+
+    try {
+      const url = `/api/collection/author/${collection.slug}-${collection.shortId}`
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(author),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+
+        // Revert optimistic update on error
+        setCollection(previousCollection)
+
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      await response.json()
+    } catch (error) {
+      console.error('Failed to update collection author:', error)
+
+      // Ensure revert on any error (in case it wasn't caught above)
+      setCollection(previousCollection)
+
+      setApiResponse({
+        success: false,
+        message: 'Collection author update failed.',
       })
     }
   }
@@ -805,6 +864,7 @@ export const CollectionProvider = ({
         collectionSummary,
         collectionSummaries,
         getImages,
+        updateAuthor,
       }}
     >
       {children}

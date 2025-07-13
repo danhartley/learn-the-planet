@@ -65,6 +65,16 @@ export const TopicSummary: React.FC<TopicSummaryProps> = ({ section }) => {
         </>
       )
     }
+
+    if (section.credit) {
+      return (
+        <>
+          <span>[Credit]</span>{' '}
+          {section.credit?.authors?.find(author => author)}
+        </>
+      )
+    }
+
     return (
       <>
         <span>Section</span> {section.id}

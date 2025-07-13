@@ -163,7 +163,7 @@ export const AddTerm = () => {
           type="submit"
           onClick={saveTerm}
           disabled={!isFormValid}
-          className="add"
+          className="save"
         >
           Add Term
         </button>

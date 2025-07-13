@@ -11,7 +11,6 @@ export const AddTrait = () => {
   const { collection, addCollectionItem, apiResponse } = useCollection()
   const [Trait, setTrait] = useState('')
   const [definition, setDefinition] = useState('')
-  // const [source, setSource] = useState()
   const [lastTraitId, setLastTraitId] = useState(
     collection?.items?.findLast(item => (item as Trait).id)
   )
@@ -25,10 +24,6 @@ export const AddTrait = () => {
   ) => {
     setDefinition(e.target.value)
   }
-
-  // const handleSourceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSource(e.target.value)
-  // }
 
   const saveTrait = () => {
     if (!Trait.trim() || !definition.trim()) {
@@ -47,7 +42,6 @@ export const AddTrait = () => {
       // Clear form after successful save
       setTrait('')
       setDefinition('')
-      // setSource()
     }
   }
 
@@ -118,29 +112,13 @@ export const AddTrait = () => {
         </div>
       </section>
 
-      {/* <section aria-labelledby="source" className="collection-field">
-        <h3 id="source">
-          <label htmlFor="source-input">Source</label>
-        </h3>
-        <div className="form-row Trait">
-          <input
-            id="source-input"
-            type="url"
-            value={source}
-            onChange={handleSourceChange}
-            onKeyDown={handleKeyPress}
-            placeholder="https://example.com (optional)"
-          />
-        </div>
-      </section> */}
-
       <div className="form-row">
         <button
           id="submit"
           type="submit"
           onClick={saveTrait}
           disabled={!isFormValid}
-          className="add"
+          className="save"
         >
           Add Trait
         </button>

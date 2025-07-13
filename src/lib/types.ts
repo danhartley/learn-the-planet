@@ -210,7 +210,7 @@ export type Collection<T> = {
   items?: T[]
   itemCount: number
   collections?: CollectionSummary[]
-  credit?: Credit
+  author?: Credit
   imageUrl?: string
   sectionOrder: string[]
   ownerId: string
@@ -379,15 +379,16 @@ export type UpdateCollectionFieldsOptions = {
   imageUrl?: string
   date?: string
   location?: string
+  author?: Credit
 }
 
 export type CollectionStatus = 'private' | 'public'
 
-export type SectionType = 'text' | 'image' | 'taxon'
+export type TopicSectionType = 'text' | 'image' | 'taxon' | 'credit'
 export type TraitSectionType = 'morphology' | 'phenology' | 'taxon'
 
 export type SectionTypeOption = {
-  key: SectionType | TraitSectionType
+  key: TopicSectionType | TraitSectionType
   value: string
   description: string
 }
