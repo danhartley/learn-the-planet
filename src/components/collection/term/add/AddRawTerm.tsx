@@ -16,34 +16,73 @@ export function AddRawTerm() {
     success: false,
     message: '',
   })
-  const [item, setItems] = useState<Term[] | undefined>()
+  const [items, setItems] = useState<Term[]>()
 
   const isValidTerm = () => {
     const result: ValidationResult<Term> = validateTermJson(jsonContent)
-    const msg = result.isValid
-      ? 'Your term data are valid'
-      : 'Your term data are invalid'
-    setMessage({
-      success: result.isValid,
-      message: msg,
-    })
 
     if (result.isValid && result.parsedData) {
       const parsedData = Array.isArray(result.parsedData)
         ? result.parsedData
         : [result.parsedData]
+
+      const termCount = parsedData.length
+      const msg =
+        termCount === 1
+          ? 'Your term data is valid'
+          : `Your ${termCount} terms are valid`
+
+      setMessage({
+        success: true,
+        message: msg,
+      })
       setItems(parsedData)
     } else {
+      const errorMsg = result.errors?.length
+        ? `Invalid term data: ${result.errors.join(', ')}`
+        : 'Your term data is invalid'
+
+      setMessage({
+        success: false,
+        message: errorMsg,
+      })
+      setItems(undefined)
       console.log(result.errors)
     }
   }
 
-  const saveTerm = () => {
-    const term = {
-      ...(item?.find(i => i) || {}),
-      id: getShortId(),
+  const saveTerms = async () => {
+    if (!items || !collection) return
+
+    try {
+      // Save each term with a new ID
+      for (const item of items) {
+        const termToSave = {
+          ...item,
+          id: getShortId(),
+        }
+        await addCollectionItem(collection, termToSave)
+      }
+
+      // Clear the form after successful save
+      setJsonContent('')
+      setItems(undefined)
+      setMessage({
+        success: false,
+        message: '',
+      })
+    } catch (error) {
+      console.error('Error saving terms:', error)
+      setMessage({
+        success: false,
+        message: 'Error saving terms. Please try again.',
+      })
     }
-    if (collection) addCollectionItem(collection, term)
+  }
+
+  const getButtonText = () => {
+    if (!items) return 'Save'
+    return items.length === 1 ? 'Save Term' : `Save ${items.length} Terms`
   }
 
   return (
@@ -57,14 +96,29 @@ export function AddRawTerm() {
         type="term"
         setMessage={setMessage}
       />
+
+      {/* Preview of terms to be saved */}
+      {items && items.length > 0 && (
+        <div className="terms-preview">
+          <h3>Terms to be saved:</h3>
+          <ul>
+            {items.map((item, index) => (
+              <li key={index}>
+                <strong>{item.term}</strong>: {item.definition}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="form-row">
         <button
           type="button"
           className="save"
-          disabled={!message.success}
-          onClick={saveTerm}
+          disabled={!message.success || !items}
+          onClick={saveTerms}
         >
-          Save
+          {getButtonText()}
         </button>
         <ApiResponseMessage apiResponse={apiResponse} />
       </div>

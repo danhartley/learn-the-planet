@@ -109,6 +109,33 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
 
   const collections = groupCollectionsByType(collection?.collections || [])
 
+  const credits =
+    collection.items &&
+    collection.items.map(section => {
+      return (
+        <div>
+          {section?.credit && (
+            <div key={section.credit?.title}>
+              {section?.credit?.authors && (
+                <div>
+                  {section.credit.authors &&
+                    `Authors: ${section.credit.authors.join(', ')}`}
+                </div>
+              )}
+              {section?.credit?.source && (
+                <div>
+                  <span>Source: </span>
+                  <Link href={section.credit.source}>
+                    {section.credit.title}
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )
+    })
+
   const article =
     collection.items &&
     collection.items.map((section, sectionIndex) => {
@@ -135,30 +162,6 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
             {section?.text?.map((para, paraIndex) => (
               <p key={`${sectionIndex}-${paraIndex}`}>{para}</p>
             ))}
-
-            <div className="article-credit">
-              {section?.credit && (
-                <>
-                  <h2>Credit</h2>
-                  <div key={section.credit?.title}>
-                    {section?.credit?.authors && (
-                      <div>
-                        {section.credit.authors &&
-                          `Authors: ${section.credit.authors.join(', ')}`}
-                      </div>
-                    )}
-                    {section?.credit?.source && (
-                      <div>
-                        <span>Source: </span>
-                        <Link href={section.credit.source}>
-                          {section.credit.title}
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
           </div>
           <div className="block">
             {section.examples?.map(taxon => {
@@ -185,6 +188,10 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
         <div>{collection.location}</div>
       </div>
       <article>{article}</article>
+      <h2>Credits</h2>
+      {credits}
+
+      <hr />
 
       <CollectionLinksSection
         collections={collections?.topic}

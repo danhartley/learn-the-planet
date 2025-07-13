@@ -48,9 +48,9 @@ export const isTermObject = (obj: unknown): obj is Term => {
 }
 
 /**
- * Validates if a JSON string represents a valid Term object
+ * Validates if a JSON string represents a valid Term object or array of Term objects
  * @param jsonString - The JSON string to validate
- * @returns A ValidationResult object
+ * @returns A ValidationResult object containing an array of Terms
  */
 export function validateTermJson(jsonString: string): ValidationResult<Term> {
   // Skip empty input
@@ -69,11 +69,13 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
     // Step 2: Check if JSON is an array or single object
     const isArray = Array.isArray(parsedJSON)
     const itemsToValidate = isArray ? parsedJSON : [parsedJSON]
+    const validatedTerms: Term[] = []
 
     // Step 3: Validate each item
     itemsToValidate.forEach((item: unknown, index: number) => {
-      // Use isTermObject directly - if valid, no need to check anything else
+      // Use isTermObject directly - if valid, add to results
       if (isTermObject(item)) {
+        validatedTerms.push(item)
         return // This item is valid, continue to next item
       }
 
@@ -155,11 +157,11 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
       }
     }
 
-    // All checks passed
+    // All checks passed - always return an array to match ValidationResult interface
     console.log('parsedJSON', parsedJSON)
     return {
       isValid: true,
-      parsedData: isArray ? parsedJSON[0] : parsedJSON, // Return in original format
+      parsedData: validatedTerms, // Always return array
       errors: [],
     }
   } catch (error) {
@@ -170,5 +172,36 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
         `Invalid JSON: ${error instanceof Error ? error.message : String(error)}`,
       ],
     }
+  }
+}
+
+/**
+ * Validates an array of Term objects
+ * @param terms - Array of Term objects to validate
+ * @returns A ValidationResult object containing the validated terms
+ */
+export function validateTermsArray(terms: unknown[]): ValidationResult<Term> {
+  const errors: string[] = []
+  const validatedTerms: Term[] = []
+
+  terms.forEach((term, index) => {
+    if (isTermObject(term)) {
+      validatedTerms.push(term)
+    } else {
+      errors.push(`Term at index ${index} is not a valid Term object`)
+    }
+  })
+
+  if (errors.length > 0) {
+    return {
+      isValid: false,
+      errors,
+    }
+  }
+
+  return {
+    isValid: true,
+    parsedData: validatedTerms,
+    errors: [],
   }
 }
