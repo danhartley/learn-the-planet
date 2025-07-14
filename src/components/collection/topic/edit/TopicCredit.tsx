@@ -15,7 +15,7 @@ type Props = {
   sectionIndex: number
 }
 
-export const TopicCredit = ({ collection, section, sectionIndex }: Props) => {
+export const TopicCredit = ({ collection, section }: Props) => {
   const { updateCollectionItem, deleteCollectionItem, apiResponse } =
     useCollection()
   const [title, setTitle] = useState<string>(section?.credit?.title || '')

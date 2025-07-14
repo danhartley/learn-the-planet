@@ -35,7 +35,7 @@ export const TraitCard = ({ trait }: Props) => {
   })
 
   return (
-    <section className="sub-section">
+    <section className="linked-collections">
       <section id={trait.trait} className="trait">
         <dl>
           <dt>{trait.trait}</dt>

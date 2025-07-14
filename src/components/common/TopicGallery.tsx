@@ -45,7 +45,7 @@ const CollectionLinksSection: React.FC<{
   }
 
   return (
-    <section aria-labelledby={sectionId} className="sub-section">
+    <section aria-labelledby={sectionId} className="linked-collections">
       <h2 id={sectionId}>{title}</h2>
       <ul>
         {filteredCollections.map((linkedCollection: CollectionSummary) => (
@@ -113,9 +113,9 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
     collection.items &&
     collection.items.map(section => {
       return (
-        <div>
+        <div key={section.credit?.title}>
           {section?.credit && (
-            <div key={section.credit?.title}>
+            <div>
               {section?.credit?.authors && (
                 <div>
                   {section.credit.authors &&

@@ -9,7 +9,7 @@ type Props = {
   fieldText: string
   setFieldValue: Dispatch<SetStateAction<string>>
   type: ContentHandlerType
-  information?: tring
+  information?: string
   required?: boolean
   sectionIndex?: number
 }

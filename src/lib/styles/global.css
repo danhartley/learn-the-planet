@@ -574,8 +574,6 @@ form {
 .question-text {
   font-size: var(--font-size-md);
   font-weight: 500;
-  /* background-color: var(--colour-bg-main); */
-  /* padding: var(--spacing-md); */
   display: flex;
   align-items: center;
   border-radius: var(--border-radius-sm);
@@ -824,17 +822,12 @@ figcaption > div > div:nth-child(2) {
   }
 }
 
-[aria-labelledby='term-gallery'] dd {
-  padding-bottom: var(--spacing-xl);
-}
-
 [data-type='term'] .block.options > button span {
   font-size: var(--font-size-sm);
 }
 
-.sub-section {
+.linked-collections {
   padding: var(--spacing-md) 0 0 0;
-  border-top: 1px solid var(--colour-line);
 }
 
 /* Score section */
@@ -1017,7 +1010,6 @@ button.draggable + div {
 
 @media (min-width: 1024px) {
   textarea {
-    padding: var(--spacing-xl) calc(var(--spacing-xl) * 2);
     line-height: calc(var(--line-height-md) * 1.25);
   }
 }

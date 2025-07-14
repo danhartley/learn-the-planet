@@ -17,12 +17,12 @@ export const CollectionType = ({
     {
       key: 'topic',
       value: 'topic',
-      description: 'Create a guide, lesson or overview',
+      description: 'Create a guide, a lesson or a field notes entry',
     },
     {
       key: 'trait',
       value: 'trait',
-      description: 'Create a collection of traits with examples',
+      description: 'Create a collection of taxa traits with examples',
     },
     {
       key: 'taxon',

@@ -23,7 +23,7 @@ export function TestConfigSettings({ config, setConfig }: Props) {
 
   const templateTypes = types.map((selection: QuestionTemplateSelection) => {
     return (
-      <li key={selection.type} className="horizontal-group">
+      <li key={selection.type}>
         <input
           id={selection.type}
           type="checkbox"
@@ -45,7 +45,7 @@ export function TestConfigSettings({ config, setConfig }: Props) {
   return (
     <section aria-labelledby="template-options">
       <h3 id="template-options">Test type options</h3>
-      <ul>{templateTypes}</ul>
+      <ul className="list-group">{templateTypes}</ul>
     </section>
   )
 }
