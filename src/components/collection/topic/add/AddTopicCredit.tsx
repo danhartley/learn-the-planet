@@ -42,6 +42,7 @@ export const AddTopicCredit = () => {
         type={'topic'}
         required={true}
       />
+
       <CollectionTextField
         fieldValue={source}
         setFieldValue={setSource}
@@ -49,6 +50,7 @@ export const AddTopicCredit = () => {
         type={'topic'}
         required={false}
       />
+
       <CollectionTextField
         fieldValue={authors}
         setFieldValue={setAuthors}

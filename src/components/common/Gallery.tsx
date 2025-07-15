@@ -42,7 +42,6 @@ export async function Gallery<T>({ collection }: GalleryProps<T>) {
   return (
     <>
       <Component collection={collection} />
-      <SignIn signInText={'Sign in to edit collection'} />
       {canEdit && (
         <Link
           href={`/collection/edit/${collection.slug}-${collection.shortId}`}
@@ -50,6 +49,7 @@ export async function Gallery<T>({ collection }: GalleryProps<T>) {
           Edit collection
         </Link>
       )}
+      <SignIn signInText={'Sign in to edit collection'} />
     </>
   )
 }

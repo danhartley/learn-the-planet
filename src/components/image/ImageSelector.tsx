@@ -147,7 +147,12 @@ export const ImageSelector = (props: Props) => {
         </ul>
       ) : (
         <div className="form-row">
-          <em>You've no images saved.</em>
+          <em>
+            {tagType === 'user' && <span>You've no images saved.</span>}
+            {tagType === 'collection' && (
+              <span>You've no images saved for this collection.</span>
+            )}
+          </em>
         </div>
       )}
     </div>

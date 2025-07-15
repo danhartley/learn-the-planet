@@ -32,7 +32,7 @@ export const TraitItems = () => {
           <em>Click to edit or delete a trait.</em>
         </div>
       </div>
-      <ul>
+      <ul className="list-group">
         {traitCollection.items.map((trait, index) => (
           <li key={trait.id} className="column-group">
             <div className="horizontal-group">

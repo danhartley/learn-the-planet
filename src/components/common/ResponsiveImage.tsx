@@ -6,17 +6,23 @@ type Props = {
   id: string
   img: Img
   alt: string
+  objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
 }
 
-export const ResponsiveImage = ({ id, img, alt }: Props) => {
+export const ResponsiveImage = ({
+  id,
+  img,
+  alt,
+  objectFit = 'cover',
+}: Props) => {
   return (
     <Image
       id={id}
       src={formatURL(img?.url || '')}
-      alt={alt}
       width={230}
       height={230}
-      style={{ objectFit: 'contain' }}
+      alt={alt}
+      objectFit={objectFit}
     />
   )
 }

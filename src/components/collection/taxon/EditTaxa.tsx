@@ -18,6 +18,7 @@ export const EditTaxa = () => {
   }, [selectedTaxa])
 
   const saveChanges = async () => {
+    console.log('selectedTaxa', selectedTaxa)
     if (collection) {
       updateCollectionItems(collection, selectedTaxa)
     }

@@ -348,7 +348,7 @@ export const CollectionProvider = ({
 
       const processedCollectionItems = processCollectionTaxa(
         collection.type,
-        collection.items
+        items
       )
 
       // Optimistic update

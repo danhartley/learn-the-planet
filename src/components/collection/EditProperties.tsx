@@ -14,6 +14,10 @@ export const EditProperties = () => {
   const [author, setAuthor] = useState<string>(
     collection?.author?.authors?.join(', ') || ''
   )
+  const [source, setSource] = useState<string>(collection?.author?.source || '')
+  const [sourceTitle, setSourceTitle] = useState<string>(
+    collection?.author?.title || ''
+  )
   const [slug, setSlug] = useState<string>(collection?.slug || '')
   const [imageUrl, setImageUrl] = useState<string>(collection?.imageUrl || '')
   const [date, setDate] = useState<string>(collection?.date || '')
@@ -28,6 +32,8 @@ export const EditProperties = () => {
       location: location || null,
       author: {
         authors: author ? author.split(',').map(a => a.trim()) : [],
+        source,
+        title: sourceTitle,
       } as Credit,
     } as UpdateCollectionFieldsOptions
 
@@ -62,6 +68,28 @@ export const EditProperties = () => {
 
       <div className="group-block">
         <CollectionTextField
+          fieldValue={source}
+          setFieldValue={setSource}
+          fieldText="Collection source"
+          type={collection?.type || 'topic'}
+          sectionIndex={1}
+          information="Enter a link to an external source"
+        />
+      </div>
+
+      <div className="group-block">
+        <CollectionTextField
+          fieldValue={sourceTitle}
+          setFieldValue={setSourceTitle}
+          fieldText="Collection source title"
+          type={collection?.type || 'topic'}
+          sectionIndex={1}
+          information="Enter a link to an external source"
+        />
+      </div>
+
+      <div className="group-block">
+        <CollectionTextField
           fieldValue={slug}
           setFieldValue={setSlug}
           fieldText="Collection slug"
@@ -69,26 +97,6 @@ export const EditProperties = () => {
           sectionIndex={1}
         />
       </div>
-
-      <div className="group-block">
-        <CollectionTextField
-          fieldValue={imageUrl}
-          setFieldValue={setImageUrl}
-          fieldText="Collection image url"
-          type={collection?.type || 'topic'}
-          sectionIndex={1}
-        />
-      </div>
-
-      <ImageSelector
-        selectionMode="single"
-        setSelectedImage={image => {
-          if (image?.url) {
-            setImageUrl(image.url)
-          }
-        }}
-        imageUrl={imageUrl}
-      />
 
       <div className="group-block">
         <div>
@@ -117,6 +125,26 @@ export const EditProperties = () => {
           sectionIndex={1}
         />
       </div>
+
+      <div className="group-block">
+        <CollectionTextField
+          fieldValue={imageUrl}
+          setFieldValue={setImageUrl}
+          fieldText="Collection image url"
+          type={collection?.type || 'topic'}
+          sectionIndex={1}
+        />
+      </div>
+
+      <ImageSelector
+        selectionMode="single"
+        setSelectedImage={image => {
+          if (image?.url) {
+            setImageUrl(image.url)
+          }
+        }}
+        imageUrl={imageUrl}
+      />
 
       <section aria-labelledby="edit-collection">
         <div className="form-row">

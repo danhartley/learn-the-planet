@@ -20,7 +20,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body>
         <header>
           <div>
-            <Link href="/collections">Learn the Planet</Link>
+            <Link href="/">Learn the Planet</Link>
           </div>
         </header>
         <main>

@@ -1,4 +1,8 @@
 'use client'
+import Link from 'next/link'
+
+import { Url } from 'next/dist/shared/lib/router/router'
+
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
@@ -37,19 +41,30 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
     return <TaxonCard key={item.id + crypto.randomUUID()} taxon={item} />
   })
 
+  const authors = collection.author?.authors?.join(',')
+
   return (
     <section aria-labelledby="taxon-gallery" className="group">
-      <h1 id="taxon-gallery">{collection.name}</h1>
-      <div>{collection?.date}</div>
-      <div>{collection?.location}</div>
+      <div className="group">
+        <h1 id="taxon-gallery">{collection.name}</h1>
+        <div>{authors}</div>
+        <div className="font-xs">
+          <Link href={collection?.author?.source as Url}>
+            {collection?.author?.title}
+          </Link>
+        </div>
+        <div>{collection?.date}</div>
+        <div>{collection?.location}</div>
+      </div>
       <section aria-labelledby="taxa" className="group-block">
         <h2 id="taxa">Taxa</h2>
         <div className="block">{taxa}</div>
       </section>
+      <TestConfigSettings config={config} setConfig={setConfig} />
       <button id="start-test" onClick={handleStartTest}>
         Start test
       </button>
-      <TestConfigSettings config={config} setConfig={setConfig} />
+      <hr />
     </section>
   )
 }

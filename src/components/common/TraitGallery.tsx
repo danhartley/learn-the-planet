@@ -77,10 +77,10 @@ export function TraitGallery({ collection }: Props<Trait>) {
         <div className="column-group">{traits}</div>
       </section>
       {collections}
+      <TestConfigSettings config={config} setConfig={setConfig} />
       <button id="start-test" onClick={handleStartTest}>
         Start test
       </button>
-      <TestConfigSettings config={config} setConfig={setConfig} />
     </section>
   )
 }

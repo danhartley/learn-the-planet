@@ -17,30 +17,44 @@ export const CreateOperation = () => {
   const [name, setName] = useState<string>('')
   const [type, setType] = useState<ContentHandlerType>('topic')
   const [imageUrl, setImageUrl] = useState<string>('')
+  const [isCreating, setIsCreating] = useState<boolean>(false)
 
   const MIN_NAME_LENGTH = 5
 
   const router = useRouter()
 
-  const createCollection = () => {
-    const create = async () => {
-      if (session && session.user && session.user.id)
-        await addCollection(name, type, session.user.id)
-    }
+  const createCollection = async () => {
+    // Prevent multiple calls if already creating
+    if (isCreating) return
+
     if (name && name.length > MIN_NAME_LENGTH && session?.user) {
-      create()
+      setIsCreating(true)
+      try {
+        if (session && session.user && session.user.id) {
+          await addCollection(name, type, session.user.id)
+        }
+      } catch (error) {
+        console.error('Error creating collection:', error)
+        // Reset creating state on error so user can try again
+        setIsCreating(false)
+      }
+      // Note: setIsCreating(false) is handled in useEffect when collection is created
     }
   }
 
   useEffect(() => {
-    if (collection)
+    if (collection) {
+      setIsCreating(false) // Reset loading state
       router.push(`/collection/edit/${collection?.slug}-${collection?.shortId}`)
+    }
   }, [collection, router])
 
   // Show loading state
   if (status === 'loading') {
     return <div>Loading...</div>
   }
+
+  const isButtonDisabled = name.length < MIN_NAME_LENGTH || isCreating
 
   // Show create form if authenticated
   return (
@@ -64,11 +78,8 @@ export const CreateOperation = () => {
             type={type}
           />
 
-          <button
-            onClick={createCollection}
-            disabled={name.length < MIN_NAME_LENGTH}
-          >
-            Create collection
+          <button onClick={createCollection} disabled={isButtonDisabled}>
+            {isCreating ? 'Creating...' : 'Create collection'}
           </button>
         </>
       )}

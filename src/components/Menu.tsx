@@ -6,7 +6,7 @@ export const Menu = () => {
     <nav>
       <section aria-labelledby="collection-menu">
         <h2 id="collection-menu" className="menu">
-          Menu
+          Links
         </h2>
         <ul>
           <li>

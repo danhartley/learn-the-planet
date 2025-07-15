@@ -224,10 +224,10 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       {fieldNotesUrl}
       {hasExamples && (
         <>
+          <TestConfigSettings config={config} setConfig={setConfig} />
           <button id="start-test" onClick={handleStartTest}>
             Start test
           </button>
-          <TestConfigSettings config={config} setConfig={setConfig} />
         </>
       )}
     </section>

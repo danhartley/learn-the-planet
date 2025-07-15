@@ -15,6 +15,7 @@
   --colour-bg-amphibia: rgb(220 239 163);
   --colour-bg-actinopterygii: rgb(241 229 215);
   --colour-bg-mollusca: rgb(241 229 215);
+  --colour-bg-fungi: rgb(234 218 208);
   --colour-bg-topic: rgb(128 128 128);
   --colour-bg-topic-card: rgb(245 245 245);
   --colour-bg-taxon: rgb(73 64 34);
@@ -84,7 +85,7 @@
 /* Base styles */
 body {
   max-width: 75vw;
-  margin: 0 auto;
+  margin: 0 auto var(--spacing-lg) auto;
   font-family: var(--font-family-sans-serif);
   color: var(--colour-fg-text);
   letter-spacing: var(--letter-spacing);
@@ -140,6 +141,11 @@ h3 {
   text-transform: capitalize;
   line-height: 1.5;
   font-family: var(--font-family-serif);
+  text-wrap: balance;
+
+  &.initial {
+    text-transform: initial;
+  }
 }
 
 h1 {
@@ -170,6 +176,10 @@ a:visited {
   font-size: var(--font-size-xs);
 }
 
+.font-xs {
+  font-size: var(--font-size-xs);
+}
+
 /* Layout elements */
 header {
   position: relative;
@@ -195,7 +205,7 @@ header {
 footer {
   display: flex;
   flex-direction: column;
-  border-top: 1px dashed var(--colour-line);
+  /* border-top: 1px dashed var(--colour-line); */
 }
 
 hr {
@@ -362,6 +372,13 @@ li::marker {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-sm);
+
+  &.bullets {
+    padding-inline: revert;
+    li::marker {
+      font-size: initial;
+    }
+  }
 }
 
 .row-group {
@@ -407,9 +424,9 @@ li::marker {
   font-style: italic;
 }
 
-[data-type='taxon'] button span {
+/* [data-type='taxon'] button span {
   text-transform: capitalize;
-}
+} */
 
 [aria-labelledby='multiple-select'] {
   .grid-lg {
@@ -656,6 +673,7 @@ figcaption {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-wrap: balance;
 }
 
 figcaption > div {
@@ -664,6 +682,7 @@ figcaption > div {
   row-gap: 0.2rem;
   padding: var(--spacing-xs) var(--spacing-sm);
   text-transform: capitalize;
+  text-align: center;
 }
 
 figcaption > div > div:nth-child(1) span:nth-child(2) {
@@ -744,6 +763,15 @@ figcaption > div > div:nth-child(2) {
   img {
     background-color: var(--colour-bg-body);
     border: 1px solid var(--colour-bg-mollusca);
+    border-bottom: none;
+  }
+}
+
+.bg-fungi {
+  background-color: var(--colour-bg-fungi);
+  img {
+    background-color: var(--colour-bg-body);
+    border: 1px solid var(--colour-bg-fungi);
     border-bottom: none;
   }
 }
