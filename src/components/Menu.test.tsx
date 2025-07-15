@@ -8,7 +8,7 @@ describe('Menu', () => {
   })
 
   it('should render', () => {
-    expect(screen.getByText('Menu')).toBeInTheDocument()
+    expect(screen.getByText('Links')).toBeInTheDocument()
   })
 
   it('should contain', () => {
