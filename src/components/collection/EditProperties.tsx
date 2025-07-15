@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
 import { CollectionTextField } from '@/components/common/CollectionTextField'
+import { ImageSelector } from '@/components/image/ImageSelector'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { UpdateCollectionFieldsOptions, Credit } from '@/types'
+import { UpdateCollectionFieldsOptions, Credit, NextCloudImage } from '@/types'
 
 export const EditProperties = () => {
   const { collection, updateCollectionFields, apiResponse } = useCollection()
@@ -17,6 +18,9 @@ export const EditProperties = () => {
   const [imageUrl, setImageUrl] = useState<string>(collection?.imageUrl || '')
   const [date, setDate] = useState<string>(collection?.date || '')
   const [location, setLocation] = useState<string>(collection?.location || '')
+  const [selectedImages, setSelectedImages] = useState<
+    NextCloudImage[] | undefined
+  >()
 
   const handleFieldsChange = () => {
     const newFields = {
@@ -32,6 +36,15 @@ export const EditProperties = () => {
 
     if (collection) updateCollectionFields(collection, newFields)
   }
+
+  useEffect(() => {
+    if (selectedImages && selectedImages.length > 0) {
+      const firstImageUrl = selectedImages[0].url
+      if (firstImageUrl) {
+        setImageUrl(firstImageUrl)
+      }
+    }
+  }, [selectedImages])
 
   return (
     <section aria-labelledby="collection-properties">
@@ -78,6 +91,16 @@ export const EditProperties = () => {
           sectionIndex={1}
         />
       </div>
+
+      <ImageSelector
+        selectionMode="single"
+        setSelectedImage={image => {
+          if (image?.url) {
+            setImageUrl(image.url)
+          }
+        }}
+        imageUrl={imageUrl}
+      />
 
       <div className="group-block">
         <div>

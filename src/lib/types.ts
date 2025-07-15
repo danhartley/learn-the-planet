@@ -66,6 +66,7 @@ export type Image = {
 export type NextCloudImage = {
   id: string
   src: string
+  url?: string
   width?: number
   height?: number
   alt?: string
@@ -77,6 +78,7 @@ export type CloudImage = {
   asset_id: string
   public_id: string
   display_name?: string
+  secure_url?: string
 }
 
 export type NextCloudImageTagType = 'collection' | 'user'
@@ -212,6 +214,7 @@ export type Collection<T> = {
   collections?: CollectionSummary[]
   author?: Credit
   imageUrl?: string
+  imageSrc?: string
   sectionOrder: string[]
   ownerId: string
 }

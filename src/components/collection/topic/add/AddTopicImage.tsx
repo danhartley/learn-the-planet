@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useCollection } from '@/contexts/CollectionContext'
 
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
-import { AddFromImageList } from '@/components/image/AddFromImageList'
+import { ImageSelector } from '@/components/image/ImageSelector'
 
 import { Topic, NextCloudImage } from '@/types'
 import { getShortId } from '@/utils/strings'
@@ -28,7 +28,10 @@ export const AddTopicImage = () => {
     <section aria-labelledby="new-section">
       <h2 id="new-section">Add image</h2>
       <div className="group-block">
-        <AddFromImageList setSelectedImages={setSelectedImages} />
+        <ImageSelector
+          selectionMode="multiple"
+          setSelectedImages={setSelectedImages}
+        />
         <div className="form-row">
           <button onClick={saveImage} className="save">
             Save selection

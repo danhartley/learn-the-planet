@@ -11,7 +11,8 @@ export const NextCloudinaryImage = ({
   alt,
   sizes = `(max-width: 768px) 100vw,
            (max-width: 1200px) 50vw,
-            33vw`,
+            33vw,
+            height: "auto"`,
   caption,
 }: NextCloudImage) => {
   return (

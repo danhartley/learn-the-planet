@@ -5,16 +5,26 @@ import { useSession } from 'next-auth/react'
 import { useCollection } from '@/contexts/CollectionContext'
 
 import { ImageListItem } from '@/components/image/common/ImageListItem'
+import { ImageListItemRadio } from '@/components/image/common/ImageListItemRadio'
 
 import { NextCloudImage, NextCloudImageTagType, CloudImage } from '@/types'
 
-type Props = {
+type SingleSelectionProps = {
+  selectionMode: 'single'
+  setSelectedImage: (image: NextCloudImage | undefined) => void
+  imageUrl: string
+}
+
+type MultipleSelectionProps = {
+  selectionMode?: 'multiple'
   setSelectedImages: React.Dispatch<
     React.SetStateAction<NextCloudImage[] | undefined>
   >
 }
 
-export const AddFromImageList = ({ setSelectedImages }: Props) => {
+type Props = SingleSelectionProps | MultipleSelectionProps
+
+export const ImageSelector = (props: Props) => {
   const { data: session } = useSession()
   const { collection, getImages } = useCollection()
   const [tagType, setTagType] = useState<NextCloudImageTagType>('collection')
@@ -34,6 +44,7 @@ export const AddFromImageList = ({ setSelectedImages }: Props) => {
               return {
                 id: cloudImage.asset_id,
                 src: cloudImage.public_id,
+                url: cloudImage.secure_url,
                 alt: cloudImage.display_name || '',
                 caption: cloudImage.display_name || '',
               } as NextCloudImage
@@ -56,21 +67,31 @@ export const AddFromImageList = ({ setSelectedImages }: Props) => {
   const handleImageToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const imageId = (e.target as HTMLInputElement).id
     const cloudImage = images?.find(image => image.id === imageId)
-    console.log(cloudImage)
-    setSelectedImages(prev => {
-      const isSelected = prev?.some(selected => selected.id === cloudImage?.id)
 
-      if (isSelected) {
-        // Remove cloudImage
-        return prev?.filter(selected => selected.id !== cloudImage?.id)
-      } else if (cloudImage) {
-        // Add cloudImage only if it's defined
-        return [...(prev ?? []), cloudImage]
-      } else {
-        // If cloudImage is undefined, return prev unchanged
-        return prev
-      }
-    })
+    if (props.selectionMode === 'single') {
+      // Single selection mode - radio button behavior
+      const newSelectedImage = cloudImage || undefined
+      // setSelectedImage(newSelectedImage)
+      props.setSelectedImage(newSelectedImage)
+    } else {
+      // Multiple selection mode - checkbox behavior (default)
+      props.setSelectedImages(prev => {
+        const isSelected = prev?.some(
+          selected => selected.id === cloudImage?.id
+        )
+
+        if (isSelected) {
+          // Remove cloudImage
+          return prev?.filter(selected => selected.id !== cloudImage?.id)
+        } else if (cloudImage) {
+          // Add cloudImage only if it's defined
+          return [...(prev ?? []), cloudImage]
+        } else {
+          // If cloudImage is undefined, return prev unchanged
+          return prev
+        }
+      })
+    }
   }
 
   return (
@@ -108,10 +129,19 @@ export const AddFromImageList = ({ setSelectedImages }: Props) => {
           {!!images &&
             images.map(image => (
               <React.Fragment key={image.id}>
-                <ImageListItem
-                  image={image}
-                  handleImageToggle={handleImageToggle}
-                />
+                {props.selectionMode === 'multiple' && (
+                  <ImageListItem
+                    image={image}
+                    handleImageToggle={handleImageToggle}
+                  />
+                )}
+                {props.selectionMode === 'single' && (
+                  <ImageListItemRadio
+                    image={image}
+                    handleImageToggle={handleImageToggle}
+                    imageUrl={props.imageUrl}
+                  />
+                )}
               </React.Fragment>
             ))}
         </ul>

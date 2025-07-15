@@ -113,7 +113,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
     collection.items &&
     collection.items.map(section => {
       return (
-        <div key={section.credit?.title}>
+        <div key={crypto.randomUUID().split('-')[0]}>
           {section?.credit && (
             <div>
               {section?.credit?.authors && (
