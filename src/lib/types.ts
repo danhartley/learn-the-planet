@@ -433,3 +433,16 @@ export interface ImageResponse {
     total_count?: number
   }
 }
+
+export type IconicTaxon =
+  | 'plantae'
+  | 'insecta'
+  | 'mammalia'
+  | 'reptilia'
+  | 'aves'
+  | 'amphibia'
+  | 'actinopterygii'
+  | 'mollusca'
+  | 'fungi'
+  | 'animalia'
+  | 'arachnida'
