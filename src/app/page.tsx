@@ -36,8 +36,8 @@ const Home = () => {
       <hr />
       <h2 className="initial">How can I link to my content elsewhere?</h2>
       <div>
-        Once you have created a new collection, you'll be able to link to
-        external content.
+        When you create a new collection, you can credit and link to external
+        content.
       </div>
     </>
   )
