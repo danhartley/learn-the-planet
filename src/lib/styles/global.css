@@ -97,7 +97,7 @@
 
 /* Base styles */
 body {
-  max-width: 75vw;
+  max-width: 96vw;
   margin: 0 auto var(--spacing-lg) auto;
   font-family: var(--font-family-sans-serif);
   color: var(--colour-fg-text);
@@ -1071,24 +1071,36 @@ button.draggable + div {
 
 /* Large grid */
 @media (min-width: 767px) and (max-width: 1286px) {
+  body {
+    max-width: 75vw;
+  }
   .grid-lg {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (min-width: 1024px) {
+  body {
+    max-width: 65vw;
+  }
   textarea {
     line-height: calc(var(--line-height-md) * 1.25);
   }
 }
 
 @media (min-width: 1287px) and (max-width: 1440px) {
+  body {
+    max-width: 65vw;
+  }
   .grid-lg {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 @media (min-width: 1441px) {
+  body {
+    max-width: 60vw;
+  }
   .grid-lg {
     grid-template-columns: 1fr 1fr 1fr;
   }

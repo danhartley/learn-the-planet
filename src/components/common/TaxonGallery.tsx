@@ -70,7 +70,6 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
       <button id="start-test" onClick={handleStartTest}>
         Start test
       </button>
-      <hr />
     </section>
   )
 }

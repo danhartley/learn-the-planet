@@ -54,7 +54,7 @@ export const TaxonHome = ({ session }: Props) => {
   const taxa = userCollections.filter(c => c.type === 'taxon')
 
   return (
-    <section aria-labelledby="taxa">
+    <section aria-labelledby="taxa" className="column-group">
       <div className="group">
         <h1 id="taxa">taxa</h1>
         <div>Taxa data sourced from Wikipedia and iNaturalist</div>

@@ -54,7 +54,7 @@ export const TermHome = ({ session }: Props) => {
   const terms = userCollections.filter(c => c.type === 'term')
 
   return (
-    <section aria-labelledby="terms">
+    <section aria-labelledby="terms" className="column-group">
       <div className="group">
         <h1 id="terms">terms</h1>
         <div>Terms used in biology and ecology</div>

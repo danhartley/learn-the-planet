@@ -54,7 +54,7 @@ export const TraitHome = ({ session }: Props) => {
   const traits = userCollections.filter(c => c.type === 'trait')
 
   return (
-    <section aria-labelledby="traits">
+    <section aria-labelledby="traits" className="column-group">
       <div className="group">
         <h1 id="traits">Traits</h1>
         <div>Common characteristics and qualities of species</div>
