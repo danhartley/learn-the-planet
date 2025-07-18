@@ -23,7 +23,7 @@ export default function Page() {
       </div>
       {Object.entries(taxonUrls).map(([key, value]) => {
         return (
-          <ul>
+          <ul key={key}>
             <li>
               <h3>
                 <Link href={value.licence}>{value.credit}</Link>

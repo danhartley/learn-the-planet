@@ -15,9 +15,8 @@ import {
 export const CollectionLinks: React.FC<{
   collections: CollectionSummary[]
   currentCollection: Collection<unknown>
-  sectionId: string
   title: string
-}> = ({ collections, currentCollection, sectionId, title }) => {
+}> = ({ collections, currentCollection, title }) => {
   const router = useRouter()
   const { getCollectionById } = useCollection()
   const { startTest } = useTestPlanner<unknown>()

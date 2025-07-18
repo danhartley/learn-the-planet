@@ -137,28 +137,24 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       <CollectionLinks
         collections={collections?.topic}
         currentCollection={collection}
-        sectionId="item-gallery"
         title="Related topics"
       />
 
       <CollectionLinks
         collections={collections?.taxon}
         currentCollection={collection}
-        sectionId="taxon-gallery"
         title="Taxa"
       />
 
       <CollectionLinks
         collections={collections?.term}
         currentCollection={collection}
-        sectionId="term-gallery"
         title="Terms"
       />
 
       <CollectionLinks
         collections={collections?.trait}
         currentCollection={collection}
-        sectionId="trait-gallery"
         title="Traits"
       />
 
