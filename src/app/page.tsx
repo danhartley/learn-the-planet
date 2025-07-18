@@ -8,6 +8,11 @@ const Home = () => {
         The aim of this website is to encourage you to leave this website, get
         off the Internet, go outside, and observe.
       </div>
+      <div>
+        While you are here, you can read fieldnotes, nature diaries and learn
+        more about ecology and species traits.
+      </div>
+      <div>You can also test yourself on what you have learnt.</div>
       <hr />
       <h2 className="initial">What can I do here?</h2>
       <ul className="list-group bullets">
@@ -18,7 +23,7 @@ const Home = () => {
         <li>
           Test yourself on <Link href="/taxa">taxa</Link>,{' '}
           <Link href="/traits">traits</Link> and{' '}
-          <Link href="/terms">terms</Link> that are new to you.
+          <Link href="/terms">terms</Link>.
         </li>
       </ul>
       <hr />
@@ -36,8 +41,8 @@ const Home = () => {
       <hr />
       <h2 className="initial">How can I link to my content elsewhere?</h2>
       <div>
-        When you create a new collection, you can credit and link to external
-        content.
+        When you <Link href="/collection/create">create a new collection</Link>,
+        you can credit and link to external content.
       </div>
     </>
   )

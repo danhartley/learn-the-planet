@@ -6,14 +6,17 @@ import Link from 'next/link'
 
 import { useRouter } from 'next/navigation'
 import { useTestPlanner } from '@/hooks/useTestPlanner'
+
 import { TraitCard } from '@/components/common/TraitCard'
+import { IconicTaxonIcon } from '@/components/image/common/IconicTaxonIcon'
+import { TestConfigSettings } from '@/components/common/TestConfigSettings'
+
 import {
   Collection,
   Trait,
   CollectionSummary,
   QuestionTemplateSelection,
 } from '@/types'
-import { TestConfigSettings } from '@/components/common/TestConfigSettings'
 
 type Props<Trait> = {
   collection: Collection<Trait>
@@ -68,13 +71,14 @@ export function TraitGallery({ collection }: Props<Trait>) {
   )
 
   return (
-    <section aria-labelledby="trait-gallery" className="group">
+    <section aria-labelledby="trait-gallery" className="column-group">
       <h1 id="trait-gallery">{collection.name}</h1>
       <section aria-labelledby="traits" className="group-block">
         <h2 id="traits">Traits</h2>
         <ul className="list-group">{traitIndex}</ul>
         <hr />
         <div className="column-group">{traits}</div>
+        <IconicTaxonIcon collection={collection} />
       </section>
       {collections}
       <TestConfigSettings config={config} setConfig={setConfig} />

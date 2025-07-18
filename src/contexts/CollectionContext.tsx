@@ -77,6 +77,10 @@ type CollectionContextType = {
     collection: Collection<unknown>,
     author: Credit
   ) => Promise<void>
+  getCollectionById: (
+    slug: string,
+    shortId: string
+  ) => Promise<Collection<unknown> | null>
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -843,6 +847,52 @@ export const CollectionProvider = ({
     []
   ) // Empty dependency array since this function doesn't depend on any context values
 
+  const getCollectionById = async (
+    slug: string,
+    shortId: string
+  ): Promise<Collection<unknown> | null> => {
+    if (!slug || !shortId) return null
+
+    try {
+      const url = `/api/collection/${slug}-${shortId}`
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const collection = await response.json()
+
+      // Update the context state with the fetched collection
+      setCollection(collection)
+
+      setApiResponse({
+        success: true,
+        message: 'Collection fetched successfully.',
+      })
+
+      return collection
+    } catch (error) {
+      console.error('Failed to get collection by ID:', error)
+
+      setApiResponse({
+        success: false,
+        message: 'Failed to fetch collection.',
+      })
+
+      return null
+    }
+  }
+
   return (
     <CollectionContext.Provider
       value={{
@@ -865,6 +915,7 @@ export const CollectionProvider = ({
         collectionSummaries,
         getImages,
         updateAuthor,
+        getCollectionById,
       }}
     >
       {children}

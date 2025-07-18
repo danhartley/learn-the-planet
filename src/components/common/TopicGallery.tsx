@@ -10,56 +10,16 @@ import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { TestConfigSettings } from '@/components/common/TestConfigSettings'
 import { TaxonCard } from '@/components/common/TaxonCard'
 import { NextCloudinaryImage } from '@/components/image/common/NextCloudinaryImage'
+import { Credits } from '@/components/common/Credits'
+import { CollectionLinks } from '@/components/common/CollectionLinks'
+import { IconicTaxonIcon } from '@/components/image/common/IconicTaxonIcon'
 
 import { groupCollectionsByType } from '@/utils/arrays'
 
-import {
-  Collection,
-  CollectionSummary,
-  Topic,
-  Taxon,
-  QuestionTemplateSelection,
-} from '@/types'
+import { Collection, Topic, Taxon, QuestionTemplateSelection } from '@/types'
 
 type Props<Topic> = {
   collection: Collection<Topic>
-}
-
-// New component for rendering collection links sections
-const CollectionLinksSection: React.FC<{
-  collections: CollectionSummary[]
-  currentCollection: Collection<unknown>
-  sectionId: string
-  title: string
-}> = ({ collections, currentCollection, sectionId, title }) => {
-  if (!collections || collections.length === 0) {
-    return null
-  }
-
-  const filteredCollections = collections.filter(
-    linkedCollection => linkedCollection.shortId !== currentCollection.shortId
-  )
-
-  if (filteredCollections.length === 0) {
-    return null
-  }
-
-  return (
-    <section aria-labelledby={sectionId} className="linked-collections">
-      <h2 id={sectionId}>{title}</h2>
-      <ul>
-        {filteredCollections.map((linkedCollection: CollectionSummary) => (
-          <li key={linkedCollection.shortId}>
-            <Link
-              href={`/collection/${linkedCollection?.slug}-${encodeURIComponent(linkedCollection?.shortId || '')}`}
-            >
-              {linkedCollection.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )
 }
 
 export const TopicGallery = ({ collection }: Props<Topic>) => {
@@ -109,33 +69,6 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
 
   const collections = groupCollectionsByType(collection?.collections || [])
 
-  const credits =
-    collection.items &&
-    collection.items.map(section => {
-      return (
-        <div key={crypto.randomUUID().split('-')[0]}>
-          {section?.credit && (
-            <div>
-              {section?.credit?.authors && (
-                <div>
-                  {section.credit.authors &&
-                    `Authors: ${section.credit.authors.join(', ')}`}
-                </div>
-              )}
-              {section?.credit?.source && (
-                <div>
-                  <span>Source: </span>
-                  <Link href={section.credit.source}>
-                    {section.credit.title}
-                  </Link>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      )
-    })
-
   const article =
     collection.items &&
     collection.items.map((section, sectionIndex) => {
@@ -180,41 +113,49 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
   const authors = collection.author?.authors?.join(',')
 
   return (
-    <section aria-labelledby="topic-gallery" className="group">
-      <div className="group">
+    <section aria-labelledby="topic-gallery" className="column-group">
+      <div>
         <h1 id="topic-gallery">{collection.name}</h1>
         <div>{authors}</div>
         <div>{collection.date}</div>
         <div>{collection.location}</div>
       </div>
       <article>{article}</article>
-      <h2>Credits</h2>
-      {credits}
+      <IconicTaxonIcon collection={collection} />
+      <Credits collection={collection} />
 
-      <hr />
+      {hasExamples && (
+        <>
+          <TestConfigSettings config={config} setConfig={setConfig} />
+          <button id="start-test" onClick={handleStartTest}>
+            Start test
+          </button>
+          <hr />
+        </>
+      )}
 
-      <CollectionLinksSection
+      <CollectionLinks
         collections={collections?.topic}
         currentCollection={collection}
         sectionId="item-gallery"
         title="Related topics"
       />
 
-      <CollectionLinksSection
+      <CollectionLinks
         collections={collections?.taxon}
         currentCollection={collection}
         sectionId="taxon-gallery"
         title="Taxa"
       />
 
-      <CollectionLinksSection
+      <CollectionLinks
         collections={collections?.term}
         currentCollection={collection}
         sectionId="term-gallery"
         title="Terms"
       />
 
-      <CollectionLinksSection
+      <CollectionLinks
         collections={collections?.trait}
         currentCollection={collection}
         sectionId="trait-gallery"
@@ -222,14 +163,6 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       />
 
       {fieldNotesUrl}
-      {hasExamples && (
-        <>
-          <TestConfigSettings config={config} setConfig={setConfig} />
-          <button id="start-test" onClick={handleStartTest}>
-            Start test
-          </button>
-        </>
-      )}
     </section>
   )
 }

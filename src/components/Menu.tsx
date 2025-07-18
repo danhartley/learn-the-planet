@@ -6,11 +6,20 @@ export const Menu = () => {
     <nav>
       <section aria-labelledby="collection-menu">
         <h2 id="collection-menu" className="menu">
-          Links
+          Site Navigation
         </h2>
-        <ul>
+        <ul className="list-group">
           <li>
-            <Link href="/collections">Collections</Link>
+            <Link href="/topics">Topics</Link>
+          </li>
+          <li>
+            <Link href="/traits">Traits</Link>
+          </li>
+          <li>
+            <Link href="/taxa">Taxa</Link>
+          </li>
+          <li>
+            <Link href="/terms">Terms</Link>
           </li>
           <li>
             <Link href="/collection/create">Create collection</Link>

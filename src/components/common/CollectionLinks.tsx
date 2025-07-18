@@ -1,0 +1,82 @@
+'use client'
+import Link from 'next/link'
+
+import { useRouter } from 'next/navigation'
+
+import { useCollection } from '@/contexts/CollectionContext'
+import { useTestPlanner } from '@/hooks/useTestPlanner'
+
+import {
+  Collection,
+  CollectionSummary,
+  QuestionTemplateSelection,
+} from '@/types'
+
+export const CollectionLinks: React.FC<{
+  collections: CollectionSummary[]
+  currentCollection: Collection<unknown>
+  sectionId: string
+  title: string
+}> = ({ collections, currentCollection, sectionId, title }) => {
+  const router = useRouter()
+  const { getCollectionById } = useCollection()
+  const { startTest } = useTestPlanner<unknown>()
+
+  if (!collections || collections.length === 0) {
+    return null
+  }
+
+  const filteredCollections = collections.filter(
+    linkedCollection => linkedCollection.shortId !== currentCollection.shortId
+  )
+
+  if (filteredCollections.length === 0) {
+    return null
+  }
+
+  const handleStartTest = async (slug?: string, shortId?: string) => {
+    if (!slug || !shortId) return
+    const collection: Collection<unknown> = (await getCollectionById(
+      slug,
+      shortId
+    )) as Collection<unknown>
+    const config = {
+      questionTemplateSelections: [
+        { type: 'multipleChoice', isSelected: true },
+        { type: 'textEntry', isSelected: true },
+      ] as QuestionTemplateSelection[],
+    }
+    startTest({ collection, config })
+    router.push('/test')
+  }
+
+  return (
+    <section aria-labelledby="linked-collections">
+      <h2 id="linked-collections">{title}</h2>
+      <ul className="grid-md">
+        {filteredCollections.map((linkedCollection: CollectionSummary) => (
+          <li key={linkedCollection.shortId}>
+            <div className="card small">
+              <Link
+                href={`/collection/${linkedCollection?.slug}-${encodeURIComponent(linkedCollection?.shortId || '')}`}
+              >
+                {linkedCollection.name}
+              </Link>
+              <button
+                id="start-test"
+                onClick={() =>
+                  handleStartTest(
+                    linkedCollection?.slug,
+                    linkedCollection?.shortId
+                  )
+                }
+              >
+                Start test
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

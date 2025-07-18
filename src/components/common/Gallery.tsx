@@ -43,11 +43,14 @@ export async function Gallery<T>({ collection }: GalleryProps<T>) {
     <>
       <Component collection={collection} />
       {canEdit && (
-        <Link
-          href={`/collection/edit/${collection.slug}-${collection.shortId}`}
-        >
-          Edit collection
-        </Link>
+        <>
+          <hr />
+          <Link
+            href={`/collection/edit/${collection.slug}-${collection.shortId}`}
+          >
+            Edit collection
+          </Link>
+        </>
       )}
       <SignIn signInText={'Sign in to edit collection'} />
     </>

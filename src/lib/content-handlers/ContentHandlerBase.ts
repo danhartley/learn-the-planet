@@ -231,7 +231,7 @@ export class ContentHandlerBase<T extends LearningItem>
 
       /* Force terms to lower case */
       if (match === '${term}')
-        value = (value as unknown as string).toLowerCase()
+        value = (value as unknown as string).toUpperCase()
 
       return value !== undefined ? String(value) : match
     })

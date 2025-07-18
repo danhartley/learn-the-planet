@@ -45,13 +45,15 @@ export function TermGallery({ collection }: Props<Term>) {
           {item.images &&
             item.images.map(img => {
               return (
-                <NextCloudinaryImage
-                  key={img.id}
-                  id={img.id}
-                  src={img.src}
-                  alt={img.alt}
-                  caption={img.caption}
-                />
+                <React.Fragment key={item.id}>
+                  <NextCloudinaryImage
+                    key={img.id}
+                    id={img.id}
+                    src={img.src}
+                    alt={img.alt}
+                    caption={img.caption}
+                  />
+                </React.Fragment>
               )
             })}
         </dd>
@@ -70,7 +72,7 @@ export function TermGallery({ collection }: Props<Term>) {
   })
 
   return (
-    <section aria-labelledby="term-gallery" className="group">
+    <section aria-labelledby="term-gallery" className="column-group">
       <h1 id="term-gallery">{collection.name}</h1>
       <section aria-labelledby="terms" className="group-block">
         <h2 id="terms">Terms</h2>

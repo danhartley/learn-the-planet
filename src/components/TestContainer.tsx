@@ -47,28 +47,25 @@ export function TestContainer<T extends LearningItem>() {
   }
 
   return (
-    <>
-      <section className="group" aria-labelledby="collection">
-        <div className="group">
-          <h1 id="collection">{currentLayout.collection.name}</h1>
-        </div>
-        <TestDisplay
-          layout={currentLayout}
-          onSubmit={handleSubmitAnswer}
-          layouts={layouts || []}
-        />
+    <section className="column-group" aria-labelledby="collection">
+      <div className="group">
         <Link
           className="breadcrumb"
           href={`/collection/${currentLayout.collection.slug}-${currentLayout.collection.shortId}`}
         >
-          Collection overview
+          <h1 id="collection">{currentLayout.collection.name}</h1>
         </Link>
-      </section>
+      </div>
+      <TestDisplay
+        layout={currentLayout}
+        onSubmit={handleSubmitAnswer}
+        layouts={layouts || []}
+      />
       <ScoreDisplayNotification
         isCorrect={score?.isCorrect || false}
         history={testHistory}
         isVisibleClassName={isVisibleClassName}
       />
-    </>
+    </section>
   )
 }

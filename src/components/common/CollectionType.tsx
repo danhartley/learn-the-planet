@@ -86,12 +86,24 @@ export const CollectionType = ({
       break
   }
   return (
-    <section aria-labelledby="collection-type" className="group-block">
-      <h2 id="collection-type">Collection type</h2>
-      <div className="column-group">
-        <span>Select the type of collection you want to create.</span>
-        {display}
-      </div>
-    </section>
+    <>
+      <section aria-labelledby="collection-type" className="group-block">
+        <h2 id="collection-type">Collection type</h2>
+        <div className="column-group">
+          <span>Select the type of collection you want to create.</span>
+          {display}
+        </div>
+      </section>
+      {/* <div className="column-group">
+        <div>
+          Once you've created a collection, you will be taken to a new page with
+          options specific to the type of collection you selected.
+        </div>
+        <div>
+          By default, this collection is private. Only you can see it until you
+          make it public.
+        </div>
+      </div> */}
+    </>
   )
 }

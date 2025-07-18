@@ -61,13 +61,13 @@ export function ScoreDisplay<T>() {
   ))
 
   return (
-    <section aria-labelledby="score">
+    <section aria-labelledby="score" className="column-group">
       <div className="group">
         <h2 id="score">Test score</h2>
         {progress}
       </div>
       {feedback}
-      <ul>{historyItems}</ul>
+      <ul className="list-group">{historyItems}</ul>
     </section>
   )
 }

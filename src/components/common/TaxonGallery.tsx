@@ -11,12 +11,7 @@ import { TestConfigSettings } from '@/components/common/TestConfigSettings'
 import { TaxonCard } from '@/components/common/TaxonCard'
 import { IconicTaxonIcon } from '@/components/image/common/IconicTaxonIcon'
 
-import {
-  Collection,
-  Taxon,
-  QuestionTemplateSelection,
-  IconicTaxon,
-} from '@/types'
+import { Collection, Taxon, QuestionTemplateSelection } from '@/types'
 
 type Props<Taxon> = {
   collection: Collection<Taxon>
@@ -50,16 +45,10 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
   })
 
   const authors = collection.author?.authors?.join(',')
-  const iconicTaxa: IconicTaxon[] = [
-    ...new Set(
-      collection?.items
-        .map(i => i.iconicTaxon?.toLowerCase())
-        .filter((it): it is IconicTaxon => it !== undefined)
-    ),
-  ]
+
   return (
-    <section aria-labelledby="taxon-gallery" className="group">
-      <div className="group">
+    <section aria-labelledby="taxon-gallery" className="column-group">
+      <div>
         <h1 id="taxon-gallery">{collection.name}</h1>
         <div>{authors}</div>
         <div className="font-xs">
@@ -75,7 +64,7 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
       <section aria-labelledby="taxa" className="group-block">
         <h2 id="taxa">Taxa</h2>
         <div className="block">{taxa}</div>
-        <IconicTaxonIcon iconicTaxa={iconicTaxa} />
+        <IconicTaxonIcon collection={collection} />
       </section>
       <TestConfigSettings config={config} setConfig={setConfig} />
       <button id="start-test" onClick={handleStartTest}>

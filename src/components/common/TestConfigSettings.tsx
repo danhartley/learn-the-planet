@@ -43,7 +43,7 @@ export function TestConfigSettings({ config, setConfig }: Props) {
   })
 
   return (
-    <section aria-labelledby="template-options">
+    <section aria-labelledby="template-options" className="column-group">
       <h2 id="template-options">Test type options</h2>
       <ul className="list-group">{templateTypes}</ul>
     </section>

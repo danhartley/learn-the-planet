@@ -2,13 +2,51 @@ import React from 'react'
 
 import { taxonUrls } from '@/api/phylopic/api'
 
-import { IconicTaxon } from '@/types'
+import { Collection, IconicTaxon } from '@/types'
 
 type IconicTaxonProps = {
-  iconicTaxa: IconicTaxon[]
+  collection: Collection<unknown>
 }
 
-export const IconicTaxonIcon: React.FC<IconicTaxonProps> = ({ iconicTaxa }) => {
+export const IconicTaxonIcon: React.FC<IconicTaxonProps> = ({ collection }) => {
+  if (!collection.items) return null
+
+  let iconicTaxa: IconicTaxon[] = []
+
+  switch (collection.type) {
+    case 'taxon':
+      iconicTaxa = [
+        ...new Set(
+          collection.items
+            .map(i =>
+              (i as { iconicTaxon?: string }).iconicTaxon?.toLowerCase()
+            )
+            .filter((it): it is IconicTaxon => it !== undefined)
+        ),
+      ]
+      break
+
+    case 'trait':
+    case 'topic':
+    case 'term':
+      iconicTaxa = [
+        ...new Set(
+          collection.items
+            .flatMap(
+              i =>
+                (i as { examples?: { iconicTaxon?: string }[] }).examples || []
+            )
+            .map(example => example.iconicTaxon?.toLowerCase())
+            .filter((it): it is IconicTaxon => it !== undefined)
+        ),
+      ]
+      break
+
+    default:
+      iconicTaxa = []
+      break
+  }
+
   return (
     <div className="iconic-taxon">
       {iconicTaxa.map(iconicTaxon => (

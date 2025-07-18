@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation'
 
+import { CollectionProvider } from '@/contexts/CollectionContext'
+
 import { Collection } from '@/types'
 import { getCollectionByShortId } from '@/api/database'
 import { extractShortId } from '@/utils/strings'
@@ -22,5 +24,9 @@ export default async function Page({
   const collection: Collection<unknown> | undefined =
     await getCollectionByShortId(shortId)
 
-  return <Gallery collection={collection} />
+  return (
+    <CollectionProvider>
+      <Gallery collection={collection} />
+    </CollectionProvider>
+  )
 }
