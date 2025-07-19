@@ -580,7 +580,7 @@ export const CollectionProvider = ({
       }
 
       const createdCollection = await response.json()
-      console.log('createdCollection', createdCollection)
+
       // Update with server response (in case server made additional changes like adding id/shortId)
       setCollection(createdCollection)
 

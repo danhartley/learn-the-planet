@@ -41,7 +41,7 @@ export const TopicItems = () => {
           Failed to save section order: {error}
         </div>
       )}
-      <section aria-labelledby="topics-list">
+      <section aria-labelledby="topics-list" className="column-group">
         <div className="group">
           <h2 id="traits-list">Topic sections</h2>
           <div>

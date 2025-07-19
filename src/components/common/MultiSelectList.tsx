@@ -38,8 +38,8 @@ export default function MultiSelectList({
     }
   }, [onRefsReady, options]) // Re-run when options change
 
-  const optionElements = options.map((option: string) => (
-    <div key={option} className="row-group">
+  const optionElements = options.map((option: string, index: number) => (
+    <div key={option + index} className="row-group">
       <input
         id={option}
         type="checkbox"

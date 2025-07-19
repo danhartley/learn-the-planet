@@ -20,10 +20,12 @@ export const TopicTextSections = ({ section }: Props) => {
   } = useCollection()
   const [sectionText, setSectionText] = useState(section.text)
   const [isUpdating, setIsUpdating] = useState(false)
+  const [topic, setTopic] = useState(section.topic || '')
 
   const saveChanges = () => {
     setIsUpdating(true)
     section.text = sectionText
+    section.topic = topic
     if (collection) {
       updateCollectionItem(collection, section).then(() => {
         setIsUpdating(false)
@@ -41,6 +43,8 @@ export const TopicTextSections = ({ section }: Props) => {
           key={section.id}
           id={section.id}
           text={sectionText}
+          topic={topic}
+          setTopic={setTopic}
           setSectionText={setSectionText}
         />
       )}

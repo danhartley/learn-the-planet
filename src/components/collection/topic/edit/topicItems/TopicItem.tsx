@@ -110,7 +110,7 @@ export const TopicItem: React.FC<TopicItemProps> = ({
         <TopicSummary section={section} />
       </div>
       {isVisible && (
-        <div className="group-block" id={`section-content-${section.id}`}>
+        <div id={`section-content-${section.id}`}>
           <TopicTextSections key={section.id} section={section} />
           {section.images?.map(img => (
             <TopicCloudImage
