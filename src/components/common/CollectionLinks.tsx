@@ -50,32 +50,35 @@ export const CollectionLinks: React.FC<{
   }
 
   return (
-    <section aria-labelledby="linked-collections">
-      <h2 id="linked-collections">{title}</h2>
-      <ul className="grid-md">
-        {filteredCollections.map((linkedCollection: CollectionSummary) => (
-          <li key={linkedCollection.shortId}>
-            <div className="card small">
-              <Link
-                href={`/collection/${linkedCollection?.slug}-${encodeURIComponent(linkedCollection?.shortId || '')}`}
-              >
-                {linkedCollection.name}
-              </Link>
-              <button
-                id="start-test"
-                onClick={() =>
-                  handleStartTest(
-                    linkedCollection?.slug,
-                    linkedCollection?.shortId
-                  )
-                }
-              >
-                Start test
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <>
+      <hr />
+      <section aria-labelledby="linked-collections">
+        <h2 id="linked-collections">{title}</h2>
+        <ul className="grid-md">
+          {filteredCollections.map((linkedCollection: CollectionSummary) => (
+            <li key={linkedCollection.shortId}>
+              <div className="card small">
+                <Link
+                  href={`/collection/${linkedCollection?.slug}-${encodeURIComponent(linkedCollection?.shortId || '')}`}
+                >
+                  {linkedCollection.name}
+                </Link>
+                <button
+                  id="start-test"
+                  onClick={() =>
+                    handleStartTest(
+                      linkedCollection?.slug,
+                      linkedCollection?.shortId
+                    )
+                  }
+                >
+                  Start test
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
   )
 }

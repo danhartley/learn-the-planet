@@ -416,7 +416,6 @@ li::marker {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-md);
-  justify-content: center;
 }
 
 .block.options > button,
@@ -662,14 +661,12 @@ form {
 }
 
 .iconic-taxon {
-  position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-lg);
   display: flex;
   align-items: center;
+  justify-content: center;
   img {
-    width: var(--spacing-xl);
-    padding: 0 var(--spacing-xs);
+    width: var(--spacing-lg);
+    padding: 0 calc(var(--spacing-xs) * 0.5);
   }
 }
 
@@ -1067,6 +1064,15 @@ button.draggable + div {
       column-count: 2;
     }
   }
+  .iconic-taxon {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-lg);
+    img {
+      width: var(--spacing-xl);
+      padding: 0 var(--spacing-xs);
+    }
+  }
 }
 
 /* Large grid */
@@ -1138,13 +1144,13 @@ button.draggable + div {
   }
 }
 
-@media (min-width: 1187px) and (max-width: 1365px) {
+@media (min-width: 1187px) and (max-width: 1919px) {
   .grid-md {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
-@media (min-width: 1366px) {
+@media (min-width: 1920px) {
   .grid-md {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }

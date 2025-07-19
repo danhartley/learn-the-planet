@@ -76,9 +76,9 @@ export function TraitGallery({ collection }: Props<Trait>) {
       <section aria-labelledby="traits" className="group-block">
         <h2 id="traits">Traits</h2>
         <ul className="list-group">{traitIndex}</ul>
+        <IconicTaxonIcon collection={collection} />
         <hr />
         <div className="column-group">{traits}</div>
-        <IconicTaxonIcon collection={collection} />
       </section>
       {collections}
       <TestConfigSettings config={config} setConfig={setConfig} />

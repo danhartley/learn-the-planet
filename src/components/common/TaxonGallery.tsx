@@ -63,8 +63,9 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
       </div>
       <section aria-labelledby="taxa" className="group-block">
         <h2 id="taxa">Taxa</h2>
-        <div className="block">{taxa}</div>
         <IconicTaxonIcon collection={collection} />
+        <hr />
+        <div className="block">{taxa}</div>
       </section>
       <TestConfigSettings config={config} setConfig={setConfig} />
       <button id="start-test" onClick={handleStartTest}>

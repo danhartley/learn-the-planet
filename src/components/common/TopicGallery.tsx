@@ -120,8 +120,9 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
         <div>{collection.date}</div>
         <div>{collection.location}</div>
       </div>
-      <article>{article}</article>
       <IconicTaxonIcon collection={collection} />
+      <hr />
+      <article>{article}</article>
       <Credits collection={collection} />
 
       {hasExamples && (
@@ -130,7 +131,6 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
           <button id="start-test" onClick={handleStartTest}>
             Start test
           </button>
-          <hr />
         </>
       )}
 
