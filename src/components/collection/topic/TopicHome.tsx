@@ -54,7 +54,7 @@ export const TopicHome = ({ session }: Props) => {
   const topics = userCollections.filter(c => c.type === 'topic')
 
   return (
-    <section aria-labelledby="topics">
+    <section aria-labelledby="topics" className="column-group">
       <div className="group">
         <h1 id="topics">Topics</h1>
         <div>Articles, fieldnotes, natural diaries, and lessons</div>

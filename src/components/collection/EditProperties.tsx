@@ -52,6 +52,7 @@ export const EditProperties = () => {
           fieldText="Collection name"
           type={collection?.type || 'topic'}
           sectionIndex={1}
+          required={true}
         />
       </div>
 
@@ -95,6 +96,7 @@ export const EditProperties = () => {
           fieldText="Collection slug"
           type={collection?.type || 'topic'}
           sectionIndex={1}
+          required={true}
         />
       </div>
 

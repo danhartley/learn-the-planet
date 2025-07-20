@@ -51,8 +51,13 @@ function TestReview<T>() {
   }
 
   return (
-    <section aria-labelledby="test-review">
-      <h1 id="test-review">{currentLayout?.collection.name}</h1>
+    <section aria-labelledby="test-review" className="column-group">
+      <Link
+        href={`/collection/${currentLayout?.collection.slug}-${currentLayout?.collection.shortId}`}
+      >
+        <h1 id="test-review">{currentLayout?.collection.name}</h1>
+      </Link>
+
       <section aria-labelledby="test-options" className="group-block">
         <h2 id="test-options">Test options</h2>
         <form>{options}</form>
@@ -60,12 +65,6 @@ function TestReview<T>() {
           <button onClick={startNewTest}>Start new test</button>
         </div>
       </section>
-      <Link
-        className="breadcrumb"
-        href={`/collection/${currentLayout?.collection.slug}-${currentLayout?.collection.shortId}`}
-      >
-        Collection overview
-      </Link>
     </section>
   )
 }

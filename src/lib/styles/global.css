@@ -2,10 +2,11 @@
   /* Colors */
   --colour-line: rgb(211, 211, 211);
   --colour-bg-accent: rgb(236, 239, 247);
+  --colour-bg-main: rgb(248 244 240);
   --colour-fg-main: rgb(0, 0, 0);
   --colour-fg-text: rgb(68, 68, 68);
   --colour-fg-alt-main: rgb(255, 255, 255);
-  --colour-bg-main: rgb(255, 255, 255);
+  --colour-bg-neutral: rgb(255, 255, 255);
   --colour-bg-card: rgb(246, 247, 249);
   --colour-bg-animalia: rgb(217 214 214);
   --colour-mg-animalia: rgb(227 226 226);
@@ -29,17 +30,13 @@
   --colour-mg-fungi: rgb(243 235 225);
   --colour-bg-arachnida: rgb(246 179 120);
   --colour-mg-arachnida: rgb(249 206 168);
-  --colour-bg-topic: rgb(128 128 128);
-  --colour-bg-topic-card: rgb(245 245 245);
-  --colour-bg-taxon: rgb(73 64 34);
-  --colour-bg-taxon-card: rgb(245, 243, 234);
-  --colour-bg-term: rgb(43 73 34);
-  --colour-bg-term-card: rgb(241 247 238);
-  --colour-bg-trait: rgb(64 34 73);
-  --colour-bg-trait-card: rgb(243 235 245);
+  --colour-bg-topic-card: rgb(221 227 239);
+  --colour-bg-taxon-card: rgb(239, 233, 221);
+  --colour-bg-term-card: rgb(221, 239, 227);
+  --colour-bg-trait-card: rgb(239, 221, 227);
   --colour-bg-button: rgb(233 228 208);
   --colour-bg-card-button: rgba(255, 255, 255, 0.5);
-  --colour-bg-body: rgb(248 244 240);
+  --colour-bg-body: rgb(242 235 226);
   --colour-bg-add-element: rgb(255 238 187);
   --colour-bg-save-btn: rgb(226 233 241);
   --colour-bg-delete-btn: rgb(234 213 223);
@@ -48,6 +45,7 @@
   --colour-correct-light: rgb(189 219 178);
   --colour-incorrect: rgb(176 84 106);
   --colour-incorrect-light: rgb(232 205 211);
+  --colour-link-hover: rgb(0 128 0);
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -119,20 +117,18 @@ main {
   }
 }
 
-body {
-  background-color: rgb(242 235 226);
-}
-
 main {
-  background-color: rgb(248 244 240);
+  background-color: var(--colour-bg-main);
   border: 1px dashed var(--colour-line);
   padding: var(--spacing-md);
+  position: relative;
 }
 
 article {
   font-family: var(--font-family-serif);
   overflow-wrap: anywhere;
   line-height: var(--line-height-lg);
+  max-width: 80ch;
 
   h2:not(:first-child) {
     margin-top: var(--spacing-xl);
@@ -185,6 +181,10 @@ a:visited {
   color: var(--colour-fg-main);
 }
 
+a:hover {
+  color: var(--colour-link-hover);
+}
+
 .breadcrumb {
   font-size: var(--font-size-xs);
 }
@@ -223,7 +223,7 @@ footer {
 
 hr {
   height: 2px;
-  background-color: var(--colour-bg-main);
+  background-color: var(--colour-bg-neutral);
   border: none;
   width: 100%;
 }
@@ -291,7 +291,7 @@ input[type='date'] {
 button {
   padding: var(--spacing-md);
   border: 1px solid var(--colour-fg-text);
-  background-color: var(--colour-bg-main);
+  background-color: var(--colour-bg-neutral);
   cursor: pointer;
   font-size: var(--font-size-md);
 }
@@ -386,9 +386,15 @@ li::marker {
   row-gap: var(--spacing-sm);
 
   &.bullets {
-    padding-inline: revert;
-    li::marker {
-      font-size: initial;
+    row-gap: 0;
+
+    p {
+      margin: var(--spacing-sm) var(--spacing-md);
+    }
+
+    p:last-child {
+      margin: var(--spacing-sm) var(--spacing-md) var(--spacing-lg)
+        var(--spacing-md);
     }
   }
 }
@@ -423,7 +429,7 @@ li::marker {
   width: var(--button-size);
   height: var(--button-size);
   padding: 0;
-  border: 3px solid var(--colour-bg-main);
+  border: 3px solid var(--colour-bg-neutral);
 }
 
 .block.options > button span,
@@ -476,7 +482,7 @@ li::marker {
   display: flex;
   justify-content: flex-end;
   div {
-    background-color: var(--colour-bg-main);
+    background-color: var(--colour-bg-neutral);
     padding: var(--spacing-md) var(--spacing-lg);
     width: fit-content;
   }
@@ -553,21 +559,21 @@ form {
 [data-type='taxon'] button {
   background-color: var(--colour-bg-taxon-card);
   &:hover {
-    background-color: var(--colour-bg-main);
+    background-color: var(--colour-bg-neutral);
   }
 }
 
 [data-type='term'] button {
   background-color: var(--colour-bg-term-card);
   &:hover {
-    background-color: var(--colour-bg-main);
+    background-color: var(--colour-bg-neutral);
   }
 }
 
 [data-type='trait'] button {
   background-color: var(--colour-bg-trait-card);
   &:hover {
-    background-color: var(--colour-bg-main);
+    background-color: var(--colour-bg-neutral);
   }
 }
 
@@ -655,7 +661,7 @@ form {
 .card button {
   background-color: var(--colour-bg-card-button);
   &:hover {
-    background-color: var(--colour-bg-main);
+    background-color: var(--colour-bg-neutral);
     border: 1px solid var(--colour-fg-main);
   }
 }
@@ -667,6 +673,16 @@ form {
   img {
     width: var(--spacing-lg);
     padding: 0 calc(var(--spacing-xs) * 0.5);
+  }
+  &.rotate {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-lg);
+    img {
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+      min-height: calc(var(--spacing-lg) * 2);
+    }
   }
 }
 
@@ -817,7 +833,7 @@ figcaption > div > div:nth-child(2) {
 }
 
 .bg-correct {
-  color: var(--colour-bg-main) !important;
+  color: var(--colour-bg-neutral) !important;
   background-color: var(--colour-correct) !important;
 }
 .bg-correct-light {
@@ -825,7 +841,7 @@ figcaption > div > div:nth-child(2) {
 }
 
 .bg-incorrect {
-  color: var(--colour-bg-main) !important;
+  color: var(--colour-bg-neutral) !important;
   background-color: var(--colour-incorrect) !important;
 }
 
@@ -929,18 +945,18 @@ progress {
   & > div {
     position: fixed;
     padding: var(--spacing-lg);
-    border: 4px solid var(--colour-bg-main);
+    border: 4px solid var(--colour-bg-neutral);
     border-radius: var(--border-radius-sm);
     bottom: var(--spacing-lg);
     color: var(--colour-fg-alt-main);
 
     &.correct {
-      color: var(--colour-bg-main);
+      color: var(--colour-bg-neutral);
       background-color: var(--colour-correct);
     }
 
     &.incorrect {
-      color: var(--colour-bg-main);
+      color: var(--colour-bg-neutral);
       background-color: var(--colour-incorrect);
     }
   }
