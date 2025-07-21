@@ -8,7 +8,7 @@ import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { CollectionStatus, CollectionSummary } from '@/types'
 
-export const TopicState = () => {
+export const CollectionState = () => {
   const {
     collection,
     collectionSummaries,

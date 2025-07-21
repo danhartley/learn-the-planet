@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
@@ -13,17 +13,12 @@ type Props = {
 
 export const TraitExamples = ({ collection, section }: Props) => {
   const { updateCollectionItem, apiResponse } = useCollection()
-  const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
     section?.examples || []
   )
 
-  useEffect(() => {
-    setChangesToSave(true)
-  }, [section?.examples])
-
-  const saveChanges = () => {
-    section.examples = selectedTaxa || []
+  const handleSaveChanges = (taxaWithDistractors: Taxon[]) => {
+    section.examples = taxaWithDistractors || []
     updateCollectionItem(collection, section)
     setSelectedTaxa([])
   }
@@ -46,8 +41,7 @@ export const TraitExamples = ({ collection, section }: Props) => {
     <TaxonAutocomplete
       selectedTaxa={selectedTaxa}
       onTaxonToggle={handleTaxonToggle}
-      changesToSave={changesToSave}
-      saveChanges={saveChanges}
+      onSaveChanges={handleSaveChanges}
       apiResponse={apiResponse}
       section={section as Trait}
       saveText={'Update trait taxa'}

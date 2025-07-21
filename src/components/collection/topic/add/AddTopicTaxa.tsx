@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
@@ -9,24 +9,19 @@ import { getShortId } from '@/utils/strings'
 
 export const AddTopicTaxa = () => {
   const { collection, addCollectionItem, apiResponse } = useCollection()
-  const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>([])
 
-  useEffect(() => {
-    setChangesToSave(true)
-  }, [selectedTaxa])
-
-  const saveChanges = async () => {
+  const handleSaveChanges = (taxaWithDistractors: Taxon[]) => {
+    setSelectedTaxa(taxaWithDistractors)
     if (collection && selectedTaxa.length > 0) {
       const item = {
         id: getShortId(),
-        examples: selectedTaxa,
+        examples: taxaWithDistractors,
       } as Topic
 
       addCollectionItem(collection, item)
       setSelectedTaxa([])
     }
-    setChangesToSave(false)
   }
 
   const handleTaxonToggle = (taxon: Taxon) => {
@@ -49,8 +44,7 @@ export const AddTopicTaxa = () => {
       <TaxonAutocomplete
         selectedTaxa={selectedTaxa}
         onTaxonToggle={handleTaxonToggle}
-        changesToSave={changesToSave}
-        saveChanges={saveChanges}
+        onSaveChanges={handleSaveChanges}
         apiResponse={apiResponse}
         sectionIndex={1}
       />

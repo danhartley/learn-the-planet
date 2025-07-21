@@ -1,35 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
 import { TaxonAutocomplete } from '@/components/collection/taxon/TaxonAutocomplete'
 
-import { Topic, Taxon } from '@/types'
+import { Trait, Taxon } from '@/types'
 import { getShortId } from '@/utils/strings'
 
 export const AddTraitTaxa = () => {
   const { collection, addCollectionItem, apiResponse } = useCollection()
-  const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>([])
 
-  useEffect(() => {
-    setChangesToSave(true)
-  }, [selectedTaxa])
-
-  const saveChanges = async () => {
+  const handleSaveChanges = (taxaWithDistractors: Taxon[]) => {
+    setSelectedTaxa(taxaWithDistractors)
     if (collection && selectedTaxa.length > 0) {
       const item = {
         id: getShortId(),
-        examples: selectedTaxa,
-      } as Topic
+        examples: taxaWithDistractors,
+      } as Trait
 
-      addCollectionItem(collection, {
-        ...item,
-        examples: selectedTaxa,
-      })
+      addCollectionItem(collection, item)
       setSelectedTaxa([])
     }
-    setChangesToSave(false)
   }
 
   const handleTaxonToggle = (taxon: Taxon) => {
@@ -52,8 +44,7 @@ export const AddTraitTaxa = () => {
       <TaxonAutocomplete
         selectedTaxa={selectedTaxa}
         onTaxonToggle={handleTaxonToggle}
-        changesToSave={changesToSave}
-        saveChanges={saveChanges}
+        onSaveChanges={handleSaveChanges}
         apiResponse={apiResponse}
         sectionIndex={1}
       />

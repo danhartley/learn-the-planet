@@ -16,7 +16,7 @@ export function AddRawTrait() {
     success: false,
     message: '',
   })
-  const [item, setItems] = useState<Trait[] | undefined>()
+  const [items, setItems] = useState<Trait[] | undefined>()
 
   const isValidTrait = () => {
     const result: ValidationResult<Trait> = validateTraitJson(jsonContent)
@@ -27,7 +27,7 @@ export function AddRawTrait() {
       success: result.isValid,
       message: msg,
     })
-
+    console.log('result', result)
     if (result.isValid && result.parsedData) {
       const parsedData = Array.isArray(result.parsedData)
         ? result.parsedData
@@ -38,12 +38,17 @@ export function AddRawTrait() {
     }
   }
 
-  const saveTrait = () => {
-    const trait = {
-      ...(item?.find(i => i) || {}),
-      id: getShortId(),
+  const saveTrait = async () => {
+    if (!items || !collection) return
+
+    // Save each term with a new ID
+    for (const item of items) {
+      const traitToSave = {
+        ...item,
+        id: getShortId(),
+      }
+      await addCollectionItem(collection, traitToSave)
     }
-    if (collection) addCollectionItem(collection, trait)
   }
 
   return (

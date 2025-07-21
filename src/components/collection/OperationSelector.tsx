@@ -23,6 +23,7 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
       ]
       break
     case 'trait':
+    case 'taxon':
     case 'term':
       operationTypes = [
         'update',

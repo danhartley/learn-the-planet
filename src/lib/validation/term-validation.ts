@@ -158,7 +158,6 @@ export function validateTermJson(jsonString: string): ValidationResult<Term> {
     }
 
     // All checks passed - always return an array to match ValidationResult interface
-    console.log('parsedJSON', parsedJSON)
     return {
       isValid: true,
       parsedData: validatedTerms, // Always return array

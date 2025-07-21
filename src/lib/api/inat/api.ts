@@ -1,20 +1,12 @@
 import { mapInatSpeciesToLTP } from '@/api/inat/inat-species-map'
-import { ContentHandlerType, LearningItem, Taxon, Trait, Topic } from '@/types'
-
-async function getInatData(url: string) {
-  try {
-    const response = await fetch(url)
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`)
-    }
-
-    const json = await response.json()
-    const species = mapInatSpeciesToLTP(json.results)
-    return species
-  } catch (error) {
-    console.error((error as Error).message)
-  }
-}
+import {
+  ContentHandlerType,
+  LearningItem,
+  Taxon,
+  Trait,
+  Topic,
+  iNaturalistTaxon,
+} from '@/types'
 
 type Props = {
   items: LearningItem[]
@@ -108,12 +100,128 @@ type AutoCompleteProps = {
   toComplete: string // taxon name
 }
 
-export const getIdByAutocomplete = async ({
+async function getInatData(url: string) {
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`)
+    }
+
+    const json = await response.json()
+    const species = mapInatSpeciesToLTP(json.results)
+
+    // Add distractors to each species
+    if (species) {
+      const speciesWithDistractors = await Promise.all(
+        species.map(async (taxon: Taxon) => {
+          try {
+            if (taxon.ancestorIds && taxon.ancestorIds.length > 0) {
+              const distractorsResult = await getDistractors({
+                ancestorIds: taxon.ancestorIds.map(id => id.toString()),
+              })
+
+              return {
+                ...taxon,
+                distractors: distractorsResult?.results || [],
+              }
+            }
+
+            return {
+              ...taxon,
+              distractors: [],
+            }
+          } catch (error) {
+            console.error(
+              `Failed to get distractors for taxon ${taxon.id}:`,
+              error
+            )
+            return {
+              ...taxon,
+              distractors: [],
+            }
+          }
+        })
+      )
+
+      return speciesWithDistractors
+    }
+
+    return species
+  } catch (error) {
+    console.error((error as Error).message)
+  }
+}
+
+export const getTaxaByAutocomplete = async ({
   by,
   toComplete,
 }: AutoCompleteProps) => {
-  const url = `https://api.inaturalist.org/v1/${by}/autocomplete?q=${toComplete}&per_page=10&rank=species,genus`
+  const url = `https://api.inaturalist.org/v1/${by}/autocomplete?q=${toComplete}&per_page=10&rank=species`
+  const response = await fetch(url)
+  const json = await response.json()
+  const species: Taxon[] = mapInatSpeciesToLTP(json.results) || []
+
+  if (species) {
+    return {
+      results: species,
+    }
+  }
+
+  return json
+}
+type AncestorProps = {
+  ancestorIds: string[]
+}
+
+export const getDistractors = async ({ ancestorIds }: AncestorProps) => {
+  const url = `https://api.inaturalist.org/v1/taxa?parent_id=${ancestorIds.join(',')}&rank=species`
   const response = await fetch(url)
   const json = await response.json()
   return json
+}
+
+export const getTaxaDistractors = async ({
+  species,
+}: {
+  species: Taxon[]
+}): Promise<Taxon[]> => {
+  const resultsWithDistractors = await Promise.all(
+    species.map(async (taxon: Taxon) => {
+      try {
+        if (taxon.ancestorIds && taxon.ancestorIds.length > 0) {
+          const distractorsResult = await getDistractors({
+            ancestorIds: taxon.ancestorIds.map((id: number) => id.toString()),
+          })
+
+          const distractors = distractorsResult?.results
+            .filter(
+              (d: iNaturalistTaxon) =>
+                d.id.toString() !== taxon.id.toString() &&
+                d.preferred_common_name !== undefined
+            )
+            .slice(0, 3)
+
+          return {
+            ...taxon,
+            distractors: mapInatSpeciesToLTP(distractors) || [],
+          }
+        }
+
+        return {
+          ...taxon,
+          distractors: [],
+        }
+      } catch (error) {
+        console.error(
+          `Failed to get distractors for autocomplete result ${taxon.id}:`,
+          error
+        )
+        return {
+          ...taxon,
+          distractors: [],
+        }
+      }
+    })
+  )
+  return resultsWithDistractors
 }

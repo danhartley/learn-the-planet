@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
@@ -8,22 +8,9 @@ import { Taxon, Collection } from '@/types'
 
 export const EditTaxa = () => {
   const { collection, updateCollectionItems, apiResponse } = useCollection()
-  const [changesToSave, setChangesToSave] = useState(false)
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
     (collection as Collection<Taxon>)?.items || []
   )
-
-  useEffect(() => {
-    setChangesToSave(true)
-  }, [selectedTaxa])
-
-  const saveChanges = async () => {
-    console.log('selectedTaxa', selectedTaxa)
-    if (collection) {
-      updateCollectionItems(collection, selectedTaxa)
-    }
-    setChangesToSave(false)
-  }
 
   const handleTaxonToggle = (taxon: Taxon) => {
     setSelectedTaxa(prev => {
@@ -39,12 +26,19 @@ export const EditTaxa = () => {
     })
   }
 
+  const handleSaveChanges = (taxaWithDistractors: Taxon[]) => {
+    setSelectedTaxa(taxaWithDistractors)
+
+    if (collection) {
+      updateCollectionItems(collection, taxaWithDistractors)
+    }
+  }
+
   return (
     <TaxonAutocomplete
       selectedTaxa={selectedTaxa}
       onTaxonToggle={handleTaxonToggle}
-      changesToSave={changesToSave}
-      saveChanges={saveChanges}
+      onSaveChanges={handleSaveChanges}
       apiResponse={apiResponse}
       sectionIndex={1}
     />

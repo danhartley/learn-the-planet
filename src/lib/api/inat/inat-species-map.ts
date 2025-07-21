@@ -1,35 +1,9 @@
 // whttps://api.inaturalist.org/v1/docs/#!/Taxa/get_taxa
 
-import { Image, Taxon } from '@/types'
-
-type inatPhoto = {
-  id: number
-  license_code: string
-  attribution: string
-  url: string
-  attribution_name: string
-  square_url: string
-  medium_url: string
-}
-
-// type inatItem = {
-//   photo: inatPhoto
-// }
-
-type iNaturalistProps = {
-  id: string
-  rank: string
-  iconic_taxon_name: string
-  name: string
-  default_photo?: inatPhoto
-  observations_count: number
-  taxon_photos: []
-  wikipedia_url: string
-  preferred_common_name: string
-}
+import { Image, Taxon, iNaturalistTaxon } from '@/types'
 
 export const mapInatSpeciesToLTP = (
-  results: iNaturalistProps[]
+  results: iNaturalistTaxon[]
 ): Taxon[] | undefined => {
   try {
     const species: Taxon[] = results.map(s => {
@@ -63,6 +37,7 @@ export const mapInatSpeciesToLTP = (
         // }),
         wikipediaUrl: s.wikipedia_url,
         vernacularName: s.preferred_common_name,
+        ancestorIds: s.ancestor_ids,
       } as unknown as Taxon
     })
     return species

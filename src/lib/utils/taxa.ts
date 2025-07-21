@@ -1,7 +1,6 @@
 import { Taxon, ContentHandlerType } from '@/types'
 
 export const generateGenusAndSpeciesFields = (taxa: Taxon[]): Taxon[] => {
-  console.log('taxa', taxa)
   return taxa.map((taxon: Taxon) => {
     // Handle null/undefined binomial and single word cases
     const binomialParts = taxon.binomial?.split(' ') || []

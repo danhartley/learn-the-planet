@@ -10,7 +10,7 @@ import { EditProperties } from '@/components/collection/EditProperties'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
 import { TopicItems } from '@/components/collection/topic/edit/topicItems/TopicItems'
 import { AddTopic } from '@/components/collection/topic/add/AddTopic'
-import { TopicState } from '@/components/collection/topic/edit/TopicState'
+import { CollectionState } from '@/components/collection/topic/edit/CollectionState'
 import { TraitItems } from '@/components/collection/trait/edit/TraitItems'
 import { AddTrait } from '@/components/collection/trait/add/AddTrait'
 import { EditTaxa } from '@/components/collection/taxon/EditTaxa'
@@ -64,8 +64,9 @@ export const EditOperations = () => {
 
       {isUpdateItems && isTopic && <TopicItems />}
       {isAddItem && isTopic && <AddTopic />}
-      {isEditState && isTopic && <TopicState />}
       {isUploadImages && isTopic && <UploadImages />}
+
+      {isEditState && <CollectionState />}
 
       {isUpdateItems && isTrait && <TraitItems />}
       {isAddItem && isTrait && <AddTrait />}

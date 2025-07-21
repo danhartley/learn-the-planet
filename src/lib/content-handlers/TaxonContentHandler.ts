@@ -28,8 +28,13 @@ export function generateTaxonDistractors(
     (collection.items ?? []).filter(d => d.binomial !== item.binomial)
   ).slice(0, extras)
 
-  const distractors = [...distractorBinomials, ...collectionBinomials]
-
+  const distractors = [
+    ...distractorBinomials.slice(0, 3),
+    ...collectionBinomials.slice(
+      0,
+      Math.max(0, 3 - distractorBinomials.length)
+    ),
+  ]
   return distractors.map(d => {
     return {
       key: d.binomial,

@@ -75,7 +75,10 @@ export const TopicItems = () => {
           </ul>
         ) : (
           <div>
-            <strong>Select "Add Item" to begin creating content.</strong>
+            <strong>
+              Select "Add text, taxa, credits, and images" to begin creating
+              content.
+            </strong>
           </div>
         )}
       </section>

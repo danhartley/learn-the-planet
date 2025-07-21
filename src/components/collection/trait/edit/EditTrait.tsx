@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
+import { TaxonAutocomplete } from '@/components/collection/taxon/TaxonAutocomplete'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { Trait } from '@/types'
+import { Trait, Taxon } from '@/types'
 
 interface EditTraitProps {
   trait: Trait
@@ -16,6 +17,7 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
     updateCollectionItem,
     deleteCollectionItem,
     apiResponse,
+    updateCollectionItems,
   } = useCollection()
 
   const [traitValue, setTraitValue] = useState(trait.trait)
@@ -29,6 +31,23 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
     trait.phenology ? trait.phenology.join('\n') : ''
   )
   const [examples] = useState(trait.examples)
+  const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>(
+    trait.examples || []
+  )
+
+  const handleTaxonToggle = (taxon: Taxon) => {
+    setSelectedTaxa(prev => {
+      const isSelected = prev?.some(selected => selected.id === taxon.id)
+
+      if (isSelected) {
+        // Remove taxon
+        return prev?.filter(selected => selected.id !== taxon.id)
+      } else {
+        // Add taxon
+        return [...(prev || []), taxon]
+      }
+    })
+  }
 
   const handleTraitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTraitValue(e.target.value)
@@ -94,7 +113,7 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
       ...(sourceObject && { source: sourceObject }),
       ...(morphologyArray && { morphology: morphologyArray }),
       ...(phenologyArray && { phenology: phenologyArray }),
-      examples,
+      examples: selectedTaxa,
     }
 
     // Remove source, morphology, phenology if they're empty
@@ -133,6 +152,10 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
   }
 
   const isFormValid = traitValue.trim() && definition.trim()
+
+  const handleSaveChanges = (taxaWithDistractors: Taxon[]) => {
+    setSelectedTaxa(taxaWithDistractors)
+  }
 
   return (
     <div id={trait.id} className="group-block">
@@ -210,7 +233,7 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
           />
         </div>
       </section>
-      <h3>Biological Aspects</h3>
+      <h2>Biological Aspects</h2>
       <section
         aria-labelledby={`${trait.id}-morphology`}
         className="collection-field"
@@ -248,6 +271,15 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
         </div>
       </section>
       <section></section>
+      {examples && (
+        <TaxonAutocomplete
+          selectedTaxa={selectedTaxa}
+          onTaxonToggle={handleTaxonToggle}
+          onSaveChanges={handleSaveChanges}
+          apiResponse={apiResponse}
+          sectionIndex={1}
+        />
+      )}
       <div className="form-row">
         <button
           type="button"

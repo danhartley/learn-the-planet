@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 
 import Image from 'next/image'
 
@@ -7,13 +7,14 @@ import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { Taxon, ApiResponse, Topic, Trait, Term } from '@/types'
 
 import { debounce } from '@/api/inat/utils'
-import { getIdByAutocomplete } from '@/api/inat/api'
+import { getTaxaByAutocomplete, getTaxaDistractors } from '@/api/inat/api'
 
 interface TaxonAutocompleteProps {
   selectedTaxa: Taxon[]
   onTaxonToggle: (taxon: Taxon) => void
-  changesToSave: boolean
-  saveChanges: () => void
+  onSaveChanges?: (taxaWithDistractors: Taxon[]) => void
+  changesToSave?: boolean
+  saveChanges?: () => void
   apiResponse: ApiResponse
   sectionIndex?: number
   deleteTaxa?: () => void
@@ -24,8 +25,9 @@ interface TaxonAutocompleteProps {
 export const TaxonAutocomplete = ({
   selectedTaxa,
   onTaxonToggle,
-  changesToSave,
-  saveChanges,
+  onSaveChanges,
+  changesToSave: externalChangesToSave,
+  saveChanges: externalSaveChanges,
   apiResponse,
   sectionIndex,
   section,
@@ -34,6 +36,18 @@ export const TaxonAutocomplete = ({
 }: TaxonAutocompleteProps) => {
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState<Taxon[]>([])
+  const [internalChangesToSave, setInternalChangesToSave] = useState(false)
+
+  // Use internal state if onSaveChanges is provided, otherwise use external props
+  const changesToSave = onSaveChanges
+    ? internalChangesToSave
+    : externalChangesToSave
+
+  useEffect(() => {
+    if (onSaveChanges) {
+      setInternalChangesToSave(true)
+    }
+  }, [selectedTaxa, onSaveChanges])
 
   // Create debounced search function
   const debouncedSearch = useCallback(
@@ -46,41 +60,14 @@ export const TaxonAutocomplete = ({
         }
 
         try {
-          const response = await getIdByAutocomplete({
+          const response = await getTaxaByAutocomplete({
             by: 'taxa',
             toComplete: searchTerm.trim(),
           })
 
-          // Transform API response to match our Taxon interface
-          const transformedSuggestions =
-            response.results?.map(
-              //eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (item: any) =>
-                ({
-                  key: item.id.toString(),
-                  id: item.id.toString(),
-                  binomial: item.name,
-                  vernacularName:
-                    item.preferred_common_name ||
-                    item.english_common_name ||
-                    '',
-                  image: item.default_photo
-                    ? {
-                        id: item.default_photo.id.toString(),
-                        url: item.default_photo.url,
-                        squareUrl: item.default_photo.square_url,
-                        mediumUrl: item.default_photo.medium_url,
-                        attribution: item.default_photo.attribution,
-                        attributionName: item.default_photo.attribution_name,
-                      }
-                    : undefined,
-                  rank: item.rank,
-                  iconicTaxon: item.iconic_taxon_name,
-                }) as Taxon
-              // eslint-disable-next-line react-hooks/exhaustive-deps
-            ) || []
+          const species = response.results
 
-          setSuggestions(transformedSuggestions)
+          setSuggestions(species)
         } catch (error) {
           console.error('Error fetching autocomplete results:', error)
           setSuggestions([])
@@ -88,7 +75,6 @@ export const TaxonAutocomplete = ({
       },
       wait: 350,
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
 
@@ -113,6 +99,21 @@ export const TaxonAutocomplete = ({
     e.preventDefault()
     setSuggestions([])
     setInputValue('')
+  }
+
+  const handleSaveChanges = async () => {
+    if (onSaveChanges) {
+      // Internal save logic with distractors
+      const taxonWithDistractors = await getTaxaDistractors({
+        species: selectedTaxa,
+      })
+
+      onSaveChanges(taxonWithDistractors)
+      setInternalChangesToSave(false)
+    } else if (externalSaveChanges) {
+      // External save logic
+      externalSaveChanges()
+    }
   }
 
   return (
@@ -212,7 +213,7 @@ export const TaxonAutocomplete = ({
                 type="button"
                 id="edit-section"
                 disabled={!changesToSave}
-                onClick={saveChanges}
+                onClick={handleSaveChanges}
                 className="save"
               >
                 {saveText}

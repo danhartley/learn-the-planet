@@ -96,11 +96,13 @@ export function validateTraitJson(jsonString: string): ValidationResult<Trait> {
     // Step 2: Check if JSON is an array or single object
     const isArray = Array.isArray(parsedJSON)
     const itemsToValidate = isArray ? parsedJSON : [parsedJSON]
+    const validatedTraits: Trait[] = []
 
     // Step 3: Validate each item
     itemsToValidate.forEach((item: unknown, index: number) => {
       // Use isTraitObject directly - if valid, no need to check anything else
       if (isTraitObject(item)) {
+        validatedTraits.push(item)
         return // This item is valid, continue to next item
       }
 
@@ -191,11 +193,11 @@ export function validateTraitJson(jsonString: string): ValidationResult<Trait> {
         errors,
       }
     }
-
+    console.log('validatedTraits', validatedTraits)
     // All checks passed
     return {
       isValid: true,
-      parsedData: parsedJSON,
+      parsedData: validatedTraits,
       errors: [],
     }
   } catch (error) {
@@ -206,5 +208,38 @@ export function validateTraitJson(jsonString: string): ValidationResult<Trait> {
         `Invalid JSON: ${error instanceof Error ? error.message : String(error)}`,
       ],
     }
+  }
+}
+
+/**
+ * Validates an array of Trait objects
+ * @param traits - Array of Trait objects to validate
+ * @returns A ValidationResult object containing the validated traits
+ */
+export function validateTraitsArray(
+  traits: unknown[]
+): ValidationResult<Trait> {
+  const errors: string[] = []
+  const validatedTraits: Trait[] = []
+
+  traits.forEach((trait, index) => {
+    if (isTraitObject(trait)) {
+      validatedTraits.push(trait)
+    } else {
+      errors.push(`Trait at index ${index} is not a valid Trait object`)
+    }
+  })
+
+  if (errors.length > 0) {
+    return {
+      isValid: false,
+      errors,
+    }
+  }
+
+  return {
+    isValid: true,
+    parsedData: validatedTraits,
+    errors: [],
   }
 }

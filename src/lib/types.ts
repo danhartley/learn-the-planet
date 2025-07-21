@@ -145,6 +145,7 @@ export interface Taxon extends LearningItem {
   observationURL?: string
   wikipediaUrl?: string
   inaturalistUrl?: string
+  ancestorIds?: number[]
 }
 
 export interface Term extends LearningItem {
@@ -446,3 +447,27 @@ export type IconicTaxon =
   | 'fungi'
   | 'animalia'
   | 'arachnida'
+
+export type inatPhoto = {
+  id: number
+  license_code: string
+  attribution: string
+  url: string
+  attribution_name: string
+  square_url: string
+  medium_url: string
+}
+
+export type iNaturalistTaxon = {
+  id: string
+  rank: string
+  iconic_taxon_name: string
+  name: string
+  default_photo?: inatPhoto
+  observations_count: number
+  taxon_photos: []
+  wikipedia_url: string
+  preferred_common_name: string
+  english_common_name: string
+  ancestor_ids: number[]
+}
