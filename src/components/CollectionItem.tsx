@@ -46,58 +46,56 @@ export function CollectionItem({ collectionSummary }: Props) {
 
   return (
     <section className="card" aria-labelledby="collection">
-      <div className="image">
-        <>
-          {collectionSummary.imageUrl && (
-            <Link
-              className="breadcrumb"
-              href={`/collection/${collectionSummary.slug}-${collectionSummary.shortId}`}
-            >
-              <Image
-                id={collectionSummary.id}
-                src={collectionSummary.imageUrl}
-                alt={collectionSummary.name}
-                width={75}
-                height={75}
-                style={{
-                  width: '100%',
-                  height: '200px',
-                  objectFit: 'cover',
-                }}
-              />
-            </Link>
-          )}
-          <h3 id="collection">{collectionSummary.name}</h3>
-          {collectionSummary.type === 'term' && (
-            <div>
-              <em>{`${collectionSummary.itemCount} items`}</em>
-            </div>
-          )}
-          {collectionSummary.type === 'topic' && (
-            <>
-              <div>
-                <em>{collectionSummary.date}</em>
-              </div>
-              <div>
-                <em>{collectionSummary.location}</em>
-              </div>
-            </>
-          )}
+      <div>
+        {collectionSummary.imageUrl && (
           <Link
             className="breadcrumb"
             href={`/collection/${collectionSummary.slug}-${collectionSummary.shortId}`}
           >
-            {linkText}
+            <Image
+              id={collectionSummary.id}
+              src={collectionSummary.imageUrl}
+              alt={collectionSummary.name}
+              width={75}
+              height={75}
+              style={{
+                width: '100%',
+                height: '200px',
+                objectFit: 'cover',
+              }}
+            />
           </Link>
+        )}
+      </div>
+      <h3 id="collection">{collectionSummary.name}</h3>
+      {collectionSummary.type === 'term' && (
+        <div>
+          <em>{`${collectionSummary.itemCount} items`}</em>
+        </div>
+      )}
+      {collectionSummary.type === 'topic' && (
+        <>
+          <div>
+            <em>{collectionSummary.date}</em>
+          </div>
+          <div>
+            <em>{collectionSummary.location}</em>
+          </div>
         </>
+      )}
+      <div>
+        <Link
+          className="breadcrumb"
+          href={`/collection/${collectionSummary.slug}-${collectionSummary.shortId}`}
+        >
+          {linkText}
+        </Link>
       </div>
       {collectionSummary.type !== 'topic' ? (
         <button id="start-test" onClick={handleStartTest}>
           Start test
         </button>
-      ) : (
-        <div></div>
-      )}
+      ) : null}
     </section>
   )
 }
