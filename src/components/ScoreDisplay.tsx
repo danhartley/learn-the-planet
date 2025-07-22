@@ -1,15 +1,19 @@
 'use client'
+import { useState, useEffect } from 'react'
 
 import { useTestPlanner } from '@/hooks/useTestPlanner'
 
 import { HistoryItem } from '@/types'
 
 export function ScoreDisplay<T>() {
-  const { currentLayout, testHistory, testState } = useTestPlanner<T>()
+  const { currentLayout, testHistory, testState, layouts } = useTestPlanner<T>()
+  const [progressValue, setProgressValue] = useState<number | undefined>(0)
+  const [layoutCount, setLayoutCount] = useState(layouts.length)
 
-  const progressValue = testState?.isEndOfTest
-    ? testState.layoutCount
-    : currentLayout?.index
+  useEffect(() => {
+    setProgressValue(testHistory.length)
+    setLayoutCount(layouts.filter(l => l.isActive).length)
+  }, [testHistory.length])
 
   const progress = !!currentLayout ? (
     <div>
@@ -17,7 +21,7 @@ export function ScoreDisplay<T>() {
       <div>
         <progress
           id="test-progress"
-          max={testState?.layoutCount}
+          max={layoutCount || testState?.layoutCount}
           value={progressValue}
         >{`${progressValue}%`}</progress>
       </div>

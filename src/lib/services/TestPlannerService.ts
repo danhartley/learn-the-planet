@@ -82,6 +82,12 @@ class TestPlannerService<T> {
         // Find first active layout index
         index = layouts?.find(layout => layout.isActive)?.index || 0
         break
+      case 'repeat-the-test-in-full':
+        layouts = oldLayouts.map(layout => {
+          // Reset all layouts to active
+          const isActive = true
+          return { ...layout, isActive }
+        }) as Layout<T>[]
     }
 
     const state = this.testPlanner?.getState() as TestState
