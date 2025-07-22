@@ -121,7 +121,6 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
         <div>{collection.location}</div>
       </div>
       <IconicTaxonIcon collection={collection} />
-      <hr />
       <article>{article}</article>
       <Credits collection={collection} />
 

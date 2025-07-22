@@ -57,7 +57,7 @@ export const CollectionSummaries = ({ session }: Props) => {
   const terms = userCollections.filter(c => c.type === 'term')
 
   return (
-    <section aria-labelledby="collections">
+    <section aria-labelledby="collections" className="column-group">
       <div className="group">
         <h1 id="collections">Collections</h1>
         <h2>Topics, traits, taxa, and terms</h2>
