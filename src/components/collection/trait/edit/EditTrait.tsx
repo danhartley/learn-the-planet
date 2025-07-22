@@ -17,7 +17,6 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
     updateCollectionItem,
     deleteCollectionItem,
     apiResponse,
-    updateCollectionItems,
   } = useCollection()
 
   const [traitValue, setTraitValue] = useState(trait.trait)

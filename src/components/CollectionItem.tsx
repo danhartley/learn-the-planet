@@ -5,7 +5,7 @@ import { useTestPlanner } from '@/hooks/useTestPlanner'
 
 import { CollectionCard } from '@/components/common/CollectionCard'
 
-import { CollectionSummary, ContentHandlerType } from '@/types'
+import { CollectionSummary } from '@/types'
 
 type Props = {
   collectionSummary: CollectionSummary

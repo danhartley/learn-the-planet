@@ -13,7 +13,7 @@ export function ScoreDisplay<T>() {
   useEffect(() => {
     setProgressValue(testHistory.length)
     setLayoutCount(layouts.filter(l => l.isActive).length)
-  }, [testHistory.length])
+  }, [testHistory.length, layouts])
 
   const progress = !!currentLayout ? (
     <div>
