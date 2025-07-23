@@ -39,15 +39,12 @@ export const TraitHome = ({ session }: Props) => {
     return <div>{error}</div>
   }
 
-  if (!collectionSummaries || collectionSummaries.length === 0) {
-    return <div>No traits found</div>
-  }
-
-  const userCollections = collectionSummaries.filter(
-    summary =>
-      (summary.status as CollectionStatus) === 'public' ||
-      summary.ownerId === session?.userId
-  )
+  const userCollections =
+    collectionSummaries?.filter(
+      summary =>
+        (summary.status as CollectionStatus) === 'public' ||
+        summary.ownerId === session?.userId
+    ) || []
 
   const traits = userCollections.filter(c => c.type === 'trait')
 
@@ -61,11 +58,18 @@ export const TraitHome = ({ session }: Props) => {
             <div>Common characteristics and qualities of species</div>
           </div>
           <div className="block-container">
-            <ul className="grid-md">{generateLoadingCards(traits.length)}</ul>
+            <ul className="grid-md">
+              {generateLoadingCards(traits.length || 5)}
+            </ul>
           </div>
         </section>
       </section>
     )
+  }
+
+  // Only show "no traits" after we've finished loading and confirmed no data
+  if (!collectionSummaries || collectionSummaries.length === 0) {
+    return <div>No traits found</div>
   }
 
   return (

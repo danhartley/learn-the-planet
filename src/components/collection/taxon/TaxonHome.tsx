@@ -39,19 +39,17 @@ export const TaxonHome = ({ session }: Props) => {
     return <div>{error}</div>
   }
 
-  if (!collectionSummaries || collectionSummaries.length === 0) {
-    return <div>No taxa found</div>
-  }
-
-  const userCollections = collectionSummaries.filter(
-    summary =>
-      (summary.status as CollectionStatus) === 'public' ||
-      summary.ownerId === session?.userId
-  )
+  const userCollections =
+    collectionSummaries?.filter(
+      summary =>
+        (summary.status as CollectionStatus) === 'public' ||
+        summary.ownerId === session?.userId
+    ) || []
 
   const taxa = userCollections.filter(c => c.type === 'taxon')
 
-  if (loading) {
+  // Show loading state if still loading OR if we don't have data yet
+  if (loading || !collectionSummaries) {
     return (
       <section aria-labelledby="taxa" className="column-group">
         <h1 id="taxa">taxa</h1>
@@ -61,11 +59,18 @@ export const TaxonHome = ({ session }: Props) => {
             <div>Taxa data sourced from Wikipedia and iNaturalist</div>
           </div>
           <div className="block-container">
-            <ul className="grid-md">{generateLoadingCards(taxa.length)}</ul>
+            <ul className="grid-md">
+              {generateLoadingCards(taxa.length || 5)}
+            </ul>
           </div>
         </section>
       </section>
     )
+  }
+
+  // Only show "no taxa" after we've finished loading and confirmed no data
+  if (taxa.length === 0) {
+    return <div>No taxa found</div>
   }
 
   return (

@@ -39,19 +39,17 @@ export const TermHome = ({ session }: Props) => {
     return <div>{error}</div>
   }
 
-  if (!collectionSummaries || collectionSummaries.length === 0) {
-    return <div>No terms found</div>
-  }
-
-  const userCollections = collectionSummaries.filter(
-    summary =>
-      (summary.status as CollectionStatus) === 'public' ||
-      summary.ownerId === session?.userId
-  )
+  const userCollections =
+    collectionSummaries?.filter(
+      summary =>
+        (summary.status as CollectionStatus) === 'public' ||
+        summary.ownerId === session?.userId
+    ) || []
 
   const terms = userCollections.filter(c => c.type === 'term')
 
-  if (loading) {
+  // Show loading state if still loading OR if we don't have data yet
+  if (loading || !collectionSummaries || collectionSummaries.length === 0) {
     return (
       <section aria-labelledby="terms" className="column-group">
         <h1 id="terms">terms</h1>
@@ -61,11 +59,18 @@ export const TermHome = ({ session }: Props) => {
             <div>Terms used in biology and ecology</div>
           </div>
           <div className="block-container">
-            <ul className="grid-md">{generateLoadingCards(terms.length)}</ul>
+            <ul className="grid-md">
+              {generateLoadingCards(terms.length || 5)}
+            </ul>
           </div>
         </section>
       </section>
     )
+  }
+
+  // Only show "no terms" after we've finished loading and confirmed no data
+  if (terms.length === 0) {
+    return <div>No terms found</div>
   }
 
   return (

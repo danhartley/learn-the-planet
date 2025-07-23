@@ -39,19 +39,18 @@ export const TopicHome = ({ session }: Props) => {
     return <div>{error}</div>
   }
 
-  if (!collectionSummaries || collectionSummaries.length === 0) {
-    return <div>No topics found</div>
-  }
-
-  const userCollections = collectionSummaries.filter(
-    summary =>
-      (summary.status as CollectionStatus) === 'public' ||
-      summary.ownerId === session?.userId
-  )
+  // Process data if available (even during loading)
+  const userCollections =
+    collectionSummaries?.filter(
+      summary =>
+        (summary.status as CollectionStatus) === 'public' ||
+        summary.ownerId === session?.userId
+    ) || []
 
   const topics = userCollections.filter(c => c.type === 'topic')
 
-  if (loading) {
+  // Show loading state if still loading OR if we don't have data yet
+  if (loading || !collectionSummaries) {
     return (
       <section aria-labelledby="topics" className="column-group">
         <h1 id="topics">Topics</h1>
@@ -63,11 +62,18 @@ export const TopicHome = ({ session }: Props) => {
             </div>
           </div>
           <div className="block-container">
-            <ul className="grid-md">{generateLoadingCards(topics.length)}</ul>
+            <ul className="grid-md">
+              {generateLoadingCards(topics.length || 5)}
+            </ul>
           </div>
         </section>
       </section>
     )
+  }
+
+  // Only show "no topics" after we've finished loading and confirmed no data
+  if (topics.length === 0) {
+    return <div>No topics found</div>
   }
 
   return (
