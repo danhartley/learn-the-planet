@@ -220,11 +220,13 @@ describe('validateTraitJson', () => {
     const result = validateTraitJson(validTraitJson)
     expect(result.isValid).toBe(true)
     expect(result.errors).toEqual([])
-    expect(result.parsedData).toEqual({
-      id: 'trait-16',
-      trait: 'Compound Leaves',
-      definition: 'Leaves composed of multiple leaflets',
-    })
+    expect(result.parsedData).toEqual([
+      {
+        id: 'trait-16',
+        trait: 'Compound Leaves',
+        definition: 'Leaves composed of multiple leaflets',
+      },
+    ])
   })
 
   it('should validate a valid trait JSON array', () => {

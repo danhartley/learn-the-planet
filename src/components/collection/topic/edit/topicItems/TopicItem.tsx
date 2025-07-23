@@ -82,14 +82,13 @@ export const TopicItem: React.FC<TopicItemProps> = ({
 
   return (
     <li
-      className={`list-group ${isDragged ? 'dragging' : ''} ${isDraggedOver ? 'drag-over' : ''}`}
+      className={`list-group ${isDragged ? 'dragging' : ''} ${isDraggedOver ? 'drag-over' : ''}  ${isVisible ? 'expanded' : 'collapsed'} `}
       draggable="true"
       onMouseDown={handleMouseDown}
       onDragStart={handleDragStart}
       onDragOver={onDragOver}
       onDragEnd={onDragEnd}
       onDrop={e => onDrop(e, section.id)}
-      aria-expanded={isVisible}
     >
       <div className="horizontal-group">
         <button

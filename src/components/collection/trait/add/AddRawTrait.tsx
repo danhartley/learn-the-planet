@@ -27,7 +27,6 @@ export function AddRawTrait() {
       success: result.isValid,
       message: msg,
     })
-    console.log('result', result)
     if (result.isValid && result.parsedData) {
       const parsedData = Array.isArray(result.parsedData)
         ? result.parsedData

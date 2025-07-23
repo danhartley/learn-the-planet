@@ -13,7 +13,10 @@ describe('Menu', () => {
 
   it('should contain', () => {
     expect(screen.getByRole('navigation')).toBeInTheDocument()
-    expect(screen.getByText('All collections')).toBeInTheDocument()
+    expect(screen.getByText('Topics')).toBeInTheDocument()
+    expect(screen.getByText('Traits')).toBeInTheDocument()
+    expect(screen.getByText('Taxa')).toBeInTheDocument()
+    expect(screen.getByText('Terms')).toBeInTheDocument()
     expect(screen.getAllByRole('link')[0]).toBeInTheDocument()
   })
 })

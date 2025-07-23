@@ -93,8 +93,6 @@
   --text-underline-offset: 0.5rem;
 
   /* Font family serif */
-  --font-family-serif: 'Noto Serif', Elena, 'PT Serif', serif;
-  --font-family-serif: 'Merriweather', Elena, 'PT Serif', serif;
   --font-family-serif: 'Playfair Display', Elena, 'PT Serif', serif;
   --font-family-sans-serif: 'Open Sans', sans-serif;
 }
@@ -140,7 +138,6 @@ article {
 
   h2:not(:first-child) {
     margin-top: var(--spacing-xl);
-    font-weight: 600;
   }
 }
 
@@ -154,10 +151,8 @@ h2,
 h3 {
   letter-spacing: normal;
   margin: 0;
-  font-weight: 500;
-  line-height: 1.5;
+  font-weight: 400;
   font-family: var(--font-family-sans-serif);
-  text-wrap: balance;
 }
 
 h1 {
@@ -181,7 +176,7 @@ h3::first-letter {
 a {
   font-family: var(--font-family-sans-serif);
   text-underline-offset: var(--text-underline-offset);
-  color: var(--colour-fg-main);
+  color: var(--colour-fg-text);
   word-break: break-word;
   overflow-wrap: break-word;
   --line-height-lg: 1.5;
@@ -189,7 +184,7 @@ a {
 }
 
 a:visited {
-  color: var(--colour-fg-main);
+  color: var(--colour-fg-text);
 }
 
 a:hover {
@@ -452,6 +447,10 @@ li::marker {
   font-size: var(--font-size-md);
 
   font-style: italic;
+}
+
+.grid-lg.options > button span::first-letter {
+  text-transform: capitalize;
 }
 
 [aria-labelledby='multiple-select'] {
@@ -744,10 +743,6 @@ figcaption > div {
   text-align: center;
 }
 
-figcaption > div::first-letter {
-  text-transform: uppercase;
-}
-
 figcaption > div > div:nth-child(1) span:nth-child(2) {
   text-transform: lowercase;
 }
@@ -755,6 +750,10 @@ figcaption > div > div:nth-child(1) span:nth-child(2) {
 figcaption > div > div:nth-child(2) {
   font-size: var(--font-size-sm);
   text-transform: capitalize;
+}
+
+figcaption div::first-letter {
+  text-transform: uppercase;
 }
 
 /* Background colors */
@@ -1033,7 +1032,6 @@ progress {
   z-index: 1;
   padding-bottom: var(--spacing-md);
   background-color: var(--colour-bg-add-element);
-  /* border-bottom: var(--spacing-md) solid var(--colour-bg-body); */
   position: sticky;
 }
 
@@ -1044,7 +1042,6 @@ progress {
 }
 
 /* Drag and drop */
-
 .dragging {
   button {
     border-style: dashed;
@@ -1074,8 +1071,7 @@ button.draggable + div {
 }
 
 /* Edit mode */
-
-li[aria-expanded='false'] {
+li.collapsed {
   opacity: 0.5;
 }
 
@@ -1184,7 +1180,6 @@ li[aria-expanded='false'] {
 }
 
 /* Small grid */
-
 @media (min-width: 767px) and (max-width: 1186px) {
   .grid-md {
     grid-template-columns: 1fr 1fr;

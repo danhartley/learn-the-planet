@@ -27,7 +27,9 @@ export const NextCloudinaryImage = ({
           sizes={sizes}
         />
         <figcaption>
-          <div>{caption}</div>
+          <div>
+            <div>{caption}</div>
+          </div>
         </figcaption>
       </figure>
     </div>
