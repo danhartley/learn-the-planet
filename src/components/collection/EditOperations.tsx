@@ -45,7 +45,7 @@ export const EditOperations = () => {
 
   return (
     <>
-      <h1 id="edit-options">
+      <h1>
         <Link href={`/collection/${collection?.slug}-${collection?.shortId}`}>
           {collection?.name}
         </Link>

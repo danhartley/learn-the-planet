@@ -47,7 +47,7 @@ export function CollectionTextField({
       aria-labelledby={hyphenateText(`${fieldText}-${sectionIndex}-section`)}
       className="collection-field"
     >
-      <div>
+      <div className="list-group">
         <h3 id={hyphenateText(`${fieldText}-${sectionIndex}-section`)}>
           <label
             htmlFor={hyphenateText(

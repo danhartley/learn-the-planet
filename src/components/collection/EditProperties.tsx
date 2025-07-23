@@ -41,7 +41,7 @@ export const EditProperties = () => {
   }
 
   return (
-    <section aria-labelledby="collection-properties">
+    <section aria-labelledby="collection-properties" className="list-group">
       <div className="group">
         <h2 id="collection-properties">Collection properties</h2>
       </div>
@@ -101,9 +101,9 @@ export const EditProperties = () => {
       </div>
 
       <div className="group-block">
-        <div>
+        <div className="list-group">
           <h3>
-            <label htmlFor="collection-date">Collection Date</label>
+            <label htmlFor="collection-date">Collection date</label>
           </h3>
           <div className={`form-row ${collection?.type}`}>
             <input

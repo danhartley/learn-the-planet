@@ -14,7 +14,7 @@ export const UploadImages = () => {
   const userId = session?.user?.id
 
   return (
-    <section aria-labelledby="upload-images">
+    <section aria-labelledby="upload-images" className="column-group">
       <h2 id="upload-images">Add images to collection</h2>
       <UserImageUpload
         collectionId={collection?.id || ''}

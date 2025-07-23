@@ -55,12 +55,12 @@ export const TermHome = ({ session }: Props) => {
 
   return (
     <section aria-labelledby="terms" className="column-group">
-      <div className="group">
-        <h1 id="terms">terms</h1>
-        <div>Terms used in biology and ecology</div>
-      </div>
+      <h1 id="terms">terms</h1>
       <section aria-labelledby="featured-terms" className="group-block">
-        <h2 id="featured-terms">Featured terms</h2>
+        <div className="group">
+          <h2 id="featured-terms">Featured collections</h2>
+          <div>Terms used in biology and ecology</div>
+        </div>
         <CollectionList collections={terms} />
       </section>
     </section>

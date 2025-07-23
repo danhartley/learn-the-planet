@@ -25,8 +25,8 @@ export const AddTopicImage = () => {
   }
 
   return (
-    <section aria-labelledby="new-section">
-      <h2 id="new-section">Add image</h2>
+    <>
+      {/* <h2 id="new-section">Add image</h2> */}
       <div className="group-block">
         <ImageSelector
           selectionMode="multiple"
@@ -39,6 +39,6 @@ export const AddTopicImage = () => {
           <ApiResponseMessage apiResponse={apiResponse} />
         </div>
       </div>
-    </section>
+    </>
   )
 }

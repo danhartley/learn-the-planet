@@ -74,11 +74,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
     collection.items.map((section, sectionIndex) => {
       return (
         <React.Fragment key={section.id}>
-          {section.topic && (
-            <h2>
-              <em>{section.topic}</em>
-            </h2>
-          )}
+          {section.topic && <h2>{section.topic}</h2>}
           {section.images &&
             section.images.map(img => {
               return (
@@ -114,14 +110,20 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
 
   return (
     <section aria-labelledby="topic-gallery" className="column-group">
-      <div>
-        <h1 id="topic-gallery">{collection.name}</h1>
-        <div>{authors}</div>
-        <div>{collection.date}</div>
-        <div>{collection.location}</div>
-      </div>
-      <IconicTaxonIcon collection={collection} />
-      <article>{article}</article>
+      <article>
+        <div>
+          <h1 id="topic-gallery">{collection.name}</h1>
+          <div>{authors}</div>
+          <div>
+            <em>{collection.date}</em>
+          </div>
+          <div>
+            <em>{collection.location}</em>
+          </div>
+        </div>
+        <IconicTaxonIcon collection={collection} />
+        {article}
+      </article>
       <Credits collection={collection} />
 
       {hasExamples && (

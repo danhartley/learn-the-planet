@@ -55,12 +55,12 @@ export const TraitHome = ({ session }: Props) => {
 
   return (
     <section aria-labelledby="traits" className="column-group">
-      <div className="group">
-        <h1 id="traits">Traits</h1>
-        <div>Common characteristics and qualities of species</div>
-      </div>
+      <h1 id="traits">Traits</h1>
       <section aria-labelledby="featured-traits" className="group-block">
-        <h2 id="featured-traits">Featured traits</h2>
+        <div className="group">
+          <h2 id="featured-traits">Featured collections</h2>
+          <div>Common characteristics and qualities of species</div>
+        </div>
         <CollectionList collections={traits} />
       </section>
     </section>

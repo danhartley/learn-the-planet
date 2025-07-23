@@ -59,7 +59,7 @@ export const TopicText = ({
           />
         </div>
         <div className="group-block">
-          <div>
+          <div className="list-group">
             <h3>Text</h3>
             <div className="form-row topic">
               <textarea

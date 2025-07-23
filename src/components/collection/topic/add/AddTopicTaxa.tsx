@@ -39,8 +39,8 @@ export const AddTopicTaxa = () => {
   }
 
   return (
-    <section aria-labelledby="new-section">
-      <h2 id="new-section">Add taxa</h2>
+    <>
+      {/* <h2 id="new-section">Add taxa</h2> */}
       <TaxonAutocomplete
         selectedTaxa={selectedTaxa}
         onTaxonToggle={handleTaxonToggle}
@@ -48,6 +48,6 @@ export const AddTopicTaxa = () => {
         apiResponse={apiResponse}
         sectionIndex={1}
       />
-    </section>
+    </>
   )
 }

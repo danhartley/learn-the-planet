@@ -6,9 +6,7 @@ const Home = () => {
   return (
     <>
       <article>
-        <h1 className="initial">
-          <strong>Welcome to Learn the Planet</strong>
-        </h1>
+        <h1>Welcome to Learn the Planet</h1>
         <p>
           This website is dedicated to natural history, to the observation of
           species in their environment, to seeing what is and what is not
@@ -27,9 +25,7 @@ const Home = () => {
           and see things for ourselves.
         </p>
         <hr />
-        <h2 className="initial">
-          <strong>What can I do here?</strong>
-        </h2>
+        <h2>What can I do here?</h2>
         <ul className="list-group bullets">
           <li>
             <p>
@@ -46,9 +42,7 @@ const Home = () => {
           </li>
         </ul>
         <hr />
-        <h2 className="initial">
-          <strong>What can I create here?</strong>
-        </h2>
+        <h2>What can I create here?</h2>
         <ul className="list-group bullets">
           <li>
             <p>
@@ -64,9 +58,7 @@ const Home = () => {
           </li>
         </ul>
         <hr />
-        <h2 className="initial">
-          <strong>How can I link to my content elsewhere?</strong>
-        </h2>
+        <h2>How can I link to my content elsewhere?</h2>
         <ul className="list-group bullets">
           <li>
             <p>

@@ -92,7 +92,7 @@ export const CollectionCard = ({
       {/* Content Section */}
       <div className="list-group">
         <h3 id={`collection-${collectionSummary.id}`}>
-          <strong>{collectionSummary.name}</strong>
+          {collectionSummary.name}
         </h3>
 
         <CollectionMetadata collectionSummary={collectionSummary} />

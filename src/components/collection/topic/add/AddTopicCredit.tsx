@@ -32,7 +32,7 @@ export const AddTopicCredit = () => {
   }
 
   return (
-    <section aria-labelledby="new-section">
+    <section aria-labelledby="new-section" className="list-group">
       <h2>Add credits</h2>
 
       <CollectionTextField

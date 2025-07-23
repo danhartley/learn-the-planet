@@ -21,7 +21,7 @@
     ],
     "baseUrl": "src/",
     "paths": {
-      "@/css/*": ["lib/styles/global.css"],
+      "@/css/*": ["lib/styles/*"],
       "@/components/*": ["components/*"],
       "@/hooks/*": ["lib/hooks/*"],
       "@/types": ["lib/types"],

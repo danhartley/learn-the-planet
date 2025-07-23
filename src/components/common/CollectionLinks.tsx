@@ -52,7 +52,7 @@ export const CollectionLinks: React.FC<{
   return (
     <>
       <hr />
-      <section aria-labelledby="linked-collections">
+      <section aria-labelledby="linked-collections" className="list-group">
         <h2 id="linked-collections">{title}</h2>
         <ul className="grid-md">
           {filteredCollections.map((linkedCollection: CollectionSummary) => (

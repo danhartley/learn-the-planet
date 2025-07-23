@@ -5,9 +5,7 @@ export const Menu = () => {
   return (
     <nav>
       <section aria-labelledby="collection-menu">
-        <h2 id="collection-menu" className="menu">
-          Site Navigation
-        </h2>
+        <h2 id="collection-menu">Site Navigation</h2>
         <ul className="list-group">
           <li>
             <Link href="/topics">Topics</Link>

@@ -89,6 +89,7 @@ export const TopicItem: React.FC<TopicItemProps> = ({
       onDragOver={onDragOver}
       onDragEnd={onDragEnd}
       onDrop={e => onDrop(e, section.id)}
+      aria-expanded={isVisible}
     >
       <div className="horizontal-group">
         <button
@@ -110,31 +111,35 @@ export const TopicItem: React.FC<TopicItemProps> = ({
         <TopicSummary section={section} />
       </div>
       {isVisible && (
-        <div id={`section-content-${section.id}`}>
-          <TopicTextSections key={section.id} section={section} />
-          {section.images?.map(img => (
-            <TopicCloudImage
-              key={img.src}
-              section={section}
-              image={img}
-              sectionIndex={index + 1}
-            />
-          ))}
-          {section.examples && (
-            <TopicExamples
-              collection={topicCollection}
-              section={section}
-              sectionIndex={index + 1}
-            />
-          )}
-          {section.credit && (
-            <TopicCredit
-              collection={topicCollection}
-              section={section}
-              sectionIndex={index + 1}
-            />
-          )}
-        </div>
+        <>
+          <hr />
+          <div id={`section-content-${section.id}`} className="list-group">
+            <TopicTextSections key={section.id} section={section} />
+            {section.images?.map(img => (
+              <TopicCloudImage
+                key={img.src}
+                section={section}
+                image={img}
+                sectionIndex={index + 1}
+              />
+            ))}
+            {section.examples && (
+              <TopicExamples
+                collection={topicCollection}
+                section={section}
+                sectionIndex={index + 1}
+              />
+            )}
+            {section.credit && (
+              <TopicCredit
+                collection={topicCollection}
+                section={section}
+                sectionIndex={index + 1}
+              />
+            )}
+            <hr />
+          </div>
+        </>
       )}
     </li>
   )

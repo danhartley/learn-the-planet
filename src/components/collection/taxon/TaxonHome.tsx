@@ -55,12 +55,12 @@ export const TaxonHome = ({ session }: Props) => {
 
   return (
     <section aria-labelledby="taxa" className="column-group">
-      <div className="group">
-        <h1 id="taxa">taxa</h1>
-        <div>Taxa data sourced from Wikipedia and iNaturalist</div>
-      </div>
+      <h1 id="taxa">taxa</h1>
       <section aria-labelledby="featured-taxa" className="group-block">
-        <h2 id="featured-taxa">Featured taxa</h2>
+        <div className="group">
+          <h2 id="featured-taxa">Featured collections</h2>
+          <div>Taxa data sourced from Wikipedia and iNaturalist</div>
+        </div>
         <CollectionList collections={taxa} />
       </section>
     </section>

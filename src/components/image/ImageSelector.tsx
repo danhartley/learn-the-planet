@@ -95,7 +95,8 @@ export const ImageSelector = (props: Props) => {
   }
 
   return (
-    <div className="column-group">
+    <div className="column-group group-block">
+      <h3>Images</h3>
       {
         <ul className="list-group">
           <li>

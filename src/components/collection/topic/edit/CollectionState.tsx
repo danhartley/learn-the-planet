@@ -30,7 +30,10 @@ export const CollectionState = () => {
   }
 
   return (
-    <section aria-labelledby="update-collection-visibility">
+    <section
+      aria-labelledby="update-collection-visibility"
+      className="list-group group-block"
+    >
       <div className="group">
         <h2 id="update-collection-visibility">Update Collection visibility</h2>
         <div>
