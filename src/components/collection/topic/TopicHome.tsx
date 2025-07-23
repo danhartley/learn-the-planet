@@ -5,6 +5,8 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { CollectionList } from '@/components/CollectionList'
 
+import { generateLoadingCards } from '@/components/common/LoadingCard'
+
 import { SessionState, CollectionStatus } from '@/types'
 
 type Props = {
@@ -33,10 +35,6 @@ export const TopicHome = ({ session }: Props) => {
     fetchCollections()
   }, [getCollectionSummaries])
 
-  if (loading) {
-    return <div>Loading topics...</div>
-  }
-
   if (error) {
     return <div>{error}</div>
   }
@@ -52,6 +50,25 @@ export const TopicHome = ({ session }: Props) => {
   )
 
   const topics = userCollections.filter(c => c.type === 'topic')
+
+  if (loading) {
+    return (
+      <section aria-labelledby="topics" className="column-group">
+        <h1 id="topics">Topics</h1>
+        <section aria-labelledby="featured-topics" className="group-block">
+          <div className="group">
+            <h2 id="featured-topics">Featured collections</h2>
+            <div>
+              Fieldnotes, nature diaries, essays, field guides, and lessons
+            </div>
+          </div>
+          <div className="block-container">
+            <ul className="grid-md">{generateLoadingCards(topics.length)}</ul>
+          </div>
+        </section>
+      </section>
+    )
+  }
 
   return (
     <section aria-labelledby="topics" className="column-group">

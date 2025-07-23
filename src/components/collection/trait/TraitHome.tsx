@@ -5,6 +5,8 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { CollectionList } from '@/components/CollectionList'
 
+import { generateLoadingCards } from '@/components/common/LoadingCard'
+
 import { SessionState, CollectionStatus } from '@/types'
 
 type Props = {
@@ -33,10 +35,6 @@ export const TraitHome = ({ session }: Props) => {
     fetchCollections()
   }, [getCollectionSummaries])
 
-  if (loading) {
-    return <div>Loading traits...</div>
-  }
-
   if (error) {
     return <div>{error}</div>
   }
@@ -52,6 +50,23 @@ export const TraitHome = ({ session }: Props) => {
   )
 
   const traits = userCollections.filter(c => c.type === 'trait')
+
+  if (loading) {
+    return (
+      <section aria-labelledby="traits" className="column-group">
+        <h1 id="traits">Traits</h1>
+        <section aria-labelledby="featured-traits" className="group-block">
+          <div className="group">
+            <h2 id="featured-traits">Featured collections</h2>
+            <div>Common characteristics and qualities of species</div>
+          </div>
+          <div className="block-container">
+            <ul className="grid-md">{generateLoadingCards(traits.length)}</ul>
+          </div>
+        </section>
+      </section>
+    )
+  }
 
   return (
     <section aria-labelledby="traits" className="column-group">

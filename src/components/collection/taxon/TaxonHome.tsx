@@ -5,6 +5,8 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { CollectionList } from '@/components/CollectionList'
 
+import { generateLoadingCards } from '@/components/common/LoadingCard'
+
 import { SessionState, CollectionStatus } from '@/types'
 
 type Props = {
@@ -33,10 +35,6 @@ export const TaxonHome = ({ session }: Props) => {
     fetchCollections()
   }, [getCollectionSummaries])
 
-  if (loading) {
-    return <div>Loading taxa...</div>
-  }
-
   if (error) {
     return <div>{error}</div>
   }
@@ -52,6 +50,23 @@ export const TaxonHome = ({ session }: Props) => {
   )
 
   const taxa = userCollections.filter(c => c.type === 'taxon')
+
+  if (loading) {
+    return (
+      <section aria-labelledby="taxa" className="column-group">
+        <h1 id="taxa">taxa</h1>
+        <section aria-labelledby="featured-taxa" className="group-block">
+          <div className="group">
+            <h2 id="featured-taxa">Featured collections</h2>
+            <div>Taxa data sourced from Wikipedia and iNaturalist</div>
+          </div>
+          <div className="block-container">
+            <ul className="grid-md">{generateLoadingCards(taxa.length)}</ul>
+          </div>
+        </section>
+      </section>
+    )
+  }
 
   return (
     <section aria-labelledby="taxa" className="column-group">
