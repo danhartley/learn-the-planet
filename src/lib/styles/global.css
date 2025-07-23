@@ -324,6 +324,13 @@ textarea {
   }
 }
 
+fieldset {
+  padding: 0;
+  background-color: initial;
+  border: none;
+  margin: 0;
+}
+
 /* Lists and term lists */
 dl > div {
   display: flex;
@@ -818,6 +825,16 @@ figcaption div::first-letter {
     border: 1px solid var(--colour-bg-amphibia);
     border-bottom: none;
   }
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-amphibia);
+  }
+  label {
+    display: inline-block;
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
 }
 
 .bg-actinopterygii {
@@ -1070,6 +1087,20 @@ button.draggable + div {
 /* Edit mode */
 li.collapsed {
   opacity: 0.5;
+}
+
+/* iNaturalist */
+#iconic-taxa-container {
+  padding: var(--spacing-md);
+  & > div {
+    gap: var(--spacing-sm);
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+    display: grid;
+
+    div {
+      padding: var(--spacing-md);
+    }
+  }
 }
 
 /* Media queries */
