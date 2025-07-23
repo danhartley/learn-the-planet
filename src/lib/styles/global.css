@@ -7,7 +7,6 @@
   --colour-fg-text: rgb(68, 68, 68);
   --colour-fg-alt-main: rgb(255, 255, 255);
   --colour-bg-neutral: rgb(255, 255, 255);
-  --colour-bg-card: rgb(246, 247, 249);
   --colour-bg-animalia: rgb(217 214 214);
   --colour-mg-animalia: rgb(227 226 226);
   --colour-bg-plantae: rgb(216, 223, 210);
@@ -30,12 +29,10 @@
   --colour-mg-fungi: rgb(243 235 225);
   --colour-bg-arachnida: rgb(246 179 120);
   --colour-mg-arachnida: rgb(249 206 168);
-
-  --colour-bg-topic-card: rgb(221 227 239);
-  --colour-bg-taxon-card: rgb(239, 233, 221);
-  --colour-bg-term-card: rgb(221, 239, 227);
-  --colour-bg-trait-card: rgb(239, 221, 227);
-
+  --colour-bg-topic-card: rgb(220 212 207); /* "brown" */
+  --colour-bg-taxon-card: rgb(207, 215, 220); /* "blue" */
+  --colour-bg-trait-card: rgb(220, 207, 207); /* "red */
+  --colour-bg-term-card: rgb(212, 220, 207); /* "green" */
   --colour-bg-button: rgb(233 228 208);
   --colour-bg-card-button: rgba(255, 255, 255, 0.5);
   --colour-bg-body: rgb(242 235 226);
