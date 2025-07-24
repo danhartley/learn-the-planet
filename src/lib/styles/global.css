@@ -1239,6 +1239,10 @@ li.collapsed {
   .column-count {
     column-count: 2;
   }
+
+  [aria-labelledby='search-species'] .column-count {
+    column-count: 1;
+  }
 }
 
 /* Large grid */
@@ -1279,6 +1283,9 @@ li.collapsed {
   .column-count {
     column-count: 3;
   }
+  [aria-labelledby='search-species'] .column-count {
+    column-count: 2;
+  }
 }
 
 @media (min-width: 1510px) {
@@ -1287,6 +1294,9 @@ li.collapsed {
   }
   .column-count {
     column-count: 3;
+  }
+  [aria-labelledby='search-species'] .column-count {
+    column-count: 2;
   }
 }
 

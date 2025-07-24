@@ -1,9 +1,9 @@
 // whttps://api.inaturalist.org/v1/docs/#!/Taxa/get_taxa
 
-import { Image, Taxon, iNaturalistTaxon } from '@/types'
+import { Image, Taxon, InatTaxon } from '@/types'
 
 export const mapInatSpeciesToLTP = (
-  results: iNaturalistTaxon[]
+  results: InatTaxon[]
 ): Taxon[] | undefined => {
   try {
     const species: Taxon[] = results.map(s => {

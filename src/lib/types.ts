@@ -448,7 +448,7 @@ export type IconicTaxon =
   | 'animalia'
   | 'arachnida'
 
-export type inatPhoto = {
+export type InatPhoto = {
   id: number
   license_code: string
   attribution: string
@@ -458,12 +458,12 @@ export type inatPhoto = {
   medium_url: string
 }
 
-export type iNaturalistTaxon = {
+export type InatTaxon = {
   id: string
   rank: string
   iconic_taxon_name: string
   name: string
-  default_photo?: inatPhoto
+  default_photo?: InatPhoto
   observations_count: number
   taxon_photos: []
   wikipedia_url: string
@@ -482,4 +482,24 @@ export type InatIdentifier = {
 export type InatIdentifierDetails = {
   id: string
   login: string
+}
+
+export type InatObservationFilters = {
+  user_key?: string
+  user_id?: string
+  place_key?: string
+  place_id?: string
+  project_key?: string
+  project_id?: string
+  iconic_taxa?: string[]
+  per_page?: number
+  page?: number
+  locale?: string
+  species_count?: boolean
+  d1?: string
+  d2?: string
+}
+
+export type InatObservation = {
+  taxon: InatTaxon
 }

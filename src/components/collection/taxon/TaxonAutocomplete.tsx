@@ -179,9 +179,9 @@ export const TaxonAutocomplete = ({
       {selectedTaxa.length > 0 && (
         <section aria-labelledby="selected-taxa" className="column-group">
           <h2 id="selected-taxa">Selected Taxa</h2>
-          <form>
+          <ul className="column-count">
             {selectedTaxa.map(taxon => (
-              <div key={taxon.id} className="form-row">
+              <li key={taxon.id} className="form-row">
                 {taxon.image?.squareUrl && (
                   <figure className="inat">
                     <Image
@@ -204,9 +204,9 @@ export const TaxonAutocomplete = ({
                   <div>{taxon.vernacularName || 'No common name'}</div>
                   <div>{taxon.binomial}</div>
                 </div>
-              </div>
+              </li>
             ))}
-          </form>
+          </ul>
           {
             <div className="form-row">
               <button

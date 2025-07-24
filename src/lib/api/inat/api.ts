@@ -5,7 +5,9 @@ import {
   Taxon,
   Trait,
   Topic,
-  iNaturalistTaxon,
+  InatTaxon,
+  InatObservationFilters,
+  InatObservation,
 } from '@/types'
 
 type Props = {
@@ -195,7 +197,7 @@ export const getTaxaDistractors = async ({
 
           const distractors = distractorsResult?.results
             .filter(
-              (d: iNaturalistTaxon) =>
+              (d: InatTaxon) =>
                 d.id.toString() !== taxon.id.toString() &&
                 d.preferred_common_name !== undefined
             )
@@ -237,4 +239,63 @@ export const getIdByAutocomplete = async ({
   const response = await fetch(url)
   const json = await response.json()
   return json.results
+}
+
+const getUniqueTaxa = (array: Taxon[]) => {
+  return Array.from(new Map(array.map(item => [item.id, item])).values())
+}
+
+export const getInatObservations = async ({
+  user_key = 'user_id',
+  user_id,
+  place_key = 'place_id',
+  place_id,
+  project_key = 'project_id',
+  project_id,
+  iconic_taxa,
+  per_page = 12,
+  page = 1,
+  locale = 'en',
+  species_count = false,
+  d1,
+  d2,
+}: InatObservationFilters): Promise<Taxon[]> => {
+  const params = new URLSearchParams({
+    order: 'desc',
+    photos: 'true',
+    page: page.toString(),
+    per_page: per_page.toString(),
+    locale,
+  })
+
+  // Add conditional parameters
+  if (user_id) params.append(user_key, user_id)
+  if (place_id) params.append(place_key, place_id)
+  if (project_id) params.append(project_key, project_id)
+  if (iconic_taxa?.length) params.append('iconic_taxa', iconic_taxa.join(','))
+  if (d1) params.append('d1', d1)
+  if (d2) params.append('d2', d2)
+
+  params.append('rank', 'species')
+
+  const base = species_count
+    ? 'https://api.inaturalist.org/v1/observations/species_counts'
+    : 'https://api.inaturalist.org/v1/observations'
+
+  const url = `${base}?${params.toString()}`
+
+  const response = await fetch(url)
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+
+  const json = await response.json()
+
+  const species: Taxon[] =
+    mapInatSpeciesToLTP(
+      json.results.map((observation: InatObservation) => observation.taxon)
+    ) || []
+
+  return getUniqueTaxa(species)
 }
