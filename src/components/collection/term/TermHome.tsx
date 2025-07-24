@@ -59,7 +59,7 @@ export const TermHome = ({ session }: Props) => {
             <div>Terms used in biology and ecology</div>
           </div>
           <div className="block-container">
-            <ul className="grid-md">
+            <ul className="grid-md column-count">
               {generateLoadingCards(terms.length || 5)}
             </ul>
           </div>

@@ -225,3 +225,16 @@ export const getTaxaDistractors = async ({
   )
   return resultsWithDistractors
 }
+
+export const getIdByAutocomplete = async ({
+  by,
+  toComplete,
+}: {
+  by: string
+  toComplete: string
+}) => {
+  const url = `https://api.inaturalist.org/v1/${by}/autocomplete?q=${toComplete}&per_page=12`
+  const response = await fetch(url)
+  const json = await response.json()
+  return json.results
+}

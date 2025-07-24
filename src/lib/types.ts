@@ -471,3 +471,15 @@ export type iNaturalistTaxon = {
   english_common_name: string
   ancestor_ids: number[]
 }
+
+export type InatIdentifierType = 'users' | 'places' | 'projects'
+
+export type InatIdentifier = {
+  id: InatIdentifierType
+  value: string
+}
+
+export type InatIdentifierDetails = {
+  id: string
+  login: string
+}

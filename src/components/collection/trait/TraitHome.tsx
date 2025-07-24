@@ -58,7 +58,7 @@ export const TraitHome = ({ session }: Props) => {
             <div>Common characteristics and qualities of species</div>
           </div>
           <div className="block-container">
-            <ul className="grid-md">
+            <ul className="grid-md column-count">
               {generateLoadingCards(traits.length || 5)}
             </ul>
           </div>

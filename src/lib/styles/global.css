@@ -45,6 +45,7 @@
   --colour-incorrect: rgb(176 84 106);
   --colour-incorrect-light: rgb(232 205 211);
   --colour-link-hover: rgb(0 128 0);
+  --colour-inat: rgb(181 206 136);
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -246,17 +247,25 @@ button {
   }
   &.save {
     background-color: var(--colour-bg-save-btn);
+    width: fit-content;
   }
   &.cancel {
     background-color: var(--colour-bg-body);
+    width: fit-content;
   }
   &.delete {
     background-color: var(--colour-bg-delete-btn);
+    width: fit-content;
   }
   &.remove {
     background-color: var(--colour-bg-delete-btn);
     font-size: var(--font-size-xs);
     padding: var(--spacing-sm) !important;
+    width: fit-content;
+  }
+  &.option {
+    background-color: var(--colour-bg-body);
+    border-style: dashed;
   }
 }
 
@@ -271,7 +280,7 @@ input:focus-visible {
 input {
   padding: var(--spacing-md);
   border: none;
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-md);
   font-family: var(--font-family-sans-serif);
   line-height: var(--line-height-md);
 }
@@ -287,6 +296,10 @@ input[type='radio'] {
 input[type='checkbox'] + label,
 input[type='radio'] + label {
   cursor: pointer;
+  display: inline-block;
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 input[type='date'] {
@@ -680,9 +693,6 @@ form {
   .card {
     background-color: var(--colour-bg-term-card);
   }
-  ul {
-    column-count: 1;
-  }
 }
 
 .card button {
@@ -761,74 +771,19 @@ figcaption div::first-letter {
 }
 
 /* Background colors */
-.bg-plantae {
-  background-color: var(--colour-bg-plantae);
-  figure {
-    border: 1px solid var(--colour-bg-plantae);
-  }
+/* Base class with common styles */
+[class*='bg-'] {
   img {
-    background-color: var(--colour-mg-plantae);
-    border: 1px solid var(--colour-bg-plantae);
+    border: 1px solid;
     border-bottom: none;
   }
-}
 
-.bg-animalia {
-  background-color: var(--colour-bg-animalia);
-  img {
-    background-color: var(--colour-mg-animalia);
-    border: 1px solid var(--colour-bg-animalia);
-    border-bottom: none;
-  }
-}
-
-.bg-insecta {
-  background-color: var(--colour-bg-insecta);
-  img {
-    background-color: var(--colour-mg-insecta);
-    border: 1px solid var(--colour-bg-insecta);
-    border-bottom: none;
-  }
-}
-
-.bg-mammalia {
-  background-color: var(--colour-bg-mammalia);
-  img {
-    background-color: var(--colour-mg-mammalia);
-    border: 1px solid var(--colour-bg-mammalia);
-    border-bottom: none;
-  }
-}
-
-.bg-reptilia {
-  background-color: var(--colour-bg-reptilia);
-  img {
-    background-color: var(--colour-mg-reptilia);
-    border: 1px solid var(--colour-bg-reptilia);
-    border-bottom: none;
-  }
-}
-
-.bg-aves {
-  background-color: var(--colour-bg-aves);
-  img {
-    background-color: var(--colour-mg-aves);
-    border: 1px solid var(--colour-bg-aves);
-    border-bottom: none;
-  }
-}
-
-.bg-amphibia {
-  background-color: var(--colour-bg-amphibia);
-  img {
-    background-color: var(--colour-mg-amphibia);
-    border: 1px solid var(--colour-bg-amphibia);
-    border-bottom: none;
-  }
   input[type='checkbox'],
   input[type='radio'] {
-    accent-color: var(--colour-bg-amphibia);
+    accent-color: inherit;
+    cursor: pointer;
   }
+
   label {
     display: inline-block;
     &::first-letter {
@@ -837,39 +792,162 @@ figcaption div::first-letter {
   }
 }
 
+/* Individual taxonomic classes */
+.bg-plantae {
+  background-color: var(--colour-bg-plantae);
+
+  figure {
+    border: 1px solid var(--colour-bg-plantae);
+  }
+
+  img {
+    background-color: var(--colour-mg-plantae);
+    border-color: var(--colour-bg-plantae);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-plantae);
+  }
+}
+
+.bg-animalia {
+  background-color: var(--colour-bg-animalia);
+
+  img {
+    background-color: var(--colour-mg-animalia);
+    border-color: var(--colour-bg-animalia);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-animalia);
+  }
+}
+
+.bg-insecta {
+  background-color: var(--colour-bg-insecta);
+
+  img {
+    background-color: var(--colour-mg-insecta);
+    border-color: var(--colour-bg-insecta);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-insecta);
+  }
+}
+
+.bg-mammalia {
+  background-color: var(--colour-bg-mammalia);
+
+  img {
+    background-color: var(--colour-mg-mammalia);
+    border-color: var(--colour-bg-mammalia);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-mammalia);
+  }
+}
+
+.bg-reptilia {
+  background-color: var(--colour-bg-reptilia);
+
+  img {
+    background-color: var(--colour-mg-reptilia);
+    border-color: var(--colour-bg-reptilia);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-reptilia);
+  }
+}
+
+.bg-aves {
+  background-color: var(--colour-bg-aves);
+
+  img {
+    background-color: var(--colour-mg-aves);
+    border-color: var(--colour-bg-aves);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-aves);
+  }
+}
+
+.bg-amphibia {
+  background-color: var(--colour-bg-amphibia);
+
+  img {
+    background-color: var(--colour-mg-amphibia);
+    border-color: var(--colour-bg-amphibia);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-amphibia);
+  }
+}
+
 .bg-actinopterygii {
   background-color: var(--colour-bg-actinopterygii);
+
   img {
     background-color: var(--colour-mg-actinopterygii);
-    border: 1px solid var(--colour-bg-actinopterygii);
-    border-bottom: none;
+    border-color: var(--colour-bg-actinopterygii);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-actinopterygii);
   }
 }
 
 .bg-mollusca {
   background-color: var(--colour-bg-mollusca);
+
   img {
     background-color: var(--colour-mg-mollusca);
-    border: 1px solid var(--colour-bg-mollusca);
-    border-bottom: none;
+    border-color: var(--colour-bg-mollusca);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-mollusca);
   }
 }
 
 .bg-fungi {
   background-color: var(--colour-bg-fungi);
+
   img {
     background-color: var(--colour-mg-fungi);
-    border: 1px solid var(--colour-bg-fungi);
-    border-bottom: none;
+    border-color: var(--colour-bg-fungi);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-fungi);
   }
 }
 
 .bg-arachnida {
   background-color: var(--colour-bg-arachnida);
+
   img {
     background-color: var(--colour-mg-arachnida);
-    border: 1px solid var(--colour-bg-arachnida);
-    border-bottom: none;
+    border-color: var(--colour-bg-arachnida);
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: var(--colour-bg-arachnida);
   }
 }
 
@@ -1103,6 +1181,22 @@ li.collapsed {
   }
 }
 
+#inat-id-container,
+#inat-observation-dates {
+  padding: var(--spacing-md);
+}
+
+.form-row.inat {
+  background-color: var(--colour-inat);
+  border: 1px solid var(--colour-line);
+  padding: var(--spacing-sm);
+  gap: var(--spacing-sm);
+
+  input[type='radio'] {
+    margin: 0;
+  }
+}
+
 /* Media queries */
 @media screen and (min-width: 768px) {
   header {
@@ -1132,13 +1226,6 @@ li.collapsed {
     top: var(--spacing-sm);
   }
 
-  [aria-labelledby='terms'],
-  [aria-labelledby='images-list'],
-  [aria-labelledby='new-section'] {
-    ul {
-      column-count: 2;
-    }
-  }
   .iconic-taxon {
     position: absolute;
     top: var(--spacing-sm);
@@ -1147,6 +1234,10 @@ li.collapsed {
       width: var(--spacing-xl);
       padding: 0 var(--spacing-xs);
     }
+  }
+
+  .column-count {
+    column-count: 2;
   }
 }
 
@@ -1185,12 +1276,8 @@ li.collapsed {
   .grid-lg {
     grid-template-columns: 1fr 1fr 1fr;
   }
-  [aria-labelledby='terms'],
-  [aria-labelledby='images-list'],
-  [aria-labelledby='new-section'] {
-    ul {
-      column-count: 3;
-    }
+  .column-count {
+    column-count: 3;
   }
 }
 
@@ -1198,12 +1285,8 @@ li.collapsed {
   .grid-lg {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-  [aria-labelledby='terms'],
-  [aria-labelledby='images-list'],
-  [aria-labelledby='new-section'] {
-    ul {
-      column-count: 3;
-    }
+  .column-count {
+    column-count: 3;
   }
 }
 

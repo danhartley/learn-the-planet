@@ -144,7 +144,7 @@ export const TaxonAutocomplete = ({
       </div>
 
       {suggestions.length > 0 && (
-        <ul className="column-group">
+        <ul className="column-count">
           {suggestions.map(taxon => (
             <li key={taxon.id} className="form-row">
               <input
