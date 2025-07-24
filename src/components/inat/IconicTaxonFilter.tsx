@@ -40,7 +40,9 @@ export function IconicTaxaFilter({ setSelectedIconicTaxons }: Props) {
   return (
     <section className="group-block">
       <fieldset id="iconic-taxa-container">
-        <legend>Filter your iNaturalist search by taxa.</legend>
+        <legend>
+          <h2>Filter your iNaturalist search by taxa</h2>
+        </legend>
         <div>
           {allTaxa.map(taxon => (
             <div key={taxon} className={`bg-${taxon}`}>

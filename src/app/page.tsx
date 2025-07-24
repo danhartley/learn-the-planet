@@ -52,8 +52,9 @@ const Home = () => {
           </li>
           <li>
             <p>
-              Create a temporary collection of taxa to test yourself on the
-              common and scientific names of species, and species recognition.
+              Create a <Link href="/inat">temporary collection</Link> of
+              iNaturalist taxa to test yourself on the common and scientific
+              names of species, and species recognition.
             </p>
           </li>
         </ul>

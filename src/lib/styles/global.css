@@ -1169,7 +1169,7 @@ li.collapsed {
 
 /* iNaturalist */
 #iconic-taxa-container {
-  padding: var(--spacing-md);
+  padding: var(--spacing-md) 0;
   & > div {
     gap: var(--spacing-sm);
     grid-template-columns: repeat(auto-fit, minmax(200px, auto));
@@ -1183,7 +1183,7 @@ li.collapsed {
 
 #inat-id-container,
 #inat-observation-dates {
-  padding: var(--spacing-md);
+  padding: var(--spacing-md) 0;
 }
 
 .form-row.inat {

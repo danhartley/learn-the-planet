@@ -12,14 +12,16 @@ export default function Page() {
         <Link href="https://www.inaturalist.org/">iNaturalist</Link>.
       </div>
       <hr />
-      <h2>Icons</h2>
+      <h2>Taxon icons</h2>
       <div>
-        The taxon icons are hosted by{' '}
+        The taxon icons (plantae, aves, etc.) are hosted by{' '}
         <Link href="https://www.phylopic.org/">PhyloPic</Link>.
       </div>
+      <div>Learn the Planet thanks the following people for their icons.</div>
       <div>
-        Learn the Planet thanks the following people for their icons. The link
-        takes you to details of the icon and the licence agreement.
+        <em>
+          (The link takes you to details of the icon and the licence agreement).
+        </em>
       </div>
       {Object.entries(taxonUrls).map(([key, value]) => {
         return (

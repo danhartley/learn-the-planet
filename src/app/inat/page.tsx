@@ -78,14 +78,17 @@ export default function Page() {
 
   return (
     <CollectionProvider>
-      <h2>search iNaturalist</h2>
+      <h1>search iNaturalist</h1>
       <IconicTaxaFilter setSelectedIconicTaxons={setSelectedIconicTaxons} />
       <IdentifierFilter setIdentifierFilter={setIdentifierFilter} />
       <ObservationDates onDateChange={onDateChange} />
-      <button onClick={search}>Search</button>
+      <button onClick={search}>Search iNaturalist</button>
       {searchSpecies.length > 0 && (
-        <section aria-labelledby="search-species" className="column-group">
-          <h2 id="search-species">Selected Taxa</h2>
+        <section
+          aria-labelledby="search-species"
+          className="group-block column-group"
+        >
+          <h2 id="search-species">Selected species</h2>
           <ul className="column-count">
             {searchSpecies.map(taxon => (
               <li key={taxon.id} className="form-row">

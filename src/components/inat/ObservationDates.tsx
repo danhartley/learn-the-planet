@@ -58,7 +58,9 @@ export const ObservationDates = ({ onDateChange }: Props) => {
   return (
     <div className="group-block">
       <fieldset id="inat-observation-dates">
-        <legend>When the observations were made.</legend>
+        <legend>
+          <h2>When the observations were made</h2>
+        </legend>
         <div className="column-group">
           <div className="list-group">
             <h3>

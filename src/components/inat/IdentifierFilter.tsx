@@ -37,15 +37,17 @@ export const IdentifierFilter = ({ setIdentifierFilter }: Props) => {
   return (
     <section className="group-block">
       <fieldset id="inat-id-container">
-        <legend>
-          Filter your search by iNaturalist user, place or project.
-        </legend>
-        <ul className="list-group">{options}</ul>
+        <div className="column-group">
+          <legend>
+            <h2>Filter your search by iNaturalist user, place or project</h2>
+          </legend>
+          <ul className="horizontal-group">{options}</ul>
+          <IdentifierAutocomplete
+            type={selectedType}
+            setIdentifierFilter={setIdentifierFilter}
+          />
+        </div>
       </fieldset>
-      <IdentifierAutocomplete
-        type={selectedType}
-        setIdentifierFilter={setIdentifierFilter}
-      />
     </section>
   )
 }
