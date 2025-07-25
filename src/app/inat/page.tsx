@@ -11,8 +11,14 @@ import { getInatObservations } from '@/api/inat/api'
 import { IconicTaxaFilter } from '@/components/inat/IconicTaxonFilter'
 import { IdentifierFilter } from '@/components/inat/IdentifierFilter'
 import { ObservationDates } from '@/components/inat/ObservationDates'
+import { SpeciesNumber } from '@/components/inat/SpeciesNumber'
 
-import { IconicTaxon, InatIdentifier, Taxon } from '@/types'
+import {
+  IconicTaxon,
+  InatIdentifier,
+  Taxon,
+  InatObservationFilters,
+} from '@/types'
 
 export default function Page() {
   const [selectedIconicTaxons, setSelectedIconicTaxons] =
@@ -23,6 +29,7 @@ export default function Page() {
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [searchSpecies, setSearchSpecies] = useState<Taxon[]>([])
+  const [speciesNumber, setSpeciesNumber] = useState<number>(12)
 
   interface DateChangeParams {
     startDate: string | undefined
@@ -40,10 +47,11 @@ export default function Page() {
   const search = async () => {
     try {
       // Build the filters object
-      const filters: any = {
+      const filters: InatObservationFilters = {
         iconic_taxa: selectedIconicTaxons,
         d1: startDate || undefined,
         d2: endDate || undefined,
+        per_page: speciesNumber,
       }
 
       // Add identifier filter based on type
@@ -82,6 +90,7 @@ export default function Page() {
       <IconicTaxaFilter setSelectedIconicTaxons={setSelectedIconicTaxons} />
       <IdentifierFilter setIdentifierFilter={setIdentifierFilter} />
       <ObservationDates onDateChange={onDateChange} />
+      <SpeciesNumber setSpeciesNumber={setSpeciesNumber} />
       <button onClick={search}>Search iNaturalist</button>
       {searchSpecies.length > 0 && (
         <section

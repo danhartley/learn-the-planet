@@ -1192,9 +1192,20 @@ li.collapsed {
   padding: var(--spacing-sm);
   gap: var(--spacing-sm);
 
+  label {
+    min-width: calc(var(--spacing-lg) * 2);
+    text-align: center;
+  }
+
   input[type='radio'] {
     margin: 0;
   }
+}
+
+.inat-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
 /* Media queries */
@@ -1242,6 +1253,10 @@ li.collapsed {
 
   [aria-labelledby='search-species'] .column-count {
     column-count: 1;
+  }
+
+  .inat-group {
+    flex-direction: row;
   }
 }
 
