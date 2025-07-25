@@ -2,25 +2,38 @@
 
 import { useState } from 'react'
 
+import { useRouter } from 'next/navigation'
+
 import Image from 'next/image'
 
 import { CollectionProvider } from '@/contexts/CollectionContext'
 
-import { getInatObservations } from '@/api/inat/api'
+import { getInatObservations, getTaxaDistractors } from '@/api/inat/api'
+
+import { useTestPlanner } from '@/hooks/useTestPlanner'
 
 import { IconicTaxaFilter } from '@/components/inat/IconicTaxonFilter'
 import { IdentifierFilter } from '@/components/inat/IdentifierFilter'
 import { ObservationDates } from '@/components/inat/ObservationDates'
 import { SpeciesNumber } from '@/components/inat/SpeciesNumber'
 
+import { getShortId } from '@/utils/strings'
+import { processCollectionTaxa } from '@/utils/taxa'
+
 import {
   IconicTaxon,
   InatIdentifier,
   Taxon,
   InatObservationFilters,
+  Collection,
+  ContentHandlerType,
 } from '@/types'
 
 export default function Page() {
+  const router = useRouter()
+
+  const { startTest } = useTestPlanner()
+
   const [selectedIconicTaxons, setSelectedIconicTaxons] =
     useState<IconicTaxon[]>()
   const [identifierFilter, setIdentifierFilter] = useState<
@@ -30,6 +43,7 @@ export default function Page() {
   const [endDate, setEndDate] = useState('')
   const [searchSpecies, setSearchSpecies] = useState<Taxon[]>([])
   const [speciesNumber, setSpeciesNumber] = useState<number>(12)
+  const [isSearching, setIsSearching] = useState(false)
 
   interface DateChangeParams {
     startDate: string | undefined
@@ -45,6 +59,7 @@ export default function Page() {
   }
 
   const search = async () => {
+    setIsSearching(true)
     try {
       // Build the filters object
       const filters: InatObservationFilters = {
@@ -68,20 +83,49 @@ export default function Page() {
             break
         }
       }
-      console.log('filters', filters)
-      // Call the API
+
       const species = await getInatObservations(filters)
 
-      setSearchSpecies(species)
-      console.log(species)
+      const speciesWithDistractors = await getTaxaDistractors({ species })
+
+      setSearchSpecies(speciesWithDistractors)
     } catch (error) {
       console.error('Search failed:', error)
       setSearchSpecies([])
+    } finally {
+      setIsSearching(false)
     }
   }
 
   const handleTaxonToggle = (taxon: Taxon) => {
-    console.log(taxon)
+    setSearchSpecies(prev => {
+      return prev?.filter(selected => selected.id !== taxon.id)
+    })
+  }
+
+  const handleStartTest = async () => {
+    const processed = processCollectionTaxa('taxon', searchSpecies) || []
+    const items: Taxon[] = processed.filter(
+      (item): item is Taxon =>
+        (item as Taxon).id !== undefined &&
+        (item as Taxon).binomial !== undefined
+    )
+    try {
+      const collection: Collection<Taxon> = {
+        shortId: getShortId(),
+        type: 'taxon' as ContentHandlerType,
+        name: 'inaturalist species',
+        slug: 'inat-taxa',
+        items,
+        itemCount: searchSpecies.length,
+        sectionOrder: [],
+        ownerId: '',
+      }
+      startTest({ collection })
+      router.push('/test')
+    } catch (error) {
+      console.error('Failed to fetch collection:', error)
+    }
   }
 
   return (
@@ -91,7 +135,9 @@ export default function Page() {
       <IdentifierFilter setIdentifierFilter={setIdentifierFilter} />
       <ObservationDates onDateChange={onDateChange} />
       <SpeciesNumber setSpeciesNumber={setSpeciesNumber} />
-      <button onClick={search}>Search iNaturalist</button>
+      <button onClick={search} disabled={isSearching}>
+        {isSearching ? 'Searching…' : 'Search iNaturalist'}
+      </button>
       {searchSpecies.length > 0 && (
         <section
           aria-labelledby="search-species"
@@ -131,6 +177,11 @@ export default function Page() {
           </ul>
         </section>
       )}
+      <div className="collection-actions">
+        <button id="start-test" onClick={handleStartTest}>
+          Start test
+        </button>
+      </div>
     </CollectionProvider>
   )
 }
