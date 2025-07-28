@@ -18,6 +18,7 @@ import {
   CollectionStatus,
   CloudImage,
   Credit,
+  Topic,
 } from '@/types'
 
 type CollectionContextType = {
@@ -893,10 +894,33 @@ export const CollectionProvider = ({
     }
   }
 
+  const orderSections = (collection: Collection<unknown>) => {
+    switch (collection.type) {
+      case 'topic':
+        const orderedItems: Topic[] =
+          collection.sectionOrder
+            .map(order => {
+              return collection?.items?.find(
+                item => (item as { id: string }).id === order
+              ) as Topic | undefined
+            })
+            .filter((item): item is Topic => item !== undefined) || []
+        return orderedItems
+      default:
+        return collection.items
+    }
+  }
+
   return (
     <CollectionContext.Provider
       value={{
-        collection,
+        collection: collection
+          ? {
+              ...collection,
+              type: collection.type ?? 'topic',
+              items: orderSections(collection),
+            }
+          : null,
         setCollection,
         apiResponse,
         setApiResponse,

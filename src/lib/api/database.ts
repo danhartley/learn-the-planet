@@ -643,7 +643,7 @@ export const updateCollectionFields = async (
 
     // Return the updated collection in the same format as other functions
     return {
-      id: result.id,
+      id: result._id.toString(),
       shortId: result.shortId || '',
       slug: result.slug || '',
       items: result.items,
@@ -688,7 +688,7 @@ export const updateCollectionSectionOrder = async (
 
     // Return the updated collection in the same format as other functions
     return {
-      id: result.id,
+      id: result._id.toString(),
       shortId: result.shortId || '',
       slug: result.slug || '',
       items: result.items,
@@ -733,7 +733,7 @@ export const updateAuthor = async (
 
     // Return the updated collection in the same format as other functions
     return {
-      id: result.id,
+      id: result._id.toString(),
       shortId: result.shortId || '',
       slug: result.slug || '',
       items: result.items,

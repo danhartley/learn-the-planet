@@ -51,6 +51,7 @@
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
+  --spacing-ml: 1.25rem;
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
 
@@ -140,7 +141,7 @@ article {
 }
 
 p {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-ml);
 }
 
 /* Typography */
