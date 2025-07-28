@@ -20,7 +20,7 @@
     "@testing-library/dom": "latest",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "latest",
-    "@types/node": "^22.14.0",
+    "@types/node": "^24.1.0",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@vitejs/plugin-react": "latest",
