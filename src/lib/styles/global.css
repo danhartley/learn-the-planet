@@ -133,7 +133,7 @@ article {
   font-family: var(--font-family-serif);
   overflow-wrap: anywhere;
   line-height: var(--line-height-lg);
-  max-width: 80ch;
+  max-width: 65ch;
 
   h2:not(:first-child) {
     margin-top: var(--spacing-xl);
