@@ -1243,6 +1243,7 @@ li.collapsed {
     position: absolute;
     top: var(--spacing-sm);
     right: var(--spacing-lg);
+    padding: 0;
     img {
       width: var(--spacing-xl);
       padding: 0 var(--spacing-xs);
