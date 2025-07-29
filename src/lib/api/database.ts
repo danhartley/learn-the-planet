@@ -48,7 +48,9 @@ export const getCollectionSummaries = async (): Promise<
     const collections = await db
       .collection('collectionsSummary')
       .find({})
+      .sort({ createdAt: -1 }) // -1 for descending (newest first), 1 for ascending (oldest first)
       .toArray()
+
     return collections.map(collection => {
       return {
         id: collection._id.toString(),
@@ -63,6 +65,7 @@ export const getCollectionSummaries = async (): Promise<
         status: collection.status,
         ownerId: collection.ownerId,
         author: collection?.author,
+        createdAt: collection.createdAt, // Don't forget to include this in your return object if needed
       }
     })
   } catch (error) {
@@ -156,6 +159,8 @@ export const createCollection = async (collection: Collection<unknown>) => {
     await db.collection('collectionsSummary').insertOne({
       ...summaryData,
       _id: result.insertedId, // Use the same ID as the main collection
+      createdAt: new Date(),
+      updatedAt: new Date(),
     })
 
     return { id: insertedId, ...collection, shortId, slug, itemCount }

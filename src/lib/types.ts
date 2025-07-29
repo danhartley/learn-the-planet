@@ -180,6 +180,8 @@ export type CollectionSummary = {
   imageUrl?: string
   status: CollectionStatus
   ownerId: string
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 export type Credit = {
