@@ -23,7 +23,7 @@ export const Menu = () => {
             <Link href="/collection/create">Create collection</Link>
           </li>
           <li>
-            <Link href="/collection/inat">iNaturalist search</Link>
+            <Link href="/inat">iNaturalist search</Link>
           </li>
           <li>
             <Link href="/credit">Credit</Link>
