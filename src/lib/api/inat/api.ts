@@ -8,6 +8,7 @@ import {
   InatTaxon,
   InatObservationFilters,
   InatObservation,
+  UserLocale,
 } from '@/types'
 
 type Props = {
@@ -275,6 +276,7 @@ export const getInatObservations = async ({
   if (iconic_taxa?.length) params.append('iconic_taxa', iconic_taxa.join(','))
   if (d1) params.append('d1', d1)
   if (d2) params.append('d2', d2)
+  if (locale) params.append(locale, locale)
 
   params.append('rank', 'species')
 
@@ -298,4 +300,68 @@ export const getInatObservations = async ({
     ) || []
 
   return getUniqueTaxa(species)
+}
+
+export const getUserLocales = () => {
+  return [
+    { code: 'ar', language: 'العربية' },
+    { code: 'be', language: 'Беларуская' },
+    { code: 'bg', language: 'български' },
+    { code: 'br', language: 'Breton' },
+    { code: 'ca', language: 'Català' },
+    { code: 'cs', language: 'česky' },
+    { code: 'da', language: 'Dansk' },
+    { code: 'de', language: 'Deutsch' },
+    { code: 'el', language: 'Ελληνικά' },
+    { code: 'en', language: 'English' },
+    { code: 'en-GB', language: 'English (UK)' },
+    { code: 'eo', language: 'Esperanto' },
+    { code: 'es', language: 'Español' },
+    { code: 'es-AR', language: 'Español (Argentina)' },
+    { code: 'es-CO', language: 'Spanish (Colombia)' },
+    { code: 'es-CR', language: 'Spanish (Costa Rica)' },
+    { code: 'es-MX', language: 'Español (México)' },
+    { code: 'et', language: 'Eesti' },
+    { code: 'eu', language: 'Euskara' },
+    { code: 'fi', language: 'suomi' },
+    { code: 'fr', language: 'français' },
+    { code: 'fr-CA', language: 'French (Canada)' },
+    { code: 'gl', language: 'Galego' },
+    { code: 'he', language: 'עברית' },
+    { code: 'hr', language: 'Hrvatski' },
+    { code: 'hu', language: 'magyar' },
+    { code: 'id', language: 'Indonesia' },
+    { code: 'it', language: 'Italiano' },
+    { code: 'ja', language: '日本語' },
+    { code: 'ka', language: 'Georgian' },
+    { code: 'kk', language: 'Қазақша' },
+    { code: 'kn', language: 'ಕನ್ನಡ' },
+    { code: 'ko', language: '한국어' },
+    { code: 'lb', language: 'Lëtzebuergesch' },
+    { code: 'lt', language: 'Lietuvių' },
+    { code: 'lv', language: 'Latviešu' },
+    { code: 'mi', language: 'Te reo Māori' },
+    { code: 'mk', language: 'македонски' },
+    { code: 'ml', language: 'Malayalam' },
+    { code: 'mr', language: 'मराठी' },
+    { code: 'nb', language: 'Norsk Bokmål' },
+    { code: 'nl', language: 'Nederlands' },
+    { code: 'oc', language: 'Occitan' },
+    { code: 'pl', language: 'Polski' },
+    { code: 'pt', language: 'Portuguese' },
+    { code: 'pt-BR', language: 'Português (Brasil)' },
+    { code: 'ru', language: 'Русский' },
+    { code: 'sat', language: 'Santali' },
+    { code: 'sk', language: 'Slovenský' },
+    { code: 'sl', language: 'Slovenščina' },
+    { code: 'sq', language: 'Shqip' },
+    { code: 'sr', language: 'srpski' },
+    { code: 'sv', language: 'Svenska' },
+    { code: 'ta', language: 'தமிழ்' },
+    { code: 'th', language: 'ภาษาไทย' },
+    { code: 'tr', language: 'Türkçe' },
+    { code: 'uk', language: 'Українська' },
+    { code: 'zh-CN', language: '简体中文' },
+    { code: 'zh-TW', language: '繁體中文' },
+  ] as UserLocale[]
 }

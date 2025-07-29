@@ -36,7 +36,7 @@ export const mapInatSpeciesToLTP = (
         //   }
         // }),
         wikipediaUrl: s.wikipedia_url,
-        vernacularName: s.preferred_common_name,
+        vernacularName: s.preferred_common_name || s.english_common_name,
         ancestorIds: s.ancestor_ids,
       } as unknown as Taxon
     })

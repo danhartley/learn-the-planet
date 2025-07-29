@@ -236,6 +236,15 @@ hr {
 
 /* Form elements */
 input,
+button,
+select {
+  font-family: var(--font-family-sans-serif);
+  letter-spacing: var(--letter-spacing);
+  width: 100%;
+  border-radius: var(--border-radius-sm);
+  color: var(--colour-fg-text);
+}
+
 button {
   font-family: var(--font-family-sans-serif);
   letter-spacing: var(--letter-spacing);
@@ -278,7 +287,8 @@ input:focus-visible {
   outline: none;
 }
 
-input {
+input,
+select {
   padding: var(--spacing-md);
   border: none;
   font-size: var(--font-size-md);
@@ -305,6 +315,32 @@ input[type='radio'] + label {
 
 input[type='date'] {
   font-size: var(--font-size-md);
+  cursor: pointer;
+}
+
+select {
+  /* Remove default styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* Add arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6,9 12,15 18,9"></polyline></svg>');
+  background-repeat: no-repeat;
+  background-position: right 16px center; /* Inset 16px from right */
+  background-size: 20px; /* Makes arrow larger */
+
+  /* Prevent text from overlapping arrow */
+  padding-right: 50px;
+
+  /* Other styling */
+  padding: 12px 16px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+
+  /* Override defaults */
+  outline: none;
+  cursor: pointer;
 }
 
 button {
@@ -1192,12 +1228,7 @@ li.collapsed {
   background-color: var(--colour-inat);
   border: 1px solid var(--colour-line);
   padding: var(--spacing-sm);
-  gap: var(--spacing-sm);
-
-  label {
-    min-width: calc(var(--spacing-lg) * 2);
-    text-align: center;
-  }
+  gap: var(--spacing-md);
 
   input[type='radio'] {
     margin: 0;

@@ -16,6 +16,7 @@ import { IconicTaxaFilter } from '@/components/inat/IconicTaxonFilter'
 import { IdentifierFilter } from '@/components/inat/IdentifierFilter'
 import { ObservationDates } from '@/components/inat/ObservationDates'
 import { SpeciesNumber } from '@/components/inat/SpeciesNumber'
+import { Locale } from '@/components/inat/Locale'
 
 import { getShortId } from '@/utils/strings'
 import { processCollectionTaxa } from '@/utils/taxa'
@@ -27,6 +28,7 @@ import {
   InatObservationFilters,
   Collection,
   ContentHandlerType,
+  UserLocale,
 } from '@/types'
 
 export default function Page() {
@@ -57,6 +59,10 @@ export default function Page() {
     if (startDate) setStartDate(startDate)
     if (endDate) setEndDate(endDate)
   }
+  const [locale, setLocale] = useState<UserLocale>({
+    code: 'en',
+    language: 'English',
+  })
 
   const search = async () => {
     setIsSearching(true)
@@ -67,6 +73,7 @@ export default function Page() {
         d1: startDate || undefined,
         d2: endDate || undefined,
         per_page: speciesNumber,
+        locale: locale.code,
       }
 
       // Add identifier filter based on type
@@ -135,6 +142,7 @@ export default function Page() {
       <IdentifierFilter setIdentifierFilter={setIdentifierFilter} />
       <ObservationDates onDateChange={onDateChange} />
       <SpeciesNumber setSpeciesNumber={setSpeciesNumber} />
+      <Locale userLocale={locale} setUserLocale={setLocale} />
       <button onClick={search} disabled={isSearching}>
         {isSearching ? 'Searching…' : 'Search iNaturalist'}
       </button>

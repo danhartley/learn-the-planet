@@ -505,3 +505,8 @@ export type InatObservationFilters = {
 export type InatObservation = {
   taxon: InatTaxon
 }
+
+export type UserLocale = {
+  code: string
+  language: string
+}
