@@ -1,6 +1,8 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 
+import Image from 'next/image'
+
 import { taxonUrls } from '@/api/phylopic/api'
 
 import { IconicTaxon } from '@/types'
@@ -21,10 +23,12 @@ export const RotatingTaxonIcons = () => {
 
   return (
     <div className="iconic-taxon rotate">
-      <img
+      <Image
         key={currentTaxon}
         src={taxonUrls[currentTaxon as IconicTaxon]?.icon}
         alt={`${currentTaxon} icon, credit to ${taxonUrls[currentTaxon as IconicTaxon]?.credit}`}
+        width={40}
+        height={48}
       />
     </div>
   )

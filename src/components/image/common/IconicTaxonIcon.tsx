@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Image from 'next/image'
+
 import { taxonUrls } from '@/api/phylopic/api'
 
 import { Collection, IconicTaxon } from '@/types'
@@ -50,10 +52,12 @@ export const IconicTaxonIcon: React.FC<IconicTaxonProps> = ({ collection }) => {
   return (
     <div className="iconic-taxon">
       {iconicTaxa.map(iconicTaxon => (
-        <img
+        <Image
           key={iconicTaxon}
           src={taxonUrls[iconicTaxon]?.icon}
           alt={`${iconicTaxon} icon, credit to ${taxonUrls[iconicTaxon]?.credit}`}
+          width={40}
+          height={48}
         />
       ))}
     </div>
