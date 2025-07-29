@@ -9,6 +9,8 @@ import { useTestPlanner } from '@/hooks/useTestPlanner'
 import { TestConfigSettings } from '@/components/common/TestConfigSettings'
 import { NextCloudinaryImage } from '@/components/image/common/NextCloudinaryImage'
 
+import { sortAlphabeticallyBy } from '@/utils/strings'
+
 import { Collection, Term, QuestionTemplateSelection } from '@/types'
 
 type Props<Term> = {
@@ -30,7 +32,11 @@ export function TermGallery({ collection }: Props<Term>) {
     router.push('/test')
   }
 
-  const definitions = (collection.items as Term[]).map(item => {
+  const sortedItems = collection.items
+    ? sortAlphabeticallyBy(collection.items, 'term')
+    : []
+
+  const definitions = (sortedItems as Term[]).map(item => {
     return (
       <React.Fragment key={item.id}>
         <dt id={item.term}>{item.term}</dt>

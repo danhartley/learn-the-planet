@@ -11,6 +11,8 @@ import { TraitCard } from '@/components/common/TraitCard'
 import { IconicTaxonIcon } from '@/components/image/common/IconicTaxonIcon'
 import { TestConfigSettings } from '@/components/common/TestConfigSettings'
 
+import { sortAlphabeticallyBy } from '@/utils/strings'
+
 import {
   Collection,
   Trait,
@@ -38,7 +40,11 @@ export function TraitGallery({ collection }: Props<Trait>) {
     router.push('/test')
   }
 
-  const traits = (collection.items as Trait[]).map(item => {
+  const sortedItems = collection.items
+    ? sortAlphabeticallyBy(collection.items, 'trait')
+    : []
+  console.log('sortedItems', sortedItems)
+  const traits = (sortedItems as Trait[]).map(item => {
     return (
       <React.Fragment key={item.id}>
         <TraitCard trait={item}></TraitCard>
@@ -46,7 +52,7 @@ export function TraitGallery({ collection }: Props<Trait>) {
     )
   })
 
-  const traitIndex = (collection.items as Trait[]).map(item => {
+  const traitIndex = (sortedItems as Trait[]).map(item => {
     return (
       <li key={item.id}>
         <Link href={`#${item.trait}`} scroll={true}>
