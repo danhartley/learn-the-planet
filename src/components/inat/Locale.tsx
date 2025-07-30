@@ -45,8 +45,6 @@ export const LocaleSelector = ({
 }
 
 export const Locale = ({ userLocale, setUserLocale }: Props) => {
-  const [locales] = useState(getUserLocales())
-
   return (
     <div className="group-block">
       <fieldset>

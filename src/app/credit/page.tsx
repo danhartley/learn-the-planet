@@ -35,6 +35,11 @@ export default function Page() {
           </ul>
         )
       })}
+      <hr />
+      <h2>Taxa images</h2>
+      <div>
+        Credit for taxon images is available by clicking on a taxon image.
+      </div>
     </div>
   )
 }

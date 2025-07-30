@@ -530,6 +530,17 @@ li::marker {
   border-radius: var(--border-radius-sm);
 }
 
+.img-reverse {
+  width: calc(var(--img-size) - var(--spacing-lg));
+  height: calc(var(--img-size) - var(--spacing-lg));
+  border-radius: var(--border-radius-sm);
+
+  div {
+    padding: var(--spacing-md) var(--spacing-md) 0 var(--spacing-md);
+    font-size: var(--font-size-xs);
+  }
+}
+
 .group > * {
   margin-bottom: 0;
 }
@@ -816,9 +827,11 @@ figcaption div::first-letter {
 /* Background colors */
 /* Base class with common styles */
 [class*='bg-'] {
-  img {
+  img,
+  .img-reverse {
     border: 1px solid;
     border-bottom: none;
+    cursor: pointer;
   }
 
   input[type='checkbox'],
@@ -836,7 +849,8 @@ figcaption div::first-letter {
     border: 1px solid var(--colour-bg-plantae);
   }
 
-  img {
+  img,
+  .img-reverse {
     background-color: var(--colour-mg-plantae);
     border-color: var(--colour-bg-plantae);
   }
@@ -850,7 +864,8 @@ figcaption div::first-letter {
 .bg-animalia {
   background-color: var(--colour-bg-animalia);
 
-  img {
+  img,
+  .img-reverse {
     background-color: var(--colour-mg-animalia);
     border-color: var(--colour-bg-animalia);
   }
@@ -864,7 +879,8 @@ figcaption div::first-letter {
 .bg-insecta {
   background-color: var(--colour-bg-insecta);
 
-  img {
+  img,
+  .img-reverse {
     background-color: var(--colour-mg-insecta);
     border-color: var(--colour-bg-insecta);
   }
@@ -878,7 +894,8 @@ figcaption div::first-letter {
 .bg-mammalia {
   background-color: var(--colour-bg-mammalia);
 
-  img {
+  img,
+  .img-reverse {
     background-color: var(--colour-mg-mammalia);
     border-color: var(--colour-bg-mammalia);
   }
@@ -892,7 +909,8 @@ figcaption div::first-letter {
 .bg-reptilia {
   background-color: var(--colour-bg-reptilia);
 
-  img {
+  img,
+  .img-reverse {
     background-color: var(--colour-mg-reptilia);
     border-color: var(--colour-bg-reptilia);
   }
@@ -906,7 +924,8 @@ figcaption div::first-letter {
 .bg-aves {
   background-color: var(--colour-bg-aves);
 
-  img {
+  img,
+  .img-reverse {
     background-color: var(--colour-mg-aves);
     border-color: var(--colour-bg-aves);
   }
@@ -920,7 +939,8 @@ figcaption div::first-letter {
 .bg-amphibia {
   background-color: var(--colour-bg-amphibia);
 
-  img {
+  img,
+  .img-reverse {
     background-color: var(--colour-mg-amphibia);
     border-color: var(--colour-bg-amphibia);
   }
@@ -934,7 +954,8 @@ figcaption div::first-letter {
 .bg-actinopterygii {
   background-color: var(--colour-bg-actinopterygii);
 
-  img {
+  img,
+  .img-reverse {
     background-color: var(--colour-mg-actinopterygii);
     border-color: var(--colour-bg-actinopterygii);
   }
@@ -948,7 +969,8 @@ figcaption div::first-letter {
 .bg-mollusca {
   background-color: var(--colour-bg-mollusca);
 
-  img {
+  img,
+  .img-reverse {
     background-color: var(--colour-mg-mollusca);
     border-color: var(--colour-bg-mollusca);
   }
@@ -962,7 +984,8 @@ figcaption div::first-letter {
 .bg-fungi {
   background-color: var(--colour-bg-fungi);
 
-  img {
+  img,
+  .img-reverse {
     background-color: var(--colour-mg-fungi);
     border-color: var(--colour-bg-fungi);
   }
@@ -976,7 +999,8 @@ figcaption div::first-letter {
 .bg-arachnida {
   background-color: var(--colour-bg-arachnida);
 
-  img {
+  img,
+  .img-reverse {
     background-color: var(--colour-mg-arachnida);
     border-color: var(--colour-bg-arachnida);
   }
