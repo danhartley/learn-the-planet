@@ -43,7 +43,7 @@ export function TraitGallery({ collection }: Props<Trait>) {
   const sortedItems = collection.items
     ? sortAlphabeticallyBy(collection.items, 'trait')
     : []
-  console.log('sortedItems', sortedItems)
+
   const traits = (sortedItems as Trait[]).map(item => {
     return (
       <React.Fragment key={item.id}>
