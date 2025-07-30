@@ -4,10 +4,12 @@ import Image from 'next/image'
 
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { Taxon, ApiResponse, Topic, Trait, Term } from '@/types'
+import { Taxon, ApiResponse, Topic, Trait, Term, UserLocale } from '@/types'
 
 import { debounce } from '@/api/inat/utils'
 import { getTaxaByAutocomplete, getTaxaDistractors } from '@/api/inat/api'
+
+import { LocaleSelector } from '@/components/inat/Locale'
 
 interface TaxonAutocompleteProps {
   selectedTaxa: Taxon[]
@@ -37,6 +39,10 @@ export const TaxonAutocomplete = ({
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState<Taxon[]>([])
   const [internalChangesToSave, setInternalChangesToSave] = useState(false)
+  const [locale, setLocale] = useState<UserLocale>({
+    code: 'en',
+    language: 'English',
+  })
 
   // Use internal state if onSaveChanges is provided, otherwise use external props
   const changesToSave = onSaveChanges
@@ -54,6 +60,7 @@ export const TaxonAutocomplete = ({
     debounce({
       func: async (...args: unknown[]) => {
         const searchTerm = args[0] as string
+        const locale = args[1] as string
         if (searchTerm.trim().length < 2) {
           setSuggestions([])
           return
@@ -63,6 +70,7 @@ export const TaxonAutocomplete = ({
           const response = await getTaxaByAutocomplete({
             by: 'taxa',
             toComplete: searchTerm.trim(),
+            locale,
           })
 
           const species = response.results
@@ -82,7 +90,7 @@ export const TaxonAutocomplete = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setInputValue(value)
-    debouncedSearch(value)
+    debouncedSearch(value, locale.code)
   }
 
   // Check if a taxon is already selected
@@ -126,6 +134,15 @@ export const TaxonAutocomplete = ({
             </label>
           </h2>
           <div>Search by common or scientific name</div>
+        </div>
+        <LocaleSelector
+          userLocale={locale}
+          setUserLocale={setLocale}
+          className="taxon"
+        />
+        <div>
+          You can search by scientific or common name in any language. The
+          choice of language applies to the search results.
         </div>
         <form>
           <div className="form-row taxon">

@@ -101,6 +101,7 @@ export const getInatTaxa = async ({
 type AutoCompleteProps = {
   by: string // taxa
   toComplete: string // taxon name
+  locale?: string
 }
 
 async function getInatData(url: string) {
@@ -158,11 +159,12 @@ async function getInatData(url: string) {
 export const getTaxaByAutocomplete = async ({
   by,
   toComplete,
+  locale = 'en',
 }: AutoCompleteProps) => {
-  const url = `https://api.inaturalist.org/v1/${by}/autocomplete?q=${toComplete}&per_page=10&rank=species`
+  const url = `https://api.inaturalist.org/v1/${by}/autocomplete?q=${toComplete}&per_page=10&rank=species&all_names=true&locale=${locale}`
   const response = await fetch(url)
   const json = await response.json()
-  const species: Taxon[] = mapInatSpeciesToLTP(json.results) || []
+  const species: Taxon[] = mapInatSpeciesToLTP(json.results, locale) || []
 
   if (species) {
     return {

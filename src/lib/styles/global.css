@@ -381,6 +381,13 @@ fieldset {
   margin: 0;
 }
 
+label {
+  display: inline-block;
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
 /* Lists and term lists */
 dl > div {
   display: flex;
@@ -583,6 +590,11 @@ form {
   gap: var(--spacing-md);
   border-radius: var(--border-radius-sm);
   padding: var(--spacing-sm) 0;
+  * {
+    div::first-letter {
+      text-transform: uppercase;
+    }
+  }
 }
 
 .form-row button {
@@ -641,13 +653,6 @@ form {
   &:hover {
     background-color: var(--colour-bg-neutral);
   }
-}
-
-.form-row.taxon label,
-.form-row.term label,
-.form-row.trait label,
-.form-row.topic label {
-  text-transform: uppercase;
 }
 
 .form-row.bg-correct,
@@ -820,13 +825,6 @@ figcaption div::first-letter {
   input[type='radio'] {
     accent-color: inherit;
     cursor: pointer;
-  }
-
-  label {
-    display: inline-block;
-    &::first-letter {
-      text-transform: capitalize;
-    }
   }
 }
 

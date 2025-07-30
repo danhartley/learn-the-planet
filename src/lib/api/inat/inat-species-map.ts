@@ -3,7 +3,8 @@
 import { Image, Taxon, InatTaxon } from '@/types'
 
 export const mapInatSpeciesToLTP = (
-  results: InatTaxon[]
+  results: InatTaxon[],
+  locale?: string
 ): Taxon[] | undefined => {
   try {
     const species: Taxon[] = results.map(s => {
@@ -23,20 +24,10 @@ export const mapInatSpeciesToLTP = (
               mediumUrl: s.default_photo.medium_url,
             }
           : (undefined as Image | undefined),
-        // observationsCount: s.observations_count,
-        // images: s.taxon_photos.map((item: inatItem) => {
-        //   return {
-        //     id: item.photo.id.toString(),
-        //     licenceCode: item.photo.license_code,
-        //     attribution: item.photo.attribution,
-        //     url: item.photo.url,
-        //     attributionName: item.photo.attribution_name,
-        //     squareUrl: item.photo.square_url,
-        //     mediumUrl: item.photo.medium_url,
-        //   }
-        // }),
         wikipediaUrl: s.wikipedia_url,
-        vernacularName: s.preferred_common_name || s.english_common_name,
+        vernacularName: s.names
+          ? s.names.find(name => name.locale === locale)?.name
+          : s.preferred_common_name || s.english_common_name,
         ancestorIds: s.ancestor_ids,
       } as unknown as Taxon
     })

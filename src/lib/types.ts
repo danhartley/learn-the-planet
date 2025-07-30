@@ -460,6 +460,11 @@ export type InatPhoto = {
   medium_url: string
 }
 
+export type Name = {
+  name: string
+  locale: string
+}
+
 export type InatTaxon = {
   id: string
   rank: string
@@ -472,6 +477,7 @@ export type InatTaxon = {
   preferred_common_name: string
   english_common_name: string
   ancestor_ids: number[]
+  names?: Name[]
 }
 
 export type InatIdentifierType = 'users' | 'places' | 'projects'
