@@ -16,17 +16,14 @@ export default function TextEntryComponent({
   const [answer, setAnswer] = useState('')
   const answerInputRef = useRef(null)
   const [correctClassName, setCorrectClassName] = useState(
-    `form-row ${(layout.question as TextEntryQuestion).contentType}`
+    `form-row ${layout.collection.type.toString()}`
   )
   const [isAnswered, setIsAnswered] = useState(false)
-
   const question: TextEntryQuestion = layout.question as TextEntryQuestion
 
   useEffect(() => {
     // Reset display
-    setCorrectClassName(
-      `form-row ${(layout.question as TextEntryQuestion).contentType}`
-    )
+    setCorrectClassName(`form-row ${layout.collection.type.toString()}`)
 
     // Reset form
     setAnswer('')

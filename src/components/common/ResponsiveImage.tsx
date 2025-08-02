@@ -9,6 +9,7 @@ type Props = {
   img: Img
   alt: string
   objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down'
+  isReversible?: boolean
 }
 
 export const ResponsiveImage = ({
@@ -16,6 +17,7 @@ export const ResponsiveImage = ({
   img,
   alt,
   objectFit = 'contain',
+  isReversible = true,
 }: Props) => {
   const [showDetails, setShowDetails] = useState(false)
   const [imageWidth, setImageWidth] = useState<number>(230)
@@ -38,17 +40,7 @@ export const ResponsiveImage = ({
 
   return (
     <div onClick={hasDetails ? toggleDetails : undefined}>
-      {!showDetails ? (
-        <Image
-          ref={imageRef}
-          id={id}
-          src={formatURL(img?.url || '')}
-          alt={alt}
-          width={230}
-          height={230}
-          style={{ objectFit: objectFit }}
-        />
-      ) : (
+      {showDetails && isReversible ? (
         <>
           <div
             className="img-reverse"
@@ -77,6 +69,16 @@ export const ResponsiveImage = ({
             )} */}
           </div>
         </>
+      ) : (
+        <Image
+          ref={imageRef}
+          id={id}
+          src={formatURL(img?.url || '')}
+          alt={alt}
+          width={230}
+          height={230}
+          style={{ objectFit: objectFit }}
+        />
       )}
     </div>
   )

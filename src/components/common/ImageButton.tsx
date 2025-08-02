@@ -49,6 +49,7 @@ const ImageButton = ({
         id={option.key}
         img={option.value as Image}
         alt={option.key}
+        isReversible={false}
       />
     </button>
   )
