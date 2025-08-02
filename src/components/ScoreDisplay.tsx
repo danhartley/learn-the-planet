@@ -36,7 +36,7 @@ export function ScoreDisplay<T>() {
 
   const feedback =
     testHistory?.length > 0 ? (
-      <div className="feedback">{`You've answered ${testHistory.filter(s => s.isCorrect).length} out of ${testHistory.length} correctly.`}</div>
+      <div className="font-weight-600">{`You've answered ${testHistory.filter(s => s.isCorrect).length} out of ${testHistory.length} correctly.`}</div>
     ) : (
       <div>Your answers and score will appear here.</div>
     )

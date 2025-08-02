@@ -171,7 +171,7 @@ export interface Trait extends LearningItem {
 export type CollectionSummary = {
   id?: string
   shortId?: string
-  type: string
+  type: ContentHandlerType
   name: string
   slug: string
   date?: string
@@ -182,6 +182,12 @@ export type CollectionSummary = {
   ownerId: string
   createdAt?: Date
   updatedAt?: Date
+
+  locale?: UserLocale
+  country?: Country
+  featured?: boolean
+  tags?: string[] // stored in lowercase
+  popularity?: number // starts at 0
 }
 
 export type Credit = {
@@ -332,7 +338,11 @@ export interface ContentTypeHandler<T> {
   validateAnswer(question: Question, answer: string | string[]): boolean
 }
 
-export type ContentHandlerType = 'taxon' | 'term' | 'topic' | 'trait'
+export interface ContentHandlerType {
+  type: 'taxon' | 'term' | 'topic' | 'trait'
+}
+
+export type ExtendedContentHandlerType = ContentHandlerType | { type: 'inat' }
 
 export type HistoryItem<T> = {
   id: string
@@ -388,7 +398,7 @@ export type UpdateCollectionFieldsOptions = {
   author?: Credit
 }
 
-export type CollectionStatus = 'private' | 'public'
+export type CollectionStatus = 'private' | 'public' | 'delete'
 
 export type TopicSectionType = 'text' | 'image' | 'taxon' | 'credit'
 export type TraitSectionType = 'morphology' | 'phenology' | 'taxon'
@@ -515,4 +525,37 @@ export type InatObservation = {
 export type UserLocale = {
   code: string
   language: string
+}
+
+export type Country = {
+  code: string
+  countryCode: string
+  name: string
+}
+
+export type CollectionFilters = {
+  type?: ContentHandlerType
+  updatedAt?: {
+    start: Date
+    end: Date
+  }
+  status?: CollectionStatus
+  ownerId?: string
+  locale?: string // locale code
+  country?: string // country code
+  featured?: boolean
+  tags?: {
+    values: string[]
+    logic: 'AND' | 'OR'
+  }
+  popularity?: number // minimum threshold
+}
+
+export type AddCollectionProps = {
+  name: string
+  type: ContentHandlerType
+  ownerId: string
+  imageUrl?: string
+  locale: UserLocale
+  country: Country
 }

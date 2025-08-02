@@ -1141,8 +1141,12 @@ progress {
   }
 }
 
-.feedback {
+.font-weight-600 {
   font-weight: var(--font-weight-600);
+}
+
+.font-weight-500 {
+  font-weight: var(--font-weight-500);
 }
 
 .information {
@@ -1191,6 +1195,11 @@ progress {
   input {
     font-size: var(--font-size-md);
   }
+}
+
+.collection-summary {
+  display: flex;
+  gap: var(--spacing-md);
 }
 
 /* Drag and drop */

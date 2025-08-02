@@ -4,6 +4,7 @@ import {
   UpdateCollectionFieldsOptions,
   CollectionStatus,
   Credit,
+  CollectionFilters,
 } from '@/types'
 import clientPromise from '@/api/mongodb'
 
@@ -55,9 +56,9 @@ export const getCollectionSummaries = async (): Promise<
       return {
         id: collection._id.toString(),
         shortId: collection?.shortId || '',
-        slug: collection?.slug || '',
-        name: collection.name,
         type: collection.type,
+        name: collection.name,
+        slug: collection?.slug || '',
         date: collection.date,
         location: collection.location,
         itemCount: collection.itemCount || 0,
@@ -65,7 +66,12 @@ export const getCollectionSummaries = async (): Promise<
         status: collection.status,
         ownerId: collection.ownerId,
         author: collection?.author,
-        createdAt: collection.createdAt, // Don't forget to include this in your return object if needed
+        createdAt: collection.createdAt,
+        locale: collection.locale,
+        country: collection.country,
+        featured: true,
+        tags: [],
+        popularity: 0, // starts at 0
       }
     })
   } catch (error) {
@@ -117,13 +123,18 @@ export const getCollectionByShortId = async (
   }
 }
 
-export const createCollection = async (collection: Collection<unknown>) => {
+export const createCollection = async ({
+  collection,
+  collectionSummary,
+}: {
+  collection: Collection<unknown>
+  collectionSummary: CollectionSummary
+}) => {
   const client = await clientPromise
   const db = client.db(DB_NAME)
-
   const shortId = crypto.randomUUID().split('-')[0]
   const slug = collection.name.toLowerCase().replace(/\s+/g, '-')
-  const itemCount = collection.items?.length || 0
+  const itemCount = collection?.items?.length || 0
   const sectionOrder = collection.items?.map(
     item => (item as { id: string }).id
   )
@@ -139,21 +150,14 @@ export const createCollection = async (collection: Collection<unknown>) => {
       itemCount,
       sectionOrder,
     })
-
     insertedId = result.insertedId.toString()
 
     // Step 2: Insert into collections summary table
     const summaryData: Omit<CollectionSummary, 'id'> = {
+      ...collectionSummary,
       shortId,
       slug,
-      name: collection.name,
-      type: collection.type,
-      date: collection.date,
-      location: collection.location,
       itemCount,
-      status: 'private' as CollectionStatus,
-      imageUrl: collection.imageUrl,
-      ownerId: collection.ownerId,
     }
 
     await db.collection('collectionsSummary').insertOne({
@@ -161,9 +165,18 @@ export const createCollection = async (collection: Collection<unknown>) => {
       _id: result.insertedId, // Use the same ID as the main collection
       createdAt: new Date(),
       updatedAt: new Date(),
+      featured: false,
+      popularity: 0,
     })
 
-    return { id: insertedId, ...collection, shortId, slug, itemCount }
+    return {
+      id: insertedId,
+      ...collection,
+      shortId,
+      slug,
+      itemCount,
+      sectionOrder,
+    }
   } catch (error) {
     console.error('Failed to create collection:', error)
 
@@ -890,3 +903,323 @@ export const updateCollectionStatus = async (
     throw error
   }
 }
+
+export const getFilteredCollectionSummaries = async (
+  filters: CollectionFilters
+): Promise<CollectionSummary[]> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+
+  try {
+    // Build MongoDB query
+    const query: any = {}
+
+    // Type filter
+    if (filters.type) {
+      query.type = filters.type
+    }
+    // Date range filter (inclusive)
+    if (filters.updatedAt) {
+      query.updatedAt = {
+        $gte: new Date(filters.updatedAt.start),
+        $lte: new Date(filters.updatedAt.end),
+      }
+    }
+    console.log(filters?.updatedAt?.start)
+
+    // Status filter
+    if (filters.status) {
+      query.status = filters.status
+    }
+
+    // Owner filter
+    if (filters.ownerId) {
+      query.ownerId = filters.ownerId
+    }
+
+    // Locale filter
+    if (filters.locale) {
+      query['locale.code'] = filters.locale
+    }
+
+    // Country filter
+    if (filters.country) {
+      query['country.code'] = filters.country
+    }
+
+    // Featured filter
+    if (filters.featured !== undefined) {
+      query.featured = filters.featured
+    }
+
+    // Tags filter (case insensitive, AND/OR logic)
+    if (filters.tags && filters.tags.values.length > 0) {
+      const normalisedTags = filters.tags.values.map(tag => tag.toLowerCase())
+
+      if (filters.tags.logic === 'AND') {
+        // All tags must be present
+        query.tags = { $all: normalisedTags }
+      } else {
+        // Any tag can be present (OR logic)
+        query.tags = { $in: normalisedTags }
+      }
+    }
+
+    // Popularity filter (minimum threshold)
+    if (filters.popularity !== undefined) {
+      query.popularity = { $gte: filters.popularity }
+    }
+
+    console.log('Filter query:', JSON.stringify(query, null, 2))
+
+    const results = await db
+      .collection('collectionsSummary')
+      .find(query)
+      .toArray()
+
+    // Convert MongoDB results to CollectionSummary format
+    const collections: CollectionSummary[] = results.map(
+      doc =>
+        ({
+          ...doc,
+          id: doc._id.toString(),
+          _id: undefined,
+        }) as unknown as CollectionSummary
+    )
+
+    return collections
+  } catch (error) {
+    console.error('Failed to filter collections:', error)
+    throw error
+  }
+}
+
+// Single document update function
+export const updateCollectionsSummaryField = async (
+  shortId: string,
+  fieldName: keyof CollectionSummary,
+  fieldValue: any
+): Promise<CollectionSummary | null> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+
+  try {
+    // Normalise tags to lowercase if updating tags field
+    let normalisedValue = fieldValue
+    if (fieldName === 'tags' && Array.isArray(fieldValue)) {
+      normalisedValue = fieldValue.map((tag: string) => tag.toLowerCase())
+    }
+
+    console.log(
+      `Updating collection ${shortId}: ${String(fieldName)} = ${JSON.stringify(normalisedValue)}`
+    )
+
+    const result = await db
+      .collection('collectionsSummary')
+      .findOneAndUpdate(
+        { shortId },
+        { $set: { [fieldName]: normalisedValue } },
+        { returnDocument: 'after' }
+      )
+
+    if (!result) {
+      console.log(`Collection with shortId ${shortId} not found`)
+      return null
+    }
+
+    // Convert MongoDB _id to string id for the return type
+    const updatedDocument: CollectionSummary = {
+      ...result,
+      id: result._id.toString(),
+    } as unknown as CollectionSummary
+
+    // Remove the _id field since we're using id
+    delete (updatedDocument as any)._id
+
+    console.log(`Successfully updated collection ${shortId}`)
+    return updatedDocument
+  } catch (error) {
+    console.error(`Failed to update collection field for ${shortId}:`, error)
+    throw error
+  }
+}
+
+// Bulk update function (all documents)
+export const updateCollectionsSummaryFields = async (
+  fieldName: keyof CollectionSummary,
+  fieldValue: any
+): Promise<number> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+
+  try {
+    // Normalise tags to lowercase if updating tags field
+    let normalisedValue = fieldValue
+    if (fieldName === 'tags' && Array.isArray(fieldValue)) {
+      normalisedValue = fieldValue.map((tag: string) => tag.toLowerCase())
+    }
+
+    console.log(
+      `Bulk updating ALL collections: ${String(fieldName)} = ${JSON.stringify(normalisedValue)}`
+    )
+
+    const result = await db.collection('collectionsSummary').updateMany(
+      {}, // Empty filter = all documents
+      { $set: { [fieldName]: normalisedValue } }
+    )
+
+    console.log(`Successfully updated ${result.modifiedCount} collections`)
+    return result.modifiedCount
+  } catch (error) {
+    console.error('Failed to bulk update collection fields:', error)
+    throw error
+  }
+}
+
+// Helper function to initialise new fields for existing collections
+// export const initialiseNewFields = async (): Promise<number> => {
+//   const client = await clientPromise
+//   const db = client.db(DB_NAME)
+
+//   try {
+//     console.log('Initialising new fields for existing collections...')
+
+//     // Default values for new fields
+//     const defaultValues = {
+//       locale: { code: 'en-GB', language: 'English (UK)' },
+//       country: { code: 'GB', name: 'United Kingdom' },
+//       featured: true,
+//       tags: [],
+//       popularity: 0,
+//     }
+
+//     // Use $setOnInsert for new documents and $set for existing documents with missing fields
+//     const result = await db.collection('collectionsSummary').updateMany(
+//       {
+//         $or: [
+//           { locale: { $exists: false } },
+//           { country: { $exists: false } },
+//           { featured: { $exists: false } },
+//           { tags: { $exists: false } },
+//           { popularity: { $exists: false } },
+//         ],
+//       },
+//       {
+//         $set: defaultValues,
+//         $setOnInsert: defaultValues, // This ensures new documents get these values too
+//       },
+//       { upsert: false } // Set to true if you want to create documents that don't exist
+//     )
+
+//     console.log(
+//       `Initialised new fields for ${result.modifiedCount} collections`
+//     )
+//     return result.modifiedCount
+//   } catch (error) {
+//     console.error('Failed to initialise new fields:', error)
+//     throw error
+//   }
+// }
+
+// export const initialiseNewFields = async (): Promise<number> => {
+//   const client = await clientPromise
+//   const db = client.db(DB_NAME)
+
+//   try {
+//     console.log('Adding or updating fields for collections...')
+
+//     // Default values for new fields
+//     const defaultValues = {
+//       locale: { code: 'en-GB', language: 'English (UK)' },
+//       country: {
+//         code: 'en-GB',
+//         countryCode: 'GB',
+//         name: 'United Kingdom',
+//       },
+//       featured: true,
+//       tags: [],
+//       popularity: 0,
+//     }
+
+//     // Update all documents - add missing fields or update existing ones
+//     const result = await db.collection('collectionsSummary').updateMany(
+//       {}, // Empty filter to match all documents
+//       {
+//         $set: defaultValues, // This will add missing fields or update existing ones
+//       }
+//     )
+
+//     console.log(
+//       `Added or updated fields for ${result.modifiedCount} collections`
+//     )
+//     return result.modifiedCount
+//   } catch (error) {
+//     console.error('Failed to add or update fields:', error)
+//     throw error
+//   }
+// }
+
+export const initialiseNewFields = async (): Promise<number> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+
+  try {
+    console.log('Adding or updating fields for collections...')
+
+    // Default values for new fields
+    const defaultValues = {
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }
+
+    // Update all documents - add missing fields or update existing ones
+    const result = await db.collection('collectionsSummary').updateMany(
+      {}, // Empty filter to match all documents
+      {
+        $set: defaultValues, // This will add missing fields or update existing ones
+      }
+    )
+
+    console.log(
+      `Added or updated fields for ${result.modifiedCount} collections`
+    )
+    return result.modifiedCount
+  } catch (error) {
+    console.error('Failed to add or update fields:', error)
+    throw error
+  }
+}
+
+// Example usage:
+
+/*
+// Filter examples:
+const recentEnglishCollections = await filterCollectionsSummary({
+  updatedAt: {
+    start: new Date('2024-01-01'),
+    end: new Date('2024-12-31')
+  },
+  locale: 'en',
+  featured: true,
+  popularity: 10
+})
+
+const collectionsWithNatureTags = await filterCollectionsSummary({
+  tags: {
+    values: ['nature', 'wildlife'],
+    logic: 'OR'
+  },
+  status: 'public'
+})
+
+// Update examples:
+await updateCollectionsSummaryField('abc123', 'featured', true)
+await updateCollectionsSummaryField('def456', 'tags', ['nature', 'Biology'])
+
+// Bulk update examples:
+await updateCollectionsSummaryFields('popularity', 0) // Reset all popularity scores
+await updateCollectionsSummaryFields('featured', false) // Unfeature all collections
+
+// Initialise new fields for existing collections:
+await initialiseNewFields()
+*/

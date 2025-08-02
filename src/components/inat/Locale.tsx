@@ -3,18 +3,18 @@ import React, { SetStateAction, Dispatch, useState } from 'react'
 
 import { getUserLocales } from '@/api/inat/api'
 
-import { UserLocale } from '@/types'
+import { UserLocale, ExtendedContentHandlerType } from '@/types'
 
 type Props = {
   userLocale: UserLocale
   setUserLocale: Dispatch<SetStateAction<UserLocale>>
-  className?: 'taxon' | 'inat'
+  className?: ExtendedContentHandlerType
 }
 
 export const LocaleSelector = ({
   userLocale,
   setUserLocale,
-  className = 'inat',
+  className = 'inat' as unknown as ExtendedContentHandlerType,
 }: Props) => {
   const [locales] = useState(getUserLocales())
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

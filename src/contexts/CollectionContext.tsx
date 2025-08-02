@@ -14,11 +14,12 @@ import {
   CollectionSummary,
   ApiResponse,
   UpdateCollectionFieldsOptions,
-  ContentHandlerType,
   CollectionStatus,
   CloudImage,
   Credit,
   Topic,
+  CollectionFilters,
+  AddCollectionProps,
 } from '@/types'
 
 type CollectionContextType = {
@@ -51,12 +52,15 @@ type CollectionContextType = {
     collection: Collection<unknown>,
     itemId: string
   ) => Promise<void>
-  addCollection: (
-    name: string,
-    type: ContentHandlerType,
-    ownerId: string,
-    imageUrl?: string
-  ) => Promise<void>
+  addCollection: ({
+    name,
+    type,
+    ownerId,
+    imageUrl,
+    locale,
+    country,
+  }: AddCollectionProps) => Promise<void>
+
   updateSectionOrder: (
     collection: Collection<unknown>,
     sectionOrder: string[]
@@ -82,6 +86,10 @@ type CollectionContextType = {
     slug: string,
     shortId: string
   ) => Promise<Collection<unknown> | null>
+  getFilteredCollectionSummaries: (
+    filters: CollectionFilters
+  ) => Promise<CollectionSummary[]>
+  initialiseNewFields: () => Promise<boolean>
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -105,6 +113,8 @@ export const CollectionProvider = ({
   const [collectionSummaries, setCollectionSummaries] = useState<
     CollectionSummary[] | null
   >()
+  const [filteredCollectionSummaries, setFilteredCollectionSummaries] =
+    useState<CollectionSummary[] | null>()
   const [apiResponse, setApiResponse] = useState<ApiResponse>({
     success: false,
     message: '',
@@ -543,12 +553,14 @@ export const CollectionProvider = ({
     }
   }
 
-  const addCollection = async (
-    name: string,
-    type: ContentHandlerType,
-    ownerId: string,
-    imageUrl?: string
-  ) => {
+  const addCollection = async ({
+    name,
+    type,
+    ownerId,
+    imageUrl,
+    locale,
+    country,
+  }: AddCollectionProps) => {
     if (!name?.trim() || !type) return
 
     const slug = name.trim().toLowerCase().replace(/\s+/g, '-')
@@ -563,13 +575,27 @@ export const CollectionProvider = ({
       ownerId,
     }
 
+    const newCollectionSummary: CollectionSummary = {
+      type,
+      name: name.trim(),
+      status: 'private' as unknown as CollectionStatus,
+      slug,
+      itemCount: 0,
+      ownerId,
+      locale,
+      country,
+    }
+
     try {
       const response = await fetch('/api/collection', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newCollection),
+        body: JSON.stringify({
+          collection: newCollection,
+          collectionSummary: newCollectionSummary,
+        }),
       })
 
       if (!response.ok) {
@@ -911,6 +937,45 @@ export const CollectionProvider = ({
     }
   }
 
+  const getFilteredCollectionSummaries = useCallback(
+    async (filters: CollectionFilters): Promise<CollectionSummary[]> => {
+      const response = await fetch('/api/filtered-collection-summaries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(filters),
+      })
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch filtered collection summaries: ${response.status}`
+        )
+      }
+
+      const summaries = await response.json()
+
+      if (summaries) {
+        setFilteredCollectionSummaries(summaries)
+      }
+
+      return summaries
+    },
+    []
+  )
+
+  const initialiseNewFields = async () => {
+    const url = '/api/admin'
+
+    const response = await fetch(url, { method: 'GET' })
+
+    if (!response.ok) {
+      throw new Error(`Failed to initialise new fields: ${response.status}`)
+    }
+
+    return true
+  }
+
   return (
     <CollectionContext.Provider
       value={{
@@ -940,6 +1005,8 @@ export const CollectionProvider = ({
         getImages,
         updateAuthor,
         getCollectionById,
+        getFilteredCollectionSummaries,
+        initialiseNewFields,
       }}
     >
       {children}

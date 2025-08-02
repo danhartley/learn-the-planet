@@ -9,6 +9,7 @@ import {
   InatObservationFilters,
   InatObservation,
   UserLocale,
+  Country,
 } from '@/types'
 
 type Props = {
@@ -21,7 +22,7 @@ export const getInatTaxonProperties = async ({
   type,
 }: Props): Promise<unknown[] | undefined> => {
   let ids: string[], url: string, inatProperties: Taxon[] | undefined
-  switch (type) {
+  switch (type.toString()) {
     case 'taxon':
       ids = items.map(item => item.id)
       url = `https://api.inaturalist.org/v1/taxa/${ids.join(',')}`
@@ -306,64 +307,541 @@ export const getInatObservations = async ({
 
 export const getUserLocales = () => {
   return [
-    { code: 'ar', language: 'العربية' },
-    { code: 'be', language: 'Беларуская' },
-    { code: 'bg', language: 'български' },
-    { code: 'br', language: 'Breton' },
-    { code: 'ca', language: 'Català' },
-    { code: 'cs', language: 'česky' },
-    { code: 'da', language: 'Dansk' },
-    { code: 'de', language: 'Deutsch' },
-    { code: 'el', language: 'Ελληνικά' },
-    { code: 'en', language: 'English' },
-    { code: 'en-GB', language: 'English (UK)' },
-    { code: 'eo', language: 'Esperanto' },
-    { code: 'es', language: 'Español' },
-    { code: 'es-AR', language: 'Español (Argentina)' },
-    { code: 'es-CO', language: 'Spanish (Colombia)' },
-    { code: 'es-CR', language: 'Spanish (Costa Rica)' },
-    { code: 'es-MX', language: 'Español (México)' },
-    { code: 'et', language: 'Eesti' },
-    { code: 'eu', language: 'Euskara' },
-    { code: 'fi', language: 'suomi' },
-    { code: 'fr', language: 'français' },
-    { code: 'fr-CA', language: 'French (Canada)' },
-    { code: 'gl', language: 'Galego' },
-    { code: 'he', language: 'עברית' },
-    { code: 'hr', language: 'Hrvatski' },
-    { code: 'hu', language: 'magyar' },
-    { code: 'id', language: 'Indonesia' },
-    { code: 'it', language: 'Italiano' },
-    { code: 'ja', language: '日本語' },
-    { code: 'ka', language: 'Georgian' },
-    { code: 'kk', language: 'Қазақша' },
-    { code: 'kn', language: 'ಕನ್ನಡ' },
-    { code: 'ko', language: '한국어' },
-    { code: 'lb', language: 'Lëtzebuergesch' },
-    { code: 'lt', language: 'Lietuvių' },
-    { code: 'lv', language: 'Latviešu' },
-    { code: 'mi', language: 'Te reo Māori' },
-    { code: 'mk', language: 'македонски' },
-    { code: 'ml', language: 'Malayalam' },
-    { code: 'mr', language: 'मराठी' },
-    { code: 'nb', language: 'Norsk Bokmål' },
-    { code: 'nl', language: 'Nederlands' },
-    { code: 'oc', language: 'Occitan' },
-    { code: 'pl', language: 'Polski' },
-    { code: 'pt', language: 'Portuguese' },
-    { code: 'pt-BR', language: 'Português (Brasil)' },
-    { code: 'ru', language: 'Русский' },
-    { code: 'sat', language: 'Santali' },
-    { code: 'sk', language: 'Slovenský' },
-    { code: 'sl', language: 'Slovenščina' },
-    { code: 'sq', language: 'Shqip' },
-    { code: 'sr', language: 'srpski' },
-    { code: 'sv', language: 'Svenska' },
-    { code: 'ta', language: 'தமிழ்' },
-    { code: 'th', language: 'ภาษาไทย' },
-    { code: 'tr', language: 'Türkçe' },
-    { code: 'uk', language: 'Українська' },
-    { code: 'zh-CN', language: '简体中文' },
-    { code: 'zh-TW', language: '繁體中文' },
+    {
+      code: 'ar',
+      language: 'العربية',
+    },
+    {
+      code: 'be',
+      language: 'Беларуская',
+    },
+    {
+      code: 'bg',
+      language: 'Български',
+    },
+    {
+      code: 'br',
+      language: 'Breton',
+    },
+    {
+      code: 'ca',
+      language: 'Català',
+    },
+    {
+      code: 'cs',
+      language: 'Česky',
+    },
+    {
+      code: 'da',
+      language: 'Dansk',
+    },
+    {
+      code: 'de',
+      language: 'Deutsch',
+    },
+    {
+      code: 'el',
+      language: 'Ελληνικά',
+    },
+    {
+      code: 'en',
+      language: 'English (US)',
+    },
+    {
+      code: 'en-GB',
+      language: 'English (UK)',
+    },
+    {
+      code: 'eo',
+      language: 'Esperanto',
+    },
+    {
+      code: 'es',
+      language: 'Español (España)',
+    },
+    {
+      code: 'es-AR',
+      language: 'Español (Argentina)',
+    },
+    {
+      code: 'es-CO',
+      language: 'Spanish (Colombia)',
+    },
+    {
+      code: 'es-CR',
+      language: 'Spanish (Costa Rica)',
+    },
+    {
+      code: 'es-MX',
+      language: 'Español (México)',
+    },
+    {
+      code: 'et',
+      language: 'Eesti',
+    },
+    {
+      code: 'eu',
+      language: 'Euskara',
+    },
+    {
+      code: 'fi',
+      language: 'Suomi',
+    },
+    {
+      code: 'fr',
+      language: 'Français (France)',
+    },
+    {
+      code: 'fr-CA',
+      language: 'French (Canada)',
+    },
+    {
+      code: 'gl',
+      language: 'Galego',
+    },
+    {
+      code: 'he',
+      language: 'עברית',
+    },
+    {
+      code: 'hr',
+      language: 'Hrvatski',
+    },
+    {
+      code: 'hu',
+      language: 'Magyar',
+    },
+    {
+      code: 'id',
+      language: 'Indonesia',
+    },
+    {
+      code: 'it',
+      language: 'Italiano',
+    },
+    {
+      code: 'ja',
+      language: '日本語',
+    },
+    {
+      code: 'ka',
+      language: 'Georgian',
+    },
+    {
+      code: 'kk',
+      language: 'Қазақша',
+    },
+    {
+      code: 'kn',
+      language: 'ಕನ್ನಡ',
+    },
+    {
+      code: 'ko',
+      language: '한국어',
+    },
+    {
+      code: 'lb',
+      language: 'Lëtzebuergesch',
+    },
+    {
+      code: 'lt',
+      language: 'Lietuvių',
+    },
+    {
+      code: 'lv',
+      language: 'Latviešu',
+    },
+    {
+      code: 'mi',
+      language: 'Te reo Māori',
+    },
+    {
+      code: 'mk',
+      language: 'Македонски',
+    },
+    {
+      code: 'ml',
+      language: 'Malayalam',
+    },
+    {
+      code: 'mr',
+      language: 'मराठी',
+    },
+    {
+      code: 'nb',
+      language: 'Norsk Bokmål',
+    },
+    {
+      code: 'nl',
+      language: 'Nederlands',
+    },
+    {
+      code: 'oc',
+      language: 'Occitan',
+    },
+    {
+      code: 'pl',
+      language: 'Polski',
+    },
+    {
+      code: 'pt',
+      language: 'Portuguese (Portugal)',
+    },
+    {
+      code: 'pt-BR',
+      language: 'Português (Brasil)',
+    },
+    {
+      code: 'ru',
+      language: 'Русский',
+    },
+    {
+      code: 'sat',
+      language: 'Santali',
+    },
+    {
+      code: 'sk',
+      language: 'Slovenský',
+    },
+    {
+      code: 'sl',
+      language: 'Slovenščina',
+    },
+    {
+      code: 'sq',
+      language: 'Shqip',
+    },
+    {
+      code: 'sr',
+      language: 'Srpski',
+    },
+    {
+      code: 'sv',
+      language: 'Svenska',
+    },
+    {
+      code: 'ta',
+      language: 'தமிழ்',
+    },
+    {
+      code: 'th',
+      language: 'ภาษาไทย',
+    },
+    {
+      code: 'tr',
+      language: 'Türkçe',
+    },
+    {
+      code: 'uk',
+      language: 'Українська',
+    },
+    {
+      code: 'zh-CN',
+      language: '简体中文',
+    },
+    {
+      code: 'zh-TW',
+      language: '繁體中文',
+    },
   ] as UserLocale[]
+}
+
+export const getCountries = () => {
+  return [
+    {
+      code: 'ar',
+      countryCode: 'SA', // Saudi Arabia
+      name: 'السعودية',
+    },
+    {
+      code: 'be',
+      countryCode: 'BY', // Belarus
+      name: 'Беларусь',
+    },
+    {
+      code: 'bg',
+      countryCode: 'BG', // Bulgaria
+      name: 'България',
+    },
+    {
+      code: 'br',
+      countryCode: 'FR', // France (Brittany region)
+      name: 'Frañs', // France in Breton
+    },
+    {
+      code: 'ca',
+      countryCode: 'ES', // Spain (Catalonia region)
+      name: 'Espanya', // Spain in Catalan
+    },
+    {
+      code: 'cs',
+      countryCode: 'CZ', // Czech Republic
+      name: 'Česká republika',
+    },
+    {
+      code: 'da',
+      countryCode: 'DK', // Denmark
+      name: 'Danmark',
+    },
+    {
+      code: 'de',
+      countryCode: 'DE', // Germany
+      name: 'Deutschland',
+    },
+    {
+      code: 'el',
+      countryCode: 'GR', // Greece
+      name: 'Ελλάδα',
+    },
+    {
+      code: 'en',
+      countryCode: 'US', // United States
+      name: 'United States',
+    },
+    {
+      code: 'en-GB',
+      countryCode: 'GB', // United Kingdom
+      name: 'United Kingdom',
+    },
+    {
+      code: 'eo',
+      countryCode: null, // Esperanto has no specific country
+      name: 'Esperantujo',
+    },
+    {
+      code: 'es',
+      countryCode: 'ES', // Spain
+      name: 'España',
+    },
+    {
+      code: 'es-AR',
+      countryCode: 'AR', // Argentina
+      name: 'Argentina',
+    },
+    {
+      code: 'es-CO',
+      countryCode: 'CO', // Colombia
+      name: 'Colombia',
+    },
+    {
+      code: 'es-CR',
+      countryCode: 'CR', // Costa Rica
+      name: 'Costa Rica',
+    },
+    {
+      code: 'es-MX',
+      countryCode: 'MX', // Mexico
+      name: 'México',
+    },
+    {
+      code: 'et',
+      countryCode: 'EE', // Estonia
+      name: 'Eesti',
+    },
+    {
+      code: 'eu',
+      countryCode: 'ES', // Spain (Basque region)
+      name: 'Espainia', // Spain in Basque
+    },
+    {
+      code: 'fi',
+      countryCode: 'FI', // Finland
+      name: 'Suomi',
+    },
+    {
+      code: 'fr',
+      countryCode: 'FR', // France
+      name: 'France',
+    },
+    {
+      code: 'fr-CA',
+      countryCode: 'CA', // Canada
+      name: 'Canada',
+    },
+    {
+      code: 'gl',
+      countryCode: 'ES', // Spain (Galicia region)
+      name: 'España', // Spain in Galician
+    },
+    {
+      code: 'he',
+      countryCode: 'IL', // Israel
+      name: 'ישראל',
+    },
+    {
+      code: 'hr',
+      countryCode: 'HR', // Croatia
+      name: 'Hrvatska',
+    },
+    {
+      code: 'hu',
+      countryCode: 'HU', // Hungary
+      name: 'Magyarország',
+    },
+    {
+      code: 'id',
+      countryCode: 'ID', // Indonesia
+      name: 'Indonesia',
+    },
+    {
+      code: 'it',
+      countryCode: 'IT', // Italy
+      name: 'Italia',
+    },
+    {
+      code: 'ja',
+      countryCode: 'JP', // Japan
+      name: '日本',
+    },
+    {
+      code: 'ka',
+      countryCode: 'GE', // Georgia
+      name: 'საქართველო',
+    },
+    {
+      code: 'kk',
+      countryCode: 'KZ', // Kazakhstan
+      name: 'Қазақстан',
+    },
+    {
+      code: 'kn',
+      countryCode: 'IN', // India
+      name: 'ಭಾರತ',
+    },
+    {
+      code: 'ko',
+      countryCode: 'KR', // South Korea
+      name: '대한민국',
+    },
+    {
+      code: 'lb',
+      countryCode: 'LU', // Luxembourg
+      name: 'Lëtzebuerg',
+    },
+    {
+      code: 'lt',
+      countryCode: 'LT', // Lithuania
+      name: 'Lietuva',
+    },
+    {
+      code: 'lv',
+      countryCode: 'LV', // Latvia
+      name: 'Latvija',
+    },
+    {
+      code: 'mi',
+      countryCode: 'NZ', // New Zealand
+      name: 'Aotearoa',
+    },
+    {
+      code: 'mk',
+      countryCode: 'MK', // North Macedonia
+      name: 'Северна Македонија',
+    },
+    {
+      code: 'ml',
+      countryCode: 'IN', // India
+      name: 'ഭാരതം',
+    },
+    {
+      code: 'mr',
+      countryCode: 'IN', // India
+      name: 'भारत',
+    },
+    {
+      code: 'nb',
+      countryCode: 'NO', // Norway
+      name: 'Norge',
+    },
+    {
+      code: 'nl',
+      countryCode: 'NL', // Netherlands
+      name: 'Nederland',
+    },
+    {
+      code: 'oc',
+      countryCode: 'FR', // France (Occitan regions)
+      name: 'França', // France in Occitan
+    },
+    {
+      code: 'pl',
+      countryCode: 'PL', // Poland
+      name: 'Polska',
+    },
+    {
+      code: 'pt',
+      countryCode: 'PT', // Portugal
+      name: 'Portugal',
+    },
+    {
+      code: 'pt-BR',
+      countryCode: 'BR', // Brazil
+      name: 'Brasil',
+    },
+    {
+      code: 'ru',
+      countryCode: 'RU', // Russia
+      name: 'Россия',
+    },
+    {
+      code: 'sat',
+      countryCode: 'IN', // India
+      name: 'ᱵᱷᱟᱨᱚᱛ',
+    },
+    {
+      code: 'sk',
+      countryCode: 'SK', // Slovakia
+      name: 'Slovensko',
+    },
+    {
+      code: 'sl',
+      countryCode: 'SI', // Slovenia
+      name: 'Slovenija',
+    },
+    {
+      code: 'sq',
+      countryCode: 'AL', // Albania
+      name: 'Shqipëria',
+    },
+    {
+      code: 'sr',
+      countryCode: 'RS', // Serbia
+      name: 'Србија',
+    },
+    {
+      code: 'sv',
+      countryCode: 'SE', // Sweden
+      name: 'Sverige',
+    },
+    {
+      code: 'ta',
+      countryCode: 'IN', // India
+      name: 'இந்தியா',
+    },
+    {
+      code: 'th',
+      countryCode: 'TH', // Thailand
+      name: 'ประเทศไทย',
+    },
+    {
+      code: 'tr',
+      countryCode: 'TR', // Turkey
+      name: 'Türkiye',
+    },
+    {
+      code: 'uk',
+      countryCode: 'UA', // Ukraine
+      name: 'Україна',
+    },
+    {
+      code: 'zh-CN',
+      countryCode: 'CN', // China
+      name: '中国',
+    },
+    {
+      code: 'zh-TW',
+      countryCode: 'TW', // Taiwan
+      name: '台灣',
+    },
+  ] as Country[]
 }

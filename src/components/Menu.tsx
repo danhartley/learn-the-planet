@@ -1,7 +1,14 @@
 'use client'
+import { useState } from 'react'
+
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 export const Menu = () => {
+  const { data: session } = useSession()
+  const [isAdmin] = useState(
+    session?.user?.id?.toString() === '6867edcb91fda094ef1fd10d'
+  )
   return (
     <nav>
       <section aria-labelledby="collection-menu">
@@ -20,6 +27,9 @@ export const Menu = () => {
             <Link href="/terms">Terms</Link>
           </li>
           <li>
+            <Link href="/collection/search">Collection search</Link>
+          </li>
+          <li>
             <Link href="/collection/create">Create collection</Link>
           </li>
           <li>
@@ -28,9 +38,16 @@ export const Menu = () => {
           <li>
             <Link href="/credit">Credit</Link>
           </li>
-          {/* <li>
-            <Link href="/flags">Flags</Link>
-          </li> */}
+          {isAdmin && (
+            <>
+              <li>
+                <Link href="/flags">Flags</Link>
+              </li>
+              <li>
+                <Link href="/admin">Admin</Link>
+              </li>
+            </>
+          )}
         </ul>
       </section>
     </nav>

@@ -28,7 +28,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         </main>
         <footer>
           <div></div>
-          <Menu />
+          <SessionProvider>
+            <Menu />
+          </SessionProvider>
         </footer>
       </body>
     </html>

@@ -29,7 +29,7 @@ export const DeleteCollection = () => {
   return (
     <section aria-labelledby="delete-collection">
       <div className="group">
-        <h2 id="delete-collection">Delete {collection?.type} collection</h2>
+        <h2 id="delete-collection">Delete collection</h2>
         <div>
           When you delete a collection, you will no longer have access to it.
         </div>

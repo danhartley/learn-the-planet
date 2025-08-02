@@ -45,10 +45,8 @@ export const TopicItems = () => {
         <div className="group">
           <h2 id="traits-list">Topic sections</h2>
           <div>
-            <em>
-              Click to edit or delete a topic. To change the position of a
-              section, click on its button and move up or down.
-            </em>
+            Click to edit or delete a topic. To change the position of a
+            section, click on its button and move up or down.
           </div>
         </div>
         {topicCollection.items.length > 0 ? (
@@ -75,10 +73,8 @@ export const TopicItems = () => {
           </ul>
         ) : (
           <div>
-            <strong>
-              Select "Add text, taxa, credits, and images" to begin creating
-              content.
-            </strong>
+            Select "Add text, taxa, credits, and images" to begin creating
+            content.
           </div>
         )}
       </section>

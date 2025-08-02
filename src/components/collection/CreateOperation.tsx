@@ -5,19 +5,37 @@ import { useSession } from 'next-auth/react'
 
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { CollectionType } from '@/components/common/CollectionType'
+import { CountrySelector } from '@/components/collection/search/FilterByCountry'
+import { LocaleSelector } from '@/components/inat/Locale'
 import { SignIn } from '@/components/oauth/SignIn'
 
 import { useCollection } from '@/contexts/CollectionContext'
 
-import { ContentHandlerType } from '@/types'
+import {
+  ContentHandlerType,
+  Country,
+  UserLocale,
+  AddCollectionProps,
+} from '@/types'
 
 export const CreateOperation = () => {
   const { data: session, status } = useSession()
   const { collection, addCollection } = useCollection()
   const [name, setName] = useState<string>('')
-  const [type, setType] = useState<ContentHandlerType>('topic')
+  const [type, setType] = useState<ContentHandlerType>(
+    'topic' as unknown as ContentHandlerType
+  )
   const [imageUrl, setImageUrl] = useState<string>('')
   const [isCreating, setIsCreating] = useState<boolean>(false)
+  const [country, setCountry] = useState<Country>({
+    code: 'en-GB',
+    countryCode: 'GB',
+    name: 'United Kingdom',
+  })
+  const [locale, setLocale] = useState<UserLocale>({
+    code: 'en-GB',
+    language: 'English (UK)',
+  })
 
   const MIN_NAME_LENGTH = 5
 
@@ -31,7 +49,15 @@ export const CreateOperation = () => {
       setIsCreating(true)
       try {
         if (session && session.user && session.user.id) {
-          await addCollection(name, type, session.user.id)
+          const props: AddCollectionProps = {
+            name,
+            type,
+            ownerId: session.user.id,
+            locale,
+            country,
+            imageUrl,
+          }
+          await addCollection(props)
         }
       } catch (error) {
         console.error('Error creating collection:', error)
@@ -76,6 +102,18 @@ export const CreateOperation = () => {
             setFieldValue={setImageUrl}
             fieldText="collection image url"
             type={type}
+          />
+
+          <CountrySelector
+            country={country}
+            setCountry={setCountry}
+            className={type}
+          />
+
+          <LocaleSelector
+            userLocale={locale}
+            setUserLocale={setLocale}
+            className={type}
           />
 
           <button onClick={createCollection} disabled={isButtonDisabled}>
