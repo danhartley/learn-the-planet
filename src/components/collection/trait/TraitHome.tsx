@@ -7,23 +7,35 @@ import { CollectionList } from '@/components/CollectionList'
 
 import { generateLoadingCards } from '@/components/common/LoadingCard'
 
-import { SessionState, CollectionStatus } from '@/types'
+import {
+  SessionState,
+  CollectionStatus,
+  CollectionFilters,
+  ContentHandlerType,
+  CollectionSummary,
+} from '@/types'
 
 type Props = {
   session: SessionState | undefined
 }
 
 export const TraitHome = ({ session }: Props) => {
-  const { collectionSummaries, getCollectionSummaries } = useCollection()
+  const { getFilteredCollectionSummaries } = useCollection()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [collectionSummaries, setCollectionSummaries] =
+    useState<CollectionSummary[]>()
 
   useEffect(() => {
     const fetchCollections = async () => {
       try {
         setLoading(true)
         setError(null)
-        await getCollectionSummaries()
+        const filters: CollectionFilters = {
+          type: 'trait' as unknown as ContentHandlerType,
+        }
+        const summaries = await getFilteredCollectionSummaries(filters)
+        setCollectionSummaries(summaries)
       } catch (err) {
         console.error('Error fetching traits:', err)
         setError('Error loading traits')
@@ -33,7 +45,7 @@ export const TraitHome = ({ session }: Props) => {
     }
 
     fetchCollections()
-  }, [getCollectionSummaries])
+  }, [getFilteredCollectionSummaries])
 
   if (error) {
     return <div>{error}</div>
