@@ -8,7 +8,7 @@ import { useCollection } from '@/contexts/CollectionContext'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 
-import { Topic, NextCloudImage } from '@/types'
+import { Topic, NextCloudImage, ContentHandlerType } from '@/types'
 
 type Props = {
   section: Topic
@@ -79,7 +79,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
         fieldValue={image.caption}
         setFieldValue={setCaption}
         fieldText="Image caption"
-        type="topic"
+        type={'topic' as unknown as ContentHandlerType}
         sectionIndex={sectionIndex}
       />
 
@@ -87,7 +87,7 @@ export const TopicCloudImage = ({ section, image, sectionIndex }: Props) => {
         fieldValue={image.alt || image.caption}
         setFieldValue={setAlt}
         fieldText="Image alt text"
-        type="topic"
+        type={'topic' as unknown as ContentHandlerType}
         sectionIndex={sectionIndex}
       />
 

@@ -46,7 +46,7 @@ export const TaxonHome = ({ session }: Props) => {
         summary.ownerId === session?.userId
     ) || []
 
-  const taxa = userCollections.filter(c => c.type === 'taxon')
+  const taxa = userCollections.filter(c => c.type.toString() === 'taxon')
 
   // Show loading state if still loading OR if we don't have data yet
   if (loading || !collectionSummaries) {

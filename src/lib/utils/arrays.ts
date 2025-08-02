@@ -3,7 +3,6 @@ import {
   QuestionTemplateSelection,
   GroupedCollectionSummaries,
   CollectionSummary,
-  ContentHandlerType,
 } from '@/types'
 
 export const updateTemplate = (
@@ -37,8 +36,21 @@ export const groupCollectionsByType = (
   }
 
   collections.forEach(collection => {
-    const type = collection.type as ContentHandlerType
-    groups[type].push(collection)
+    const type = collection.type
+    switch (type.toString()) {
+      case 'taxon':
+        groups.taxon.push(collection)
+        break
+      case 'term':
+        groups.term.push(collection)
+        break
+      case 'topic':
+        groups.topic.push(collection)
+        break
+      case 'trait':
+        groups.trait.push(collection)
+        break
+    }
   })
 
   return groups

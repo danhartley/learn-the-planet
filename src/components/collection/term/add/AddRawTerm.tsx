@@ -4,7 +4,7 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { ItemInput } from '@/components/collection/item/ItemInput'
 import { validateTermJson } from '@/validation/term-validation'
-import { ValidationResult, Term } from '@/types'
+import { ValidationResult, Term, ContentHandlerType } from '@/types'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { getShortId } from '@/utils/strings'
@@ -93,7 +93,7 @@ export function AddRawTerm() {
         onJsonContentChange={setJsonContent}
         onSubmit={isValidTerm}
         message={message}
-        type="term"
+        type={'term' as unknown as ContentHandlerType}
         setMessage={setMessage}
       />
 

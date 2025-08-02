@@ -10,28 +10,28 @@ type Props = {
 
 export const CollectionType = ({
   operation = 'read',
-  type = 'topic',
+  type = 'topic' as unknown as ContentHandlerType,
   setType,
 }: Props) => {
   const types: ContentType[] = [
     {
       key: 'topic',
-      value: 'topic',
+      value: 'topic' as unknown as ContentHandlerType,
       description: 'Create a guide, a lesson or a field notes entry',
     },
     {
       key: 'trait',
-      value: 'trait',
+      value: 'trait' as unknown as ContentHandlerType,
       description: 'Create a collection of taxa traits with examples',
     },
     {
       key: 'taxon',
-      value: 'taxon',
+      value: 'taxon' as unknown as ContentHandlerType,
       description: 'Create a collection of iNaturalist taxa',
     },
     {
       key: 'term',
-      value: 'term',
+      value: 'term' as unknown as ContentHandlerType,
       description: 'Create a collection of terms and their definitions',
     },
   ]
@@ -44,7 +44,7 @@ export const CollectionType = ({
   let display
   const handleSelectType = (e: React.FormEvent) => {
     const selectedType = (e.target as HTMLInputElement)
-      .value as ContentHandlerType
+      .value as unknown as ContentHandlerType
 
     if (setType) setType(selectedType)
   }
@@ -57,12 +57,12 @@ export const CollectionType = ({
             <input
               type="radio"
               id={rbType.key}
-              value={rbType.value}
+              value={rbType.value.toString()}
               name="type"
               onChange={handleSelectType}
               checked={rbType.value === type}
             />
-            <label htmlFor={rbType.key}>{rbType.value}</label>
+            <label htmlFor={rbType.key}>{rbType.value.toString()}</label>
           </li>
         )
       })
@@ -80,7 +80,7 @@ export const CollectionType = ({
     default:
       display = (
         <div>
-          Collection type: <span>{type}</span>
+          Collection type: <span>{type.toString()}</span>
         </div>
       )
       break

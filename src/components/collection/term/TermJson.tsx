@@ -4,7 +4,7 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { ItemInput } from '@/components/collection/item/ItemInput'
 import { validateTermJson } from '@/validation/term-validation'
-import { ValidationResult, Term } from '@/types'
+import { ValidationResult, Term, ContentHandlerType } from '@/types'
 
 export function TermJson() {
   const { collection, updateCollectionItems } = useCollection()
@@ -35,7 +35,7 @@ export function TermJson() {
         onJsonContentChange={setJsonContent}
         onSubmit={isValidTerm}
         message={message}
-        type="term"
+        type={'term' as unknown as ContentHandlerType}
         setMessage={setMessage}
       />
     </section>

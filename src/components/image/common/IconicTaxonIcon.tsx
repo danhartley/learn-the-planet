@@ -15,7 +15,7 @@ export const IconicTaxonIcon: React.FC<IconicTaxonProps> = ({ collection }) => {
 
   let iconicTaxa: IconicTaxon[] = []
 
-  switch (collection.type) {
+  switch (collection.type.toString()) {
     case 'taxon':
       iconicTaxa = [
         ...new Set(

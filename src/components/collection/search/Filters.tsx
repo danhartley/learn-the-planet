@@ -21,6 +21,8 @@ import {
   ContentHandlerType,
 } from '@/types'
 
+import { CountryDefault, LocaleDefault } from '@/config'
+
 export const Filters = () => {
   const { getFilteredCollectionSummaries } = useCollection()
   const [type, setType] = useState<ContentHandlerType>(
@@ -28,15 +30,8 @@ export const Filters = () => {
   )
   const [ownerId, setOwnerId] = useState<string | undefined>()
   const [showOnlyByOwner, setShowOnlyByOwner] = useState(false)
-  const [locale, setLocale] = useState<UserLocale>({
-    code: 'en-GB',
-    language: 'English (UK)',
-  })
-  const [country, setCountry] = useState<Country>({
-    code: 'en-GB',
-    countryCode: 'GB',
-    name: 'United Kingdom',
-  })
+  const [locale, setLocale] = useState<UserLocale>(LocaleDefault)
+  const [country, setCountry] = useState<Country>(CountryDefault)
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [isSearching, setIsSearching] = useState(false)
@@ -114,13 +109,9 @@ export const Filters = () => {
       <LocaleSelector
         userLocale={locale}
         setUserLocale={setLocale}
-        className={type}
+        type={type}
       />
-      <CountrySelector
-        country={country}
-        setCountry={setCountry}
-        className={type}
-      />
+      <CountrySelector country={country} setCountry={setCountry} type={type} />
       <FilterByDate
         startDate={startDate}
         setStartDate={setStartDate}

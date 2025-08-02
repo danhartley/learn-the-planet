@@ -921,7 +921,7 @@ export const CollectionProvider = ({
   }
 
   const orderSections = (collection: Collection<unknown>) => {
-    switch (collection.type) {
+    switch (collection.type.toString()) {
       case 'topic':
         const orderedItems: Topic[] =
           collection.sectionOrder

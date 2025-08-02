@@ -111,7 +111,11 @@ export default function Page() {
   }
 
   const handleStartTest = async () => {
-    const processed = processCollectionTaxa('taxon', searchSpecies) || []
+    const processed =
+      processCollectionTaxa(
+        'taxon' as unknown as ContentHandlerType,
+        searchSpecies
+      ) || []
     const items: Taxon[] = processed.filter(
       (item): item is Taxon =>
         (item as Taxon).id !== undefined &&
@@ -120,7 +124,7 @@ export default function Page() {
     try {
       const collection: Collection<Taxon> = {
         shortId: getShortId(),
-        type: 'taxon' as ContentHandlerType,
+        type: 'taxon' as unknown as ContentHandlerType,
         name: 'inaturalist species',
         slug: 'inat-taxa',
         items,

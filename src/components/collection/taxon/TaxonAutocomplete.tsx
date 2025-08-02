@@ -4,7 +4,15 @@ import Image from 'next/image'
 
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { Taxon, ApiResponse, Topic, Trait, Term, UserLocale } from '@/types'
+import {
+  Taxon,
+  ApiResponse,
+  Topic,
+  Trait,
+  Term,
+  UserLocale,
+  ExtendedContentHandlerType,
+} from '@/types'
 
 import { debounce } from '@/api/inat/utils'
 import { getTaxaByAutocomplete, getTaxaDistractors } from '@/api/inat/api'
@@ -138,7 +146,7 @@ export const TaxonAutocomplete = ({
         <LocaleSelector
           userLocale={locale}
           setUserLocale={setLocale}
-          className="taxon"
+          type={'taxon' as unknown as ExtendedContentHandlerType}
         />
         <div>
           You can search by scientific or common name in any language. The

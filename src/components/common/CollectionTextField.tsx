@@ -56,7 +56,7 @@ export function CollectionTextField({
           >
             {fieldText}
           </label>
-          <span>{required ? ' *' : ' (optional)'}</span>
+          <span>{!required && ' (optional)'}</span>
         </h3>
 
         <div className={`form-row ${type}`}>

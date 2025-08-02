@@ -5,8 +5,18 @@ import { useCollection } from '@/contexts/CollectionContext'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { ImageSelector } from '@/components/image/ImageSelector'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
+import { CountrySelector } from '@/components/collection/search/FilterByCountry'
+import { LocaleSelector } from '@/components/inat/Locale'
 
-import { UpdateCollectionFieldsOptions, Credit } from '@/types'
+import {
+  UpdateCollectionFieldsOptions,
+  Credit,
+  ContentHandlerType,
+  Country,
+  UserLocale,
+} from '@/types'
+
+import { CountryDefault, LocaleDefault } from '@/config'
 
 export const EditProperties = () => {
   const { collection, updateCollectionFields, apiResponse } = useCollection()
@@ -22,6 +32,8 @@ export const EditProperties = () => {
   const [imageUrl, setImageUrl] = useState<string>(collection?.imageUrl || '')
   const [date, setDate] = useState<string>(collection?.date || '')
   const [location, setLocation] = useState<string>(collection?.location || '')
+  const [country, setCountry] = useState<Country>(CountryDefault)
+  const [locale, setLocale] = useState<UserLocale>(LocaleDefault)
 
   const handleFieldsChange = () => {
     const newFields = {
@@ -50,7 +62,7 @@ export const EditProperties = () => {
           fieldValue={name}
           setFieldValue={setName}
           fieldText="Collection name"
-          type={collection?.type || 'topic'}
+          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
           sectionIndex={1}
           required={true}
         />
@@ -61,9 +73,24 @@ export const EditProperties = () => {
           fieldValue={author}
           setFieldValue={setAuthor}
           fieldText="Collection author"
-          type={collection?.type || 'topic'}
+          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
           sectionIndex={1}
           information="Enter authors as a comma-separated list"
+        />
+      </div>
+      <div className="group-block">
+        <CountrySelector
+          country={country}
+          setCountry={setCountry}
+          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
+        />
+      </div>
+
+      <div className="group-block">
+        <LocaleSelector
+          userLocale={locale}
+          setUserLocale={setLocale}
+          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
         />
       </div>
 
@@ -72,7 +99,7 @@ export const EditProperties = () => {
           fieldValue={source}
           setFieldValue={setSource}
           fieldText="Collection source"
-          type={collection?.type || 'topic'}
+          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
           sectionIndex={1}
           information="Enter a link to an external source"
         />
@@ -83,7 +110,7 @@ export const EditProperties = () => {
           fieldValue={sourceTitle}
           setFieldValue={setSourceTitle}
           fieldText="Collection source title"
-          type={collection?.type || 'topic'}
+          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
           sectionIndex={1}
           information="Enter a link to an external source"
         />
@@ -94,7 +121,7 @@ export const EditProperties = () => {
           fieldValue={slug}
           setFieldValue={setSlug}
           fieldText="Collection slug"
-          type={collection?.type || 'topic'}
+          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
           sectionIndex={1}
           required={true}
         />
@@ -123,7 +150,7 @@ export const EditProperties = () => {
           fieldValue={location}
           setFieldValue={setLocation}
           fieldText="Collection location"
-          type={collection?.type || 'topic'}
+          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
           sectionIndex={1}
         />
       </div>
@@ -133,7 +160,7 @@ export const EditProperties = () => {
           fieldValue={imageUrl}
           setFieldValue={setImageUrl}
           fieldText="Collection image url"
-          type={collection?.type || 'topic'}
+          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
           sectionIndex={1}
         />
       </div>

@@ -5,7 +5,7 @@ import { useCollection } from '@/contexts/CollectionContext'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { Topic, Credit } from '@/types'
+import { Topic, Credit, ContentHandlerType } from '@/types'
 
 import { textToArray, getShortId } from '@/utils/strings'
 
@@ -39,7 +39,7 @@ export const AddTopicCredit = () => {
         fieldValue={title}
         setFieldValue={setTitle}
         fieldText="title"
-        type={'topic'}
+        type={'topic' as unknown as ContentHandlerType}
         required={true}
       />
 
@@ -47,7 +47,7 @@ export const AddTopicCredit = () => {
         fieldValue={source}
         setFieldValue={setSource}
         fieldText="source"
-        type={'topic'}
+        type={'topic' as unknown as ContentHandlerType}
         required={false}
       />
 
@@ -55,7 +55,7 @@ export const AddTopicCredit = () => {
         fieldValue={authors}
         setFieldValue={setAuthors}
         fieldText="authors"
-        type={'topic'}
+        type={'topic' as unknown as ContentHandlerType}
         required={false}
       />
 

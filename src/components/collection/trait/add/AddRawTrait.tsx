@@ -4,7 +4,7 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { ItemInput } from '@/components/collection/item/ItemInput'
 import { validateTraitJson } from '@/validation/trait-validation'
-import { ValidationResult, Trait } from '@/types'
+import { ValidationResult, Trait, ContentHandlerType } from '@/types'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
 import { getShortId } from '@/utils/strings'
@@ -58,7 +58,7 @@ export function AddRawTrait() {
         onJsonContentChange={setJsonContent}
         onSubmit={isValidTrait}
         message={message}
-        type="trait"
+        type={'trait' as unknown as ContentHandlerType}
         setMessage={setMessage}
       />
       <div className="form-row">

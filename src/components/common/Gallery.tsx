@@ -17,23 +17,29 @@ type GalleryProps<T> = {
   collection: Collection<T> | undefined
 }
 
-export async function Gallery<T>({ collection }: GalleryProps<T>) {
-  const pageMap: {
-    [K in ContentHandlerType]: React.ComponentType<ComponentProps>
-  } = {
-    term: TermGallery as React.ComponentType<ComponentProps>,
-    taxon: TaxonGallery as React.ComponentType<ComponentProps>,
-    topic: TopicGallery as React.ComponentType<ComponentProps>,
-    trait: TraitGallery as React.ComponentType<ComponentProps>,
-  }
+const PAGE_MAP = {
+  term: TermGallery,
+  taxon: TaxonGallery,
+  topic: TopicGallery,
+  trait: TraitGallery,
+} as const
 
+const getGalleryComponent = (
+  type: ContentHandlerType
+): React.ComponentType<ComponentProps> => {
+  const Component = PAGE_MAP[type as unknown as keyof typeof PAGE_MAP]
+  return (
+    (Component as React.ComponentType<ComponentProps>) ||
+    (() => <div>Component not found</div>)
+  )
+}
+
+export async function Gallery<T>({ collection }: GalleryProps<T>) {
   if (!collection) {
     return <div>Collection not found</div>
   }
 
-  const Component =
-    pageMap[collection.type as ContentHandlerType] ||
-    (() => <div>Component not found</div>)
+  const Component = getGalleryComponent(collection.type as ContentHandlerType)
 
   // Get session on server side
   const session = await auth()

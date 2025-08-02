@@ -16,7 +16,13 @@ import { IconicTaxonIcon } from '@/components/image/common/IconicTaxonIcon'
 
 import { groupCollectionsByType } from '@/utils/arrays'
 
-import { Collection, Topic, Taxon, QuestionTemplateSelection } from '@/types'
+import {
+  Collection,
+  Topic,
+  Taxon,
+  QuestionTemplateSelection,
+  ContentHandlerType,
+} from '@/types'
 
 type Props<Topic> = {
   collection: Collection<Topic>
@@ -47,7 +53,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
 
     return {
       ...collection,
-      type: 'taxon', // Set type to taxon for proper question template selection
+      type: 'taxon' as unknown as ContentHandlerType,
       items: allExamples,
     } as Collection<Taxon>
   }

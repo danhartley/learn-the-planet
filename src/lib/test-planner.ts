@@ -10,7 +10,7 @@ import {
   HistoryItem,
 } from './types'
 
-import { contentHandlers } from './content-handlers/registry'
+import { getContentHander } from './content-handlers/registry'
 
 import { shuffleArray } from '@/utils/strings'
 
@@ -40,9 +40,9 @@ export class TestPlanner<T> {
     questionTemplates: QuestionTemplate[]
   ) {
     this.collection = collection
-    this.contentHandler = contentHandlers[
-      collection.type as ContentHandlerType
-    ] as ContentTypeHandler<T>
+    this.contentHandler = getContentHander(
+      collection.type as unknown as ContentHandlerType
+    ) as ContentTypeHandler<T>
 
     if (!collection) {
       throw new Error('Collection cannot be null or undefined')

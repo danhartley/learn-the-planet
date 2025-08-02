@@ -8,13 +8,13 @@ import { Country, ExtendedContentHandlerType } from '@/types'
 type Props = {
   country: Country
   setCountry: Dispatch<SetStateAction<Country>>
-  className?: ExtendedContentHandlerType
+  type?: ExtendedContentHandlerType
 }
 
 export const CountrySelector = ({
   country,
   setCountry,
-  className = 'taxon' as unknown as ExtendedContentHandlerType,
+  type = 'taxon' as unknown as ExtendedContentHandlerType,
 }: Props) => {
   const [countries] = useState(getCountries())
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -25,17 +25,25 @@ export const CountrySelector = ({
   }
 
   return (
-    <div className={`form-row ${className}`}>
-      <label htmlFor="country-select">Country</label>
-      <select id="country-select" value={country.code} onChange={handleChange}>
-        {countries.map(country => {
-          return (
-            <option key={country.code} value={country.code}>
-              {country.name}
-            </option>
-          )
-        })}
-      </select>
+    <div className="list-group">
+      <h3>
+        <label htmlFor="country-select">Country</label>
+      </h3>
+      <div className={`form-row ${type}`}>
+        <select
+          id="country-select"
+          value={country.code}
+          onChange={handleChange}
+        >
+          {countries.map(country => {
+            return (
+              <option key={country.code} value={country.code}>
+                {country.name}
+              </option>
+            )
+          })}
+        </select>
+      </div>
     </div>
   )
 }

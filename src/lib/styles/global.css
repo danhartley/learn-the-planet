@@ -1272,6 +1272,18 @@ li.collapsed {
   gap: var(--spacing-sm);
 }
 
+/* Create collection progress */
+/* .create-collection-progress {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  div {
+    border-radius: 50%;
+    background-color: var(--colour-bg-body);
+    padding: var(--spacing-md);
+  }
+} */
+
 /* Media queries */
 @media screen and (min-width: 768px) {
   header {

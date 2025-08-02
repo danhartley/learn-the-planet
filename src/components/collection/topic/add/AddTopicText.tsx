@@ -5,7 +5,7 @@ import { useCollection } from '@/contexts/CollectionContext'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { Topic } from '@/types'
+import { Topic, ContentHandlerType } from '@/types'
 
 import { textToArray, getShortId } from '@/utils/strings'
 
@@ -69,7 +69,9 @@ export const AddTopicText = () => {
             fieldValue={topic}
             setFieldValue={setTopic}
             fieldText="Text header"
-            type={collection?.type || 'topic'}
+            type={
+              collection?.type || ('topic' as unknown as ContentHandlerType)
+            }
             sectionIndex={1}
             required={false}
           />

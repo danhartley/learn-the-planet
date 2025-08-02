@@ -47,7 +47,7 @@ export const TopicHome = ({ session }: Props) => {
         summary.ownerId === session?.userId
     ) || []
 
-  const topics = userCollections.filter(c => c.type === 'topic')
+  const topics = userCollections.filter(c => c.type.toString() === 'topic')
 
   // Show loading state if still loading OR if we don't have data yet
   if (loading || !collectionSummaries) {

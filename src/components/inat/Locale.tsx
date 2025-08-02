@@ -8,13 +8,13 @@ import { UserLocale, ExtendedContentHandlerType } from '@/types'
 type Props = {
   userLocale: UserLocale
   setUserLocale: Dispatch<SetStateAction<UserLocale>>
-  className?: ExtendedContentHandlerType
+  type?: ExtendedContentHandlerType
 }
 
 export const LocaleSelector = ({
   userLocale,
   setUserLocale,
-  className = 'inat' as unknown as ExtendedContentHandlerType,
+  type = 'inat' as unknown as ExtendedContentHandlerType,
 }: Props) => {
   const [locales] = useState(getUserLocales())
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -25,21 +25,25 @@ export const LocaleSelector = ({
   }
 
   return (
-    <div className={`form-row ${className}`}>
-      <label htmlFor="locale-select">Language</label>
-      <select
-        id="locale-select"
-        value={userLocale.code}
-        onChange={handleChange}
-      >
-        {locales.map(locale => {
-          return (
-            <option key={locale.code} value={locale.code}>
-              {locale.language}
-            </option>
-          )
-        })}
-      </select>
+    <div className="list-group">
+      <h3>
+        <label htmlFor="locale-select">Language</label>
+      </h3>
+      <div className={`form-row ${type}`}>
+        <select
+          id="locale-select"
+          value={userLocale.code}
+          onChange={handleChange}
+        >
+          {locales.map(locale => {
+            return (
+              <option key={locale.code} value={locale.code}>
+                {locale.language}
+              </option>
+            )
+          })}
+        </select>
+      </div>
     </div>
   )
 }

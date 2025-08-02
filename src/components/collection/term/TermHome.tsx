@@ -46,7 +46,7 @@ export const TermHome = ({ session }: Props) => {
         summary.ownerId === session?.userId
     ) || []
 
-  const terms = userCollections.filter(c => c.type === 'term')
+  const terms = userCollections.filter(c => c.type.toString() === 'term')
 
   // Show loading state if still loading OR if we don't have data yet
   if (loading || !collectionSummaries || collectionSummaries.length === 0) {

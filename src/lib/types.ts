@@ -229,7 +229,7 @@ export type Collection<T> = {
 }
 
 export type GroupedCollectionSummaries = {
-  [K in ContentHandlerType]: CollectionSummary[]
+  [K in string]: CollectionSummary[]
 }
 
 export type Layout<T> = {

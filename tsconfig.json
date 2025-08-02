@@ -27,6 +27,7 @@
       "@/types": ["lib/types"],
       "@/services/*": ["lib/services/*"],
       "@/utils/*": ["lib/utils/*"],
+      "@/config": ["lib/config"],
       "@/api/*": ["lib/api/*"],
       "@/mocks/*": ["lib/mocks/*"],
       "@/registry": ["lib/registry"],

@@ -18,7 +18,7 @@ export const FilterByOwnerId = ({
 
   useEffect(() => {
     setOwnerId(session?.user?.id)
-  }, [session?.user?.id])
+  }, [setOwnerId, session?.user?.id])
 
   const handleSelectOwnership = (e: React.FormEvent) => {
     const ownership = (e.target as HTMLInputElement).value

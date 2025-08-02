@@ -5,7 +5,7 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { CollectionList } from '@/components/CollectionList'
 
-import { SessionState, CollectionStatus } from '@/types'
+import { SessionState, CollectionStatus, ContentHandlerType } from '@/types'
 
 type Props = {
   session: SessionState | undefined
@@ -51,10 +51,18 @@ export const CollectionSummaries = ({ session }: Props) => {
       summary.ownerId === session?.userId
   )
 
-  const topics = userCollections.filter(c => c.type === 'topic')
-  const traits = userCollections.filter(c => c.type === 'trait')
-  const taxa = userCollections.filter(c => c.type === 'taxon')
-  const terms = userCollections.filter(c => c.type === 'term')
+  const topics = userCollections.filter(
+    c => c.type === ('topic' as unknown as ContentHandlerType)
+  )
+  const traits = userCollections.filter(
+    c => c.type === ('trait' as unknown as ContentHandlerType)
+  )
+  const taxa = userCollections.filter(
+    c => c.type === ('taxon' as unknown as ContentHandlerType)
+  )
+  const terms = userCollections.filter(
+    c => c.type === ('term' as unknown as ContentHandlerType)
+  )
 
   return (
     <section aria-labelledby="collections" className="column-group">

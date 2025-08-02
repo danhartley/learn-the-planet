@@ -39,7 +39,8 @@ export const ItemInput: React.FC<ItemInputProps> = ({
     <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="json-input">
-          Please paste your {type} JSON object or array in the text area below.
+          Please paste your {type.toString()} JSON object or array in the text
+          area below.
         </label>
         <div className="form-row">
           <textarea
@@ -54,7 +55,7 @@ export const ItemInput: React.FC<ItemInputProps> = ({
 
         <div className="form-row">
           <button id="submit" type="submit">
-            Validate {type} data
+            Validate {type.toString()} data
           </button>
           <ApiResponseMessage apiResponse={message} />
         </div>

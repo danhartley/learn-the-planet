@@ -5,7 +5,7 @@ import { useCollection } from '@/contexts/CollectionContext'
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { Collection, Topic, Credit } from '@/types'
+import { Collection, Topic, Credit, ContentHandlerType } from '@/types'
 
 import { textToArray } from '@/utils/strings'
 
@@ -50,21 +50,21 @@ export const TopicCredit = ({ collection, section }: Props) => {
           fieldValue={title}
           setFieldValue={setTitle}
           fieldText="title"
-          type={'topic'}
+          type={'topic' as unknown as ContentHandlerType}
           required={true}
         />
         <CollectionTextField
           fieldValue={source}
           setFieldValue={setSource}
           fieldText="source"
-          type={'topic'}
+          type={'topic' as unknown as ContentHandlerType}
           required={false}
         />
         <CollectionTextField
           fieldValue={authors}
           setFieldValue={setAuthors}
           fieldText="authors"
-          type={'topic'}
+          type={'topic' as unknown as ContentHandlerType}
           required={false}
         />
         <div className="form-row">

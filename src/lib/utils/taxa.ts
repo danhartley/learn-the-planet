@@ -42,7 +42,7 @@ export const processCollectionTaxa = (
     return items
   }
 
-  switch (type) {
+  switch (type.toString()) {
     case 'taxon':
       return generateGenusAndSpeciesFields(items as Taxon[])
 

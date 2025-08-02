@@ -84,8 +84,8 @@ export function useTestPlanner<T>() {
     startTest: ({
       collection,
       questionTemplates = getTemplatesByContentType(
-        collection.type as ContentHandlerType
-      ),
+        collection.type as unknown as ContentHandlerType
+      ) as QuestionTemplate[],
       config,
     }: Props) => service.startTest(collection, questionTemplates, config),
     startRetest: (strategy: TestStrategy) => {

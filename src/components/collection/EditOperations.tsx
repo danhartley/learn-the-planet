@@ -32,10 +32,13 @@ export const EditOperations = () => {
     getCollectionSummaries().then(setCollectionSummaries)
   }, [getCollectionSummaries])
 
-  const isTopic = collection?.type === ('topic' as ContentHandlerType)
-  const isTrait = collection?.type === ('trait' as ContentHandlerType)
-  const isTaxon = collection?.type === ('taxon' as ContentHandlerType)
-  const isTerm = collection?.type === ('term' as ContentHandlerType)
+  const isTopic =
+    collection?.type === ('topic' as unknown as unknown as ContentHandlerType)
+  const isTrait =
+    collection?.type === ('trait' as unknown as ContentHandlerType)
+  const isTaxon =
+    collection?.type === ('taxon' as unknown as ContentHandlerType)
+  const isTerm = collection?.type === ('term' as unknown as ContentHandlerType)
 
   const isUpdateItems = operation === ('update-items' as Operation)
   const isAddItem = operation === ('add-item' as Operation)
@@ -53,7 +56,7 @@ export const EditOperations = () => {
       <OperationSelector
         operation={operation}
         setOperation={setOperation}
-        type={collection?.type || 'topic'}
+        type={collection?.type || ('topic' as unknown as ContentHandlerType)}
       />
 
       {operation === ('update' as Operation) && <EditProperties />}

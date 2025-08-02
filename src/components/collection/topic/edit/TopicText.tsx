@@ -2,6 +2,8 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react'
 
 import { CollectionTextField } from '@/components/common/CollectionTextField'
 
+import { ContentHandlerType } from '@/types'
+
 type Props = {
   id: string
   text: string[] | undefined
@@ -53,7 +55,7 @@ export const TopicText = ({
             fieldValue={topic || ''}
             setFieldValue={setTopic}
             fieldText="Text header"
-            type={'topic'}
+            type={'topic' as unknown as ContentHandlerType}
             sectionIndex={1}
             required={false}
           />

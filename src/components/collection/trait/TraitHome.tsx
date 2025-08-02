@@ -46,7 +46,7 @@ export const TraitHome = ({ session }: Props) => {
         summary.ownerId === session?.userId
     ) || []
 
-  const traits = userCollections.filter(c => c.type === 'trait')
+  const traits = userCollections.filter(c => c.type.toString() === 'trait')
 
   if (loading) {
     return (

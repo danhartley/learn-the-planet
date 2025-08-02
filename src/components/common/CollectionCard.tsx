@@ -16,7 +16,7 @@ const CollectionMetadata = ({
 }: {
   collectionSummary: CollectionSummary
 }) => {
-  switch (collectionSummary.type) {
+  switch (collectionSummary.type.toString()) {
     case 'term':
       return (
         <div className="collection-metadata">
@@ -58,10 +58,10 @@ export const CollectionCard = ({
     term: 'Review terms',
     topic: 'Read notes',
     trait: 'View traits',
-  }[collectionSummary.type as ContentHandlerType]
+  }[collectionSummary.type.toString()]
 
   const collectionUrl = `/collection/${collectionSummary.slug}-${collectionSummary.shortId}`
-  const showTestButton = collectionSummary.type !== 'topic'
+  const showTestButton = collectionSummary.type.toString() !== 'topic'
 
   return (
     <section

@@ -93,6 +93,7 @@ export const traitTemplates: QuestionTemplate[] = [
     distractorType: 'definition',
   },
 ]
+
 export const topicTemplates: QuestionTemplate[] = [
   {
     type: 'multipleChoice',
@@ -134,20 +135,15 @@ export const topicTemplates: QuestionTemplate[] = [
   },
 ]
 
-export const getTemplatesByContentType = (
-  contentType: ContentHandlerType
-): QuestionTemplate[] => {
-  const templateMap = {
-    taxon: taxonTemplates,
-    term: termTemplates,
-    trait: traitTemplates,
-    topic: topicTemplates,
+export const getTemplatesByContentType = (type: ContentHandlerType) => {
+  switch (type.toString()) {
+    case 'topic':
+      return topicTemplates
+    case 'trait':
+      return traitTemplates
+    case 'taxon':
+      return taxonTemplates
+    case 'term':
+      return termTemplates
   }
-
-  const templates = templateMap[contentType].map(template => {
-    template.contentType = contentType
-    return template
-  })
-
-  return templates
 }

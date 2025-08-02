@@ -18,6 +18,8 @@ import {
   AddCollectionProps,
 } from '@/types'
 
+import { CountryDefault, LocaleDefault } from '@/config'
+
 export const CreateOperation = () => {
   const { data: session, status } = useSession()
   const { collection, addCollection } = useCollection()
@@ -27,15 +29,8 @@ export const CreateOperation = () => {
   )
   const [imageUrl, setImageUrl] = useState<string>('')
   const [isCreating, setIsCreating] = useState<boolean>(false)
-  const [country, setCountry] = useState<Country>({
-    code: 'en-GB',
-    countryCode: 'GB',
-    name: 'United Kingdom',
-  })
-  const [locale, setLocale] = useState<UserLocale>({
-    code: 'en-GB',
-    language: 'English (UK)',
-  })
+  const [country, setCountry] = useState<Country>(CountryDefault)
+  const [locale, setLocale] = useState<UserLocale>(LocaleDefault)
 
   const MIN_NAME_LENGTH = 5
 
@@ -107,13 +102,13 @@ export const CreateOperation = () => {
           <CountrySelector
             country={country}
             setCountry={setCountry}
-            className={type}
+            type={type}
           />
 
           <LocaleSelector
             userLocale={locale}
             setUserLocale={setLocale}
-            className={type}
+            type={type}
           />
 
           <button onClick={createCollection} disabled={isButtonDisabled}>

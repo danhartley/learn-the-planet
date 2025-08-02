@@ -912,6 +912,7 @@ export const getFilteredCollectionSummaries = async (
 
   try {
     // Build MongoDB query
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     const query: any = {}
 
     // Type filter
@@ -998,7 +999,7 @@ export const getFilteredCollectionSummaries = async (
 export const updateCollectionsSummaryField = async (
   shortId: string,
   fieldName: keyof CollectionSummary,
-  fieldValue: any
+  fieldValue: unknown
 ): Promise<CollectionSummary | null> => {
   const client = await clientPromise
   const db = client.db(DB_NAME)
@@ -1034,6 +1035,7 @@ export const updateCollectionsSummaryField = async (
     } as unknown as CollectionSummary
 
     // Remove the _id field since we're using id
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (updatedDocument as any)._id
 
     console.log(`Successfully updated collection ${shortId}`)
@@ -1047,7 +1049,7 @@ export const updateCollectionsSummaryField = async (
 // Bulk update function (all documents)
 export const updateCollectionsSummaryFields = async (
   fieldName: keyof CollectionSummary,
-  fieldValue: any
+  fieldValue: unknown
 ): Promise<number> => {
   const client = await clientPromise
   const db = client.db(DB_NAME)
