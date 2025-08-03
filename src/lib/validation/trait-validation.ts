@@ -193,7 +193,6 @@ export function validateTraitJson(jsonString: string): ValidationResult<Trait> {
         errors,
       }
     }
-    console.log('validatedTraits', validatedTraits)
     // All checks passed
     return {
       isValid: true,

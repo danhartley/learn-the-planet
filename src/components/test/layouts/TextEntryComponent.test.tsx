@@ -2,7 +2,13 @@ import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import TextEntryComponent from '@/components/test/layouts/TextEntryComponent'
-import { Layout, LearningItem, TextEntryQuestion, Score } from '@/types'
+import {
+  Layout,
+  LearningItem,
+  TextEntryQuestion,
+  Score,
+  ContentHandlerType,
+} from '@/types'
 
 describe('TextEntryComponent', () => {
   const mockOnSubmit = vi.fn()
@@ -18,14 +24,18 @@ describe('TextEntryComponent', () => {
     collection: {
       id: 'test-collection-id',
       name: 'Test Collection',
-      type: 'test-collection',
+      slug: 'test-collection',
+      ownerId: '',
+      itemCount: 0,
+      sectionOrder: [],
+      type: 'topic' as unknown as ContentHandlerType,
       items: [],
     },
     question: {
       key: 'test-question',
       text: 'What is your answer?',
       hint: 'Enter your answer here',
-      contentType: 'text-input',
+      contentType: 'topic' as unknown as ContentHandlerType,
       type: 'text-entry',
       ...questionData,
     } as TextEntryQuestion,
@@ -46,7 +56,7 @@ describe('TextEntryComponent', () => {
       />
     )
 
-    expect(screen.getByText('text-input')).toBeInTheDocument()
+    expect(screen.getByText('topic')).toBeInTheDocument()
     expect(screen.getByText('What is your answer?')).toBeInTheDocument()
     expect(screen.getByText('Question 1 of 5')).toBeInTheDocument()
   })
@@ -367,7 +377,7 @@ describe('TextEntryComponent', () => {
     await waitFor(() => {
       formRow = container.querySelector('.form-row')
       expect(formRow).not.toHaveClass('bg-incorrect')
-      expect(formRow).toHaveClass('text-input')
+      expect(formRow).toHaveClass('topic')
     })
   })
 
@@ -385,7 +395,7 @@ describe('TextEntryComponent', () => {
     const section = container.querySelector('section')
     expect(section).toHaveClass('group-block')
     expect(section).toHaveAttribute('aria-labelledby', 'text-entry')
-    expect(section).toHaveAttribute('data-type', 'test-collection')
+    expect(section).toHaveAttribute('data-type', 'topic')
   })
 
   it('handles input with required attribute', () => {
@@ -406,7 +416,7 @@ describe('TextEntryComponent', () => {
   })
 
   it('applies initial form-row class with contentType', () => {
-    const layout = createMockLayout({ contentType: 'custom-input' })
+    const layout = createMockLayout({ contentType: 'topic' })
 
     const { container } = render(
       <TextEntryComponent
@@ -417,7 +427,7 @@ describe('TextEntryComponent', () => {
     )
 
     const formRow = container.querySelector('.form-row')
-    expect(formRow).toHaveClass('form-row', 'custom-input')
+    expect(formRow).toHaveClass('form-row', 'topic')
   })
 
   it('handles case where answerInputRef is null', () => {
