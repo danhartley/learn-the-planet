@@ -95,7 +95,6 @@ export default function Page() {
 
       const speciesWithDistractors = await getTaxaDistractors({
         species,
-        locale: locale.code,
       })
 
       setSearchSpecies(speciesWithDistractors)

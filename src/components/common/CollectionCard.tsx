@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { CollectionSummary, ContentHandlerType } from '@/types'
+import { CollectionSummary } from '@/types'
 
 type Props = {
   collectionSummary: CollectionSummary

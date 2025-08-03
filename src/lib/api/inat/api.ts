@@ -189,12 +189,10 @@ export const getDistractors = async ({ ancestorIds }: AncestorProps) => {
 
 type TaxaDistractorProps = {
   species: Taxon[]
-  locale: string
 }
 
 export const getTaxaDistractors = async ({
   species,
-  locale,
 }: TaxaDistractorProps): Promise<Taxon[]> => {
   const resultsWithDistractors = await Promise.all(
     species.map(async (taxon: Taxon) => {
