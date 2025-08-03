@@ -2,10 +2,27 @@
 
 import { Image, Taxon, InatTaxon } from '@/types'
 
-export const mapInatSpeciesToLTP = (
-  results: InatTaxon[],
+const extractVernacularName = ({
+  species,
+  locale,
+}: {
+  species: InatTaxon
+  locale: string | undefined
+}) => {
+  return species.names
+    ? species.names.find(name => name.locale === locale || 'en-GB')?.name
+    : species.preferred_common_name || species.english_common_name
+}
+
+type InatMapProps = {
+  results: InatTaxon[]
   locale?: string
-): Taxon[] | undefined => {
+}
+
+export const mapInatSpeciesToLTP = ({
+  results,
+  locale,
+}: InatMapProps): Taxon[] | undefined => {
   try {
     const species: Taxon[] = results.map(s => {
       return {
@@ -25,9 +42,7 @@ export const mapInatSpeciesToLTP = (
             }
           : (undefined as Image | undefined),
         wikipediaUrl: s.wikipedia_url,
-        vernacularName: s.names
-          ? s.names.find(name => name.locale === locale)?.name
-          : s.preferred_common_name || s.english_common_name,
+        vernacularName: extractVernacularName({ species: s, locale }),
         ancestorIds: s.ancestor_ids,
       } as unknown as Taxon
     })

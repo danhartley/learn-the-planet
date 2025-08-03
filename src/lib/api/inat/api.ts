@@ -113,7 +113,7 @@ async function getInatData(url: string) {
     }
 
     const json = await response.json()
-    const species = mapInatSpeciesToLTP(json.results)
+    const species = mapInatSpeciesToLTP({ results: json.results })
 
     // Add distractors to each species
     if (species) {
@@ -165,7 +165,8 @@ export const getTaxaByAutocomplete = async ({
   const url = `https://api.inaturalist.org/v1/${by}/autocomplete?q=${toComplete}&per_page=10&rank=species&all_names=true&locale=${locale}`
   const response = await fetch(url)
   const json = await response.json()
-  const species: Taxon[] = mapInatSpeciesToLTP(json.results, locale) || []
+  const species: Taxon[] =
+    mapInatSpeciesToLTP({ results: json.results, locale }) || []
 
   if (species) {
     return {
@@ -180,17 +181,21 @@ type AncestorProps = {
 }
 
 export const getDistractors = async ({ ancestorIds }: AncestorProps) => {
-  const url = `https://api.inaturalist.org/v1/taxa?parent_id=${ancestorIds.join(',')}&rank=species`
+  const url = `https://api.inaturalist.org/v1/taxa?parent_id=${ancestorIds.join(',')}&rank=species&all_names=true`
   const response = await fetch(url)
   const json = await response.json()
   return json
 }
 
+type TaxaDistractorProps = {
+  species: Taxon[]
+  locale: string
+}
+
 export const getTaxaDistractors = async ({
   species,
-}: {
-  species: Taxon[]
-}): Promise<Taxon[]> => {
+  locale,
+}: TaxaDistractorProps): Promise<Taxon[]> => {
   const resultsWithDistractors = await Promise.all(
     species.map(async (taxon: Taxon) => {
       try {
@@ -198,7 +203,6 @@ export const getTaxaDistractors = async ({
           const distractorsResult = await getDistractors({
             ancestorIds: taxon.ancestorIds.map((id: number) => id.toString()),
           })
-
           const distractors = distractorsResult?.results
             .filter(
               (d: InatTaxon) =>
@@ -209,7 +213,10 @@ export const getTaxaDistractors = async ({
 
           return {
             ...taxon,
-            distractors: mapInatSpeciesToLTP(distractors) || [],
+            distractors:
+              mapInatSpeciesToLTP({
+                results: distractors,
+              }) || [],
           }
         }
 
@@ -298,9 +305,11 @@ export const getInatObservations = async ({
   const json = await response.json()
 
   const species: Taxon[] =
-    mapInatSpeciesToLTP(
-      json.results.map((observation: InatObservation) => observation.taxon)
-    ) || []
+    mapInatSpeciesToLTP({
+      results: json.results.map(
+        (observation: InatObservation) => observation.taxon
+      ),
+    }) || []
 
   return getUniqueTaxa(species)
 }

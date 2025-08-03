@@ -93,7 +93,10 @@ export default function Page() {
 
       const species = await getInatObservations(filters)
 
-      const speciesWithDistractors = await getTaxaDistractors({ species })
+      const speciesWithDistractors = await getTaxaDistractors({
+        species,
+        locale: locale.code,
+      })
 
       setSearchSpecies(speciesWithDistractors)
     } catch (error) {
@@ -190,7 +193,11 @@ export default function Page() {
         </section>
       )}
       <div className="collection-actions">
-        <button id="start-test" onClick={handleStartTest}>
+        <button
+          id="start-test"
+          onClick={handleStartTest}
+          disabled={searchSpecies.length === 0}
+        >
           Start test
         </button>
       </div>
