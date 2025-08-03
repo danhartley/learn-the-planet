@@ -976,6 +976,7 @@ export const getFilteredCollectionSummaries = async (
     const results = await db
       .collection('collectionsSummary')
       .find(query)
+      .sort({ updatedAt: -1 }) // -1 for descending (newest first), 1 for ascending (oldest first)
       .toArray()
 
     // Convert MongoDB results to CollectionSummary format

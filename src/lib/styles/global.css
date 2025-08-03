@@ -1260,6 +1260,11 @@ li.collapsed {
   border: 1px solid var(--colour-line);
   padding: var(--spacing-sm);
   gap: var(--spacing-md);
+  width: -webkit-fill-available;
+
+  label.date {
+    width: calc(var(--spacing-md) * 4);
+  }
 
   input[type='radio'] {
     margin: 0;

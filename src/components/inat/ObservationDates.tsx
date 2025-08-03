@@ -33,7 +33,9 @@ export const ObservationDates = ({ onDateChange }: Props) => {
           </h3>
           <div className="inat-group">
             <div className="form-row inat">
-              <label htmlFor="observations-start-date">From</label>
+              <label htmlFor="observations-start-date" className="date">
+                From
+              </label>
               <input
                 type="date"
                 id="observations-start-date"
@@ -43,7 +45,9 @@ export const ObservationDates = ({ onDateChange }: Props) => {
               />
             </div>
             <div className="form-row inat">
-              <label htmlFor="observations-end-date">To</label>
+              <label htmlFor="observations-end-date" className="date">
+                Until
+              </label>
               <input
                 type="date"
                 id="observations-end-date"
