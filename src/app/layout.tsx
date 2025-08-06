@@ -1,11 +1,28 @@
 import Link from 'next/link'
 
 import '@/css/global.css'
-import '@/css/fonts.css'
 
 import { SessionProvider } from 'next-auth/react'
 
 import { Menu } from '@/components/Menu'
+
+import { Playfair_Display, Open_Sans } from 'next/font/google'
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'], // Regular, Medium, Semi-bold, Bold
+  display: 'swap', // Prevents layout shift
+  variable: '--font-family-serif',
+  style: ['normal', 'italic'],
+})
+
+const openSans = Open_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '800'], // Light, Regular, Medium, Semi-bold, Bold
+  display: 'swap',
+  variable: '--font-family-sans-serif',
+  style: ['normal', 'italic'],
+})
 
 export const metadata = {
   title: 'Learn the Planet',
@@ -15,7 +32,10 @@ export const metadata = {
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${playfairDisplay.variable} ${openSans.variable}`}
+    >
       <head>{/* <script src="http://localhost:8097" /> */}</head>
       <body>
         <header>

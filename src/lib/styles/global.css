@@ -91,9 +91,9 @@
   --line-height-xl: 1.8;
   --text-underline-offset: 0.5rem;
 
-  /* Font family serif */
-  --font-family-serif: 'Playfair Display', Elena, 'PT Serif', serif;
-  --font-family-sans-serif: 'Open Sans', sans-serif;
+  /* Font families */
+  /* --font-family-serif: 'Playfair Display', Elena, 'PT Serif', serif;
+  --font-family-sans-serif: 'Open Sans', sans-serif; */
 }
 
 /* Base styles */
