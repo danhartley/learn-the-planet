@@ -14,7 +14,7 @@ export const RotatingTaxonIcons = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex(prevIndex => (prevIndex + 1) % iconicTaxa.length)
-    }, 3500)
+    }, 2500)
 
     return () => clearInterval(interval)
   }, [iconicTaxa.length])
