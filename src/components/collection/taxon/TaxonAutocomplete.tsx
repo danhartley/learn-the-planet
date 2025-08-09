@@ -19,6 +19,8 @@ import { getTaxaByAutocomplete, getTaxaDistractors } from '@/api/inat/api'
 
 import { LocaleSelector } from '@/components/inat/Locale'
 
+import { LocaleDefault } from '@/config'
+
 interface TaxonAutocompleteProps {
   selectedTaxa: Taxon[]
   onTaxonToggle: (taxon: Taxon) => void
@@ -47,10 +49,7 @@ export const TaxonAutocomplete = ({
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState<Taxon[]>([])
   const [internalChangesToSave, setInternalChangesToSave] = useState(false)
-  const [locale, setLocale] = useState<UserLocale>({
-    code: 'en',
-    language: 'English',
-  })
+  const [locale, setLocale] = useState<UserLocale>(LocaleDefault)
 
   // Use internal state if onSaveChanges is provided, otherwise use external props
   const changesToSave = onSaveChanges

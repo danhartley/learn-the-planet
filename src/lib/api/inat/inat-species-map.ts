@@ -2,6 +2,12 @@
 
 import { Image, Taxon, InatTaxon } from '@/types'
 
+const extractLocalePartFromLocale = (locale: string) => {
+  // e.g. if locale is 'en-GB' return 'en'
+  // Because many locales do not have the two part locale designation
+  return locale?.split('-')[0] || locale
+}
+
 const extractVernacularName = ({
   species,
   locale,
@@ -10,7 +16,9 @@ const extractVernacularName = ({
   locale: string | undefined
 }) => {
   return species.names
-    ? species.names.find(name => name.locale === locale || 'en-GB')?.name
+    ? species.names.find(
+        name => name.locale === extractLocalePartFromLocale(locale || 'en')
+      )?.name
     : species.preferred_common_name || species.english_common_name
 }
 

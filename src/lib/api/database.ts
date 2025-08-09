@@ -134,10 +134,10 @@ export const createCollection = async ({
   const db = client.db(DB_NAME)
   const shortId = crypto.randomUUID().split('-')[0]
   const slug = collection.name.toLowerCase().replace(/\s+/g, '-')
-  const itemCount = collection?.items?.length || 0
+  const itemCount = collection?.items?.length || 0 // 0
   const sectionOrder = collection.items?.map(
     item => (item as { id: string }).id
-  )
+  ) // []
 
   let insertedId: string | null = null
 
@@ -211,7 +211,7 @@ export const updateCollectionSummary = async (
 ) => {
   const client = await clientPromise
   const db = client.db(DB_NAME)
-
+  console.log('updates', updates)
   try {
     const result = await db
       .collection('collectionsSummary')
@@ -816,6 +816,13 @@ export const updateCollectionItem = async (
       { returnDocument: 'after' }
     )
 
+    // Update the summary collection with the new item count
+    if (addResult) {
+      await updateCollectionSummary(shortId, {
+        itemCount: addResult.itemCount,
+      })
+    }
+
     if (!addResult) {
       throw new Error(`Collection with shortId ${shortId} not found`)
     }
@@ -857,6 +864,13 @@ export const deleteCollectionItem = async (
 
     if (!deleteResult) {
       throw new Error(`Item with id ${itemId} not found in collection`)
+    }
+
+    // Update the summary collection with the new item count
+    if (deleteResult) {
+      await updateCollectionSummary(shortId, {
+        itemCount: deleteResult.itemCount,
+      })
     }
 
     return deleteResult
@@ -970,8 +984,6 @@ export const getFilteredCollectionSummaries = async (
     if (filters.popularity !== undefined) {
       query.popularity = { $gte: filters.popularity }
     }
-
-    console.log('Filter query:', JSON.stringify(query, null, 2))
 
     const results = await db
       .collection('collectionsSummary')

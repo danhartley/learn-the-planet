@@ -162,7 +162,17 @@ export const getTaxaByAutocomplete = async ({
   toComplete,
   locale = 'en',
 }: AutoCompleteProps) => {
-  const url = `https://api.inaturalist.org/v1/${by}/autocomplete?q=${toComplete}&per_page=10&rank=species&all_names=true&locale=${locale}`
+  const baseUrl = `https://api.inaturalist.org/v1/${by}/autocomplete`
+  const params = new URLSearchParams({
+    q: toComplete,
+    per_page: '10',
+    rank: 'genus, species',
+    all_names: 'true',
+    locale,
+  })
+
+  const url = `${baseUrl}?${params.toString()}`
+
   const response = await fetch(url)
   const json = await response.json()
   const species: Taxon[] =
@@ -176,6 +186,7 @@ export const getTaxaByAutocomplete = async ({
 
   return json
 }
+
 type AncestorProps = {
   ancestorIds: string[]
 }

@@ -26,7 +26,6 @@ export const AddTopicImage = () => {
 
   return (
     <>
-      {/* <h2 id="new-section">Add image</h2> */}
       <div className="group-block">
         <ImageSelector
           selectionMode="multiple"

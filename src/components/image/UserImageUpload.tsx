@@ -62,7 +62,7 @@ export const UserImageUpload = ({
     multiple: false,
     clientAllowedFormats: allowedFormats,
 
-    // Organization
+    // Organisation
     folder: generateFolder(),
     context: {
       title: '',
@@ -242,7 +242,7 @@ export const MultipleImageUpload = ({
     multiple: true,
     clientAllowedFormats: allowedFormats,
 
-    // Organization
+    // Organisation
     folder: generateFolder(),
     context: {
       title: '',

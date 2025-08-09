@@ -31,6 +31,8 @@ import {
   UserLocale,
 } from '@/types'
 
+import { LocaleDefault } from '@/config'
+
 export default function Page() {
   const router = useRouter()
 
@@ -59,10 +61,7 @@ export default function Page() {
     if (startDate) setStartDate(startDate)
     if (endDate) setEndDate(endDate)
   }
-  const [locale, setLocale] = useState<UserLocale>({
-    code: 'en',
-    language: 'English',
-  })
+  const [locale, setLocale] = useState<UserLocale>(LocaleDefault)
 
   const search = async () => {
     setIsSearching(true)

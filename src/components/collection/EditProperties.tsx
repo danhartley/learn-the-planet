@@ -70,6 +70,17 @@ export const EditProperties = () => {
 
       <div className="group-block">
         <CollectionTextField
+          fieldValue={slug}
+          setFieldValue={setSlug}
+          fieldText="Collection slug"
+          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
+          sectionIndex={1}
+          required={true}
+        />
+      </div>
+
+      <div className="group-block">
+        <CollectionTextField
           fieldValue={author}
           setFieldValue={setAuthor}
           fieldText="Collection author"
@@ -113,17 +124,6 @@ export const EditProperties = () => {
           type={collection?.type || ('topic' as unknown as ContentHandlerType)}
           sectionIndex={1}
           information="Enter a link to an external source"
-        />
-      </div>
-
-      <div className="group-block">
-        <CollectionTextField
-          fieldValue={slug}
-          setFieldValue={setSlug}
-          fieldText="Collection slug"
-          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
-          sectionIndex={1}
-          required={true}
         />
       </div>
 

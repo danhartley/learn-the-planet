@@ -23,7 +23,6 @@ export const LocaleSelector = ({
     ) as unknown as UserLocale
     setUserLocale(locale)
   }
-
   return (
     <div className="list-group">
       <h3>
