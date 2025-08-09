@@ -402,3 +402,14 @@ export const getShortId = () => {
 export const hyphenateText = (text: string) => {
   return text.trim().replace(/\s+/g, '-')
 }
+
+export const getBtnText = (type: string) => {
+  switch (type) {
+    case 'taxon':
+      return 'Learn taxa'
+    case 'trait':
+      return 'Learn traits'
+    case 'term':
+      return 'Learn terms'
+  }
+}

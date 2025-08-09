@@ -5,6 +5,8 @@ import Image from 'next/image'
 
 import { CollectionSummary } from '@/types'
 
+import { getBtnText } from '@/utils/strings'
+
 type Props = {
   collectionSummary: CollectionSummary
   handleStartTest: () => Promise<void>
@@ -106,7 +108,7 @@ export const CollectionCard = ({
       {showTestButton ? (
         <div className="collection-actions">
           <button id="start-test" onClick={handleStartTest}>
-            Start test
+            {getBtnText(collectionSummary.type.toString())}
           </button>
         </div>
       ) : (

@@ -89,7 +89,7 @@ export function TraitGallery({ collection }: Props<Trait>) {
       {collections}
       <TestConfigSettings config={config} setConfig={setConfig} />
       <button id="start-test" onClick={handleStartTest}>
-        Start test
+        Learn traits
       </button>
     </section>
   )

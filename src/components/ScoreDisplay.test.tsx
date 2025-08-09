@@ -65,14 +65,14 @@ describe('ScoreDisplay Component', () => {
     render(<ScoreDisplay />)
 
     // Check that the component renders with default progress
-    expect(screen.getByText('Test score')).toBeInTheDocument()
+    expect(screen.getByText('Lesson progress')).toBeInTheDocument()
 
     const progressBar = screen.getByRole('progressbar') as HTMLProgressElement
     expect(progressBar).toBeInTheDocument()
     expect(progressBar.max).toBe(10)
     expect(progressBar.value).toBe(0)
     expect(
-      screen.getByText('Your answers and score will appear here.')
+      screen.getByText('A record of your progress will appear here.')
     ).toBeInTheDocument()
   })
 
@@ -101,7 +101,7 @@ describe('ScoreDisplay Component', () => {
     render(<ScoreDisplay />)
 
     // Check that the component renders with correct progress
-    expect(screen.getByText('Test progress')).toBeInTheDocument()
+    expect(screen.getByText('Completed')).toBeInTheDocument()
 
     const progressBar = screen.getByRole('progressbar') as HTMLProgressElement
     expect(progressBar).toBeInTheDocument()

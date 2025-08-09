@@ -136,7 +136,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
         <>
           <TestConfigSettings config={config} setConfig={setConfig} />
           <button id="start-test" onClick={handleStartTest}>
-            Start test
+            Learn topic taxa
           </button>
         </>
       )}

@@ -68,7 +68,7 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
       </section>
       <TestConfigSettings config={config} setConfig={setConfig} />
       <button id="start-test" onClick={handleStartTest}>
-        Start test
+        Learn taxa
       </button>
     </section>
   )

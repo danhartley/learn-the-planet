@@ -12,6 +12,8 @@ import {
   QuestionTemplateSelection,
 } from '@/types'
 
+import { getBtnText } from '@/utils/strings'
+
 export const CollectionLinks: React.FC<{
   collections: CollectionSummary[]
   currentCollection: Collection<unknown>
@@ -72,7 +74,7 @@ export const CollectionLinks: React.FC<{
                     )
                   }
                 >
-                  Start test
+                  {getBtnText(linkedCollection.type.toString())}
                 </button>
               </div>
             </li>

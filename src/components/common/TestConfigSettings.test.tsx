@@ -20,7 +20,7 @@ describe('TestConfigSettings', () => {
 
     render(<TestConfigSettings config={mockConfig} setConfig={mockSetConfig} />)
 
-    expect(screen.getByText('Test type options')).toBeInTheDocument()
+    expect(screen.getByText('Question types')).toBeInTheDocument()
     expect(screen.getByText('Multiple choice')).toBeInTheDocument()
     expect(screen.getByText('Text entry')).toBeInTheDocument()
     expect(screen.getByText('Multi select')).toBeInTheDocument()

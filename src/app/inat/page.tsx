@@ -196,7 +196,7 @@ export default function Page() {
           onClick={handleStartTest}
           disabled={searchSpecies.length === 0}
         >
-          Start test
+          Learn taxa
         </button>
       </div>
     </CollectionProvider>

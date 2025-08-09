@@ -88,7 +88,7 @@ export function TermGallery({ collection }: Props<Term>) {
       </section>
       <TestConfigSettings config={config} setConfig={setConfig} />
       <button id="start-test" onClick={handleStartTest}>
-        Start test
+        Learn terms
       </button>
     </section>
   )

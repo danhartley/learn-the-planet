@@ -17,7 +17,7 @@ export function ScoreDisplay<T>() {
 
   const progress = !!currentLayout ? (
     <div>
-      <label htmlFor="test-progress">Test progress </label>
+      <label htmlFor="test-progress">Completed</label>
       <div>
         <progress
           id="test-progress"
@@ -38,7 +38,7 @@ export function ScoreDisplay<T>() {
     testHistory?.length > 0 ? (
       <div className="font-weight-600">{`You've answered ${testHistory.filter(s => s.isCorrect).length} out of ${testHistory.length} correctly.`}</div>
     ) : (
-      <div>Your answers and score will appear here.</div>
+      <div>A record of your progress will appear here.</div>
     )
 
   const questionDisplay = (
@@ -67,7 +67,7 @@ export function ScoreDisplay<T>() {
   return (
     <section aria-labelledby="score" className="column-group">
       <div className="group">
-        <h2 id="score">Test score</h2>
+        <h2 id="score">Lesson progress</h2>
         {progress}
       </div>
       {feedback}
