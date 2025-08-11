@@ -205,6 +205,7 @@ export interface Topic extends LearningItem {
   type?: TextType
   examples?: Taxon[]
   images?: NextCloudImage[]
+  terms?: Term[]
 }
 
 export type Collection<T> = {
@@ -400,7 +401,7 @@ export type UpdateCollectionFieldsOptions = {
 
 export type CollectionStatus = 'private' | 'public' | 'delete'
 
-export type TopicSectionType = 'text' | 'image' | 'taxon' | 'credit'
+export type TopicSectionType = 'text' | 'image' | 'taxon' | 'credit' | 'term'
 export type TraitSectionType = 'morphology' | 'phenology' | 'taxon'
 
 export type SectionTypeOption = {

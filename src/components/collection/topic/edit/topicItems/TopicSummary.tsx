@@ -75,6 +75,15 @@ export const TopicSummary: React.FC<TopicSummaryProps> = ({ section }) => {
       )
     }
 
+    if (section.terms) {
+      return (
+        <>
+          <span>[Terms]</span>{' '}
+          {section.terms?.map(term => term.term).join(', ')}
+        </>
+      )
+    }
+
     return (
       <>
         <span>Section</span> {section.id}

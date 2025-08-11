@@ -30,6 +30,11 @@ export const SectionTypeSelector = ({
       value: 'Credit',
       description: 'Add authors or sources credits',
     },
+    {
+      key: 'term' as TopicSectionType,
+      value: 'Term',
+      description: 'Add terms from linked term collections',
+    },
   ] as SectionTypeOption[]
 
   const scrollToNewSection = () => {

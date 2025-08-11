@@ -8,17 +8,20 @@ type Props = {
 
 export function SignIn({ signInText = 'Sign in' }: Props) {
   const { data: session, status } = useSession()
-  // console.log('session', session)
   if (status === 'loading') return <p>Loading...</p>
   if (session?.user) {
     return (
-      <button onClick={() => signOut()} className="save">
+      <button id="sign-out-btn" onClick={() => signOut()} className="save">
         Sign out
       </button>
     )
   } else {
     return (
-      <button onClick={() => signIn('google')} className="save">
+      <button
+        id="sign-in-btn"
+        onClick={() => signIn('google')}
+        className="save"
+      >
         {signInText}
       </button>
     )

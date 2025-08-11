@@ -55,5 +55,5 @@ export default function MultiSelectList({
     </div>
   ))
 
-  return <div className={`grid-lg options ${className}`}>{optionElements}</div>
+  return <div className={`options ${className}`}>{optionElements}</div>
 }

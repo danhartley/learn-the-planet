@@ -39,15 +39,12 @@ export const AddTopicTaxa = () => {
   }
 
   return (
-    <>
-      {/* <h2 id="new-section">Add taxa</h2> */}
-      <TaxonAutocomplete
-        selectedTaxa={selectedTaxa}
-        onTaxonToggle={handleTaxonToggle}
-        onSaveChanges={handleSaveChanges}
-        apiResponse={apiResponse}
-        sectionIndex={1}
-      />
-    </>
+    <TaxonAutocomplete
+      selectedTaxa={selectedTaxa}
+      onTaxonToggle={handleTaxonToggle}
+      onSaveChanges={handleSaveChanges}
+      apiResponse={apiResponse}
+      sectionIndex={1}
+    />
   )
 }

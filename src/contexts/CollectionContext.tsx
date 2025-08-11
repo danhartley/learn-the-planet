@@ -86,6 +86,12 @@ type CollectionContextType = {
     slug: string,
     shortId: string
   ) => Promise<Collection<unknown> | null>
+  getManyCollectionsById: (
+    collections: {
+      slug: string
+      shortId: string
+    }[]
+  ) => Promise<Collection<unknown>[]>
   getFilteredCollectionSummaries: (
     filters: CollectionFilters
   ) => Promise<CollectionSummary[]>
@@ -113,6 +119,7 @@ export const CollectionProvider = ({
   const [collectionSummaries, setCollectionSummaries] = useState<
     CollectionSummary[] | null
   >()
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filteredCollectionSummaries, setFilteredCollectionSummaries] =
     useState<CollectionSummary[] | null>()
   const [apiResponse, setApiResponse] = useState<ApiResponse>({
@@ -920,6 +927,71 @@ export const CollectionProvider = ({
     }
   }
 
+  const getManyCollectionsById = async (
+    collections: { slug: string; shortId: string }[]
+  ): Promise<Collection<unknown>[]> => {
+    const fetchCollection = async (
+      slug: string,
+      shortId: string
+    ): Promise<Collection<unknown> | null> => {
+      if (!slug || !shortId) return null
+
+      try {
+        const url = `/api/collection/${slug}-${shortId}`
+
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(
+            errorData.error || `HTTP error! status: ${response.status}`
+          )
+        }
+
+        const collection = await response.json()
+
+        return collection
+      } catch (error) {
+        console.error(`Failed to get collection ${slug}-${shortId}:`, error)
+        return null
+      }
+    }
+
+    try {
+      const collectionPromises = collections.map(({ slug, shortId }) =>
+        fetchCollection(slug, shortId)
+      )
+
+      const results = await Promise.all(collectionPromises)
+
+      // Filter out null results (failed requests)
+      const validCollections = results.filter(
+        (collection): collection is Collection<unknown> => collection !== null
+      )
+
+      setApiResponse({
+        success: true,
+        message: `Fetched ${validCollections.length} of ${collections.length} collections successfully.`,
+      })
+
+      return validCollections
+    } catch (error) {
+      console.error('Failed to fetch multiple collections:', error)
+
+      setApiResponse({
+        success: false,
+        message: 'Failed to fetch collections.',
+      })
+
+      return []
+    }
+  }
+
   const orderSections = (collection: Collection<unknown>) => {
     switch (collection.type.toString()) {
       case 'topic':
@@ -1005,6 +1077,7 @@ export const CollectionProvider = ({
         getImages,
         updateAuthor,
         getCollectionById,
+        getManyCollectionsById,
         getFilteredCollectionSummaries,
         initialiseNewFields,
       }}

@@ -108,6 +108,21 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
               )
             })}
           </div>
+          {section.terms && (
+            <aside>
+              <dl>
+                {section.terms?.map(term => (
+                  <React.Fragment key={term.term}>
+                    <dt>
+                      <strong>{term.term}</strong>
+                    </dt>
+                    <dd>{term.definition}</dd>
+                    {term.source && <Link href={term.source}>Source</Link>}
+                  </React.Fragment>
+                ))}
+              </dl>
+            </aside>
+          )}
         </React.Fragment>
       )
     })

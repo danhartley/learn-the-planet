@@ -12,7 +12,6 @@ import { textToArray } from '@/utils/strings'
 type Props = {
   collection: Collection<Topic>
   section: Topic
-  sectionIndex: number
 }
 
 export const TopicCredit = ({ collection, section }: Props) => {
