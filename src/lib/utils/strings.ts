@@ -413,3 +413,33 @@ export const getBtnText = (type: string) => {
       return 'Learn terms'
   }
 }
+
+export function formatDateToReadable(isoString: string): string {
+  if (isoString === '') return ''
+  const date = new Date(isoString)
+
+  const day = date.getDate()
+  const month = date.toLocaleString('en-US', { month: 'long' })
+  const year = date.getFullYear()
+
+  // Add ordinal suffix
+  const getOrdinalSuffix = (day: number): string => {
+    if (day > 3 && day < 21) return 'th'
+    switch (day % 10) {
+      case 1:
+        return 'st'
+      case 2:
+        return 'nd'
+      case 3:
+        return 'rd'
+      default:
+        return 'th'
+    }
+  }
+
+  return `${day}${getOrdinalSuffix(day)} ${month} ${year}`
+}
+
+// Usage in your component
+const mongoDate = '2025-08-07T12:51:07.436+00:00'
+const formattedDate = formatDateToReadable(mongoDate) // "7th August 2025"

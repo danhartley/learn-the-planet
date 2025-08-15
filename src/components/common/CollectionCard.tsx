@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import { CollectionSummary } from '@/types'
 
-import { getBtnText } from '@/utils/strings'
+import { getBtnText, formatDateToReadable } from '@/utils/strings'
 
 type Props = {
   collectionSummary: CollectionSummary
@@ -30,7 +30,7 @@ const CollectionMetadata = ({
       return (
         <div className="collection-metadata">
           <div>
-            <em>{collectionSummary.date}</em>
+            <em>{formatDateToReadable(collectionSummary.date || '')}</em>
           </div>
           <div>
             <em>{collectionSummary.location}</em>

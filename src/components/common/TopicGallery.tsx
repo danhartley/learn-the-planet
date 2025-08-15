@@ -15,6 +15,7 @@ import { CollectionLinks } from '@/components/common/CollectionLinks'
 import { IconicTaxonIcon } from '@/components/image/common/IconicTaxonIcon'
 
 import { groupCollectionsByType } from '@/utils/arrays'
+import { formatDateToReadable } from '@/utils/strings'
 
 import {
   Collection,
@@ -132,14 +133,16 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
   return (
     <section aria-labelledby="topic-gallery" className="column-group">
       <article>
-        <div>
+        <div className="list-group">
           <h1 id="topic-gallery">{collection.name}</h1>
-          <div>{authors}</div>
           <div>
-            <em>{collection.date}</em>
-          </div>
-          <div>
-            <em>{collection.location}</em>
+            <div>{authors}</div>
+            <div>
+              <em>{formatDateToReadable(collection.date || '')}</em>
+            </div>
+            <div>
+              <em>{collection.location}</em>
+            </div>
           </div>
         </div>
         <IconicTaxonIcon collection={collection} />

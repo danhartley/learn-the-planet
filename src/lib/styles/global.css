@@ -244,6 +244,7 @@ hr {
 aside {
   padding: var(--spacing-md);
   border: 1px solid var(--colour-line);
+  margin: var(--spacing-xl) 0;
 
   dl {
     font-size: var(--font-size-sm);
@@ -791,7 +792,6 @@ form {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: var(--spacing-md);
   img {
     width: var(--spacing-lg);
     padding: 0 calc(var(--spacing-xs) * 0.5);
@@ -1337,10 +1337,6 @@ li.collapsed {
   }
 
   .iconic-taxon {
-    position: absolute;
-    top: var(--spacing-sm);
-    right: var(--spacing-lg);
-    padding: 0;
     img {
       width: var(--spacing-xl);
       padding: 0 var(--spacing-xs);

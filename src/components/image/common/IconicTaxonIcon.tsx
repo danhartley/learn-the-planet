@@ -54,6 +54,7 @@ export const IconicTaxonIcon: React.FC<IconicTaxonProps> = ({ collection }) => {
       {iconicTaxa.map(iconicTaxon => (
         <Image
           key={iconicTaxon}
+          id={iconicTaxon}
           src={taxonUrls[iconicTaxon]?.icon}
           alt={`${iconicTaxon} icon, credit to ${taxonUrls[iconicTaxon]?.credit}`}
           width={40}
