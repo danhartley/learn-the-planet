@@ -166,7 +166,7 @@ export const getTaxaByAutocomplete = async ({
   const params = new URLSearchParams({
     q: toComplete,
     per_page: '10',
-    rank: 'genus, species',
+    rank: 'genus,species',
     all_names: 'true',
     locale,
   })
@@ -192,7 +192,7 @@ type AncestorProps = {
 }
 
 export const getDistractors = async ({ ancestorIds }: AncestorProps) => {
-  const url = `https://api.inaturalist.org/v1/taxa?parent_id=${ancestorIds.join(',')}&rank=species&all_names=true`
+  const url = `https://api.inaturalist.org/v1/taxa?parent_id=${ancestorIds.join(',')}&rank=species,genus&all_names=true`
   const response = await fetch(url)
   const json = await response.json()
   return json

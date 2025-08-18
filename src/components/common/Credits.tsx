@@ -37,11 +37,11 @@ export const Credits = ({ collection }: Props) => {
   return (
     hasCredits && (
       <>
-        <div>
+        <hr />
+        <div className="list-group">
           <h2>Credits</h2>
           <ul className="list-group">{credits}</ul>
         </div>
-        <hr />
       </>
     )
   )
