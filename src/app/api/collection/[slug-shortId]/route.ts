@@ -1,4 +1,7 @@
-import { getCollectionByShortId } from '@/api/database'
+import {
+  getCollectionByShortId,
+  getCollectionSummaryByShortId,
+} from '@/api/database'
 import { NextRequest, NextResponse } from 'next/server'
 import { extractShortId } from '@/utils/strings'
 
@@ -15,15 +18,16 @@ export async function GET(request: NextRequest) {
     }
 
     const collection = await getCollectionByShortId(shortId)
+    const collectionSummary = await getCollectionSummaryByShortId(shortId)
 
-    if (!collection) {
+    if (!collection || !collectionSummary) {
       return NextResponse.json(
         { error: 'Collection not found' },
         { status: 404 }
       )
     }
 
-    return NextResponse.json(collection)
+    return NextResponse.json({ collection, collectionSummary })
   } catch (error) {
     console.error('Failed to get collection:', error)
     return NextResponse.json(

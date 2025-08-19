@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { auth } from '@/auth'
 
-import { Collection, ContentHandlerType } from '@/types'
+import { Collection, ContentHandlerType, CollectionSummary } from '@/types'
 import { TaxonGallery } from '@/components/common/TaxonGallery'
 import { TermGallery } from '@/components/common/TermGallery'
 import { TopicGallery } from '@/components/common/TopicGallery'
@@ -15,6 +15,7 @@ type ComponentProps = {
 
 type GalleryProps<T> = {
   collection: Collection<T> | undefined
+  collectionSummary: CollectionSummary | undefined
 }
 
 const PAGE_MAP = {

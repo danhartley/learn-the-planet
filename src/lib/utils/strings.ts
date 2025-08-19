@@ -439,7 +439,3 @@ export function formatDateToReadable(isoString: string): string {
 
   return `${day}${getOrdinalSuffix(day)} ${month} ${year}`
 }
-
-// Usage in your component
-const mongoDate = '2025-08-07T12:51:07.436+00:00'
-const formattedDate = formatDateToReadable(mongoDate) // "7th August 2025"

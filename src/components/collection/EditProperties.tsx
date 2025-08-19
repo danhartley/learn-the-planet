@@ -19,7 +19,8 @@ import {
 import { CountryDefault, LocaleDefault } from '@/config'
 
 export const EditProperties = () => {
-  const { collection, updateCollectionFields, apiResponse } = useCollection()
+  const { collection, updateCollectionFields, apiResponse, collectionSummary } =
+    useCollection()
   const [name, setName] = useState<string>(collection?.name || '')
   const [author, setAuthor] = useState<string>(
     collection?.author?.authors?.join(', ') || ''
@@ -32,8 +33,12 @@ export const EditProperties = () => {
   const [imageUrl, setImageUrl] = useState<string>(collection?.imageUrl || '')
   const [date, setDate] = useState<string>(collection?.date || '')
   const [location, setLocation] = useState<string>(collection?.location || '')
-  const [country, setCountry] = useState<Country>(CountryDefault)
-  const [locale, setLocale] = useState<UserLocale>(LocaleDefault)
+  const [country, setCountry] = useState<Country>(
+    collectionSummary?.country || CountryDefault
+  )
+  const [locale, setLocale] = useState<UserLocale>(
+    collectionSummary?.locale || LocaleDefault
+  )
 
   const handleFieldsChange = () => {
     const newFields = {
@@ -41,12 +46,14 @@ export const EditProperties = () => {
       slug,
       imageUrl,
       date: date || null,
-      location: location || null,
+      location: location,
+      country: country,
       author: {
         authors: author ? author.split(',').map(a => a.trim()) : [],
         source,
         title: sourceTitle,
       } as Credit,
+      locale: locale,
     } as UpdateCollectionFieldsOptions
 
     if (collection) updateCollectionFields(collection, newFields)

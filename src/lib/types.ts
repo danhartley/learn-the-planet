@@ -397,6 +397,9 @@ export type UpdateCollectionFieldsOptions = {
   date?: string
   location?: string
   author?: Credit
+  country?: Country
+  ownerId: string
+  locale?: UserLocale
 }
 
 export type CollectionStatus = 'private' | 'public' | 'delete'

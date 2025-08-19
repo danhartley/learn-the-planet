@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { CollectionProvider } from '@/contexts/CollectionContext'
 
 import { EditOperations } from '@/components/collection/EditOperations'
-import { Collection } from '@/types'
+import { Collection, CollectionSummary } from '@/types'
 import { extractShortId, extractSlug } from '@/utils/strings'
 
 export default function Page({
@@ -14,6 +14,8 @@ export default function Page({
   params: Promise<{ 'slug-shortId': string }>
 }) {
   const [collection, setCollection] = useState<Collection<unknown> | null>(null)
+  const [collectionSummary, setCollectionSummary] =
+    useState<CollectionSummary>()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
@@ -36,8 +38,9 @@ export default function Page({
           return
         }
 
-        const fetchedCollection = await response.json()
-        setCollection(fetchedCollection)
+        const { collection, collectionSummary } = await response.json()
+        setCollection(collection)
+        setCollectionSummary(collectionSummary)
       } catch (err) {
         console.error('Failed to fetch collection:', err)
         setError(true)
@@ -54,7 +57,10 @@ export default function Page({
   if (!collection) return <div>Collection not found</div>
 
   return (
-    <CollectionProvider initialCollection={collection}>
+    <CollectionProvider
+      initialCollection={collection}
+      initialCollectionSummary={collectionSummary}
+    >
       <EditOperations />
     </CollectionProvider>
   )

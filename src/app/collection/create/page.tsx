@@ -12,9 +12,6 @@ export default function Page() {
       <CollectionProvider>
         <CreateOperation />
       </CollectionProvider>
-      {/* <div className="create-collection-progress">
-        <div>1/2</div>
-      </div> */}
     </>
   )
 }

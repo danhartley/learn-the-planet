@@ -208,14 +208,15 @@ a:hover {
 /* Layout elements */
 header {
   position: relative;
-  height: 0;
+  height: 6vh;
+  right: var(--spacing-xs);
   top: var(--spacing-md);
   font-size: var(--font-size-sm);
   text-transform: uppercase;
 
   & > div {
     position: absolute;
-    display: none;
+    right: 0;
 
     & a {
       text-decoration: none;
@@ -1309,16 +1310,6 @@ li.collapsed {
 
 /* Media queries */
 @media screen and (min-width: 768px) {
-  header {
-    height: 5vh;
-    right: var(--spacing-md);
-  }
-
-  header > div {
-    display: block;
-    right: 0%;
-  }
-
   footer {
     flex-direction: row;
   }
@@ -1360,7 +1351,6 @@ li.collapsed {
 @media (min-width: 767px) and (max-width: 1286px) {
   body {
     max-width: 75vw;
-    gap: var(--spacing-lg);
   }
   .grid-lg {
     grid-template-columns: 1fr 1fr;

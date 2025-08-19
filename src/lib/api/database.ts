@@ -5,6 +5,8 @@ import {
   CollectionStatus,
   Credit,
   CollectionFilters,
+  Country,
+  UserLocale,
 } from '@/types'
 import clientPromise from '@/api/mongodb'
 
@@ -121,6 +123,43 @@ export const getCollectionByShortId = async (
     ...selectedCollection,
     items: orderedItems,
   }
+}
+
+export const getCollectionSummaryByShortId = async (
+  shortId: string
+): Promise<CollectionSummary | undefined> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+  const collectionSummary = await db
+    .collection('collectionsSummary')
+    .findOne({ shortId })
+
+  if (!collectionSummary) {
+    return undefined
+  }
+
+  const selectedCollectionSummary = {
+    id: collectionSummary._id.toString(),
+    shortId: collectionSummary.shortId,
+    type: collectionSummary.type,
+    name: collectionSummary.name,
+    slug: collectionSummary.slug,
+    date: collectionSummary.date,
+    location: collectionSummary.location,
+    itemCount: collectionSummary.itemCount,
+    imageUrl: collectionSummary.imageUrl,
+    status: collectionSummary.status,
+    ownerId: collectionSummary.ownerId,
+    createdAt: collectionSummary.createdAt,
+    updatedAt: collectionSummary.updatedAt,
+    locale: collectionSummary.locale,
+    country: collectionSummary.country,
+    featured: collectionSummary.featured,
+    tags: collectionSummary.tags,
+    popularity: collectionSummary.popularity,
+  } as unknown as CollectionSummary
+
+  return selectedCollectionSummary
 }
 
 export const createCollection = async ({
@@ -603,7 +642,10 @@ export const updateCollectionFields = async (
   const db = client.db(DB_NAME)
 
   // Build update object with only provided fields
-  const updateFields: Record<string, string | Credit> = {}
+  const updateFields: Record<
+    string,
+    string | Credit | Country | UserLocale | Date
+  > = {}
 
   if (options.name !== undefined) {
     updateFields.name = options.name
@@ -632,6 +674,16 @@ export const updateCollectionFields = async (
   ) {
     updateFields.author = options.author
   }
+
+  if (options.country !== undefined && options.country.name !== '') {
+    updateFields.country = options.country
+  }
+
+  if (options.locale !== undefined && options.locale.language !== '') {
+    updateFields.locale = options.locale
+  }
+
+  updateFields.updatedAt = new Date()
 
   // If no fields to update, return undefined
   if (Object.keys(updateFields).length === 0) {

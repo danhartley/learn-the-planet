@@ -96,6 +96,7 @@ type CollectionContextType = {
     filters: CollectionFilters
   ) => Promise<CollectionSummary[]>
   initialiseNewFields: () => Promise<boolean>
+  setCollectionSummary: (collectionSummary: CollectionSummary) => void
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -105,17 +106,19 @@ const CollectionContext = createContext<CollectionContextType | undefined>(
 type CollectionProviderProps = {
   children: ReactNode
   initialCollection?: Collection<unknown>
+  initialCollectionSummary?: CollectionSummary
 }
 
 export const CollectionProvider = ({
   children,
   initialCollection,
+  initialCollectionSummary,
 }: CollectionProviderProps) => {
   const [collection, setCollection] = useState<Collection<unknown> | null>(
     initialCollection ?? null
   )
   const [collectionSummary, setCollectionSummary] =
-    useState<CollectionSummary | null>()
+    useState<CollectionSummary | null>(initialCollectionSummary || null)
   const [collectionSummaries, setCollectionSummaries] = useState<
     CollectionSummary[] | null
   >()
@@ -300,6 +303,21 @@ export const CollectionProvider = ({
           }
         : null
     )
+    const previousCollectionSummary = collectionSummary
+    setCollectionSummary(prev =>
+      prev
+        ? {
+            ...prev,
+            name: fields.name ?? prev.name,
+            slug: fields.slug ?? prev.slug,
+            imageUrl: fields.imageUrl ?? prev.imageUrl,
+            date: fields.date ?? prev.date,
+            location: fields.location ?? prev.location,
+            locale: fields.locale ?? prev.locale,
+            country: fields.country ?? prev.country,
+          }
+        : null
+    )
 
     try {
       const url = `/api/collection/update-fields/${collection.slug}-${collection.shortId}`
@@ -317,6 +335,7 @@ export const CollectionProvider = ({
 
         // Revert optimistic update on error
         setCollection(previousCollection)
+        setCollectionSummary(previousCollectionSummary)
 
         throw new Error(
           errorData.error || `HTTP error! status: ${response.status}`
@@ -888,26 +907,52 @@ export const CollectionProvider = ({
     if (!slug || !shortId) return null
 
     try {
-      const url = `/api/collection/${slug}-${shortId}`
+      let url
 
-      const response = await fetch(url, {
+      // Get collection
+      url = `/api/collection/${slug}-${shortId}`
+
+      const responseForCollection = await fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       })
 
-      if (!response.ok) {
-        const errorData = await response.json()
+      if (!responseForCollection.ok) {
+        const errorData = await responseForCollection.json()
         throw new Error(
-          errorData.error || `HTTP error! status: ${response.status}`
+          errorData.error ||
+            `HTTP error! status: ${responseForCollection.status}`
         )
       }
 
-      const collection = await response.json()
+      const collection = await responseForCollection.json()
 
       // Update the context state with the fetched collection
       setCollection(collection)
+
+      // Get collection summary
+      url = `/api/collection-summary/${slug}-${shortId}`
+
+      const responseForSummary = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (!responseForSummary.ok) {
+        const errorData = await responseForSummary.json()
+        throw new Error(
+          errorData.error || `HTTP error! status: ${responseForSummary.status}`
+        )
+      }
+
+      const collectionSummary = await responseForSummary.json()
+
+      // Update the context state with the fetched collection summary
+      setCollectionSummary(collectionSummary)
 
       setApiResponse({
         success: true,
@@ -953,7 +998,7 @@ export const CollectionProvider = ({
           )
         }
 
-        const collection = await response.json()
+        const { collection, collectionSummary } = await response.json()
 
         return collection
       } catch (error) {
@@ -1080,6 +1125,7 @@ export const CollectionProvider = ({
         getManyCollectionsById,
         getFilteredCollectionSummaries,
         initialiseNewFields,
+        setCollectionSummary,
       }}
     >
       {children}
