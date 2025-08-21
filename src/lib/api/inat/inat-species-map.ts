@@ -52,7 +52,7 @@ export const getPhoto = async (
 
   if (photo && !isLicencePermissive(photo.license_code)) {
     // Make API call to get alternative photos
-    return await fetchAlternativePhoto(id, 'en')
+    return await fetchAlternativePhoto(id)
   } else if (photo) {
     image = {
       id: photo.id,
@@ -107,8 +107,7 @@ export const mapInatSpeciesToLTP = async ({
  * @returns Promise<Image | undefined> - First photo with permissive license, or undefined if none found
  */
 export const fetchAlternativePhoto = async (
-  taxonId: string,
-  locale: string = 'en'
+  taxonId: string
 ): Promise<Image | undefined> => {
   try {
     const url = `https://api.inaturalist.org/v1/taxa/${taxonId}`
