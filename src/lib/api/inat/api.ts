@@ -113,7 +113,7 @@ async function getInatData(url: string) {
     }
 
     const json = await response.json()
-    const species = mapInatSpeciesToLTP({ results: json.results })
+    const species = await mapInatSpeciesToLTP({ results: json.results })
 
     // Add distractors to each species
     if (species) {
@@ -176,7 +176,7 @@ export const getTaxaByAutocomplete = async ({
   const response = await fetch(url)
   const json = await response.json()
   const species: Taxon[] =
-    mapInatSpeciesToLTP({ results: json.results, locale }) || []
+    (await mapInatSpeciesToLTP({ results: json.results, locale })) || []
 
   if (species) {
     return {
@@ -223,9 +223,9 @@ export const getTaxaDistractors = async ({
           return {
             ...taxon,
             distractors:
-              mapInatSpeciesToLTP({
+              (await mapInatSpeciesToLTP({
                 results: distractors,
-              }) || [],
+              })) || [],
           }
         }
 
@@ -314,11 +314,11 @@ export const getInatObservations = async ({
   const json = await response.json()
 
   const species: Taxon[] =
-    mapInatSpeciesToLTP({
+    (await mapInatSpeciesToLTP({
       results: json.results.map(
         (observation: InatObservation) => observation.taxon
       ),
-    }) || []
+    })) || []
 
   return getUniqueTaxa(species)
 }

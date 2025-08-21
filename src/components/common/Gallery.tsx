@@ -55,7 +55,7 @@ export async function Gallery<T>({ collection }: GalleryProps<T>) {
           <Link
             href={`/collection/edit/${collection.slug}-${collection.shortId}`}
           >
-            Edit collection
+            Edit {collection?.type.toString()}
           </Link>
         </>
       )}

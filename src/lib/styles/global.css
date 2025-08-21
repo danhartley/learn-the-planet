@@ -179,6 +179,10 @@ h3::first-letter {
   text-transform: capitalize;
 }
 
+h3 label {
+  padding-bottom: var(--spacing-xs);
+}
+
 a {
   font-family: var(--font-family-sans-serif);
   text-underline-offset: var(--text-underline-offset);
