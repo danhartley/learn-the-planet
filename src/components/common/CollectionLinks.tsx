@@ -8,6 +8,7 @@ import { useTestPlanner } from '@/hooks/useTestPlanner'
 
 import {
   Collection,
+  CollectionOverview,
   CollectionSummary,
   QuestionTemplateSelection,
 } from '@/types'
@@ -47,7 +48,11 @@ export const CollectionLinks: React.FC<{
         { type: 'textEntry', isSelected: true },
       ] as QuestionTemplateSelection[],
     }
-    startTest({ collection, config })
+
+    startTest({
+      collection: (collection as unknown as CollectionOverview).collection,
+      config,
+    })
     router.push('/test')
   }
 

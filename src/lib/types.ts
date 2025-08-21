@@ -196,6 +196,11 @@ export type Credit = {
   authors?: string[]
 }
 
+export type CollectionOverview = {
+  collection: Collection<unknown>
+  collectionSummary: CollectionSummary
+}
+
 export type TextType = 'aside' | 'article'
 
 export interface Topic extends LearningItem {

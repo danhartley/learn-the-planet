@@ -20,6 +20,7 @@ import {
   Topic,
   CollectionFilters,
   AddCollectionProps,
+  CollectionOverview,
 } from '@/types'
 
 type CollectionContextType = {
@@ -105,17 +106,17 @@ const CollectionContext = createContext<CollectionContextType | undefined>(
 
 type CollectionProviderProps = {
   children: ReactNode
-  initialCollection?: Collection<unknown>
+  collectionOverview?: CollectionOverview
   initialCollectionSummary?: CollectionSummary
 }
 
 export const CollectionProvider = ({
   children,
-  initialCollection,
+  collectionOverview,
   initialCollectionSummary,
 }: CollectionProviderProps) => {
   const [collection, setCollection] = useState<Collection<unknown> | null>(
-    initialCollection ?? null
+    collectionOverview?.collection ?? null
   )
   const [collectionSummary, setCollectionSummary] =
     useState<CollectionSummary | null>(initialCollectionSummary || null)
@@ -1037,11 +1038,12 @@ export const CollectionProvider = ({
     }
   }
 
-  const orderSections = (collection: Collection<unknown>) => {
-    switch (collection.type.toString()) {
+  const orderSections = (collectionOverview: CollectionOverview) => {
+    console.log('collection', collection)
+    switch (collectionOverview.collection.type.toString()) {
       case 'topic':
         const orderedItems: Topic[] =
-          collection.sectionOrder
+          collectionOverview.collection.sectionOrder
             .map(order => {
               return collection?.items?.find(
                 item => (item as { id: string }).id === order
@@ -1050,7 +1052,7 @@ export const CollectionProvider = ({
             .filter((item): item is Topic => item !== undefined) || []
         return orderedItems
       default:
-        return collection.items
+        return collectionOverview.collection.items
     }
   }
 
