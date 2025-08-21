@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { Metadata } from 'next'
+
 import '@/css/global.css'
 
 import { SessionProvider } from 'next-auth/react'
@@ -24,7 +26,7 @@ const openSans = Open_Sans({
   style: ['normal', 'italic'],
 })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Learn the Planet',
   description:
     'Lessons to help you to learn more about the natural world. Overcoming plant blindness. Prevent the extinction of experience.',

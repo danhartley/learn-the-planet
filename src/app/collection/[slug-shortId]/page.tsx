@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation'
 
+import { Metadata, ResolvingMetadata } from 'next'
+
 import { CollectionProvider } from '@/contexts/CollectionContext'
 
 import { Collection, CollectionSummary } from '@/types'
@@ -36,3 +38,38 @@ export default async function Page({
     </CollectionProvider>
   )
 }
+
+type Props = {
+  params: Promise<{ 'slug-shortId': string }>
+}
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { 'slug-shortId': slugShortId } = await params
+  const shortId = extractShortId(slugShortId)
+
+  if (!shortId) {
+    return {
+      title: 'Collection not found',
+    }
+  }
+
+  const collection: Collection<unknown> | undefined =
+    await getCollectionByShortId(shortId)
+
+  if (!collection) {
+    return {
+      title: 'Collection not found',
+    }
+  }
+
+  return {
+    title: collection.name,
+  }
+}
+
+// export const metadata: Metadata = {
+//   title: 'Collection article',
+// }
