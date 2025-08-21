@@ -1,13 +1,9 @@
-import Link from 'next/link'
-
-import { auth } from '@/auth'
-
 import { Collection, ContentHandlerType, CollectionSummary } from '@/types'
 import { TaxonGallery } from '@/components/common/TaxonGallery'
 import { TermGallery } from '@/components/common/TermGallery'
 import { TopicGallery } from '@/components/common/TopicGallery'
 import { TraitGallery } from '@/components/common/TraitGallery'
-import { SignIn } from '@/components/oauth/SignIn'
+import { CollectionOwnerOptions } from '@/components/common/CollectionOwnerOptions'
 
 type ComponentProps = {
   collection: Collection<unknown>
@@ -42,24 +38,10 @@ export async function Gallery<T>({ collection }: GalleryProps<T>) {
 
   const Component = getGalleryComponent(collection.type as ContentHandlerType)
 
-  // Get session on server side
-  const session = await auth()
-  const canEdit = session?.user?.id === collection.ownerId
-
   return (
     <>
       <Component collection={collection} />
-      {canEdit && (
-        <>
-          <hr />
-          <Link
-            href={`/collection/edit/${collection.slug}-${collection.shortId}`}
-          >
-            Edit {collection?.type.toString()}
-          </Link>
-        </>
-      )}
-      <SignIn signInText={'Sign in to edit collection'} />
+      <CollectionOwnerOptions collection={collection} />
     </>
   )
 }
