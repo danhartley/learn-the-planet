@@ -20,7 +20,6 @@ import {
   Topic,
   CollectionFilters,
   AddCollectionProps,
-  CollectionOverview,
 } from '@/types'
 
 type CollectionContextType = {
@@ -908,10 +907,8 @@ export const CollectionProvider = ({
     if (!slug || !shortId) return null
 
     try {
-      let url
-
       // Get collection
-      url = `/api/collection/${slug}-${shortId}`
+      const url = `/api/collection/${slug}-${shortId}`
 
       const responseForCollection = await fetch(url, {
         method: 'GET',
