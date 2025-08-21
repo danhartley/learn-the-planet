@@ -78,15 +78,17 @@ export function TraitGallery({ collection }: Props<Trait>) {
 
   return (
     <section aria-labelledby="trait-gallery" className="column-group">
-      <h1 id="trait-gallery">{collection.name}</h1>
-      <section aria-labelledby="traits" className="group-block">
-        <h2 id="traits">Traits</h2>
-        <ul className="list-group">{traitIndex}</ul>
-        <IconicTaxonIcon collection={collection} />
-        <hr />
-        <div className="column-group">{traits}</div>
-      </section>
-      {collections}
+      <div className="article">
+        <h1 id="trait-gallery">{collection.name}</h1>
+        <section aria-labelledby="traits" className="group-block">
+          <h2 id="traits">Traits</h2>
+          <ul className="list-group">{traitIndex}</ul>
+          <IconicTaxonIcon collection={collection} />
+          <hr />
+          <div className="column-group">{traits}</div>
+        </section>
+        {collections}
+      </div>
       <TestConfigSettings config={config} setConfig={setConfig} />
       <button id="start-test" onClick={handleStartTest}>
         Learn traits

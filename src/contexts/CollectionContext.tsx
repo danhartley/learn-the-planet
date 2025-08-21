@@ -106,17 +106,17 @@ const CollectionContext = createContext<CollectionContextType | undefined>(
 
 type CollectionProviderProps = {
   children: ReactNode
-  collectionOverview?: CollectionOverview
+  initialCollection?: Collection<unknown>
   initialCollectionSummary?: CollectionSummary
 }
 
 export const CollectionProvider = ({
   children,
-  collectionOverview,
+  initialCollection,
   initialCollectionSummary,
 }: CollectionProviderProps) => {
   const [collection, setCollection] = useState<Collection<unknown> | null>(
-    collectionOverview?.collection ?? null
+    initialCollection ?? null
   )
   const [collectionSummary, setCollectionSummary] =
     useState<CollectionSummary | null>(initialCollectionSummary || null)
@@ -928,30 +928,11 @@ export const CollectionProvider = ({
         )
       }
 
-      const collection = await responseForCollection.json()
+      const { collection, collectionSummary } =
+        await responseForCollection.json()
 
       // Update the context state with the fetched collection
       setCollection(collection)
-
-      // Get collection summary
-      url = `/api/collection-summary/${slug}-${shortId}`
-
-      const responseForSummary = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-
-      if (!responseForSummary.ok) {
-        const errorData = await responseForSummary.json()
-        throw new Error(
-          errorData.error || `HTTP error! status: ${responseForSummary.status}`
-        )
-      }
-
-      const collectionSummary = await responseForSummary.json()
-
       // Update the context state with the fetched collection summary
       setCollectionSummary(collectionSummary)
 
@@ -1038,12 +1019,12 @@ export const CollectionProvider = ({
     }
   }
 
-  const orderSections = (collectionOverview: CollectionOverview) => {
+  const orderSections = (collection: Collection<unknown>) => {
     console.log('collection', collection)
-    switch (collectionOverview.collection.type.toString()) {
+    switch (collection.type.toString()) {
       case 'topic':
         const orderedItems: Topic[] =
-          collectionOverview.collection.sectionOrder
+          collection.sectionOrder
             .map(order => {
               return collection?.items?.find(
                 item => (item as { id: string }).id === order
@@ -1052,7 +1033,7 @@ export const CollectionProvider = ({
             .filter((item): item is Topic => item !== undefined) || []
         return orderedItems
       default:
-        return collectionOverview.collection.items
+        return collection.items
     }
   }
 

@@ -6,6 +6,7 @@ import { Collection } from '@/types'
 
 import { SignIn } from '@/components/oauth/SignIn'
 import { CollectionOwnerExportButton } from '@/components/common/CollectionOwnerExportButton'
+import { CollectionPrintButton } from '@/components/common/CollectionPrintButton'
 
 type Props = {
   collection: Collection<unknown>
@@ -29,6 +30,7 @@ export const CollectionOwnerOptions = async ({ collection }: Props) => {
         </>
       )}
       <SignIn signInText={'Sign in to edit collection'} />
+      <CollectionPrintButton />
     </>
   )
 }

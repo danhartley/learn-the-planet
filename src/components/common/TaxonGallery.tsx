@@ -48,24 +48,26 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
 
   return (
     <section aria-labelledby="taxon-gallery" className="column-group">
-      <div>
-        <h1 id="taxon-gallery">{collection.name}</h1>
-        <div>{authors}</div>
-        <div className="font-xs">
-          {collection?.author?.source && (
-            <Link href={collection?.author?.source as Url}>
-              {collection?.author?.title}
-            </Link>
-          )}
+      <div className="article">
+        <div>
+          <h1 id="taxon-gallery">{collection.name}</h1>
+          <div>{authors}</div>
+          <div className="font-xs">
+            {collection?.author?.source && (
+              <Link href={collection?.author?.source as Url}>
+                {collection?.author?.title}
+              </Link>
+            )}
+          </div>
+          <div>{collection?.date}</div>
+          <div>{collection?.location}</div>
         </div>
-        <div>{collection?.date}</div>
-        <div>{collection?.location}</div>
+        <section aria-labelledby="taxa" className="group-block">
+          <h2 id="taxa">Taxa</h2>
+          <IconicTaxonIcon collection={collection} />
+          <div className="block">{taxa}</div>
+        </section>
       </div>
-      <section aria-labelledby="taxa" className="group-block">
-        <h2 id="taxa">Taxa</h2>
-        <IconicTaxonIcon collection={collection} />
-        <div className="block">{taxa}</div>
-      </section>
       <TestConfigSettings config={config} setConfig={setConfig} />
       <button id="start-test" onClick={handleStartTest}>
         Learn taxa

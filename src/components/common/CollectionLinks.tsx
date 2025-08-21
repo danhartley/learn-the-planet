@@ -50,7 +50,7 @@ export const CollectionLinks: React.FC<{
     }
 
     startTest({
-      collection: (collection as unknown as CollectionOverview).collection,
+      collection,
       config,
     })
     router.push('/test')

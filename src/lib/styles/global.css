@@ -1428,3 +1428,30 @@ li.collapsed {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
+
+@media print {
+  header,
+  footer {
+    display: none;
+  }
+
+  main
+    > *:not(
+      [aria-labelledby='topic-gallery'],
+      [aria-labelledby='taxon-gallery'],
+      [aria-labelledby='trait-gallery'],
+      [aria-labelledby='term-gallery']
+    ),
+  [aria-labelledby='topic-gallery'] > *:not(article) {
+    display: none !important;
+  }
+  [aria-labelledby='taxon-gallery'] > *:not(.article) {
+    display: none !important;
+  }
+  [aria-labelledby='trait-gallery'] > *:not(.article) {
+    display: none !important;
+  }
+  [aria-labelledby='term-gallery'] > *:not(.article) {
+    display: none !important;
+  }
+}
