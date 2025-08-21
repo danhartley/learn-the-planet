@@ -154,6 +154,8 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
 
   const handleSaveChanges = (taxaWithDistractors: Taxon[]) => {
     setSelectedTaxa(taxaWithDistractors)
+    // Also save trait also when saving taxa
+    handleSave()
   }
 
   return (
@@ -279,6 +281,7 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
           sectionIndex={1}
         />
       )}
+      <hr />
       <div className="form-row">
         <button
           type="button"
@@ -286,18 +289,15 @@ export const EditTrait: React.FC<EditTraitProps> = ({ trait }) => {
           disabled={!isFormValid}
           className="save"
         >
-          Save
+          Save trait changes
         </button>
-        {/* <button type="button" className="cancel">
-          Cancel
-        </button> */}
         <button
           type="button"
           onClick={handleDelete}
           className="delete"
           aria-label={`Delete trait: ${trait.trait}`}
         >
-          Delete
+          Delete trait
         </button>
         <ApiResponseMessage apiResponse={apiResponse} />
       </div>

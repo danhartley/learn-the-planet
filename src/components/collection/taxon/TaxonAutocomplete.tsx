@@ -44,7 +44,7 @@ export const TaxonAutocomplete = ({
   apiResponse,
   sectionIndex,
   section,
-  saveText = 'Save',
+  saveText = 'Save taxa',
   deleteTaxa,
   deleteText = 'Delete taxa',
 }: TaxonAutocompleteProps) => {
