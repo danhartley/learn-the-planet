@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
+import { useCollection } from '@/contexts/CollectionContext'
+
 import { ApiResponse } from '@/types'
 
 interface ApiResponseMessageProps {
@@ -11,6 +13,7 @@ export const ApiResponseMessage: React.FC<ApiResponseMessageProps> = ({
   apiResponse,
   delayMs = 2000,
 }) => {
+  const { setApiResponse } = useCollection()
   const [isVisible, setIsVisible] = useState(true)
 
   useEffect(() => {
@@ -19,6 +22,7 @@ export const ApiResponseMessage: React.FC<ApiResponseMessageProps> = ({
 
     const timer = setTimeout(() => {
       setIsVisible(false)
+      setApiResponse({ success: false, message: '' })
     }, delayMs)
 
     // Cleanup timer if component unmounts or apiResponse changes
