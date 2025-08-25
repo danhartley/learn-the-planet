@@ -310,6 +310,10 @@ button {
     background-color: var(--colour-bg-body);
     border-style: dashed;
   }
+  &.detail {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-sm);
+  }
 }
 
 button:focus-visible {
@@ -1223,7 +1227,6 @@ progress {
   z-index: 1;
   padding-bottom: var(--spacing-md);
   background-color: var(--colour-bg-add-element);
-  position: sticky;
 }
 
 .collection-field {
@@ -1255,6 +1258,7 @@ progress {
 
 button.draggable {
   width: fit-content;
+  cursor: grab;
 }
 
 button.draggable + div {

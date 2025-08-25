@@ -36,6 +36,9 @@ export const Menu = () => {
             <Link href="/inat">iNaturalist search</Link>
           </li>
           <li>
+            <Link href="/authors">Authors</Link>
+          </li>
+          <li>
             <Link href="/credit">Credit</Link>
           </li>
           {isAdmin && (

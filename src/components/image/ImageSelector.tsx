@@ -109,7 +109,7 @@ export const ImageSelector = (props: Props) => {
               onChange={handleStatusChange}
             />
             <label htmlFor="rbCollection">
-              Show images from current collection
+              Show images from the current collection
             </label>
           </li>
           <li>
@@ -121,7 +121,7 @@ export const ImageSelector = (props: Props) => {
               checked={tagType === 'user'}
               onChange={handleStatusChange}
             />
-            <label htmlFor="rbUser">Show all images</label>
+            <label htmlFor="rbUser">Show all my images</label>
           </li>
         </ul>
       }

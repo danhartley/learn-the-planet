@@ -79,7 +79,7 @@ export function TermGallery({ collection }: Props<Term>) {
 
   return (
     <section aria-labelledby="term-gallery" className="column-group">
-      <div className="article">
+      <div className="article column-group">
         <h1 id="term-gallery">{collection.name}</h1>
         <section aria-labelledby="terms" className="group-block">
           <h2 id="terms">Terms</h2>

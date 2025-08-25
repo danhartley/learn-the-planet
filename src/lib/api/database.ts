@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb'
+
 import {
   Collection,
   CollectionSummary,
@@ -7,6 +9,8 @@ import {
   CollectionFilters,
   Country,
   UserLocale,
+  Author,
+  Role,
 } from '@/types'
 import clientPromise from '@/api/mongodb'
 
@@ -1143,150 +1147,213 @@ export const updateCollectionsSummaryFields = async (
   }
 }
 
-// Helper function to initialise new fields for existing collections
-// export const initialiseNewFields = async (): Promise<number> => {
-//   const client = await clientPromise
-//   const db = client.db(DB_NAME)
-
-//   try {
-//     console.log('Initialising new fields for existing collections...')
-
-//     // Default values for new fields
-//     const defaultValues = {
-//       locale: { code: 'en-GB', language: 'English (UK)' },
-//       country: { code: 'GB', name: 'United Kingdom' },
-//       featured: true,
-//       tags: [],
-//       popularity: 0,
-//     }
-
-//     // Use $setOnInsert for new documents and $set for existing documents with missing fields
-//     const result = await db.collection('collectionsSummary').updateMany(
-//       {
-//         $or: [
-//           { locale: { $exists: false } },
-//           { country: { $exists: false } },
-//           { featured: { $exists: false } },
-//           { tags: { $exists: false } },
-//           { popularity: { $exists: false } },
-//         ],
-//       },
-//       {
-//         $set: defaultValues,
-//         $setOnInsert: defaultValues, // This ensures new documents get these values too
-//       },
-//       { upsert: false } // Set to true if you want to create documents that don't exist
-//     )
-
-//     console.log(
-//       `Initialised new fields for ${result.modifiedCount} collections`
-//     )
-//     return result.modifiedCount
-//   } catch (error) {
-//     console.error('Failed to initialise new fields:', error)
-//     throw error
-//   }
-// }
-
-// export const initialiseNewFields = async (): Promise<number> => {
-//   const client = await clientPromise
-//   const db = client.db(DB_NAME)
-
-//   try {
-//     console.log('Adding or updating fields for collections...')
-
-//     // Default values for new fields
-//     const defaultValues = {
-//       locale: { code: 'en-GB', language: 'English (UK)' },
-//       country: {
-//         code: 'en-GB',
-//         countryCode: 'GB',
-//         name: 'United Kingdom',
-//       },
-//       featured: true,
-//       tags: [],
-//       popularity: 0,
-//     }
-
-//     // Update all documents - add missing fields or update existing ones
-//     const result = await db.collection('collectionsSummary').updateMany(
-//       {}, // Empty filter to match all documents
-//       {
-//         $set: defaultValues, // This will add missing fields or update existing ones
-//       }
-//     )
-
-//     console.log(
-//       `Added or updated fields for ${result.modifiedCount} collections`
-//     )
-//     return result.modifiedCount
-//   } catch (error) {
-//     console.error('Failed to add or update fields:', error)
-//     throw error
-//   }
-// }
-
-export const initialiseNewFields = async (): Promise<number> => {
+export const getAuthors = async (): Promise<Author[]> => {
   const client = await clientPromise
   const db = client.db(DB_NAME)
+  const authors = await db.collection('authors').find({}).toArray()
 
-  try {
-    console.log('Adding or updating fields for collections...')
+  return authors.map(author => ({
+    id: author._id.toString(),
+    ownerId: author.ownerId || '',
+    displayName: author.displayName || '',
+    role: author.role || 'author',
+    bio: author.bio || '',
+    trustLevel: author.trustLevel || 'untrusted',
+    joinedAt: author.joinedAt || new Date(),
+  }))
+}
 
-    // Default values for new fields
-    const defaultValues = {
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }
+export const getAuthorByOwnerId = async (
+  ownerId: string
+): Promise<Author | undefined> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+  const author = await db.collection('authors').findOne({ ownerId })
 
-    // Update all documents - add missing fields or update existing ones
-    const result = await db.collection('collectionsSummary').updateMany(
-      {}, // Empty filter to match all documents
-      {
-        $set: defaultValues, // This will add missing fields or update existing ones
-      }
-    )
+  if (!author) {
+    return undefined
+  }
 
-    console.log(
-      `Added or updated fields for ${result.modifiedCount} collections`
-    )
-    return result.modifiedCount
-  } catch (error) {
-    console.error('Failed to add or update fields:', error)
-    throw error
+  return {
+    id: author._id.toString(),
+    ownerId: author.ownerId || '',
+    displayName: author.displayName || '',
+    role: author.role || 'author',
+    bio: author.bio || '',
+    trustLevel: author.trustLevel || 'untrusted',
+    joinedAt: author.joinedAt || new Date(),
   }
 }
 
-// Example usage:
+export const getAuthorById = async (
+  id: string
+): Promise<Author | undefined> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+  const author = await db
+    .collection('authors')
+    .findOne({ _id: new ObjectId(id) })
 
-/*
-// Filter examples:
-const recentEnglishCollections = await filterCollectionsSummary({
-  updatedAt: {
-    start: new Date('2024-01-01'),
-    end: new Date('2024-12-31')
-  },
-  locale: 'en',
-  featured: true,
-  popularity: 10
-})
+  if (!author) {
+    return undefined
+  }
 
-const collectionsWithNatureTags = await filterCollectionsSummary({
-  tags: {
-    values: ['nature', 'wildlife'],
-    logic: 'OR'
-  },
-  status: 'public'
-})
+  return {
+    id: author._id.toString(),
+    ownerId: author.ownerId || '',
+    displayName: author.displayName || '',
+    role: author.role || 'author',
+    bio: author.bio || '',
+    trustLevel: author.trustLevel || 'untrusted',
+    joinedAt: author.joinedAt || new Date(),
+  }
+}
 
-// Update examples:
-await updateCollectionsSummaryField('abc123', 'featured', true)
-await updateCollectionsSummaryField('def456', 'tags', ['nature', 'Biology'])
+export const getCollectionSummariesByOwnerId = async (
+  ownerId: string
+): Promise<CollectionSummary[]> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+  const collectionSummaries = await db
+    .collection('collectionsSummary')
+    .find({ ownerId })
+    .toArray()
 
-// Bulk update examples:
-await updateCollectionsSummaryFields('popularity', 0) // Reset all popularity scores
-await updateCollectionsSummaryFields('featured', false) // Unfeature all collections
+  return collectionSummaries.map(
+    collectionSummary =>
+      ({
+        id: collectionSummary._id.toString(),
+        shortId: collectionSummary.shortId,
+        type: collectionSummary.type,
+        name: collectionSummary.name,
+        slug: collectionSummary.slug,
+        date: collectionSummary.date,
+        location: collectionSummary.location,
+        itemCount: collectionSummary.itemCount,
+        imageUrl: collectionSummary.imageUrl,
+        status: collectionSummary.status,
+        ownerId: collectionSummary.ownerId,
+        createdAt: collectionSummary.createdAt,
+        updatedAt: collectionSummary.updatedAt,
+        locale: collectionSummary.locale,
+        country: collectionSummary.country,
+        featured: collectionSummary.featured,
+        tags: collectionSummary.tags,
+        popularity: collectionSummary.popularity,
+      }) as unknown as CollectionSummary
+  )
+}
 
-// Initialise new fields for existing collections:
-await initialiseNewFields()
-*/
+export const updateAuthenticatedAuthor = async (
+  ownerId: string,
+  updates: Partial<Pick<Author, 'bio' | 'displayName' | 'role' | 'trustLevel'>>,
+  updaterRole: Role
+): Promise<boolean> => {
+  try {
+    const client = await clientPromise
+    const db = client.db(DB_NAME)
+
+    // Input validation
+    if (!ownerId?.trim()) {
+      console.error('updateAuthor: ownerId is required')
+      return false
+    }
+
+    if (!updates || Object.keys(updates).length === 0) {
+      console.error('updateAuthor: No updates provided')
+      return false
+    }
+
+    // Validate field values
+    if (updates.role && !['admin', 'author'].includes(updates.role)) {
+      console.error(`updateAuthor: Invalid role value: ${updates.role}`)
+      return false
+    }
+
+    if (
+      updates.trustLevel &&
+      !['trusted', 'untrusted'].includes(updates.trustLevel)
+    ) {
+      console.error(
+        `updateAuthor: Invalid trustLevel value: ${updates.trustLevel}`
+      )
+      return false
+    }
+
+    if (
+      updates.displayName !== undefined &&
+      typeof updates.displayName !== 'string'
+    ) {
+      console.error('updateAuthor: displayName must be a string')
+      return false
+    }
+
+    if (updates.bio !== undefined && typeof updates.bio !== 'string') {
+      console.error('updateAuthor: bio must be a string')
+      return false
+    }
+
+    // Permission checks
+    const allowedFields: string[] = []
+
+    if (updaterRole === 'author') {
+      allowedFields.push('bio')
+    } else if (updaterRole === 'admin') {
+      allowedFields.push('displayName', 'role', 'trustLevel')
+    } else {
+      console.error(`updateAuthor: Invalid updater role: ${updaterRole}`)
+      return false
+    }
+
+    // Check if user is trying to update fields they don't have permission for
+    const updateFields = Object.keys(updates)
+    const unauthorisedFields = updateFields.filter(
+      field => !allowedFields.includes(field)
+    )
+
+    if (unauthorisedFields.length > 0) {
+      console.error(
+        `updateAuthor: User with role '${updaterRole}' cannot update fields: ${unauthorisedFields.join(', ')}`
+      )
+      return false
+    }
+
+    // Check if author exists
+    const existingAuthor = await db.collection('authors').findOne({ ownerId })
+    if (!existingAuthor) {
+      console.error(`updateAuthor: Author with ownerId '${ownerId}' not found`)
+      return false
+    }
+
+    // Perform the update
+    const result = await db.collection('authors').updateOne(
+      { ownerId },
+      {
+        $set: {
+          ...updates,
+          updatedAt: new Date(), // Optional: track when updates happen
+        },
+      }
+    )
+
+    if (result.matchedCount === 0) {
+      console.error(`updateAuthor: No author found with ownerId: ${ownerId}`)
+      return false
+    }
+
+    if (result.modifiedCount === 0) {
+      console.warn(
+        `updateAuthor: No changes made for ownerId: ${ownerId} (values may be identical)`
+      )
+      return true // Still consider this successful
+    }
+
+    console.log(
+      `updateAuthor: Successfully updated author with ownerId: ${ownerId}`
+    )
+    return true
+  } catch (error) {
+    console.error('updateAuthor: Database error:', error)
+    return false
+  }
+}

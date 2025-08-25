@@ -20,6 +20,8 @@ import {
   Topic,
   CollectionFilters,
   AddCollectionProps,
+  Role,
+  Author,
 } from '@/types'
 
 type CollectionContextType = {
@@ -97,6 +99,17 @@ type CollectionContextType = {
   ) => Promise<CollectionSummary[]>
   initialiseNewFields: () => Promise<boolean>
   setCollectionSummary: (collectionSummary: CollectionSummary) => void
+  getCollectionSummariesByOwnerId: (
+    ownerId: string
+  ) => Promise<CollectionSummary[]>
+  updateAuthenticatedAuthor: (
+    ownerId: string,
+    role: Role,
+    updates: Object
+  ) => Promise<void>
+  getAuthorByOwnerId: (ownerId: string) => Promise<Author | undefined>
+  getAuthorById: (id: string) => Promise<Author | undefined>
+  authenticatedAuthor: Author | undefined
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -129,6 +142,7 @@ export const CollectionProvider = ({
     success: false,
     message: '',
   })
+  const [authenticatedAuthor, setAuthenticatedAuthor] = useState<Author>()
 
   const addCollectionItem = useCallback(
     async (collection: Collection<unknown>, item: unknown) => {
@@ -1015,7 +1029,6 @@ export const CollectionProvider = ({
   )
 
   const orderSections = (collection: Collection<unknown>) => {
-    console.log('collection', collection)
     switch (collection.type.toString()) {
       case 'topic':
         const orderedItems: Topic[] =
@@ -1059,6 +1072,29 @@ export const CollectionProvider = ({
     []
   )
 
+  const getCollectionSummariesByOwnerId = useCallback(
+    async (ownerId: string): Promise<CollectionSummary[]> => {
+      const response = await fetch('/api/articles', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(ownerId),
+      })
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch filtered collection summaries: ${response.status}`
+        )
+      }
+
+      const summaries = await response.json()
+
+      return summaries
+    },
+    []
+  )
+
   const initialiseNewFields = async () => {
     const url = '/api/admin'
 
@@ -1069,6 +1105,107 @@ export const CollectionProvider = ({
     }
 
     return true
+  }
+
+  const updateAuthenticatedAuthor = async (
+    ownerId: string,
+    role: Role,
+    updates: Object
+  ) => {
+    if (!ownerId || !role) return
+
+    try {
+      const url = `/api/author/update-fields/${ownerId}-${role}`
+
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updates),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      await response.json()
+
+      setApiResponse({
+        success: true,
+        message: 'Author updated.',
+      })
+    } catch (error) {
+      console.error('Failed to update author:', error)
+
+      setApiResponse({
+        success: false,
+        message: 'Author update failed.',
+      })
+    }
+  }
+
+  const getAuthorByOwnerId = async (
+    ownerId: string
+  ): Promise<Author | undefined> => {
+    if (!ownerId) return
+
+    try {
+      const url = `/api/authenticated-author/${ownerId}`
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const author = response.json()
+      setAuthenticatedAuthor(await author)
+      return author
+    } catch (error) {
+      console.error('Failed to fetch author:', error)
+    }
+  }
+
+  const getAuthorById = async (id: string): Promise<Author | undefined> => {
+    if (!id) return
+
+    try {
+      const url = `/api/author/${id}`
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const author = response.json()
+      return author
+    } catch (error) {
+      console.error('Failed to fetch author:', error)
+    }
   }
 
   return (
@@ -1104,6 +1241,11 @@ export const CollectionProvider = ({
         getFilteredCollectionSummaries,
         initialiseNewFields,
         setCollectionSummary,
+        getCollectionSummariesByOwnerId,
+        updateAuthenticatedAuthor,
+        getAuthorByOwnerId,
+        getAuthorById,
+        authenticatedAuthor,
       }}
     >
       {children}

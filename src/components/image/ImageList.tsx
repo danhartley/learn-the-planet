@@ -47,7 +47,7 @@ export const ImageList = () => {
   }
 
   return (
-    <div className="column-group group-block">
+    <div className="column-group">
       <h3>Images</h3>
       {
         <ul className="list-group">
@@ -61,7 +61,7 @@ export const ImageList = () => {
               onChange={handleStatusChange}
             />
             <label htmlFor="rbCollection">
-              Show images from current collection
+              Show images from the current collection
             </label>
           </li>
           <li>
@@ -73,7 +73,7 @@ export const ImageList = () => {
               checked={tagType === 'user'}
               onChange={handleStatusChange}
             />
-            <label htmlFor="rbUser">Show all images</label>
+            <label htmlFor="rbUser">Show all my images</label>
           </li>
         </ul>
       }

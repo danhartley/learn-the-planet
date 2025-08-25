@@ -348,7 +348,9 @@ export interface ContentHandlerType {
   type: 'taxon' | 'term' | 'topic' | 'trait'
 }
 
-export type ExtendedContentHandlerType = ContentHandlerType | { type: 'inat' }
+export type ExtendedContentHandlerType =
+  | ContentHandlerType
+  | { type: 'inat' | 'author' }
 
 export type HistoryItem<T> = {
   id: string
@@ -407,7 +409,7 @@ export type UpdateCollectionFieldsOptions = {
   locale?: UserLocale
 }
 
-export type CollectionStatus = 'private' | 'public' | 'delete'
+export type CollectionStatus = 'private' | 'public' | 'delete' | 'pending'
 
 export type TopicSectionType = 'text' | 'image' | 'taxon' | 'credit' | 'term'
 export type TraitSectionType = 'morphology' | 'phenology' | 'taxon'
@@ -567,4 +569,18 @@ export type AddCollectionProps = {
   imageUrl?: string
   locale: UserLocale
   country: Country
+}
+
+export type Role = 'admin' | 'author'
+
+export type TrustLevel = 'trusted' | 'untrusted'
+
+export type Author = {
+  id: string
+  ownerId: string
+  displayName: string
+  role: Role
+  bio: string
+  trustLevel: TrustLevel
+  joinedAt: Date
 }
