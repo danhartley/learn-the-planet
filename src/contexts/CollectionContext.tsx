@@ -97,7 +97,6 @@ type CollectionContextType = {
   getFilteredCollectionSummaries: (
     filters: CollectionFilters
   ) => Promise<CollectionSummary[]>
-  initialiseNewFields: () => Promise<boolean>
   setCollectionSummary: (collectionSummary: CollectionSummary) => void
   getCollectionSummariesByOwnerId: (
     ownerId: string
@@ -105,7 +104,7 @@ type CollectionContextType = {
   updateAuthenticatedAuthor: (
     ownerId: string,
     role: Role,
-    updates: Object
+    updates: object
   ) => Promise<void>
   getAuthorByOwnerId: (ownerId: string) => Promise<Author | undefined>
   getAuthorById: (id: string) => Promise<Author | undefined>
@@ -1095,22 +1094,10 @@ export const CollectionProvider = ({
     []
   )
 
-  const initialiseNewFields = async () => {
-    const url = '/api/admin'
-
-    const response = await fetch(url, { method: 'GET' })
-
-    if (!response.ok) {
-      throw new Error(`Failed to initialise new fields: ${response.status}`)
-    }
-
-    return true
-  }
-
   const updateAuthenticatedAuthor = async (
     ownerId: string,
     role: Role,
-    updates: Object
+    updates: object
   ) => {
     if (!ownerId || !role) return
 
@@ -1239,7 +1226,6 @@ export const CollectionProvider = ({
         getCollectionById,
         getManyCollectionsById,
         getFilteredCollectionSummaries,
-        initialiseNewFields,
         setCollectionSummary,
         getCollectionSummariesByOwnerId,
         updateAuthenticatedAuthor,

@@ -53,14 +53,6 @@ export const Authors = ({ authors, session }: Props) => {
               {author.displayName}{' '}
               {session?.user?.id === author.ownerId ? '*' : ''}
             </div>
-            <div>
-              {canEditAuthor(author) && (
-                <button onClick={() => toggleEditAuthor(author.id)}>
-                  {isEditing ? 'Cancel' : 'Edit'}
-                </button>
-              )}
-            </div>
-
             {isEditing && authenticatedAuthor ? (
               <Author
                 authenticatedAuthor={authenticatedAuthor}
@@ -71,8 +63,17 @@ export const Authors = ({ authors, session }: Props) => {
                 <em>{author.bio}</em>
               </div>
             )}
-
             <Articles ownerId={author.ownerId} author={author.displayName} />
+            <div>
+              {canEditAuthor(author) && (
+                <button
+                  onClick={() => toggleEditAuthor(author.id)}
+                  className="small"
+                >
+                  {isEditing ? 'Cancel' : 'Edit'}
+                </button>
+              )}
+            </div>
             <hr />
           </li>
         )

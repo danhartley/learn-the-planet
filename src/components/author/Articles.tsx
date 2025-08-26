@@ -112,7 +112,7 @@ export const Articles = ({ ownerId, author }: Props) => {
 
   return (
     <div className="column-group">
-      <button className="detail" onClick={toggleArticles}>
+      <button className="small" onClick={toggleArticles}>
         {loading ? 'Loading...' : visible ? 'Hide articles' : 'Show articles'}
       </button>
 
@@ -123,18 +123,34 @@ export const Articles = ({ ownerId, author }: Props) => {
             <div>No Collections found for {author}.</div>
           ) : (
             <>
-              <h3>Articles</h3>
-              {topics}
-              <hr />
-              <h3>Taxa</h3>
-              {taxa}
-              <hr />
-              <h3>Traits</h3>
-              {traits}
-              <hr />
-              <h3>Terms</h3>
-              {terms}
-              <hr />
+              {topics && (
+                <>
+                  <h3>Articles</h3>
+                  {topics}
+                  <hr />
+                </>
+              )}
+              {taxa.length > 0 && (
+                <>
+                  <h3>Taxa</h3>
+                  {taxa}
+                  <hr />
+                </>
+              )}
+              {traits.length > 0 && (
+                <>
+                  <h3>Traits</h3>
+                  {traits}
+                  <hr />
+                </>
+              )}
+              {terms.length > 0 && (
+                <>
+                  <h3>Terms</h3>
+                  {terms}
+                  <hr />
+                </>
+              )}
             </>
           )}
         </div>

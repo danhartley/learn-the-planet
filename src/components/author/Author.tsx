@@ -17,7 +17,7 @@ import { CollectionTextField } from '@/components/common/CollectionTextField'
 
 type Props = {
   authenticatedAuthor: AuthorType
-  authorToEdit: AuthorType | undefined
+  authorToEdit?: AuthorType | undefined
 }
 
 export const Author = ({ authenticatedAuthor, authorToEdit }: Props) => {
@@ -35,7 +35,7 @@ export const Author = ({ authenticatedAuthor, authorToEdit }: Props) => {
 
   const saveChanges = () => {
     const author = authorToEdit || authenticatedAuthor
-    const role = author.role
+    const role = authenticatedAuthor.role // the logged in, authenticated user
     let updates = {}
 
     if (role === 'author') {

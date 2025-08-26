@@ -310,7 +310,7 @@ button {
     background-color: var(--colour-bg-body);
     border-style: dashed;
   }
-  &.detail {
+  &.small {
     font-size: var(--font-size-xs);
     padding: var(--spacing-sm);
   }
