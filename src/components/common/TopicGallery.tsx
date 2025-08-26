@@ -1,11 +1,13 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 import { useRouter } from 'next/navigation'
 
 import { useTestPlanner } from '@/hooks/useTestPlanner'
+
+import { useCollection } from '@/contexts/CollectionContext'
 
 import { TestConfigSettings } from '@/components/common/TestConfigSettings'
 import { TaxonCard } from '@/components/common/TaxonCard'
@@ -23,6 +25,7 @@ import {
   Taxon,
   QuestionTemplateSelection,
   ContentHandlerType,
+  Author,
 } from '@/types'
 
 type Props<Topic> = {
@@ -30,6 +33,9 @@ type Props<Topic> = {
 }
 
 export const TopicGallery = ({ collection }: Props<Topic>) => {
+  const router = useRouter()
+  const { startTest } = useTestPlanner<Taxon>()
+  const { getAuthorByOwnerId } = useCollection()
   const fieldNotesUrl = collection?.fieldNotes?.url ? (
     <Link href={collection.fieldNotes.url}>Field notes</Link>
   ) : null
@@ -39,8 +45,15 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       { type: 'textEntry', isSelected: true },
     ] as QuestionTemplateSelection[],
   })
-  const { startTest } = useTestPlanner<Taxon>() // Changed to Taxon since we're testing examples
-  const router = useRouter()
+  const [author, setAuthor] = useState<Author>()
+
+  useEffect(() => {
+    const getAuthenticatedAuthor = async () => {
+      const owner = await getAuthorByOwnerId(collection.ownerId)
+      setAuthor(owner)
+    }
+    getAuthenticatedAuthor()
+  }, [])
 
   // Extract all examples from topics to create a testable collection
   const createExamplesCollection = (): Collection<Taxon> => {
@@ -149,7 +162,9 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
         {article}
       </article>
       <Credits collection={collection} />
-
+      <hr />
+      <div>© 2025 {author?.displayName}</div>
+      <hr />
       {hasExamples && (
         <>
           <TestConfigSettings config={config} setConfig={setConfig} />
@@ -158,31 +173,26 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
           </button>
         </>
       )}
-
       <CollectionLinks
         collections={collections?.topic}
         currentCollection={collection}
         title="Related topics"
       />
-
       <CollectionLinks
         collections={collections?.taxon}
         currentCollection={collection}
         title="Taxa"
       />
-
       <CollectionLinks
         collections={collections?.term}
         currentCollection={collection}
         title="Terms"
       />
-
       <CollectionLinks
         collections={collections?.trait}
         currentCollection={collection}
         title="Traits"
       />
-
       {fieldNotesUrl}
     </section>
   )
