@@ -22,10 +22,8 @@ export default function Page() {
         {Object.entries(taxonUrls).map(([key, value]) => {
           return (
             <li key={key}>
-              <h3>
-                <Link href={value.licence}>{value.credit}</Link>
-                <span> ({value.taxon})</span>
-              </h3>
+              <Link href={value.licence}>{value.credit}</Link>
+              <span> ({value.taxon})</span>
             </li>
           )
         })}
@@ -83,30 +81,72 @@ export default function Page() {
         .
       </p>
       <hr />
-      <h2 id="contributor-policy">Contributor photo policy</h2>
-      <p>
-        When you upload or link photos to Learn the Planet, you retain full
-        ownership and rights to your images. Learn the Planet makes no claim to
-        ownership of contributed photos.
-      </p>
-      <p>
-        By contributing photos, you grant Learn the Planet permission to display
-        and use these images on the platform in perpetuity for your articles and
-        lessons. Your uploaded photos remain private to you and are only
-        accessible when you are creating or editing your own content.
-      </p>
-      <p>
-        <strong>Important </strong>You are responsible for ensuring you have the
-        legal right to upload or link any photos you contribute. We strongly
-        recommend using your own original photographs. If you use images from
-        other sources, you must verify that you have proper permission or that
-        the images are available under appropriate licenses for educational use
-      </p>
-      <p>
-        Learn the Planet operates as a non-profit educational platform, and all
-        contributed content supports our mission of nature education, species
-        identification, and citizen science.
-      </p>
+      <section aria-labelledby="contributor-policy" className="column-group">
+        <section>
+          <h2 id="contributor-policy">Contributor Content Policy</h2>
+          <p>
+            When you contribute articles, notes, lessons, or photos to{' '}
+            <em>Learn the Planet</em>, you retain full ownership and copyright
+            of your work. <em>Learn the Planet</em> makes no claim to ownership
+            of contributed content.
+          </p>
+          <p>
+            By contributing, you grant <em>Learn the Planet</em> a{' '}
+            <strong>non-exclusive, perpetual licence</strong> to publish,
+            display, and archive your text and images on the platform. This
+            licence allows us to share your contributions with the community in
+            support of our educational mission. You remain free to republish
+            your work elsewhere at any time.
+          </p>
+        </section>
+        <section>
+          <h3>Contributor responsibilities</h3>
+          <p>
+            You are responsible for ensuring that any material you contribute is
+            either your own original work or used with proper permission or
+            licence.
+          </p>
+          <p>
+            Photos should preferably be your own. If you use images from other
+            sources, you must confirm that you have the right to do so.
+          </p>
+          <p>
+            Plagiarism, unauthorised reproductions, or unlicensed use of
+            material are not permitted.
+          </p>
+        </section>
+
+        <section>
+          <h3>Visitor use of content</h3>
+          <p>
+            Visitors to <em>Learn the Planet</em> may print or download articles
+            and photos <strong>for personal or educational use only</strong>.
+            Any other use, including commercial redistribution or publication on
+            other platforms, requires permission from the original author or
+            photographer.
+          </p>
+          <p>
+            <em>Learn the Planet</em> operates as a non-profit educational
+            platform. All contributed content supports our shared mission of
+            nature education, species identification, and citizen science.
+          </p>
+        </section>
+
+        <section>
+          <h3>Usage note</h3>
+          <p>
+            Unless otherwise stated, contributed content is made available under
+            a{' '}
+            <strong>
+              Creative Commons Attribution–NonCommercial (CC BY-NC) licence
+            </strong>
+            . This means visitors may copy, print, and share articles and photos
+            for personal or educational purposes, provided proper credit is
+            given to the author and <em>Learn the Planet</em>. Commercial use is
+            not permitted without permission.
+          </p>
+        </section>
+      </section>
     </article>
   )
 }
