@@ -209,10 +209,14 @@ a:hover {
   font-size: var(--font-size-xs);
 }
 
+.capitalise {
+  text-transform: capitalize;
+}
+
 /* Layout elements */
 header {
   position: relative;
-  height: 6vh;
+  height: 8vh;
   right: var(--spacing-xs);
   top: var(--spacing-md);
   font-size: var(--font-size-sm);

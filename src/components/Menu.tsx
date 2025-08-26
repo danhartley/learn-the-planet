@@ -11,7 +11,7 @@ export const Menu = () => {
   )
   return (
     <nav>
-      <section aria-labelledby="collection-menu">
+      <section aria-labelledby="collection-menu" className="list-group">
         <h2 id="collection-menu">Site Navigation</h2>
         <ul className="list-group">
           <li>

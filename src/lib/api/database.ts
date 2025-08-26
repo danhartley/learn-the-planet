@@ -996,7 +996,6 @@ export const getFilteredCollectionSummaries = async (
         $lte: new Date(filters.updatedAt.end),
       }
     }
-    console.log(filters?.updatedAt?.start)
 
     // Status filter
     if (filters.status) {
@@ -1206,6 +1205,7 @@ export const getAuthorById = async (
     bio: author.bio || '',
     trustLevel: author.trustLevel || 'untrusted',
     joinedAt: author.joinedAt || new Date(),
+    website: author.website,
   }
 }
 
@@ -1246,7 +1246,9 @@ export const getCollectionSummariesByOwnerId = async (
 
 export const updateAuthenticatedAuthor = async (
   ownerId: string,
-  updates: Partial<Pick<Author, 'bio' | 'displayName' | 'role' | 'trustLevel'>>,
+  updates: Partial<
+    Pick<Author, 'bio' | 'displayName' | 'role' | 'trustLevel' | 'website'>
+  >,
   updaterRole: Role
 ): Promise<boolean> => {
   try {
@@ -1299,7 +1301,7 @@ export const updateAuthenticatedAuthor = async (
     if (updaterRole === 'author') {
       allowedFields.push('bio')
     } else if (updaterRole === 'admin') {
-      allowedFields.push('displayName', 'role', 'trustLevel')
+      allowedFields.push('displayName', 'bio', 'role', 'trustLevel', 'website')
     } else {
       console.error(`updateAuthor: Invalid updater role: ${updaterRole}`)
       return false

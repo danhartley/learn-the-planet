@@ -6,14 +6,15 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 import { sortAlphabeticallyBy } from '@/utils/strings'
 
-import { CollectionSummary } from '@/types'
+import { CollectionSummary, Author } from '@/types'
 
 type Props = {
   ownerId: string
   author: string
+  authenticatedAuthor: Author | undefined
 }
 
-export const Articles = ({ ownerId, author }: Props) => {
+export const Articles = ({ ownerId, author, authenticatedAuthor }: Props) => {
   const { getCollectionSummariesByOwnerId } = useCollection()
   const [articles, setArticles] = useState<CollectionSummary[]>([])
   const [loading, setLoading] = useState(false)
@@ -75,39 +76,54 @@ export const Articles = ({ ownerId, author }: Props) => {
     }
   }
 
-  const topics = types['topics'].map(article => (
-    <div key={article.id} className="list-group">
+  const deleteOptions = (article: CollectionSummary) => {
+    const hideLink =
+      article.status === 'deleted' && authenticatedAuthor?.role !== 'admin'
+    return hideLink ? (
+      <div>{article?.name}</div>
+    ) : (
       <Link href={`/collection/${article?.slug}-${article?.shortId}`}>
         {article?.name}
       </Link>
+    )
+  }
+
+  const topics = types['topics'].map(article => (
+    <div key={article.id} className="list-group">
+      {deleteOptions(article)}
       <div>{article.date || ''}</div>
       <div>{article.location || ''}</div>
-      <div>{article.status}</div>
+      <div>
+        <em>{article.status}</em>
+      </div>
     </div>
   ))
 
   const taxa = types['taxa'].map(article => (
-    <div key={article.id}>
-      <Link href={`/collection/${article?.slug}-${article?.shortId}`}>
-        {article?.name}
-      </Link>
-    </div>
+    <>
+      <div key={article.id}>{deleteOptions(article)}</div>
+      <div>
+        <em>{article.status}</em>
+      </div>
+    </>
   ))
 
   const traits = types['traits'].map(article => (
-    <div key={article.id}>
-      <Link href={`/collection/${article?.slug}-${article?.shortId}`}>
-        {article?.name}
-      </Link>
-    </div>
+    <>
+      <div key={article.id}>{deleteOptions(article)}</div>
+      <div>
+        <em>{article.status}</em>
+      </div>
+    </>
   ))
 
   const terms = types['terms'].map(article => (
-    <div key={article.id}>
-      <Link href={`/collection/${article?.slug}-${article?.shortId}`}>
-        {article?.name}
-      </Link>
-    </div>
+    <>
+      <div key={article.id}>{deleteOptions(article)}</div>
+      <div>
+        <em>{article.status}</em>
+      </div>
+    </>
   ))
 
   return (

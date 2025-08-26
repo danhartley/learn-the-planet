@@ -409,7 +409,7 @@ export type UpdateCollectionFieldsOptions = {
   locale?: UserLocale
 }
 
-export type CollectionStatus = 'private' | 'public' | 'delete' | 'pending'
+export type CollectionStatus = 'private' | 'public' | 'deleted' | 'pending'
 
 export type TopicSectionType = 'text' | 'image' | 'taxon' | 'credit' | 'term'
 export type TraitSectionType = 'morphology' | 'phenology' | 'taxon'
@@ -583,4 +583,5 @@ export type Author = {
   bio: string
   trustLevel: TrustLevel
   joinedAt: Date
+  website?: string
 }

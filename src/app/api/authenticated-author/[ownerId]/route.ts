@@ -5,7 +5,7 @@ export async function GET(request: NextRequest) {
   try {
     const parts = request.nextUrl.pathname.split('/')
     const ownerId = parts[3]
-    console.log('ownerId', ownerId)
+
     if (!ownerId) {
       return NextResponse.json(
         { error: 'Missing ownerId in path' },

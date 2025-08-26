@@ -51,12 +51,12 @@ export const TopicHome = ({ session }: Props) => {
     return <div>{error}</div>
   }
 
-  // Process data if available (even during loading)
   const userCollections =
     collectionSummaries?.filter(
       summary =>
         (summary.status as CollectionStatus) === 'public' ||
-        summary.ownerId === session?.userId
+        (summary.ownerId === session?.userId &&
+          (summary.status as CollectionStatus)) !== 'deleted'
     ) || []
 
   const topics = userCollections.filter(c => c.type.toString() === 'topic')

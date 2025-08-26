@@ -35,7 +35,7 @@ export const CollectionState = () => {
       className="list-group group-block"
     >
       <div className="group">
-        <h2 id="update-collection-visibility">Update Collection visibility</h2>
+        <h2 id="update-collection-visibility">Update collection visibility</h2>
         <div>
           Public collections are available to everyone. Private collections are
           only available to their owner.
@@ -70,7 +70,7 @@ export const CollectionState = () => {
         <ApiResponseMessage apiResponse={apiResponse} />
       </div>
 
-      <DeleteCollection />
+      <DeleteCollection collectionSummary={collectionSummary} />
     </section>
   )
 }

@@ -1,11 +1,11 @@
-import Link from 'next/link'
-
 import { Metadata } from 'next'
 
 import '@/css/global.css'
 
 import { SessionProvider } from 'next-auth/react'
+import { CollectionProvider } from '@/contexts/CollectionContext'
 
+import { Header } from '@/components/Header'
 import { Menu } from '@/components/Menu'
 
 import { Playfair_Display, Open_Sans } from 'next/font/google'
@@ -40,11 +40,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     >
       <head>{/* <script src="http://localhost:8097" /> */}</head>
       <body>
-        <header>
-          <div>
-            <Link href="/">Learn the Planet</Link>
-          </div>
-        </header>
+        <SessionProvider>
+          <CollectionProvider>
+            <Header />
+          </CollectionProvider>
+        </SessionProvider>
         <main>
           <SessionProvider>{children}</SessionProvider>
         </main>

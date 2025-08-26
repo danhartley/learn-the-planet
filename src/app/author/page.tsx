@@ -2,7 +2,7 @@ import { auth } from '@/auth'
 
 import { CollectionProvider } from '@/contexts/CollectionContext'
 
-import { Author as AuthorType, SessionState } from '@/types'
+import { Author as AuthorType } from '@/types'
 import { getAuthorByOwnerId } from '@/api/database'
 
 import { Author } from '@/components/author/Author'

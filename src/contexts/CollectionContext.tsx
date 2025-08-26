@@ -1160,7 +1160,8 @@ export const CollectionProvider = ({
       }
 
       const author = response.json()
-      setAuthenticatedAuthor(await author)
+      const authenticatedAuthor = await author
+      setAuthenticatedAuthor(authenticatedAuthor)
       return author
     } catch (error) {
       console.error('Failed to fetch author:', error)

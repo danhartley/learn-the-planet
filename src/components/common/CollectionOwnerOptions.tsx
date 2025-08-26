@@ -1,20 +1,29 @@
+'use client'
+
 import Link from 'next/link'
 
-import { auth } from '@/auth'
+import { useSession } from 'next-auth/react'
 
-import { Collection } from '@/types'
-
+import { useAuthenticatedAuthor } from '@/hooks/useAuthenticatedAuthor'
 import { SignIn } from '@/components/oauth/SignIn'
 import { CollectionOwnerExportButton } from '@/components/common/CollectionOwnerExportButton'
 import { CollectionPrintButton } from '@/components/common/CollectionPrintButton'
+
+import { Collection, SessionState } from '@/types'
 
 type Props = {
   collection: Collection<unknown>
 }
 
-export const CollectionOwnerOptions = async ({ collection }: Props) => {
-  const session = await auth()
-  const canEdit = session?.user?.id === collection.ownerId
+export const CollectionOwnerOptions = ({ collection }: Props) => {
+  const { data: session } = useSession()
+  const authenticatedAuthor = useAuthenticatedAuthor(
+    session as unknown as SessionState
+  )
+
+  const canEdit =
+    session?.user?.id === collection.ownerId ||
+    authenticatedAuthor?.role === 'admin'
 
   return (
     <>

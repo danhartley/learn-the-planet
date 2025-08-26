@@ -32,27 +32,30 @@ export const Author = ({ authenticatedAuthor, authorToEdit }: Props) => {
   const [selectedTrustLevel, setSelectedTrustLevel] = useState<TrustLevel>(
     authorToEdit?.trustLevel || authenticatedAuthor.trustLevel
   )
+  const [website, setWebsite] = useState<string>(authorToEdit?.website || '')
 
   const saveChanges = () => {
     const author = authorToEdit || authenticatedAuthor
-    const role = authenticatedAuthor.role // the logged in, authenticated user
+    const updaterRole = authenticatedAuthor.role // the logged in, authenticated user
     let updates = {}
 
-    if (role === 'author') {
+    if (updaterRole === 'author') {
       updates = {
         bio,
       }
     }
 
-    if (role === 'admin') {
+    if (updaterRole === 'admin') {
       updates = {
         displayName: name,
+        bio,
         role: selectedRole,
         trustLevel: selectedTrustLevel,
+        website: website || '',
       }
     }
 
-    updateAuthenticatedAuthor(author.ownerId, role, updates)
+    updateAuthenticatedAuthor(author.ownerId, updaterRole, updates)
   }
 
   return (
@@ -63,6 +66,20 @@ export const Author = ({ authenticatedAuthor, authorToEdit }: Props) => {
             fieldValue={name}
             setFieldValue={setName}
             fieldText="Display name"
+            type={'topic' as unknown as ContentHandlerType}
+            required={true}
+          />
+          <CollectionTextField
+            fieldValue={bio}
+            setFieldValue={setBio}
+            fieldText="Short biography"
+            type={'topic' as unknown as ContentHandlerType}
+            required={true}
+          />
+          <CollectionTextField
+            fieldValue={website || ''}
+            setFieldValue={setWebsite}
+            fieldText="Personal website"
             type={'topic' as unknown as ContentHandlerType}
             required={true}
           />
@@ -123,11 +140,6 @@ export const Author = ({ authenticatedAuthor, authorToEdit }: Props) => {
                 Trusted
               </label>
             </div>
-          </div>
-
-          <div className="list-group">
-            <div>Short biography</div>
-            <em>{bio}</em>
           </div>
         </>
       ) : (

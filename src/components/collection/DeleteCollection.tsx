@@ -1,11 +1,26 @@
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
+import { useSession } from 'next-auth/react'
+
+import { useAuthenticatedAuthor } from '@/hooks/useAuthenticatedAuthor'
+
 import { useCollection } from '@/contexts/CollectionContext'
 import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-export const DeleteCollection = () => {
-  const { collection, deleteCollection, apiResponse } = useCollection()
+import { CollectionSummary, CollectionStatus, SessionState } from '@/types'
+
+type Props = {
+  collectionSummary: CollectionSummary
+}
+
+export const DeleteCollection = ({ collectionSummary }: Props) => {
+  const { data: session } = useSession()
+  const authenticatedAuthor = useAuthenticatedAuthor(
+    session as unknown as SessionState
+  )
+  const { collection, deleteCollection, apiResponse, updateCollectionState } =
+    useCollection()
   const router = useRouter()
 
   const handleDeleteCollection = () => {
@@ -13,9 +28,15 @@ export const DeleteCollection = () => {
       const confirmed = window.confirm(
         `Are you sure you want to delete the "${collection.type}" collection? This action cannot be undone.`
       )
-
+      console.log('authenticatedAuthor', authenticatedAuthor)
       if (confirmed) {
-        deleteCollection(collection)
+        if (authenticatedAuthor?.role.toString() === 'admin') {
+          deleteCollection(collection)
+        } else {
+          // soft delete
+          const status: CollectionStatus = 'deleted'
+          updateCollectionState(collectionSummary, status)
+        }
       }
     }
   }
