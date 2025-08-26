@@ -218,7 +218,7 @@ header {
   position: relative;
   height: 8vh;
   right: var(--spacing-xs);
-  top: var(--spacing-md);
+  top: var(--spacing-sm);
   font-size: var(--font-size-sm);
   text-transform: uppercase;
 
@@ -229,10 +229,10 @@ header {
     & a {
       text-decoration: none;
       letter-spacing: calc(var(--letter-spacing) * 2);
+    }
 
-      &:hover {
-        text-decoration: underline;
-      }
+    & div {
+      text-align: right;
     }
   }
 }
@@ -241,6 +241,10 @@ footer {
   display: flex;
   flex-direction: column;
   margin: 0 0 0 var(--spacing-md);
+
+  #copyright {
+    justify-content: center;
+  }
 }
 
 hr {
@@ -1322,10 +1326,6 @@ li.collapsed {
 
 /* Media queries */
 @media screen and (min-width: 768px) {
-  footer {
-    flex-direction: row;
-  }
-
   button {
     width: fit-content;
   }
