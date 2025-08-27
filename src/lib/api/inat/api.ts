@@ -177,7 +177,7 @@ export const getTaxaByAutocomplete = async ({
   const json = await response.json()
   const species: Taxon[] =
     (await mapInatSpeciesToLTP({ results: json.results, locale })) || []
-
+  console.log('species', species)
   if (species) {
     return {
       results: species,

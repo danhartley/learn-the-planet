@@ -42,7 +42,7 @@ export const CollectionOwnerExportButton = ({ collection }: Props) => {
   }
 
   return collection.type.toString() === 'topic' ? (
-    <div className="column-group">
+    <div className="grid-md">
       <button
         onClick={() =>
           handleExportCollection({ textOnly: false, format: 'json' })

@@ -71,10 +71,33 @@ export const getPhoto = async (
   return image
 }
 
+type Name = {
+  name: string
+  locale: string
+}
+
+export const extractNames = (
+  names: Name[] | undefined,
+  vernacularName: string,
+  localeLanguage: string
+) => {
+  if (!names || names.length === 0) return null
+  return names
+    ?.filter(name => name.name !== vernacularName)
+    .filter(name => name.locale === localeLanguage)
+    .map(name => {
+      return {
+        name: name.name,
+        locale: name.locale,
+      }
+    })
+}
+
 export const mapInatSpeciesToLTP = async ({
   results,
   locale,
 }: InatMapProps): Promise<Taxon[] | undefined> => {
+  const localeLanguage = locale?.split('-')[0] // e.g. 'en' from 'en-GB'
   try {
     const species: Taxon[] = await Promise.all(
       results.map(async s => {
@@ -91,6 +114,11 @@ export const mapInatSpeciesToLTP = async ({
           wikipediaUrl: s.wikipedia_url,
           vernacularName: extractVernacularName({ species: s, locale }),
           ancestorIds: s.ancestor_ids,
+          names: extractNames(
+            s.names,
+            s.preferred_common_name || s.english_common_name,
+            localeLanguage || 'en'
+          ),
         } as unknown as Taxon
       })
     )

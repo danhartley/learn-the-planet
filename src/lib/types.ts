@@ -119,9 +119,8 @@ export interface LearningItem {
 export interface Taxon extends LearningItem {
   iconicTaxon?: string
   names?: {
-    vernacularName?: string
-    language?: string
-    wikiSearchTerm?: string
+    name: string
+    locale: string
   }[]
   binomial: string
   rank?: string

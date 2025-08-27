@@ -92,9 +92,9 @@
   --line-height-xl: 1.8;
   --text-underline-offset: 0.5rem;
 
-  /* Font families */
-  /* --font-family-serif: 'Playfair Display', Elena, 'PT Serif', serif;
-  --font-family-sans-serif: 'Open Sans', sans-serif; */
+  /* Widths */
+  --width-wide: 65ch;
+  --width-narrow: 45ch;
 }
 
 /* Base styles */
@@ -135,7 +135,7 @@ article {
   font-family: var(--font-family-serif);
   overflow-wrap: anywhere;
   line-height: var(--line-height-lg);
-  max-width: 65ch;
+  max-width: var(--width-wide);
 
   h2:not(:first-child) {
     margin-top: var(--spacing-xl);
@@ -207,6 +207,10 @@ a:hover {
 
 .font-xs {
   font-size: var(--font-size-xs);
+}
+
+.width-narrow {
+  width: inherit;
 }
 
 .capitalise {
@@ -1356,6 +1360,10 @@ li.collapsed {
 
   .inat-group {
     flex-direction: row;
+  }
+
+  .width-narrow {
+    width: var(--width-narrow);
   }
 }
 
