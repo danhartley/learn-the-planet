@@ -243,7 +243,7 @@ footer {
   margin: 0 0 0 var(--spacing-md);
 
   #copyright {
-    justify-content: center;
+    align-items: center;
   }
 }
 

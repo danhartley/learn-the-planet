@@ -14,7 +14,7 @@ export const Menu = () => {
       <nav>
         <section aria-labelledby="collection-menu" className="list-group">
           <h2 id="collection-menu">Site Navigation</h2>
-          <ul className="list-group">
+          <ul className="grid-md">
             <li>
               <Link href="/topics">Topics</Link>
             </li>
