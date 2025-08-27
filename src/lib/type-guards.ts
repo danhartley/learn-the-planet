@@ -40,18 +40,11 @@ export const isTaxon = (obj: unknown): obj is Taxon => {
     // Check each name object structure
     for (const name of taxon.names) {
       if (!name || typeof name !== 'object' || Array.isArray(name)) return false
-      if (
-        name.vernacularName !== undefined &&
-        typeof name.vernacularName !== 'string'
-      )
+      if (name.name !== undefined && typeof name.name !== 'string') return false
+      if (name.locale !== undefined && typeof name.locale !== 'string')
         return false
-      if (name.language !== undefined && typeof name.language !== 'string')
-        return false
-      if (
-        name.wikiSearchTerm !== undefined &&
-        typeof name.wikiSearchTerm !== 'string'
-      )
-        return false
+
+      return false
     }
   }
 
