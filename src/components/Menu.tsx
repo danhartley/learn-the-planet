@@ -72,6 +72,11 @@ export const Menu = () => {
           </a>
           .
         </div>
+        <div>
+          <Link href="rss.xml" target="_blank">
+            RSS feed
+          </Link>
+        </div>
       </div>
     </div>
   )

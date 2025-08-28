@@ -17,7 +17,7 @@ export function SignIn({ signInText = 'Sign in' }: Props) {
   useEffect(() => {
     const getAuthenticatedAuthor = async () => {
       if (session?.user?.id) {
-        const author = await getAuthorByOwnerId(session.user.id)
+        await getAuthorByOwnerId(session.user.id)
       }
     }
     getAuthenticatedAuthor()

@@ -8,7 +8,6 @@ import { useTestPlanner } from '@/hooks/useTestPlanner'
 
 import {
   Collection,
-  CollectionOverview,
   CollectionSummary,
   QuestionTemplateSelection,
 } from '@/types'

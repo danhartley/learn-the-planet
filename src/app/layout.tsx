@@ -38,7 +38,21 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       lang="en"
       className={`${playfairDisplay.variable} ${openSans.variable}`}
     >
-      <head>{/* <script src="http://localhost:8097" /> */}</head>
+      <head>
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Learn the Planet - Nature Topics"
+          href="/rss.xml"
+        />
+        <link
+          rel="alternate"
+          type="application/feed+json"
+          title="Learn the Planet - Nature Topics (JSON)"
+          href="/feed.json"
+        />
+        {/* <script src="http://localhost:8097" /> */}
+      </head>
       <body>
         <SessionProvider>
           <CollectionProvider>
