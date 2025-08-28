@@ -75,6 +75,13 @@ export const Menu = () => {
         <div>
           <Link href="rss.xml" target="_blank">
             RSS feed
+          </Link>{' '}
+          |
+          <Link
+            href="http://validator.w3.org/feed/check.cgi?url=https%3A//learn-the-planet.com/rss.xml"
+            target="_blank"
+          >
+            Valid RSS
           </Link>
         </div>
       </div>

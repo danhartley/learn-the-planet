@@ -37,11 +37,35 @@ export async function GET(request: NextRequest) {
     })
 
     collections.forEach((collection: CollectionSummary) => {
+      // Build description with HTML including images
+      let description = ''
+
+      // Add featured image if available
+      if (collection.imageUrl) {
+        description += `<img src="${collection.imageUrl}" alt="${collection.name}" />`
+      }
+
+      // Add location if available
+      if (collection.location) {
+        description += `<strong>Location:</strong> ${collection.location}`
+      }
+
       feed.item({
         title: collection.name,
-        description: collection.location ? `${collection.location})` : '',
+        description: description || `New collection: ${collection.name}`,
         url: `https://learn-the-planet.com/collection/${collection.slug}-${collection.shortId}`,
         date: collection.createdAt || collection.updatedAt || new Date(),
+        // Use custom_elements to include raw HTML description
+        // custom_elements: description
+        //   ? [{ 'content:encoded': { _cdata: description } }]
+        //   : [],
+        // // You can also use enclosure for the main image
+        // ...(collection.imageUrl && {
+        //   enclosure: {
+        //     url: collection.imageUrl,
+        //     type: 'image/jpeg', // you might want to detect the actual type
+        //   },
+        // }),
       })
     })
 
