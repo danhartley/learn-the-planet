@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
 
       // Add featured image if available
       if (collection.imageUrl) {
-        description += `<img src="${collection.imageUrl}" alt="${collection.name}" />`
+        description += `<img src="${collection.imageUrl}" alt="${collection.name}" style="width: 130px; height: 78px; margin: 10px 0;" /><br/>`
       }
 
       // Add location if available
