@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import RSS from 'rss'
 
-import { getFilteredCollectionSummaries } from '@/api/database'
+import {
+  getFilteredCollectionSummaries,
+  getAuthorsByOwnerIds,
+} from '@/api/database'
 
 import {
   CollectionFilters,
@@ -15,30 +18,51 @@ async function getPublishedTopicCollections() {
   const filters: CollectionFilters = {
     type: topic,
     status: 'public',
+    limit: 10, // number of topics to return in the feed
   }
   const collections = await getFilteredCollectionSummaries(filters)
 
-  return collections
+  // Get unique owner IDs (for batch author lookup)
+  const ownerIds = [
+    ...new Set(collections.map(collection => collection.ownerId)),
+  ]
+
+  // Batch fetch authors
+  const authors = await getAuthorsByOwnerIds(ownerIds)
+
+  // Create author lookup map
+  const authorMap = new Map(
+    authors.map(author => [author.ownerId, author.displayName])
+  )
+
+  return { collections, authors, authorMap }
 }
 
 export async function GET(request: NextRequest) {
   try {
-    const collections = await getPublishedTopicCollections()
+    const { collections, authors, authorMap } =
+      await getPublishedTopicCollections()
 
     const feed = new RSS({
       title: 'Learn the Planet - Nature Topics',
       description:
         'Latest nature lessons, field notes, and articles from Learn the Planet',
-      feed_url: request.url, // This will be the actual URL being accessed
+      feed_url: request.url, // The URL being accessed
       site_url: 'https://learn-the-planet.com',
       language: 'en',
       pubDate: new Date().toISOString(),
-      ttl: 60, // cache for 60 minutes
+      ttl: 120, // cache for 2 hours
     })
 
     collections.forEach((collection: CollectionSummary) => {
       // Build description with HTML including images
       let description = ''
+
+      const author = authorMap.get(collection.ownerId)
+
+      if (author) {
+        description += `Author: ${author}`
+      }
 
       // Add featured image if available
       if (collection.imageUrl) {
@@ -52,20 +76,9 @@ export async function GET(request: NextRequest) {
 
       feed.item({
         title: collection.name,
-        description: description || `New collection: ${collection.name}`,
+        description: description || collection.name,
         url: `https://learn-the-planet.com/collection/${collection.slug}-${collection.shortId}`,
         date: collection.createdAt || collection.updatedAt || new Date(),
-        // Use custom_elements to include raw HTML description
-        // custom_elements: description
-        //   ? [{ 'content:encoded': { _cdata: description } }]
-        //   : [],
-        // // You can also use enclosure for the main image
-        // ...(collection.imageUrl && {
-        //   enclosure: {
-        //     url: collection.imageUrl,
-        //     type: 'image/jpeg', // you might want to detect the actual type
-        //   },
-        // }),
       })
     })
 

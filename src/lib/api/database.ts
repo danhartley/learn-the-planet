@@ -1040,11 +1040,18 @@ export const getFilteredCollectionSummaries = async (
       query.popularity = { $gte: filters.popularity }
     }
 
-    const results = await db
+    // Build the query with optional limit
+    let queryBuilder = db
       .collection('collectionsSummary')
       .find(query)
       .sort({ updatedAt: -1 }) // -1 for descending (newest first), 1 for ascending (oldest first)
-      .toArray()
+
+    // Apply limit if specified
+    if (filters.limit !== undefined && filters.limit > 0) {
+      queryBuilder = queryBuilder.limit(filters.limit)
+    }
+
+    const results = await queryBuilder.toArray()
 
     // Convert MongoDB results to CollectionSummary format
     const collections: CollectionSummary[] = results.map(
@@ -1207,6 +1214,27 @@ export const getAuthorById = async (
     joinedAt: author.joinedAt || new Date(),
     website: author.website,
   }
+}
+export const getAuthorsByOwnerIds = async (
+  ownerIds: string[]
+): Promise<Author[]> => {
+  const client = await clientPromise
+  const db = client.db(DB_NAME)
+  const authors = await db
+    .collection('authors')
+    .find({ ownerId: { $in: ownerIds } })
+    .project({ ownerId: 1, displayName: 1 }) // Only get fields we need
+    .toArray()
+
+  return authors.map(author => ({
+    id: author._id.toString(),
+    ownerId: author.ownerId || '',
+    displayName: author.displayName || '',
+    role: author.role || 'author',
+    bio: author.bio || '',
+    trustLevel: author.trustLevel || 'untrusted',
+    joinedAt: author.joinedAt || new Date(),
+  }))
 }
 
 export const getCollectionSummariesByOwnerId = async (

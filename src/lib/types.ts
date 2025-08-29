@@ -559,6 +559,7 @@ export type CollectionFilters = {
     logic: 'AND' | 'OR'
   }
   popularity?: number // minimum threshold
+  limit?: number // minimum threshold
 }
 
 export type AddCollectionProps = {
