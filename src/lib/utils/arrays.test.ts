@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { groupCollectionsByType } from '@/utils/arrays'
+import { groupCollectionsByType, sortedArrayByRank } from '@/utils/arrays'
+
+import { InatTaxon } from '@/types'
 
 // Mock types based on your function signature
 type ContentHandlerType = 'taxon' | 'term' | 'topic' | 'trait'
@@ -158,5 +160,31 @@ describe('groupCollectionsByType', () => {
 
     expect(result.term[0].name).toBe('First Term')
     expect(result.term[1].name).toBe('Second Term')
+  })
+})
+
+describe('sortedArrayByRank', () => {
+  const array = [
+    {
+      name: 'second',
+      rank: 'genus',
+    },
+    {
+      name: 'first',
+      rank: 'species',
+    },
+  ] as InatTaxon[]
+  it('should rank species before genus', () => {
+    const sortedArray = sortedArrayByRank(array)
+    expect(sortedArray).toEqual([
+      {
+        name: 'first',
+        rank: 'species',
+      },
+      {
+        name: 'second',
+        rank: 'genus',
+      },
+    ])
   })
 })

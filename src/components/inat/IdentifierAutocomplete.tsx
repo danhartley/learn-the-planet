@@ -58,7 +58,7 @@ export const IdentifierAutocomplete = ({
   }
 
   const handleResultClick = (result: InatIdentifierDetails) => {
-    setQuery(result.login)
+    setQuery(result.login || result.name || result.title || '') // user, place or project
     setShowResults(false)
     setIdentifierFilter({
       id: type,
@@ -99,7 +99,7 @@ export const IdentifierAutocomplete = ({
                 onClick={() => handleResultClick(result)}
                 className="option"
               >
-                {result.login}
+                {result.login || result.name || result.title}
               </button>
             </li>
           ))}

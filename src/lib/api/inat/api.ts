@@ -1,4 +1,5 @@
 import { mapInatSpeciesToLTP } from '@/api/inat/inat-species-map'
+import { sortedArrayByRank } from '@/utils/arrays'
 import {
   ContentHandlerType,
   LearningItem,
@@ -127,7 +128,7 @@ async function getInatData(url: string) {
 
               return {
                 ...taxon,
-                distractors: distractorsResult?.results || [],
+                distractors: distractorsResult || [],
               }
             }
 
@@ -195,7 +196,8 @@ export const getDistractors = async ({ ancestorIds }: AncestorProps) => {
   const url = `https://api.inaturalist.org/v1/taxa?parent_id=${ancestorIds.join(',')}&rank=species,genus&all_names=true`
   const response = await fetch(url)
   const json = await response.json()
-  return json
+  // sort array to return members with rank of species first, genus second
+  return sortedArrayByRank(json.results)
 }
 
 type TaxaDistractorProps = {
@@ -212,8 +214,8 @@ export const getTaxaDistractors = async ({
           const distractorsResult = await getDistractors({
             ancestorIds: taxon.ancestorIds.map((id: number) => id.toString()),
           })
-          const distractors = distractorsResult?.results
-            .filter(
+          const distractors = distractorsResult
+            ?.filter(
               (d: InatTaxon) =>
                 d.id.toString() !== taxon.id.toString() &&
                 d.preferred_common_name !== undefined

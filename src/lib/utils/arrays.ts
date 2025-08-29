@@ -1,4 +1,4 @@
-import { LearningItem } from '@/types'
+import { LearningItem, InatTaxon } from '@/types'
 import {
   QuestionTemplateSelection,
   GroupedCollectionSummaries,
@@ -54,4 +54,12 @@ export const groupCollectionsByType = (
   })
 
   return groups
+}
+
+export const sortedArrayByRank = (array: InatTaxon[]) => {
+  return array.sort((a, b) => {
+    if (a.rank === 'species' && b.rank !== 'species') return -1
+    if (a.rank !== 'species' && b.rank === 'species') return 1
+    return 0
+  })
 }

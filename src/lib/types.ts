@@ -509,7 +509,9 @@ export type InatIdentifier = {
 
 export type InatIdentifierDetails = {
   id: string
-  login: string
+  login: string // user
+  name: string // place
+  title?: string // project
 }
 
 export type InatObservationFilters = {
