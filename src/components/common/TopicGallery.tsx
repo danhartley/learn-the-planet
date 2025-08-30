@@ -162,9 +162,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
         {article}
       </article>
       <Credits collection={collection} />
-      <hr />
       <div>© 2025 {author?.displayName}</div>
-      <hr />
       {hasExamples && (
         <>
           <TestConfigSettings config={config} setConfig={setConfig} />

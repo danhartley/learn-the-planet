@@ -24,37 +24,39 @@ export const ObservationDates = ({ onDateChange }: Props) => {
   return (
     <div className="group-block">
       <fieldset id="inat-observation-dates">
-        <legend>
-          <h2>When the observations were made</h2>
-        </legend>
-        <div className="list-group">
-          <h3>
-            <div>Date range</div>
-          </h3>
-          <div className="inat-group">
-            <div className="form-row inat">
-              <label htmlFor="observations-start-date" className="date">
-                From
-              </label>
-              <input
-                type="date"
-                id="observations-start-date"
-                name="observations-start-date"
-                value={startDate}
-                onChange={e => handleStartDateChange(e.target.value)}
-              />
-            </div>
-            <div className="form-row inat">
-              <label htmlFor="observations-end-date" className="date">
-                Until
-              </label>
-              <input
-                type="date"
-                id="observations-end-date"
-                name="observations-end-date"
-                value={endDate}
-                onChange={e => handleEndDateChange(e.target.value)}
-              />
+        <div className="column-group">
+          <legend>
+            <h2>When the observations were made</h2>
+          </legend>
+          <div className="list-group">
+            <h3>
+              <div>Date range</div>
+            </h3>
+            <div className="inat-group">
+              <div className="form-row inat">
+                <label htmlFor="observations-start-date" className="date">
+                  From
+                </label>
+                <input
+                  type="date"
+                  id="observations-start-date"
+                  name="observations-start-date"
+                  value={startDate}
+                  onChange={e => handleStartDateChange(e.target.value)}
+                />
+              </div>
+              <div className="form-row inat">
+                <label htmlFor="observations-end-date" className="date">
+                  Until
+                </label>
+                <input
+                  type="date"
+                  id="observations-end-date"
+                  name="observations-end-date"
+                  value={endDate}
+                  onChange={e => handleEndDateChange(e.target.value)}
+                />
+              </div>
             </div>
           </div>
         </div>

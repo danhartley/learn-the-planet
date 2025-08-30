@@ -38,7 +38,7 @@ export function IconicTaxaFilter({ setSelectedIconicTaxons }: Props) {
   }
 
   return (
-    <section className="group-block">
+    <section>
       <fieldset id="iconic-taxa-container">
         <legend>
           <h2>Filter your iNaturalist search by taxa</h2>

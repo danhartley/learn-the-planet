@@ -51,7 +51,7 @@ export const Locale = ({ userLocale, setUserLocale }: Props) => {
   return (
     <div className="group-block">
       <fieldset>
-        <div className="list-group">
+        <div className="column-group">
           <h2>Choose the language of species common names</h2>
           <LocaleSelector
             userLocale={userLocale}

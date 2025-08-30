@@ -192,8 +192,8 @@ export default function Page() {
       <h1>Search iNaturalist</h1>
 
       {/* Toggle  */}
-      <div className="group-block">
-        <div className="form-row">
+      <ul className="horizontal-group">
+        <li>
           <input
             id="search"
             type="radio"
@@ -202,6 +202,8 @@ export default function Page() {
             name="inat-searches"
           />
           <label htmlFor="search">Search by filters</label>
+        </li>
+        <li>
           <input
             id="autocomplete"
             type="radio"
@@ -210,8 +212,8 @@ export default function Page() {
             name="inat-searches"
           />
           <label htmlFor="autocomplete">Add Taxa Manually</label>
-        </div>
-      </div>
+        </li>
+      </ul>
 
       {/* Group 1 - Search Filters */}
       {activeGroup === 'search' && (

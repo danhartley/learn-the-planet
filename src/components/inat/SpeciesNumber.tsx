@@ -9,8 +9,8 @@ export const SpeciesNumber = ({ setSpeciesNumber }: Props) => {
   return (
     <div className="group-block">
       <fieldset>
-        <div className="list-group">
-          <h2>Choose how many species you want to review.</h2>
+        <div className="column-group">
+          <h2>Choose how many species you want to review</h2>
           <h3>
             <label htmlFor="species-input">Number of species</label>
           </h3>
