@@ -71,6 +71,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <Menu />
           </SessionProvider>
         </footer>
+        <script async src="https://scripts.withcabin.com/hello.js"></script>
       </body>
     </html>
   )
