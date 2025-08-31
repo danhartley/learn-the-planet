@@ -52,6 +52,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           href="/feed.json"
         />
         {/* <script src="http://localhost:8097" /> */}
+        <meta
+          name="google-site-verification"
+          content="5g4jsd-u-eJJBXzDy87rjB7KXqe1JZWeoQ78ivfQxLA"
+        />
       </head>
       <body>
         <SessionProvider>
