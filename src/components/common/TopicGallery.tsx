@@ -77,6 +77,9 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
 
     // Only start test if there are examples to test
     if (examplesCollection.items && examplesCollection.items.length > 0) {
+      examplesCollection.items = examplesCollection.items.filter(
+        taxon => taxon.rank === 'species'
+      ) // exclude genus
       startTest({ collection: examplesCollection, config })
       router.push('/test')
     }

@@ -148,10 +148,14 @@ export const TopicTerms: React.FC<TopicTermsProps> = ({
 
       <div className="column-group">
         <div className="form-row">
-          <button onClick={handleSaveTerms}>Save terms</button>
+          <button onClick={handleSaveTerms} className="save">
+            Save terms
+          </button>
           <ApiResponseMessage apiResponse={apiResponse} />
         </div>
-        <button onClick={handleDeleteTermsSection}>Delete terms</button>
+        <button onClick={handleDeleteTermsSection} className="delete">
+          Delete terms
+        </button>
       </div>
     </div>
   )
