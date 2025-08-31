@@ -52,12 +52,15 @@ export const TopicHome = ({ session }: Props) => {
   }
 
   const userCollections =
-    collectionSummaries?.filter(
-      summary =>
-        (summary.status as CollectionStatus) === 'public' ||
-        (summary.ownerId === session?.userId &&
-          (summary.status as CollectionStatus)) !== 'deleted'
-    ) || []
+    collectionSummaries?.filter(summary => {
+      const status = summary.status as CollectionStatus
+
+      // Always include public collections (not deleted)
+      if (status === 'public') return true
+
+      // For non-public collections, only include if user owns them and they're not deleted
+      return summary.ownerId === session?.userId && status !== 'deleted'
+    }) || []
 
   const topics = userCollections.filter(c => c.type.toString() === 'topic')
 

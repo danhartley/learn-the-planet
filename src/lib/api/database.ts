@@ -1215,6 +1215,7 @@ export const getAuthorById = async (
     website: author.website,
   }
 }
+
 export const getAuthorsByOwnerIds = async (
   ownerIds: string[]
 ): Promise<Author[]> => {
