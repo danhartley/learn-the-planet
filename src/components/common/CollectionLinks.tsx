@@ -56,35 +56,33 @@ export const CollectionLinks: React.FC<{
   }
 
   return (
-    <>
-      <hr />
-      <section aria-labelledby="linked-collections" className="list-group">
-        <h2 id="linked-collections">{title}</h2>
-        <ul className="grid-md">
-          {filteredCollections.map((linkedCollection: CollectionSummary) => (
-            <li key={linkedCollection.shortId}>
-              <div className="card small">
-                <Link
-                  href={`/collection/${linkedCollection?.slug}-${encodeURIComponent(linkedCollection?.shortId || '')}`}
-                >
-                  {linkedCollection.name}
-                </Link>
-                <button
-                  id="start-test"
-                  onClick={() =>
-                    handleStartTest(
-                      linkedCollection?.slug,
-                      linkedCollection?.shortId
-                    )
-                  }
-                >
-                  {getBtnText(linkedCollection.type.toString())}
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </>
+    <section aria-labelledby="linked-collections" className="list-group">
+      <h2 id="linked-collections">{title}</h2>
+      <ul className="grid-md">
+        {filteredCollections.map((linkedCollection: CollectionSummary) => (
+          <li key={linkedCollection.shortId}>
+            <div className="card small">
+              <Link
+                href={`/collection/${linkedCollection?.slug}-${encodeURIComponent(linkedCollection?.shortId || '')}`}
+              >
+                {linkedCollection.name}
+              </Link>
+              <button
+                id="start-test"
+                onClick={() =>
+                  handleStartTest(
+                    linkedCollection?.slug,
+                    linkedCollection?.shortId
+                  )
+                }
+                className="small"
+              >
+                {getBtnText(linkedCollection.type.toString())}
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 }

@@ -68,10 +68,12 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
           <div className="block">{taxa}</div>
         </section>
       </div>
-      <TestConfigSettings config={config} setConfig={setConfig} />
-      <button id="start-test" onClick={handleStartTest}>
-        Learn taxa
-      </button>
+      <div className="group-block">
+        <TestConfigSettings config={config} setConfig={setConfig} />
+        <button id="start-test" onClick={handleStartTest}>
+          Learn taxa
+        </button>
+      </div>
     </section>
   )
 }

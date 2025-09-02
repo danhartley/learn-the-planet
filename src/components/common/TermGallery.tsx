@@ -88,10 +88,12 @@ export function TermGallery({ collection }: Props<Term>) {
           <dl>{definitions}</dl>
         </section>
       </div>
-      <TestConfigSettings config={config} setConfig={setConfig} />
-      <button id="start-test" onClick={handleStartTest}>
-        Learn terms
-      </button>
+      <div className="group-block">
+        <TestConfigSettings config={config} setConfig={setConfig} />
+        <button id="start-test" onClick={handleStartTest}>
+          Learn terms
+        </button>
+      </div>
     </section>
   )
 }

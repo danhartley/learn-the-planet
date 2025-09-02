@@ -167,33 +167,35 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
       <Credits collection={collection} />
       <div>© 2025 {author?.displayName}</div>
       {hasExamples && (
-        <>
+        <div className="group-block">
           <TestConfigSettings config={config} setConfig={setConfig} />
           <button id="start-test" onClick={handleStartTest}>
             Learn topic taxa
           </button>
-        </>
+        </div>
       )}
-      <CollectionLinks
-        collections={collections?.topic}
-        currentCollection={collection}
-        title="Related topics"
-      />
-      <CollectionLinks
-        collections={collections?.taxon}
-        currentCollection={collection}
-        title="Taxa"
-      />
-      <CollectionLinks
-        collections={collections?.term}
-        currentCollection={collection}
-        title="Terms"
-      />
-      <CollectionLinks
-        collections={collections?.trait}
-        currentCollection={collection}
-        title="Traits"
-      />
+      <div className="group-block">
+        <CollectionLinks
+          collections={collections?.topic}
+          currentCollection={collection}
+          title="Related topics"
+        />
+        <CollectionLinks
+          collections={collections?.taxon}
+          currentCollection={collection}
+          title="Taxa"
+        />
+        <CollectionLinks
+          collections={collections?.term}
+          currentCollection={collection}
+          title="Terms"
+        />
+        <CollectionLinks
+          collections={collections?.trait}
+          currentCollection={collection}
+          title="Traits"
+        />
+      </div>
       {fieldNotesUrl}
     </section>
   )

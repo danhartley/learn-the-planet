@@ -78,6 +78,7 @@
 
   /* Element sizes */
   --card-width: clamp(100px, 14rem, 240px);
+  --card-width-small: clamp(100px, 10rem, 200px);
   --card-height: clamp(400px, 20rem, 440px);
   --img-size: clamp(180px, 16vw, 240px);
   --button-size: clamp(200px, 20vw, 260px);
@@ -770,6 +771,7 @@ form {
 .card.small {
   min-height: calc(var(--card-height) * 0.35);
   padding: var(--spacing-md);
+  width: var(--card-width-small);
 }
 
 .card > *:nth-last-child(1) {
