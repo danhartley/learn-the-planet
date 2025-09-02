@@ -71,6 +71,7 @@ export default function Page() {
   const [selectedTaxa, setSelectedTaxa] = useState<Taxon[]>([])
 
   const search = async () => {
+    setSearchSpecies([]) // reset selected species
     setIsSearching(true)
     try {
       // Build the filters object
