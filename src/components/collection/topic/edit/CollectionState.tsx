@@ -1,20 +1,22 @@
 'use client'
 import React from 'react'
 
+import { useSession } from 'next-auth/react'
+
 import { useCollection } from '@/contexts/CollectionContext'
+import { useAuthenticatedAuthor } from '@/hooks/useAuthenticatedAuthor'
 
 import { DeleteCollection } from '@/components/collection/DeleteCollection'
-import { ApiResponseMessage } from '@/components/common/ApiResponseMessage'
 
-import { CollectionStatus, CollectionSummary } from '@/types'
+import { CollectionStatus, CollectionSummary, SessionState } from '@/types'
 
 export const CollectionState = () => {
-  const {
-    collection,
-    collectionSummaries,
-    updateCollectionState,
-    apiResponse,
-  } = useCollection()
+  const { data: session } = useSession()
+  const authenticatedAuthor = useAuthenticatedAuthor(
+    session as unknown as SessionState
+  )
+  const { collection, collectionSummaries, updateCollectionState } =
+    useCollection()
 
   if (!collectionSummaries) {
     return null
@@ -24,11 +26,13 @@ export const CollectionState = () => {
     summary => summary.shortId === collection?.shortId
   ) as unknown as CollectionSummary
 
-  const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newStatus = event.target.value as CollectionStatus
-    updateCollectionState(collectionSummary, newStatus)
+  const publish = () => {
+    updateCollectionState(
+      collectionSummary,
+      'public' as unknown as CollectionStatus
+    )
   }
-
+  console.log('authenticatedAuthor?.role', authenticatedAuthor?.role)
   return (
     <section
       aria-labelledby="update-collection-visibility"
@@ -42,35 +46,20 @@ export const CollectionState = () => {
         </div>
       </div>
 
-      <div className="form-row">
-        <ul className="list-group">
-          <li>
-            <input
-              id="private"
-              type="radio"
-              name="collectionStatus"
-              value="private"
-              checked={collectionSummary.status === 'private'}
-              onChange={handleStatusChange}
-            />
-            <label htmlFor="private">Private</label>
-          </li>
-          <li>
-            <input
-              id="public"
-              type="radio"
-              name="collectionStatus"
-              value="public"
-              checked={collectionSummary.status === 'public'}
-              onChange={handleStatusChange}
-            />
-            <label htmlFor="public">Public</label>
-          </li>
-        </ul>
-        <ApiResponseMessage apiResponse={apiResponse} />
-      </div>
+      {collectionSummary.status === 'private' && (
+        <button onClick={publish}>Publish</button>
+      )}
 
-      <DeleteCollection collectionSummary={collectionSummary} />
+      {collectionSummary.status === 'public' && (
+        <div>
+          <strong>This collection is public.</strong>
+        </div>
+      )}
+
+      {(collectionSummary.status === 'private' ||
+        authenticatedAuthor?.role === 'admin') && (
+        <DeleteCollection collectionSummary={collectionSummary} />
+      )}
     </section>
   )
 }

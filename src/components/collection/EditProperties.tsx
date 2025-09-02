@@ -65,14 +65,25 @@ export const EditProperties = () => {
         <h2 id="collection-properties">Collection properties</h2>
       </div>
       <div className="group-block">
-        <CollectionTextField
-          fieldValue={name}
-          setFieldValue={setName}
-          fieldText="Collection name"
-          type={collection?.type || ('topic' as unknown as ContentHandlerType)}
-          sectionIndex={1}
-          required={true}
-        />
+        {collectionSummary?.status.toString() === 'private' ? (
+          <CollectionTextField
+            fieldValue={name}
+            setFieldValue={setName}
+            fieldText="Collection name"
+            type={
+              collection?.type || ('topic' as unknown as ContentHandlerType)
+            }
+            sectionIndex={1}
+            required={true}
+          />
+        ) : (
+          <div className="list-group">
+            <h3>Collection name</h3>
+            <div className="capitalise-first-letter">
+              <strong>{collection?.name}</strong>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="group-block">
