@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 
 import Link from 'next/link'
 
+import { SignIn } from '@/components/oauth/SignIn'
+
 import { useSession } from 'next-auth/react'
 import { useAuthenticatedAuthor } from '@/hooks/useAuthenticatedAuthor'
 
@@ -24,8 +26,13 @@ export const Header = () => {
   return (
     <header>
       <div>
-        <Link href="/">Learn the Planet</Link>
-        <div className="font-xs capitalise">{userName}</div>
+        <div>
+          <Link href="/">Learn the Planet</Link>
+        </div>
+        <div>
+          <div className="font-xs capitalise">{userName}</div>
+          <SignIn signInText="Sign in" className="small" />
+        </div>
       </div>
     </header>
   )

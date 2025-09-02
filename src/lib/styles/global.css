@@ -218,10 +218,16 @@ a:hover {
   text-transform: capitalize;
 }
 
+.capitalise-first-letter {
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
 /* Layout elements */
 header {
   position: relative;
-  height: 8vh;
+  height: 9vh;
   right: var(--spacing-xs);
   top: var(--spacing-sm);
   font-size: var(--font-size-sm);
@@ -230,6 +236,16 @@ header {
   & > div {
     position: absolute;
     right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+
+    > div {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      justify-content: right;
+    }
 
     & a {
       text-decoration: none;
@@ -325,7 +341,7 @@ button {
   }
   &.small {
     font-size: var(--font-size-xs);
-    padding: var(--spacing-sm);
+    padding: var(--spacing-sm) !important;
   }
 }
 

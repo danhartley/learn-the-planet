@@ -8,9 +8,10 @@ import { useCollection } from '@/contexts/CollectionContext'
 
 type Props = {
   signInText: string
+  className?: string
 }
 
-export function SignIn({ signInText = 'Sign in' }: Props) {
+export function SignIn({ signInText = 'Sign in', className }: Props) {
   const { getAuthorByOwnerId } = useCollection()
   const { data: session, status } = useSession()
 
@@ -23,11 +24,16 @@ export function SignIn({ signInText = 'Sign in' }: Props) {
     getAuthenticatedAuthor()
   }, [session])
 
-  if (status === 'loading') return <p>Loading...</p>
+  if (status === 'loading') return null
+  // return <div className={`${className}`}>Loading...</div>
 
   if (session?.user) {
     return (
-      <button id="sign-out-btn" onClick={() => signOut()} className="save">
+      <button
+        id="sign-out-btn"
+        onClick={() => signOut()}
+        className={`save ${className}`}
+      >
         Sign out
       </button>
     )
@@ -36,7 +42,7 @@ export function SignIn({ signInText = 'Sign in' }: Props) {
       <button
         id="sign-in-btn"
         onClick={() => signIn('google')}
-        className="save"
+        className={`save ${className}`}
       >
         {signInText}
       </button>
