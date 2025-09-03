@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.learn-the-planet.com/sitemap.xml
+Sitemap: https://www.learn-the-planet.com/rss.xml

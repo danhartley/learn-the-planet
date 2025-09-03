@@ -1,5 +1,0 @@
-User-agent: *
-Disallow:
-
-# The RSS feed
-Sitemap: https://learn-the-planet.com/rss.xml
