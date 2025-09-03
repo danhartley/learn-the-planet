@@ -226,16 +226,14 @@ a:hover {
 
 /* Layout elements */
 header {
-  position: relative;
-  height: 9vh;
+  display: flex;
+  justify-content: right;
   right: var(--spacing-xs);
   top: var(--spacing-sm);
   font-size: var(--font-size-sm);
   text-transform: uppercase;
 
   & > div {
-    position: absolute;
-    right: 0;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
@@ -261,7 +259,7 @@ header {
 footer {
   display: flex;
   flex-direction: column;
-  margin: 0 0 0 var(--spacing-md);
+  margin: var(--spacing-md) 0 0 var(--spacing-md);
 
   #copyright {
     align-items: center;
@@ -342,6 +340,11 @@ button {
   &.small {
     font-size: var(--font-size-xs);
     padding: var(--spacing-sm) !important;
+  }
+  &.hidden {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    margin: 0;
   }
 }
 
@@ -824,6 +827,16 @@ form {
   &:hover {
     background-color: var(--colour-bg-neutral);
     border: 1px solid var(--colour-fg-main);
+  }
+}
+
+.rotating-icons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    max-width: 80%;
   }
 }
 

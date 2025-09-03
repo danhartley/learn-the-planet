@@ -24,8 +24,8 @@ export function SignIn({ signInText = 'Sign in', className }: Props) {
     getAuthenticatedAuthor()
   }, [session])
 
-  if (status === 'loading') return null
-  // return <div className={`${className}`}>Loading...</div>
+  if (status === 'loading')
+    return <button className="small hidden">Loading...</button>
 
   if (session?.user) {
     return (

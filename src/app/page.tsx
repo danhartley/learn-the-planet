@@ -6,7 +6,10 @@ const Home = () => {
   return (
     <>
       <article>
-        <h1>Welcome to Learn the Planet</h1>
+        <div className="rotating-icons-container">
+          <h1>Welcome to Learn the Planet</h1>
+          <RotatingTaxonIcons />
+        </div>
         <p>
           This website is dedicated to natural history, to the observation of
           species in their environment, to seeing what is and what is not
@@ -69,9 +72,7 @@ const Home = () => {
             </p>
           </li>
         </ul>
-        <hr />
       </article>
-      <RotatingTaxonIcons />
     </>
   )
 }
