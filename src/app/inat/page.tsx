@@ -18,6 +18,7 @@ import { ObservationDates } from '@/components/inat/ObservationDates'
 import { SpeciesNumber } from '@/components/inat/SpeciesNumber'
 import { Locale } from '@/components/inat/Locale'
 import { TaxonAutocomplete } from '@/components/collection/taxon/TaxonAutocomplete'
+import { Authentication } from '@/components/inat/Authentication'
 
 import { getShortId } from '@/utils/strings'
 import { processCollectionTaxa } from '@/utils/taxa'
@@ -295,6 +296,8 @@ export default function Page() {
           Learn to remember and recognise taxa
         </button>
       </div>
+
+      <Authentication />
     </CollectionProvider>
   )
 }
