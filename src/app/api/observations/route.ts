@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
     }
 
     // If you stored the access token in the session (be careful in production!)
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
     const accessToken = (session as any).inaturalist_access_token
     if (accessToken) {
       headers['Authorization'] = `Bearer ${accessToken}`

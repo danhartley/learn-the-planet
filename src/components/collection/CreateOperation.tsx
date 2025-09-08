@@ -116,8 +116,10 @@ export const CreateOperation = () => {
           </button>
         </>
       )}
-
-      <SignIn signInText="Sign in to create collection" />
+      <SignIn
+        signInText="Sign in to create collection"
+        className="wide login"
+      />
     </>
   )
 }

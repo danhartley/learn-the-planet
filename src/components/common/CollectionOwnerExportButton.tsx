@@ -47,6 +47,7 @@ export const CollectionOwnerExportButton = ({ collection }: Props) => {
         onClick={() =>
           handleExportCollection({ textOnly: false, format: 'json' })
         }
+        className="small"
       >
         Export collection
       </button>
@@ -54,6 +55,7 @@ export const CollectionOwnerExportButton = ({ collection }: Props) => {
         onClick={() =>
           handleExportCollection({ textOnly: true, format: 'json' })
         }
+        className="small"
       >
         Export text only
       </button>
@@ -62,6 +64,7 @@ export const CollectionOwnerExportButton = ({ collection }: Props) => {
         onClick={() =>
           handleExportCollection({ textOnly: false, format: 'md' })
         }
+        className="small"
       >
         Export markdown
       </button>

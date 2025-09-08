@@ -1,9 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-
 import { signIn, signOut, useSession } from 'next-auth/react'
-
 import { useCollection } from '@/contexts/CollectionContext'
 
 type Props = {
@@ -24,28 +22,48 @@ export function SignIn({ signInText = 'Sign in', className }: Props) {
     getAuthenticatedAuthor()
   }, [session])
 
-  if (status === 'loading')
-    return <button className="small hidden">Loading...</button>
+  const handleSignIn = (provider: string) => {
+    signIn(provider)
+  }
+
+  const handleSignOut = () => {
+    signOut()
+  }
+  console.log(status)
+  if (status === 'loading') {
+    return (
+      <button id="sign-in-loading" className={`${className} small`}>
+        Updating…
+      </button>
+    )
+  }
 
   if (session?.user) {
     return (
-      <button
-        id="sign-out-btn"
-        onClick={() => signOut()}
-        className={`save ${className}`}
-      >
+      <button id="sign-out-btn" onClick={handleSignOut} className={className}>
         Sign out
       </button>
     )
   } else {
     return (
-      <button
-        id="sign-in-btn"
-        onClick={() => signIn('google')}
-        className={`save ${className}`}
+      <select
+        id="sign-in-select"
+        aria-label="Sign in with provider"
+        className={className}
+        onChange={e => {
+          const provider = e.target.value
+          if (provider) {
+            handleSignIn(provider)
+          }
+        }}
+        defaultValue=""
       >
-        {signInText}
-      </button>
+        <option value="" disabled>
+          {signInText}
+        </option>
+        <option value="google">Google</option>
+        <option value="inaturalist">iNaturalist</option>
+      </select>
     )
   }
 }

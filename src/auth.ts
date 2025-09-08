@@ -1,4 +1,4 @@
-// Enhanced auth.ts with better debugging and error handling
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import { MongoDBAdapter } from '@auth/mongodb-adapter'
@@ -206,7 +206,7 @@ const requiredEnvVars = {
 }
 
 const missingVars = Object.entries(requiredEnvVars)
-  .filter(([_, value]) => !value)
+  .filter(([value]) => !value)
   .map(([key]) => key)
 
 if (missingVars.length > 0) {
@@ -268,8 +268,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           : null,
       })
     },
-    async signOut({ token }) {
+    async signOut(message) {
       console.log('👋 Sign out event')
+      if ('token' in message) {
+        console.log(message.token)
+      }
     },
   },
   debug: true, // Enable full debugging

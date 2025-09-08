@@ -1,5 +1,9 @@
 'use client'
 
 export const CollectionPrintButton = () => {
-  return <button onClick={() => print()}>Print</button>
+  return (
+    <button onClick={() => print()} className="small">
+      Print
+    </button>
+  )
 }

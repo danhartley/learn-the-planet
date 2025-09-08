@@ -15,6 +15,7 @@ import { NextCloudinaryImage } from '@/components/image/common/NextCloudinaryIma
 import { Credits } from '@/components/common/Credits'
 import { CollectionLinks } from '@/components/common/CollectionLinks'
 import { IconicTaxonIcon } from '@/components/image/common/IconicTaxonIcon'
+import { CollectionPrintButton } from '@/components/common/CollectionPrintButton'
 
 import { groupCollectionsByType } from '@/utils/arrays'
 import { formatDateToReadable } from '@/utils/strings'
@@ -196,6 +197,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
           title="Traits"
         />
       </div>
+      <CollectionPrintButton />
       {fieldNotesUrl}
     </section>
   )

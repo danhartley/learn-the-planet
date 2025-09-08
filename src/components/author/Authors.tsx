@@ -7,7 +7,6 @@ import { useAuthenticatedAuthor } from '@/hooks/useAuthenticatedAuthor'
 
 import { Articles } from '@/components/author/Articles'
 import { Author } from '@/components/author/Author'
-import { SignIn } from '@/components/oauth/SignIn'
 
 import { Author as AuthorType, SessionState } from '@/types'
 
@@ -75,7 +74,6 @@ export const Authors = ({ authors }: Props) => {
           )
         })}
       </ul>
-      <SignIn signInText="Sign in" />
     </>
   )
 }

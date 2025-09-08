@@ -7,7 +7,6 @@ import { useSession } from 'next-auth/react'
 import { useAuthenticatedAuthor } from '@/hooks/useAuthenticatedAuthor'
 import { SignIn } from '@/components/oauth/SignIn'
 import { CollectionOwnerExportButton } from '@/components/common/CollectionOwnerExportButton'
-import { CollectionPrintButton } from '@/components/common/CollectionPrintButton'
 
 import { Collection, SessionState } from '@/types'
 
@@ -26,10 +25,14 @@ export const CollectionOwnerOptions = ({ collection }: Props) => {
     authenticatedAuthor?.role === 'admin'
 
   return (
-    <>
+    <div className="column-group">
+      <hr />
+      <SignIn
+        signInText={'Sign in to edit collection'}
+        className="wide login"
+      />
       {canEdit && (
         <>
-          <hr />
           <Link
             href={`/collection/edit/${collection.slug}-${collection.shortId}`}
           >
@@ -38,8 +41,6 @@ export const CollectionOwnerOptions = ({ collection }: Props) => {
           <CollectionOwnerExportButton collection={collection} />
         </>
       )}
-      <SignIn signInText={'Sign in to edit collection'} />
-      <CollectionPrintButton />
-    </>
+    </div>
   )
 }
