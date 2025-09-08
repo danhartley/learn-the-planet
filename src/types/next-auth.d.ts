@@ -21,5 +21,6 @@ declare module 'next-auth/jwt' {
   interface JWT extends DefaultJWT {
     inaturalist_user_id?: number
     inaturalist_login?: string
+    inaturalist_access_token?: string
   }
 }

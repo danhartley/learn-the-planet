@@ -34,7 +34,7 @@
       "@/validation/*": ["lib/validation/*"],
       "@/type-guards": ["lib/type-guards"],
       "@/contexts/*": ["contexts/*"],
-      "@/auth": ["../auth.ts"]
+      "@/auth": ["auth.ts"]
     },
     "types": [
       "cypress",

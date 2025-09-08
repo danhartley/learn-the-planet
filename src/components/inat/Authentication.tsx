@@ -9,23 +9,21 @@ export const Authentication = () => {
 
   if (session) {
     return (
-      <div className="space-y-2">
-        <p>Signed in as {session.user?.email}</p>
+      <div>
+        <p>Signed in as {session.user?.email || session.user?.name}</p>
         {session.user?.inaturalist_user_id && (
-          <p>iNaturalist User ID: {session.user.inaturalist_user_id}</p>
+          <div>
+            <p>iNaturalist User ID: {session.user.inaturalist_user_id}</p>
+            <p>iNaturalist Login: {session.user.inaturalist_login}</p>
+          </div>
         )}
-        <button
-          onClick={() => signOut()}
-          className="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Sign out
-        </button>
+        <button onClick={() => signOut()}>Sign out</button>
       </div>
     )
   }
 
   return (
-    <div className="form-row">
+    <div>
       <button onClick={() => signIn('google')}>Sign in with Google</button>
       <button onClick={() => signIn('inaturalist')}>
         Sign in with iNaturalist
