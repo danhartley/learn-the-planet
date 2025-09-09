@@ -185,12 +185,8 @@ const iNaturalistProvider = (options: any) => ({
     return processedProfile
   },
   style: {
-    logo: 'https://static.inaturalist.org/sites/1-logo.png',
-    logoDark: 'https://static.inaturalist.org/sites/1-logo.png',
-    bg: '#74ac00',
-    text: '#fff',
-    bgDark: '#74ac00',
-    textDark: '#fff',
+    logo: 'https://upload.wikimedia.org/wikipedia/en/7/76/INaturalist_logo.png',
+    brandColor: '#74ac00',
   },
   ...options,
 })
