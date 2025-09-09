@@ -29,7 +29,7 @@ export function SignIn({ signInText = 'Sign in', className }: Props) {
   const handleSignOut = () => {
     signOut()
   }
-  console.log(status)
+
   if (status === 'loading') {
     return (
       <button id="sign-in-loading" className={`${className} small`}>

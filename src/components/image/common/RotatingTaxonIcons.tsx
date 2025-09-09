@@ -27,8 +27,12 @@ export const RotatingTaxonIcons = () => {
         key={currentTaxon}
         src={taxonUrls[currentTaxon as IconicTaxon]?.icon}
         alt={`${currentTaxon} icon, credit to ${taxonUrls[currentTaxon as IconicTaxon]?.credit}`}
-        width={40}
-        height={48}
+        width={0}
+        height={0}
+        style={{
+          width: '40px',
+          height: 'auto', // This maintains aspect ratio
+        }}
       />
     </div>
   )
