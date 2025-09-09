@@ -586,4 +586,5 @@ export type Author = {
   trustLevel: TrustLevel
   joinedAt: Date
   website?: string
+  inatToken?: string
 }

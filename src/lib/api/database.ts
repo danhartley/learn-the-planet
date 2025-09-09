@@ -15,6 +15,7 @@ import {
 import clientPromise from '@/api/mongodb'
 
 const DB_NAME = 'ltp'
+const DB_NAME_META = 'test'
 
 export const getCollections = async (): Promise<
   Collection<unknown>[] | undefined
@@ -1195,7 +1196,7 @@ export const getAuthorById = async (
   id: string
 ): Promise<Author | undefined> => {
   const client = await clientPromise
-  const db = client.db(DB_NAME)
+  const db = client.db('DB_NAME')
   const author = await db
     .collection('authors')
     .findOne({ _id: new ObjectId(id) })
@@ -1386,5 +1387,21 @@ export const updateAuthenticatedAuthor = async (
   } catch (error) {
     console.error('updateAuthor: Database error:', error)
     return false
+  }
+}
+
+export const getInatToken = async (userId: string): Promise<string | null> => {
+  try {
+    const client = await clientPromise
+    const db = client.db(DB_NAME_META)
+    const query = {
+      userId: new ObjectId(userId),
+      provider: 'inaturalist',
+    }
+    const account = await db.collection('accounts').findOne(query)
+    return account?.jwt_token || account?.access_token || null
+  } catch (error) {
+    console.error('Error getting iNat token:', error)
+    return null
   }
 }

@@ -109,6 +109,8 @@ type CollectionContextType = {
   getAuthorByOwnerId: (ownerId: string) => Promise<Author | undefined>
   getAuthorById: (id: string) => Promise<Author | undefined>
   authenticatedAuthor: Author | undefined
+  getInatToken: (userId: string) => Promise<string | undefined>
+  setAuthenticatedAuthor: (author: Author) => void
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(
@@ -1160,8 +1162,6 @@ export const CollectionProvider = ({
       }
 
       const author = response.json()
-      const authenticatedAuthor = await author
-      setAuthenticatedAuthor(authenticatedAuthor)
       return author
     } catch (error) {
       console.error('Failed to fetch author:', error)
@@ -1193,6 +1193,34 @@ export const CollectionProvider = ({
       return author
     } catch (error) {
       console.error('Failed to fetch author:', error)
+    }
+  }
+
+  const getInatToken = async (userId: string): Promise<string | undefined> => {
+    if (!userId) return
+
+    try {
+      const url = `/api/account/${userId}/inat-token/`
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+
+        throw new Error(
+          errorData.error || `HTTP error! status: ${response.status}`
+        )
+      }
+
+      const inatToken = response.json()
+      return inatToken
+    } catch (error) {
+      console.error('Failed to fetch inat token:', error)
     }
   }
 
@@ -1233,6 +1261,8 @@ export const CollectionProvider = ({
         getAuthorByOwnerId,
         getAuthorById,
         authenticatedAuthor,
+        getInatToken,
+        setAuthenticatedAuthor,
       }}
     >
       {children}

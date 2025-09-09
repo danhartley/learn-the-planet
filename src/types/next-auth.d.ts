@@ -8,12 +8,18 @@ declare module 'next-auth' {
       id: string
       inaturalist_user_id?: number
       inaturalist_login?: string
+      inaturalist_login_exact?: string
+      inaturalist_name?: string
+      inaturalist_icon?: string
     } & DefaultSession['user']
   }
 
   interface User extends DefaultUser {
     inaturalist_user_id?: number
     inaturalist_login?: string
+    inaturalist_login_exact?: string
+    inaturalist_name?: string
+    inaturalist_icon?: string
   }
 }
 

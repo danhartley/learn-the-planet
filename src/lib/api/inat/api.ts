@@ -865,3 +865,17 @@ export const getCountries = () => {
     },
   ] as Country[]
 }
+
+export async function getINatUserInfo(accessToken: string) {
+  const res = await fetch('/api/user', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ accessToken }),
+  })
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch user info: ${res.status}`)
+  }
+
+  return res.json()
+}
