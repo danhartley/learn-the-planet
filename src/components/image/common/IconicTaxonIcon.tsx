@@ -57,8 +57,12 @@ export const IconicTaxonIcon: React.FC<IconicTaxonProps> = ({ collection }) => {
           id={iconicTaxon}
           src={taxonUrls[iconicTaxon]?.icon}
           alt={`${iconicTaxon} icon, credit to ${taxonUrls[iconicTaxon]?.credit}`}
-          width={40}
-          height={48}
+          width={0}
+          height={0}
+          style={{
+            width: '40px',
+            height: 'auto', // This maintains aspect ratio
+          }}
         />
       ))}
     </div>

@@ -867,6 +867,7 @@ form {
   img {
     width: var(--spacing-lg);
     padding: 0 calc(var(--spacing-xs) * 0.5);
+    min-height: calc(var(--spacing-lg) * 2);
   }
   &.rotate {
     position: absolute;
@@ -875,7 +876,6 @@ form {
     img {
       opacity: 1;
       transition: opacity 0.3s ease-in-out;
-      min-height: calc(var(--spacing-lg) * 2);
     }
   }
 }
