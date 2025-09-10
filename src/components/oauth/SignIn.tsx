@@ -1,10 +1,8 @@
 'use client'
 
-import { useEffect } from 'react'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { useCollection } from '@/contexts/CollectionContext'
-
-import { Author } from '@/types'
+import { useAuthenticatedAuthor } from '@/hooks/useAuthenticatedAuthor'
+import { SessionState } from '@/types'
 
 type Props = {
   signInText: string
@@ -12,25 +10,8 @@ type Props = {
 }
 
 export function SignIn({ signInText = 'Sign in', className }: Props) {
-  const { getAuthorByOwnerId, getInatToken, setAuthenticatedAuthor } =
-    useCollection()
   const { data: session, status } = useSession()
-
-  useEffect(() => {
-    const getAuthenticatedAuthor = async () => {
-      if (session?.user?.id) {
-        const author = await getAuthorByOwnerId(session.user.id)
-        if (author && session?.user?.inaturalist_name) {
-          const token = await getInatToken(session.user.id)
-          if (token) {
-            author.inatToken = token
-          }
-          setAuthenticatedAuthor(author)
-        }
-      }
-    }
-    getAuthenticatedAuthor()
-  }, [session])
+  useAuthenticatedAuthor(session as unknown as SessionState)
 
   const handleSignIn = (provider: string) => {
     signIn(provider)

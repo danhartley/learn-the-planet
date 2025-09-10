@@ -110,7 +110,7 @@ type CollectionContextType = {
   getAuthorById: (id: string) => Promise<Author | undefined>
   authenticatedAuthor: Author | undefined
   getInatToken: (userId: string) => Promise<string | undefined>
-  setAuthenticatedAuthor: (author: Author) => void
+  setAuthenticatedAuthor: (author: Author | undefined) => void
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(

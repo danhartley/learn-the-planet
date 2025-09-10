@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useCollection } from '@/contexts/CollectionContext'
 import { Author, SessionState } from '@/types'
 
@@ -35,10 +35,12 @@ const getAuthorFromStorage = (): Author | undefined => {
 export const useAuthenticatedAuthor = (
   session: SessionState | undefined
 ): Author | undefined => {
-  const { getAuthorByOwnerId } = useCollection()
-  const [authenticatedAuthor, setAuthenticatedAuthor] = useState<
-    Author | undefined
-  >(undefined)
+  const {
+    getAuthorByOwnerId,
+    authenticatedAuthor,
+    setAuthenticatedAuthor,
+    getInatToken,
+  } = useCollection()
 
   // Load from localStorage after component mounts (client-side only)
   useEffect(() => {
@@ -68,6 +70,22 @@ export const useAuthenticatedAuthor = (
     }
 
     fetchAuthenticatedAuthor()
+  }, [session])
+
+  useEffect(() => {
+    const getAuthenticatedAuthor = async () => {
+      if (session?.user?.id) {
+        const author = await getAuthorByOwnerId(session.user.id)
+        if (author && session?.user?.inaturalist_name) {
+          const token = await getInatToken(session.user.id)
+          if (token) {
+            author.inatToken = token
+          }
+          setAuthenticatedAuthor(author)
+        }
+      }
+    }
+    getAuthenticatedAuthor()
   }, [session])
 
   return authenticatedAuthor

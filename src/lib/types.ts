@@ -426,6 +426,11 @@ export type SessionState = {
     email: string
     image: string
     emailVerified?: boolean
+    inaturalist_user_id?: number
+    inaturalist_login?: string
+    inaturalist_login_exact?: string
+    inaturalist_name?: string
+    inaturalist_icon?: string
   }
   id: string
   sessionToken: string
