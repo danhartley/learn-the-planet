@@ -297,7 +297,7 @@ export default function Page() {
         </button>
       </div>
 
-      <Authentication />
+      {/* <Authentication /> */}
     </CollectionProvider>
   )
 }

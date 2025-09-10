@@ -24,42 +24,25 @@ export function AuthTest() {
   }
 
   return (
-    <div className="p-4 border rounded">
-      <h3 className="font-bold mb-2">NextAuth Test</h3>
+    <div>
+      <h3>NextAuth Test</h3>
       <p>Status: {status}</p>
       <p>Session: {session ? 'Active' : 'None'}</p>
 
-      <div className="mt-4 space-x-2">
-        <button
-          onClick={testNextAuth}
-          className="bg-blue-500 text-white px-3 py-1 rounded text-sm"
-        >
-          Test NextAuth Endpoints
-        </button>
+      <div className="grid-md">
+        <button onClick={testNextAuth}>Test NextAuth Endpoints</button>
 
-        <button
-          onClick={() => signIn('google')}
-          className="bg-red-500 text-white px-3 py-1 rounded text-sm"
-        >
-          Test Google Sign In
-        </button>
+        <button onClick={() => signIn('google')}>Test Google Sign In</button>
 
         <button
           onClick={() => {
             console.log('Attempting iNaturalist sign in...')
             signIn('inaturalist')
           }}
-          className="bg-green-500 text-white px-3 py-1 rounded text-sm"
         >
           Test iNaturalist Sign In
         </button>
-      </div>
-
-      <div className="mt-2">
-        <button
-          onClick={() => window.open('/api/auth/providers', '_blank')}
-          className="bg-gray-500 text-white px-3 py-1 rounded text-sm"
-        >
+        <button onClick={() => window.open('/api/auth/providers', '_blank')}>
           Check /api/auth/providers
         </button>
       </div>

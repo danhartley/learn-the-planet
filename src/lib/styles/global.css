@@ -520,6 +520,10 @@ li::marker {
   font-size: 0;
 }
 
+code {
+  white-space: pre-wrap;
+}
+
 /* Block components */
 .block-container {
   display: flex;
