@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { useRouter } from 'next/navigation'
-
 import Image from 'next/image'
+import { useSession } from 'next-auth/react'
 
 import { CollectionProvider } from '@/contexts/CollectionContext'
 
@@ -18,7 +18,6 @@ import { ObservationDates } from '@/components/inat/ObservationDates'
 import { SpeciesNumber } from '@/components/inat/SpeciesNumber'
 import { Locale } from '@/components/inat/Locale'
 import { TaxonAutocomplete } from '@/components/collection/taxon/TaxonAutocomplete'
-import { Authentication } from '@/components/inat/Authentication'
 
 import { getShortId } from '@/utils/strings'
 import { processCollectionTaxa } from '@/utils/taxa'
@@ -47,6 +46,7 @@ export default function Page() {
 
   const [selectedIconicTaxons, setSelectedIconicTaxons] =
     useState<IconicTaxon[]>()
+  const { data: session } = useSession()
   const [identifierFilter, setIdentifierFilter] = useState<
     InatIdentifier | undefined
   >()
@@ -60,6 +60,16 @@ export default function Page() {
     startDate: string | undefined
     endDate: string | undefined
   }
+
+  useEffect(() => {
+    const filter = session?.user?.inaturalist_login
+      ? { id: 'users' as const, value: session.user.inaturalist_login }
+      : undefined
+
+    if (filter) {
+      setIdentifierFilter(filter)
+    }
+  }, [session])
 
   const onDateChange = (
     startDate: DateChangeParams['startDate'],
@@ -221,7 +231,10 @@ export default function Page() {
       {activeGroup === 'search' && (
         <div className="group-block">
           <IconicTaxaFilter setSelectedIconicTaxons={setSelectedIconicTaxons} />
-          <IdentifierFilter setIdentifierFilter={setIdentifierFilter} />
+          <IdentifierFilter
+            setIdentifierFilter={setIdentifierFilter}
+            identifierFilter={identifierFilter}
+          />
           <ObservationDates onDateChange={onDateChange} />
           <SpeciesNumber setSpeciesNumber={setSpeciesNumber} />
           <Locale userLocale={locale} setUserLocale={setLocale} />
@@ -296,8 +309,6 @@ export default function Page() {
           Learn to remember and recognise taxa
         </button>
       </div>
-
-      {/* <Authentication /> */}
     </CollectionProvider>
   )
 }

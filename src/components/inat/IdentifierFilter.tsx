@@ -7,9 +7,13 @@ import { InatIdentifierType, InatIdentifier } from '@/types'
 
 type Props = {
   setIdentifierFilter: (identifierFilter: InatIdentifier | undefined) => void
+  identifierFilter: InatIdentifier | undefined
 }
 
-export const IdentifierFilter = ({ setIdentifierFilter }: Props) => {
+export const IdentifierFilter = ({
+  setIdentifierFilter,
+  identifierFilter,
+}: Props) => {
   const [selectedType, setSelectedType] = useState<InatIdentifierType>('users')
 
   const handleIdChange = (type: InatIdentifierType) => {
@@ -45,6 +49,7 @@ export const IdentifierFilter = ({ setIdentifierFilter }: Props) => {
           <IdentifierAutocomplete
             type={selectedType}
             setIdentifierFilter={setIdentifierFilter}
+            identifierFilter={identifierFilter}
           />
         </div>
       </fieldset>

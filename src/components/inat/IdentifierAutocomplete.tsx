@@ -9,15 +9,24 @@ import {
 type Props = {
   type: InatIdentifierType
   setIdentifierFilter: (identifierFilter: InatIdentifier | undefined) => void
+  identifierFilter: InatIdentifier | undefined
 }
 
 export const IdentifierAutocomplete = ({
   type,
   setIdentifierFilter,
+  identifierFilter,
 }: Props) => {
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState(identifierFilter?.value || '')
   const [results, setResults] = useState<InatIdentifierDetails[]>([])
   const [showResults, setShowResults] = useState(false)
+
+  useEffect(() => {
+    const newValue = identifierFilter?.value || ''
+    if (newValue !== query) {
+      setQuery(newValue)
+    }
+  }, [identifierFilter, query])
 
   // Debounced search function
   const debouncedSearch = useCallback(
