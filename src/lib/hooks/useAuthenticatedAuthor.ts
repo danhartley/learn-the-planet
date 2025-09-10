@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react'
+import { useEffect, useRef } from 'react'
 import { useCollection } from '@/contexts/CollectionContext'
 import { Author, SessionState } from '@/types'
 
@@ -39,8 +39,34 @@ export const useAuthenticatedAuthor = (
     getInatToken,
   } = useCollection()
 
-  const fetchAndSetAuthor = useCallback(
-    async (userId: string, inaturalistName?: string) => {
+  // Track the last fetched user ID to prevent duplicate requests
+  const lastFetchedUserId = useRef<string | null>(null)
+  const isInitialized = useRef(false)
+
+  // Initialise from localStorage on mount (only once)
+  useEffect(() => {
+    if (!isInitialized.current) {
+      const storedAuthor = getAuthorFromStorage()
+      if (storedAuthor && !authenticatedAuthor) {
+        setAuthenticatedAuthor(storedAuthor)
+      }
+      isInitialized.current = true
+    }
+  }, []) // Empty dependency array - only run once
+
+  // Handle session changes
+  useEffect(() => {
+    const fetchAndSetAuthor = async (
+      userId: string,
+      inaturalistName?: string
+    ) => {
+      // Prevent duplicate requests for the same user
+      if (lastFetchedUserId.current === userId) {
+        return
+      }
+
+      lastFetchedUserId.current = userId
+
       try {
         const author = await getAuthorByOwnerId(userId)
 
@@ -54,38 +80,31 @@ export const useAuthenticatedAuthor = (
 
         setAuthenticatedAuthor(author)
         saveAuthorToStorage(author)
-        return author
       } catch (error) {
         console.error('Failed to fetch authenticated author:', error)
         setAuthenticatedAuthor(undefined)
         saveAuthorToStorage(undefined)
-        return undefined
       }
-    },
-    [getAuthorByOwnerId, getInatToken, setAuthenticatedAuthor]
-  )
-
-  const clearAuthor = useCallback(() => {
-    setAuthenticatedAuthor(undefined)
-    saveAuthorToStorage(undefined)
-  }, [setAuthenticatedAuthor])
-
-  // Initialize from localStorage on mount
-  useEffect(() => {
-    const storedAuthor = getAuthorFromStorage()
-    if (storedAuthor && !authenticatedAuthor) {
-      setAuthenticatedAuthor(storedAuthor)
     }
-  }, [authenticatedAuthor, setAuthenticatedAuthor])
 
-  // Handle session changes
-  useEffect(() => {
+    const clearAuthor = () => {
+      lastFetchedUserId.current = null
+      setAuthenticatedAuthor(undefined)
+      saveAuthorToStorage(undefined)
+    }
+
     if (session?.user?.id) {
       fetchAndSetAuthor(session.user.id, session.user.inaturalist_name)
     } else {
       clearAuthor()
     }
-  }, [session, fetchAndSetAuthor, clearAuthor])
+  }, [
+    session?.user?.id,
+    session?.user?.inaturalist_name,
+    getAuthorByOwnerId,
+    getInatToken,
+    setAuthenticatedAuthor,
+  ])
 
   return authenticatedAuthor
 }
