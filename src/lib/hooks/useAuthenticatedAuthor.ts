@@ -1,10 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import { useCollection } from '@/contexts/CollectionContext'
 import { Author, SessionState } from '@/types'
 
 // localStorage utility functions
 const saveAuthorToStorage = (author: Author | undefined): void => {
-  // Check if running in browser
   if (typeof window === 'undefined') return
 
   try {
@@ -19,7 +18,6 @@ const saveAuthorToStorage = (author: Author | undefined): void => {
 }
 
 const getAuthorFromStorage = (): Author | undefined => {
-  // Check if running in browser
   if (typeof window === 'undefined') return undefined
 
   try {
@@ -31,7 +29,6 @@ const getAuthorFromStorage = (): Author | undefined => {
   }
 }
 
-// Custom hook
 export const useAuthenticatedAuthor = (
   session: SessionState | undefined
 ): Author | undefined => {
@@ -42,51 +39,53 @@ export const useAuthenticatedAuthor = (
     getInatToken,
   } = useCollection()
 
-  // Load from localStorage after component mounts (client-side only)
-  useEffect(() => {
-    const storedAuthor = getAuthorFromStorage()
-    if (storedAuthor) {
-      setAuthenticatedAuthor(storedAuthor)
-    }
-  }, [])
+  const fetchAndSetAuthor = useCallback(
+    async (userId: string, inaturalistName?: string) => {
+      try {
+        const author = await getAuthorByOwnerId(userId)
 
-  useEffect(() => {
-    const fetchAuthenticatedAuthor = async () => {
-      if (session?.user.id) {
-        try {
-          const author = await getAuthorByOwnerId(session.user.id)
-          setAuthenticatedAuthor(author)
-          saveAuthorToStorage(author)
-        } catch (error) {
-          console.error('Failed to fetch authenticated author:', error)
-          // Clear localStorage on error
-          saveAuthorToStorage(undefined)
-        }
-      } else {
-        // No session, clear author
-        setAuthenticatedAuthor(undefined)
-        saveAuthorToStorage(undefined)
-      }
-    }
-
-    fetchAuthenticatedAuthor()
-  }, [session])
-
-  useEffect(() => {
-    const getAuthenticatedAuthor = async () => {
-      if (session?.user?.id) {
-        const author = await getAuthorByOwnerId(session.user.id)
-        if (author && session?.user?.inaturalist_name) {
-          const token = await getInatToken(session.user.id)
+        // Add iNaturalist token if available
+        if (author && inaturalistName) {
+          const token = await getInatToken(userId)
           if (token) {
             author.inatToken = token
           }
-          setAuthenticatedAuthor(author)
         }
+
+        setAuthenticatedAuthor(author)
+        saveAuthorToStorage(author)
+        return author
+      } catch (error) {
+        console.error('Failed to fetch authenticated author:', error)
+        setAuthenticatedAuthor(undefined)
+        saveAuthorToStorage(undefined)
+        return undefined
       }
+    },
+    [getAuthorByOwnerId, getInatToken, setAuthenticatedAuthor]
+  )
+
+  const clearAuthor = useCallback(() => {
+    setAuthenticatedAuthor(undefined)
+    saveAuthorToStorage(undefined)
+  }, [setAuthenticatedAuthor])
+
+  // Initialize from localStorage on mount
+  useEffect(() => {
+    const storedAuthor = getAuthorFromStorage()
+    if (storedAuthor && !authenticatedAuthor) {
+      setAuthenticatedAuthor(storedAuthor)
     }
-    getAuthenticatedAuthor()
-  }, [session])
+  }, [authenticatedAuthor, setAuthenticatedAuthor])
+
+  // Handle session changes
+  useEffect(() => {
+    if (session?.user?.id) {
+      fetchAndSetAuthor(session.user.id, session.user.inaturalist_name)
+    } else {
+      clearAuthor()
+    }
+  }, [session, fetchAndSetAuthor, clearAuthor])
 
   return authenticatedAuthor
 }
