@@ -42,7 +42,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <link
           rel="alternate"
           type="application/rss+xml"
-          title="Learn the Planet - Nature Topics"
+          title="Learn the Planet"
           href="/rss.xml"
         />
         {/* <script src="http://localhost:8097" /> */}
@@ -51,12 +51,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           content="5g4jsd-u-eJJBXzDy87rjB7KXqe1JZWeoQ78ivfQxLA"
         />
       </head>
-      <link
-        rel="alternate"
-        type="application/rss+xml"
-        title="Learn the Planet RSS"
-        href="https://www.learn-the-planet.com/rss.xml"
-      ></link>
       <link rel="canonical" href="https://www.learn-the-planet.com"></link>
       <body>
         <SessionProvider>
