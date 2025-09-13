@@ -45,12 +45,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           title="Learn the Planet - Nature Topics"
           href="/rss.xml"
         />
-        <link
-          rel="alternate"
-          type="application/feed+json"
-          title="Learn the Planet - Nature Topics (JSON)"
-          href="/feed.json"
-        />
         {/* <script src="http://localhost:8097" /> */}
         <meta
           name="google-site-verification"
