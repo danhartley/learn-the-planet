@@ -41,7 +41,13 @@ export const TaxonGallery = ({ collection }: Props<Taxon>) => {
     const firstImage = item?.images ? item.images[0] : null
     const image = item?.image || firstImage
     if (!image) return null
-    return <TaxonCard key={item.id + crypto.randomUUID()} taxon={item} />
+    return (
+      <TaxonCard
+        key={item.id + crypto.randomUUID()}
+        taxon={item}
+        includeNames={false}
+      />
+    )
   })
 
   const authors = collection.author?.authors?.join(',')
