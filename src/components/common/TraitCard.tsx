@@ -30,7 +30,11 @@ export const TraitCard = ({ trait }: Props) => {
 
   const examples = trait.examples?.map(taxon => {
     return (
-      <TaxonCard key={taxon.id + crypto.randomUUID()} taxon={taxon}></TaxonCard>
+      <TaxonCard
+        key={taxon.id + crypto.randomUUID()}
+        taxon={taxon}
+        includeNames={false}
+      ></TaxonCard>
     )
   })
 

@@ -6,11 +6,12 @@ import { Taxon, Image as Img } from '@/types'
 
 type Props = {
   taxon: Taxon
+  includeNames?: boolean
 }
 
 type responsiveImage = Img | null
 
-export const TaxonCard = ({ taxon }: Props) => {
+export const TaxonCard = ({ taxon, includeNames = true }: Props) => {
   const bgClassName = `bg-${taxon.iconicTaxon?.toLowerCase()}`
   const classNames = `taxon ${bgClassName}`
   const image: responsiveImage = taxon.image ?? taxon.images?.[0] ?? null
@@ -21,7 +22,7 @@ export const TaxonCard = ({ taxon }: Props) => {
     .join(', ')
 
   const namesDisplay =
-    names && names.length > 0 ? (
+    includeNames && names && names.length > 0 ? (
       <>
         Alternative names for {taxon.vernacularName} include, <em>{names}</em>
       </>
