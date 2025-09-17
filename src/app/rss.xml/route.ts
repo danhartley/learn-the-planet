@@ -38,6 +38,10 @@ async function getPublishedTopicCollections() {
   return { collections, authors, authorMap }
 }
 
+function createSafeUrl(slug: string, shortId: string) {
+  return `https://learn-the-planet.com/collection/${encodeURIComponent(slug)}-${shortId}`
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { collections, authors, authorMap } =
@@ -49,7 +53,6 @@ export async function GET(request: NextRequest) {
         'Latest nature lessons, field notes, and articles from Learn the Planet',
       feed_url: request.url, // The URL being accessed
       site_url: 'https://learn-the-planet.com',
-      language: 'en',
       pubDate: new Date().toISOString(),
       ttl: 120, // cache for 2 hours
     })
@@ -61,24 +64,23 @@ export async function GET(request: NextRequest) {
       const author = authorMap.get(collection.ownerId)
 
       if (author) {
-        description += `Author: ${author}`
+        description += `<p><strong>Author</strong>: ${author}</p>`
       }
 
       // Add featured image if available
       if (collection.imageUrl) {
-        description += `<img src="${collection.imageUrl}" alt="${collection.name}" style="width: 130px; height: 78px; margin: 10px 0;" /><br/>`
+        description += `<p style="width: 130px; height: 78px; margin: 10px 0; padding: 10px;"><img src="${collection.imageUrl}" alt="${collection.name}" style="width: 130px; height: 78px;" /></p>`
       }
 
       // Add location if available
       if (collection.location) {
-        description += `<strong>Location:</strong> ${collection.location}`
+        description += `<p><strong>Location:</strong> ${collection.location}</p>`
       }
 
       feed.item({
         title: collection.name,
         description: description || collection.name,
-        url: `https://learn-the-planet.com/collection/${collection.slug}-${collection.shortId}`,
-        guid: `https://learn-the-planet.com/collection/${collection.slug}-${collection.shortId}`,
+        url: createSafeUrl(collection.slug, collection.shortId || ''),
         date: collection.createdAt || collection.updatedAt || new Date(),
       })
     })
