@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
       await getPublishedTopicCollections()
 
     const feed = new RSS({
-      title: 'Learn the Planet - Nature Topics',
+      title: 'Learn the Planet',
       description:
         'Latest nature lessons, field notes, and articles from Learn the Planet',
       feed_url: request.url, // The URL being accessed
@@ -78,6 +78,7 @@ export async function GET(request: NextRequest) {
         title: collection.name,
         description: description || collection.name,
         url: `https://learn-the-planet.com/collection/${collection.slug}-${collection.shortId}`,
+        guid: `https://learn-the-planet.com/collection/${collection.slug}-${collection.shortId}`,
         date: collection.createdAt || collection.updatedAt || new Date(),
       })
     })
