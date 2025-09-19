@@ -36,7 +36,7 @@ export const EditLinkedCollections = ({ collectionSummaries }: Props) => {
   return (
     <>
       <CollectionSelector
-        options={permittedCollections.map(collection => collection.name)}
+        collections={permittedCollections}
         selectedCollections={linkedCollections}
         setSelectedCollections={setLinkedCollections}
       />

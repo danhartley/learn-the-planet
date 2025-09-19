@@ -9,6 +9,7 @@ import { OperationSelector } from '@/components/collection/OperationSelector'
 import { EditProperties } from '@/components/collection/EditProperties'
 import { EditLinkedCollections } from '@/components/collection/EditLinkedCollections'
 import { TopicItems } from '@/components/collection/topic/edit/topicItems/TopicItems'
+import { CollectionGenerator } from '@/components/collection/CollectionGenerator'
 import { AddTopic } from '@/components/collection/topic/add/AddTopic'
 import { CollectionState } from '@/components/collection/topic/edit/CollectionState'
 import { TraitItems } from '@/components/collection/trait/edit/TraitItems'
@@ -64,6 +65,9 @@ export const EditOperations = () => {
         collectionSummaries && (
           <EditLinkedCollections collectionSummaries={collectionSummaries} />
         )}
+      {operation === ('linked-collections' as Operation) && collection && (
+        <CollectionGenerator topicCollection={collection} />
+      )}
 
       {isUpdateItems && isTopic && <TopicItems />}
       {isAddItem && isTopic && <AddTopic />}

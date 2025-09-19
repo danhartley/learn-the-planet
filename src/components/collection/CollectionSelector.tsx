@@ -3,14 +3,16 @@ import React, { useRef, Dispatch } from 'react'
 
 import MultiSelectList from '@/components/common/MultiSelectList'
 
+import { CollectionSummary } from '@/types'
+
 type Props = {
-  options: string[]
+  collections: CollectionSummary[]
   selectedCollections: string[]
   setSelectedCollections: Dispatch<string[]>
 }
 
 export const CollectionSelector = ({
-  options,
+  collections,
   selectedCollections,
   setSelectedCollections,
 }: Props) => {
@@ -25,7 +27,7 @@ export const CollectionSelector = ({
       <h2 id="linked-collections">Link to other collections</h2>
       <div className="group-block">
         <MultiSelectList
-          options={options}
+          options={collections.map(collection => collection.name)}
           selectedValues={selectedCollections}
           onSelectionChange={setSelectedCollections}
           onRefsReady={handleRefsReady}
