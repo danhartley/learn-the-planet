@@ -175,7 +175,7 @@ export const TopicGallery = ({ collection }: Props<Topic>) => {
           </button>
         </div>
       )}
-      <div className="group-block">
+      <div className="grid-md">
         <CollectionLinks
           collections={collections?.topic}
           currentCollection={collection}

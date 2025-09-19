@@ -130,7 +130,7 @@ main {
   padding: var(--spacing-md);
   position: relative;
   border-radius: var(--border-radius-md);
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
 article {

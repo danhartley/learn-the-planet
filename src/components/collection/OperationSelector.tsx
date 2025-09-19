@@ -114,9 +114,9 @@ export const OperationSelector = ({ type, operation, setOperation }: Props) => {
   })
 
   return (
-    <>
+    <div className="list-group">
       <ul className="list-group">{editOptions}</ul>
       <hr />
-    </>
+    </div>
   )
 }
