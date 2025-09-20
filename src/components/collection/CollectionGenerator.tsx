@@ -13,7 +13,12 @@ type Props = {
 
 export const CollectionGenerator = ({ topicCollection }: Props) => {
   const { data: session } = useSession()
-  const { collection, addCollection } = useCollection()
+  const {
+    collection,
+    addCollection,
+    getCollectionSummaries,
+    updateLinkedCollections,
+  } = useCollection()
   const [selectedType, setSelectedType] = useState<ContentHandlerType | null>(
     null
   )
@@ -69,9 +74,21 @@ export const CollectionGenerator = ({ topicCollection }: Props) => {
             countryCode: 'GB', // United Kingdom
             name: 'United Kingdom',
           },
+          imageUrl: topicCollection.imageUrl,
         }
 
         await addCollection(props)
+
+        const summaries = await getCollectionSummaries()
+        const linkedCollections = topicCollection.collections || []
+        const newCollectionSummary = summaries.find(
+          summary => summary.name === newName
+        )
+        // Once the collection has been created, link it to the existing collection
+        if (newCollectionSummary) {
+          linkedCollections.push(newCollectionSummary) || [newCollectionSummary]
+          updateLinkedCollections(linkedCollections)
+        }
       } catch (error) {
         console.error('Error creating collection:', error)
         // Reset creating state on error so user can try again
@@ -91,7 +108,9 @@ export const CollectionGenerator = ({ topicCollection }: Props) => {
   const isButtonDisabled = !selectedType || isCreating
 
   return (
-    <div>
+    <section aria-labelledby="add-linked-collection" className="group-block">
+      <h2 id="add-linked-collection">Add a linked collection</h2>
+      <div>{getButtonLabel()}</div>
       <div>
         <div>
           <input
@@ -142,12 +161,9 @@ export const CollectionGenerator = ({ topicCollection }: Props) => {
           <label htmlFor="trait">trait</label>
         </div>
       </div>
-
       <button onClick={createCollection} disabled={isButtonDisabled}>
         {isCreating ? 'Creating...' : 'Create collection'}
       </button>
-
-      <div>{getButtonLabel()}</div>
-    </div>
+    </section>
   )
 }

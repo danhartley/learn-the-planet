@@ -61,7 +61,7 @@ type CollectionContextType = {
     imageUrl,
     locale,
     country,
-  }: AddCollectionProps) => Promise<void>
+  }: AddCollectionProps) => Promise<CollectionSummary>
 
   updateSectionOrder: (
     collection: Collection<unknown>,
