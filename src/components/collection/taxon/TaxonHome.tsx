@@ -64,11 +64,12 @@ export const TaxonHome = ({ session }: Props) => {
   if (loading || !collectionSummaries) {
     return (
       <section aria-labelledby="taxa" className="column-group">
-        <h1 id="taxa">taxa</h1>
+        <h1 id="taxa" className="none">
+          taxa
+        </h1>
         <section aria-labelledby="featured-taxa" className="group-block">
           <div className="group">
-            <h2 id="featured-taxa">Featured collections</h2>
-            <div>Taxa data sourced from Wikipedia and iNaturalist</div>
+            <h2 id="featured-taxa">Taxa</h2>
           </div>
           <div className="block-container">
             <ul className="grid-md">
@@ -87,11 +88,12 @@ export const TaxonHome = ({ session }: Props) => {
 
   return (
     <section aria-labelledby="taxa" className="column-group">
-      <h1 id="taxa">taxa</h1>
+      <h1 id="taxa" className="none">
+        taxa
+      </h1>
       <section aria-labelledby="featured-taxa" className="group-block">
         <div className="group">
-          <h2 id="featured-taxa">Featured collections</h2>
-          <div>Taxa data sourced from Wikipedia and iNaturalist</div>
+          <h2 id="featured-taxa">Taxa collections</h2>
         </div>
         <CollectionList collections={taxa} />
       </section>

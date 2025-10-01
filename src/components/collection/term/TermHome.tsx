@@ -64,11 +64,12 @@ export const TermHome = ({ session }: Props) => {
   if (loading || !collectionSummaries || collectionSummaries.length === 0) {
     return (
       <section aria-labelledby="terms" className="column-group">
-        <h1 id="terms">terms</h1>
+        <h1 id="terms" className="none">
+          terms
+        </h1>
         <section aria-labelledby="featured-terms" className="group-block">
           <div className="group">
-            <h2 id="featured-terms">Featured collections</h2>
-            <div>Terms used in biology and ecology</div>
+            <h2 id="featured-terms">Term collections</h2>
           </div>
           <div className="block-container">
             <ul className="grid-md column-count">
@@ -87,11 +88,12 @@ export const TermHome = ({ session }: Props) => {
 
   return (
     <section aria-labelledby="terms" className="column-group">
-      <h1 id="terms">terms</h1>
+      <h1 id="terms" className="none">
+        terms
+      </h1>
       <section aria-labelledby="featured-terms" className="group-block">
         <div className="group">
-          <h2 id="featured-terms">Featured collections</h2>
-          <div>Terms used in biology and ecology</div>
+          <h2 id="featured-terms">Term collections</h2>
         </div>
         <CollectionList collections={terms} />
       </section>

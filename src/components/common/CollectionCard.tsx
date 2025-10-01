@@ -58,7 +58,7 @@ export const CollectionCard = ({
   const linkText = {
     taxon: 'View taxa',
     term: 'Review terms',
-    topic: 'Read notes',
+    topic: 'Read article',
     trait: 'View traits',
   }[collectionSummary.type.toString()]
 
@@ -72,7 +72,10 @@ export const CollectionCard = ({
     >
       {/* Image Section */}
       {collectionSummary.imageUrl ? (
-        <div className="collection-image">
+        <div
+          className="collection-image"
+          id={`collection-${collectionSummary.id}`}
+        >
           <Link className="breadcrumb" href={collectionUrl}>
             <Image
               src={collectionSummary.imageUrl}

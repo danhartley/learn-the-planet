@@ -63,11 +63,12 @@ export const TraitHome = ({ session }: Props) => {
   if (loading) {
     return (
       <section aria-labelledby="traits" className="column-group">
-        <h1 id="traits">Traits</h1>
+        <h1 id="traits" className="none">
+          Traits
+        </h1>
         <section aria-labelledby="featured-traits" className="group-block">
           <div className="group">
-            <h2 id="featured-traits">Featured collections</h2>
-            <div>Common characteristics and qualities of species</div>
+            <h2 id="featured-traits">Trait collections</h2>
           </div>
           <div className="block-container">
             <ul className="grid-md column-count">
@@ -86,11 +87,12 @@ export const TraitHome = ({ session }: Props) => {
 
   return (
     <section aria-labelledby="traits" className="column-group">
-      <h1 id="traits">Traits</h1>
+      <h1 id="traits" className="none">
+        Traits
+      </h1>
       <section aria-labelledby="featured-traits" className="group-block">
         <div className="group">
-          <h2 id="featured-traits">Featured collections</h2>
-          <div>Common characteristics and qualities of species</div>
+          <h2 id="featured-traits">Trait collections</h2>
         </div>
         <CollectionList collections={traits} />
       </section>

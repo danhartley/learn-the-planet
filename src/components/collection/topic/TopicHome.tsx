@@ -68,13 +68,12 @@ export const TopicHome = ({ session }: Props) => {
   if (loading || !collectionSummaries) {
     return (
       <section aria-labelledby="topics" className="column-group">
-        <h1 id="topics">Topics</h1>
+        <h1 id="topics" className="none">
+          Topics
+        </h1>
         <section aria-labelledby="featured-topics" className="group-block">
           <div className="group">
-            <h2 id="featured-topics">Featured collections</h2>
-            <div>
-              Fieldnotes, nature diaries, essays, field guides, and lessons
-            </div>
+            <h2 id="featured-topics">Recent topics</h2>
           </div>
           <div className="block-container">
             <ul className="grid-md">
@@ -93,13 +92,12 @@ export const TopicHome = ({ session }: Props) => {
 
   return (
     <section aria-labelledby="topics" className="column-group">
-      <h1 id="topics">Topics</h1>
+      <h1 id="topics" className="none">
+        Topics
+      </h1>
       <section aria-labelledby="featured-topics" className="group-block">
         <div className="group">
-          <h2 id="featured-topics">Featured collections</h2>
-          <div>
-            Fieldnotes, nature diaries, essays, field guides, and lessons
-          </div>
+          <h2 id="featured-topics">Recent topics</h2>
         </div>
         <CollectionList collections={topics} />
       </section>
